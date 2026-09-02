@@ -245,7 +245,7 @@ $\bar{x} \pm t_{\alpha}(n-1)\sqrt{\frac{\hat{\sigma}_{\bar{x}}^{2}}{n}}$
 
 <medium>
 
-$\textcolor{red}{\bar{\chi}}\pm t_{0.025}(n-1)\sqrt{\frac{{\hat{\sigma_x^2}}}{n}}$
+$\textcolor{red}{\bar{\chi}}\pm t_{0.025}(n-1)\sqrt{\frac{\hat{\sigma_x^2}}{n}}$
 
 </medium>
 
@@ -259,7 +259,7 @@ $\textcolor{red}{\bar{\chi}}\pm t_{0.025}(n-1)\sqrt{\frac{{\hat{\sigma_x^2}}}{n}
 
 <medium>
 
-$\textcolor{green}{1.98}\pm \textcolor{red}{t_{0.025}(n-1)}\sqrt{\frac{{\hat{\sigma_x^2}}}{n}}$
+$\textcolor{green}{1.98}\pm \textcolor{red}{t_{0.025}(n-1)}\sqrt{\frac{\hat{\sigma_x^2}}{n}}$
 
 </medium>
 
