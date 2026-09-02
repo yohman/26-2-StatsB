@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="2026 統計学B — formula and concept review.">
+  <title>Review — 2026 統計学B</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--ink:#161819;--paper:#f4f0e8;--blue:#2e56d0;--acid:#dfff4f;--line:#c8c2b6}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.65 'Noto Sans JP',sans-serif}.mast{display:flex;align-items:center;justify-content:space-between;height:76px;padding:0 4.6vw;border-bottom:1px solid var(--line)}.mark,.back{color:var(--ink);text-decoration:none;font:500 11px 'DM Mono',monospace;letter-spacing:.08em}.mark b{font:30px/1 'Instrument Serif',serif;color:var(--blue);margin:0 8px}.back{border-bottom:1px solid var(--ink)}.wrap{max-width:1180px;margin:auto;padding:0 4vw}.hero{padding:90px 4vw 70px;border-bottom:2px solid var(--ink);position:relative;overflow:hidden}.hero:after{content:'Σ';position:absolute;right:4vw;bottom:-75px;color:var(--acid);font:300 260px/1 'Instrument Serif',serif;z-index:-1}.eyebrow{font:500 11px 'DM Mono',monospace;color:var(--blue);letter-spacing:.1em;margin:0 0 16px}.hero h1{font:400 clamp(4.2rem,9vw,9rem)/.82 'Instrument Serif',serif;letter-spacing:-.055em;margin:0}.hero h1 em{font-style:italic;color:var(--blue)}.hero p:last-child{max-width:570px;margin:28px 0 0;font-size:16px}.review{padding-top:65px;padding-bottom:100px}.rule{font:500 11px 'DM Mono',monospace;color:var(--blue);letter-spacing:.1em;margin:0 0 30px}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--ink);border-left:1px solid var(--line)}.card{min-height:250px;padding:24px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}.card:nth-child(3n+1){background:#e9e4da}.card:nth-child(4n){background:var(--blue);color:#fff}.card:nth-child(4n) .tag{color:var(--acid)}.tag{margin:0 0 30px;font:500 10px 'DM Mono',monospace;color:var(--blue);letter-spacing:.1em}.formula{font:400 clamp(1.7rem,3.5vw,3rem)/1.04 'Instrument Serif',serif;letter-spacing:-.03em;margin:0 0 16px}.formula.small{font-size:clamp(1.4rem,2.4vw,2.2rem)}.card p:last-child{max-width:450px;margin:0;font-size:13px}.note{border-top:2px solid var(--ink);padding:35px 0 0;display:grid;grid-template-columns:1fr 2fr;gap:30px}.note h2{font:400 37px/1 'Instrument Serif',serif;margin:0}.note p{margin:0;max-width:630px}.note a{color:var(--blue)}footer{padding:26px 4.6vw;border-top:1px solid var(--line);font:10px 'DM Mono',monospace;color:#706f69}@media(max-width:650px){.mast{padding:0 6vw}.wrap{padding:0 6vw}.hero{padding:70px 6vw 60px}.grid{grid-template-columns:1fr}.card{min-height:210px}.note{grid-template-columns:1fr;gap:12px}}
+  </style>
+</head>
+<body>
+  <header class="mast"><a class="mark" href="index.html">STATISTICS <b>B</b> 26–2</a><a class="back" href="index.html#agenda">← WEEKLY MATERIALS</a></header>
+  <main>
+    <section class="hero wrap"><p class="eyebrow">STUDY REVIEW · 2026 STANDARD</p><h1>Things to<br><em>remember.</em></h1><p>A compact review of the key definitions, relationships, and formulas appearing in the 2026 Standard lecture sequence. Use it to orient your study; return to the linked weekly slides for conditions, notation, and worked examples.</p></section>
+    <section class="review wrap">
+      <p class="rule">CORE FORMULAS & CONCEPTS</p>
+      <div class="grid">
+        <article class="card"><p class="tag">W01 · PROBABILITY</p><h2 class="formula">0 ≤ Pr(A) ≤ 1<br>Pr(Ω) = 1</h2><p>Probability is bounded between zero and one; the entire sample space has probability one.</p></article>
+        <article class="card"><p class="tag">W02–04 · BINOMIAL</p><h2 class="formula small">Pr(X=x) = ⁿCₓ πˣ(1−π)ⁿ⁻ˣ</h2><p>For repeated Bernoulli trials: choose x successes, then combine success and non-success probabilities.</p></article>
+        <article class="card"><p class="tag">W03 · EXPECTATION & VARIANCE</p><h2 class="formula">E(X)=nπ<br>Var(X)=nπ(1−π)</h2><p>For a binomial distribution. In the Standard deck, the Poisson approximation has E(X)=Var(X)=nπ.</p></article>
+        <article class="card"><p class="tag">W05 · STANDARDISATION</p><h2 class="formula">Z = (X−μ) / σ</h2><p>Transform a normal observation to the standard normal scale. The central limit theorem connects this to sample means.</p></article>
+        <article class="card"><p class="tag">W06–07 · UNBIASED VARIANCE</p><h2 class="formula small">s² = Σ(Xᵢ−X̄)² / (n−1)</h2><p>Use degrees of freedom n−1 when calculating the sample unbiased variance.</p></article>
+        <article class="card"><p class="tag">W08 · POINT ESTIMATION</p><h2 class="formula">X̄ = (1/n)Σxᵢ<br>E(X̄)=μ</h2><p>The sample mean is an unbiased estimator of the population mean.</p></article>
+        <article class="card"><p class="tag">W09 · MEAN CONFIDENCE INTERVAL</p><h2 class="formula small">X̄ ± t<sub>α,n−1</sub> √(s²/n)</h2><p>Interval estimation for a population mean uses the t distribution and the sample unbiased variance in the Standard examples.</p></article>
+        <article class="card"><p class="tag">W10 · CONFIDENCE</p><h2 class="formula">wider interval<br>→ more confidence</h2><p>In the screw-length activity, identify the known quantities first: population variance, sample size, and sample mean.</p></article>
+        <article class="card"><p class="tag">W11 · HYPOTHESIS TEST</p><h2 class="formula small">t = (X̄−μ) / √(s²/n)</h2><p>Set a null hypothesis, select a significance level, calculate the statistic, and compare with the rejection region / critical value.</p></article>
+        <article class="card"><p class="tag">W12 · REGRESSION</p><h2 class="formula">ŷ = a + bx</h2><p>Interpret the intercept a and regression coefficient b. A relationship is not by itself evidence of causation.</p></article>
+      </div>
+      <div class="note"><h2>Study with the conditions.</h2><p>These formulas are prompts, not substitutes for the lectures. Pay attention to which distribution is assumed, whether a population variance is known, the role of degrees of freedom, and the wording of each hypothesis. <a href="index.html#agenda">Open the weekly materials →</a></p></div>
+    </section>
+  </main>
+  <footer>2026–2 統計学B / Statistics B · Review guide</footer>
+</body>
+</html>
