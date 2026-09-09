@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja" data-language="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Preview · 2026–2 Statistics B</title>
+  <link rel="stylesheet" href="assets/stats-styles.css?v=20260909">
+</head>
+<body class="viewer-page">
+  <header class="site-header"><a class="wordmark" href="agenda.html"><span>STAT / B</span>2026–2 Statistics B</a><div class="header-tools"><a class="language-toggle" href="agenda.html"><span class="lang-en">BACK TO AGENDA</span><span class="lang-ja" lang="ja">授業予定に戻る</span></a><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
+  <main class="viewer-main wrap"><div class="viewer-top"><div><p class="eyebrow"><span class="lang-en">FILE PREVIEW</span><span class="lang-ja" lang="ja">資料プレビュー</span></p><h1 data-viewer-title>Course file</h1></div><div class="viewer-actions"><a data-download href="#" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span> ↓</a><a class="secondary" href="agenda.html"><span class="lang-en">AGENDA</span><span class="lang-ja" lang="ja">授業予定</span></a></div></div><div data-viewer-content></div></main>
+  <script>
+    const parameters = new URLSearchParams(location.search); const file = parameters.get('file') || ''; const title = parameters.get('title') || file.split('/').pop() || 'Course file';
+    document.title = `${title} · Preview`; document.querySelector('[data-viewer-title]').textContent = title; document.querySelector('[data-download]').href = encodeURI(file);
+    const content = document.querySelector('[data-viewer-content]');
+    if (/\.pdf$/i.test(file)) content.innerHTML = `<object class="pdf-frame" data="${encodeURI(file)}" type="application/pdf"><div class="viewer-file-note"><h2>PDF preview unavailable</h2><p>Use the download button to open this file.</p></div></object>`;
+    else content.innerHTML = `<div class="viewer-file-note"><p class="eyebrow">${(file.split('.').pop() || 'FILE').toUpperCase()}</p><h2>This file opens after download.</h2><p>Download the source file to use it in its matching application.</p></div>`;
+  </script>
+  <script src="assets/stats-site.js?v=20260909"></script>
+</body>
+</html>

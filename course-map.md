@@ -1,6 +1,6 @@
 # 2026 統計学B — curriculum map
 
-This working map preserves the **2026 Standard** order while selecting Yoh's 2025 materials by subject, not by their original week number. `weeks/` is the student-facing, consolidated set; source folders in `other material/` are retained unchanged. Each scheduled week includes the matching 2026 Standard PowerPoint as a secondary reference. Yoh's `w*.pdf` decks are the primary lecture slides wherever the source contains a relevant deck.
+This working map preserves the **2026 Standard** order and uses the matching 2026 Standard PowerPoint as the authoritative lecture deck for every scheduled week. `weeks/` is the student-facing, consolidated set; source folders in `other material/` are retained unchanged. Each weekly copy is byte-for-byte identical to its deck in `other material/2026 standard/`, and each is available in both PowerPoint and PDF formats.
 
 | 2026 week | Standard curriculum | Yoh material selected | Consolidated folder |
 | --- | --- | --- | --- |
