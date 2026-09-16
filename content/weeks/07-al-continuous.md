@@ -21,11 +21,11 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 
 ## Materials
 
-- [2026 Standard slides (PowerPoint)](weeks/07-al-continuous-distributions/07_Standard_Curriculum.pptx) {primary}
-- [2026 Standard slides (PDF)](weeks/07-al-continuous-distributions/07_Standard_Curriculum.pdf) {primary}
-- [Activity worksheet PDF](weeks/07-al-continuous-distributions/07_AL_Worksheet.pdf) {worksheet}
-- [Activity worksheet](weeks/07-al-continuous-distributions/07_AL_Worksheet.xlsx) {worksheet}
-- [Answer](weeks/07-al-continuous-distributions/07_AL_Worksheet_Answers.xlsx) {answer}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pptx) {primary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pdf) {primary}
+- [課題：確率分布・連続確率分布](weeks/07-al-continuous-distributions/07 課題 確率分布_2_連続確率分布.xlsx) {homework}
+- [AL用ワークシート](weeks/07-al-continuous-distributions/07_AL用ワークシート.xlsx) {homework}
+- [AL用ワークシート（解答入り）](weeks/07-al-continuous-distributions/07_AL用ワークシート_解答入り.xlsx) {homework-answer}
 - [Yoh continuous-distributions activity worksheet](other material/2025 yoh/07 確率分布_2_連続確率分布/07_AL用ワークシート.pdf) {worksheet}
 - [Yoh lecture: normal distribution and standardization](other material/2025 yoh/07 確率分布_2_連続確率分布/w7.pdf) {yoh}
 - [Yoh lecture: normal and chi-square distribution tables](other material/2025 yoh/07 確率分布_2_連続確率分布/w9-6.pdf) {yoh}

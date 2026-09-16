@@ -6,17 +6,93 @@
   <meta name="robots" content="noindex">
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="stylesheet" href="assets/stats-styles.css?v=20260909">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20260915-pdf-preview">
 </head>
 <body class="viewer-page">
-  <header class="site-header"><a class="wordmark" href="agenda.html"><span>STAT / B</span>2026–2 Statistics B</a><div class="header-tools"><a class="language-toggle" href="agenda.html"><span class="lang-en">BACK TO AGENDA</span><span class="lang-ja" lang="ja">授業予定に戻る</span></a><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
-  <main class="viewer-main wrap"><div class="viewer-top"><div><p class="eyebrow"><span class="lang-en">FILE PREVIEW</span><span class="lang-ja" lang="ja">資料プレビュー</span></p><h1 data-viewer-title>Course file</h1></div><div class="viewer-actions"><a data-download href="#" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span> ↓</a><a class="secondary" href="agenda.html"><span class="lang-en">AGENDA</span><span class="lang-ja" lang="ja">授業予定</span></a></div></div><div data-viewer-content></div></main>
+  <header class="site-header"><a class="wordmark" href="index.html"><span>STAT / B</span>2026–2 Statistics B</a><div class="header-tools"><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
+  <main class="viewer-main wrap">
+    <a class="viewer-back" data-viewer-back href="agenda.html"><span aria-hidden="true">←</span><span class="lang-en">BACK TO AGENDA</span><span class="lang-ja" lang="ja">授業予定に戻る</span></a>
+    <div class="viewer-top"><div><p class="eyebrow"><span class="lang-en">FILE PREVIEW</span><span class="lang-ja" lang="ja">資料プレビュー</span></p><h1 data-viewer-title>Course file</h1></div><div class="viewer-actions"><a data-download href="#" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span> ↓</a></div></div>
+    <div data-viewer-content></div>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
-    const parameters = new URLSearchParams(location.search); const file = parameters.get('file') || ''; const title = parameters.get('title') || file.split('/').pop() || 'Course file';
-    document.title = `${title} · Preview`; document.querySelector('[data-viewer-title]').textContent = title; document.querySelector('[data-download]').href = encodeURI(file);
+    const parameters = new URLSearchParams(location.search);
+    const file = parameters.get('file') || '';
+    const title = parameters.get('title') || file.split('/').pop() || 'Course file';
+    const week = parameters.get('week') || '';
+    const requestedReturn = parameters.get('return') || '';
+    const returnTo = requestedReturn.startsWith('agenda.html') ? requestedReturn : 'agenda.html';
+    const fullTitle = week ? `${week} · ${title}` : title;
+    document.title = `${fullTitle} · Preview`;
+    document.querySelector('[data-viewer-title]').textContent = fullTitle;
+    document.querySelector('[data-download]').href = encodeURI(file);
+    document.querySelector('[data-viewer-back]').href = returnTo;
     const content = document.querySelector('[data-viewer-content]');
-    if (/\.pdf$/i.test(file)) content.innerHTML = `<object class="pdf-frame" data="${encodeURI(file)}" type="application/pdf"><div class="viewer-file-note"><h2>PDF preview unavailable</h2><p>Use the download button to open this file.</p></div></object>`;
-    else content.innerHTML = `<div class="viewer-file-note"><p class="eyebrow">${(file.split('.').pop() || 'FILE').toUpperCase()}</p><h2>This file opens after download.</h2><p>Download the source file to use it in its matching application.</p></div>`;
+    const showFileNote = () => {
+      content.innerHTML = `<div class="viewer-file-note"><p class="eyebrow">${(file.split('.').pop() || 'FILE').toUpperCase()}</p><h2>This file opens after download.</h2><p>Download the source file to use it in its matching application.</p></div>`;
+    };
+    const showPdfFallback = () => {
+      content.innerHTML = `<div class="viewer-file-note"><h2>PDF preview could not load.</h2><p>Please use the download button to open the PDF directly.</p></div>`;
+    };
+    const makeLabel = (en, ja) => `<span class="lang-en">${en}</span><span class="lang-ja" lang="ja">${ja}</span>`;
+    async function renderPdfPreview(path) {
+      const viewer = document.createElement('section');
+      viewer.className = 'pdf-viewer';
+      const toolbar = document.createElement('div');
+      toolbar.className = 'pdf-toolbar';
+      const previous = document.createElement('button');
+      previous.type = 'button';
+      previous.innerHTML = makeLabel('PREVIOUS', '前へ');
+      const pageStatus = document.createElement('p');
+      pageStatus.className = 'pdf-status';
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.innerHTML = makeLabel('NEXT', '次へ');
+      toolbar.append(previous, pageStatus, next);
+      const canvasWrap = document.createElement('div');
+      canvasWrap.className = 'pdf-canvas-wrap';
+      const canvas = document.createElement('canvas');
+      canvas.className = 'pdf-canvas';
+      canvasWrap.append(canvas);
+      viewer.append(toolbar, canvasWrap);
+      content.replaceChildren(viewer);
+      try {
+        if (!window.pdfjsLib) throw new Error('PDF renderer unavailable');
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        const response = await fetch(encodeURI(path));
+        if (!response.ok) throw new Error('PDF unavailable');
+        const pdf = await window.pdfjsLib.getDocument({ data: await response.arrayBuffer() }).promise;
+        let activePage = 1;
+        const renderPage = async requestedPage => {
+          activePage = requestedPage;
+          const page = await pdf.getPage(activePage);
+          const baseViewport = page.getViewport({ scale: 1 });
+          const availableWidth = Math.max(320, Math.min(1100, canvasWrap.clientWidth - 32));
+          const scale = Math.min(1.7, availableWidth / baseViewport.width);
+          const viewport = page.getViewport({ scale });
+          const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+          canvas.width = Math.floor(viewport.width * pixelRatio);
+          canvas.height = Math.floor(viewport.height * pixelRatio);
+          canvas.style.width = `${Math.floor(viewport.width)}px`;
+          canvas.style.height = `${Math.floor(viewport.height)}px`;
+          const context = canvas.getContext('2d');
+          context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+          await page.render({ canvasContext: context, viewport }).promise;
+          pageStatus.textContent = `${activePage} / ${pdf.numPages}`;
+          previous.disabled = activePage === 1;
+          next.disabled = activePage === pdf.numPages;
+        };
+        previous.addEventListener('click', () => activePage > 1 && renderPage(activePage - 1));
+        next.addEventListener('click', () => activePage < pdf.numPages && renderPage(activePage + 1));
+        await renderPage(activePage);
+      } catch (error) {
+        showPdfFallback();
+      }
+    }
+    if (/\.pdf$/i.test(file)) renderPdfPreview(file);
+    else showFileNote();
   </script>
-  <script src="assets/stats-site.js?v=20260909"></script>
+  <script src="assets/stats-site.js?v=20260915-tsumura-materials-v2"></script>
 </body>
 </html>

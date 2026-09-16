@@ -2,7 +2,7 @@ const weekFiles = [
   '00-orientation.md', '01-inference.md', '02-binomial.md', '03-poisson.md',
   '04-al-discrete.md', '05-normal.md', '06-t-chi.md', '07-al-continuous.md',
   '08-estimation.md', '09-confidence.md', '10-al-confidence.md', '11-hypothesis.md',
-  '12-regression.md', '14-final-exam.md'
+  '12-regression.md', '13-exam-prep.md', '14-final-exam.md'
 ];
 
 const phaseForWeek = week => {
@@ -52,6 +52,7 @@ function parseMaterials(body) {
 
 function materialRole(item) {
   if (item.type === 'primary' || item.type === 'standard') return 'core';
+  if (item.type === 'homework' || item.type === 'homework-answer') return 'homework';
   if (['worksheet', 'answer', 'data', 'notebook'].includes(item.type)) return 'practice';
   return 'more';
 }
@@ -60,7 +61,8 @@ function materialName(item) {
   const labels = {
     primary:['PRIMARY DECK', '基本スライド'], standard:['STANDARD DECK', '標準スライド'],
     worksheet:['PRACTICE', '演習'], answer:['ANSWERS', '解答'], data:['DATA', 'データ'],
-    notebook:['NOTEBOOK', 'ノートブック'], yoh:['YOH ARCHIVE', 'Yoh資料'], support:['REFERENCE', '参考資料']
+    notebook:['NOTEBOOK', 'ノートブック'], homework:['HOMEWORK', '課題'], 'homework-answer':['ANSWER KEY', '解答'],
+    yoh:['YOH ARCHIVE', 'Yoh資料'], support:['REFERENCE', '参考資料']
   };
   return labels[item.type] || labels.support;
 }
@@ -72,11 +74,12 @@ function formatDate(value, language) {
   }).format(date);
 }
 
-function viewerLink(file, title) {
-  return `viewer.html?file=${encodeURIComponent(file)}&title=${encodeURIComponent(title)}`;
+function viewerLink(file, title, week) {
+  const weekId = `week-${String(week).padStart(2, '0')}`;
+  return `viewer.html?file=${encodeURIComponent(file)}&title=${encodeURIComponent(title)}&week=W${String(week).padStart(2, '0')}&return=${encodeURIComponent(`agenda.html#${weekId}`)}`;
 }
 
-function materialCard(item, allMaterials) {
+function materialCard(item, allMaterials, week) {
   const ext = extension(item.href);
   const [roleEn, roleJa] = materialName(item);
   const pairedPdf = item.href.toLowerCase().endsWith('.pptx')
@@ -87,13 +90,13 @@ function materialCard(item, allMaterials) {
   return `<article class="material-card material-${escapeHtml(item.type)}" data-resource-role="${materialRole(item)}">
     <div class="material-card-head"><span class="file-kind">${ext}</span><span class="material-role"><span class="lang-en">${roleEn}</span><span class="lang-ja" lang="ja">${roleJa}</span></span></div>
     <h4>${escapeHtml(item.label)}</h4>
-    <div class="material-actions">${previewFile ? `<a class="preview-link" href="${viewerLink(previewFile, item.label)}"><span class="lang-en">${previewLabel[0]}</span><span class="lang-ja" lang="ja">${previewLabel[1]}</span><i>↗</i></a>` : `<span class="preview-unavailable"><span class="lang-en">DOWNLOAD TO OPEN</span><span class="lang-ja" lang="ja">ダウンロードして開く</span></span>`}<a class="download-link" href="${encodeHref(item.href)}" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span><i>↓</i></a></div>
+    <div class="material-actions">${previewFile ? `<a class="preview-link" href="${viewerLink(previewFile, item.label, week)}"><span class="lang-en">${previewLabel[0]}</span><span class="lang-ja" lang="ja">${previewLabel[1]}</span><i>↗</i></a>` : `<span class="preview-unavailable"><span class="lang-en">DOWNLOAD TO OPEN</span><span class="lang-ja" lang="ja">ダウンロードして開く</span></span>`}<a class="download-link" href="${encodeHref(item.href)}" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span><i>↓</i></a></div>
   </article>`;
 }
 
-function resourceGroup(titleEn, titleJa, items, allMaterials) {
+function resourceGroup(titleEn, titleJa, items, allMaterials, week) {
   if (!items.length) return '';
-  return `<section class="resource-group"><header><p class="lang-en">${titleEn}</p><p class="lang-ja" lang="ja">${titleJa}</p><span>${items.length}</span></header><div class="material-grid">${items.map(item => materialCard(item, allMaterials)).join('')}</div></section>`;
+  return `<section class="resource-group"><header><p class="lang-en">${titleEn}</p><p class="lang-ja" lang="ja">${titleJa}</p><span>${items.length}</span></header><div class="material-grid">${items.map(item => materialCard(item, allMaterials, week)).join('')}</div></section>`;
 }
 
 function weekCard(week) {
@@ -101,12 +104,13 @@ function weekCard(week) {
   const focus = parseFocus(week.inClass);
   const materials = parseMaterials(week.materials);
   const core = materials.filter(item => materialRole(item) === 'core');
+  const homework = materials.filter(item => materialRole(item) === 'homework');
   const practice = materials.filter(item => materialRole(item) === 'practice');
   const more = materials.filter(item => materialRole(item) === 'more');
   const id = `week-${String(week.week).padStart(2, '0')}`;
   const available = new Date() >= new Date(week.publish_at);
   const focusHtml = focus.length ? `<ul class="focus-list">${focus.map(item => `<li><span class="lang-en">${escapeHtml(item.en)}</span><span class="lang-ja" lang="ja">${escapeHtml(item.ja)}</span></li>`).join('')}</ul>` : '';
-  const resources = available ? `${resourceGroup('START HERE', 'まずはここから', core, materials)}${resourceGroup('PRACTISE & WORK WITH DATA', '演習・データ', practice, materials)}${resourceGroup('GO FURTHER', 'さらに学ぶ', more, materials)}` : `<p class="locked-copy"><span class="lang-en">This week’s resources will appear here when they are released.</span><span class="lang-ja" lang="ja">この週の資料は、公開後にここに表示されます。</span></p>`;
+  const resources = available ? `${resourceGroup('START HERE', 'まずはここから', core, materials, week.week)}${resourceGroup('HOMEWORK', '課題', homework, materials, week.week)}${resourceGroup('PRACTISE & WORK WITH DATA', '演習・データ', practice, materials, week.week)}${resourceGroup('GO FURTHER', 'さらに学ぶ', more, materials, week.week)}` : `<p class="locked-copy"><span class="lang-en">This week’s resources will appear here when they are released.</span><span class="lang-ja" lang="ja">この週の資料は、公開後にここに表示されます。</span></p>`;
   return `<article class="week-card${available ? '' : ' is-locked'}" id="${id}">
     <div class="week-rail"><span>W${String(week.week).padStart(2, '0')}</span><b class="lang-en">${phaseEn}</b><b class="lang-ja" lang="ja">${phaseJa}</b></div>
     <div class="week-body"><header class="week-header"><div><p class="week-date"><span class="lang-en">${formatDate(week.date, 'en')}</span><span class="lang-ja" lang="ja">${formatDate(week.date, 'ja')}</span></p><h2><span class="lang-en">${escapeHtml(week.title_en)}</span><span class="lang-ja" lang="ja">${escapeHtml(week.title_ja)}</span></h2></div><button class="week-toggle" type="button" aria-controls="${id}-detail" aria-expanded="false"><span class="lang-en">OPEN WEEK</span><span class="lang-ja" lang="ja">週の内容を見る</span><i aria-hidden="true">+</i></button></header>
@@ -118,8 +122,20 @@ function weekCard(week) {
 function renderAgenda(weeks) {
   const root = document.querySelector('[data-agenda]');
   if (!root) return;
+  const openStateKey = 'stats-b-open-weeks';
+  const scrollStateKey = 'stats-b-agenda-scroll-y';
+  const savedOpenWeeks = new Set(JSON.parse(sessionStorage.getItem(openStateKey) || '[]'));
   root.innerHTML = `<div class="agenda-controls"><p><span class="lang-en">${weeks.length} course meetings · Open the week you need.</span><span class="lang-ja" lang="ja">全${weeks.length}回 · 必要な週を開いてください。</span></p><button class="all-toggle" type="button" aria-expanded="false"><span class="lang-en">EXPAND ALL</span><span class="lang-ja" lang="ja">すべて開く</span><i>↓</i></button></div>${weeks.sort((a, b) => a.week - b.week).map(weekCard).join('')}`;
   const cards = [...root.querySelectorAll('.week-card')];
+  const all = root.querySelector('.all-toggle');
+  const saveOpenWeeks = () => sessionStorage.setItem(openStateKey, JSON.stringify(cards.filter(card => card.classList.contains('is-open')).map(card => card.id)));
+  const syncAllToggle = () => {
+    const open = cards.length > 0 && cards.every(card => card.classList.contains('is-open'));
+    all.setAttribute('aria-expanded', String(open));
+    all.querySelector('.lang-en').textContent = open ? 'COLLAPSE ALL' : 'EXPAND ALL';
+    all.querySelector('.lang-ja').textContent = open ? 'すべて閉じる' : 'すべて開く';
+    all.querySelector('i').textContent = open ? '↑' : '↓';
+  };
   const setOpen = (card, open) => {
     const detail = card.querySelector('.week-detail');
     const button = card.querySelector('.week-toggle');
@@ -130,16 +146,30 @@ function renderAgenda(weeks) {
     button.querySelector('.lang-en').textContent = open ? 'CLOSE WEEK' : 'OPEN WEEK';
     button.querySelector('.lang-ja').textContent = open ? '週を閉じる' : '週の内容を見る';
   };
-  cards.forEach(card => card.querySelector('.week-toggle').addEventListener('click', () => setOpen(card, !card.classList.contains('is-open'))));
-  const all = root.querySelector('.all-toggle');
+  cards.filter(card => savedOpenWeeks.has(card.id)).forEach(card => setOpen(card, true));
+  syncAllToggle();
+  cards.forEach(card => card.querySelector('.week-toggle').addEventListener('click', () => {
+    setOpen(card, !card.classList.contains('is-open'));
+    syncAllToggle();
+    saveOpenWeeks();
+  }));
   all.addEventListener('click', () => {
     const open = all.getAttribute('aria-expanded') !== 'true';
     cards.forEach(card => setOpen(card, open));
-    all.setAttribute('aria-expanded', String(open));
-    all.querySelector('.lang-en').textContent = open ? 'COLLAPSE ALL' : 'EXPAND ALL';
-    all.querySelector('.lang-ja').textContent = open ? 'すべて閉じる' : 'すべて開く';
-    all.querySelector('i').textContent = open ? '↑' : '↓';
+    syncAllToggle();
+    saveOpenWeeks();
   });
+  const saveScrollPosition = () => sessionStorage.setItem(scrollStateKey, String(window.scrollY));
+  window.addEventListener('pagehide', saveScrollPosition, { once:true });
+  const savedScrollPosition = Number(sessionStorage.getItem(scrollStateKey));
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    if (Number.isFinite(savedScrollPosition) && savedScrollPosition > 0) {
+      window.scrollTo({ top:savedScrollPosition, behavior:'auto' });
+      return;
+    }
+    const target = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    target?.scrollIntoView({ block:'start' });
+  }));
 }
 
 function setupLanguage() {

@@ -21,9 +21,11 @@ prepare_en: Review the probability mass function and expected value of a binomia
 
 ## Materials
 
-- [2026 Standard slides (PowerPoint)](weeks/03-discrete-distributions-ii/03_Standard_Curriculum.pptx) {primary}
-- [2026 Standard slides (PDF)](weeks/03-discrete-distributions-ii/03_Standard_Curriculum.pdf) {primary}
-- [Poisson table](weeks/03-discrete-distributions-ii/03_Poisson_Table.pdf) {worksheet}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v2.pptx) {primary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v2.pdf) {primary}
+- [課題：確率分布・離散確率分布（後半）](weeks/03-discrete-distributions-ii/03 課題 確率分布_離散確率分布(後半).xlsx) {homework}
+- [AL用ワークシート](weeks/03-discrete-distributions-ii/03_AL用ワークシート.xlsx) {homework}
+- [AL用ワークシート（解答入り）](weeks/03-discrete-distributions-ii/03_AL用ワークシート_解答入り.xlsx) {homework-answer}
 - [Yoh 2025 active-learning discrete-distributions slides](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/06_[AL]確率分布_1_離散確率分布.pdf) {yoh}
 - [Yoh 2025 Poisson-distribution lecture](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/w6.pdf) {yoh}
 - [Yoh Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {worksheet}

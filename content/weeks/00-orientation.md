@@ -18,10 +18,10 @@ PC と電卓を持参してください。UNIPA の履修クラスと授業の�
 ## In class
 
 - 授業の進め方と履修上の準備 (course workflow and readiness)
-- 教科書、PC・電卓、授業外学習 (textbook, computer/calculator, and independent study)
+- UNIPA・Google Classroomでの連絡と提出 (announcements and submissions through UNIPA and Google Classroom)
+- 教科書、PC・電卓、授業外学習、iStudio (textbook, computer/calculator, independent study, and iStudio)
 
 ## Materials
 
-- [2026 Standard slides (PowerPoint)](weeks/00-orientation/00_Orientation_2026-standard.pptx) {primary}
-- [2026 Standard slides (PDF)](weeks/00-orientation/00_Orientation_2026-standard.pdf) {primary}
-- [Yoh 2025 introductory statistics slides](other material/2025 yoh/01 統計記述の基礎/w1.pdf) {yoh}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_00_オリエンテーション.pptx) {primary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_00_オリエンテーション.pdf) {primary}

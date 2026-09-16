@@ -21,8 +21,11 @@ prepare_en: Review the different purposes of confidence intervals and hypothesis
 
 ## Materials
 
-- [2026 Standard slides (PowerPoint)](weeks/11-hypothesis-testing/11_Standard_Curriculum.pptx) {primary}
-- [2026 Standard slides (PDF)](weeks/11-hypothesis-testing/11_Standard_Curriculum.pdf) {primary}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_11_統計的仮説検定v2.pptx) {primary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_11_統計的仮説検定v2.pdf) {primary}
+- [課題：統計的仮説検定](weeks/11-hypothesis-testing/11 課題 統計的仮説検定.xlsx) {homework}
+- [AL用ワークシート](weeks/11-hypothesis-testing/11_AL用ワークシート.xlsx) {homework}
+- [AL用ワークシート（解答入り）](weeks/11-hypothesis-testing/11_AL用ワークシート_解答入り.xlsx) {homework-answer}
 - [Practice](weeks/11-hypothesis-testing/11_Hypothesis-Testing_Practice_Yoh.pdf) {worksheet}
 - [Yoh 2025 hypothesis-testing slides](other material/2025 yoh/11 仮設検定/11_統計的仮説検定.pdf) {yoh}
 - [Yoh hypothesis-testing lecture](other material/2025 yoh/11 仮設検定/w11 仮設検定.pdf) {yoh}

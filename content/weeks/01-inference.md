@@ -21,11 +21,11 @@ prepare_en: Review the terms probability, population, and sample before class.
 
 ## Materials
 
-- [2026 Standard slides (PowerPoint)](weeks/01-inference-and-probability/01_Standard_Curriculum.pptx) {primary}
-- [2026 Standard slides (PDF)](weeks/01-inference-and-probability/01_Standard_Curriculum.pdf) {primary}
-- [Probability worksheet](weeks/01-inference-and-probability/01_Probability_Worksheet.pdf) {worksheet}
-- [Worksheet answers](weeks/01-inference-and-probability/01_Probability_Worksheet_Answers.pdf) {answer}
-- [In-class data](weeks/01-inference-and-probability/01_In-class_Data.xlsx) {data}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_01_推測統計学の基礎_推測統計学のプロセスｰ確率の基礎v2.pptx) {primary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_01_推測統計学の基礎_推測統計学のプロセスｰ確率の基礎v2.pdf) {primary}
+- [課題：推測統計学の基礎](weeks/01-inference-and-probability/01 課題 推測統計学の基礎.xlsx) {homework}
+- [AL用ワークシート](weeks/01-inference-and-probability/01_AL用ワークシート_v1.xlsx) {homework}
+- [AL用ワークシート（解答入り）](weeks/01-inference-and-probability/01_AL用ワークシート_解答入り.xlsx) {homework-answer}
 - [Yoh 2025 inference-process slides](other material/2025 yoh/03 推測統計学の基礎_1_推測統計学のプロセス/03_推測統計学の基礎_1_推測統計学のプロセス.pdf) {yoh}
 - [Yoh 2025 inference and probability lecture](other material/2025 yoh/03 推測統計学の基礎_1_推測統計学のプロセス/w3.pdf) {yoh}
 - [Yoh probability handout](other material/2025 yoh/03 推測統計学の基礎_1_推測統計学のプロセス/ch3_配布資料YOH.pdf) {worksheet}

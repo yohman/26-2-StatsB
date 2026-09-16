@@ -28,7 +28,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 00 — Orientation / getting ready
 
-**Content and materials.** Course expectations, textbook, UNIPA/submission routine, BYOD and calculator expectations. Use `weeks/00-orientation/00_Orientation_2026-standard.pptx`.
+**Content and materials.** Course expectations, textbook, UNIPA / Google Classroom routine, BYOD, calculator, and iStudio expectations. Use `materials/2026-tsumura/26_00_オリエンテーション.pptx`.
 
 | Minutes | Plan |
 | --- | --- |
@@ -100,7 +100,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 04 — Active learning: using discrete distributions
 
-**Content and materials.** Consolidate binomial and Poisson distributions, complements, parameters, and interpretation. Use `04_AL_Worksheet.xlsx` and `04_Standard_Curriculum.pptx`; keep `04_AL_Worksheet_Answers.xlsx` for the debrief.
+**Content and materials.** Consolidate binomial and Poisson distributions, complements, parameters, and interpretation. Use the Week 04 Tsumura active-learning deck and exercise files; keep the answer workbook for the debrief.
 
 | Minutes | Plan |
 | --- | --- |
@@ -116,45 +116,45 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 **Homework.** Correct and submit the marked workbook cells plus a 150-word reflection on one error you fixed.  
 **Challenge.** Create a four-line real-world prompt that could be solved by either a binomial or Poisson model only after making the right assumption explicit.
 
-### Week 05 — Continuous distributions I: density, normal, CLT
+### Week 05 — Continuous distributions I: density and normal
 
-**Content and materials.** Probability density and CDF, normal distributions, standardization, standard normal table, central limit theorem. Use `05_Lecture_Slides_Yoh_w8.pdf`, `05_Normal-Distribution_CDF_Yoh.pdf`, `05_Normal-Distribution_and_CLT_Yoh.pdf`, `05_Supplement_Yoh_w7.pdf`, and `05_Statistical_Tables.xlsx`.
+**Content and materials.** Continuous probability distributions, density, integration, cumulative probability, expectation and variance, normal and standard-normal distributions, and the normal table. Use the Week 05 Tsumura deck and exercise files; Yoh density/CDF, normal, and moments PDFs remain scoped supplements.
 
 | Minutes | Plan |
 | --- | --- |
 | 0–8 | Retrieval: model-choice question from Week 04. |
 | 8–20 | Mini-lesson: why a point probability is zero for a continuous variable; area under a density curve. |
 | 20–38 | Sketch-and-shade activity: match four probability statements to density/CDF pictures. |
-| 38–50 | Mini-lesson: normal shape, mean/standard deviation, and (Z=(X-\mu)/\sigma). |
-| 50–68 | Guided standardization: students calculate z-scores and use the standard normal table for upper, lower, and between probabilities. |
-| 68–80 | Mini-lesson: large numbers vs. the central limit theorem—value convergence versus distribution of sample means. |
-| 80–94 | Sampling simulation/prediction: compare individual observations with repeated sample means; discuss why means vary less. |
+| 38–50 | Mini-lesson: expectation and variance for a continuous distribution. |
+| 50–68 | Mini-lesson: normal shape, mean/standard deviation, and (Z=(X-\mu)/\sigma). |
+| 68–80 | Guided standardization: students calculate z-scores and use the standard normal table for upper, lower, and between probabilities. |
+| 80–94 | Pair check: use the normal table and interpret the probability in original units. |
 | 94–100 | Exit ticket: interpret a z-score in the context of the original units. |
 
-**Homework.** Normal-distribution set: z-score, upper/lower/between probability, and a one-sentence CLT interpretation.  
-**Challenge.** Change the sample size in a simulation and explain the observed change in the sampling distribution without claiming the population changed.
+**Homework.** Complete Tsumura's Week 05 exercise file.
+**Challenge.** Explain a z-score and probability in the original units.
 
-### Week 06 — Continuous distributions II: t, chi-square, degrees of freedom
+### Week 06 — Continuous distributions II: samples, CLT, t, chi-square
 
-**Content and materials.** Sample variance vs. unbiased variance, t distribution/table, chi-square distribution/table, degrees of freedom, and expectation/variance review. Use `06_Lecture_Slides_Yoh_w8-Chi-Squared.pdf`, `06_t-and-Chi-square_Distributions_Yoh.pdf`, and `06_t_Distribution_Table.pdf`.
+**Content and materials.** Samples, sample means, the central limit theorem, t distribution/table, unbiased sample variance, degrees of freedom, and chi-square distribution. Use the Week 06 Tsumura deck and exercise files; Yoh sampling/CLT, t, chi-square, and table PDFs remain scoped supplements.
 
 | Minutes | Plan |
 | --- | --- |
 | 0–8 | Retrieval: convert one raw value to a z-score and identify the relevant table area. |
-| 8–20 | Mini-lesson: sample variance, unbiased variance, and why the divisor changes from (n) to (n-1). |
-| 20–38 | Small-group data task: calculate a favorite athlete’s sample mean and both variance versions; compare results. |
-| 38–50 | Mini-lesson: t distribution, degrees of freedom, and reading a t table. |
+| 8–20 | Mini-lesson: samples, sample means, and the central limit theorem. |
+| 20–38 | Small-group data task: compare individual observations and repeated sample means; then calculate both variance versions. |
+| 38–50 | Mini-lesson: t distribution, unbiased variance, degrees of freedom, and reading a t table. |
 | 50–68 | Guided table practice: identify df and critical t for one- and two-sided areas. |
 | 68–80 | Mini-lesson: chi-square as a right-skewed distribution and its connection to squared deviations. |
 | 80–94 | Category/fit discussion using the koala example; calculate one chi-square contribution and interpret a large value. |
 | 94–100 | Exit ticket: explain what degrees of freedom counts in the variance context. |
 
-**Homework.** t-table and chi-square-table practice, including a variance calculation that shows the denominator.  
+**Homework.** Complete Tsumura's Week 06 exercise file.
 **Challenge.** Write an explanation for a classmate: why does estimating the mean “use up” one degree of freedom?
 
 ### Week 07 — Active learning: reading continuous distributions
 
-**Content and materials.** Standard normal table fluency, standardization, unbiased variance, and t-table use. Use `07_AL_Worksheet.pdf` / `.xlsx`, `07_Standard_Curriculum.pptx`, and reserve `07_AL_Worksheet_Answers.xlsx` for the debrief.
+**Content and materials.** Standard normal table fluency, standardization, unbiased variance, and t-table use. Use the Week 07 Tsumura active-learning deck and exercise files; reserve the answer workbook for the debrief.
 
 | Minutes | Plan |
 | --- | --- |
@@ -172,7 +172,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 08 — Estimation I: parameters, estimators, point estimation
 
-**Content and materials.** Parameters and statistics, estimator versus estimate, sampling distributions, unbiasedness, point estimation of a population mean and variance. Use `08_Lecture_Slides_Yoh_w9.pdf`, `08_Estimation-and-Confidence-Intervals_Yoh.pdf`, `08_Worksheet.xlsx`, and `08_Confidence-Intervals.ipynb`.
+**Content and materials.** Parameters and statistics, estimator versus estimate, unbiasedness, efficiency, consistency, and point estimation of a population mean and variance. Use the Week 08 Tsumura deck and exercise files, plus the W08-only Yoh supplement.
 
 | Minutes | Plan |
 | --- | --- |
@@ -190,7 +190,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 09 — Estimation II: confidence intervals for mean and variance
 
-**Content and materials.** Confidence level, t-based interval for a population mean, variance interval using chi-square, and reporting an interval responsibly. Use `09_Lecture_Slides_Yoh_w10.pdf`, `09_Confidence-Intervals_for-the-Mean_Yoh.pdf`, and `09_Confidence-Intervals_for-Variance_Yoh.pdf`.
+**Content and materials.** Confidence level, rejection region, t-based interval for a population mean, variance interval using chi-square, and reporting an interval responsibly. Use the Week 09 Tsumura deck and exercise files, plus the W09-only Yoh supplement.
 
 | Minutes | Plan |
 | --- | --- |
@@ -208,7 +208,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 10 — Active learning: confidence intervals in context
 
-**Content and materials.** Choosing Z/t/chi-square routes and building/communicating intervals. Use `10_AL_Confidence-Intervals_Yoh.pdf`, `10_AL_Worksheet.xlsx`, `10_AL_Worksheet_Answers.xlsx`, and `10_Standard_Curriculum.pptx`.
+**Content and materials.** Choosing Z/t/chi-square routes and building/communicating intervals. Use the Week 10 Tsumura active-learning deck and exercise files; Yoh #10 remains supplementary.
 
 | Minutes | Plan |
 | --- | --- |
@@ -226,7 +226,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 11 — Hypothesis testing
 
-**Content and materials.** Null and alternative hypotheses, p-value, significance level, one-/two-sided rejection regions, critical values, test statistics, and Type I/II error. Use `11_Lecture_Slides_Yoh_w11.pdf`, `11_Hypothesis-Testing_Yoh.pdf`, and `11_Hypothesis-Testing_Practice_Yoh.pdf`.
+**Content and materials.** The seven-step test process, null and alternative hypotheses, significance level, rejection regions, one- and two-group examples, and p values. Use the Week 11 Tsumura deck and exercise files; Yoh #11 remains supplementary.
 
 | Minutes | Plan |
 | --- | --- |
@@ -244,7 +244,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 12 — Regression analysis and interpretation
 
-**Content and materials.** Correlation versus causation, response/explanatory variables, simple linear regression, Excel output, fitted line, coefficient and (R^2) interpretation, and a cautious conclusion. Use `12_Lecture_Slides_Yoh_w12.pdf`, `12_Regression-Analysis_Yoh.pdf`, `12_Interpreting-Regression_Yoh.pdf`, `12_Regression_Data.xlsx`, `12_Interpretation_Data.xlsx`, `12_Regression_Worksheet.xlsx`, and `12_Linear-Regression.ipynb`.
+**Content and materials.** Correlation versus causation, outcome/explanatory variables, simple regression, least squares, Excel regression, a testing-process review, and incorrect interpretations of results. Use both Week 12 Tsumura decks and their exercise files; Yoh #02 and #12 remain matching supplements.
 
 | Minutes | Plan |
 | --- | --- |
@@ -253,12 +253,33 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 | 20–38 | Scatterplot gallery: groups describe direction, strength, outliers, and a plausible confounder before seeing any regression output. |
 | 38–50 | Mini-lesson: (\hat y=a+bx), slope/intercept, residuals, and what (R^2) does and does not say. |
 | 50–68 | Excel setup and guided regression with the supplied data; students save an output table/screenshot. |
-| 68–80 | Mini-lesson: read the regression output—coefficient, p-value/significance, confidence language, and practical versus statistical meaning. |
-| 80–94 | Mini-report workshop: pairs use the worksheet to write a five-sentence evidence-based conclusion and a causation caveat. |
+| 68–80 | Mini-lesson: review the testing process and read regression output cautiously. |
+| 80–94 | Error clinic: non-significant coefficients, variable direction, adjusted R², method choice, and spurious correlation. |
 | 94–100 | Final exit ticket: name the tool you would use to answer a new data question and why. |
 
-**Homework / culminating task.** Submit a one-page regression memo using a provided dataset: question, variables, scatterplot description, fitted equation/output, interpretation, and one limitation.  
+**Homework / culminating task.** Complete Tsumura's Week 12 exercise file.
 **Challenge.** Improve a misleading regression headline by adding the missing evidence/limitation; propose one design change that would make a causal claim more credible.
+
+### Week 13 — Final-exam preparation and integrated review
+
+**Content and materials.** Review the central sequence: inference, probability distributions, interval estimation, hypothesis testing, and regression. Use Yoh's 2025 practice problems, answer key, and review materials. No new Tsumura lecture deck is scheduled.
+
+| Minutes | Plan |
+| --- | --- |
+| 0–20 | Confirm the final scope and retrieve the course sequence. |
+| 20–60 | Work representative problems across all five topic blocks. |
+| 60–86 | Error clinic: identify setup, calculation, and interpretation errors. |
+| 86–100 | Exam-readiness check and final questions. |
+
+**Homework.** Complete selected practice problems and self-correct with the answer key.
+
+### Week 14 — Final examination
+
+**Content and materials.** Final examination. No new lecture or practice material is scheduled; follow the latest UNIPA notice.
+
+| Minutes | Plan |
+| --- | --- |
+| 0–100 | Final examination. |
 
 ## Instructor setup checklist
 
