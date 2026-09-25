@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Yoh — Statistics</title>
+  <path d="M8 12h11l10 15 10-15h11L34 36v6c0 12-7 18-21 18H8V50h5c7 0 10-3 10-9v-5Z" fill="#2b211d"/>
+  <path d="M37 25c6-1 6-17 12-17s6 16 13 17v5c-9-1-8-16-13-16s-4 15-12 16Z" fill="#bd8425"/>
+  <circle cx="49" cy="21" r="3" fill="#bd8425"/>
+</svg>
