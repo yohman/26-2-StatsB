@@ -19,6 +19,10 @@ prepare_en: Review the meanings of parameter, statistic, and estimator.
 - 点推定と区間推定 (point estimation and interval estimation)
 - 母平均・母分散の点推定量、標本不偏分散、自由度 (point estimators, unbiased sample variance, and degrees of freedom)
 
+## Textbook
+
+- 第2章 第3節「母平均の区間推定・母分散の区間推定」p.131 (Chapter 2, Section 3: Interval Estimation of Population Mean and Variance, p.131)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_08_母平均の区間推定・母分散の区間推定(前半)v2.pptx) {primary}

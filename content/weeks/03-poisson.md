@@ -19,6 +19,10 @@ prepare_en: Review the probability mass function and expected value of a binomia
 - 打率の事例を使った二項分布の計算 (binomial calculations using a batting-average example)
 - ポアソン分布の確率、期待値、分散 (Poisson probabilities, expected value, and variance)
 
+## Textbook
+
+- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v3.pptx) {primary}

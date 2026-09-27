@@ -21,6 +21,10 @@ PC と電卓を持参してください。UNIPA の履修クラスと授業の�
 - UNIPA・Google Classroomでの連絡と提出 (announcements and submissions through UNIPA and Google Classroom)
 - 教科書、PC・電卓、授業外学習、iStudio (textbook, computer/calculator, independent study, and iStudio)
 
+## Textbook
+
+- 第2章「推測統計学」導入 (Chapter 2 introduction: Inferential Statistics)
+
 ## Materials
 
 - [統計学の授業について (PowerPoint)](materials/2026-tsumura/26_00_オリエンテーション.pptx) {primary}

@@ -18,6 +18,10 @@ prepare_en: Review the terms probability, population, and sample before class.
 - 事象、積事象、排反・和事象、確率の公理 (events, intersection, mutual exclusivity/union, probability axioms)
 - 同時確率、条件付き確率、独立とコイン投げの活動 (joint probability, conditional probability, independence, and coin-toss activity)
 
+## Textbook
+
+- 第2章 第1節「推測統計学の基礎」p.102 (Chapter 2, Section 1: Fundamentals of Inferential Statistics, p.102)
+
 ## Materials
 
 - [推測統計学の基礎：推測統計学のプロセス / 確率の基礎 (PowerPoint)](materials/2026-tsumura/26_01_推測統計学の基礎_推測統計学のプロセスｰ確率の基礎v2.pptx) {primary}

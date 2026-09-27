@@ -19,6 +19,11 @@ prepare_en: Review Week 12 regression and bring questions for final-exam prepara
 - 代表問題を使って、解法と結果の解釈を確認する (practice representative problems and review both solutions and interpretation)
 - 期末試験の範囲・形式・持ち込みに関する最新案内を確認する (confirm the latest examination scope, format, and permitted materials)
 
+## Textbook
+
+- 第1章 第7節「回帰分析とその他の代表的な分析手法」p.71 (Chapter 1, Section 7: Regression Analysis and Other Representative Methods, p.71)
+- 復習：第2章 第1〜4節 p.102、117、131、138 (Review: Chapter 2, Sections 1–4, pp.102, 117, 131, 138)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides: Part 2 (PowerPoint)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pptx) {primary}

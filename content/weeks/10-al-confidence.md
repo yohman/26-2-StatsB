@@ -18,6 +18,10 @@ prepare_en: Practise identifying which of the population variance, sample size, 
 - 標本不偏分散、母平均の95%信頼区間、母分散の95%信頼区間を確認する (unbiased sample variance and 95% confidence intervals)
 - テスト得点、ネジの長さ、バッテリー寿命、トマト重量の事例で区間推定を行う (interval estimation using scores, screw lengths, battery life, and tomato weight)
 
+## Textbook
+
+- 第2章 第3節「母平均の区間推定・母分散の区間推定」p.131 (Chapter 2, Section 3: Interval Estimation of Population Mean and Variance, p.131)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_10_[AL]_母平均の区間推定・母分散の区間推定v2.pptx) {primary}

@@ -19,6 +19,10 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 - 標準正規分布表とt分布を確認する (reviewing the standard-normal table and t distribution)
 - 標準正規分布表の読み方を練習する (practising standard-normal table reading)
 
+## Textbook
+
+- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pptx) {primary}

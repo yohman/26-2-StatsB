@@ -19,6 +19,10 @@ prepare_en: Review the difference between sample variance and unbiased sample va
 - t分布、自由度、標本不偏分散、t分布表 (t distribution, degrees of freedom, unbiased sample variance, and t table)
 - カイ二乗分布 (chi-square distribution)
 
+## Textbook
+
+- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pptx) {primary}

@@ -18,6 +18,10 @@ Excel でデータ分析ツールを使えるか確認してください。
 - 相関と因果、目的変数・説明変数、単回帰分析、最小二乗法 (correlation and causation, outcome and explanatory variables, simple regression, and least squares)
 - Excelの分析ツールによる単回帰分析と、仮説検定のプロセスの確認 (simple regression with Excel's Analysis ToolPak and a review of the testing process)
 
+## Textbook
+
+- 第1章 第7節「回帰分析とその他の代表的な分析手法」p.71 (Chapter 1, Section 7: Regression Analysis and Other Representative Methods, p.71)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides: Part 1 (PowerPoint)](materials/2026-tsumura/26_12_回帰分析とその他の代表的な分析手法_前半v3.pptx) {primary}

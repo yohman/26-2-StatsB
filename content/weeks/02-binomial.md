@@ -19,6 +19,10 @@ prepare_en: Review combinations and the notation used for random variables.
 - 確率分布、離散確率分布、連続確率分布 (probability distributions, discrete distributions, continuous distributions)
 - 二項・ベルヌーイ・ポアソン・負の二項分布の特徴 (binomial, Bernoulli, Poisson, and negative-binomial distributions)
 
+## Textbook
+
+- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_02_確率分布_離散確率分布_前半v2.pptx) {primary}

@@ -48,6 +48,7 @@ function parseWeek(source, file) {
     week:Number(meta.week),
     prepare:section('Prepare'),
     inClass:section('In class'),
+    textbook:parseAgenda(section('Textbook')),
     materials:parseMaterials(section('Materials'))
   };
 }
@@ -83,6 +84,7 @@ function combineWeekOne(weeks) {
     orientationTitleEn:orientation.title_en,
     orientationTitleJa:orientation.title_ja,
     agenda:[...parseAgenda(orientation.inClass), ...parseAgenda(weekOne.inClass)],
+    textbook:[...orientation.textbook, ...weekOne.textbook],
     materials:[...orientation.materials, ...weekOne.materials],
     prepare_en:`${orientation.prepare_en} ${weekOne.prepare_en}`,
     prepare:`${orientation.prepare}\n\n${weekOne.prepare}`
@@ -117,8 +119,8 @@ function fullDate(value, language) {
   }).format(date);
 }
 
-function viewerLink(file, title, week) {
-  return `viewer.html?file=${encodeURIComponent(file)}&title=${encodeURIComponent(title)}&week=W${String(week).padStart(2, '0')}&return=${encodeURIComponent(`agenda.html#week-${String(week).padStart(2, '0')}`)}`;
+function viewerLink(file, title, week, source = '') {
+  return `viewer.html?file=${encodeURIComponent(file)}&title=${encodeURIComponent(title)}&week=W${String(week).padStart(2, '0')}&return=${encodeURIComponent(`agenda.html#week-${String(week).padStart(2, '0')}`)}${source ? `&source=${encodeURIComponent(source)}` : ''}`;
 }
 
 function isLectureMaterial(item) {
@@ -144,10 +146,10 @@ function lectureDecks(materials, week) {
       const pdf = lecture.find(candidate => candidate.href === item.href.replace(/\.pptx$/i, '.pdf'));
       used.add(item.href);
       if (pdf) used.add(pdf.href);
-      return [{ label, preview:pdf?.href || '', downloads:[item, ...(pdf ? [pdf] : [])], type:item.type }];
+      return [{ label, preview:pdf?.href || '', source:item.href, type:item.type }];
     }
     used.add(item.href);
-    return [{ label, preview:ext === 'PDF' ? item.href : '', downloads:[item], type:item.type }];
+    return [{ label, preview:ext === 'PDF' ? item.href : '', type:item.type }];
   });
 }
 
@@ -177,9 +179,9 @@ function timeAgenda(week) {
 
 function slideCard(deck, week) {
   const image = slideThumbnail(deck, week);
-  const preview = deck.preview ? `<a class="file-button slide-preview-button" href="${viewerLink(deck.preview, deck.label, week.week)}">${bilingual('Preview slides', 'スライドをプレビュー')}<span aria-hidden="true">→</span></a>` : '';
-  const downloads = deck.downloads.map(item => fileButton(item, extension(item.href))).join('');
-  return `<article class="slide-card${image ? '' : ' slide-card--no-cover'}">${image ? `<a class="slide-cover" href="${viewerLink(deck.preview, deck.label, week.week)}" aria-label="${escapeHtml(deck.label)}"><img src="${encodeHref(image)}" alt="" loading="lazy"></a>` : ''}<div class="slide-card-body"><h4>${escapeHtml(deck.label)}</h4><div class="slide-actions">${preview}<div class="slide-downloads">${downloads}</div></div></div></article>`;
+  const link = deck.preview ? viewerLink(deck.preview, deck.label, week.week, deck.source) : '';
+  const preview = link ? `<a class="file-button slide-preview-button" href="${link}">${bilingual('Preview slides', 'スライドをプレビュー')}<span aria-hidden="true">→</span></a>` : '';
+  return `<article class="slide-card${image ? '' : ' slide-card--no-cover'}">${image && link ? `<a class="slide-cover" href="${link}" aria-label="${escapeHtml(deck.label)}"><img src="${encodeHref(image)}" alt="" loading="lazy"></a>` : ''}<div class="slide-card-body"><h4>${escapeHtml(deck.label)}</h4>${preview}</div></article>`;
 }
 
 function lectureSection(week) {
@@ -193,11 +195,12 @@ function lectureSection(week) {
   const slideList = visible.map(deck => slideCard(deck, week)).join('');
   const extra = more.length ? `<details class="more-slides"><summary>${bilingual(`Additional slides (${more.length})`, `補助スライド（${more.length}）`)}</summary><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></details>` : '';
   const description = plan ? bilingual(escapeHtml(plan.overview[0]), escapeHtml(plan.overview[1])) : bilingual(escapeHtml(week.title_en), escapeHtml(week.title_ja));
+  const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
   return `<section class="week-zone lecture-zone" aria-labelledby="week-${week.week}-lecture">
     <header class="zone-heading"><p>${week.week === 14 ? bilingual('EXAM', '試験') : bilingual('LECTURE', '講義')}</p><h3 id="week-${week.week}-lecture">${heading}</h3></header>
     ${timeAgenda(week)}
-    <div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><p class="lecture-summary">${description}</p>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>
+    <div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>
   </section>`;
 }
 

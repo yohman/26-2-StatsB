@@ -19,6 +19,10 @@ prepare_en: Review the difference between continuous and discrete variables.
 - 確率分布の期待値と分散 (expected value and variance of probability distributions)
 - 正規分布、標準正規分布、標準正規分布表の読み方 (normal distribution, standardized normal distribution, and the normal table)
 
+## Textbook
+
+- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pptx) {primary}

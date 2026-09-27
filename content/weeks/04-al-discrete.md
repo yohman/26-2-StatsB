@@ -18,6 +18,10 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 - 二項分布の確率、期待値、分散を確認する (reviewing binomial probability, expected value, and variance)
 - ヒット、ガチャ、不良品の事例で二項分布とポアソン分布を使う (using binomial and Poisson distributions for hits, gacha draws, and defective items)
 
+## Textbook
+
+- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pptx) {primary}

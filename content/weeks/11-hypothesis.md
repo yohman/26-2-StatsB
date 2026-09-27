@@ -19,6 +19,11 @@ prepare_en: Review the different purposes of confidence intervals and hypothesis
 - ポテト重量と2社の満足度を使った検定 (tests using potato weight and two-company satisfaction examples)
 - 仮説検定とp値 (hypothesis testing and p values)
 
+## Textbook
+
+- 第2章 第4節「統計的仮説検定」p.138 (Chapter 2, Section 4: Statistical Hypothesis Testing, p.138)
+- 第3章 第3節「分析事例③ 2群の検定」p.170 (Chapter 3, Section 3: Case Study 3, Two-Group Tests, p.170)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_11_統計的仮説検定v3.pptx) {primary}

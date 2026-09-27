@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex">
   <title>Preview · 2026–2 Statistics B</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.svg?v=20260927-b-mark-1" type="image/svg+xml">
   <link rel="stylesheet" href="assets/stats-styles.css?v=20260909">
-  <link rel="stylesheet" href="assets/viewer-context.css?v=20260915-pdf-preview">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20260927-fullscreen-1">
 </head>
 <body class="viewer-page">
-  <header class="site-header"><a class="wordmark" href="index.html"><span>STAT / B</span>2026–2 Statistics B</a><div class="header-tools"><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
+  <header class="site-header"><a class="wordmark" href="index.html"><img src="favicon.svg?v=20260927-b-mark-1" alt="" width="42" height="42">2026–2 Statistics B</a><div class="header-tools"><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
   <main class="viewer-main wrap">
     <a class="viewer-back" data-viewer-back href="agenda.html"><span aria-hidden="true">←</span><span class="lang-en">BACK TO AGENDA</span><span class="lang-ja" lang="ja">授業予定に戻る</span></a>
     <div class="viewer-top"><div><p class="eyebrow"><span class="lang-en">FILE PREVIEW</span><span class="lang-ja" lang="ja">資料プレビュー</span></p><h1 data-viewer-title>Course file</h1></div><div class="viewer-actions"><a data-download href="#" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span> ↓</a></div></div>
@@ -20,6 +20,7 @@
   <script>
     const parameters = new URLSearchParams(location.search);
     const file = parameters.get('file') || '';
+    const source = parameters.get('source') || '';
     const title = parameters.get('title') || file.split('/').pop() || 'Course file';
     const week = parameters.get('week') || '';
     const requestedReturn = parameters.get('return') || '';
@@ -28,6 +29,14 @@
     document.title = `${fullTitle} · Preview`;
     document.querySelector('[data-viewer-title]').textContent = fullTitle;
     document.querySelector('[data-download]').href = encodeURI(file);
+    if (/\.pdf$/i.test(file)) document.querySelector('[data-download]').innerHTML = '<span class="lang-en">DOWNLOAD PDF</span><span class="lang-ja" lang="ja">PDFをダウンロード</span> ↓';
+    if (/\.pptx$/i.test(source)) {
+      const sourceDownload = document.createElement('a');
+      sourceDownload.href = encodeURI(source);
+      sourceDownload.download = '';
+      sourceDownload.innerHTML = '<span class="lang-en">DOWNLOAD PPTX</span><span class="lang-ja" lang="ja">PPTXをダウンロード</span> ↓';
+      document.querySelector('.viewer-actions').append(sourceDownload);
+    }
     document.querySelector('[data-viewer-back]').href = returnTo;
     const content = document.querySelector('[data-viewer-content]');
     const showFileNote = () => {
@@ -50,7 +59,16 @@
       const next = document.createElement('button');
       next.type = 'button';
       next.innerHTML = makeLabel('NEXT', '次へ');
-      toolbar.append(previous, pageStatus, next);
+      const navigation = document.createElement('div');
+      navigation.className = 'pdf-navigation';
+      navigation.append(previous, pageStatus, next);
+      const fullscreen = document.createElement('button');
+      fullscreen.type = 'button';
+      fullscreen.className = 'pdf-fullscreen';
+      fullscreen.innerHTML = makeLabel('FULL SCREEN', '全画面');
+      fullscreen.setAttribute('aria-pressed', 'false');
+      fullscreen.disabled = true;
+      toolbar.append(navigation, fullscreen);
       const canvasWrap = document.createElement('div');
       canvasWrap.className = 'pdf-canvas-wrap';
       const canvas = document.createElement('canvas');
@@ -65,25 +83,62 @@
         if (!response.ok) throw new Error('PDF unavailable');
         const pdf = await window.pdfjsLib.getDocument({ data: await response.arrayBuffer() }).promise;
         let activePage = 1;
-        const renderPage = async requestedPage => {
+        let renderQueue = Promise.resolve();
+        const isFullscreen = () => document.fullscreenElement === viewer || viewer.classList.contains('is-fullscreen-fallback');
+        const renderPage = requestedPage => {
           activePage = requestedPage;
-          const page = await pdf.getPage(activePage);
-          const baseViewport = page.getViewport({ scale: 1 });
-          const availableWidth = Math.max(320, Math.min(1100, canvasWrap.clientWidth - 32));
-          const scale = Math.min(1.7, availableWidth / baseViewport.width);
-          const viewport = page.getViewport({ scale });
-          const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-          canvas.width = Math.floor(viewport.width * pixelRatio);
-          canvas.height = Math.floor(viewport.height * pixelRatio);
-          canvas.style.width = `${Math.floor(viewport.width)}px`;
-          canvas.style.height = `${Math.floor(viewport.height)}px`;
-          const context = canvas.getContext('2d');
-          context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-          await page.render({ canvasContext: context, viewport }).promise;
-          pageStatus.textContent = `${activePage} / ${pdf.numPages}`;
-          previous.disabled = activePage === 1;
-          next.disabled = activePage === pdf.numPages;
+          renderQueue = renderQueue.catch(() => {}).then(async () => {
+            const page = await pdf.getPage(requestedPage);
+            const baseViewport = page.getViewport({ scale: 1 });
+            const availableWidth = Math.max(320, Math.min(1400, canvasWrap.clientWidth - 32));
+            const availableHeight = Math.max(200, canvasWrap.clientHeight - 32);
+            const scale = isFullscreen()
+              ? Math.min(2.5, availableWidth / baseViewport.width, availableHeight / baseViewport.height)
+              : Math.min(1.7, availableWidth / baseViewport.width);
+            const viewport = page.getViewport({ scale });
+            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = Math.floor(viewport.width * pixelRatio);
+            canvas.height = Math.floor(viewport.height * pixelRatio);
+            canvas.style.width = `${Math.floor(viewport.width)}px`;
+            canvas.style.height = `${Math.floor(viewport.height)}px`;
+            const context = canvas.getContext('2d');
+            context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+            await page.render({ canvasContext: context, viewport }).promise;
+            pageStatus.textContent = `${requestedPage} / ${pdf.numPages}`;
+            previous.disabled = requestedPage === 1;
+            next.disabled = requestedPage === pdf.numPages;
+          });
+          return renderQueue;
         };
+        const syncFullscreen = () => {
+          const expanded = isFullscreen();
+          fullscreen.innerHTML = expanded ? makeLabel('EXIT FULL SCREEN', '全画面を終了') : makeLabel('FULL SCREEN', '全画面');
+          fullscreen.setAttribute('aria-pressed', String(expanded));
+          renderPage(activePage);
+        };
+        const exitFallbackFullscreen = () => {
+          viewer.classList.remove('is-fullscreen-fallback');
+          document.body.classList.remove('pdf-preview-expanded');
+          syncFullscreen();
+        };
+        fullscreen.addEventListener('click', async () => {
+          if (document.fullscreenElement === viewer) {
+            await document.exitFullscreen();
+          } else if (viewer.classList.contains('is-fullscreen-fallback')) {
+            exitFallbackFullscreen();
+          } else {
+            try {
+              if (!viewer.requestFullscreen) throw new Error('Fullscreen unavailable');
+              await viewer.requestFullscreen();
+            } catch {
+              viewer.classList.add('is-fullscreen-fallback');
+              document.body.classList.add('pdf-preview-expanded');
+              syncFullscreen();
+            }
+          }
+        });
+        document.addEventListener('fullscreenchange', syncFullscreen);
+        fullscreen.disabled = false;
         const showPreviousPage = () => activePage > 1 && renderPage(activePage - 1);
         const showNextPage = () => activePage < pdf.numPages && renderPage(activePage + 1);
         previous.addEventListener('click', showPreviousPage);
@@ -93,6 +148,11 @@
           const isEditing = target instanceof HTMLElement &&
             (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
           if (isEditing || event.altKey || event.ctrlKey || event.metaKey) return;
+          if (event.key === 'Escape' && viewer.classList.contains('is-fullscreen-fallback')) {
+            event.preventDefault();
+            exitFallbackFullscreen();
+            return;
+          }
           if (event.key === 'ArrowLeft') {
             event.preventDefault();
             showPreviousPage();

@@ -19,6 +19,10 @@ prepare_en: Review why we use unbiased sample variance before class.
 - 母平均の95%信頼区間 (95% confidence interval for the population mean)
 - 母分散の95%信頼区間とカイ二乗分布の非対称性 (95% confidence interval for population variance and chi-square asymmetry)
 
+## Textbook
+
+- 第2章 第3節「母平均の区間推定・母分散の区間推定」p.131 (Chapter 2, Section 3: Interval Estimation of Population Mean and Variance, p.131)
+
 ## Materials
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半)v4.pptx) {primary}
