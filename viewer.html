@@ -84,8 +84,23 @@
           previous.disabled = activePage === 1;
           next.disabled = activePage === pdf.numPages;
         };
-        previous.addEventListener('click', () => activePage > 1 && renderPage(activePage - 1));
-        next.addEventListener('click', () => activePage < pdf.numPages && renderPage(activePage + 1));
+        const showPreviousPage = () => activePage > 1 && renderPage(activePage - 1);
+        const showNextPage = () => activePage < pdf.numPages && renderPage(activePage + 1);
+        previous.addEventListener('click', showPreviousPage);
+        next.addEventListener('click', showNextPage);
+        document.addEventListener('keydown', event => {
+          const target = event.target;
+          const isEditing = target instanceof HTMLElement &&
+            (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+          if (isEditing || event.altKey || event.ctrlKey || event.metaKey) return;
+          if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            showPreviousPage();
+          } else if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            showNextPage();
+          }
+        });
         await renderPage(activePage);
       } catch (error) {
         showPdfFallback();

@@ -1,6 +1,6 @@
 ---
 week: 9
-date: 2026-12-02
+date: 2026-11-25
 publish_at: 2026-01-01T00:00:00+09:00
 title_ja: 母平均の区間推定・母分散の区間推定（後半）
 title_en: Interval Estimation of the Population Mean and Population Variance (Part 2)
@@ -21,11 +21,9 @@ prepare_en: Review why we use unbiased sample variance before class.
 
 ## Materials
 
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半).pptx) {primary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半).pdf) {primary}
-- [課題：母平均の区間推定・母分散の区間推定](weeks/09-confidence-intervals-ii/09 課題 母平均の区間推定・母分散の区間推定.xlsx) {homework}
-- [AL用ワークシート](weeks/09-confidence-intervals-ii/09_AL用ワークシート.xlsx) {homework}
-- [AL用ワークシート（解答入り）](weeks/09-confidence-intervals-ii/09_AL用ワークシート_解答入り.xlsx) {homework-answer}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半)v4.pptx) {primary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半)v4.pdf) {primary}
+- [AL用ワークシート](weeks/09-confidence-intervals-ii/09_AL用ワークシート.xlsx) {worksheet}
 - [統計表](weeks/09-confidence-intervals-ii/09_統計表.xlsx) {homework}
 - [Yoh supplement: confidence intervals for the mean and variance](materials/2026-yoh-supplements/09_信頼区間_W09.pdf) {yoh}
 - [Yoh lecture: confidence interval for the mean](other material/2025 yoh/09 母集団の信頼区間/w9 Confidence Interval.pdf) {yoh}

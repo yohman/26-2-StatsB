@@ -23,5 +23,5 @@ PC と電卓を持参してください。UNIPA の履修クラスと授業の�
 
 ## Materials
 
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_00_オリエンテーション.pptx) {primary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_00_オリエンテーション.pdf) {primary}
+- [統計学の授業について (PowerPoint)](materials/2026-tsumura/26_00_オリエンテーション.pptx) {primary}
+- [統計学の授業について (PDF)](materials/2026-tsumura/26_00_オリエンテーション.pdf) {primary}

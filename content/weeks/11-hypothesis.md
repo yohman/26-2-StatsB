@@ -1,6 +1,6 @@
 ---
 week: 11
-date: 2026-12-16
+date: 2026-12-09
 publish_at: 2026-01-01T00:00:00+09:00
 title_ja: 統計的仮説検定
 title_en: Statistical Hypothesis Testing
@@ -21,11 +21,9 @@ prepare_en: Review the different purposes of confidence intervals and hypothesis
 
 ## Materials
 
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_11_統計的仮説検定v2.pptx) {primary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_11_統計的仮説検定v2.pdf) {primary}
-- [課題：統計的仮説検定](weeks/11-hypothesis-testing/11 課題 統計的仮説検定.xlsx) {homework}
-- [AL用ワークシート](weeks/11-hypothesis-testing/11_AL用ワークシート.xlsx) {homework}
-- [AL用ワークシート（解答入り）](weeks/11-hypothesis-testing/11_AL用ワークシート_解答入り.xlsx) {homework-answer}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_11_統計的仮説検定v3.pptx) {primary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_11_統計的仮説検定v3.pdf) {primary}
+- [AL用ワークシート](weeks/11-hypothesis-testing/11_AL用ワークシート.xlsx) {worksheet}
 - [Practice](weeks/11-hypothesis-testing/11_Hypothesis-Testing_Practice_Yoh.pdf) {worksheet}
 - [Yoh 2025 hypothesis-testing slides](other material/2025 yoh/11 仮設検定/11_統計的仮説検定.pdf) {yoh}
 - [Yoh hypothesis-testing lecture](other material/2025 yoh/11 仮設検定/w11 仮設検定.pdf) {yoh}

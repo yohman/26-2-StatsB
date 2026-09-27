@@ -20,7 +20,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 ### Recommended routine
 
 - **Exit ticket every week:** one calculation/decision and one sentence explaining it. Use it to form the opening retrieval prompt next week.
-- **Homework every content week:** 20–30 minutes, due before the next meeting; grade for completion plus one or two checked items. The supplied worksheets, data, tables, and notebooks are the starting point.
+- **Homework every content week:** students complete the AL worksheet and enter the requested cell values in the corresponding UNIPA quiz. Do not distribute the quiz-import spreadsheet or answer workbook.
 - **Challenge every active-learning week:** an optional or small-bonus extension. Groups submit one clearly labeled calculation and a short interpretation; it should reward transfer, not speed.
 - **Feedback loop:** show two anonymized exit-ticket responses at the start of the following class—one sound method and one useful misconception.
 
@@ -164,7 +164,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 | 40–60 | Station 2: solve the Chiba temperature unbiased-variance item; require visible intermediate steps. |
 | 60–68 | Reset: compare two correct paths for a lower-tail probability. |
 | 68–86 | Station 3: t-table lookup and a mixed “which distribution/table?” sorting task. |
-| 86–94 | Pair check using the answer workbook; each pair corrects one answer in a contrasting color and explains the correction. |
+| 86–94 | Instructor-led debrief; each pair corrects one answer in a contrasting color and explains the correction. |
 | 94–100 | Exit ticket: solve one new probability and name the symmetry/complement rule used. |
 
 **Homework.** Submit the completed worksheet and corrections; students explain one wrong answer rather than merely replacing it.  
@@ -244,7 +244,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 12 — Regression analysis and interpretation
 
-**Content and materials.** Correlation versus causation, outcome/explanatory variables, simple regression, least squares, Excel regression, a testing-process review, and incorrect interpretations of results. Use both Week 12 Tsumura decks and their exercise files; Yoh #02 and #12 remain matching supplements.
+**Content and materials.** Correlation versus causation, outcome/explanatory variables, simple regression, least squares, Excel regression, and a testing-process review. Use Tsumura's Week 12 Part 1 deck and AL worksheet; Yoh #02 remains the matching supplement.
 
 | Minutes | Plan |
 | --- | --- |
@@ -254,24 +254,24 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 | 38–50 | Mini-lesson: (\hat y=a+bx), slope/intercept, residuals, and what (R^2) does and does not say. |
 | 50–68 | Excel setup and guided regression with the supplied data; students save an output table/screenshot. |
 | 68–80 | Mini-lesson: review the testing process and read regression output cautiously. |
-| 80–94 | Error clinic: non-significant coefficients, variable direction, adjusted R², method choice, and spurious correlation. |
+| 80–94 | Read regression output cautiously and identify claims that need more evidence. |
 | 94–100 | Final exit ticket: name the tool you would use to answer a new data question and why. |
 
-**Homework / culminating task.** Complete Tsumura's Week 12 exercise file.
+**Homework / culminating task.** Complete the AL worksheet and submit the requested cell values in the UNIPA quiz.
 **Challenge.** Improve a misleading regression headline by adding the missing evidence/limitation; propose one design change that would make a causal claim more credible.
 
-### Week 13 — Final-exam preparation and integrated review
+### Week 13 — Regression interpretation and final-exam review
 
-**Content and materials.** Review the central sequence: inference, probability distributions, interval estimation, hypothesis testing, and regression. Use Yoh's 2025 practice problems, answer key, and review materials. No new Tsumura lecture deck is scheduled.
+**Content and materials.** Use Tsumura's Week 13 Part 2 deck to examine incorrect interpretations of regression results, then review representative problems from the course. Yoh #12 and the 2025 practice problems remain supplements; the answer key is not student-facing.
 
 | Minutes | Plan |
 | --- | --- |
-| 0–20 | Confirm the final scope and retrieve the course sequence. |
-| 20–60 | Work representative problems across all five topic blocks. |
-| 60–86 | Error clinic: identify setup, calculation, and interpretation errors. |
+| 0–20 | Interpret regression output and identify common overclaims. |
+| 20–40 | Error clinic: non-significant coefficients, variable direction, adjusted R², method choice, and spurious correlation. |
+| 40–86 | Work representative problems across the course sequence and confirm the final scope. |
 | 86–100 | Exam-readiness check and final questions. |
 
-**Homework.** Complete selected practice problems and self-correct with the answer key.
+**Homework.** Work selected practice problems and check the final-exam notice in UNIPA.
 
 ### Week 14 — Final examination
 
@@ -283,7 +283,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ## Instructor setup checklist
 
-- Before each meeting, post the primary slide deck, activity file, and submission link; never post the answer workbook until after the activity closes.
+- Before each meeting, post the primary slide deck and AL worksheet, and confirm the corresponding quiz is available in UNIPA. Keep quiz-import spreadsheets and answer workbooks instructor-only.
 - Have a PDF fallback and a short paper version of the opening/exit task for access failures.
 - Pre-open Excel/notebook files and test the data-analysis add-in before Week 12.
 - Keep the same four-part reporting frame on the board: **What is the question? What is known? What method fits? What does the result mean?**

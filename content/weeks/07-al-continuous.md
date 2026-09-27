@@ -1,6 +1,6 @@
 ---
 week: 7
-date: 2026-11-18
+date: 2026-11-11
 publish_at: 2026-01-01T00:00:00+09:00
 title_ja: '[AL] 確率分布：連続確率分布'
 title_en: '[AL] Probability Distributions: Continuous Probability Distributions'
@@ -23,9 +23,7 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pptx) {primary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pdf) {primary}
-- [課題：確率分布・連続確率分布](weeks/07-al-continuous-distributions/07 課題 確率分布_2_連続確率分布.xlsx) {homework}
-- [AL用ワークシート](weeks/07-al-continuous-distributions/07_AL用ワークシート.xlsx) {homework}
-- [AL用ワークシート（解答入り）](weeks/07-al-continuous-distributions/07_AL用ワークシート_解答入り.xlsx) {homework-answer}
+- [AL用ワークシート](weeks/07-al-continuous-distributions/07_AL用ワークシート.xlsx) {worksheet}
 - [Yoh continuous-distributions activity worksheet](other material/2025 yoh/07 確率分布_2_連続確率分布/07_AL用ワークシート.pdf) {worksheet}
 - [Yoh lecture: normal distribution and standardization](other material/2025 yoh/07 確率分布_2_連続確率分布/w7.pdf) {yoh}
 - [Yoh lecture: normal and chi-square distribution tables](other material/2025 yoh/07 確率分布_2_連続確率分布/w9-6.pdf) {yoh}

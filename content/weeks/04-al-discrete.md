@@ -1,6 +1,6 @@
 ---
 week: 4
-date: 2026-10-28
+date: 2026-10-21
 publish_at: 2026-01-01T00:00:00+09:00
 title_ja: '[AL] 確率分布：離散確率分布'
 title_en: '[AL] Probability Distributions: Discrete Probability Distributions'
@@ -22,9 +22,7 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pptx) {primary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pdf) {primary}
-- [課題：確率分布・離散確率分布](weeks/04-al-discrete-distributions/04 課題 確率分布_離散確率分布.xlsx) {homework}
-- [AL用ワークシート](weeks/04-al-discrete-distributions/04_AL用ワークシート.xlsx) {homework}
-- [AL用ワークシート（解答入り）](weeks/04-al-discrete-distributions/04_AL用ワークシート_解答入り.xlsx) {homework-answer}
+- [AL用ワークシート](weeks/04-al-discrete-distributions/04_AL用ワークシート.xlsx) {worksheet}
 - [Yoh 2025 active-learning discrete-distributions slides](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/06_[AL]確率分布_1_離散確率分布.pdf) {yoh}
 - [Yoh 2025 discrete-distributions activity lecture](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/w6.pdf) {yoh}
 - [Yoh Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {worksheet}
