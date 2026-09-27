@@ -1,0 +1,13 @@
+# Keep answer keys and private source downloads out of the public course site.
+*解答*
+*正答*
+*模範*
+*Answer*
+*answer*
+*Solution*
+*solution*
+/materials/2026-津村*/
+
+# Local operating-system and Office files.
+.DS_Store
+~$*
