@@ -124,7 +124,7 @@ function viewerLink(file, title, week, source = '') {
 }
 
 function isLectureMaterial(item) {
-  return ['primary', 'standard', 'yoh'].includes(item.type);
+  return ['primary', 'supplementary', 'standard', 'yoh'].includes(item.type);
 }
 
 function isActivityMaterial(item) {
@@ -154,11 +154,11 @@ function lectureDecks(materials, week) {
 }
 
 function slideThumbnail(deck, week) {
-  if (deck.type === 'primary') {
+  if (deck.preview?.includes('materials/2026-tsumura/')) {
     const number = deck.preview.match(/\/26_(\d{2})_/)?.[1];
     if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png`;
   }
-  if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png';
+  if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
 }
@@ -184,23 +184,47 @@ function slideCard(deck, week) {
   return `<article class="slide-card${image ? '' : ' slide-card--no-cover'}">${image && link ? `<a class="slide-cover" href="${link}" aria-label="${escapeHtml(deck.label)}"><img src="${encodeHref(image)}" alt="" loading="lazy"></a>` : ''}<div class="slide-card-body"><h4>${escapeHtml(deck.label)}</h4>${preview}</div></article>`;
 }
 
+function coinSimulationMarkup() {
+  return `<div class="coin-simulation" data-coin-simulation>
+    <div class="coin-simulation-intro"><h4>${bilingual('Coin tosses', 'コイン投げ')}</h4><p>${bilingual('Watch the running percentage of heads as each toss is added.', '投げるたびに、表が出た割合がどう変わるか見てみましょう。')}</p></div>
+    <div class="coin-controls" aria-label="Coin toss controls">
+      <button type="button" data-toss="1">${bilingual('Toss 1', '1回投げる')}</button>
+      <button type="button" data-toss="10">${bilingual('Toss 10', '10回投げる')}</button>
+      <button type="button" data-toss="100">${bilingual('Toss 100', '100回投げる')}</button>
+      <button type="button" data-toss="1000">${bilingual('Toss 1,000', '1000回投げる')}</button>
+      <button type="button" class="coin-reset" data-reset>${bilingual('Reset', 'リセット')}</button>
+    </div>
+    <div class="coin-chart-wrap"><svg class="coin-chart" data-coin-chart viewBox="0 0 760 390" role="img" aria-labelledby="coin-chart-title coin-chart-desc"><title id="coin-chart-title">表が出た割合の推移</title><desc id="coin-chart-desc" data-coin-chart-desc>まだ投げていません。基準線は50%です。</desc></svg></div>
+    <div class="coin-readout"><span data-toss-count>0回</span><strong data-heads-percent>—</strong><span data-heads-count>表: 0</span><span data-tails-count>裏: 0</span></div>
+    <p class="sr-only" data-coin-announcement aria-live="polite"></p>
+    <p class="coin-caption">${bilingual('The line tends to settle near 50% with many tosses, but it can move away from 50% along the way. Each toss is independent.', '回数が増えると50%付近に落ち着きやすくなりますが、途中で50%から離れることもあります。各回の結果は独立です。')}</p>
+  </div>`;
+}
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
   const primary = decks.filter(deck => deck.type === 'primary');
   const other = decks.filter(deck => deck.type !== 'primary');
   const orientation = week.week === 1 ? primary.filter(deck => deck.preview.includes('26_00_')) : [];
-  const visible = week.week === 1 ? [...primary.filter(deck => !orientation.includes(deck)), ...other] : !primary.length ? decks : primary;
-  const more = week.week === 1 ? orientation : !primary.length ? [] : other;
+  const visible = week.week === 1 ? primary.filter(deck => !orientation.includes(deck)) : !primary.length ? decks : primary;
+  const more = week.week === 1 ? [...other, ...orientation] : !primary.length ? [] : other;
   const slideList = visible.map(deck => slideCard(deck, week)).join('');
-  const extra = more.length ? `<details class="more-slides"><summary>${bilingual(`Additional slides (${more.length})`, `補助スライド（${more.length}）`)}</summary><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></details>` : '';
+  const extra = more.length ? `<details class="more-slides"><summary>${bilingual(`Supplementary slides (${more.length})`, `補助スライド（${more.length}）`)}</summary><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></details>` : '';
   const description = plan ? bilingual(escapeHtml(plan.overview[0]), escapeHtml(plan.overview[1])) : bilingual(escapeHtml(week.title_en), escapeHtml(week.title_ja));
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
+  const content = `${timeAgenda(week)}
+    <div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>`;
+  const lectureBody = week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
+      <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
+      <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
+    </div>
+    <div id="week-1-lecture-slides" role="tabpanel" aria-labelledby="week-1-lecture-slides-tab">${content}</div>
+    <div id="week-1-lecture-simulations" role="tabpanel" aria-labelledby="week-1-lecture-simulations-tab" hidden>${coinSimulationMarkup()}</div>` : content;
   return `<section class="week-zone lecture-zone" aria-labelledby="week-${week.week}-lecture">
     <header class="zone-heading"><p>${week.week === 14 ? bilingual('EXAM', '試験') : bilingual('LECTURE', '講義')}</p><h3 id="week-${week.week}-lecture">${heading}</h3></header>
-    ${timeAgenda(week)}
-    <div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>
+    ${lectureBody}
   </section>`;
 }
 
@@ -296,6 +320,7 @@ function renderAgenda(weeks) {
   root.innerHTML = `${previewAll ? `<div class="preview-notice">${bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today)).join('')}</div>`;
   setupActivityTabs(root);
   setupWeekToggles(root);
+  document.dispatchEvent(new Event('statsb:agenda-rendered'));
   const requested = location.hash ? document.getElementById(location.hash.slice(1)) : null;
   if (requested?.tagName === 'DETAILS') requested.open = true;
   requestAnimationFrame(() => requestAnimationFrame(() => requested?.scrollIntoView({ block:'start' })));

@@ -7,7 +7,7 @@
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="icon" href="favicon.svg?v=20260927-b-mark-1" type="image/svg+xml">
   <link rel="stylesheet" href="assets/stats-styles.css?v=20260909">
-  <link rel="stylesheet" href="assets/viewer-context.css?v=20260927-fullscreen-1">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20260929-pdf-links-1">
 </head>
 <body class="viewer-page">
   <header class="site-header"><a class="wordmark" href="index.html"><img src="favicon.svg?v=20260927-b-mark-1" alt="" width="42" height="42">2026–2 Statistics B</a><div class="header-tools"><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
@@ -15,6 +15,10 @@
     <a class="viewer-back" data-viewer-back href="agenda.html"><span aria-hidden="true">←</span><span class="lang-en">BACK TO AGENDA</span><span class="lang-ja" lang="ja">授業予定に戻る</span></a>
     <div class="viewer-top"><div><p class="eyebrow"><span class="lang-en">FILE PREVIEW</span><span class="lang-ja" lang="ja">資料プレビュー</span></p><h1 data-viewer-title>Course file</h1></div><div class="viewer-actions"><a data-download href="#" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span> ↓</a></div></div>
     <div data-viewer-content></div>
+    <section class="viewer-links" data-viewer-links hidden>
+      <h2>Links</h2>
+      <a href="https://www.rossmanchance.com/applets/2021/montyhall/Monty.html" target="_blank" rel="noopener noreferrer">Monty Hall simulator <span aria-hidden="true">↗</span></a>
+    </section>
   </main>
   <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
   <script>
@@ -39,6 +43,9 @@
     }
     document.querySelector('[data-viewer-back]').href = returnTo;
     const content = document.querySelector('[data-viewer-content]');
+    if (week === 'W01' && /\/(?:w1|w3)\.pdf$/i.test(file)) {
+      document.querySelector('[data-viewer-links]').hidden = false;
+    }
     const showFileNote = () => {
       content.innerHTML = `<div class="viewer-file-note"><p class="eyebrow">${(file.split('.').pop() || 'FILE').toUpperCase()}</p><h2>This file opens after download.</h2><p>Download the source file to use it in its matching application.</p></div>`;
     };
@@ -71,9 +78,14 @@
       toolbar.append(navigation, fullscreen);
       const canvasWrap = document.createElement('div');
       canvasWrap.className = 'pdf-canvas-wrap';
+      const pageSurface = document.createElement('div');
+      pageSurface.className = 'pdf-page';
       const canvas = document.createElement('canvas');
       canvas.className = 'pdf-canvas';
-      canvasWrap.append(canvas);
+      const linkLayer = document.createElement('div');
+      linkLayer.className = 'pdf-link-layer';
+      pageSurface.append(canvas, linkLayer);
+      canvasWrap.append(pageSurface);
       viewer.append(toolbar, canvasWrap);
       content.replaceChildren(viewer);
       try {
@@ -81,13 +93,67 @@
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdfjs/pdf.worker.min.js?v=3.11.174';
         const response = await fetch(encodeURI(path));
         if (!response.ok) throw new Error('PDF unavailable');
-        const pdf = await window.pdfjsLib.getDocument({ data: await response.arrayBuffer() }).promise;
+        const pdf = await window.pdfjsLib.getDocument({
+          data: await response.arrayBuffer(),
+          docBaseUrl: new URL(encodeURI(path), location.href).href
+        }).promise;
         let activePage = 1;
         let renderQueue = Promise.resolve();
         const isFullscreen = () => document.fullscreenElement === viewer || viewer.classList.contains('is-fullscreen-fallback');
+        const openDestination = async destination => {
+          const target = typeof destination === 'string' ? await pdf.getDestination(destination) : destination;
+          if (!Array.isArray(target)) return;
+          const pageIndex = Number.isInteger(target[0]) ? target[0] : await pdf.getPageIndex(target[0]);
+          if (pageIndex >= 0 && pageIndex < pdf.numPages) renderPage(pageIndex + 1);
+        };
+        const renderLinks = async (page, viewport) => {
+          linkLayer.replaceChildren();
+          const annotations = await page.getAnnotations({ intent: 'display' });
+          for (const annotation of annotations) {
+            if (annotation.subtype !== 'Link' || !annotation.rect) continue;
+            const rectangle = viewport.convertToViewportRectangle(annotation.rect);
+            const [x1, y1, x2, y2] = rectangle;
+            const left = Math.max(0, Math.min(x1, x2));
+            const top = Math.max(0, Math.min(y1, y2));
+            const right = Math.min(viewport.width, Math.max(x1, x2));
+            const bottom = Math.min(viewport.height, Math.max(y1, y2));
+            if (right <= left || bottom <= top) continue;
+            const link = document.createElement('a');
+            link.className = 'pdf-page-link';
+            link.style.left = `${left / viewport.width * 100}%`;
+            link.style.top = `${top / viewport.height * 100}%`;
+            link.style.width = `${(right - left) / viewport.width * 100}%`;
+            link.style.height = `${(bottom - top) / viewport.height * 100}%`;
+            if (annotation.url) {
+              let destination;
+              try {
+                destination = new URL(annotation.url, location.href);
+              } catch {
+                continue;
+              }
+              if (!['http:', 'https:', 'mailto:'].includes(destination.protocol)) continue;
+              link.href = destination.href;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              link.title = destination.href;
+              link.setAttribute('aria-label', `Open link: ${destination.href}`);
+            } else if (annotation.dest) {
+              link.href = '#';
+              link.setAttribute('aria-label', 'Go to linked PDF page');
+              link.addEventListener('click', event => {
+                event.preventDefault();
+                openDestination(annotation.dest).catch(console.error);
+              });
+            } else {
+              continue;
+            }
+            linkLayer.append(link);
+          }
+        };
         const renderPage = requestedPage => {
           activePage = requestedPage;
           renderQueue = renderQueue.catch(() => {}).then(async () => {
+            linkLayer.replaceChildren();
             const page = await pdf.getPage(requestedPage);
             const baseViewport = page.getViewport({ scale: 1 });
             const availableWidth = Math.max(320, Math.min(1400, canvasWrap.clientWidth - 32));
@@ -101,9 +167,12 @@
             canvas.height = Math.floor(viewport.height * pixelRatio);
             canvas.style.width = `${Math.floor(viewport.width)}px`;
             canvas.style.height = `${Math.floor(viewport.height)}px`;
+            pageSurface.style.width = canvas.style.width;
+            pageSurface.style.height = canvas.style.height;
             const context = canvas.getContext('2d');
             context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
             await page.render({ canvasContext: context, viewport }).promise;
+            await renderLinks(page, viewport);
             pageStatus.textContent = `${requestedPage} / ${pdf.numPages}`;
             previous.disabled = requestedPage === 1;
             next.disabled = requestedPage === pdf.numPages;
