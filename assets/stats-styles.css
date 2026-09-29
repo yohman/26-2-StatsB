@@ -126,14 +126,16 @@
 .agenda-page .simulation-tablist button span{font:700 12px 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .simulation-tablist button[aria-selected='true']{border-color:var(--course-ink);background:var(--course-ink);color:#fff}
 .agenda-page .simulation-tablist button:hover,.agenda-page .simulation-tablist button:focus-visible{border-color:var(--course-crimson);outline:2px solid transparent;box-shadow:0 0 0 2px var(--course-crimson)}
-.agenda-page .monty-game{max-width:920px}
-.agenda-page .monty-intro{display:grid;grid-template-columns:minmax(220px,.8fr) minmax(0,1.2fr);gap:24px;align-items:end;margin-bottom:18px}
+.agenda-page .monty-game{width:100%}
+.agenda-page .monty-intro{display:grid;grid-template-columns:minmax(220px,.55fr) minmax(0,1.45fr);gap:22px;align-items:end;margin-bottom:12px}
 .agenda-page .monty-kicker{margin:0 0 5px;color:var(--course-crimson);font:700 10px 'DM Mono',monospace;letter-spacing:.09em}
 .agenda-page .monty-intro h4{margin:0;font:700 clamp(23px,2.5vw,32px)/1.2 Fraunces,'Noto Serif JP',Georgia,serif;letter-spacing:-.025em}
 .agenda-page .monty-intro>p{max-width:60ch;margin:0;color:var(--course-muted);font-size:13px;line-height:1.65}
-.agenda-page .monty-stage{padding:22px 24px 24px;background:#fbf8f0}
-.agenda-page .monty-prompt{min-height:1.6em;margin:0 0 18px;font-size:15px;font-weight:700;text-align:center}
-.agenda-page .monty-doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(10px,3vw,32px);max-width:680px;margin:auto}
+.agenda-page .monty-play-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start}
+.agenda-page .monty-stage{min-width:0;padding:15px;background:#fbf8f0}
+.agenda-page .monty-stage.has-won{box-shadow:inset 0 0 0 3px #268b79}
+.agenda-page .monty-prompt{display:grid;place-items:center;height:3.4em;margin:0 0 7px;font-size:13px;font-weight:700;line-height:1.35;text-align:center}
+.agenda-page .monty-doors{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:100%;margin:auto}
 .agenda-page .monty-door{display:grid;gap:7px;padding:0;border:0;background:none;color:var(--course-ink);cursor:pointer;min-width:0}
 .agenda-page .monty-door-number{color:var(--course-crimson);font:700 11px 'DM Mono',monospace;letter-spacing:.08em;text-align:left}
 .agenda-page .monty-door-face{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:4/5;overflow:hidden;border:4px solid #755945;border-radius:58px 58px 5px 5px;background:linear-gradient(100deg,#a97852,#bd8d62 45%,#976c4c);box-shadow:inset 8px 0 rgba(255,255,255,.12),inset -8px 0 rgba(48,34,26,.1),0 5px 0 #4c3e33;transition:transform .28s ease,box-shadow .28s ease,background .28s ease}
@@ -143,40 +145,42 @@
 .agenda-page .monty-door.is-open .monty-door-face{background:#eee8dc;border-color:#a79a88;box-shadow:inset 0 0 0 7px #f7f3e8,0 5px 0 #a79a88;animation:monty-reveal .5s ease both}
 .agenda-page .monty-door.is-host .monty-door-face{background:#e5dfd2}
 .agenda-page .monty-door.is-final .monty-door-face{outline:4px solid var(--course-crimson);outline-offset:4px}
-.agenda-page .monty-door.is-winner .monty-door-face{outline-color:#2a8e86;animation:monty-reveal .5s ease both,monty-celebrate .75s .5s ease}
+.agenda-page .monty-door.is-winner .monty-door-face{outline-color:#2a8e86;box-shadow:inset 0 0 0 7px #f7f3e8,0 0 0 8px rgba(42,142,134,.22);animation:monty-reveal .5s ease both,monty-celebrate .75s .5s ease}
 .agenda-page .monty-door:disabled{cursor:default}
 .agenda-page .monty-door-symbol{color:#f8eed9;font:700 clamp(40px,7vw,80px)/1 Fraunces,Georgia,serif;text-shadow:0 3px 0 rgba(55,38,28,.2)}
 .agenda-page .monty-door-handle{position:absolute;right:12%;top:56%;width:11px;height:11px;border-radius:50%;background:#efd4a2;box-shadow:0 1px 3px #4c3e33}
-.agenda-page .monty-door-caption{min-height:2.8em;color:var(--course-muted);font:700 11px/1.35 'Zen Kaku Gothic New',sans-serif;text-align:center}
+.agenda-page .monty-door-caption{min-height:2.7em;color:var(--course-muted);font:700 10px/1.35 'Zen Kaku Gothic New',sans-serif;text-align:center}
 .agenda-page .monty-character{width:min(75%,120px);height:auto;filter:drop-shadow(0 5px 1px rgba(54,47,40,.1))}
-.agenda-page .monty-decision{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:9px;margin-top:21px}
+.agenda-page .monty-feedback-slot{display:flex;align-items:center;min-height:90px;height:90px}
+.agenda-page .monty-decision{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:9px;width:100%}
 .agenda-page .monty-decision[hidden],.agenda-page .monty-outcome[hidden]{display:none}
 .agenda-page .monty-decision button,.agenda-page .monty-outcome button,.agenda-page .monty-batch button{min-height:40px;padding:9px 15px;border:0;background:var(--course-ink);color:#fff;font:700 12px 'Zen Kaku Gothic New',sans-serif;cursor:pointer}
 .agenda-page .monty-decision button:last-child,.agenda-page .monty-batch [data-monty-go]{background:var(--course-crimson)}
 .agenda-page .monty-decision button:hover,.agenda-page .monty-outcome button:hover,.agenda-page .monty-batch button:hover{filter:brightness(1.15)}
 .agenda-page .monty-decision button:focus-visible,.agenda-page .monty-outcome button:focus-visible,.agenda-page .monty-batch button:focus-visible{outline:3px solid var(--course-crimson);outline-offset:3px}
-.agenda-page .monty-outcome{display:flex;align-items:center;gap:15px;margin-top:22px;padding:17px 20px;background:#e8e6de;border-left:4px solid #776f64}
-.agenda-page .monty-outcome.is-win{background:#daf0e9;border-left-color:#268b79}
+.agenda-page .monty-outcome{display:flex;align-items:center;gap:10px;width:100%;min-height:90px;padding:10px 12px;background:#e8e6de;border-left:4px solid #776f64}
+.agenda-page .monty-outcome.is-win{background:#187968;border-left-color:#0e574b;color:#fff}
 .agenda-page .monty-outcome.is-loss{background:#f5e2dc;border-left-color:#ad5b49}
 .agenda-page .monty-outcome.is-summary{background:#e5e9e7;border-left-color:#536d70}
-.agenda-page .monty-outcome-mark{display:grid;place-items:center;flex:0 0 48px;width:48px;height:48px;border-radius:50%;background:#746b60;color:#fff;font:700 25px 'DM Mono',monospace}
-.agenda-page .monty-outcome.is-win .monty-outcome-mark{background:#268b79}
+.agenda-page .monty-outcome-mark{display:grid;place-items:center;flex:0 0 38px;width:38px;height:38px;border-radius:50%;background:#746b60;color:#fff;font:700 22px 'DM Mono',monospace}
+.agenda-page .monty-outcome.is-win .monty-outcome-mark{background:#fff;color:#187968}
 .agenda-page .monty-outcome.is-loss .monty-outcome-mark{background:#ad5b49}
 .agenda-page .monty-outcome>div{flex:1;min-width:0}
-.agenda-page .monty-outcome strong{display:block;font:700 clamp(18px,2.4vw,25px)/1.25 Fraunces,'Noto Serif JP',Georgia,serif}
-.agenda-page .monty-outcome p{margin:4px 0 0;font-size:12px;line-height:1.45}
-.agenda-page .monty-outcome small{display:block;margin-top:5px;color:var(--course-muted);font-size:10px}
+.agenda-page .monty-outcome strong{display:block;font:700 clamp(17px,2vw,23px)/1.2 Fraunces,'Noto Serif JP',Georgia,serif}
+.agenda-page .monty-outcome.is-win strong{font-size:clamp(23px,2.5vw,30px)}
+.agenda-page .monty-outcome p{margin:3px 0 0;font-size:11px;line-height:1.35}
+.agenda-page .monty-outcome.is-win button{background:#fff;color:#145d52}
 .agenda-page .monty-outcome button{flex:0 0 auto}
 .agenda-page .monty-stage.is-batch-flash .monty-door.is-open .monty-door-face{animation:monty-rapid .2s ease both}
-.agenda-page .monty-results{margin-top:18px;padding:21px 24px 19px;background:#eee7db}
+.agenda-page .monty-results{min-width:0;padding:15px;background:#eee7db}
 .agenda-page .monty-results-head{display:flex;align-items:end;justify-content:space-between;gap:15px}
 .agenda-page .monty-results-head h5{margin:0;font:700 clamp(17px,2vw,22px)/1.35 Fraunces,'Noto Serif JP',Georgia,serif}
 .agenda-page .monty-results-head>p{margin:0;color:var(--course-muted);font-size:12px;white-space:nowrap}
 .agenda-page .monty-results-head>p strong{color:var(--course-ink);font:700 24px 'DM Mono',monospace}
-.agenda-page .monty-scoreline{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;margin:13px 0 17px;font-size:12px}
+.agenda-page .monty-scoreline{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 15px;margin:6px 0 8px;font-size:11px}
 .agenda-page .monty-scoreline strong{font:700 19px 'DM Mono',monospace}
-.agenda-page .monty-scoreline span:first-child strong{color:#278678;font-size:25px}
-.agenda-page .monty-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:7px}
+.agenda-page .monty-scoreline span:first-child strong{color:#278678;font-size:23px}
+.agenda-page .monty-chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:5px}
 .agenda-page .monty-chart-head strong{font-size:12px}
 .agenda-page .monty-chart-head span{color:var(--course-muted);font-size:10px}
 .agenda-page .monty-line-wrap{width:100%;background:#fbf8f0}
@@ -191,14 +195,14 @@
 .agenda-page .monty-chart-dot-stay{fill:#bb8057}
 .agenda-page .monty-chart-dot-switch{fill:#278678}
 .agenda-page .monty-chart-last{stroke:#fbf8f0;stroke-width:2;animation:monty-dot-pop .25s ease}
-.agenda-page .monty-chart-legend{display:flex;flex-wrap:wrap;gap:9px 20px;margin:9px 0 5px;font-size:11px}
+.agenda-page .monty-chart-legend{display:flex;flex-wrap:wrap;gap:5px 14px;margin:6px 0 4px;font-size:10px}
 .agenda-page .monty-chart-legend span:before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px}
 .agenda-page .monty-legend-stay:before{background:#bb8057}
 .agenda-page .monty-legend-switch:before{background:#278678}
 .agenda-page .monty-chart-legend strong{font:700 11px 'DM Mono',monospace}
 .agenda-page .monty-theory{margin:0;color:var(--course-muted);font-size:11px;line-height:1.5}
 .agenda-page .monty-theory strong{color:var(--course-ink)}
-.agenda-page .monty-winloss{display:grid;grid-template-columns:150px minmax(0,1fr);gap:6px 16px;align-items:center;margin-top:19px;padding:16px 0 0;border-top:1px solid #d3c8b7}
+.agenda-page .monty-winloss{display:grid;grid-template-columns:120px minmax(0,1fr);gap:4px 10px;align-items:center;margin-top:10px;padding:9px 0 0;border-top:1px solid #d3c8b7}
 .agenda-page .monty-winloss>div:first-child{display:grid;gap:2px}
 .agenda-page .monty-winloss>div:first-child strong{font-size:12px}
 .agenda-page .monty-winloss>div:first-child span{color:var(--course-muted);font-size:10px}
@@ -210,22 +214,19 @@
 .agenda-page .monty-winloss-key span:first-child{color:#278678}
 .agenda-page .monty-winloss-key span:last-child{color:#bb8057}
 .agenda-page .monty-winloss-key strong{color:var(--course-ink)}
-.agenda-page .monty-batch{display:flex;flex-wrap:wrap;align-items:end;gap:9px;margin-top:19px;padding-top:18px;border-top:1px solid #d3c8b7}
-.agenda-page .monty-batch>div{display:grid;gap:2px;flex:1 1 230px}
-.agenda-page .monty-batch>div strong{font-size:13px}
-.agenda-page .monty-batch>div span{color:var(--course-muted);font-size:11px}
+.agenda-page .monty-batch{display:flex;flex-wrap:wrap;align-items:end;gap:7px;margin-top:4px;padding:9px;background:#eee7db}
 .agenda-page .monty-batch label{display:grid;gap:3px;color:var(--course-muted);font-size:10px;font-weight:700}
 .agenda-page .monty-batch select,.agenda-page .monty-batch input{min-height:40px;padding:7px 9px;border:1px solid #b9ab9b;border-radius:0;background:#fbf8f0;color:var(--course-ink);font:700 12px 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .monty-batch input{width:84px}
 .agenda-page .monty-batch .monty-reset{background:#d7cec0;color:var(--course-ink)}
 .agenda-page .monty-batch button:disabled{opacity:.5;cursor:wait}
-.agenda-page .monty-batch-status{min-height:1.4em;margin:8px 0 0;color:var(--course-muted);font-size:11px}
+.agenda-page .monty-batch-status{height:1.4em;margin:4px 0 0;color:var(--course-muted);font-size:10px;line-height:1.4;overflow:hidden}
 @keyframes monty-reveal{from{transform:rotateY(80deg);opacity:.4}to{transform:rotateY(0);opacity:1}}
 @keyframes monty-celebrate{40%{transform:translateY(-10px) rotate(-2deg)}70%{transform:translateY(2px) rotate(2deg)}}
 @keyframes monty-rapid{from{transform:scale(.88) rotateY(18deg);opacity:.5}to{transform:scale(1) rotateY(0);opacity:1}}
 @keyframes monty-dot-pop{from{transform:scale(.3);opacity:.4}to{transform:scale(1);opacity:1}}
-@media(max-width:760px){.agenda-page .monty-intro{grid-template-columns:1fr;gap:8px}.agenda-page .monty-batch>div{flex-basis:100%}}
-@media(max-width:520px){.agenda-page .simulation-tablist button{flex:1;justify-content:center;padding:9px 5px}.agenda-page .monty-stage,.agenda-page .monty-results{padding:18px 14px}.agenda-page .monty-doors{gap:8px}.agenda-page .monty-door-face{border-width:3px;border-radius:35px 35px 4px 4px}.agenda-page .monty-door-caption{font-size:9px}.agenda-page .monty-door-handle{width:7px;height:7px}.agenda-page .monty-decision button{flex:1 1 130px}.agenda-page .monty-outcome{flex-wrap:wrap;padding:14px}.agenda-page .monty-outcome-mark{width:40px;height:40px;flex-basis:40px}.agenda-page .monty-outcome button{width:100%}.agenda-page .monty-chart-head span{display:none}.agenda-page .monty-winloss{grid-template-columns:1fr}.agenda-page .monty-winloss-key{grid-column:1}}
+@media(max-width:880px){.agenda-page .monty-play-grid{grid-template-columns:1fr}.agenda-page .monty-intro{grid-template-columns:1fr;gap:6px}}
+@media(max-width:520px){.agenda-page .simulation-tablist button{flex:1;justify-content:center;padding:9px 5px}.agenda-page .monty-stage,.agenda-page .monty-results{padding:14px}.agenda-page .monty-doors{gap:8px}.agenda-page .monty-door-face{border-width:3px;border-radius:35px 35px 4px 4px}.agenda-page .monty-door-caption{font-size:9px}.agenda-page .monty-door-handle{width:7px;height:7px}.agenda-page .monty-feedback-slot{height:112px;min-height:112px}.agenda-page .monty-decision button{flex:1 1 130px}.agenda-page .monty-outcome{flex-wrap:wrap;padding:10px}.agenda-page .monty-outcome-mark{width:36px;height:36px;flex-basis:36px}.agenda-page .monty-outcome button{width:100%;min-height:32px}.agenda-page .monty-chart-head span{display:none}.agenda-page .monty-winloss{grid-template-columns:1fr}.agenda-page .monty-winloss-key{grid-column:1}}
 @media(prefers-reduced-motion:reduce){.agenda-page .monty-door-face,.agenda-page .monty-winloss-track span{transition:none}.agenda-page .monty-door.is-open .monty-door-face,.agenda-page .monty-door.is-winner .monty-door-face,.agenda-page .monty-stage.is-batch-flash .monty-door.is-open .monty-door-face,.agenda-page .monty-chart-last{animation:none}}
 .agenda-page .slide-card{min-width:0;background:var(--course-paper)}
 .agenda-page .slide-cover{display:block;background:#e3ded7}

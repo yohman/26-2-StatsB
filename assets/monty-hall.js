@@ -66,8 +66,8 @@
       const description = chartDescription;
       const maxTrials = Math.max(10, score.stay.plays, score.switch.plays);
       const width = Math.max(300, Math.round(lineChart.parentElement.getBoundingClientRect().width));
-      lineChart.setAttribute('viewBox', `0 0 ${width} 270`);
-      const left = 46, right = width - 18, top = 17, bottom = 223;
+      lineChart.setAttribute('viewBox', `0 0 ${width} 225`);
+      const left = 46, right = width - 18, top = 14, bottom = 180;
       const x = trial => left + (trial / maxTrials) * (right - left);
       const y = percent => bottom - percent * (bottom - top);
       lineChart.replaceChildren(title, description);
@@ -129,6 +129,7 @@
     function render() {
       const running = phase === 'batch';
       const fullyRevealed = phase === 'reveal' || phase === 'batch-done' || (running && batchProgress.completed > 0);
+      stage.classList.toggle('has-won', phase === 'reveal' && round.won === true);
       doors.forEach((door, index) => {
         const openedByHost = index === round.opened;
         const revealed = fullyRevealed || openedByHost;
@@ -157,7 +158,7 @@
       countInput.disabled = running;
       strategyInput.disabled = running;
       again.disabled = running;
-      prompt.textContent = running ? `${batchProgress.completed} / ${batchProgress.amount} 回：ドアを開けながら実験中…`
+      prompt.textContent = running ? `実験中：${batchProgress.completed} / ${batchProgress.amount} 回`
         : phase === 'pick' ? '好きなドアを1つ選んでください。'
         : phase === 'choose' ? '司会者がヤギを見せました。最初のドアに残る？ もう一方へ変更する？'
         : phase === 'batch-done' ? '最後の1回を表示しています。ドアを押すと次のゲームへ。'
@@ -182,9 +183,9 @@
       round.won = round.final === round.robot;
       record(strategy, round.won);
       phase = 'reveal';
-      setOutcome(round.won ? '大当たり！ ロボットをゲット！' : 'ハズレ！ ヤギでした', round.won
-        ? `${strategy === 'stay' ? 'そのまま' : '変更する'}作戦で勝ち。ドア${round.final + 1}にロボットがいました。`
-        : `${strategy === 'stay' ? 'そのまま' : '変更する'}作戦で負け。ロボットはドア${round.robot + 1}でした。`, round.won ? 'win' : 'loss');
+      setOutcome(round.won ? '大当たり！' : 'ハズレ！', round.won
+        ? `ロボットをゲット！ ${strategy === 'stay' ? 'そのまま' : '変更する'}作戦で勝ち。`
+        : `ヤギでした。${strategy === 'stay' ? 'そのまま' : '変更する'}作戦で負け。ロボットはドア${round.robot + 1}。`, round.won ? 'win' : 'loss');
       render();
       updateStats();
     }
@@ -220,7 +221,7 @@
       batchProgress = { completed:0, amount };
       phase = 'batch';
       render();
-      status.textContent = 'ドアを開けて実験します。大量の実験では表示を間引きますが、すべての回を集計します。';
+      status.textContent = 'すべての回を集計中。表示は一部です。';
       batchTimer = setInterval(() => {
         for (let index = 0; index < batchSize && batchProgress.completed < amount; index += 1) {
           round = simulate(strategy);
@@ -239,7 +240,7 @@
           phase = 'batch-done';
           setOutcome(`${amount}回の実験が終了`, `${strategy === 'stay' ? 'そのまま' : '変更する'}作戦：${wins}勝・${amount - wins}敗。上のドアは最後の1回です。`, 'summary');
           render();
-          status.textContent = `${amount}回すべてを集計しました。別の作戦も試して、累積勝率を比べてみましょう。`;
+          status.textContent = `${amount}回終了。別の作戦も試そう。`;
         }
       }, 60);
     }
