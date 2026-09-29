@@ -11,7 +11,7 @@
     const answer = root.querySelector('[data-test-answer]');
     const dots = root.querySelector('[data-test-dots]');
     const count = new Intl.NumberFormat('ja-JP');
-    const decimal = new Intl.NumberFormat('ja-JP', { maximumFractionDigits:2 });
+    const decimal = new Intl.NumberFormat('ja-JP', { maximumFractionDigits:6 });
     const percent = new Intl.NumberFormat('ja-JP', { maximumSignificantDigits:3 });
 
     function update() {
@@ -31,15 +31,31 @@
       const truePositive = 1 - error;
       const falsePositive = (population - 1) * error;
       const positiveTotal = truePositive + falsePositive;
+      const negativeTotal = population - positiveTotal;
       const conditional = positiveTotal ? truePositive / positiveTotal : 0;
       const greenDots = Math.round(conditional * 1000);
+      const trueText = decimal.format(truePositive);
+      const falseText = decimal.format(falsePositive);
+      const totalText = decimal.format(positiveTotal);
+      const percentText = `${percent.format(conditional * 100)}%`;
 
       root.querySelector('[data-test-sensitivity]').textContent = `${decimal.format(100 - wrongPercent)}%`;
       root.querySelector('[data-test-false-rate]').textContent = `${decimal.format(wrongPercent)}%`;
-      root.querySelector('[data-test-healthy]').textContent = `${count.format(population - 1)}人`;
-      root.querySelector('[data-test-true]').textContent = `${decimal.format(truePositive)}人`;
-      root.querySelector('[data-test-false]').textContent = `${decimal.format(falsePositive)}人`;
-      root.querySelector('[data-test-percent]').textContent = `${percent.format(conditional * 100)}%`;
+      root.querySelector('[data-test-cohort-heading]').textContent = `${count.format(population)}人を検査したら`;
+      root.querySelector('[data-test-true]').textContent = `${trueText}人`;
+      root.querySelector('[data-test-false]').textContent = `${falseText}人`;
+      root.querySelector('[data-test-negative]').textContent = `${decimal.format(negativeTotal)}人`;
+      root.querySelector('[data-test-percent]').textContent = percentText;
+      root.querySelector('[data-test-bar-true]').style.width = `${100 * truePositive / population}%`;
+      root.querySelector('[data-test-bar-false]').style.width = `${100 * falsePositive / population}%`;
+      root.querySelector('[data-test-bar-negative]').style.width = `${100 * negativeTotal / population}%`;
+      root.querySelector('[data-test-overview-bar]').setAttribute('aria-label', `本当に病気で陽性${trueText}人、病気でないのに陽性${falseText}人、陰性${decimal.format(negativeTotal)}人。緑の線は見やすく拡大しています。`);
+      root.querySelector('[data-test-takeaway]').textContent =
+        `陽性でも、本当に病気である確率は${percentText}。陽性者およそ${count.format(Math.round(1 / conditional))}人に1人です。`;
+      root.querySelector('[data-test-step-true]').textContent = `1 × ${decimal.format(1 - error)} = ${trueText}人`;
+      root.querySelector('[data-test-step-false]').textContent = `${count.format(population - 1)} × ${decimal.format(error)} = ${falseText}人`;
+      root.querySelector('[data-test-step-total]').textContent = `${trueText} + ${falseText} = ${totalText}人`;
+      root.querySelector('[data-test-step-answer]').textContent = `${trueText} ÷ ${totalText} × 100 = ${percentText}`;
 
       const fragment = document.createDocumentFragment();
       for (let index = 0; index < 1000; index += 1) {
@@ -53,9 +69,7 @@
         ? 'この縮図では小さすぎて緑の点が表示されません。'
         : `陽性者1000人の縮図では、緑が約${greenDots}人です。`;
       root.querySelector('[data-test-explanation]').textContent =
-        `陽性になる経路は「病気で正しく陽性」約${decimal.format(truePositive)}人と「病気でないのに誤って陽性」約${decimal.format(falsePositive)}人。` +
-        `したがって ${decimal.format(truePositive)} ÷ (${decimal.format(truePositive)} + ${decimal.format(falsePositive)}) = ${percent.format(conditional * 100)}%。` +
-        ` ${visualNote} 人数は${count.format(population)}人を検査したときの期待値です。`;
+        `${visualNote} 小数の人数は${count.format(population)}人を検査したときの平均的な期待値で、1人を分割しているわけではありません。`;
     }
 
     [populationInput, errorInput].forEach(input => input.addEventListener('input', update));

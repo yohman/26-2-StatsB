@@ -211,7 +211,7 @@ function coinSimulationMarkup() {
 
 function diseaseTestMarkup() {
   return `<div class="test-simulation" data-test-simulation>
-    <div class="test-intro"><p class="monty-kicker">[AL] 条件付き確率</p><h4>陽性なら、本当に病気？</h4><p>10万人に1人の病気。検査は99%正しい。陽性になった人が、本当に病気である確率を考えます。</p></div>
+    <div class="test-intro"><p class="monty-kicker">[AL] 条件付き確率</p><h4>陽性なら、本当に病気？</h4><p>陽性という結果から、本当に病気である確率を考えます。数字を変えると答えも変わります。</p></div>
     <div class="test-controls" aria-label="検査の条件">
       <label>罹患率 <span>1人 / <input type="number" data-test-population min="2" max="100000000" step="1" value="100000" inputmode="numeric"> 人</span></label>
       <label>判定を間違える確率 <span><input type="number" data-test-error min="0" max="50" step="0.1" value="1" inputmode="decimal"> %</span></label>
@@ -219,16 +219,20 @@ function diseaseTestMarkup() {
     </div>
     <p class="test-input-message" data-test-message role="status"></p>
     <p class="test-assumption">病気の人は <strong data-test-sensitivity>99%</strong> が陽性、病気でない人は <strong data-test-false-rate>1%</strong> が誤って陽性になると仮定します。</p>
-    <div class="test-flow" aria-label="検査結果の2つの経路">
-      <div class="test-path test-path-true"><span class="test-path-label">病気がある</span><strong>1人</strong><span>正しく陽性になる</span><b data-test-true>0.99人</b></div>
-      <div class="test-path test-path-false"><span class="test-path-label">病気がない</span><strong data-test-healthy>99,999人</strong><span>誤って陽性になる</span><b data-test-false>999.99人</b></div>
+    <div class="test-overview">
+      <div class="test-overview-head"><strong data-test-cohort-heading>10万人を検査したら</strong><span>結果の内訳（期待値）</span></div>
+      <div class="test-overview-bar" data-test-overview-bar role="img" aria-label="検査結果の内訳"><span class="test-bar-true" data-test-bar-true></span><span class="test-bar-false" data-test-bar-false></span><span class="test-bar-negative" data-test-bar-negative></span></div>
+      <div class="test-overview-key"><span><i class="test-dot-sick"></i><span>本当に病気で陽性 <strong data-test-true>0.99人</strong></span></span><span><i class="test-dot-well"></i><span>病気でないのに陽性 <strong data-test-false>999.99人</strong></span></span><span><i class="test-dot-negative"></i><span>陰性 <strong data-test-negative>98,999.02人</strong></span></span></div>
+      <p>緑の極細線は見えるように拡大しています。陰性には、ごく少数の見逃し（偽陰性）も含みます。</p>
     </div>
     <div class="test-positive">
-      <div class="test-positive-head"><div><span class="test-path-label">陽性の人だけを見る</span><p>この2つの経路を合わせた陽性者の中で、病気の人はどれくらい？</p></div><button type="button" data-test-reveal aria-expanded="false">答えを見る →</button></div>
+      <div class="test-positive-head"><div><span class="test-path-label">陽性の人だけを見る</span><p>陰性の人を除くと、緑と茶色だけが残ります。本当に病気なのは何％？</p></div><button type="button" data-test-reveal aria-expanded="false">答えを見る →</button></div>
       <div data-test-answer hidden>
-        <div class="test-answer-summary"><strong data-test-percent>—</strong><span>陽性だった人が本当に病気である確率</span></div>
+        <div class="test-answer-summary"><strong data-test-percent>—</strong><span>陽性だった人が、本当に病気である確率</span></div>
+        <p class="test-takeaway" data-test-takeaway></p>
         <div class="test-dots" data-test-dots aria-hidden="true"></div>
-        <div class="test-dot-legend"><span><i class="test-dot-sick"></i> 本当に病気</span><span><i class="test-dot-well"></i> 病気ではない</span><span>陽性者1000人を想像した図</span></div>
+        <div class="test-dot-legend"><span><i class="test-dot-sick"></i> 本当に病気で陽性</span><span><i class="test-dot-well"></i> 病気でないのに陽性</span><span>陽性者1000人を想像した縮図</span></div>
+        <ol class="test-math"><li><span>病気の人が正しく陽性</span><strong data-test-step-true></strong></li><li><span>病気でない人が誤って陽性</span><strong data-test-step-false></strong></li><li><span>陽性になった人の合計</span><strong data-test-step-total></strong></li><li><span>陽性の人が本当に病気である確率</span><strong data-test-step-answer></strong></li></ol>
         <p class="test-explanation" data-test-explanation></p>
       </div>
     </div>
