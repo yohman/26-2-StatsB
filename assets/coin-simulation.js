@@ -10,7 +10,8 @@
 
   function setupCoinSimulation() {
     const root = document.querySelector('[data-coin-simulation]');
-    if (!root) return;
+    if (!root || root.dataset.coinInitialized) return;
+    root.dataset.coinInitialized = 'true';
 
     const chart = root.querySelector('[data-coin-chart]');
     const description = root.querySelector('[data-coin-chart-desc]');
@@ -135,4 +136,5 @@
   }
 
   document.addEventListener('statsb:agenda-rendered', setupCoinSimulation);
+  setupCoinSimulation();
 })();
