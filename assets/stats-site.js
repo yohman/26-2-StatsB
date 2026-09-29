@@ -204,7 +204,7 @@ function coinSimulationMarkup() {
 
 function montyHallMarkup() {
   return `<div class="monty-game" data-monty-game>
-    <div class="monty-intro"><div><p class="monty-kicker">3つのドア、1つの当たり</p><h4>モンティ・ホールのゲーム</h4></div><p>ロボットがいるドアを当てましょう。まず1つ選ぶと、司会者が残りの「ヤギ」のドアを開けます。そのままにする？ それとも変更する？</p></div>
+    <div class="monty-intro"><div><p class="monty-kicker">3つのドア、1つの当たり</p><h4>モンティ・ホール</h4></div><p>ロボットがいるドアを当てましょう。まず1つ選ぶと、司会者が残りの「ヤギ」のドアを開けます。そのままにする？ それとも変更する？</p></div>
     <div class="monty-stage">
       <p class="monty-prompt" data-monty-prompt aria-live="polite">好きなドアを1つ選んでください。</p>
       <div class="monty-doors" role="group" aria-label="3つのドア">${[1, 2, 3].map(number => `<button type="button" class="monty-door" data-monty-door="${number - 1}" aria-label="ドア${number}を選ぶ"><span class="monty-door-number">0${number}</span><span class="monty-door-face" aria-hidden="true"><span class="monty-door-symbol">?</span><span class="monty-door-handle"></span></span><span class="monty-door-caption" data-monty-caption>ドア ${number}</span></button>`).join('')}</div>
