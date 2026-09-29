@@ -22,9 +22,56 @@
     const headsCount = root.querySelector('[data-heads-count]');
     const tailsCount = root.querySelector('[data-tails-count]');
     const announcement = root.querySelector('[data-coin-announcement]');
+    const demo = root.querySelector('[data-coin-demo]');
+    const disc = root.querySelector('[data-coin-disc]');
+    const headFace = root.querySelector('[data-coin-head-face]');
+    const resultLabel = root.querySelector('[data-coin-result]');
+    const sideKey = root.querySelector('[data-coin-side-key]');
+    headFace.innerHTML = window.statsbMontyCharacters.robot;
+    root.querySelector('[data-coin-tail-face]').innerHTML = window.statsbMontyCharacters.goat;
     let results = [];
     let heads = 0;
     let timer = null;
+    let animation = null;
+    let busy = false;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setFace(result) {
+      headFace.innerHTML = result ? window.statsbMontyCharacters.robot : window.statsbMontyCharacters.goat;
+      disc.style.transform = 'rotateY(0deg)';
+      demo.dataset.state = result ? 'heads' : 'tails';
+      const japanese = document.documentElement.dataset.language === 'ja';
+      resultLabel.textContent = result ? (japanese ? '表！ ロボット' : 'Heads! Robot') : (japanese ? '裏！ ヤギ' : 'Tails! Goat');
+      demo.setAttribute('aria-label', resultLabel.textContent);
+    }
+
+    function spinTo(result, duration, done) {
+      headFace.innerHTML = window.statsbMontyCharacters.robot;
+      demo.dataset.state = 'flipping';
+      resultLabel.textContent = document.documentElement.dataset.language === 'ja' ? '回転中…' : 'Spinning…';
+      demo.setAttribute('aria-label', resultLabel.textContent);
+      if (reducedMotion) {
+        setFace(result);
+        done();
+        return;
+      }
+      animation = disc.animate([
+        { transform:'rotateY(0deg)' },
+        { transform:'rotateY(1440deg)' }
+      ], { duration, easing:'cubic-bezier(.18,.72,.24,1)', fill:'forwards' });
+      animation.onfinish = () => {
+        setFace(result);
+        animation.cancel();
+        animation = null;
+        done();
+      };
+    }
+
+    function addResult(result) {
+      results.push(result);
+      heads += result;
+      draw();
+    }
 
     function draw() {
       const japanese = document.documentElement.dataset.language === 'ja';
@@ -88,29 +135,57 @@
     function stop() {
       if (timer !== null) clearInterval(timer);
       timer = null;
+      if (animation) animation.cancel();
+      animation = null;
+      busy = false;
       tossButtons.forEach(button => { button.disabled = false; });
     }
 
     function toss(amount) {
-      if (timer !== null) return;
+      if (busy) return;
+      busy = true;
       tossButtons.forEach(button => { button.disabled = true; });
+      if (amount === 1) {
+        const result = Math.random() < 0.5 ? 1 : 0;
+        spinTo(result, 1050, () => {
+          addResult(result);
+          stop();
+          announcement.textContent = description.textContent;
+        });
+        return;
+      }
+      demo.dataset.state = 'flipping';
+      headFace.innerHTML = window.statsbMontyCharacters.robot;
+      resultLabel.textContent = document.documentElement.dataset.language === 'ja' ? '回転中…' : 'Spinning…';
+      demo.setAttribute('aria-label', resultLabel.textContent);
+      if (!reducedMotion) animation = disc.animate([
+        { transform:'rotateY(0deg)' },
+        { transform:'rotateY(360deg)' }
+      ], { duration:520, iterations:Infinity, easing:'linear' });
       let remaining = amount;
+      let lastResult = 0;
       const addBatch = () => {
         const batchSize = Math.min(remaining, amount === 1000 ? 10 : 1);
         for (let index = 0; index < batchSize; index += 1) {
           const result = Math.random() < 0.5 ? 1 : 0;
           results.push(result);
           heads += result;
+          lastResult = result;
           remaining -= 1;
         }
         draw();
         if (!remaining) {
-          stop();
-          announcement.textContent = description.textContent;
+          clearInterval(timer);
+          timer = null;
+          if (animation) animation.cancel();
+          animation = null;
+          spinTo(lastResult, 650, () => {
+            stop();
+            announcement.textContent = description.textContent;
+          });
         }
       };
-      addBatch();
-      if (remaining) timer = setInterval(addBatch, 36);
+      timer = setInterval(addBatch, 36);
     }
 
     tossButtons.forEach(button => button.addEventListener('click', () => toss(Number(button.dataset.toss))));
@@ -118,6 +193,11 @@
       stop();
       results = [];
       heads = 0;
+      headFace.innerHTML = window.statsbMontyCharacters.robot;
+      disc.style.transform = 'rotateY(0deg)';
+      demo.dataset.state = 'ready';
+      resultLabel.textContent = document.documentElement.dataset.language === 'ja' ? '投げてみよう' : 'Ready to toss';
+      demo.setAttribute('aria-label', resultLabel.textContent);
       draw();
       announcement.textContent = description.textContent;
     });
@@ -128,6 +208,12 @@
     new MutationObserver(() => {
       if (!root.closest('[hidden]')) {
         draw();
+        const japanese = document.documentElement.dataset.language === 'ja';
+        sideKey.textContent = japanese ? 'ロボット＝表 · ヤギ＝裏' : 'Robot = heads · Goat = tails';
+        if (demo.dataset.state === 'ready') resultLabel.textContent = japanese ? '投げてみよう' : 'Ready to toss';
+        else if (demo.dataset.state === 'flipping') resultLabel.textContent = japanese ? '回転中…' : 'Spinning…';
+        else resultLabel.textContent = demo.dataset.state === 'heads' ? (japanese ? '表！ ロボット' : 'Heads! Robot') : (japanese ? '裏！ ヤギ' : 'Tails! Goat');
+        demo.setAttribute('aria-label', resultLabel.textContent);
         if (announcement.textContent) announcement.textContent = description.textContent;
       }
     }).observe(document.documentElement, { attributes:true, attributeFilter:['data-language'] });

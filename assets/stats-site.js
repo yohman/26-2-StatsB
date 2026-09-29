@@ -195,7 +195,13 @@ function coinSimulationMarkup() {
       <button type="button" data-toss="1000">${bilingual('Toss 1,000', '1000回投げる')}</button>
       <button type="button" class="coin-reset" data-reset>${bilingual('Reset', 'リセット')}</button>
     </div>
-    <div class="coin-chart-wrap"><svg class="coin-chart" data-coin-chart viewBox="0 0 760 390" role="img" aria-labelledby="coin-chart-title coin-chart-desc"><title id="coin-chart-title">表が出た割合の推移</title><desc id="coin-chart-desc" data-coin-chart-desc>まだ投げていません。基準線は50%です。</desc></svg></div>
+    <div class="coin-demo-grid">
+      <div class="coin-demo" data-coin-demo data-state="ready" role="status" aria-live="polite" aria-label="コインを投げてみよう">
+        <div class="coin-stage" aria-hidden="true"><div class="coin-disc" data-coin-disc><div class="coin-face coin-face-heads" data-coin-head-face></div><div class="coin-face coin-face-tails" data-coin-tail-face></div></div></div>
+        <strong data-coin-result>${bilingual('Ready to toss', '投げてみよう')}</strong><span data-coin-side-key>${bilingual('Robot = heads · Goat = tails', 'ロボット＝表 · ヤギ＝裏')}</span>
+      </div>
+      <div class="coin-chart-wrap"><svg class="coin-chart" data-coin-chart viewBox="0 0 760 390" role="img" aria-labelledby="coin-chart-title coin-chart-desc"><title id="coin-chart-title">表が出た割合の推移</title><desc id="coin-chart-desc" data-coin-chart-desc>まだ投げていません。基準線は50%です。</desc></svg></div>
+    </div>
     <div class="coin-readout"><span data-toss-count>0回</span><strong data-heads-percent>—</strong><span data-heads-count>表: 0</span><span data-tails-count>裏: 0</span></div>
     <p class="sr-only" data-coin-announcement aria-live="polite"></p>
     <p class="coin-caption">${bilingual('The line tends to settle near 50% with many tosses, but it can move away from 50% along the way. Each toss is independent.', '回数が増えると50%付近に落ち着きやすくなりますが、途中で50%から離れることもあります。各回の結果は独立です。')}</p>
