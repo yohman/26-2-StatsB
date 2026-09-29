@@ -93,10 +93,12 @@
 .agenda-page .lecture-textbook ul{display:grid;gap:6px;margin:0;padding:0;list-style:none}
 .agenda-page .lecture-textbook li{color:var(--course-muted);font:500 13px/1.5 Manrope,'Zen Kaku Gothic New',sans-serif}
 .agenda-page .lecture-slides{display:grid;gap:10px;min-width:0}
-.agenda-page .lecture-tablist{display:flex;gap:0;margin:0 0 20px;background:#e9dfd2}
-.agenda-page .lecture-tablist button{border:0;padding:12px 18px;background:transparent;color:var(--course-ink);font:700 11px Manrope,'Zen Kaku Gothic New',sans-serif;cursor:pointer}
-.agenda-page .lecture-tablist button[aria-selected='true']{background:var(--course-crimson);color:#fff}
-.agenda-page .lecture-tablist button:focus-visible{outline:3px solid var(--course-ink);outline-offset:-3px}
+.agenda-page .lecture-tablist{display:flex;gap:5px;margin:0 0 20px;border-bottom:2px solid var(--course-crimson)}
+.agenda-page .lecture-tablist button{position:relative;min-width:138px;margin-bottom:-2px;border:1px solid #cbbfb1;border-bottom:2px solid var(--course-crimson);border-radius:5px 5px 0 0;padding:12px 20px;background:#e9dfd2;color:var(--course-muted);font:700 13px Manrope,'Zen Kaku Gothic New',sans-serif;cursor:pointer}
+.agenda-page .lecture-tablist button:hover{background:#f4ede2;color:var(--course-ink)}
+.agenda-page .lecture-tablist button[aria-selected='true']{z-index:1;border:2px solid var(--course-crimson);border-bottom-color:var(--course-sand);background:var(--course-sand);color:var(--course-ink)}
+.agenda-page .lecture-tablist button:focus-visible{outline:2px solid var(--course-ink);outline-offset:2px}
+@media(max-width:520px){.agenda-page .lecture-tablist button{flex:1;min-width:0;padding:10px 8px}}
 .agenda-page .lecture-zone [role='tabpanel'][hidden]{display:none}
 .agenda-page .coin-simulation{max-width:850px}
 .agenda-page .coin-simulation-intro{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin:0 0 15px}

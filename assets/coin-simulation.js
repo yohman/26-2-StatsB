@@ -240,6 +240,7 @@
         drawRecent();
         drawProgress();
         const japanese = document.documentElement.dataset.language === 'ja';
+        root.querySelector('.coin-controls').setAttribute('aria-label', japanese ? 'コイン投げの操作' : 'Coin toss controls');
         sideKey.textContent = japanese ? 'ロボット＝表 · ヤギ＝裏' : 'Robot = heads · Goat = tails';
         if (demo.dataset.state === 'ready') resultLabel.textContent = japanese ? '投げてみよう' : 'Ready to toss';
         else if (demo.dataset.state === 'flipping') resultLabel.textContent = japanese ? '回転中…' : 'Spinning…';
@@ -248,8 +249,13 @@
         if (announcement.textContent) announcement.textContent = description.textContent;
       }
     }).observe(document.documentElement, { attributes:true, attributeFilter:['data-language'] });
-    document.getElementById('week-1-coin-tab')?.addEventListener('click', () => requestAnimationFrame(draw));
+    document.getElementById('week-1-coin-tab')?.addEventListener('click', () => requestAnimationFrame(() => {
+      draw();
+      demo.setAttribute('aria-label', demo.dataset.state === 'ready' ? (document.documentElement.dataset.language === 'ja' ? '投げてみよう' : 'Ready to toss') : resultLabel.textContent);
+    }));
     draw();
+    root.querySelector('.coin-controls').setAttribute('aria-label', document.documentElement.dataset.language === 'ja' ? 'コイン投げの操作' : 'Coin toss controls');
+    demo.setAttribute('aria-label', document.documentElement.dataset.language === 'ja' ? '投げてみよう' : 'Ready to toss');
   }
 
   document.addEventListener('statsb:agenda-rendered', setupCoinSimulation);

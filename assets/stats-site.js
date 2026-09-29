@@ -211,53 +211,53 @@ function coinSimulationMarkup() {
 
 function diseaseTestMarkup() {
   return `<div class="test-simulation" data-test-simulation>
-    <div class="test-intro"><p class="monty-kicker">[AL] 条件付き確率</p><h4>陽性なら、本当に病気？</h4><p>陽性という結果から、本当に病気である確率を考えます。数字を変えると答えも変わります。</p></div>
-    <div class="test-controls" aria-label="検査の条件">
-      <label>罹患率 <span>1人 / <input type="number" data-test-population min="2" max="100000000" step="1" value="100000" inputmode="numeric"> 人</span></label>
-      <label>判定を間違える確率 <span><input type="number" data-test-error min="0" max="50" step="0.1" value="1" inputmode="decimal"> %</span></label>
-      <button type="button" data-test-reset>元の条件に戻す</button>
+    <div class="test-intro"><p class="monty-kicker">${bilingual('[AL] Conditional probability', '[AL] 条件付き確率')}</p><h4>${bilingual('Positive test. Actually ill?', '陽性なら、本当に病気？')}</h4><p>${bilingual('A positive result is not the same as having the disease. Change the numbers to see how the answer shifts.', '陽性という結果から、本当に病気である確率を考えます。数字を変えると答えも変わります。')}</p></div>
+    <div class="test-controls" role="group" aria-label="Test assumptions">
+      <label>${bilingual('Prevalence', '罹患率')} <span>${bilingual('1 in', '1人 /')} <input type="number" data-test-population min="2" max="100000000" step="1" value="100000" inputmode="numeric"> ${bilingual('people', '人')}</span></label>
+      <label>${bilingual('Error rate', '判定を間違える確率')} <span><input type="number" data-test-error min="0" max="50" step="0.1" value="1" inputmode="decimal"> %</span></label>
+      <button type="button" data-test-reset>${bilingual('Restore defaults', '元の条件に戻す')}</button>
     </div>
     <p class="test-input-message" data-test-message role="status"></p>
-    <p class="test-assumption">病気の人は <strong data-test-sensitivity>99%</strong> が陽性、病気でない人は <strong data-test-false-rate>1%</strong> が誤って陽性になると仮定します。</p>
+    <p class="test-assumption">${bilingual('Assume that', '病気の人は')} <strong data-test-sensitivity>99%</strong> ${bilingual('of people with the disease test positive, while', 'が陽性、病気でない人は')} <strong data-test-false-rate>1%</strong> ${bilingual('of people without it also test positive by mistake.', 'が誤って陽性になると仮定します。')}</p>
     <div class="test-overview">
-      <div class="test-overview-head"><strong data-test-cohort-heading>10万人を検査したら</strong><span>結果の内訳（期待値）</span></div>
-      <div class="test-overview-bar" data-test-overview-bar role="img" aria-label="検査結果の内訳"><span class="test-bar-true" data-test-bar-true></span><span class="test-bar-false" data-test-bar-false></span><span class="test-bar-negative" data-test-bar-negative></span></div>
-      <div class="test-overview-key"><span><i class="test-dot-sick"></i><span>本当に病気で陽性 <strong data-test-true>0.99人</strong></span></span><span><i class="test-dot-well"></i><span>病気でないのに陽性 <strong data-test-false>999.99人</strong></span></span><span><i class="test-dot-negative"></i><span>陰性 <strong data-test-negative>98,999.02人</strong></span></span></div>
-      <p>緑の極細線は見えるように拡大しています。陰性には、ごく少数の見逃し（偽陰性）も含みます。</p>
+      <div class="test-overview-head"><strong data-test-cohort-heading>10万人を検査したら</strong><span>${bilingual('Expected breakdown', '結果の内訳（期待値）')}</span></div>
+      <div class="test-overview-bar" data-test-overview-bar role="img" aria-label="Test results breakdown"><span class="test-bar-true" data-test-bar-true></span><span class="test-bar-false" data-test-bar-false></span><span class="test-bar-negative" data-test-bar-negative></span></div>
+      <div class="test-overview-key"><span><i class="test-dot-sick"></i><span>${bilingual('Actually ill · positive', '本当に病気で陽性')} <strong data-test-true>0.99人</strong></span></span><span><i class="test-dot-well"></i><span>${bilingual('Not ill · false positive', '病気でないのに陽性')} <strong data-test-false>999.99人</strong></span></span><span><i class="test-dot-negative"></i><span>${bilingual('Negative result', '陰性')} <strong data-test-negative>98,999.02人</strong></span></span></div>
+      <p>${bilingual('The tiny green sliver is enlarged for visibility. The negative group also includes a very small number of missed cases (false negatives).', '緑の極細線は見えるように拡大しています。陰性には、ごく少数の見逃し（偽陰性）も含みます。')}</p>
     </div>
     <div class="test-positive">
-      <div class="test-positive-head"><div><span class="test-path-label">陽性の人だけを見る</span><p>陰性の人を除くと、緑と茶色だけが残ります。本当に病気なのは何％？</p></div><button type="button" data-test-reveal aria-expanded="false">答えを見る →</button></div>
+      <div class="test-positive-head"><div><span class="test-path-label">${bilingual('Focus on positive results', '陽性の人だけを見る')}</span><p>${bilingual('Remove the negative results. Only green and brown remain. What share truly has the disease?', '陰性の人を除くと、緑と茶色だけが残ります。本当に病気なのは何％？')}</p></div><button type="button" data-test-reveal aria-expanded="false">${bilingual('Reveal answer →', '答えを見る →')}</button></div>
       <div data-test-answer hidden>
-        <div class="test-answer-summary"><strong data-test-percent>—</strong><span>陽性だった人が、本当に病気である確率</span></div>
+        <div class="test-answer-summary"><strong data-test-percent>—</strong><span>${bilingual('Chance of actually having the disease, given a positive test', '陽性だった人が、本当に病気である確率')}</span></div>
         <p class="test-takeaway" data-test-takeaway></p>
         <div class="test-dots" data-test-dots aria-hidden="true"></div>
-        <div class="test-dot-legend"><span><i class="test-dot-sick"></i> 本当に病気で陽性</span><span><i class="test-dot-well"></i> 病気でないのに陽性</span><span>陽性者1000人を想像した縮図</span></div>
-        <ol class="test-math"><li><span>病気の人が正しく陽性</span><strong data-test-step-true></strong></li><li><span>病気でない人が誤って陽性</span><strong data-test-step-false></strong></li><li><span>陽性になった人の合計</span><strong data-test-step-total></strong></li><li><span>陽性の人が本当に病気である確率</span><strong data-test-step-answer></strong></li></ol>
+        <div class="test-dot-legend"><span><i class="test-dot-sick"></i> ${bilingual('Actually ill · positive', '本当に病気で陽性')}</span><span><i class="test-dot-well"></i> ${bilingual('Not ill · false positive', '病気でないのに陽性')}</span><span>${bilingual('Imagine 1,000 positive results', '陽性者1000人を想像した縮図')}</span></div>
+        <ol class="test-math"><li><span>${bilingual('Ill people who test positive', '病気の人が正しく陽性')}</span><strong data-test-step-true></strong></li><li><span>${bilingual('Healthy people who test positive by mistake', '病気でない人が誤って陽性')}</span><strong data-test-step-false></strong></li><li><span>${bilingual('Total positive results', '陽性になった人の合計')}</span><strong data-test-step-total></strong></li><li><span>${bilingual('Probability of disease given a positive result', '陽性の人が本当に病気である確率')}</span><strong data-test-step-answer></strong></li></ol>
         <p class="test-explanation" data-test-explanation></p>
       </div>
     </div>
-    <p class="test-disclaimer">これは確率を学ぶための仮想の検査です。実際の診断には使えません。</p>
+    <p class="test-disclaimer">${bilingual('This is a hypothetical test for learning probability, not medical advice.', 'これは確率を学ぶための仮想の検査です。実際の診断には使えません。')}</p>
   </div>`;
 }
 
 function montyHallMarkup() {
   return `<div class="monty-game" data-monty-game>
-    <div class="monty-intro"><div><p class="monty-kicker">3つのドア、1つの当たり</p><h4>モンティ・ホール</h4></div><p>ロボットを探そう。1つ選ぶと、司会者がヤギのドアを開けます。最後に、そのままにするか変更するかを決めます。</p></div>
+    <div class="monty-intro"><div><p class="monty-kicker">${bilingual('Three doors. One prize.', '3つのドア、1つの当たり')}</p><h4>${bilingual('Monty Hall', 'モンティ・ホール')}</h4></div><p>${bilingual('Find the robot. Pick a door; the host opens a different door hiding a goat. Then decide whether to stay or switch.', 'ロボットを探そう。1つ選ぶと、司会者がヤギのドアを開けます。最後に、そのままにするか変更するかを決めます。')}</p></div>
     <div class="monty-play-grid"><div class="monty-stage">
       <p class="monty-prompt" data-monty-prompt aria-live="polite">好きなドアを1つ選んでください。</p>
-      <div class="monty-doors" role="group" aria-label="3つのドア">${[1, 2, 3].map(number => `<button type="button" class="monty-door" data-monty-door="${number - 1}" aria-label="ドア${number}を選ぶ"><span class="monty-door-number">0${number}</span><span class="monty-door-face" aria-hidden="true"><span class="monty-door-symbol">?</span><span class="monty-door-handle"></span></span><span class="monty-door-caption" data-monty-caption>ドア ${number}</span></button>`).join('')}</div>
-      <div class="monty-feedback-slot"><div class="monty-decision" data-monty-decision hidden><button type="button" data-monty-choice="stay">最初のドアのまま</button><button type="button" data-monty-choice="switch">もう一方へ変更</button></div>
-      <div class="monty-outcome" data-monty-outcome hidden><span class="monty-outcome-mark" data-monty-mark aria-hidden="true"></span><div><strong data-monty-result-title></strong><p data-monty-result></p></div><button type="button" data-monty-again>次へ →</button></div></div>
-      <div class="monty-batch"><label>作戦 <select data-monty-strategy><option value="stay">そのまま</option><option value="switch">変更する</option></select></label><label>繰り返す回数 <input type="number" data-monty-count min="1" max="10000" step="1" value="100" inputmode="numeric"></label><button type="button" data-monty-go>実行する →</button><button type="button" class="monty-reset" data-monty-reset>リセット</button></div>
+      <div class="monty-doors" role="group" aria-label="Three doors">${[1, 2, 3].map(number => `<button type="button" class="monty-door" data-monty-door="${number - 1}" aria-label="ドア${number}を選ぶ"><span class="monty-door-number">0${number}</span><span class="monty-door-face" aria-hidden="true"><span class="monty-door-symbol">?</span><span class="monty-door-handle"></span></span><span class="monty-door-caption" data-monty-caption>ドア ${number}</span></button>`).join('')}</div>
+      <div class="monty-feedback-slot"><div class="monty-decision" data-monty-decision hidden><button type="button" data-monty-choice="stay">${bilingual('Stay with the first door', '最初のドアのまま')}</button><button type="button" data-monty-choice="switch">${bilingual('Switch to the other door', 'もう一方へ変更')}</button></div>
+      <div class="monty-outcome" data-monty-outcome hidden><span class="monty-outcome-mark" data-monty-mark aria-hidden="true"></span><div><strong data-monty-result-title></strong><p data-monty-result></p></div><button type="button" data-monty-again>${bilingual('Next →', '次へ →')}</button></div></div>
+      <div class="monty-batch"><label>${bilingual('Strategy', '作戦')} <select data-monty-strategy><option value="stay">そのまま</option><option value="switch">変更する</option></select></label><label>${bilingual('Number of games', '繰り返す回数')} <input type="number" data-monty-count min="1" max="10000" step="1" value="100" inputmode="numeric"></label><button type="button" data-monty-go>${bilingual('Run →', '実行する →')}</button><button type="button" class="monty-reset" data-monty-reset>${bilingual('Reset', 'リセット')}</button></div>
       <p class="monty-batch-status" data-monty-status aria-live="polite"></p>
     </div>
-    <div class="monty-results"><div class="monty-results-head"><div><p class="monty-kicker">実験結果</p><h5>勝率はどう変わる？</h5></div><p><strong data-monty-total>0</strong> 回プレイ</p></div>
-      <div class="monty-scoreline"><span>全体の勝率 <strong data-monty-overall>—</strong></span><span><strong data-monty-wins>0</strong> 勝</span><span><strong data-monty-losses>0</strong> 敗</span></div>
-      <div class="monty-chart-head"><strong>作戦ごとの累積勝率</strong><span>横軸：試した回数　縦軸：当たった割合</span></div>
+    <div class="monty-results"><div class="monty-results-head"><div><p class="monty-kicker">${bilingual('Results', '実験結果')}</p><h5>${bilingual('How does the win rate change?', '勝率はどう変わる？')}</h5></div><p><strong data-monty-total>0</strong> ${bilingual('games played', '回プレイ')}</p></div>
+      <div class="monty-scoreline"><span>${bilingual('Overall win rate', '全体の勝率')} <strong data-monty-overall>—</strong></span><span><strong data-monty-wins>0</strong> ${bilingual('wins', '勝')}</span><span><strong data-monty-losses>0</strong> ${bilingual('losses', '敗')}</span></div>
+      <div class="monty-chart-head"><strong>${bilingual('Cumulative win rate by strategy', '作戦ごとの累積勝率')}</strong><span>${bilingual('X: games played · Y: win rate', '横軸：試した回数　縦軸：当たった割合')}</span></div>
       <div class="monty-line-wrap"><svg class="monty-line-chart" data-monty-line-chart viewBox="0 0 760 225" role="img" aria-labelledby="monty-chart-title monty-chart-desc"><title id="monty-chart-title">作戦ごとの累積勝率</title><desc id="monty-chart-desc" data-monty-chart-desc>まだ結果がありません。</desc></svg></div>
-      <div class="monty-chart-legend"><span class="monty-legend-stay">線：そのまま <strong data-monty-stay-summary>—</strong></span><span class="monty-legend-switch">線：変更する <strong data-monty-switch-summary>—</strong></span><span class="monty-legend-win">点：勝ち</span><span class="monty-legend-loss">点：負け</span></div>
-      <p class="monty-theory">理論上の勝率：そのまま <strong>約33%</strong> ／ 変更する <strong>約67%</strong>。少ない回数では結果がばらつきます。</p>
-      <div class="monty-winloss"><div><strong>勝ちと負けの内訳</strong><span>これまでの全ゲーム</span></div><div class="monty-winloss-track" role="img" aria-label="まだ結果がありません" data-monty-winloss><span class="monty-win-fill" data-monty-win-bar></span><span class="monty-loss-fill" data-monty-loss-bar></span></div><div class="monty-winloss-key"><span>● 勝ち <strong data-monty-win-count>0</strong></span><span>● 負け <strong data-monty-loss-count>0</strong></span></div></div>
+      <div class="monty-chart-legend"><span class="monty-legend-stay">${bilingual('Line: stay', '線：そのまま')} <strong data-monty-stay-summary>—</strong></span><span class="monty-legend-switch">${bilingual('Line: switch', '線：変更する')} <strong data-monty-switch-summary>—</strong></span><span class="monty-legend-win">${bilingual('Dot: win', '点：勝ち')}</span><span class="monty-legend-loss">${bilingual('Dot: loss', '点：負け')}</span></div>
+      <p class="monty-theory">${bilingual('Theoretical win rate: stay', '理論上の勝率：そのまま')} <strong>${bilingual('about 33%', '約33%')}</strong> ／ ${bilingual('switch', '変更する')} <strong>${bilingual('about 67%', '約67%')}</strong>${bilingual('. Results vary with only a few games.', '。少ない回数では結果がばらつきます。')}</p>
+      <div class="monty-winloss"><div><strong>${bilingual('Wins and losses', '勝ちと負けの内訳')}</strong><span>${bilingual('All games so far', 'これまでの全ゲーム')}</span></div><div class="monty-winloss-track" role="img" aria-label="まだ結果がありません" data-monty-winloss><span class="monty-win-fill" data-monty-win-bar></span><span class="monty-loss-fill" data-monty-loss-bar></span></div><div class="monty-winloss-key"><span>● ${bilingual('Wins', '勝ち')} <strong data-monty-win-count>0</strong></span><span>● ${bilingual('Losses', '負け')} <strong data-monty-loss-count>0</strong></span></div></div>
     </div></div>
   </div>`;
 }
@@ -283,10 +283,10 @@ function lectureSection(week) {
     </div>
     <div id="week-1-lecture-slides" role="tabpanel" aria-labelledby="week-1-lecture-slides-tab">${content}</div>
     <div id="week-1-lecture-simulations" role="tabpanel" aria-labelledby="week-1-lecture-simulations-tab" hidden>
-      <div class="simulation-tablist" role="tablist" aria-label="シミュレーターを選ぶ">
-        <button type="button" role="tab" id="week-1-monty-tab" aria-controls="week-1-monty" aria-selected="true" tabindex="0">01 <span>モンティ・ホール</span></button>
-        <button type="button" role="tab" id="week-1-coin-tab" aria-controls="week-1-coin" aria-selected="false" tabindex="-1">02 <span>コイン投げ</span></button>
-        <button type="button" role="tab" id="week-1-test-tab" aria-controls="week-1-test" aria-selected="false" tabindex="-1">03 <span>病気の検査</span></button>
+      <div class="simulation-tablist" role="tablist" aria-label="Choose a simulation">
+        <button type="button" role="tab" id="week-1-monty-tab" aria-controls="week-1-monty" aria-selected="true" tabindex="0">01 <span>${bilingual('Monty Hall', 'モンティ・ホール')}</span></button>
+        <button type="button" role="tab" id="week-1-coin-tab" aria-controls="week-1-coin" aria-selected="false" tabindex="-1">02 <span>${bilingual('Coin toss', 'コイン投げ')}</span></button>
+        <button type="button" role="tab" id="week-1-test-tab" aria-controls="week-1-test" aria-selected="false" tabindex="-1">03 <span>${bilingual('Disease test', '病気の検査')}</span></button>
       </div>
       <div id="week-1-monty" role="tabpanel" aria-labelledby="week-1-monty-tab">${montyHallMarkup()}</div>
       <div id="week-1-coin" role="tabpanel" aria-labelledby="week-1-coin-tab" hidden>${coinSimulationMarkup()}</div>
