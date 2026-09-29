@@ -32,8 +32,8 @@
     const lineChart = root.querySelector('[data-monty-line-chart]');
     const chartDescription = root.querySelector('[data-monty-chart-desc]');
     const score = {
-      stay:{ plays:0, wins:0, history:[] },
-      switch:{ plays:0, wins:0, history:[] }
+      stay:{ plays:0, wins:0, history:[], outcomes:[] },
+      switch:{ plays:0, wins:0, history:[], outcomes:[] }
     };
     let phase = 'pick';
     let round = null;
@@ -58,6 +58,7 @@
       series.plays += 1;
       if (won) series.wins += 1;
       series.history.push(series.wins / series.plays);
+      series.outcomes.push(won);
     }
 
     function drawChart() {
@@ -91,10 +92,10 @@
         if (points.at(-1).trial !== history.length) points.push({ trial:history.length, ratio:history.at(-1) });
         lineChart.append(makeSvg('polyline', { points:points.map(point => `${x(point.trial).toFixed(1)},${y(point.ratio).toFixed(1)}`).join(' '), class:`monty-chart-line monty-chart-line-${strategy}` }));
         const dotStep = Math.max(1, Math.ceil(history.length / 65));
-        for (let index = 0; index < history.length; index += dotStep) lineChart.append(makeSvg('circle', { cx:x(index + 1), cy:y(history[index]), r:history.length > 100 ? 2.3 : 3, class:`monty-chart-dot monty-chart-dot-${strategy}` }));
-        lineChart.append(makeSvg('circle', { cx:x(history.length), cy:y(history.at(-1)), r:5.5, class:`monty-chart-last monty-chart-dot-${strategy}` }));
+        for (let index = 0; index < history.length; index += dotStep) lineChart.append(makeSvg('circle', { cx:x(index + 1), cy:y(history[index]), r:history.length > 100 ? 2.3 : 3, class:`monty-chart-dot monty-chart-dot-${score[strategy].outcomes[index] ? 'win' : 'loss'}` }));
+        lineChart.append(makeSvg('circle', { cx:x(history.length), cy:y(history.at(-1)), r:5.5, class:`monty-chart-last monty-chart-dot-${score[strategy].outcomes.at(-1) ? 'win' : 'loss'}` }));
       });
-      description.textContent = `そのまま${score.stay.plays}回中${score.stay.wins}勝、変更する${score.switch.plays}回中${score.switch.wins}勝。横軸は作戦ごとの試行回数、縦軸は累積勝率です。`;
+      description.textContent = `そのまま${score.stay.plays}回中${score.stay.wins}勝、変更する${score.switch.plays}回中${score.switch.wins}勝。横軸は作戦ごとの試行回数、縦軸は累積勝率です。点の緑は勝ち、茶色は負けです。`;
     }
 
     function updateStats() {
@@ -251,7 +252,7 @@
     goButton.addEventListener('click', runBatch);
     resetButton.addEventListener('click', () => {
       stopBatch();
-      ['stay', 'switch'].forEach(strategy => { score[strategy] = { plays:0, wins:0, history:[] }; });
+      ['stay', 'switch'].forEach(strategy => { score[strategy] = { plays:0, wins:0, history:[], outcomes:[] }; });
       batchFrame = 0;
       root.dataset.montyBatchFrame = '0';
       status.textContent = '結果をリセットしました。';

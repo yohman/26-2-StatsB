@@ -217,7 +217,7 @@ function montyHallMarkup() {
       <div class="monty-scoreline"><span>全体の勝率 <strong data-monty-overall>—</strong></span><span><strong data-monty-wins>0</strong> 勝</span><span><strong data-monty-losses>0</strong> 敗</span></div>
       <div class="monty-chart-head"><strong>作戦ごとの累積勝率</strong><span>横軸：試した回数　縦軸：当たった割合</span></div>
       <div class="monty-line-wrap"><svg class="monty-line-chart" data-monty-line-chart viewBox="0 0 760 225" role="img" aria-labelledby="monty-chart-title monty-chart-desc"><title id="monty-chart-title">作戦ごとの累積勝率</title><desc id="monty-chart-desc" data-monty-chart-desc>まだ結果がありません。</desc></svg></div>
-      <div class="monty-chart-legend"><span class="monty-legend-stay">そのまま <strong data-monty-stay-summary>—</strong></span><span class="monty-legend-switch">変更する <strong data-monty-switch-summary>—</strong></span></div>
+      <div class="monty-chart-legend"><span class="monty-legend-stay">線：そのまま <strong data-monty-stay-summary>—</strong></span><span class="monty-legend-switch">線：変更する <strong data-monty-switch-summary>—</strong></span><span class="monty-legend-win">点：勝ち</span><span class="monty-legend-loss">点：負け</span></div>
       <p class="monty-theory">理論上の勝率：そのまま <strong>約33%</strong> ／ 変更する <strong>約67%</strong>。少ない回数では結果がばらつきます。</p>
       <div class="monty-winloss"><div><strong>勝ちと負けの内訳</strong><span>これまでの全ゲーム</span></div><div class="monty-winloss-track" role="img" aria-label="まだ結果がありません" data-monty-winloss><span class="monty-win-fill" data-monty-win-bar></span><span class="monty-loss-fill" data-monty-loss-bar></span></div><div class="monty-winloss-key"><span>● 勝ち <strong data-monty-win-count>0</strong></span><span>● 負け <strong data-monty-loss-count>0</strong></span></div></div>
     </div></div>
