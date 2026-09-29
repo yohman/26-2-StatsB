@@ -209,14 +209,15 @@ function montyHallMarkup() {
       <p class="monty-prompt" data-monty-prompt aria-live="polite">好きなドアを1つ選んでください。</p>
       <div class="monty-doors" role="group" aria-label="3つのドア">${[1, 2, 3].map(number => `<button type="button" class="monty-door" data-monty-door="${number - 1}" aria-label="ドア${number}を選ぶ"><span class="monty-door-number">0${number}</span><span class="monty-door-face" aria-hidden="true"><span class="monty-door-symbol">?</span><span class="monty-door-handle"></span></span><span class="monty-door-caption" data-monty-caption>ドア ${number}</span></button>`).join('')}</div>
       <div class="monty-decision" data-monty-decision hidden><button type="button" data-monty-choice="stay">最初のドアのまま</button><button type="button" data-monty-choice="switch">もう一方へ変更</button></div>
-      <div class="monty-outcome" data-monty-outcome hidden><p data-monty-result></p><button type="button" data-monty-again>もう一度遊ぶ ↗</button></div>
+      <div class="monty-outcome" data-monty-outcome hidden><span class="monty-outcome-mark" data-monty-mark aria-hidden="true"></span><div><strong data-monty-result-title></strong><p data-monty-result></p><small>どのドアを押しても、次のゲームを始められます。</small></div><button type="button" data-monty-again>もう一度遊ぶ ↗</button></div>
     </div>
-    <div class="monty-results"><div class="monty-results-head"><div><p class="monty-kicker">実験結果</p><h5>選び方で、当たりやすさは変わる？</h5></div><p><strong data-monty-total>0</strong> 回プレイ</p></div>
-      <div class="monty-bars" role="img" aria-label="まだ結果がありません" data-monty-chart>
-        <div class="monty-bar-row"><div class="monty-bar-label"><strong>そのまま</strong><span data-monty-stay-count>0 / 0 回当たり</span></div><div class="monty-bar-track"><span class="monty-bar-fill monty-bar-stay" data-monty-stay-bar></span></div><strong class="monty-bar-percent" data-monty-stay-percent>—</strong></div>
-        <div class="monty-bar-row"><div class="monty-bar-label"><strong>変更する</strong><span data-monty-switch-count>0 / 0 回当たり</span></div><div class="monty-bar-track"><span class="monty-bar-fill monty-bar-switch" data-monty-switch-bar></span></div><strong class="monty-bar-percent" data-monty-switch-percent>—</strong></div>
-      </div>
-      <p class="monty-theory">理論上の当たる確率：そのまま <strong>約33%</strong> ／ 変更する <strong>約67%</strong>。少ない回数では結果がばらつきます。</p>
+    <div class="monty-results"><div class="monty-results-head"><div><p class="monty-kicker">実験結果</p><h5>勝率はどう変わる？</h5></div><p><strong data-monty-total>0</strong> 回プレイ</p></div>
+      <div class="monty-scoreline"><span>全体の勝率 <strong data-monty-overall>—</strong></span><span><strong data-monty-wins>0</strong> 勝</span><span><strong data-monty-losses>0</strong> 敗</span></div>
+      <div class="monty-chart-head"><strong>作戦ごとの累積勝率</strong><span>横軸：試した回数　縦軸：当たった割合</span></div>
+      <div class="monty-line-wrap"><svg class="monty-line-chart" data-monty-line-chart viewBox="0 0 760 270" role="img" aria-labelledby="monty-chart-title monty-chart-desc"><title id="monty-chart-title">作戦ごとの累積勝率</title><desc id="monty-chart-desc" data-monty-chart-desc>まだ結果がありません。</desc></svg></div>
+      <div class="monty-chart-legend"><span class="monty-legend-stay">そのまま <strong data-monty-stay-summary>—</strong></span><span class="monty-legend-switch">変更する <strong data-monty-switch-summary>—</strong></span></div>
+      <p class="monty-theory">理論上の勝率：そのまま <strong>約33%</strong> ／ 変更する <strong>約67%</strong>。少ない回数では結果がばらつきます。</p>
+      <div class="monty-winloss"><div><strong>勝ちと負けの内訳</strong><span>これまでの全ゲーム</span></div><div class="monty-winloss-track" role="img" aria-label="まだ結果がありません" data-monty-winloss><span class="monty-win-fill" data-monty-win-bar></span><span class="monty-loss-fill" data-monty-loss-bar></span></div><div class="monty-winloss-key"><span>● 勝ち <strong data-monty-win-count>0</strong></span><span>● 負け <strong data-monty-loss-count>0</strong></span></div></div>
       <div class="monty-batch"><div><strong>まとめて試す</strong><span>同じ作戦を繰り返して、勝率の変化を見てみましょう。</span></div><label>作戦 <select data-monty-strategy><option value="stay">そのまま</option><option value="switch">変更する</option></select></label><label>回数 <input type="number" data-monty-count min="1" max="10000" step="1" value="100" inputmode="numeric"></label><button type="button" data-monty-go>実行する →</button><button type="button" class="monty-reset" data-monty-reset>リセット</button></div>
       <p class="monty-batch-status" data-monty-status aria-live="polite"></p>
     </div>
