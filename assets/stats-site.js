@@ -280,7 +280,7 @@ function lectureSection(week) {
   const visible = week.week === 1 ? primary.filter(deck => !orientation.includes(deck)) : !primary.length ? decks : primary;
   const more = week.week === 1 ? [...other, ...orientation] : !primary.length ? [] : other;
   const slideList = visible.map(deck => slideCard(deck, week)).join('');
-  const extra = more.length ? `<details class="more-slides"><summary>${bilingual(`Supplementary slides (${more.length})`, `補助スライド（${more.length}）`)}</summary><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></details>` : '';
+  const extra = more.length ? `<div class="more-slides"><p class="more-slides-heading">${bilingual('Supplementary slides', '補助スライド')}</p><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></div>` : '';
   const description = plan ? bilingual(escapeHtml(plan.overview[0]), escapeHtml(plan.overview[1])) : bilingual(escapeHtml(week.title_en), escapeHtml(week.title_ja));
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
