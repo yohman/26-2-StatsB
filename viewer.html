@@ -16,7 +16,7 @@
     <div class="viewer-top"><div><p class="eyebrow"><span class="lang-en">FILE PREVIEW</span><span class="lang-ja" lang="ja">資料プレビュー</span></p><h1 data-viewer-title>Course file</h1></div><div class="viewer-actions"><a data-download href="#" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span> ↓</a></div></div>
     <div data-viewer-content></div>
   </main>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
   <script>
     const parameters = new URLSearchParams(location.search);
     const file = parameters.get('file') || '';
@@ -78,7 +78,7 @@
       content.replaceChildren(viewer);
       try {
         if (!window.pdfjsLib) throw new Error('PDF renderer unavailable');
-        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdfjs/pdf.worker.min.js?v=3.11.174';
         const response = await fetch(encodeURI(path));
         if (!response.ok) throw new Error('PDF unavailable');
         const pdf = await window.pdfjsLib.getDocument({ data: await response.arrayBuffer() }).promise;
@@ -163,6 +163,7 @@
         });
         await renderPage(activePage);
       } catch (error) {
+        console.error('PDF preview failed:', error);
         showPdfFallback();
       }
     }
