@@ -202,6 +202,27 @@ function coinSimulationMarkup() {
   </div>`;
 }
 
+function montyHallMarkup() {
+  return `<div class="monty-game" data-monty-game>
+    <div class="monty-intro"><div><p class="monty-kicker">3つのドア、1つの当たり</p><h4>モンティ・ホールのゲーム</h4></div><p>ロボットがいるドアを当てましょう。まず1つ選ぶと、司会者が残りの「ヤギ」のドアを開けます。そのままにする？ それとも変更する？</p></div>
+    <div class="monty-stage">
+      <p class="monty-prompt" data-monty-prompt aria-live="polite">好きなドアを1つ選んでください。</p>
+      <div class="monty-doors" role="group" aria-label="3つのドア">${[1, 2, 3].map(number => `<button type="button" class="monty-door" data-monty-door="${number - 1}" aria-label="ドア${number}を選ぶ"><span class="monty-door-number">0${number}</span><span class="monty-door-face" aria-hidden="true"><span class="monty-door-symbol">?</span><span class="monty-door-handle"></span></span><span class="monty-door-caption" data-monty-caption>ドア ${number}</span></button>`).join('')}</div>
+      <div class="monty-decision" data-monty-decision hidden><button type="button" data-monty-choice="stay">最初のドアのまま</button><button type="button" data-monty-choice="switch">もう一方へ変更</button></div>
+      <div class="monty-outcome" data-monty-outcome hidden><p data-monty-result></p><button type="button" data-monty-again>もう一度遊ぶ ↗</button></div>
+    </div>
+    <div class="monty-results"><div class="monty-results-head"><div><p class="monty-kicker">実験結果</p><h5>選び方で、当たりやすさは変わる？</h5></div><p><strong data-monty-total>0</strong> 回プレイ</p></div>
+      <div class="monty-bars" role="img" aria-label="まだ結果がありません" data-monty-chart>
+        <div class="monty-bar-row"><div class="monty-bar-label"><strong>そのまま</strong><span data-monty-stay-count>0 / 0 回当たり</span></div><div class="monty-bar-track"><span class="monty-bar-fill monty-bar-stay" data-monty-stay-bar></span></div><strong class="monty-bar-percent" data-monty-stay-percent>—</strong></div>
+        <div class="monty-bar-row"><div class="monty-bar-label"><strong>変更する</strong><span data-monty-switch-count>0 / 0 回当たり</span></div><div class="monty-bar-track"><span class="monty-bar-fill monty-bar-switch" data-monty-switch-bar></span></div><strong class="monty-bar-percent" data-monty-switch-percent>—</strong></div>
+      </div>
+      <p class="monty-theory">理論上の当たる確率：そのまま <strong>約33%</strong> ／ 変更する <strong>約67%</strong>。少ない回数では結果がばらつきます。</p>
+      <div class="monty-batch"><div><strong>まとめて試す</strong><span>同じ作戦を繰り返して、勝率の変化を見てみましょう。</span></div><label>作戦 <select data-monty-strategy><option value="stay">そのまま</option><option value="switch">変更する</option></select></label><label>回数 <input type="number" data-monty-count min="1" max="10000" step="1" value="100" inputmode="numeric"></label><button type="button" data-monty-go>実行する →</button><button type="button" class="monty-reset" data-monty-reset>リセット</button></div>
+      <p class="monty-batch-status" data-monty-status aria-live="polite"></p>
+    </div>
+  </div>`;
+}
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
@@ -222,7 +243,14 @@ function lectureSection(week) {
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
     </div>
     <div id="week-1-lecture-slides" role="tabpanel" aria-labelledby="week-1-lecture-slides-tab">${content}</div>
-    <div id="week-1-lecture-simulations" role="tabpanel" aria-labelledby="week-1-lecture-simulations-tab" hidden>${coinSimulationMarkup()}</div>` : content;
+    <div id="week-1-lecture-simulations" role="tabpanel" aria-labelledby="week-1-lecture-simulations-tab" hidden>
+      <div class="simulation-tablist" role="tablist" aria-label="シミュレーターを選ぶ">
+        <button type="button" role="tab" id="week-1-monty-tab" aria-controls="week-1-monty" aria-selected="true" tabindex="0">01 <span>モンティ・ホール</span></button>
+        <button type="button" role="tab" id="week-1-coin-tab" aria-controls="week-1-coin" aria-selected="false" tabindex="-1">02 <span>コイン投げ</span></button>
+      </div>
+      <div id="week-1-monty" role="tabpanel" aria-labelledby="week-1-monty-tab">${montyHallMarkup()}</div>
+      <div id="week-1-coin" role="tabpanel" aria-labelledby="week-1-coin-tab" hidden>${coinSimulationMarkup()}</div>
+    </div>` : content;
   return `<section class="week-zone lecture-zone" aria-labelledby="week-${week.week}-lecture">
     <header class="zone-heading"><p>${week.week === 14 ? bilingual('EXAM', '試験') : bilingual('LECTURE', '講義')}</p><h3 id="week-${week.week}-lecture">${heading}</h3></header>
     ${lectureBody}

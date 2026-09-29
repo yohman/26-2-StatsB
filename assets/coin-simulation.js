@@ -131,7 +131,7 @@
         if (announcement.textContent) announcement.textContent = description.textContent;
       }
     }).observe(document.documentElement, { attributes:true, attributeFilter:['data-language'] });
-    root.closest('[role="tabpanel"]').parentElement.querySelector('[aria-controls="week-1-lecture-simulations"]').addEventListener('click', () => requestAnimationFrame(draw));
+    document.getElementById('week-1-coin-tab')?.addEventListener('click', () => requestAnimationFrame(draw));
     draw();
   }
 
