@@ -167,15 +167,14 @@
 .agenda-page .test-overview-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .agenda-page .test-overview-head strong{font:700 18px 'Noto Serif JP',serif}
 .agenda-page .test-overview-head span{color:var(--course-muted);font-size:11px}
-.agenda-page .test-overview-bar{display:flex;width:100%;height:26px;margin:15px 0 13px;overflow:hidden;background:#d6d2cb}
-.agenda-page .test-overview-bar span{display:block;height:100%;flex-shrink:0}
-.agenda-page .test-bar-true{min-width:3px;background:#278678}
-.agenda-page .test-bar-false{background:#996847}
-.agenda-page .test-bar-negative{flex:1;min-width:0;background:#d6d2cb}
-.agenda-page .test-overview-key{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.agenda-page .test-overview-key>span{display:flex;align-items:start;gap:7px;min-width:0;color:var(--course-muted);font-size:11px;line-height:1.5}
-.agenda-page .test-overview-key i{flex:none;width:8px;height:8px;margin-top:4px;border-radius:50%}
-.agenda-page .test-overview-key strong{display:block;margin-top:2px;color:var(--course-ink);font:700 14px 'DM Mono','Zen Kaku Gothic New',sans-serif}
+.agenda-page .test-outcome-flow{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(145px,.8fr);gap:12px;margin-top:16px}
+.agenda-page .test-outcome-positive{padding:15px;background:#f3e7d8}
+.agenda-page .test-outcome-positive>strong{display:block;margin:4px 0 13px;font:700 22px 'DM Mono','Zen Kaku Gothic New',sans-serif}
+.agenda-page .test-outcome-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.agenda-page .test-outcome-pair>div,.agenda-page .test-outcome-negative{display:flex;align-items:center;gap:9px;min-width:0;padding:10px;background:#fff;font-size:12px;line-height:1.35}
+.agenda-page .test-outcome-pair i,.agenda-page .test-outcome-negative i{flex:none;width:12px;height:12px;border-radius:50%}
+.agenda-page .test-outcome-pair strong,.agenda-page .test-outcome-negative strong{display:block;margin-top:4px;color:var(--course-ink);font:700 16px 'DM Mono','Zen Kaku Gothic New',sans-serif;overflow-wrap:anywhere}
+.agenda-page .test-outcome-negative{background:#e8e6e2;color:var(--course-muted)}
 .agenda-page .test-dot-negative{background:#a9a6a1}
 .agenda-page .test-overview>p{margin:12px 0 0;color:var(--course-muted);font-size:11px;line-height:1.5}
 .agenda-page .test-positive{margin-top:12px;padding:20px 22px;background:#fff}
@@ -187,12 +186,24 @@
 .agenda-page .test-answer-summary strong{color:#278678;font:700 clamp(38px,5vw,64px)/1 Fraunces,Georgia,serif;letter-spacing:-.05em}
 .agenda-page .test-answer-summary span{font-size:13px}
 .agenda-page .test-takeaway{max-width:45ch;margin:0 0 18px;color:var(--course-ink);font:700 clamp(16px,2vw,22px)/1.5 'Noto Serif JP',serif}
-.agenda-page .test-dots{display:grid;grid-template-columns:repeat(50,6px);gap:3px;max-width:100%;width:max-content;padding:14px;background:#f7f4ef}
-.agenda-page .test-dots span,.agenda-page .test-dot-legend i{display:block;width:6px;height:6px;border-radius:50%}
+.agenda-page .test-dot-chart{padding:15px;background:#f7f4ef}
+.agenda-page .test-dot-chart-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:12px}
+.agenda-page .test-dot-chart-head strong{font:700 14px 'Zen Kaku Gothic New',sans-serif}
+.agenda-page .test-dot-chart-head span{color:var(--course-muted);font-size:11px}
+.agenda-page .test-dots{display:grid;grid-template-columns:repeat(50,8px);gap:3px;max-width:100%;width:max-content}
+.agenda-page .test-dots span,.agenda-page .test-dot-legend i{display:block;width:8px;height:8px;border-radius:50%}
 .agenda-page .test-dot-sick{background:#278678}
 .agenda-page .test-dot-well{background:#996847}
+.agenda-page .test-dots .test-dot-highlight{position:relative;z-index:1;box-shadow:0 0 0 3px #f7f4ef,0 0 0 6px #278678}
 .agenda-page .test-dot-legend{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;margin-top:9px;color:var(--course-muted);font-size:11px}
 .agenda-page .test-dot-legend span{display:flex;align-items:center;gap:6px}
+.agenda-page .test-dot-legend strong{color:var(--course-ink);font:700 11px 'DM Mono',monospace}
+.agenda-page .test-excluded{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:12px;border-top:1px solid #d8d1c7}
+.agenda-page .test-excluded-dots{display:grid;grid-template-columns:repeat(20,5px);gap:3px;flex:none}
+.agenda-page .test-excluded-dots span{width:5px;height:5px;border-radius:50%}
+.agenda-page .test-excluded>span{display:block;color:var(--course-muted);font-size:11px;line-height:1.5}
+.agenda-page .test-excluded>span i{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:50%}
+.agenda-page .test-excluded small{display:block;font-size:10px}
 .agenda-page .test-math{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0 0;padding:0;list-style:none;counter-reset:test-step}
 .agenda-page .test-math li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:4px 8px;align-content:start;min-width:0;padding:12px;background:#f7f4ef;counter-increment:test-step}
 .agenda-page .test-math li:before{content:counter(test-step,decimal-leading-zero);grid-row:1/3;color:var(--course-crimson);font:700 11px 'DM Mono',monospace}
@@ -346,7 +357,7 @@
 @media(max-width:680px){.agenda-page .coin-demo-grid{grid-template-columns:1fr}.agenda-page .coin-demo{padding:10px}.agenda-page .coin-stage{height:145px}.agenda-page .coin-disc{width:104px;height:104px}.agenda-page .coin-face .monty-character{width:67px;max-height:67px}}
 @media(max-width:680px){.agenda-page .test-positive-head{align-items:flex-start;flex-direction:column}.agenda-page .test-controls button{margin-left:0}.agenda-page .test-answer-summary{flex-direction:column;gap:4px}.agenda-page .test-overview-key{grid-template-columns:1fr 1fr}}
 @media(max-width:900px){.agenda-page .test-math{grid-template-columns:1fr}}
-@media(max-width:560px){.agenda-page .test-dots{box-sizing:border-box;grid-template-columns:repeat(40,minmax(0,1fr));gap:2px;width:100%;padding:9px}.agenda-page .test-dots span{width:100%;height:auto;aspect-ratio:1}.agenda-page .test-positive,.agenda-page .test-overview{padding:16px}.agenda-page .test-overview-key,.agenda-page .test-math{grid-template-columns:1fr}}
+@media(max-width:560px){.agenda-page .test-outcome-flow,.agenda-page .test-math{grid-template-columns:1fr}.agenda-page .test-dots{box-sizing:border-box;grid-template-columns:repeat(40,minmax(0,1fr));gap:2px;width:100%}.agenda-page .test-dots span{width:100%;height:auto;aspect-ratio:1}.agenda-page .test-positive,.agenda-page .test-overview{padding:16px}.agenda-page .test-dot-chart-head{display:block}.agenda-page .test-dot-chart-head span{display:block;margin-top:3px}}
 @media(max-width:560px){.agenda-page .wrap{width:calc(100% - 28px)}.agenda-page .week-summary{grid-template-columns:60px minmax(0,1fr);gap:14px;padding:18px 0}.agenda-page .week-number,.agenda-page .week-card--locked .week-number{font-size:42px}.agenda-page .week-summary h2,.agenda-page .week-card--locked .week-summary h2{font-size:26px}.agenda-page .week-content{gap:12px;padding-bottom:25px}.agenda-page .lecture-zone{padding:17px}.agenda-page .class-agenda li{min-height:100px;padding:11px}.agenda-page .class-agenda strong{font-size:13px}.agenda-page .slide-card:not(:first-child){grid-template-columns:80px minmax(0,1fr)}.agenda-page .lecture-summary{font-size:21px}.agenda-page .lecture-slides{grid-template-columns:1fr}.agenda-page .coin-simulation-intro{display:block}.agenda-page .coin-simulation-intro p{margin-top:8px}.agenda-page .coin-controls button{flex:1 1 auto}.agenda-page .coin-controls .coin-reset{margin-left:0}.agenda-page .homework-zone{padding:21px}.agenda-page .activity-panel{padding:21px;min-height:215px}}
 
 /* Assessment and submission rules are the first practical information in the guide. */
