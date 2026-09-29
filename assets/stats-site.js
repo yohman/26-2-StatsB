@@ -174,6 +174,7 @@ function timeAgenda(week) {
   const labels = week.week === 14
     ? [['EXAM', '試験']]
     : [['LECTURE', '講義'], ['ACTIVITY 1', 'アクティビティ1'], ['ACTIVITY 2', 'アクティビティ2'], ['WRAP-UP', 'まとめ']];
+  if (week.week === 1) labels[2] = ['COIN TOSS', 'コイン投げ'];
   return `<ol class="class-agenda${week.week === 14 ? ' class-agenda--single' : ''}" aria-label="${escapeHtml(`Week ${week.week} class timing`)}">${plan.steps.map((step, index) => `<li><time>${times[index]}</time><strong>${bilingual(...labels[index])}</strong><span>${bilingual(escapeHtml(step[0]), escapeHtml(step[1]))}</span></li>`).join('')}</ol>`;
 }
 

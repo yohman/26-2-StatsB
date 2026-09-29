@@ -28,4 +28,3 @@ prepare_en: Review the terms probability, population, and sample before class.
 - [推測統計学の基礎：推測統計学のプロセス / 確率の基礎 (PDF)](materials/2026-tsumura/26_01_推測統計学の基礎_推測統計学のプロセスｰ確率の基礎v2.pdf) {supplementary}
 - [AL用ワークシート](weeks/01-inference-and-probability/01_AL用ワークシート_v1.xlsx) {worksheet}
 - [Yoh's Week 1 lecture](other material/2025 yoh/03 推測統計学の基礎_1_推測統計学のプロセス/w3.pdf) {primary}
-- [Yoh probability handout](other material/2025 yoh/03 推測統計学の基礎_1_推測統計学のプロセス/ch3_配布資料YOH.pdf) {worksheet}
