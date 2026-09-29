@@ -167,14 +167,17 @@
 .agenda-page .test-overview-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
 .agenda-page .test-overview-head strong{font:700 18px 'Noto Serif JP',serif}
 .agenda-page .test-overview-head span{color:var(--course-muted);font-size:11px}
-.agenda-page .test-outcome-flow{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(145px,.8fr);gap:12px;margin-top:16px}
-.agenda-page .test-outcome-positive{padding:15px;background:#f3e7d8}
-.agenda-page .test-outcome-positive>strong{display:block;margin:4px 0 13px;font:700 22px 'DM Mono','Zen Kaku Gothic New',sans-serif}
-.agenda-page .test-outcome-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.agenda-page .test-outcome-pair>div,.agenda-page .test-outcome-negative{display:flex;align-items:center;gap:9px;min-width:0;padding:10px;background:#fff;font-size:12px;line-height:1.35}
-.agenda-page .test-outcome-pair i,.agenda-page .test-outcome-negative i{flex:none;width:12px;height:12px;border-radius:50%}
-.agenda-page .test-outcome-pair strong,.agenda-page .test-outcome-negative strong{display:block;margin-top:4px;color:var(--course-ink);font:700 16px 'DM Mono','Zen Kaku Gothic New',sans-serif;overflow-wrap:anywhere}
-.agenda-page .test-outcome-negative{background:#e8e6e2;color:var(--course-muted)}
+.agenda-page .test-bar-figure{margin-top:17px}
+.agenda-page .test-bar-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.agenda-page .test-bar-labels>div{display:flex;align-items:flex-start;gap:7px;min-width:0;color:var(--course-muted);font-size:11px;line-height:1.35}
+.agenda-page .test-bar-labels i{flex:none;width:9px;height:9px;margin-top:3px;border-radius:50%}
+.agenda-page .test-bar-labels strong{display:block;margin-top:3px;color:var(--course-ink);font:700 15px 'DM Mono','Zen Kaku Gothic New',sans-serif;overflow-wrap:anywhere}
+.agenda-page .test-bar-leaders{display:block;width:100%;height:34px;overflow:visible}
+.agenda-page .test-overview-bar{display:flex;gap:6px;width:100%;height:28px}
+.agenda-page .test-overview-bar span{display:block;flex:none;height:100%}
+.agenda-page .test-bar-true{background:#278678}
+.agenda-page .test-bar-false{background:#996847}
+.agenda-page .test-bar-negative{background:#a9a6a1}
 .agenda-page .test-dot-negative{background:#a9a6a1}
 .agenda-page .test-overview>p{margin:12px 0 0;color:var(--course-muted);font-size:11px;line-height:1.5}
 .agenda-page .test-positive{margin-top:12px;padding:20px 22px;background:#fff}
@@ -182,7 +185,9 @@
 .agenda-page .test-positive-head p{margin:6px 0 0;font-size:15px;line-height:1.5}
 .agenda-page .test-positive-head button{flex:none;min-height:40px;padding:10px 17px;border:0;background:var(--course-ink);color:#fff;font:700 12px 'Zen Kaku Gothic New',sans-serif;cursor:pointer}
 .agenda-page .test-positive-head button:hover,.agenda-page .test-positive-head button:focus-visible{background:var(--course-crimson)}
-.agenda-page .test-answer-summary{display:flex;align-items:baseline;gap:12px;margin:25px 0 15px}
+.agenda-page .test-event-definitions{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:22px;padding:10px 13px;background:#edf3ee;font-size:12px}
+.agenda-page .test-event-definitions b{font:700 15px 'DM Mono',monospace;color:var(--course-crimson)}
+.agenda-page .test-answer-summary{display:flex;align-items:baseline;gap:12px;margin:18px 0 15px}
 .agenda-page .test-answer-summary strong{color:#278678;font:700 clamp(38px,5vw,64px)/1 Fraunces,Georgia,serif;letter-spacing:-.05em}
 .agenda-page .test-answer-summary span{font-size:13px}
 .agenda-page .test-takeaway{max-width:45ch;margin:0 0 18px;color:var(--course-ink);font:700 clamp(16px,2vw,22px)/1.5 'Noto Serif JP',serif}
@@ -198,17 +203,13 @@
 .agenda-page .test-dot-legend{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;margin-top:9px;color:var(--course-muted);font-size:11px}
 .agenda-page .test-dot-legend span{display:flex;align-items:center;gap:6px}
 .agenda-page .test-dot-legend strong{color:var(--course-ink);font:700 11px 'DM Mono',monospace}
-.agenda-page .test-excluded{display:flex;gap:12px;align-items:center;margin-top:18px;padding-top:12px;border-top:1px solid #d8d1c7}
-.agenda-page .test-excluded-dots{display:grid;grid-template-columns:repeat(20,5px);gap:3px;flex:none}
-.agenda-page .test-excluded-dots span{width:5px;height:5px;border-radius:50%}
-.agenda-page .test-excluded>span{display:block;color:var(--course-muted);font-size:11px;line-height:1.5}
-.agenda-page .test-excluded>span i{display:inline-block;width:7px;height:7px;margin-right:4px;border-radius:50%}
-.agenda-page .test-excluded small{display:block;font-size:10px}
 .agenda-page .test-math{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:22px 0 0;padding:0;list-style:none;counter-reset:test-step}
 .agenda-page .test-math li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:4px 8px;align-content:start;min-width:0;padding:12px;background:#f7f4ef;counter-increment:test-step}
+.agenda-page .test-math li:nth-child(n+3){grid-column:1/-1}
 .agenda-page .test-math li:before{content:counter(test-step,decimal-leading-zero);grid-row:1/3;color:var(--course-crimson);font:700 11px 'DM Mono',monospace}
 .agenda-page .test-math li span{color:var(--course-muted);font-size:11px;line-height:1.4}
 .agenda-page .test-math li strong{font:700 13px/1.5 'DM Mono','Zen Kaku Gothic New',sans-serif;overflow-wrap:anywhere}
+.agenda-page .test-math li small{grid-column:2;display:block;font:500 12px/1.5 'DM Mono','Zen Kaku Gothic New',sans-serif;overflow-wrap:anywhere}
 .agenda-page .test-math li:last-child{background:#edf3ee}
 .agenda-page .test-explanation{max-width:76ch;margin:18px 0 0;font-size:13px;line-height:1.7}
 .agenda-page .test-disclaimer{margin:11px 0 0;color:var(--course-muted);font-size:11px}
