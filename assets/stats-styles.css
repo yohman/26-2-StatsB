@@ -134,11 +134,50 @@
 .agenda-page .coin-readout{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px;margin:13px 0 0;font:600 12px Manrope,'Zen Kaku Gothic New',sans-serif}
 .agenda-page .coin-readout strong{color:#276c91;font:700 24px Fraunces,'Noto Serif JP',Georgia,serif}
 .agenda-page .coin-caption{max-width:76ch;margin:16px 0 0;color:var(--course-muted);font-size:12px;line-height:1.5}
-.agenda-page .simulation-tablist{display:flex;gap:8px;margin:0 0 16px}
+.agenda-page .simulation-tablist{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
 .agenda-page .simulation-tablist button{display:flex;align-items:center;gap:9px;min-height:40px;padding:9px 15px;border:1px solid #c7b9a7;background:transparent;color:var(--course-muted);font:700 11px 'DM Mono',monospace;cursor:pointer}
 .agenda-page .simulation-tablist button span{font:700 12px 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .simulation-tablist button[aria-selected='true']{border-color:var(--course-ink);background:var(--course-ink);color:#fff}
 .agenda-page .simulation-tablist button:hover,.agenda-page .simulation-tablist button:focus-visible{border-color:var(--course-crimson);outline:2px solid transparent;box-shadow:0 0 0 2px var(--course-crimson)}
+.agenda-page .test-simulation{max-width:950px;color:var(--course-ink)}
+.agenda-page .test-intro h4{margin:0;font:700 clamp(24px,2.8vw,34px)/1.25 Fraunces,'Noto Serif JP',Georgia,serif}
+.agenda-page .test-intro>p:last-child{margin:8px 0 20px;font-size:15px;line-height:1.6}
+.agenda-page .test-controls{display:flex;flex-wrap:wrap;align-items:end;gap:10px;padding:18px;background:#f8f4ec}
+.agenda-page .test-controls label{display:grid;gap:6px;color:var(--course-muted);font:700 11px 'Zen Kaku Gothic New',sans-serif}
+.agenda-page .test-controls label span{display:flex;align-items:center;gap:5px;color:var(--course-ink);font-size:14px}
+.agenda-page .test-controls input{width:108px;min-height:38px;padding:7px 9px;border:1px solid #b8a997;border-radius:0;background:#fff;color:var(--course-ink);font:700 15px 'DM Mono',monospace}
+.agenda-page .test-controls [data-test-error]{width:75px}
+.agenda-page .test-controls input:focus-visible{outline:2px solid var(--course-crimson);outline-offset:1px}
+.agenda-page .test-controls button{min-height:38px;margin-left:auto;padding:8px 12px;border:1px solid #ac9e8d;background:transparent;color:var(--course-ink);font:700 11px 'Zen Kaku Gothic New',sans-serif;cursor:pointer}
+.agenda-page .test-controls button:hover,.agenda-page .test-controls button:focus-visible{background:#e9dfd1}
+.agenda-page .test-input-message{margin:0;color:#a5363f;font-size:12px}
+.agenda-page .test-input-message:not(:empty){margin-top:8px}
+.agenda-page .test-assumption{margin:12px 0 22px;color:var(--course-muted);font-size:12px;line-height:1.5}
+.agenda-page .test-assumption strong{color:var(--course-ink)}
+.agenda-page .test-flow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.agenda-page .test-path{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:baseline;min-width:0;padding:18px 20px;border-left:3px solid #278678;background:#edf3ee}
+.agenda-page .test-path-false{border-color:#996847;background:#f1ebe4}
+.agenda-page .test-path-label{grid-column:1/-1;color:var(--course-muted);font:700 11px 'Zen Kaku Gothic New',sans-serif}
+.agenda-page .test-path>strong{font:700 clamp(20px,2.3vw,27px)/1.2 Fraunces,'Noto Serif JP',serif}
+.agenda-page .test-path>span:nth-last-child(2){grid-column:1;color:var(--course-muted);font-size:12px}
+.agenda-page .test-path>b{grid-column:2;grid-row:3;color:#187865;font:700 18px 'DM Mono','Zen Kaku Gothic New',sans-serif;white-space:nowrap}
+.agenda-page .test-path-false>b{color:#996847}
+.agenda-page .test-positive{margin-top:12px;padding:20px 22px;background:#fff}
+.agenda-page .test-positive-head{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.agenda-page .test-positive-head p{margin:6px 0 0;font-size:15px;line-height:1.5}
+.agenda-page .test-positive-head button{flex:none;min-height:40px;padding:10px 17px;border:0;background:var(--course-ink);color:#fff;font:700 12px 'Zen Kaku Gothic New',sans-serif;cursor:pointer}
+.agenda-page .test-positive-head button:hover,.agenda-page .test-positive-head button:focus-visible{background:var(--course-crimson)}
+.agenda-page .test-answer-summary{display:flex;align-items:baseline;gap:12px;margin:25px 0 15px}
+.agenda-page .test-answer-summary strong{color:#278678;font:700 clamp(38px,5vw,64px)/1 Fraunces,Georgia,serif;letter-spacing:-.05em}
+.agenda-page .test-answer-summary span{font-size:13px}
+.agenda-page .test-dots{display:grid;grid-template-columns:repeat(50,6px);gap:3px;max-width:100%;width:max-content;padding:14px;background:#f7f4ef}
+.agenda-page .test-dots span,.agenda-page .test-dot-legend i{display:block;width:6px;height:6px;border-radius:50%}
+.agenda-page .test-dot-sick{background:#278678}
+.agenda-page .test-dot-well{background:#996847}
+.agenda-page .test-dot-legend{display:flex;flex-wrap:wrap;gap:9px 18px;align-items:center;margin-top:9px;color:var(--course-muted);font-size:11px}
+.agenda-page .test-dot-legend span{display:flex;align-items:center;gap:6px}
+.agenda-page .test-explanation{max-width:76ch;margin:18px 0 0;font-size:13px;line-height:1.7}
+.agenda-page .test-disclaimer{margin:11px 0 0;color:var(--course-muted);font-size:11px}
 .agenda-page .monty-game{width:100%}
 .agenda-page .monty-intro{display:grid;grid-template-columns:minmax(220px,.55fr) minmax(0,1.45fr);gap:22px;align-items:end;margin-bottom:12px}
 .agenda-page .monty-kicker{margin:0 0 5px;color:var(--course-crimson);font:700 10px 'DM Mono',monospace;letter-spacing:.09em}
@@ -282,6 +321,8 @@
 @media(max-width:1000px){.agenda-page .week-summary{grid-template-columns:85px minmax(0,1fr) auto;gap:20px}.agenda-page .week-content{margin-left:105px}.agenda-page .lecture-layout{grid-template-columns:minmax(0,1fr) 245px;gap:24px}}
 @media(max-width:820px){.agenda-page .week-summary{grid-template-columns:78px minmax(0,1fr)}.agenda-page .week-action{grid-column:2;justify-content:flex-start;max-width:none}.agenda-page .week-content{margin-left:0}.agenda-page .work-row{grid-template-columns:1fr}.agenda-page .lecture-layout{grid-template-columns:1fr}.agenda-page .lecture-slides{grid-template-columns:repeat(2,minmax(0,1fr))}.agenda-page .class-agenda{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.agenda-page .coin-demo-grid{grid-template-columns:1fr}.agenda-page .coin-demo{padding:10px}.agenda-page .coin-stage{height:145px}.agenda-page .coin-disc{width:104px;height:104px}.agenda-page .coin-face .monty-character{width:67px;max-height:67px}}
+@media(max-width:680px){.agenda-page .test-flow{grid-template-columns:1fr}.agenda-page .test-positive-head{align-items:flex-start;flex-direction:column}.agenda-page .test-controls button{margin-left:0}.agenda-page .test-answer-summary{flex-direction:column;gap:4px}}
+@media(max-width:560px){.agenda-page .test-dots{box-sizing:border-box;grid-template-columns:repeat(40,minmax(0,1fr));gap:2px;width:100%;padding:9px}.agenda-page .test-dots span{width:100%;height:auto;aspect-ratio:1}.agenda-page .test-path{padding:14px}.agenda-page .test-positive{padding:16px}}
 @media(max-width:560px){.agenda-page .wrap{width:calc(100% - 28px)}.agenda-page .week-summary{grid-template-columns:60px minmax(0,1fr);gap:14px;padding:18px 0}.agenda-page .week-number,.agenda-page .week-card--locked .week-number{font-size:42px}.agenda-page .week-summary h2,.agenda-page .week-card--locked .week-summary h2{font-size:26px}.agenda-page .week-content{gap:12px;padding-bottom:25px}.agenda-page .lecture-zone{padding:17px}.agenda-page .class-agenda li{min-height:100px;padding:11px}.agenda-page .class-agenda strong{font-size:13px}.agenda-page .slide-card:not(:first-child){grid-template-columns:80px minmax(0,1fr)}.agenda-page .lecture-summary{font-size:21px}.agenda-page .lecture-slides{grid-template-columns:1fr}.agenda-page .coin-simulation-intro{display:block}.agenda-page .coin-simulation-intro p{margin-top:8px}.agenda-page .coin-controls button{flex:1 1 auto}.agenda-page .coin-controls .coin-reset{margin-left:0}.agenda-page .homework-zone{padding:21px}.agenda-page .activity-panel{padding:21px;min-height:215px}}
 
 /* Assessment and submission rules are the first practical information in the guide. */

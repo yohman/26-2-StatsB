@@ -208,6 +208,33 @@ function coinSimulationMarkup() {
   </div>`;
 }
 
+function diseaseTestMarkup() {
+  return `<div class="test-simulation" data-test-simulation>
+    <div class="test-intro"><p class="monty-kicker">[AL] 条件付き確率</p><h4>陽性なら、本当に病気？</h4><p>10万人に1人の病気。検査は99%正しい。陽性になった人が、本当に病気である確率を考えます。</p></div>
+    <div class="test-controls" aria-label="検査の条件">
+      <label>罹患率 <span>1人 / <input type="number" data-test-population min="2" max="100000000" step="1" value="100000" inputmode="numeric"> 人</span></label>
+      <label>判定を間違える確率 <span><input type="number" data-test-error min="0" max="50" step="0.1" value="1" inputmode="decimal"> %</span></label>
+      <button type="button" data-test-reset>元の条件に戻す</button>
+    </div>
+    <p class="test-input-message" data-test-message role="status"></p>
+    <p class="test-assumption">病気の人は <strong data-test-sensitivity>99%</strong> が陽性、病気でない人は <strong data-test-false-rate>1%</strong> が誤って陽性になると仮定します。</p>
+    <div class="test-flow" aria-label="検査結果の2つの経路">
+      <div class="test-path test-path-true"><span class="test-path-label">病気がある</span><strong>1人</strong><span>正しく陽性になる</span><b data-test-true>0.99人</b></div>
+      <div class="test-path test-path-false"><span class="test-path-label">病気がない</span><strong data-test-healthy>99,999人</strong><span>誤って陽性になる</span><b data-test-false>999.99人</b></div>
+    </div>
+    <div class="test-positive">
+      <div class="test-positive-head"><div><span class="test-path-label">陽性の人だけを見る</span><p>この2つの経路を合わせた陽性者の中で、病気の人はどれくらい？</p></div><button type="button" data-test-reveal aria-expanded="false">答えを見る →</button></div>
+      <div data-test-answer hidden>
+        <div class="test-answer-summary"><strong data-test-percent>—</strong><span>陽性だった人が本当に病気である確率</span></div>
+        <div class="test-dots" data-test-dots aria-hidden="true"></div>
+        <div class="test-dot-legend"><span><i class="test-dot-sick"></i> 本当に病気</span><span><i class="test-dot-well"></i> 病気ではない</span><span>陽性者1000人を想像した図</span></div>
+        <p class="test-explanation" data-test-explanation></p>
+      </div>
+    </div>
+    <p class="test-disclaimer">これは確率を学ぶための仮想の検査です。実際の診断には使えません。</p>
+  </div>`;
+}
+
 function montyHallMarkup() {
   return `<div class="monty-game" data-monty-game>
     <div class="monty-intro"><div><p class="monty-kicker">3つのドア、1つの当たり</p><h4>モンティ・ホール</h4></div><p>ロボットを探そう。1つ選ぶと、司会者がヤギのドアを開けます。最後に、そのままにするか変更するかを決めます。</p></div>
@@ -254,9 +281,11 @@ function lectureSection(week) {
       <div class="simulation-tablist" role="tablist" aria-label="シミュレーターを選ぶ">
         <button type="button" role="tab" id="week-1-monty-tab" aria-controls="week-1-monty" aria-selected="true" tabindex="0">01 <span>モンティ・ホール</span></button>
         <button type="button" role="tab" id="week-1-coin-tab" aria-controls="week-1-coin" aria-selected="false" tabindex="-1">02 <span>コイン投げ</span></button>
+        <button type="button" role="tab" id="week-1-test-tab" aria-controls="week-1-test" aria-selected="false" tabindex="-1">03 <span>病気の検査</span></button>
       </div>
       <div id="week-1-monty" role="tabpanel" aria-labelledby="week-1-monty-tab">${montyHallMarkup()}</div>
       <div id="week-1-coin" role="tabpanel" aria-labelledby="week-1-coin-tab" hidden>${coinSimulationMarkup()}</div>
+      <div id="week-1-test" role="tabpanel" aria-labelledby="week-1-test-tab" hidden>${diseaseTestMarkup()}</div>
     </div>` : content;
   return `<section class="week-zone lecture-zone" aria-labelledby="week-${week.week}-lecture">
     <header class="zone-heading"><p>${week.week === 14 ? bilingual('EXAM', '試験') : bilingual('LECTURE', '講義')}</p><h3 id="week-${week.week}-lecture">${heading}</h3></header>
