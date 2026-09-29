@@ -167,17 +167,6 @@ function fileButton(item, label = bilingual('Download material', '資料をダ�
   return `<a class="file-button" href="${encodeHref(item.href)}" download>${label}<span aria-hidden="true">↓</span></a>`;
 }
 
-function timeAgenda(week) {
-  const plan = weekFlow[week.week];
-  if (!plan) return '';
-  const times = week.week === 14 ? ['10:40–12:20'] : ['10:40–11:00', '11:00–11:30', '11:30–12:00', '12:00–12:20'];
-  const labels = week.week === 14
-    ? [['EXAM', '試験']]
-    : [['LECTURE', '講義'], ['ACTIVITY 1', 'アクティビティ1'], ['ACTIVITY 2', 'アクティビティ2'], ['WRAP-UP', 'まとめ']];
-  if (week.week === 1) labels[2] = ['COIN TOSS', 'コイン投げ'];
-  return `<ol class="class-agenda${week.week === 14 ? ' class-agenda--single' : ''}" aria-label="${escapeHtml(`Week ${week.week} class timing`)}">${plan.steps.map((step, index) => `<li><time>${times[index]}</time><strong>${bilingual(...labels[index])}</strong><span>${bilingual(escapeHtml(step[0]), escapeHtml(step[1]))}</span></li>`).join('')}</ol>`;
-}
-
 function slideCard(deck, week) {
   const image = slideThumbnail(deck, week);
   const link = deck.preview ? viewerLink(deck.preview, deck.label, week.week, deck.source) : '';
@@ -295,8 +284,7 @@ function lectureSection(week) {
   const description = plan ? bilingual(escapeHtml(plan.overview[0]), escapeHtml(plan.overview[1])) : bilingual(escapeHtml(week.title_en), escapeHtml(week.title_ja));
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
-  const content = `${timeAgenda(week)}
-    <div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>`;
+  const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>`;
   const lectureBody = week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
