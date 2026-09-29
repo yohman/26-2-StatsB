@@ -7,10 +7,10 @@
     D: new Set(['o', 'p', 'q', 'r', 's', 't'])
   };
   const steps = [
-    { description: ['Start with a single event: count its white squares out of all nine outcomes.', 'まず1つの事象。該当するマスを9つの結果から数えます。'], expressions: ['A', 'B', 'C'] },
-    { description: ['Intersection means both; union means either or both. Watch the highlighted squares change.', '積事象は「両方」、和事象は「少なくとも一方」。色の変わるマスを比べましょう。'], expressions: ['A∩B', 'A∩C', 'B∩C', 'A∪B', 'A∪C', 'B∪C'] },
-    { description: ['The condition narrows the sample space. Reverse the condition and the denominator changes.', '条件として分かった事象だけに標本空間を絞ります。条件を逆にすると分母も変わります。'], expressions: ['B|A', 'A|B'] },
-    { description: ['Does knowing B change the chance of D? Compare conditional and ordinary probabilities.', 'Bが起きたと知ると、Dの確率は変わる？ 条件付き確率と普通の確率を比べます。'], expressions: ['D', 'D|B', 'B', 'B|D'] }
+    { description: ['Pick an event. Count the red squares.', '事象を選んで、赤いマスを数えよう。'], expressions: ['A', 'B', 'C'] },
+    { description: ['∩ means both. ∪ means either.', '∩ は「両方」、∪ は「どちらか」。'], expressions: ['A∩B', 'A∩C', 'B∩C', 'A∪B', 'A∪C', 'B∪C'] },
+    { description: ['The blue squares are the new “whole.”', '青いマスだけが新しい「全体」。'], expressions: ['B|A', 'A|B'] },
+    { description: ['Does the answer change when we know B?', 'Bを知ると、答えは変わる？'], expressions: ['D', 'D|B', 'B', 'B|D'] }
   ];
 
   const t = (en, ja) => document.documentElement.dataset.language === 'en' ? en : ja;
@@ -20,7 +20,7 @@
     while (b) [a, b] = [b, a % b];
     return b === 1 || bottom / a === 1 ? String(top / a) : `${top / a}/${bottom / a}`;
   };
-  const notation = expression => `P(${expression})`;
+  const notation = expression => `Pr(${expression})`;
 
   function solve(expression) {
     const conditional = expression.includes('|');
@@ -91,12 +91,10 @@
         : t('All nine outcomes form the sample space', '9つすべてが標本空間');
       formula.textContent = answer.formula;
       const selected = outcomes.filter(cell => answer.matches.has(cell));
-      explanation.textContent = answer.conditional
-        ? t(`${answer.right} contains ${answer.denominator} outcomes. Of those, ${answer.numerator} also belong to ${answer.left}: ${selected.join(', ') || 'none'}.`, `${answer.right}に入る${answer.denominator}つのうち、${answer.left}にも入るのは${answer.numerator}つ：${selected.join('・') || 'なし'}。`)
-        : t(`Count ${answer.numerator} of the nine squares: ${selected.join(', ') || 'none'}.`, `9つのうち${answer.numerator}マス：${selected.join('・') || 'なし'}。`);
-      if (step === 3 && expression === 'D|B') explanation.textContent += t(' Since P(D) = 6/9 = 2/3 too, B and D are independent.', ' P(D) = 6/9 = 2/3 と同じなので、BとDは独立です。');
-      if (step === 3 && expression === 'B|D') explanation.textContent += t(' Since P(B) = 3/9 = 1/3 too, the same independence appears in reverse.', ' P(B) = 3/9 = 1/3 と同じ。逆向きにも独立が確かめられます。');
-      membership.replaceChildren(...['A', 'B', 'C', 'A∩B', 'A∩C', 'B∩C', 'A∪B', 'A∪C', 'B∪C', 'D'].map(name => {
+      explanation.textContent = t(`Red: ${selected.join(', ') || 'none'} · ${answer.numerator} of ${answer.denominator}`, `赤：${selected.join('・') || 'なし'} · ${answer.denominator}マス中${answer.numerator}マス`);
+      if (step === 3 && expression === 'D|B') explanation.textContent += t(' · Same as Pr(D): independent!', ' · Pr(D) と同じ → 独立！');
+      if (step === 3 && expression === 'B|D') explanation.textContent += t(' · Same as Pr(B): independent!', ' · Pr(B) と同じ → 独立！');
+      membership.replaceChildren(...['A', 'B', 'C', 'D'].map(name => {
         const row = document.createElement('div');
         row.className = `event-set-row${name === expression || name === answer.left || name === answer.right ? ' is-relevant' : ''}`;
         const label = document.createElement('strong');
@@ -109,8 +107,8 @@
       }));
       if (inspected) {
         const names = Object.keys(events).filter(name => events[name].has(inspected));
-        note.textContent = t(`Square ${inspected} belongs to ${names.join(', ') || 'none of A–D'}. ${answer.matches.has(inspected) ? 'It counts in this probability!' : answer.base.has(inspected) ? 'It is possible, but does not count.' : 'It is outside the given sample space.'}`, `マス${inspected}は${names.join('・') || 'A〜Dのどれにも入らない'}に含まれます。${answer.matches.has(inspected) ? 'この確率で数えます！' : answer.base.has(inspected) ? '候補ですが、該当しません。' : '条件付きの標本空間の外です。'}`);
-      } else note.textContent = t('Tap a square to check whether it counts.', 'マスを押して、この確率で数えるか確かめよう。');
+        note.textContent = t(`${inspected} ∈ ${names.join(', ') || 'none'} · ${answer.matches.has(inspected) ? 'Counts!' : answer.base.has(inspected) ? 'Not counted' : 'Outside the condition'}`, `${inspected} ∈ ${names.join('・') || 'なし'} · ${answer.matches.has(inspected) ? '数える！' : answer.base.has(inspected) ? '数えない' : '条件の外'}`);
+      } else note.textContent = t('Tap a square to explore.', 'マスを押してみよう。');
     }
 
     root.querySelectorAll('[data-event-step]').forEach(button => button.addEventListener('click', () => {

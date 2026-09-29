@@ -245,7 +245,7 @@ function diseaseTestMarkup() {
 
 function eventGridMarkup() {
   return `<div class="event-simulation" data-event-simulation>
-    <div class="event-intro"><p class="monty-kicker">${bilingual('Nine outcomes · one sample space', '9つの結果・1つの標本空間')}</p><h4>${bilingual('Events on a 3 × 3 grid', '3 × 3のマスで確率を考える')}</h4><p>${bilingual('The nine letters are equally likely. Choose a question to see exactly which outcomes count.', '9つの文字は同じ確率で起こります。問いを選ぶと、どのマスを数えるかが見えます。')}</p></div>
+    <div class="event-intro"><p class="monty-kicker">${bilingual('Figure 6 · nine equally likely outcomes', '図6・同じ確率の9つの結果')}</p><h4>${bilingual('Which squares count?', 'どのマスを数える？')}</h4></div>
     <div class="event-step-list" role="group" aria-label="Probability topics">
       <button type="button" data-event-step="0" aria-pressed="true">01 ${bilingual('Events', '事象')}</button>
       <button type="button" data-event-step="1" aria-pressed="false">02 ${bilingual('And / or', '積・和')}</button>
@@ -254,10 +254,8 @@ function eventGridMarkup() {
     </div>
     <p class="event-step-description" data-event-step-description></p>
     <div class="event-expression-list" data-event-expression-list role="group" aria-label="Choose a probability expression"></div>
-    <div class="event-workspace"><div class="event-grid-card"><div class="event-grid-head"><strong>${bilingual('Figure 6 · nine equally likely outcomes', '図6・同じ確率で起こる9つの結果')}</strong><span data-event-grid-key></span></div><div class="event-grid" data-event-grid role="group" aria-label="Nine outcome grid"></div><p class="event-cell-note" data-event-cell-note aria-live="polite"></p></div>
+    <div class="event-workspace"><div class="event-grid-card"><div class="event-grid-head"><strong>${bilingual('Figure 6', '図6')}</strong><span data-event-grid-key></span></div><div class="event-grid" data-event-grid role="group" aria-label="Nine outcome grid"></div><div class="event-membership" data-event-membership aria-label="Figure 6 event key"></div><p class="event-cell-note" data-event-cell-note aria-live="polite"></p></div>
     <div class="event-answer-card"><p class="monty-kicker" data-event-context></p><strong class="event-formula" data-event-formula aria-live="polite"></strong><p class="event-explanation" data-event-explanation></p></div></div>
-    <details class="event-figure-table"><summary>${bilingual('Show Figure 6 sets and combinations', '図6の事象と集合を確認する')}</summary><div class="event-membership" data-event-membership></div></details>
-    <p class="event-source-note">${bilingual('Based on figures 6, 8, 9, 11 and 12 in Yoh’s Week 1 lecture, slides 54–57.', 'Yohの第1週講義スライド54〜57の図6・8・9・11・12をもとにしています。')}</p>
   </div>`;
 }
 
