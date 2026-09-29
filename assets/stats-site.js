@@ -241,6 +241,24 @@ function diseaseTestMarkup() {
   </div>`;
 }
 
+function eventGridMarkup() {
+  return `<div class="event-simulation" data-event-simulation>
+    <div class="event-intro"><p class="monty-kicker">${bilingual('Nine outcomes · one sample space', '9つの結果・1つの標本空間')}</p><h4>${bilingual('Events on a 3 × 3 grid', '3 × 3のマスで確率を考える')}</h4><p>${bilingual('The nine letters are equally likely. Choose a question to see exactly which outcomes count.', '9つの文字は同じ確率で起こります。問いを選ぶと、どのマスを数えるかが見えます。')}</p></div>
+    <div class="event-step-list" role="group" aria-label="Probability topics">
+      <button type="button" data-event-step="0" aria-pressed="true">01 ${bilingual('Events', '事象')}</button>
+      <button type="button" data-event-step="1" aria-pressed="false">02 ${bilingual('And / or', '積・和')}</button>
+      <button type="button" data-event-step="2" aria-pressed="false">03 ${bilingual('Given that', '条件付き')}</button>
+      <button type="button" data-event-step="3" aria-pressed="false">04 ${bilingual('Independent?', '独立？')}</button>
+    </div>
+    <p class="event-step-description" data-event-step-description></p>
+    <div class="event-expression-list" data-event-expression-list role="group" aria-label="Choose a probability expression"></div>
+    <div class="event-workspace"><div class="event-grid-card"><div class="event-grid-head"><strong>${bilingual('Figure 6 · nine equally likely outcomes', '図6・同じ確率で起こる9つの結果')}</strong><span data-event-grid-key></span></div><div class="event-grid" data-event-grid role="group" aria-label="Nine outcome grid"></div><p class="event-cell-note" data-event-cell-note aria-live="polite"></p></div>
+    <div class="event-answer-card"><p class="monty-kicker" data-event-context></p><strong class="event-formula" data-event-formula aria-live="polite"></strong><p class="event-explanation" data-event-explanation></p></div></div>
+    <details class="event-figure-table"><summary>${bilingual('Show Figure 6 sets and combinations', '図6の事象と集合を確認する')}</summary><div class="event-membership" data-event-membership></div></details>
+    <p class="event-source-note">${bilingual('Based on figures 6, 8, 9, 11 and 12 in Yoh’s Week 1 lecture, slides 54–57.', 'Yohの第1週講義スライド54〜57の図6・8・9・11・12をもとにしています。')}</p>
+  </div>`;
+}
+
 function montyHallMarkup() {
   return `<div class="monty-game" data-monty-game>
     <div class="monty-intro"><div><p class="monty-kicker">${bilingual('Three doors. One prize.', '3つのドア、1つの当たり')}</p><h4>${bilingual('Monty Hall', 'モンティ・ホール')}</h4></div><p>${bilingual('Find the robot. Pick a door; the host opens a different door hiding a goat. Then decide whether to stay or switch.', 'ロボットを探そう。1つ選ぶと、司会者がヤギのドアを開けます。最後に、そのままにするか変更するかを決めます。')}</p></div>
@@ -287,10 +305,12 @@ function lectureSection(week) {
       <div class="simulation-tablist" role="tablist" aria-label="Choose a simulation">
         <button type="button" role="tab" id="week-1-monty-tab" aria-controls="week-1-monty" aria-selected="true" tabindex="0">01 <span>${bilingual('Monty Hall', 'モンティ・ホール')}</span></button>
         <button type="button" role="tab" id="week-1-coin-tab" aria-controls="week-1-coin" aria-selected="false" tabindex="-1">02 <span>${bilingual('Coin toss', 'コイン投げ')}</span></button>
-        <button type="button" role="tab" id="week-1-test-tab" aria-controls="week-1-test" aria-selected="false" tabindex="-1">03 <span>${bilingual('Disease test', '病気の検査')}</span></button>
+        <button type="button" role="tab" id="week-1-events-tab" aria-controls="week-1-events" aria-selected="false" tabindex="-1">03 <span>${bilingual('Event grid', '事象のマス目')}</span></button>
+        <button type="button" role="tab" id="week-1-test-tab" aria-controls="week-1-test" aria-selected="false" tabindex="-1">04 <span>${bilingual('Disease test', '病気の検査')}</span></button>
       </div>
       <div id="week-1-monty" role="tabpanel" aria-labelledby="week-1-monty-tab">${montyHallMarkup()}</div>
       <div id="week-1-coin" role="tabpanel" aria-labelledby="week-1-coin-tab" hidden>${coinSimulationMarkup()}</div>
+      <div id="week-1-events" role="tabpanel" aria-labelledby="week-1-events-tab" hidden>${eventGridMarkup()}</div>
       <div id="week-1-test" role="tabpanel" aria-labelledby="week-1-test-tab" hidden>${diseaseTestMarkup()}</div>
     </div>` : content;
   return `<section class="week-zone lecture-zone" aria-labelledby="week-${week.week}-lecture">
