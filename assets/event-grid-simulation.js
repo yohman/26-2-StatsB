@@ -94,15 +94,35 @@
       explanation.textContent = t(`Red: ${selected.join(', ') || 'none'} · ${answer.numerator} of ${answer.denominator}`, `赤：${selected.join('・') || 'なし'} · ${answer.denominator}マス中${answer.numerator}マス`);
       if (step === 3 && expression === 'D|B') explanation.textContent += t(' · Same as Pr(D): independent!', ' · Pr(D) と同じ → 独立！');
       if (step === 3 && expression === 'B|D') explanation.textContent += t(' · Same as Pr(B): independent!', ' · Pr(B) と同じ → 独立！');
-      membership.replaceChildren(...['A', 'B', 'C', 'D'].map(name => {
-        const row = document.createElement('div');
-        row.className = `event-set-row${name === expression || name === answer.left || name === answer.right ? ' is-relevant' : ''}`;
+      const figureRows = ['A', 'B', 'C', 'A∩B', 'A∩C', 'B∩C', 'A∪B', 'A∪C', 'B∪C'];
+      if (step === 3) figureRows.push('D');
+      membership.replaceChildren(...figureRows.map(name => {
+        const row = document.createElement('button');
+        row.type = 'button';
+        const direct = name === expression;
+        const condition = answer.conditional && name === answer.right;
+        const target = answer.conditional && name === answer.left;
+        row.className = `event-set-row${direct ? ' is-relevant' : ''}${condition ? ' is-condition' : ''}${target ? ' is-target' : ''}${name === 'D' ? ' is-extension' : ''}`;
+        row.setAttribute('aria-label', `${name}: ${outcomes.filter(cell => (events[name] || solve(name).matches).has(cell)).join(', ') || 'empty set'}`);
+        row.setAttribute('aria-pressed', String(direct));
         const label = document.createElement('strong');
         label.textContent = name;
-        const values = document.createElement('span');
+        row.append(label);
         const cells = events[name] || solve(name).matches;
-        values.textContent = cells.size ? `{${[...cells].join(', ')}}` : '∅';
-        row.append(label, values);
+        outcomes.forEach(cell => {
+          const slot = document.createElement('span');
+          slot.className = `event-figure-slot${cells.has(cell) ? ' has-outcome' : ''}`;
+          if (cells.has(cell)) slot.textContent = cell;
+          slot.setAttribute('aria-hidden', 'true');
+          row.append(slot);
+        });
+        row.addEventListener('click', () => {
+          const nextStep = name === 'D' ? 3 : ['A', 'B', 'C'].includes(name) ? 0 : 1;
+          step = nextStep;
+          expression = name;
+          inspected = null;
+          render();
+        });
         return row;
       }));
       if (inspected) {

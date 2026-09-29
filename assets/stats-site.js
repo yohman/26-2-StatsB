@@ -254,7 +254,8 @@ function eventGridMarkup() {
     </div>
     <p class="event-step-description" data-event-step-description></p>
     <div class="event-expression-list" data-event-expression-list role="group" aria-label="Choose a probability expression"></div>
-    <div class="event-workspace"><div class="event-grid-card"><div class="event-grid-head"><strong>${bilingual('Figure 6', '図6')}</strong><span data-event-grid-key></span></div><div class="event-grid" data-event-grid role="group" aria-label="Nine outcome grid"></div><div class="event-membership" data-event-membership aria-label="Figure 6 event key"></div><p class="event-cell-note" data-event-cell-note aria-live="polite"></p></div>
+    <div class="event-workspace"><div class="event-grid-card"><div class="event-grid-head"><strong>${bilingual('Nine possible outcomes', '9つの結果')}</strong><span data-event-grid-key></span></div><div class="event-grid" data-event-grid role="group" aria-label="Nine outcome grid"></div><p class="event-cell-note" data-event-cell-note aria-live="polite"></p></div>
+    <div class="event-figure"><div class="event-grid-head"><strong>${bilingual('Figure 6 · intersections and unions', '図6・3人の積事象と和事象')}</strong><span>${bilingual('Each row shows which letters belong to that event', '各行の枠は、その事象に入る結果')}</span></div><div class="event-membership" data-event-membership aria-label="Figure 6 event diagram"></div></div>
     <div class="event-answer-card"><p class="monty-kicker" data-event-context></p><strong class="event-formula" data-event-formula aria-live="polite"></strong><p class="event-explanation" data-event-explanation></p></div></div>
   </div>`;
 }
