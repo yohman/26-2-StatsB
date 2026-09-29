@@ -120,7 +120,13 @@
 .agenda-page .coin-demo [data-coin-result]{min-height:25px;color:var(--course-ink);font:700 18px/1.3 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .coin-demo[data-state='heads'] [data-coin-result]{color:#187865}
 .agenda-page .coin-demo[data-state='tails'] [data-coin-result]{color:#986341}
+.agenda-page .coin-progress{min-height:16px;margin-top:2px;color:var(--course-muted);font:700 11px 'DM Mono','Zen Kaku Gothic New',sans-serif}
 .agenda-page .coin-demo [data-coin-side-key]{margin-top:5px;color:var(--course-muted);font:700 10px/1.4 'Zen Kaku Gothic New',sans-serif}
+.agenda-page .coin-recent{width:100%;margin-top:13px;color:var(--course-muted);font:700 10px 'Zen Kaku Gothic New',sans-serif}
+.agenda-page .coin-recent [data-coin-recent]{display:flex;justify-content:center;gap:2px;min-height:20px;margin-top:5px}
+.agenda-page .coin-recent [data-coin-recent] span{display:grid;place-items:center;width:14px;height:18px;color:#fff;font:700 9px 'Zen Kaku Gothic New',sans-serif}
+.agenda-page .coin-recent-heads{background:#278678}
+.agenda-page .coin-recent-tails{background:#996847}
 .agenda-page .coin-chart-wrap{width:100%;background:var(--course-paper)}
 .agenda-page .coin-chart{display:block;width:100%;overflow:visible}
 .agenda-page .coin-grid{stroke:#ddd6cb;stroke-width:1}

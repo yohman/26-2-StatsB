@@ -196,9 +196,10 @@ function coinSimulationMarkup() {
       <button type="button" class="coin-reset" data-reset>${bilingual('Reset', 'リセット')}</button>
     </div>
     <div class="coin-demo-grid">
-      <div class="coin-demo" data-coin-demo data-state="ready" role="status" aria-live="polite" aria-label="コインを投げてみよう">
+      <div class="coin-demo" data-coin-demo data-state="ready" role="group" aria-label="コインを投げてみよう">
         <div class="coin-stage" aria-hidden="true"><div class="coin-disc" data-coin-disc><div class="coin-face coin-face-heads" data-coin-head-face></div><div class="coin-face coin-face-tails" data-coin-tail-face></div></div></div>
-        <strong data-coin-result>${bilingual('Ready to toss', '投げてみよう')}</strong><span data-coin-side-key>${bilingual('Robot = heads · Goat = tails', 'ロボット＝表 · ヤギ＝裏')}</span>
+        <strong data-coin-result>${bilingual('Ready to toss', '投げてみよう')}</strong><span class="coin-progress" data-coin-progress></span><span data-coin-side-key>${bilingual('Robot = heads · Goat = tails', 'ロボット＝表 · ヤギ＝裏')}</span>
+        <div class="coin-recent"><span>${bilingual('Latest 10', '直近10回')}</span><div data-coin-recent aria-hidden="true"></div></div>
       </div>
       <div class="coin-chart-wrap"><svg class="coin-chart" data-coin-chart viewBox="0 0 760 390" role="img" aria-labelledby="coin-chart-title coin-chart-desc"><title id="coin-chart-title">表が出た割合の推移</title><desc id="coin-chart-desc" data-coin-chart-desc>まだ投げていません。基準線は50%です。</desc></svg></div>
     </div>

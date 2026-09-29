@@ -26,6 +26,8 @@
     const disc = root.querySelector('[data-coin-disc]');
     const headFace = root.querySelector('[data-coin-head-face]');
     const resultLabel = root.querySelector('[data-coin-result]');
+    const progress = root.querySelector('[data-coin-progress]');
+    const recent = root.querySelector('[data-coin-recent]');
     const sideKey = root.querySelector('[data-coin-side-key]');
     headFace.innerHTML = window.statsbMontyCharacters.robot;
     root.querySelector('[data-coin-tail-face]').innerHTML = window.statsbMontyCharacters.goat;
@@ -34,6 +36,8 @@
     let timer = null;
     let animation = null;
     let busy = false;
+    let batchAmount = 0;
+    let batchCompleted = 0;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function setFace(result) {
@@ -71,6 +75,34 @@
       results.push(result);
       heads += result;
       draw();
+      drawRecent();
+    }
+
+    function drawRecent() {
+      const japanese = document.documentElement.dataset.language === 'ja';
+      recent.replaceChildren(...results.slice(-10).map(result => {
+        const item = document.createElement('span');
+        item.className = result ? 'coin-recent-heads' : 'coin-recent-tails';
+        item.textContent = result ? (japanese ? '表' : 'H') : (japanese ? '裏' : 'T');
+        return item;
+      }));
+    }
+
+    function drawProgress() {
+      const japanese = document.documentElement.dataset.language === 'ja';
+      progress.textContent = batchAmount ? (japanese ? `${batchCompleted} / ${batchAmount}回` : `${batchCompleted} / ${batchAmount} tosses`) : '';
+    }
+
+    function updateReadout() {
+      const japanese = document.documentElement.dataset.language === 'ja';
+      const tails = results.length - heads;
+      tossCount.textContent = japanese ? `${results.length}回` : `${results.length} toss${results.length === 1 ? '' : 'es'}`;
+      percent.textContent = results.length ? `${((heads / results.length) * 100).toFixed(1)}%` : '—';
+      headsCount.textContent = japanese ? `表: ${heads}` : `Heads: ${heads}`;
+      tailsCount.textContent = japanese ? `裏: ${tails}` : `Tails: ${tails}`;
+      description.textContent = results.length
+        ? (japanese ? `${results.length}回中、表${heads}回。表の割合は${percent.textContent}です。` : `${heads} heads in ${results.length} tosses. The running percentage is ${percent.textContent}.`)
+        : (japanese ? 'まだ投げていません。基準線は50%です。' : 'No tosses yet. The reference line is 50 percent.');
     }
 
     function draw() {
@@ -122,14 +154,7 @@
         });
       }
 
-      const tails = results.length - heads;
-      tossCount.textContent = japanese ? `${results.length}回` : `${results.length} toss${results.length === 1 ? '' : 'es'}`;
-      percent.textContent = results.length ? `${((heads / results.length) * 100).toFixed(1)}%` : '—';
-      headsCount.textContent = japanese ? `表: ${heads}` : `Heads: ${heads}`;
-      tailsCount.textContent = japanese ? `裏: ${tails}` : `Tails: ${tails}`;
-      description.textContent = results.length
-        ? (japanese ? `${results.length}回中、表${heads}回。表の割合は${percent.textContent}です。` : `${heads} heads in ${results.length} tosses. The running percentage is ${percent.textContent}.`)
-        : (japanese ? 'まだ投げていません。基準線は50%です。' : 'No tosses yet. The reference line is 50 percent.');
+      updateReadout();
     }
 
     function stop() {
@@ -146,6 +171,9 @@
       busy = true;
       tossButtons.forEach(button => { button.disabled = true; });
       if (amount === 1) {
+        batchAmount = 0;
+        batchCompleted = 0;
+        drawProgress();
         const result = Math.random() < 0.5 ? 1 : 0;
         spinTo(result, 1050, () => {
           addResult(result);
@@ -154,38 +182,35 @@
         });
         return;
       }
-      demo.dataset.state = 'flipping';
-      headFace.innerHTML = window.statsbMontyCharacters.robot;
-      resultLabel.textContent = document.documentElement.dataset.language === 'ja' ? '回転中…' : 'Spinning…';
-      demo.setAttribute('aria-label', resultLabel.textContent);
-      if (!reducedMotion) animation = disc.animate([
-        { transform:'rotateY(0deg)' },
-        { transform:'rotateY(360deg)' }
-      ], { duration:520, iterations:Infinity, easing:'linear' });
+      batchAmount = amount;
+      batchCompleted = 0;
+      drawProgress();
       let remaining = amount;
-      let lastResult = 0;
+      const delay = amount === 10 ? 220 : amount === 100 ? 60 : 16;
       const addBatch = () => {
-        const batchSize = Math.min(remaining, amount === 1000 ? 10 : 1);
-        for (let index = 0; index < batchSize; index += 1) {
-          const result = Math.random() < 0.5 ? 1 : 0;
-          results.push(result);
-          heads += result;
-          lastResult = result;
-          remaining -= 1;
+        const result = Math.random() < 0.5 ? 1 : 0;
+        results.push(result);
+        heads += result;
+        remaining -= 1;
+        batchCompleted += 1;
+        setFace(result);
+        drawProgress();
+        drawRecent();
+        if (animation) animation.cancel();
+        if (!reducedMotion) {
+          animation = disc.animate([
+            { transform:'rotateY(-85deg) scale(.9)' },
+            { transform:'rotateY(0deg) scale(1)' }
+          ], { duration:Math.min(delay, 180), easing:'ease-out' });
         }
-        draw();
+        if (amount === 1000 && remaining % 5 !== 0 && remaining !== 0) updateReadout();
+        else draw();
         if (!remaining) {
-          clearInterval(timer);
-          timer = null;
-          if (animation) animation.cancel();
-          animation = null;
-          spinTo(lastResult, 650, () => {
-            stop();
-            announcement.textContent = description.textContent;
-          });
+          stop();
+          announcement.textContent = description.textContent;
         }
       };
-      timer = setInterval(addBatch, 36);
+      timer = setInterval(addBatch, delay);
     }
 
     tossButtons.forEach(button => button.addEventListener('click', () => toss(Number(button.dataset.toss))));
@@ -193,6 +218,10 @@
       stop();
       results = [];
       heads = 0;
+      batchAmount = 0;
+      batchCompleted = 0;
+      drawProgress();
+      drawRecent();
       headFace.innerHTML = window.statsbMontyCharacters.robot;
       disc.style.transform = 'rotateY(0deg)';
       demo.dataset.state = 'ready';
@@ -208,6 +237,8 @@
     new MutationObserver(() => {
       if (!root.closest('[hidden]')) {
         draw();
+        drawRecent();
+        drawProgress();
         const japanese = document.documentElement.dataset.language === 'ja';
         sideKey.textContent = japanese ? 'ロボット＝表 · ヤギ＝裏' : 'Robot = heads · Goat = tails';
         if (demo.dataset.state === 'ready') resultLabel.textContent = japanese ? '投げてみよう' : 'Ready to toss';
