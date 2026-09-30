@@ -272,6 +272,21 @@ function montyHallMarkup() {
   </div>`;
 }
 
+function combinationMarkup() {
+  return `<section class="combination-simulation" data-combination-simulation aria-label="Robot and goat combinations">
+    <div class="combination-intro"><div><p class="section-kicker">${bilingual('COUNT THE LINEUPS', '並び方を数える')}</p><h4>${bilingual('Robots in the lineup', 'ロボットは何通り？')}</h4></div><p>${bilingual('Place the robots in different positions. How many unique lineups can you make?', 'ロボットを別の位置に置いてみよう。重複しない並びは何通り？')}</p></div>
+    <div class="combination-controls">
+      <label>${bilingual('Positions', '並ぶ数')} <select data-combination-n aria-label="Number of positions"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select></label>
+      <label>${bilingual('Robots', 'ロボットの数')} <select data-combination-k aria-label="Number of robots"></select></label>
+      <label>${bilingual('Your guess', '予想')} <input data-combination-guess type="number" min="1" max="64" inputmode="numeric" placeholder="?" aria-label="Guess the number of lineups"></label>
+    </div>
+    <div class="combination-builder" data-combination-builder role="group" aria-label="Click positions to place robots"></div>
+    <p class="combination-hint" data-combination-hint aria-live="polite"></p>
+    <div class="combination-actions"><button type="button" data-combination-save>${bilingual('Add this lineup', 'この並びを追加')}</button><button type="button" data-combination-reveal>${bilingual('Show all lineups', '全部の並びを見る')}</button><button type="button" data-combination-reset>${bilingual('Start over', 'やり直す')}</button></div>
+    <div class="combination-results" data-combination-results aria-live="polite"></div>
+  </section>`;
+}
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
@@ -286,7 +301,12 @@ function lectureSection(week) {
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
   const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>`;
-  const lectureBody = week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
+  const lectureBody = week.week === 2 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 2 lecture">
+      <button type="button" role="tab" id="week-2-lecture-slides-tab" aria-controls="week-2-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
+      <button type="button" role="tab" id="week-2-lecture-explore-tab" aria-controls="week-2-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore', 'やってみる')}</button>
+    </div>
+    <div id="week-2-lecture-slides" role="tabpanel" aria-labelledby="week-2-lecture-slides-tab">${content}</div>
+    <div id="week-2-lecture-explore" role="tabpanel" aria-labelledby="week-2-lecture-explore-tab" hidden>${combinationMarkup()}</div>` : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
     </div>

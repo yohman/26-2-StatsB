@@ -92,6 +92,37 @@
 .agenda-page .lecture-tablist button[aria-selected='true']{z-index:1;border:2px solid var(--course-crimson);border-bottom-color:var(--course-sand);background:var(--course-sand);color:var(--course-ink)}
 .agenda-page .lecture-tablist button:focus-visible{outline:2px solid var(--course-ink);outline-offset:2px}
 @media(max-width:520px){.agenda-page .lecture-tablist button{flex:1;min-width:0;padding:10px 8px}}
+.agenda-page .combination-simulation{max-width:960px}
+.agenda-page .combination-intro{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px}
+.agenda-page .combination-intro h4{margin:3px 0 0;font:700 clamp(24px,2.8vw,34px)/1.2 Fraunces,'Noto Serif JP',Georgia,serif}
+.agenda-page .combination-intro>p{max-width:40ch;margin:0;color:var(--course-muted);font-size:14px;line-height:1.6}
+.agenda-page .combination-controls{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.agenda-page .combination-controls label{display:flex;align-items:center;gap:9px;color:var(--course-ink);font-size:13px;font-weight:700}
+.agenda-page .combination-controls select,.agenda-page .combination-controls input{width:74px;min-height:39px;border:1px solid #b9aa99;border-radius:3px;padding:6px 9px;background:#fff;color:var(--course-ink);font:700 16px Manrope,sans-serif}
+.agenda-page .combination-builder{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;padding:22px 10px;background:#eee6da}
+.agenda-page .combination-slot{width:74px;height:82px;border:2px solid #c6b7a5;border-radius:8px;background:#fff;font-size:44px;line-height:1;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.agenda-page .combination-slot:hover{transform:translateY(-4px);border-color:var(--course-crimson)}
+.agenda-page .combination-slot.is-robot{background:#e2f0ed;border-color:#45877f}
+.agenda-page .combination-slot:focus-visible,.agenda-page .combination-actions button:focus-visible{outline:3px solid var(--course-crimson);outline-offset:3px}
+.agenda-page .combination-hint{min-height:1.5em;margin:10px 0 15px;color:var(--course-muted);font-size:13px}
+.agenda-page .combination-actions{display:flex;flex-wrap:wrap;gap:9px}
+.agenda-page .combination-actions button{min-height:42px;border:1px solid var(--course-ink);padding:9px 16px;background:var(--course-ink);color:#fff;font:700 12px Manrope,'Zen Kaku Gothic New',sans-serif;cursor:pointer}
+.agenda-page .combination-actions button:nth-child(2){background:var(--course-crimson);border-color:var(--course-crimson)}
+.agenda-page .combination-actions button:last-child{background:transparent;color:var(--course-ink)}
+.agenda-page .combination-actions button:disabled{opacity:.42;cursor:not-allowed}
+.agenda-page .combination-results{margin-top:24px}
+.agenda-page .combination-answer{margin:0 0 6px;font:700 clamp(20px,2.5vw,29px)/1.3 Fraunces,'Noto Serif JP',Georgia,serif}
+.agenda-page .combination-formula{margin:0 0 6px;font:700 16px/1.6 'DM Mono',monospace;overflow-wrap:anywhere}
+.agenda-page .combination-note,.agenda-page .combination-saved-count{margin:0 0 15px;color:var(--course-muted);font-size:13px;line-height:1.6}
+.agenda-page .combination-lineup-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:7px}
+.agenda-page .combination-lineup{display:flex;align-items:center;gap:5px;min-height:49px;border:1px solid #d3c7b7;padding:5px 8px;background:#faf7f1;animation:combination-enter .25s ease both;animation-delay:calc(var(--lineup-order)*35ms)}
+.agenda-page .combination-lineup.is-found{border-color:#45877f;background:#eaf4f0}
+.agenda-page .combination-lineup-number{min-width:25px;margin-right:2px;color:var(--course-muted);font:700 11px 'DM Mono',monospace}
+.agenda-page .combination-character{font-size:24px;line-height:1.2}
+.agenda-page .combination-found-mark{margin-left:auto;color:#28796c;font-weight:800}
+@keyframes combination-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.agenda-page .combination-lineup{animation:none}.agenda-page .combination-slot{transition:none}}
+@media(max-width:640px){.agenda-page .combination-intro{display:block}.agenda-page .combination-intro>p{margin-top:10px}.agenda-page .combination-slot{width:54px;height:62px;font-size:32px}.agenda-page .combination-builder{gap:5px;padding:14px 5px}}
 .agenda-page .lecture-zone [role='tabpanel'][hidden]{display:none}
 .agenda-page .coin-simulation{max-width:850px}
 .agenda-page .coin-simulation-intro{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin:0 0 15px}
