@@ -139,6 +139,19 @@
 .agenda-page .batting-intro{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:18px}
 .agenda-page .batting-intro h4{margin:3px 0 0;font:700 clamp(24px,2.8vw,34px)/1.2 Fraunces,'Noto Serif JP',Georgia,serif}
 .agenda-page .batting-intro>p{max-width:48ch;margin:0;color:var(--course-muted);font-size:13px;line-height:1.55}
+.agenda-page .batting-formula-card{display:grid;grid-template-columns:minmax(260px,.9fr) minmax(280px,1.1fr);gap:14px 22px;margin:0 0 13px;padding:17px 19px;background:#f5ecda;border-left:4px solid #bd8531}
+.agenda-page .batting-formula-main{align-self:center}
+.agenda-page .batting-formula-label{display:block;margin-bottom:7px;color:#765e39;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.agenda-page .batting-equation{min-height:44px;color:var(--course-ink);font-size:clamp(21px,2.4vw,31px);font-weight:700}
+.agenda-page .batting-formula-explain{align-self:center;color:#574b3a;font-size:12px;line-height:1.55}
+.agenda-page .batting-formula-explain p{margin:3px 0}
+.agenda-page .batting-formula-substitution{color:#17675d;font-weight:800}
+.agenda-page .batting-formula-card .batting-controls{grid-column:1/-1;margin:0;padding-top:11px;border-top:1px solid #ddceb2}
+.agenda-page .batting-formula-card .batting-controls label{display:grid;gap:3px;align-content:end;min-height:0;font-size:10px}
+.agenda-page .batting-formula-card .batting-controls label span{white-space:nowrap}
+.agenda-page .batting-formula-card .batting-controls i{color:#a66e22;font:italic 700 13px Georgia,serif}
+.agenda-page .batting-formula-card .batting-controls select{width:78px}
+.agenda-page .batting-assumption{margin:3px 0 10px;color:var(--course-muted);font-size:11px}
 .agenda-page .batting-controls{display:flex;flex-wrap:wrap;align-items:end;gap:9px;margin:0 0 8px}
 .agenda-page .batting-controls label{display:flex;align-items:center;gap:8px;min-height:40px;color:var(--course-ink);font-size:12px;font-weight:700}
 .agenda-page .batting-controls select{width:70px;min-height:38px;border:1px solid #b9aa99;padding:5px 8px;background:#fff;color:var(--course-ink);font:700 14px 'DM Mono',monospace}
@@ -157,6 +170,18 @@
 .agenda-page .batting-result-head>strong,.agenda-page .batting-chart-heading>strong{font:700 15px Fraunces,'Noto Serif JP',Georgia,serif}
 .agenda-page .batting-result-head>span,.agenda-page .batting-chart-heading>span{color:var(--course-muted);font-size:10px;text-align:right}
 .agenda-page .batting-atbats{display:grid;grid-template-columns:repeat(5,minmax(34px,1fr));gap:5px;margin-top:12px}
+.agenda-page .batting-mascot{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;height:100px;margin:8px auto 0;color:#59747a;font:800 8px 'DM Mono',monospace;letter-spacing:.12em}
+.agenda-page .batting-mascot svg{width:155px;height:103px;overflow:visible}
+.agenda-page .batting-robot,.agenda-page .batting-bat,.agenda-page .batting-swing-ball{transform-box:fill-box;transform-origin:center;transition:transform .18s ease}
+.agenda-page .batting-bat{transform-origin:10% 90%}
+.agenda-page .batting-mascot[data-swing="windup"] .batting-bat{transform:rotate(-38deg)}
+.agenda-page .batting-mascot[data-swing="swing"] .batting-bat,.agenda-page .batting-mascot[data-swing="hit"] .batting-bat{transform:rotate(48deg)}
+.agenda-page .batting-mascot[data-swing="swing"] .batting-robot{transform:rotate(4deg)}
+.agenda-page .batting-mascot[data-swing="hit"] .batting-swing-ball{transform:translate(24px,-20px)}
+.agenda-page .batting-mascot[data-swing="miss"] .batting-swing-ball{transform:translate(-5px,18px)}
+.agenda-page .batting-bin{cursor:pointer}
+.agenda-page .batting-bin.is-selected{position:relative;color:var(--course-ink);background:#f5ecda;outline:2px solid #bd8531;outline-offset:-2px}
+.agenda-page .batting-bin:focus-visible{outline:2px solid #bd8531;outline-offset:2px}
 .agenda-page .batting-atbat{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:66px;border:1px solid #d7d0c4;background:#fff;color:#837c72;transition:background-color .18s ease,transform .18s ease}
 .agenda-page .batting-atbat.is-hit{border-color:#8db9a6;background:#e4f1e9;color:#246f58;animation:batting-reveal .28s ease both}
 .agenda-page .batting-atbat.is-out{background:#eee9e1;animation:batting-reveal .28s ease both}
@@ -179,8 +204,8 @@
 .agenda-page .batting-bin>small{font:500 8px 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .batting-model-note{margin:10px 0 0;color:var(--course-muted);font:500 10px/1.5 'DM Mono','Zen Kaku Gothic New',sans-serif}
 @keyframes batting-reveal{from{opacity:.45;transform:translateY(5px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
-@media(prefers-reduced-motion:reduce){.agenda-page .batting-atbat,.agenda-page .batting-bar{animation:none;transition:none}}
-@media(max-width:720px){.agenda-page .batting-intro{display:block}.agenda-page .batting-intro>p{margin-top:9px}.agenda-page .batting-play-area{grid-template-columns:1fr}.agenda-page .batting-controls .batting-reset{margin-left:0}.agenda-page .batting-chart{grid-template-columns:repeat(var(--bin-count,10),minmax(36px,1fr))}}
+@media(prefers-reduced-motion:reduce){.agenda-page .batting-atbat,.agenda-page .batting-bar,.agenda-page .batting-bat,.agenda-page .batting-robot,.agenda-page .batting-swing-ball{animation:none;transition:none}}
+@media(max-width:720px){.agenda-page .batting-intro{display:block}.agenda-page .batting-intro>p{margin-top:9px}.agenda-page .batting-formula-card{grid-template-columns:1fr;padding:14px}.agenda-page .batting-formula-card .batting-controls{grid-column:auto}.agenda-page .batting-play-area{grid-template-columns:1fr}.agenda-page .batting-controls .batting-reset{margin-left:0}.agenda-page .batting-chart{grid-template-columns:repeat(var(--bin-count,10),minmax(36px,1fr))}}
 .agenda-page .lecture-zone [role='tabpanel'][hidden]{display:none}
 .agenda-page .coin-simulation{max-width:850px}
 .agenda-page .coin-simulation-intro{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin:0 0 15px}

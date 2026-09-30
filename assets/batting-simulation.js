@@ -12,6 +12,7 @@
     root.dataset.initialized = 'true';
 
     const nInput = root.querySelector('[data-batting-n]');
+    const xInput = root.querySelector('[data-batting-x]');
     const pInput = root.querySelector('[data-batting-p]');
     const pLabel = root.querySelector('[data-batting-p-label]');
     const atBats = root.querySelector('[data-batting-atbats]');
@@ -20,9 +21,14 @@
     const batchStatus = root.querySelector('[data-batting-batch-status]');
     const chart = root.querySelector('[data-batting-chart]');
     const modelNote = root.querySelector('[data-batting-model-note]');
+    const equation = root.querySelector('[data-batting-equation]');
+    const formulaSteps = root.querySelector('[data-batting-formula-steps]');
+    const formulaResult = root.querySelector('[data-batting-formula-result]');
+    const mascot = root.querySelector('[data-batting-mascot]');
     const buttons = [...root.querySelectorAll('[data-batting-one], [data-batting-many], [data-batting-reset]')];
     let n = Number(nInput.value);
     let p = Number(pInput.value);
+    let x = 2;
     let counts = Array(n + 1).fill(0);
     let games = 0;
     let busy = false;
@@ -30,6 +36,52 @@
     const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
     const sampleGame = () => Array.from({ length: n }, () => Math.random() < p);
     const model = () => Array.from({ length: n + 1 }, (_, k) => choose(n, k) * p ** k * (1 - p) ** (n - k));
+
+    function typesetFormula() {
+      const probability = choose(n, x) * p ** x * (1 - p) ** (n - x);
+      xInput.value = String(x);
+      const remaining = n - x;
+      const patterns = choose(n, x);
+      const onePattern = p ** x * (1 - p) ** remaining;
+      const percent = probability * 100;
+      formulaSteps.textContent = t(
+        `1  Choose the hit positions: ${n}! ÷ (${x}! × ${remaining}!) = ${patterns} patterns.   2  Chance of one pattern: π^${x}(1−π)^${remaining} = ${onePattern.toFixed(5)}.`,
+        `① ヒットの位置を選ぶ：${n}! ÷（${x}! × ${remaining}!）= ${patterns}通り。  ② その1通りの確率：π^${x}(1−π)^${remaining} = ${onePattern.toFixed(5)}。`
+      );
+      formulaResult.textContent = t(
+        `${patterns} patterns × ${onePattern.toFixed(5)} = ${probability.toFixed(5)}  →  ${percent.toFixed(2)}% chance of exactly ${x} hit${x === 1 ? '' : 's'}.`,
+        `${patterns}通り × ${onePattern.toFixed(5)} = ${probability.toFixed(5)}  →  ちょうど${x}本の確率は ${percent.toFixed(2)}%。`
+      );
+      equation.innerHTML = `\\[\\Pr(X=${x})={}_${n}C_${x}\\,\\pi^{${x}}(1-\\pi)^{${remaining}} = ${patterns}\\times(${p.toFixed(2)})^{${x}}\\times(1-${p.toFixed(2)})^{${remaining}}\\]`;
+      const math = window.MathJax;
+      if (math?.typesetPromise) {
+        math.typesetClear?.([equation]);
+        math.typesetPromise([equation]).catch(() => {});
+      }
+      chart.querySelectorAll('.batting-bin').forEach((bin, index) => bin.classList.toggle('is-selected', index === x));
+    }
+
+    function fillHitChoices() {
+      const previous = Math.min(x, n);
+      x = previous;
+      xInput.replaceChildren(...Array.from({ length: n + 1 }, (_, value) => {
+        const option = document.createElement('option');
+        option.value = String(value);
+        option.textContent = `${value}`;
+        option.selected = value === x;
+        return option;
+      }));
+    }
+
+    async function swing(outcome) {
+      if (!mascot) return;
+      mascot.dataset.swing = 'windup';
+      await wait(95);
+      mascot.dataset.swing = 'swing';
+      await wait(190);
+      mascot.dataset.swing = outcome ? 'hit' : 'miss';
+      await wait(100);
+    }
 
     function showAtBats(results, revealed = results.length) {
       atBats.replaceChildren(...Array.from({ length: n }, (_, index) => {
@@ -51,6 +103,9 @@
         const expectedPercent = expected[hits] * 100;
         const bin = document.createElement('div');
         bin.className = 'batting-bin';
+        bin.tabIndex = 0;
+        bin.setAttribute('role', 'button');
+        bin.dataset.hits = String(hits);
         bin.setAttribute('aria-label', t(`${hits} hits: observed ${observed.toFixed(1)}%; expected ${expectedPercent.toFixed(1)}%`, `安打${hits}本：実測 ${observed.toFixed(1)}%、理論値 ${expectedPercent.toFixed(1)}%`));
         const bars = document.createElement('div');
         bars.className = 'batting-bars';
@@ -81,9 +136,10 @@
         : t('Run games to compare observed and expected results.', '試合を実行して、実測と理論値を比べよう。');
       const mean = n * p;
       modelNote.textContent = t(
-        `Model: X ~ Binomial(n = ${n}, p = ${p.toFixed(2)}). Expected hits per game: E[X] = np = ${mean.toFixed(2)}.`,
-        `モデル：X ~ Binomial(n = ${n}, p = ${p.toFixed(2)})。1試合あたりの期待安打数：E[X] = np = ${mean.toFixed(2)}本。`
+        `If the assumptions hold, X ~ Binomial(n = ${n}, π = ${p.toFixed(2)}). Average hits per game: nπ = ${mean.toFixed(2)}.`,
+        `この前提では X ~ Binomial(n = ${n}, π = ${p.toFixed(2)})。平均安打数は nπ = ${mean.toFixed(2)}本。`
       );
+      typesetFormula();
     }
 
     function updateRate() {
@@ -117,7 +173,8 @@
       gameTotal.textContent = '';
       singleStatus.textContent = t('The next pitch…', '次の投球…');
       for (let index = 0; index < result.length; index += 1) {
-        await wait(360);
+        await swing(result[index]);
+        await wait(120);
         showAtBats(result, index + 1);
         singleStatus.textContent = t(`At-bat ${index + 1} of ${n}`, `${index + 1} / ${n} 打席目`);
       }
@@ -151,8 +208,20 @@
 
     nInput.addEventListener('change', () => {
       n = Number(nInput.value);
+      fillHitChoices();
       clear();
       showAtBats([]);
+    });
+    xInput.addEventListener('change', () => { x = Number(xInput.value); typesetFormula(); });
+    chart.addEventListener('click', event => {
+      const bin = event.target.closest('[data-hits]');
+      if (!bin) return;
+      x = Number(bin.dataset.hits);
+      typesetFormula();
+    });
+    chart.addEventListener('keydown', event => {
+      const bin = event.target.closest('[data-hits]');
+      if (bin && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); x = Number(bin.dataset.hits); typesetFormula(); }
     });
     pInput.addEventListener('input', () => {
       updateRate();
@@ -166,6 +235,7 @@
       singleStatus.textContent = games ? t('Game over', '試合終了') : t('Ready when you are.', '準備ができたら始めよう。');
     }).observe(document.documentElement, { attributes:true, attributeFilter:['data-language'] });
     updateRate();
+    fillHitChoices();
     showAtBats([]);
     drawChart();
   }

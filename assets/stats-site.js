@@ -294,16 +294,23 @@ function combinationMarkup() {
 
 function battingSimulationMarkup() {
   return `<section class="batting-simulation" data-batting-simulation aria-label="Batting average simulation">
-    <div class="batting-intro"><div><p class="section-kicker">${bilingual('A BINOMIAL EXPERIMENT', '二項分布を体験')}</p><h4>${bilingual('A game at the plate', '打率シミュレーター')}</h4></div><p>${bilingual('Choose a hit rate and number of at-bats. Play one game, then run many games to compare the results with the binomial model.', '打率と打席数を決めて1試合をプレイ。その後たくさん試して、結果と二項分布を比べよう。')}</p></div>
-    <div class="batting-controls">
-      <label>${bilingual('At-bats per game', '1試合の打席数')} <select data-batting-n aria-label="At-bats per game"><option value="3">3</option><option value="5" selected>5</option><option value="9">9</option></select></label>
-      <label class="batting-rate-control">${bilingual('Chance of a hit', 'ヒットの確率')} <input id="batting-hit-rate" data-batting-p type="range" min="0.05" max="0.80" step="0.01" value="0.32"><output data-batting-p-label for="batting-hit-rate">32%</output></label>
-      <button type="button" data-batting-one>${bilingual('Play one game', '1試合をプレイ')}</button>
-      <button type="button" class="batting-run-button" data-batting-many>${bilingual('Run 500 games', '500試合を実行')}</button>
-      <button type="button" class="batting-reset" data-batting-reset>${bilingual('Reset', 'リセット')}</button>
+    <div class="batting-intro"><div><p class="section-kicker">${bilingual('THE TEXTBOOK FORMULA, IN ACTION', '教科書の公式を体験')}</p><h4>${bilingual('How many hits in a game?', '1試合で何本ヒットが出る？')}</h4></div><p>${bilingual('The binomial formula predicts the chance of exactly x hits. Play a game, then run many games to see the prediction take shape.', '二項分布の公式で「ちょうどx本」の確率を予測します。1試合をプレイし、たくさん試して予測と比べよう。')}</p></div>
+    <div class="batting-formula-card">
+      <div class="batting-formula-main"><span class="batting-formula-label">${bilingual('Probability of exactly x hits', 'ちょうどx本の安打が出る確率')}</span><div class="batting-equation" data-batting-equation>\\[\\Pr(X=x)={}_nC_x\\,\\pi^x(1-\\pi)^{n-x}\\]</div></div>
+      <div class="batting-formula-explain"><p data-batting-formula-steps></p><p class="batting-formula-substitution" data-batting-formula-result aria-live="polite"></p></div>
+      <div class="batting-controls">
+        <label><span>${bilingual('At-bats', '打席数')} <i>n</i></span> <select data-batting-n aria-label="At-bats per game"><option value="3">3</option><option value="5" selected>5</option><option value="9">9</option></select></label>
+        <label><span>${bilingual('Hits to examine', '調べる安打数')} <i>x</i></span> <select data-batting-x aria-label="Number of hits"></select></label>
+        <label class="batting-rate-control"><span>${bilingual('Chance per at-bat', '1打席のヒット確率')} <i>π</i></span> <input id="batting-hit-rate" data-batting-p type="range" min="0.05" max="0.80" step="0.01" value="0.32"><output data-batting-p-label for="batting-hit-rate">32%</output></label>
+        <button type="button" data-batting-one>${bilingual('Play one game', '1試合をプレイ')}</button>
+        <button type="button" class="batting-run-button" data-batting-many>${bilingual('Run 500 games', '500試合を実行')}</button>
+        <button type="button" class="batting-reset" data-batting-reset>${bilingual('Reset', 'リセット')}</button>
+      </div>
     </div>
-    <p class="batting-assumption">${bilingual('Each at-bat is an independent chance with the same hit probability.', '各打席は、同じ確率で起きる独立した試行です。')}</p>
-    <div class="batting-play-area"><div class="batting-game-card"><div class="batting-result-head"><strong>${bilingual('One game', '1試合')}</strong><span data-batting-single-status aria-live="polite">${bilingual('Ready when you are.', '準備ができたら始めよう。')}</span></div><div class="batting-atbats" data-batting-atbats aria-label="At-bat results"></div><p class="batting-game-total" data-batting-game-total></p></div>
+    <p class="batting-assumption">${bilingual('Each at-bat is independent and has the same chance π of a hit.', '各打席は独立で、ヒットの確率πは毎回同じです。')}</p>
+    <div class="batting-play-area"><div class="batting-game-card"><div class="batting-result-head"><strong>${bilingual('One game', '1試合')}</strong><span data-batting-single-status aria-live="polite">${bilingual('Ready when you are.', '準備ができたら始めよう。')}</span></div>
+      <div class="batting-mascot" data-batting-mascot aria-hidden="true"><svg viewBox="0 0 180 120" role="presentation"><ellipse cx="91" cy="108" rx="45" ry="7" fill="#d9d0c3"/><g class="batting-robot"><path d="M68 65h46l9 37H59z" fill="#4b7c84" stroke="#263d48" stroke-width="4"/><path d="M79 57l-16 22M108 58l21 13" fill="none" stroke="#263d48" stroke-width="7" stroke-linecap="round"/><rect x="58" y="18" width="65" height="45" rx="13" fill="#d8e4df" stroke="#263d48" stroke-width="4"/><path d="M76 12v-8m30 8v-8" stroke="#d29c38" stroke-width="4" stroke-linecap="round"/><circle cx="79" cy="39" r="5" fill="#263d48"/><circle cx="103" cy="39" r="5" fill="#263d48"/><path d="M82 51q9 8 18 0" fill="none" stroke="#d15c4d" stroke-width="3" stroke-linecap="round"/><path d="M60 25l61 0" stroke="#d29c38" stroke-width="7" stroke-linecap="round"/><path d="M61 26l-8 4" stroke="#d15c4d" stroke-width="5" stroke-linecap="round"/></g><g class="batting-bat"><path d="M132 72L161 31" stroke="#865b37" stroke-width="9" stroke-linecap="round"/><path d="M155 36l8-12" stroke="#d0a56f" stroke-width="14" stroke-linecap="round"/></g><circle class="batting-swing-ball" cx="150" cy="88" r="7" fill="#fff" stroke="#b45d48" stroke-width="3"/></svg><span>${bilingual('ROBO-BATTER', 'ロボ打者')}</span></div>
+      <div class="batting-atbats" data-batting-atbats aria-label="At-bat results"></div><p class="batting-game-total" data-batting-game-total></p></div>
       <div class="batting-chart-card"><div class="batting-chart-heading"><strong>${bilingual('Hits per game', '1試合の安打数')}</strong><span data-batting-batch-status aria-live="polite">${bilingual('Run games to build the chart.', '試合を実行するとグラフが表示されます。')}</span></div><div class="batting-chart-legend"><span class="batting-legend-observed">${bilingual('Observed', '実測')}</span><span class="batting-legend-model">${bilingual('Binomial model', '二項分布の理論値')}</span></div><div class="batting-chart" data-batting-chart role="group" aria-label="Observed and expected hits per game"></div><p class="batting-model-note" data-batting-model-note></p></div>
     </div>
   </section>`;
