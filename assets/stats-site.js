@@ -396,7 +396,8 @@ function setupWeekToggles(root) {
 function renderAgenda(weeks) {
   const root = document.querySelector('[data-agenda]');
   if (!root) return;
-  const previewAll = new URLSearchParams(location.search).get('preview') === 'all';
+  const localBrowsing = location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  const previewAll = localBrowsing || new URLSearchParams(location.search).get('preview') === 'all';
   const today = todayInTokyo();
   root.innerHTML = `${previewAll ? `<div class="preview-notice">${bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today)).join('')}</div>`;
   setupActivityTabs(root);
