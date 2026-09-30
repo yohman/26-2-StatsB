@@ -22,8 +22,12 @@
     const chart = root.querySelector('[data-batting-chart]');
     const modelNote = root.querySelector('[data-batting-model-note]');
     const equation = root.querySelector('[data-batting-equation]');
-    const formulaSteps = root.querySelector('[data-batting-formula-steps]');
     const formulaResult = root.querySelector('[data-batting-formula-result]');
+    const answerCaption = root.querySelector('[data-batting-answer-caption]');
+    const patternsOutput = root.querySelector('[data-batting-patterns]');
+    const singlePatternOutput = root.querySelector('[data-batting-single-pattern]');
+    const patternExample = root.querySelector('[data-batting-pattern-example]');
+    const totalOutput = root.querySelector('[data-batting-total]');
     const mascot = root.querySelector('[data-batting-mascot]');
     const buttons = [...root.querySelectorAll('[data-batting-one], [data-batting-many], [data-batting-reset]')];
     let n = Number(nInput.value);
@@ -37,28 +41,49 @@
     const sampleGame = () => Array.from({ length: n }, () => Math.random() < p);
     const model = () => Array.from({ length: n + 1 }, (_, k) => choose(n, k) * p ** k * (1 - p) ** (n - k));
 
-    function typesetFormula() {
+    function updateCalculation() {
       const probability = choose(n, x) * p ** x * (1 - p) ** (n - x);
       xInput.value = String(x);
       const remaining = n - x;
       const patterns = choose(n, x);
       const onePattern = p ** x * (1 - p) ** remaining;
       const percent = probability * 100;
-      formulaSteps.textContent = t(
-        `1  Choose the hit positions: ${n}! ÷ (${x}! × ${remaining}!) = ${patterns} patterns.   2  Chance of one pattern: π^${x}(1−π)^${remaining} = ${onePattern.toFixed(5)}.`,
-        `① ヒットの位置を選ぶ：${n}! ÷（${x}! × ${remaining}!）= ${patterns}通り。  ② その1通りの確率：π^${x}(1−π)^${remaining} = ${onePattern.toFixed(5)}。`
-      );
-      formulaResult.textContent = t(
-        `${patterns} patterns × ${onePattern.toFixed(5)} = ${probability.toFixed(5)}  →  ${percent.toFixed(2)}% chance of exactly ${x} hit${x === 1 ? '' : 's'}.`,
-        `${patterns}通り × ${onePattern.toFixed(5)} = ${probability.toFixed(5)}  →  ちょうど${x}本の確率は ${percent.toFixed(2)}%。`
-      );
-      equation.innerHTML = `\\[\\Pr(X=${x})={}_${n}C_${x}\\,\\pi^{${x}}(1-\\pi)^{${remaining}} = ${patterns}\\times(${p.toFixed(2)})^{${x}}\\times(1-${p.toFixed(2)})^{${remaining}}\\]`;
-      const math = window.MathJax;
-      if (math?.typesetPromise) {
-        math.typesetClear?.([equation]);
-        math.typesetPromise([equation]).catch(() => {});
+      formulaResult.textContent = `${percent.toFixed(1)}%`;
+      answerCaption.textContent = t(`exactly ${x} hit${x === 1 ? '' : 's'} in ${n} at-bats`, `${n}打席でちょうど${x}本の安打`);
+      patternsOutput.textContent = t(`${n}C${x} = ${patterns} possible orders`, `${n}C${x} = ${patterns}通りの順番`);
+      singlePatternOutput.textContent = `${p.toFixed(2)}^${x} × ${(1-p).toFixed(2)}^${remaining} = ${onePattern.toFixed(4)}`;
+      totalOutput.textContent = `${patterns} × ${onePattern.toFixed(4)} = ${probability.toFixed(4)} → ${percent.toFixed(1)}%`;
+      patternExample.replaceChildren(...Array.from({ length:n }, (_, index) => {
+        const token = document.createElement('span');
+        const hit = index < x;
+        token.className = `batting-pattern-token${hit ? ' is-hit' : ''}`;
+        token.textContent = hit ? '⚾' : '×';
+        token.setAttribute('aria-label', hit ? t('hit','安打') : t('out','アウト'));
+        return token;
+      }));
+      chart.setAttribute('aria-label', t(`Observed and predicted share of games with exactly 0 to ${n} hits`, `安打0〜${n}本ごとの試合の割合：実測と予測`));
+    }
+
+    function typesetStaticFormula() {
+      const revealFallback = () => {
+        if (!equation.querySelector('mjx-container')) equation.textContent = 'Pr(X = x) = nCₓ × πˣ × (1 − π)ⁿ⁻ˣ';
+        equation.classList.add('is-typeset');
+      };
+      const render = () => {
+        const math = window.MathJax;
+        if (!math?.typesetPromise) { revealFallback(); return; }
+        Promise.resolve(math.startup?.promise).then(() => math.typesetPromise([equation]))
+          .then(() => equation.classList.add('is-typeset'))
+          .catch(revealFallback);
+      };
+      if (window.MathJax?.typesetPromise) render();
+      else {
+        const script = document.querySelector('script[src*="mathjax"]');
+        if (!script) { revealFallback(); return; }
+        script.addEventListener('load', render, { once:true });
+        script.addEventListener('error', revealFallback, { once:true });
+        window.setTimeout(() => { if (!equation.classList.contains('is-typeset')) revealFallback(); }, 5000);
       }
-      chart.querySelectorAll('.batting-bin').forEach((bin, index) => bin.classList.toggle('is-selected', index === x));
     }
 
     function fillHitChoices() {
@@ -103,9 +128,6 @@
         const expectedPercent = expected[hits] * 100;
         const bin = document.createElement('div');
         bin.className = 'batting-bin';
-        bin.tabIndex = 0;
-        bin.setAttribute('role', 'button');
-        bin.dataset.hits = String(hits);
         bin.setAttribute('aria-label', t(`${hits} hits: observed ${observed.toFixed(1)}%; expected ${expectedPercent.toFixed(1)}%`, `安打${hits}本：実測 ${observed.toFixed(1)}%、理論値 ${expectedPercent.toFixed(1)}%`));
         const bars = document.createElement('div');
         bars.className = 'batting-bars';
@@ -120,10 +142,10 @@
         }
         const observedLabel = document.createElement('span');
         observedLabel.className = 'batting-bin-observed';
-        observedLabel.textContent = `${observed.toFixed(0)}%`;
+        observedLabel.textContent = `${observed.toFixed(1)}%`;
         const modelLabel = document.createElement('span');
         modelLabel.className = 'batting-bin-model';
-        modelLabel.textContent = `${expectedPercent.toFixed(0)}%`;
+        modelLabel.textContent = `${expectedPercent.toFixed(1)}%`;
         const label = document.createElement('strong');
         label.textContent = String(hits);
         const caption = document.createElement('small');
@@ -132,14 +154,12 @@
         return bin;
       }));
       batchStatus.textContent = games
-        ? t(`${games.toLocaleString()} games · observed bars update as results accumulate`, `${games.toLocaleString()}試合 · 実測値は試行とともに更新`)
-        : t('Run games to compare observed and expected results.', '試合を実行して、実測と理論値を比べよう。');
-      const mean = n * p;
-      modelNote.textContent = t(
-        `If the assumptions hold, X ~ Binomial(n = ${n}, π = ${p.toFixed(2)}). Average hits per game: nπ = ${mean.toFixed(2)}.`,
-        `この前提では X ~ Binomial(n = ${n}, π = ${p.toFixed(2)})。平均安打数は nπ = ${mean.toFixed(2)}本。`
-      );
-      typesetFormula();
+        ? t(`${games.toLocaleString()} games · compare actual vs predicted for ${x} hits`, `${games.toLocaleString()}試合完了 · ${x}本の実測と予測を比べる`)
+        : t(`Run games to compare actual vs predicted for ${x} hits.`, `試合を実行して、安打${x}本の実測と予測を比べる。`);
+      modelNote.textContent = games
+        ? t(`${counts[x]} of ${games} games had exactly ${x} hits (${(counts[x] / games * 100).toFixed(1)}%). Formula prediction: ${(expected[x] * 100).toFixed(1)}%.`, `${games}試合中、ちょうど${x}本は${counts[x]}試合（${(counts[x] / games * 100).toFixed(1)}％）。公式の予測は${(expected[x] * 100).toFixed(1)}％。`)
+        : t('Compare the actual share of games with the chance calculated by the formula.', '実際にその安打数になった試合の割合と、公式から計算した確率を比べます。');
+      updateCalculation();
     }
 
     function updateRate() {
@@ -202,7 +222,7 @@
         drawChart();
         await wait(45);
       }
-      batchStatus.textContent = t(`${games.toLocaleString()} games played · compare the bars`, `${games.toLocaleString()}試合完了 · 2つの棒を比べよう`);
+      batchStatus.textContent = t(`${games.toLocaleString()} games played · compare actual vs predicted for ${x} hits`, `${games.toLocaleString()}試合完了 · ${x}本の実測と予測を比べる`);
       setBusy(false);
     }
 
@@ -212,17 +232,7 @@
       clear();
       showAtBats([]);
     });
-    xInput.addEventListener('change', () => { x = Number(xInput.value); typesetFormula(); });
-    chart.addEventListener('click', event => {
-      const bin = event.target.closest('[data-hits]');
-      if (!bin) return;
-      x = Number(bin.dataset.hits);
-      typesetFormula();
-    });
-    chart.addEventListener('keydown', event => {
-      const bin = event.target.closest('[data-hits]');
-      if (bin && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); x = Number(bin.dataset.hits); typesetFormula(); }
-    });
+    xInput.addEventListener('change', () => { x = Number(xInput.value); drawChart(); });
     pInput.addEventListener('input', () => {
       updateRate();
       clear();
@@ -238,6 +248,7 @@
     fillHitChoices();
     showAtBats([]);
     drawChart();
+    typesetStaticFormula();
   }
 
   document.addEventListener('statsb:agenda-rendered', setup);
