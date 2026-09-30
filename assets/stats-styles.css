@@ -203,6 +203,51 @@
 .agenda-page .batting-bin>strong{color:var(--course-ink);font-size:11px}
 .agenda-page .batting-bin>small{font:500 8px 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .batting-model-note{margin:10px 0 0;color:var(--course-muted);font:500 10px/1.5 'DM Mono','Zen Kaku Gothic New',sans-serif}
+.agenda-page .distribution-simulation{max-width:1020px;color:var(--course-ink)}
+.agenda-page .distribution-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:0 0 15px}
+.agenda-page .distribution-heading h4{margin:3px 0 0;font:700 clamp(23px,2.6vw,32px)/1.18 Fraunces,'Noto Serif JP',Georgia,serif}
+.agenda-page .distribution-heading>p{max-width:55ch;margin:0;color:var(--course-muted);font-size:12px;line-height:1.55}
+.agenda-page .distribution-formula{display:flex;align-items:center;gap:18px;margin:0 0 10px;padding:11px 15px;background:#f5ecda;border-left:4px solid #bd8531}
+.agenda-page .distribution-formula>span{flex:0 0 auto;color:#765e39;font:700 9px 'DM Mono',monospace;letter-spacing:.08em}
+.agenda-page .distribution-formula>div{font-size:clamp(17px,2vw,23px)}
+.agenda-page .distribution-controls{display:flex;flex-wrap:wrap;align-items:end;gap:10px;margin:0 0 11px}
+.agenda-page .distribution-controls label{display:grid;gap:3px;color:var(--course-ink);font-size:10px;font-weight:700}
+.agenda-page .distribution-controls label span{white-space:nowrap}
+.agenda-page .distribution-controls i{color:#a66e22;font:italic 700 13px Georgia,serif}
+.agenda-page .distribution-controls input[type=range]{width:105px;accent-color:#bd8531}
+.agenda-page .distribution-controls output{color:#17675d;font:700 11px 'DM Mono',monospace}
+.agenda-page .distribution-controls select{min-height:34px;border:1px solid #b9aa99;padding:5px 8px;background:#fff;color:var(--course-ink);font:700 12px 'DM Mono',monospace}
+.agenda-page .distribution-df{align-self:center;margin:0 5px;color:#17675d;font:700 12px 'DM Mono',monospace}
+.agenda-page .distribution-controls button{min-height:36px;border:1px solid var(--course-ink);padding:7px 12px;background:var(--course-ink);color:#fff;font:700 10px Manrope,'Zen Kaku Gothic New',sans-serif;cursor:pointer}
+.agenda-page .distribution-controls button.distribution-run{border-color:#2d8274;background:#2d8274}
+.agenda-page .distribution-controls button:disabled,.agenda-page .distribution-controls input:disabled,.agenda-page .distribution-controls select:disabled{opacity:.5;cursor:wait}
+.agenda-page .distribution-chart-wrap{padding:10px 13px 8px;background:#fff}
+.agenda-page .distribution-chart-wrap svg{display:block;width:100%;height:auto;min-height:200px;overflow:visible}
+.agenda-page .distribution-grid{stroke:#e7e0d6;stroke-width:1}
+.agenda-page .distribution-axis-line,.agenda-page .distribution-tick{stroke:#9a9084;stroke-width:1}
+.agenda-page .distribution-axis{fill:#796f64;font:10px 'DM Mono',monospace}
+.agenda-page .distribution-axis-label{fill:#63584e;font:700 11px 'DM Mono',monospace}
+.agenda-page .distribution-area{fill:#d3a74b;opacity:.16}
+.agenda-page .distribution-bound{stroke:#b9852e;stroke-width:1.5;stroke-dasharray:4 4;opacity:.8}
+.agenda-page .distribution-hist-bar{fill:#ca7650;opacity:.52;animation:distribution-rise .55s ease both;transform-box:fill-box;transform-origin:bottom}
+.agenda-page .distribution-curve{fill:none;stroke:#287e72;stroke-width:3;vector-effect:non-scaling-stroke}
+.agenda-page .distribution-normal-curve{fill:none;stroke:#287e72;stroke-width:2;stroke-dasharray:5 4;opacity:.72;vector-effect:non-scaling-stroke}
+.agenda-page .distribution-legend{display:flex;flex-wrap:wrap;gap:15px;padding:4px 8px;color:var(--course-muted);font-size:10px}
+.agenda-page .distribution-legend span:before{content:'';display:inline-block;width:9px;height:9px;margin-right:5px;background:#ca7650;vertical-align:-1px}
+.agenda-page .distribution-legend .distribution-legend-theory:before{width:15px;height:2px;background:#287e72}
+.agenda-page .distribution-legend .distribution-legend-normal:before{width:15px;height:2px;background:repeating-linear-gradient(90deg,#287e72 0 4px,transparent 4px 7px)}
+.agenda-page .distribution-foot{display:flex;justify-content:space-between;gap:20px;align-items:start;margin:10px 0 0}
+.agenda-page .distribution-foot p{margin:0;color:var(--course-muted);font-size:11px;line-height:1.5}
+.agenda-page .distribution-foot [data-dist-status]{flex:0 0 auto;color:#17675d;font-weight:700}
+.agenda-page .distribution-aha{max-width:67ch}
+.agenda-page .distribution-aha strong{color:#a66e22}
+.agenda-page .distribution-robot{display:flex;align-items:center;gap:8px;margin-top:11px;color:#59747a;font-size:10px}
+.agenda-page .distribution-robot>span:first-child{font-size:21px;transform-origin:50% 75%}
+.agenda-page .distribution-robot[data-running=true]>span:first-child{animation:distribution-bob .32s ease-in-out infinite alternate}
+@keyframes distribution-rise{from{transform:scaleY(.05);opacity:.1}to{transform:scaleY(1);opacity:.52}}
+@keyframes distribution-bob{to{transform:rotate(12deg) translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.agenda-page .distribution-hist-bar,.agenda-page .distribution-robot>span:first-child{animation:none}}
+@media(max-width:720px){.agenda-page .distribution-heading{display:block}.agenda-page .distribution-heading>p{margin-top:8px}.agenda-page .distribution-foot{display:block}.agenda-page .distribution-foot .distribution-aha{margin-top:7px}.agenda-page .distribution-formula{display:block}.agenda-page .distribution-formula>span{display:block;margin-bottom:5px}.agenda-page .distribution-chart-wrap{padding:8px 4px}.agenda-page .distribution-chart-wrap svg{min-height:160px}}
 @keyframes batting-reveal{from{opacity:.45;transform:translateY(5px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(prefers-reduced-motion:reduce){.agenda-page .batting-atbat,.agenda-page .batting-bar,.agenda-page .batting-bat,.agenda-page .batting-robot,.agenda-page .batting-swing-ball{animation:none;transition:none}}
 @media(max-width:720px){.agenda-page .batting-intro{display:block}.agenda-page .batting-intro>p{margin-top:9px}.agenda-page .batting-formula-card{grid-template-columns:1fr;padding:14px}.agenda-page .batting-formula-card .batting-controls{grid-column:auto}.agenda-page .batting-play-area{grid-template-columns:1fr}.agenda-page .batting-controls .batting-reset{margin-left:0}.agenda-page .batting-chart{grid-template-columns:repeat(var(--bin-count,10),minmax(36px,1fr))}}

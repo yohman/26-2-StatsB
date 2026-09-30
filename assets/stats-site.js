@@ -316,6 +316,44 @@ function battingSimulationMarkup() {
   </section>`;
 }
 
+function distributionSimulationMarkup(type) {
+  const configs = {
+    normal: {
+      title:['Normal distribution: the bell curve','正規分布：ベル型の曲線'],
+      description:['Generate values from a normal population. Change its center and spread, then see how often values land within one, two, or three standard deviations.','正規分布から値を生成し、中心と広がりを変えます。平均から標準偏差1・2・3個分の範囲に、どれくらい入るかを見てみましょう。'],
+      formula:'\\[X\\sim N(\\mu,\\sigma^2),\\qquad Z=\\frac{X-\\mu}{\\sigma}\\]',
+      sample:['observations','個のデータ']
+    },
+    t: {
+      title:['t distribution: small samples, wider tails','t分布：小標本では裾が広い'],
+      description:['Robo samples from a normal population and recalculates a t statistic each time. With few observations, the estimate of spread is uncertain—so extreme t values are less surprising.','ロボが正規母集団から標本を取り、毎回t値を計算します。標本が少ないとばらつきの推定が不安定になり、極端なt値も起こりやすくなります。'],
+      formula:'\\[t=\\frac{\\bar X-\\mu}{s/\\sqrt n},\\qquad \\mathrm{df}=n-1\\]',
+      sample:['t statistics','個のt値']
+    },
+    chi: {
+      title:['Chi-square: how surprising is this spread?','カイ二乗分布：このばらつきはどれくらい？'],
+      description:['Robo repeatedly takes samples from a normal population and measures their spread. The statistic is never negative and often has a long right tail.','ロボが正規母集団から標本を繰り返し取り、ばらつきを測ります。統計量は負にならず、右側に長い裾を持つことが多い分布です。'],
+      formula:'\\[\\chi^2=\\frac{(n-1)s^2}{\\sigma^2}=\\sum_{i=1}^{n}\\frac{(X_i-\\bar X)^2}{\\sigma^2},\\qquad \\mathrm{df}=n-1\\]',
+      sample:['chi-square values','個のカイ二乗値']
+    }
+  };
+  const config = configs[type];
+  const parameterControls = type === 'normal' ? `<label><span>${bilingual('Mean','平均')} <i>μ</i></span><input type="range" min="40" max="80" value="60" step="1" data-dist-mean><output data-dist-mean-value>60</output></label><label><span>${bilingual('Standard deviation','標準偏差')} <i>σ</i></span><input type="range" min="5" max="20" value="10" step="1" data-dist-sd><output data-dist-sd-value>10</output></label><label><span>${bilingual('Highlight','範囲を強調')}</span><select data-dist-band><option value="1">±1σ</option><option value="2" selected>±2σ</option><option value="3">±3σ</option></select></label>` : `<label><span>${bilingual('Sample size','標本サイズ')} <i>n</i></span><select data-dist-n><option value="3">3</option><option value="5" selected>5</option><option value="10">10</option><option value="30">30</option></select></label><span class="distribution-df" data-dist-df></span>`;
+  const aha = type === 'normal'
+    ? ['About 68%, 95%, and 99.7% fall within 1σ, 2σ, and 3σ. Try it: does your sample follow the rule?','約68％・95％・99.7％が平均±標準偏差1・2・3個分に入ります。標本でも確かめてみましょう。']
+    : type === 't'
+      ? ['Aha: lower df means heavier tails. Increase n and the t curve approaches the standard normal curve.','発見：自由度が小さいほど裾が厚くなります。nを増やすとt分布は標準正規分布に近づきます。']
+      : ['Aha: chi-square records squared deviations. More degrees of freedom make the curve less lopsided.','発見：カイ二乗は偏差を二乗して足し合わせます。自由度が増えると、分布の左右の偏りは小さくなります。'];
+  return `<section class="distribution-simulation" data-distribution-simulation data-distribution-type="${type}" aria-label="${config.title[0]}">
+    <header class="distribution-heading"><div><p class="section-kicker">${bilingual('DISTRIBUTION LAB','分布ラボ')}</p><h4>${bilingual(...config.title)}</h4></div><p>${bilingual(...config.description)}</p></header>
+    <div class="distribution-formula"><span>${bilingual('THE MODEL','モデル')}</span><div>${config.formula}</div></div>
+    <div class="distribution-controls">${parameterControls}<button type="button" class="distribution-run" data-dist-run>${bilingual('Run 1,000 trials','1,000回試す')}</button><button type="button" data-dist-clear>${bilingual('Clear','消去')}</button></div>
+    <div class="distribution-chart-wrap"><svg data-dist-chart viewBox="0 0 760 330" role="img" aria-label="Simulated distribution chart"></svg><div class="distribution-legend"><span class="distribution-legend-sample">${bilingual('Simulated','シミュレーション')}</span><span class="distribution-legend-theory">${type === 't' ? bilingual('t model','t分布') : type === 'chi' ? bilingual('Chi-square model','カイ二乗分布') : bilingual('Normal model','正規分布')}</span>${type === 't' ? `<span class="distribution-legend-normal">${bilingual('Standard normal','標準正規')}</span>` : ''}</div></div>
+    <div class="distribution-foot"><p data-dist-status aria-live="polite">${bilingual('Ready to sample.','試行できます。')}</p><p class="distribution-aha"><strong>💡 ${bilingual('Aha','気づき')}</strong> <span data-dist-aha>${bilingual(...aha)}</span></p></div>
+    <div class="distribution-robot" data-dist-robot aria-hidden="true"><span>🤖</span><span>${bilingual('Robo is ready to collect data.','ロボ、データ収集中。')}</span></div>
+  </section>`;
+}
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
@@ -330,7 +368,21 @@ function lectureSection(week) {
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
   const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>`;
-  const lectureBody = week.week === 2 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 2 lecture">
+  const lectureBody = week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">
+      <button type="button" role="tab" id="week-5-lecture-slides-tab" aria-controls="week-5-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
+      <button type="button" role="tab" id="week-5-lecture-explore-tab" aria-controls="week-5-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
+    </div><div id="week-5-lecture-slides" role="tabpanel" aria-labelledby="week-5-lecture-slides-tab">${content}</div><div id="week-5-lecture-explore" role="tabpanel" aria-labelledby="week-5-lecture-explore-tab" hidden>${distributionSimulationMarkup('normal')}</div>`
+    : week.week === 6 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 6 lecture">
+      <button type="button" role="tab" id="week-6-lecture-slides-tab" aria-controls="week-6-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
+      <button type="button" role="tab" id="week-6-lecture-explore-tab" aria-controls="week-6-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
+    </div><div id="week-6-lecture-slides" role="tabpanel" aria-labelledby="week-6-lecture-slides-tab">${content}</div><div id="week-6-lecture-explore" role="tabpanel" aria-labelledby="week-6-lecture-explore-tab" hidden>
+      <div class="simulation-tablist" role="tablist" aria-label="Choose a distribution">
+        <button type="button" role="tab" id="week-6-t-tab" aria-controls="week-6-t" aria-selected="true" tabindex="0">01 <span>${bilingual('t distribution','t分布')}</span></button>
+        <button type="button" role="tab" id="week-6-chi-tab" aria-controls="week-6-chi" aria-selected="false" tabindex="-1">02 <span>${bilingual('Chi-square','カイ二乗分布')}</span></button>
+      </div>
+      <div id="week-6-t" role="tabpanel" aria-labelledby="week-6-t-tab">${distributionSimulationMarkup('t')}</div>
+      <div id="week-6-chi" role="tabpanel" aria-labelledby="week-6-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div>
+    </div>` : week.week === 2 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 2 lecture">
       <button type="button" role="tab" id="week-2-lecture-slides-tab" aria-controls="week-2-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-2-lecture-explore-tab" aria-controls="week-2-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore', 'やってみる')}</button>
     </div>
