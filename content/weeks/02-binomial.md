@@ -29,4 +29,3 @@ prepare_en: Review combinations and the notation used for random variables.
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_02_確率分布_離散確率分布_前半v2.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_02_確率分布_離散確率分布_前半v2.pdf) {supplementary}
 - [AL用ワークシート](weeks/02-discrete-distributions-i/02_AL用ワークシート.xlsx) {worksheet}
-- [Yoh textbook notes: binomial distribution](other material/2025 yoh/07 確率分布_2_連続確率分布/textbook 2-2.pdf) {yoh}
