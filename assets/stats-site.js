@@ -287,6 +287,23 @@ function combinationMarkup() {
   </section>`;
 }
 
+function battingSimulationMarkup() {
+  return `<section class="batting-simulation" data-batting-simulation aria-label="Batting average simulation">
+    <div class="batting-intro"><div><p class="section-kicker">${bilingual('A BINOMIAL EXPERIMENT', '二項分布を体験')}</p><h4>${bilingual('A game at the plate', '打率シミュレーター')}</h4></div><p>${bilingual('Choose a hit rate and number of at-bats. Play one game, then run many games to compare the results with the binomial model.', '打率と打席数を決めて1試合をプレイ。その後たくさん試して、結果と二項分布を比べよう。')}</p></div>
+    <div class="batting-controls">
+      <label>${bilingual('At-bats per game', '1試合の打席数')} <select data-batting-n aria-label="At-bats per game"><option value="3">3</option><option value="5" selected>5</option><option value="9">9</option></select></label>
+      <label class="batting-rate-control">${bilingual('Chance of a hit', 'ヒットの確率')} <input id="batting-hit-rate" data-batting-p type="range" min="0.05" max="0.80" step="0.01" value="0.32"><output data-batting-p-label for="batting-hit-rate">32%</output></label>
+      <button type="button" data-batting-one>${bilingual('Play one game', '1試合をプレイ')}</button>
+      <button type="button" class="batting-run-button" data-batting-many>${bilingual('Run 500 games', '500試合を実行')}</button>
+      <button type="button" class="batting-reset" data-batting-reset>${bilingual('Reset', 'リセット')}</button>
+    </div>
+    <p class="batting-assumption">${bilingual('Each at-bat is an independent chance with the same hit probability.', '各打席は、同じ確率で起きる独立した試行です。')}</p>
+    <div class="batting-play-area"><div class="batting-game-card"><div class="batting-result-head"><strong>${bilingual('One game', '1試合')}</strong><span data-batting-single-status aria-live="polite">${bilingual('Ready when you are.', '準備ができたら始めよう。')}</span></div><div class="batting-atbats" data-batting-atbats aria-label="At-bat results"></div><p class="batting-game-total" data-batting-game-total></p></div>
+      <div class="batting-chart-card"><div class="batting-chart-heading"><strong>${bilingual('Hits per game', '1試合の安打数')}</strong><span data-batting-batch-status aria-live="polite">${bilingual('Run games to build the chart.', '試合を実行するとグラフが表示されます。')}</span></div><div class="batting-chart-legend"><span class="batting-legend-observed">${bilingual('Observed', '実測')}</span><span class="batting-legend-model">${bilingual('Binomial model', '二項分布の理論値')}</span></div><div class="batting-chart" data-batting-chart role="group" aria-label="Observed and expected hits per game"></div><p class="batting-model-note" data-batting-model-note></p></div>
+    </div>
+  </section>`;
+}
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
@@ -306,7 +323,14 @@ function lectureSection(week) {
       <button type="button" role="tab" id="week-2-lecture-explore-tab" aria-controls="week-2-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore', 'やってみる')}</button>
     </div>
     <div id="week-2-lecture-slides" role="tabpanel" aria-labelledby="week-2-lecture-slides-tab">${content}</div>
-    <div id="week-2-lecture-explore" role="tabpanel" aria-labelledby="week-2-lecture-explore-tab" hidden>${combinationMarkup()}</div>` : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
+    <div id="week-2-lecture-explore" role="tabpanel" aria-labelledby="week-2-lecture-explore-tab" hidden>
+      <div class="simulation-tablist" role="tablist" aria-label="Choose a Week 2 activity">
+        <button type="button" role="tab" id="week-2-combinations-tab" aria-controls="week-2-combinations" aria-selected="true" tabindex="0">01 <span>${bilingual('Lineup combinations', 'ロボットの並び')}</span></button>
+        <button type="button" role="tab" id="week-2-batting-tab" aria-controls="week-2-batting" aria-selected="false" tabindex="-1">02 <span>${bilingual('Batting average', '打率')}</span></button>
+      </div>
+      <div id="week-2-combinations" role="tabpanel" aria-labelledby="week-2-combinations-tab">${combinationMarkup()}</div>
+      <div id="week-2-batting" role="tabpanel" aria-labelledby="week-2-batting-tab" hidden>${battingSimulationMarkup()}</div>
+    </div>` : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
     </div>
