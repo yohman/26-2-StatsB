@@ -139,7 +139,7 @@ function lectureDecks(materials, week) {
     if (used.has(item.href)) return [];
     const ext = extension(item.href);
     const sourceLabel = item.label.replace(/\s*\((PowerPoint|PDF)\)$/i, '');
-    const label = item.type === 'primary' && /^Tsumura 2026 lecture slides/i.test(sourceLabel)
+    const label = /^Tsumura 2026 lecture slides/i.test(sourceLabel)
       ? (week.week === 13 ? '回帰分析とその他の代表的な分析手法 / 回帰分析の結果の解釈（後半）' : week.title_ja)
       : sourceLabel;
     if (ext === 'PPTX') {
@@ -159,6 +159,7 @@ function slideThumbnail(deck, week) {
     if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png`;
   }
   if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
+  if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20260930';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
 }
