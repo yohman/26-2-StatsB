@@ -96,6 +96,18 @@
 .agenda-page .combination-intro{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:22px}
 .agenda-page .combination-intro h4{margin:3px 0 0;font:700 clamp(24px,2.8vw,34px)/1.2 Fraunces,'Noto Serif JP',Georgia,serif}
 .agenda-page .combination-intro>p{max-width:40ch;margin:0;color:var(--course-muted);font-size:14px;line-height:1.6}
+.agenda-page .combination-equation-card{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(230px,.75fr);gap:18px;align-items:center;margin:0 0 17px;padding:18px 21px;border-left:4px solid #45877f;background:#e8f2ed}
+.agenda-page .combination-equation-copy>.section-kicker{margin:0;color:#28796c;font:700 10px 'DM Mono',monospace;letter-spacing:.08em}
+.agenda-page .combination-equation{min-height:64px;display:flex;align-items:center;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;padding:7px 0 4px;color:var(--course-ink);font-size:clamp(27px,3.4vw,42px);font-weight:700;line-height:1.25;white-space:nowrap}
+.agenda-page .combination-equation .mjx-container{margin:0!important}
+.agenda-page .combination-equation-detail{overflow-x:auto;padding:4px 0 1px;color:#4b5e56;font-size:clamp(13px,1.5vw,18px);line-height:1.4;white-space:nowrap}
+.agenda-page .combination-equation-detail .mjx-container{margin:0!important}
+.agenda-page .combination-equation-note{margin:4px 0 0;color:var(--course-muted);font-size:11px;line-height:1.5}
+.agenda-page .combination-equation-controls{display:grid;gap:10px;padding:13px 15px;border:1px solid #c2d6cc;background:rgba(255,255,255,.65)}
+.agenda-page .combination-equation-controls label{display:grid;grid-template-columns:minmax(0,1fr) 20px 78px;gap:8px;align-items:center;color:var(--course-ink);font-size:12px;font-weight:700}
+.agenda-page .combination-equation-controls .math-variable{color:#28796c;font:italic 700 17px Georgia,serif;text-align:center}
+.agenda-page .combination-equation-controls select{min-height:37px;border:1px solid #9eafa6;padding:5px 8px;background:#fff;color:var(--course-ink);font:700 14px 'DM Mono',monospace}
+.agenda-page .combination-equation-controls select:focus-visible{outline:2px solid #28796c;outline-offset:2px}
 .agenda-page .combination-controls{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
 .agenda-page .combination-controls label{display:flex;align-items:center;gap:9px;color:var(--course-ink);font-size:13px;font-weight:700}
 .agenda-page .combination-controls select,.agenda-page .combination-controls input{width:74px;min-height:39px;border:1px solid #b9aa99;border-radius:3px;padding:6px 9px;background:#fff;color:var(--course-ink);font:700 16px Manrope,sans-serif}
@@ -122,7 +134,7 @@
 .agenda-page .combination-found-mark{margin-left:auto;color:#28796c;font-weight:800}
 @keyframes combination-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.agenda-page .combination-lineup{animation:none}.agenda-page .combination-slot{transition:none}}
-@media(max-width:640px){.agenda-page .combination-intro{display:block}.agenda-page .combination-intro>p{margin-top:10px}.agenda-page .combination-slot{width:54px;height:62px;font-size:32px}.agenda-page .combination-builder{gap:5px;padding:14px 5px}}
+@media(max-width:640px){.agenda-page .combination-intro{display:block}.agenda-page .combination-intro>p{margin-top:10px}.agenda-page .combination-equation-card{grid-template-columns:1fr;padding:15px}.agenda-page .combination-equation-controls{grid-template-columns:1fr 1fr}.agenda-page .combination-equation-controls label{grid-template-columns:minmax(0,1fr) 16px 58px;gap:5px;font-size:11px}.agenda-page .combination-equation{font-size:30px}.agenda-page .combination-slot{width:54px;height:62px;font-size:32px}.agenda-page .combination-builder{gap:5px;padding:14px 5px}}
 .agenda-page .batting-simulation{max-width:1080px}
 .agenda-page .batting-intro{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:18px}
 .agenda-page .batting-intro h4{margin:3px 0 0;font:700 clamp(24px,2.8vw,34px)/1.2 Fraunces,'Noto Serif JP',Georgia,serif}

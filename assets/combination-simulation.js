@@ -18,6 +18,7 @@
     const builder = root.querySelector('[data-combination-builder]');
     const hint = root.querySelector('[data-combination-hint]');
     const results = root.querySelector('[data-combination-results]');
+    const equation = root.querySelector('[data-combination-equation]');
     const save = root.querySelector('[data-combination-save]');
     let n = 5, k = 2, lineup = [1, 1, 0, 0, 0], revealed = false;
     let saved = new Set();
@@ -38,6 +39,27 @@
       revealed = false;
       guess.value = '';
       render();
+    }
+
+    function factorialFactors(value) {
+      if (value === 0) return '1';
+      return Array.from({ length:value }, (_, index) => value - index).join('\\times ');
+    }
+
+    function updateEquation() {
+      const total = choose(n, k);
+      const numerator = factorialFactors(n);
+      const leftDenominator = factorialFactors(k);
+      const rightDenominator = factorialFactors(n - k);
+      const source = String.raw`\[{}_{${n}}C_{${k}}=\frac{${n}!}{${k}!(${n}-${k})!}=${total}\]`;
+      const worked = String.raw`\[\frac{${n}!}{${k}!(${n}-${k})!}=\frac{${numerator}}{(${leftDenominator})(${rightDenominator})}=${total}\]`;
+      const detail = root.querySelector('[data-combination-equation-detail]');
+      if (window.MathJax?.typesetClear) window.MathJax.typesetClear([equation, detail]);
+      equation.replaceChildren(document.createTextNode(source));
+      detail.replaceChildren(document.createTextNode(worked));
+      if (window.MathJax?.typesetPromise) {
+        window.MathJax.typesetPromise([equation, detail]).catch(() => {});
+      }
     }
 
     function row(bits, index, discovered) {
@@ -98,13 +120,10 @@
         const heading = document.createElement('p');
         heading.className = 'combination-answer';
         heading.textContent = t(`${n} positions, ${k} robots: ${total} different lineups.`, `${n}か所にロボット${k}体：並びは${total}通り。`);
-        const formula = document.createElement('p');
-        formula.className = 'combination-formula';
-        formula.textContent = `C(${n},${k}) = ${n}! / (${k}! × ${n - k}!) = ${total}　　Pr(X=${k}) = ${total} / 2^${n} = ${(100 * total / 2 ** n).toFixed(2).replace(/\.00$/, '')}%`;
         const note = document.createElement('p');
         note.className = 'combination-note';
         note.textContent = t(`Each exact lineup has chance 1/${2 ** n} when robot and goat are equally likely and independent.${guess.value ? ` Your guess was ${answer}${answer === total ? ' — exactly right!' : '.'}` : ''}`, `ロボットとヤギが同じ確率で独立なら、特定の並び1つは1/${2 ** n}。${guess.value ? `あなたの予想は${answer}通り${answer === total ? '。正解！' : '。'}` : ''}`);
-        results.append(heading, formula, note);
+        results.append(heading, note);
       } else if (saved.size) {
         const count = document.createElement('p');
         count.className = 'combination-saved-count';
@@ -118,9 +137,10 @@
       n = Number(nSelect.value);
       k = Math.min(k, n);
       fillK();
+      updateEquation();
       reset();
     });
-    kSelect.addEventListener('change', () => { k = Number(kSelect.value); reset(); });
+    kSelect.addEventListener('change', () => { k = Number(kSelect.value); updateEquation(); reset(); });
     root.querySelector('[data-combination-save]').addEventListener('click', () => {
       if (lineup.reduce((total, value) => total + value, 0) !== k) return;
       saved.add(lineup.join(''));
@@ -130,6 +150,8 @@
     root.querySelector('[data-combination-reset]').addEventListener('click', reset);
     new MutationObserver(render).observe(document.documentElement, { attributes:true, attributeFilter:['data-language'] });
     fillK();
+    updateEquation();
+    if (document.readyState !== 'complete') window.addEventListener('load', updateEquation, { once:true });
     render();
   }
 

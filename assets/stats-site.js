@@ -275,9 +275,14 @@ function montyHallMarkup() {
 function combinationMarkup() {
   return `<section class="combination-simulation" data-combination-simulation aria-label="Robot and goat combinations">
     <div class="combination-intro"><div><p class="section-kicker">${bilingual('COUNT THE LINEUPS', '並び方を数える')}</p><h4>${bilingual('Robots in the lineup', 'ロボットは何通り？')}</h4></div><p>${bilingual('Place the robots in different positions. How many unique lineups can you make?', 'ロボットを別の位置に置いてみよう。重複しない並びは何通り？')}</p></div>
+    <div class="combination-equation-card">
+      <div class="combination-equation-copy"><p class="section-kicker">${bilingual('THE COMBINATION RULE', '組合せの公式')}</p><div class="combination-equation" data-combination-equation aria-live="polite">\\[{}_{5}C_{2}=\\frac{5!}{2!(5-2)!}=10\\]</div><div class="combination-equation-detail" data-combination-equation-detail>\\[\\frac{5!}{2!(5-2)!}=\\frac{5\\times4\\times3\\times2\\times1}{(2\\times1)(3\\times2\\times1)}=10\\]</div><p class="combination-equation-note" data-combination-equation-note>${bilingual('Choose k positions from n. The order of the robots does not matter.', 'nか所からkか所を選ぶ。ロボットを置く順番は数えません。')}</p></div>
+      <div class="combination-equation-controls">
+        <label>${bilingual('Positions', '並ぶ位置数')} <span class="math-variable">n</span> <select data-combination-n aria-label="Number of positions"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select></label>
+        <label>${bilingual('Robots', 'ロボットの数')} <span class="math-variable">k</span> <select data-combination-k aria-label="Number of robots"></select></label>
+      </div>
+    </div>
     <div class="combination-controls">
-      <label>${bilingual('Positions', '並ぶ数')} <select data-combination-n aria-label="Number of positions"><option value="3">3</option><option value="4">4</option><option value="5" selected>5</option><option value="6">6</option></select></label>
-      <label>${bilingual('Robots', 'ロボットの数')} <select data-combination-k aria-label="Number of robots"></select></label>
       <label>${bilingual('Your guess', '予想')} <input data-combination-guess type="number" min="1" max="64" inputmode="numeric" placeholder="?" aria-label="Guess the number of lineups"></label>
     </div>
     <div class="combination-builder" data-combination-builder role="group" aria-label="Click positions to place robots"></div>
