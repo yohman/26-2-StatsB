@@ -12,7 +12,7 @@
 <body class="viewer-page">
   <header class="site-header"><a class="wordmark" href="index.html"><img src="favicon.svg?v=20260927-b-mark-1" alt="" width="42" height="42">2026–2 Statistics B</a><div class="header-tools"><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
   <main class="viewer-main wrap">
-    <a class="viewer-back" data-viewer-back href="agenda.html"><span aria-hidden="true">←</span><span class="lang-en">BACK TO AGENDA</span><span class="lang-ja" lang="ja">授業予定に戻る</span></a>
+    <a class="viewer-back" data-viewer-back href="agenda.html"><span aria-hidden="true">←</span><span class="lang-en">BACK</span><span class="lang-ja" lang="ja">戻る</span></a>
     <div class="viewer-top"><div><p class="eyebrow"><span class="lang-en">FILE PREVIEW</span><span class="lang-ja" lang="ja">資料プレビュー</span></p><h1 data-viewer-title>Course file</h1></div><div class="viewer-actions"><a data-download href="#" download><span class="lang-en">DOWNLOAD</span><span class="lang-ja" lang="ja">ダウンロード</span> ↓</a></div></div>
     <div data-viewer-content></div>
     <section class="viewer-links" data-viewer-links hidden>
@@ -41,7 +41,13 @@
       sourceDownload.innerHTML = '<span class="lang-en">DOWNLOAD PPTX</span><span class="lang-ja" lang="ja">PPTXをダウンロード</span> ↓';
       document.querySelector('.viewer-actions').append(sourceDownload);
     }
-    document.querySelector('[data-viewer-back]').href = returnTo;
+    const backLink = document.querySelector('[data-viewer-back]');
+    backLink.href = returnTo;
+    backLink.addEventListener('click', event => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || history.length <= 1) return;
+      event.preventDefault();
+      history.back();
+    });
     const content = document.querySelector('[data-viewer-content]');
     if (week === 'W01' && /\/(?:w1|w3)\.pdf$/i.test(file)) {
       document.querySelector('[data-viewer-links]').hidden = false;
