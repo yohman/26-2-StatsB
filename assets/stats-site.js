@@ -321,12 +321,50 @@ function battingSimulationMarkup() {
 
 function week2DiscreteMarkup() {
   return `<section class="week2-probability-lab" data-week2-discrete aria-label="Discrete and continuous probability">
-    <header class="week2-lab-heading"><div><p class="section-kicker">${bilingual('TWO WAYS PROBABILITY WORKS','確率の2つの考え方')}</p><h4>${bilingual('Count it—or measure it?','数える？それとも測る？')}</h4></div><p>${bilingual('A count can land on separate values. A measurement can land anywhere along a scale. Compare what probability means in each case.','個数は飛び飛びの値をとり、測定値は目盛りの間にも現れます。それぞれの確率の意味を比べてみましょう。')}</p></header>
+    <header class="week2-lab-heading"><div><p class="section-kicker">${bilingual('TWO WAYS PROBABILITY WORKS','確率の2つの考え方')}</p><h4>${bilingual('Count it—or measure it?','数える？それとも測る？')}</h4></div><p>${bilingual('Move the sliders. Watch the selected values enter the formula, then see that probability in the chart.','スライダーを動かそう。選んだ値を公式に入れると、その確率がグラフに現れます。')}</p></header>
     <div class="week2-compare-grid">
-      <article class="week2-compare-card week2-discrete-card"><div class="week2-card-top"><span class="week2-type-chip">${bilingual('DISCRETE · COUNT','離散 · 個数')}</span><span class="week2-card-icon" aria-hidden="true">🪙</span></div><h5>${bilingual('Heads in 5 tosses','コイン5回の表')}</h5><p>${bilingual('With a fair coin, the count can only be 0, 1, 2, 3, 4, or 5. Choose one result to see its probability.','公平なコインでは、表の回数は0〜5回のどれか。結果を選ぶと、その確率がわかります。')}</p><label class="week2-control-label">${bilingual('Number of heads','表の回数')} <select data-w2-discrete-k aria-label="Number of heads"><option>0</option><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></label><div class="week2-discrete-bars" data-w2-discrete-bars role="img" aria-label="Probability for each number of heads"></div><div class="week2-probability-answer"><span>${bilingual('PROBABILITY OF THIS COUNT','この回数になる確率')}</span><strong data-w2-discrete-answer>—</strong></div><p class="week2-mini-formula" data-w2-discrete-formula></p></article>
-      <article class="week2-compare-card week2-continuous-card"><div class="week2-card-top"><span class="week2-type-chip">${bilingual('CONTINUOUS · MEASURE','連続 · 測定')}</span><span class="week2-card-icon" aria-hidden="true">🤖</span></div><h5>${bilingual('Robot height','ロボの身長')}</h5><p>${bilingual('Heights can take any value. Here, mean = 170 cm and SD = 6 cm; the shaded area is probability.','身長はどんな値にもなります。ここでは平均170cm、標準偏差6cm。色のついた面積が確率です。')}</p><label class="week2-control-label">${bilingual('Range around the average','平均からの範囲')} <select data-w2-continuous-band aria-label="Range around the average"><option value="0.5">±0.5σ</option><option value="1" selected>±1σ</option><option value="2">±2σ</option></select></label><div class="week2-density-chart"><svg data-w2-density viewBox="0 0 440 185" role="img" aria-label="Normal density curve with highlighted interval"></svg></div><div class="week2-probability-answer"><span data-w2-continuous-caption>${bilingual('CHANCE WITHIN THIS RANGE','この範囲に入る確率')}</span><strong data-w2-continuous-answer>—</strong></div><p class="week2-mini-formula">P(X = 170 cm) = 0</p></article>
+      <article class="week2-compare-card week2-discrete-card">
+        <div class="week2-card-top"><span class="week2-type-chip">${bilingual('DISCRETE · COUNT','離散 · 個数')}</span><span class="week2-card-icon" aria-hidden="true">🪙</span></div>
+        <h5>${bilingual('Heads in 5 tosses','コイン5回の表')}</h5>
+        <p>${bilingual('Fair coin · 5 independent tosses · each toss has a 50% chance of heads.','公平なコインを独立に5回投げます。1回ごとの表の確率は50％。')}</p>
+        <div class="week2-slider-control">
+          <label for="w2-heads-slider">${bilingual('Heads to calculate','計算する表の回数')} <i>k</i></label><output for="w2-heads-slider" data-w2-discrete-value>2</output>
+          <input id="w2-heads-slider" type="range" min="0" max="5" step="1" value="2" data-w2-discrete-k>
+          <div class="week2-slider-ticks" aria-hidden="true"><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+        </div>
+        <div class="week2-equation-card">
+          <span class="week2-equation-label">${bilingual('REMEMBER THIS FORMULA','覚えておきたい公式')}</span>
+          <div class="week2-memory-formula" data-w2-discrete-rule>Pr(X = k) = ₙCₖ · pᵏ · (1 − p)ⁿ⁻ᵏ</div>
+          <p class="week2-formula-key">n = 5　p = 0.5　<span data-w2-discrete-key>k = 2</span></p>
+          <div class="week2-worked-formula" data-w2-discrete-formula></div>
+          <div class="week2-equation-result"><span data-w2-discrete-caption>${bilingual('CHANCE OF EXACTLY 2 HEADS','ちょうど2回が表になる確率')}</span><strong data-w2-discrete-answer>31.25%</strong></div>
+        </div>
+        <p class="week2-chart-link">↓ ${bilingual('The formula gives the highlighted bar.','公式の答えが、色のついた棒になります。')}</p>
+        <div class="week2-discrete-bars" data-w2-discrete-bars role="group" aria-label="Probability for each number of heads"></div>
+      </article>
+      <article class="week2-compare-card week2-continuous-card">
+        <div class="week2-card-top"><span class="week2-type-chip">${bilingual('CONTINUOUS · MEASURE','連続 · 測定')}</span><span class="week2-card-icon" aria-hidden="true">🤖</span></div>
+        <h5>${bilingual('Robot height','ロボの身長')}</h5>
+        <p>${bilingual('A normal model: mean μ = 170 cm, standard deviation σ = 6 cm.','正規分布の例：平均 μ = 170cm、標準偏差 σ = 6cm。')}</p>
+        <div class="week2-slider-control">
+          <label for="w2-height-slider">${bilingual('Range around the mean','平均からの範囲')}</label><output for="w2-height-slider" data-w2-continuous-value>±1σ</output>
+          <input id="w2-height-slider" type="range" min="0" max="3" step="0.1" value="1" data-w2-continuous-band>
+          <div class="week2-slider-ticks" aria-hidden="true"><span>0σ</span><span>1σ</span><span>2σ</span><span>3σ</span></div>
+        </div>
+        <div class="week2-equation-card">
+          <span class="week2-equation-label">${bilingual('REMEMBER THIS FORMULA','覚えておきたい公式')}</span>
+          <div class="week2-memory-formula" data-w2-continuous-rule>Pr(a ≤ X ≤ b) = ∫ₐᵇ f(x) dx</div>
+          <p class="week2-formula-key" data-w2-continuous-key>170 ± 1 × 6 → 164〜176cm</p>
+          <p class="week2-z-key">Z = (X − 170) / 6</p>
+          <div class="week2-worked-formula" data-w2-continuous-formula></div>
+          <div class="week2-equation-result"><span data-w2-continuous-caption>${bilingual('CHANCE FROM 164 TO 176 CM','164〜176cmの確率')}</span><strong data-w2-continuous-answer>68.27%</strong></div>
+        </div>
+        <p class="week2-chart-link">↓ ${bilingual('The formula gives the shaded area.','公式の答えが、色のついた面積になります。')}</p>
+        <div class="week2-density-chart"><svg data-w2-density viewBox="0 0 440 185" role="img" aria-label="Normal density curve with highlighted interval"></svg></div>
+        <p class="week2-point-note">${bilingual('One exact point: Pr(X = 170) = 0. A range has area—and probability.','1点だけなら Pr(X = 170) = 0。範囲に面積があり、その面積が確率です。')}</p>
+      </article>
     </div>
-    <p class="week2-aha"><strong>💡 ${bilingual('The key difference','ここがポイント')}</strong> ${bilingual('Discrete: probability belongs to each count. Continuous: probability is area across an interval—not the curve height at one point.','離散：それぞれの個数に確率がある。連続：確率は範囲の面積で、1点の曲線の高さではありません。')}</p>
+    <p class="week2-aha"><strong>💡 ${bilingual('The key difference','ここがポイント')}</strong> ${bilingual('Discrete: a probability for each count. Continuous: add the density across a range to find its probability.','離散：個数ごとに確率がある。連続：範囲の中の密度を足し合わせた面積が確率になる。')}</p>
   </section>`;
 }
 

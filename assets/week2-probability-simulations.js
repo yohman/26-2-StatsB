@@ -11,30 +11,61 @@
   function setupDiscrete(root) {
     if (root.dataset.initialized) return;
     root.dataset.initialized = 'true';
-    const kSelect = root.querySelector('[data-w2-discrete-k]');
+    const kSlider = root.querySelector('[data-w2-discrete-k]');
     const discreteBars = root.querySelector('[data-w2-discrete-bars]');
     const discreteAnswer = root.querySelector('[data-w2-discrete-answer]');
     const discreteFormula = root.querySelector('[data-w2-discrete-formula]');
-    const bandSelect = root.querySelector('[data-w2-continuous-band]');
+    const bandSlider = root.querySelector('[data-w2-continuous-band]');
     const densitySvg = root.querySelector('[data-w2-density]');
     const continuousAnswer = root.querySelector('[data-w2-continuous-answer]');
     const continuousCaption = root.querySelector('[data-w2-continuous-caption]');
+    const formulaTimers = new WeakMap();
+
+    // Render off-screen first, then swap in finished math. Slider updates never expose raw TeX.
+    function renderFormula(element, source, fallback) {
+      element.dataset.mathSource = source;
+      if (!element.querySelector('mjx-container')) element.textContent = fallback;
+      window.clearTimeout(formulaTimers.get(element));
+      formulaTimers.set(element, window.setTimeout(async () => {
+        const math = window.MathJax;
+        if (!math?.tex2chtmlPromise) return;
+        try {
+          await math.startup.promise;
+          if (element.dataset.mathSource !== source) return;
+          const rendered = await math.tex2chtmlPromise(source, { display: true });
+          if (element.dataset.mathSource !== source) return;
+          element.replaceChildren(rendered);
+          element.dataset.renderedSource = source;
+          math.startup.document.reset();
+          math.startup.document.updateDocument();
+        } catch {
+          if (element.dataset.mathSource === source) element.textContent = fallback;
+        }
+      }, 40));
+    }
 
     function drawDiscrete() {
-      const selected = Number(kSelect.value);
+      const selected = Number(kSlider.value);
+      root.querySelector('[data-w2-discrete-value]').textContent = String(selected);
+      root.querySelector('[data-w2-discrete-key]').textContent = 'k = ' + selected;
+      root.querySelector('[data-w2-discrete-caption]').textContent = t('CHANCE OF EXACTLY ' + selected + ' HEADS', 'ちょうど' + selected + '回が表になる確率');
       discreteBars.replaceChildren(...Array.from({ length: 6 }, (_, k) => {
         const probability = choose(5, k) / 32;
         const column = document.createElement('button');
         column.type = 'button';
-        column.className = `week2-discrete-column${k === selected ? ' is-selected' : ''}`;
-        column.setAttribute('aria-label', t(`${k} heads: ${(probability * 100).toFixed(2)}%`, `表${k}回：${(probability * 100).toFixed(2)}％`));
-        column.innerHTML = `<span class="week2-discrete-value">${(probability * 100).toFixed(0)}%</span><span class="week2-discrete-bar" style="--bar-height:${probability / (10 / 32) * 100}%"></span><span class="week2-discrete-x">${k}</span>`;
-        column.addEventListener('click', () => { kSelect.value = String(k); drawDiscrete(); });
+        column.className = 'week2-discrete-column' + (k === selected ? ' is-selected' : '');
+        column.setAttribute('aria-pressed', String(k === selected));
+        column.setAttribute('aria-label', t(k + ' heads: ' + (probability * 100).toFixed(2) + '%', '表' + k + '回：' + (probability * 100).toFixed(2) + '％'));
+        column.innerHTML = '<span class="week2-discrete-value">' + (probability * 100).toFixed(0) + '%</span><span class="week2-discrete-bar" style="--bar-height:' + probability / (10 / 32) * 100 + '%"></span><span class="week2-discrete-x">' + k + '</span>';
+        column.addEventListener('click', () => { kSlider.value = String(k); drawDiscrete(); });
         return column;
       }));
-      const probability = choose(5, selected) / 32;
-      discreteAnswer.textContent = `${(probability * 100).toFixed(2)}%`;
-      discreteFormula.textContent = t(`P(X = ${selected}) = ₅C${selected} × (0.5)^${selected} × (0.5)^${5-selected} = ${(probability * 100).toFixed(2)}%`, `P(X = ${selected}) = ₅C${selected} × (0.5)^${selected} × (0.5)^${5-selected} = ${(probability * 100).toFixed(2)}％`);
+      const combinations = choose(5, selected);
+      const probability = combinations / 32;
+      discreteAnswer.textContent = (probability * 100).toFixed(2) + '%';
+      renderFormula(discreteFormula,
+        String.raw`\begin{aligned}\Pr(X=${selected})&={}_5C_{${selected}}(0.5)^{${selected}}(0.5)^{${5-selected}}\\&=\frac{${combinations}}{32}=${probability.toFixed(4)}\end{aligned}`,
+        'Pr(X = ' + selected + ') = C(5, ' + selected + ') × 0.5^' + selected + ' × 0.5^' + (5-selected) + ' = ' + probability.toFixed(4));
     }
 
     function erf(x) {
@@ -47,26 +78,45 @@
     }
 
     function drawDensity() {
-      const band = Number(bandSelect.value);
+      const band = Number(bandSlider.value);
+      const low = Number((170 - band * 6).toFixed(1));
+      const high = Number((170 + band * 6).toFixed(1));
+      const probability = band === 0 ? 0 : erf(band / Math.sqrt(2));
+      root.querySelector('[data-w2-continuous-value]').textContent = '±' + band + 'σ';
+      root.querySelector('[data-w2-continuous-key]').textContent = '170 ± ' + band + ' × 6 → ' + low + '〜' + high + ' cm';
+      renderFormula(root.querySelector('[data-w2-continuous-formula]'),
+        String.raw`\begin{aligned}\Pr(${low}\le X\le${high})&=\Pr(${band===0?0:-band}\le Z\le${band})\\&=${probability.toFixed(4)}\end{aligned}`,
+        'Pr(' + low + ' ≤ X ≤ ' + high + ') = Pr(' + (band===0?0:-band) + ' ≤ Z ≤ ' + band + ') = ' + probability.toFixed(4));
       const x0 = 34, x1 = 406, baseline = 151, peak = 20;
       const xFor = z => x0 + (z + 3.5) / 7 * (x1 - x0);
       const yFor = z => baseline - Math.exp(-0.5 * z * z) * (baseline - peak);
       const curve = Array.from({ length: 141 }, (_, i) => {
         const z = -3.5 + 7 * i / 140;
-        return `${i ? 'L' : 'M'}${xFor(z).toFixed(1)},${yFor(z).toFixed(1)}`;
+        return (i ? 'L' : 'M') + xFor(z).toFixed(1) + ',' + yFor(z).toFixed(1);
       }).join(' ');
       const samples = Array.from({ length: 41 }, (_, i) => -band + 2 * band * i / 40);
-      const area = `M${xFor(-band)},${baseline} ${samples.map(z => `L${xFor(z).toFixed(1)},${yFor(z).toFixed(1)}`).join(' ')} L${xFor(band)},${baseline} Z`;
-      const ticks = [-3,-2,-1,0,1,2,3].map(z => `<line class="w2-density-tick" x1="${xFor(z)}" y1="${baseline}" x2="${xFor(z)}" y2="${baseline+5}"/><text class="w2-density-label" x="${xFor(z)}" y="${baseline+18}" text-anchor="middle">${z === 0 ? 'μ' : `${z}σ`}</text>`).join('');
-      const probability = erf(band / Math.sqrt(2));
-      densitySvg.innerHTML = `<line class="w2-density-axis" x1="${x0}" y1="${baseline}" x2="${x1}" y2="${baseline}"/><path class="w2-density-area" d="${area}"/><path class="w2-density-curve" d="${curve}"/><line class="w2-density-mean" x1="${xFor(0)}" y1="${yFor(0)}" x2="${xFor(0)}" y2="${baseline}"/>${ticks}<text class="w2-density-range" x="${xFor(0)}" y="14" text-anchor="middle">${(probability * 100).toFixed(1)}% ${t('in the shaded range','色のついた範囲')}</text>`;
-      continuousAnswer.textContent = `${(probability * 100).toFixed(1)}%`;
-      continuousCaption.textContent = t(`CHANCE FROM ${170 - band * 6} TO ${170 + band * 6} CM`, `${170-band*6}〜${170+band*6}cmの確率`);
+      const area = 'M' + xFor(-band) + ',' + baseline + ' ' + samples.map(z => 'L' + xFor(z).toFixed(1) + ',' + yFor(z).toFixed(1)).join(' ') + ' L' + xFor(band) + ',' + baseline + ' Z';
+      const ticks = [-3,-2,-1,0,1,2,3].map(z => '<line class="w2-density-tick" x1="' + xFor(z) + '" y1="' + baseline + '" x2="' + xFor(z) + '" y2="' + (baseline+5) + '"/><text class="w2-density-label" x="' + xFor(z) + '" y="' + (baseline+18) + '" text-anchor="middle">' + (z === 0 ? 'μ' : z + 'σ') + '</text>').join('');
+      densitySvg.innerHTML = '<line class="w2-density-axis" x1="' + x0 + '" y1="' + baseline + '" x2="' + x1 + '" y2="' + baseline + '"/><path class="w2-density-area" d="' + area + '"/><path class="w2-density-curve" d="' + curve + '"/><line class="w2-density-mean" x1="' + xFor(0) + '" y1="' + yFor(0) + '" x2="' + xFor(0) + '" y2="' + baseline + '"/>' + ticks + '<text class="w2-density-range" x="' + xFor(0) + '" y="14" text-anchor="middle">' + (probability * 100).toFixed(2) + '%</text>';
+      densitySvg.setAttribute('aria-label', t('Normal density: shaded range ' + low + ' to ' + high + ' cm, probability ' + (probability * 100).toFixed(2) + '%', '正規分布の密度：' + low + '〜' + high + 'cmの面積、確率' + (probability * 100).toFixed(2) + '％'));
+      continuousAnswer.textContent = (probability * 100).toFixed(2) + '%';
+      continuousCaption.textContent = t('CHANCE FROM ' + low + ' TO ' + high + ' CM', low + '〜' + high + 'cmの確率');
     }
-    kSelect.addEventListener('change', drawDiscrete);
-    bandSelect.addEventListener('change', drawDensity);
-    drawDiscrete();
-    drawDensity();
+
+    function drawRules() {
+      renderFormula(root.querySelector('[data-w2-discrete-rule]'),
+        String.raw`\Pr(X=k)={}_nC_k\,p^k(1-p)^{n-k}`,
+        'Pr(X = k) = ₙCₖ · pᵏ · (1 − p)ⁿ⁻ᵏ');
+      renderFormula(root.querySelector('[data-w2-continuous-rule]'),
+        String.raw`\Pr(a\le X\le b)=\int_a^b f(x)\,dx`,
+        'Pr(a ≤ X ≤ b) = ∫ₐᵇ f(x) dx');
+    }
+    kSlider.addEventListener('input', drawDiscrete);
+    bandSlider.addEventListener('input', drawDensity);
+    const drawAll = () => { drawRules(); drawDiscrete(); drawDensity(); };
+    document.querySelector('script[src*="mathjax"]')?.addEventListener('load', drawAll, { once: true });
+    new MutationObserver(() => { drawDiscrete(); drawDensity(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-language'] });
+    drawAll();
   }
 
   function setupFamilies(root) {
