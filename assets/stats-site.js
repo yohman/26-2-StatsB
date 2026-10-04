@@ -381,6 +381,22 @@ function week2ProbabilityMarkup() {
   </section>`;
 }
 
+function alExpectationMarkup(type) {
+  const discrete = type === 'discrete';
+  return `<section class="al-expectation-lab" data-al-expectation="${type}" aria-label="${discrete ? 'Discrete expected value' : 'Continuous expected value'}">
+    <header class="week2-lab-heading"><div><p class="section-kicker">${bilingual('AL WORKSHEET · EXPECTED VALUE','ALワークシート · 期待値')}</p><h4>${discrete ? bilingual('What is a weighted average?','確率で重みをつけると？') : bilingual('Area is probability. Weighted area is expectation.','確率の面積と、期待値の面積')}</h4></div><p>${discrete ? bilingual('Use the worksheet’s six outcomes. Multiply each value by its probability, then add the contributions.','ワークシートの6つの値を使います。値×確率を1行ずつ計算し、最後に足し合わせよう。') : bilingual('The worksheet gives f(x) = x on 0 ≤ x ≤ √2. Compare f(x) with x f(x): they answer different questions.','ワークシートの条件は f(x)=x、0≤x≤√2。f(x) と x f(x) は、何を計算している？')}</p></header>
+    <p class="al-source-note">${discrete ? bilingual('Worksheet: “離散変数の場合の期待値の計算” · B5:C10 → D5:D10 → total','対応：シート「離散変数の場合の期待値の計算」· B5:C10 → D5:D10 → 合計') : bilingual('Worksheet: “連続変数の場合の期待値の計算” · the two integrals','対応：シート「連続変数の場合の期待値の計算」· 2つの積分')}</p>
+    ${discrete ? `<div class="al-discrete-layout"><div class="al-table-wrap"><table class="al-weight-table"><thead><tr><th>x</th><th>Pr(X=x)</th><th>x × Pr(X=x)</th></tr></thead><tbody data-al-rows></tbody><tfoot><tr><th>${bilingual('Total','合計')}</th><td>1</td><td data-al-sum>?</td></tr></tfoot></table><p class="al-help">${bilingual('Select a row. Blue cells are the calculations you complete in Excel. Row D7 already contains an example.','行を選ぼう。水色はExcelで計算する欄。D7には計算例が入っています。')}</p></div><div class="al-visual-card"><h5>${bilingual('Imagine 12 equally likely tickets','同じ確率の12枚のくじで考える')}</h5><div class="al-ticket-grid" data-al-tickets></div><p data-al-row-story></p><div class="al-contribution-chart" data-al-contributions></div><p class="al-help">${bilingual('Bars show x × probability. A negative outcome makes a negative contribution.','棒は「値×確率」。負の値は、期待値を下げる方向に働きます。')}</p></div></div>
+      <div class="al-formula-focus"><span class="section-kicker">${bilingual('MULTIPLY EACH ROW, THEN ADD','各行を掛けて、最後に足す')}</span><div data-al-rule></div><div class="al-worked-math" data-al-worked></div><p>${bilingual('In Excel: enter =B5*C5 in D5 and copy down. Add the six products with =SUM(D5:D10).','ExcelではD5に =B5*C5 を入力して下へコピー。6行の合計は =SUM(D5:D10)。')}</p></div>
+      <div class="al-actions"><button type="button" data-al-reveal-row>${bilingual('Calculate this row','この行を計算')}</button><button type="button" data-al-add>${bilingual('Add the six contributions','6行の合計を確かめる')}</button><button type="button" data-al-sample>${bilingual('Draw 120 tickets','120回くじを引く')}</button><button type="button" data-al-reset>${bilingual('Reset','リセット')}</button></div>
+      <div class="al-sample-strip" aria-live="polite"><span class="al-drawn-ticket" data-al-last>🤖</span><p data-al-sample-status></p></div>` : `<div class="al-continuous-controls"><label for="al-slices">${bilingual('Number of narrow rectangles','細い長方形の数')} <output data-al-slices-value>12</output><input id="al-slices" data-al-slices type="range" min="4" max="80" step="4" value="12"></label><p>${bilingual('Click a rectangle. Then increase the number of slices to see the sums approach the integrals.','長方形をクリック。分割数を増やすと、足し算が積分の値に近づきます。')}</p></div>
+      <div class="al-area-grid"><article class="al-area-card"><p class="section-kicker">${bilingual('1 · TOTAL PROBABILITY','1 · 確率の合計')}</p><h5>f(x) = x</h5><svg data-al-density viewBox="0 0 460 245" role="img" aria-label="Probability density and midpoint rectangles"></svg><div data-al-density-rule></div><p class="al-area-result" data-al-density-sum></p></article><article class="al-area-card is-weighted"><p class="section-kicker">${bilingual('2 · EXPECTED VALUE','2 · 期待値')}</p><h5>x f(x) = x²</h5><svg data-al-weighted viewBox="0 0 460 245" role="img" aria-label="Value-weighted density and midpoint rectangles"></svg><div data-al-weighted-rule></div><p class="al-area-result" data-al-weighted-sum></p></article></div>
+      <div class="al-formula-focus"><span class="section-kicker">${bilingual('ONE SLICE: WEIGHT ITS PROBABILITY BY ITS VALUE','1つの区間：確率に、その値を掛ける')}</span><div class="al-worked-math" data-al-slice-math></div><p data-al-slice-story></p></div>
+      <div class="al-actions"><button type="button" data-al-integrals>${bilingual('Reveal the exact integrals','積分の計算を確かめる')}</button><button type="button" data-al-reset>${bilingual('Reset','リセット')}</button></div><div class="al-exact-grid" data-al-exact hidden><div data-al-density-exact></div><div data-al-weighted-exact></div></div>`}
+    <p class="week2-aha" data-al-aha></p>
+  </section>`;
+}
+
 function distributionSimulationMarkup(type) {
   const configs = {
     normal: {
@@ -458,11 +474,15 @@ function lectureSection(week) {
         <button type="button" role="tab" id="week-2-batting-tab" aria-controls="week-2-batting" aria-selected="false" tabindex="-1">02 <span>${bilingual('Batting average', '打率')}</span></button>
         <button type="button" role="tab" id="week-2-discrete-tab" aria-controls="week-2-discrete" aria-selected="false" tabindex="-1">03 <span>${bilingual('Discrete vs continuous', '離散と連続')}</span></button>
         <button type="button" role="tab" id="week-2-probability-tab" aria-controls="week-2-probability" aria-selected="false" tabindex="-1">04 <span>${bilingual('Probability models', '確率分布')}</span></button>
+        <button type="button" role="tab" id="week-2-al-discrete-tab" aria-controls="week-2-al-discrete" aria-selected="false" tabindex="-1">05 <span>${bilingual('AL: weighted average','AL：期待値')}</span></button>
+        <button type="button" role="tab" id="week-2-al-continuous-tab" aria-controls="week-2-al-continuous" aria-selected="false" tabindex="-1">06 <span>${bilingual('AL: two integrals','AL：2つの積分')}</span></button>
       </div>
       <div id="week-2-combinations" role="tabpanel" aria-labelledby="week-2-combinations-tab">${combinationMarkup()}</div>
       <div id="week-2-batting" role="tabpanel" aria-labelledby="week-2-batting-tab" hidden>${battingSimulationMarkup()}</div>
       <div id="week-2-discrete" role="tabpanel" aria-labelledby="week-2-discrete-tab" hidden>${week2DiscreteMarkup()}</div>
       <div id="week-2-probability" role="tabpanel" aria-labelledby="week-2-probability-tab" hidden>${week2ProbabilityMarkup()}</div>
+      <div id="week-2-al-discrete" role="tabpanel" aria-labelledby="week-2-al-discrete-tab" hidden>${alExpectationMarkup('discrete')}</div>
+      <div id="week-2-al-continuous" role="tabpanel" aria-labelledby="week-2-al-continuous-tab" hidden>${alExpectationMarkup('continuous')}</div>
     </div>` : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
