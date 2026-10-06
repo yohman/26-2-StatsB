@@ -1,16 +1,18 @@
 (() => {
+  const escapeHtml=text=>String(text).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
+  const inline=(source,fallback=source)=>`<span data-inline-math="${escapeHtml(source)}">${escapeHtml(fallback)}</span>`;
   const scenarios = {
-    lottery: {title:'100円のくじ', unit:'円', values:[0,100,1000], probabilities:[.7,.25,.05], cost:100, icon:'🎟️', story:'X は開く前の賞金。引いた結果が x。賞金の平均と、100円を払ったあとの損益を分けて見よう。'},
-    dice: {title:'サイコロ', unit:'', values:[1,2,3,4,5,6], probabilities:Array(6).fill(1/6), cost:0, icon:'🎲', story:'X は出る目。出たあとには x=1,2,…,6 のどれか。平均3.5でも、3.5の目は出ません。'},
-    delivery: {title:'配達ロボットB', unit:'分', values:[2,18], probabilities:[.5,.5], cost:0, icon:'🤖', story:'Aは毎回10分で分散0。Bは2分か18分で、平均10分でも分散64分²。平均だけでは安心感の違いが見えません。'}
+    lottery: {title:'100円のくじ', unit:'円', values:[0,100,1000], probabilities:[.7,.25,.05], cost:100, icon:'🎟️', story:`${inline('X')} は開く前の賞金。引いた結果が ${inline('x')}。賞金の平均と、${inline('100')}円を払ったあとの損益を分けて見よう。`},
+    dice: {title:'サイコロ', unit:'', values:[1,2,3,4,5,6], probabilities:Array(6).fill(1/6), cost:0, icon:'🎲', story:`${inline('X')} は出る目。出たあとには ${inline(String.raw`x=1,2,\ldots,6`,'x=1,2,…,6')} のどれか。平均${inline('3.5')}でも、${inline('3.5')}の目は出ません。`},
+    delivery: {title:'配達ロボットB', unit:'分', values:[2,18], probabilities:[.5,.5], cost:0, icon:'🤖', story:`Aは毎回${inline('10')}分で分散${inline('0')}。Bは${inline('2')}分か${inline('18')}分で、平均${inline('10')}分でも分散${inline('64')}分${inline('^2','²')}。平均だけでは安心感の違いが見えません。`}
   };
   function setup(root) {
     if (root.dataset.ready) return;
     root.dataset.ready='true';
     root.innerHTML = `<header><p class="section-kicker">教科書 p.117・129</p><h4>1回の結果から、平均とばらつきへ</h4></header>
       <div class="example-choices" aria-label="例を選ぶ">${Object.entries(scenarios).map(([id,s])=>`<button type="button" data-example="${id}" aria-pressed="false">${s.icon} ${s.title}</button>`).join('')}</div>
-      <p data-example-story></p><div class="example-layout"><div><div class="example-result" aria-live="polite"><span data-example-icon></span><strong data-example-last>?</strong><small>今回の実現値 x</small></div><div class="example-actions"><button type="button" data-example-run="1">1回試す</button><button type="button" data-example-run="1000">1,000回試す</button><button type="button" data-example-reset>リセット</button></div></div>
-      <div><table class="example-table"><thead><tr><th>x</th><th>Pr(X=x)</th><th>x Pr(X=x)</th><th>実測</th></tr></thead><tbody data-example-rows></tbody></table><p>各行の「値 × 確率」を足すと期待値。</p><div class="example-formula" data-example-formula></div><p data-example-variance></p></div></div>
+      <p data-example-story></p><div class="example-layout"><div><div class="example-result" aria-live="polite"><span data-example-icon></span><strong data-example-last>?</strong><small>今回の実現値 ${inline('x')}</small></div><div class="example-actions"><button type="button" data-example-run="1">1回試す</button><button type="button" data-example-run="1000">1,000回試す</button><button type="button" data-example-reset>リセット</button></div></div>
+      <div><table class="example-table"><thead><tr><th>${inline('x')}</th><th>${inline(String.raw`\Pr(X=x)`,'Pr(X=x)')}</th><th>${inline(String.raw`x\Pr(X=x)`,'x Pr(X=x)')}</th><th>実測</th></tr></thead><tbody data-example-rows></tbody></table><p>各行の「値 ${inline(String.raw`\times`,'×')} 確率」を足すと期待値。</p><div class="example-formula" data-example-formula></div><p data-example-variance></p></div></div>
       <section class="example-summary" aria-label="試行結果"><dl class="example-metrics" data-example-metrics></dl><p class="example-accounting" data-example-status aria-live="polite"></p></section>
       <h5>繰り返すと、平均はどうなる？</h5><svg data-example-chart viewBox="0 0 720 220" role="img" aria-label="試行回数と実測平均。青は実測平均、点線は期待値。"></svg><p class="week2-aha">青：実測平均 ／ 点線：理論の期待値。たくさん試すと近づく傾向があります。毎回、近づくとは限りません。</p>`;
     const pairs = document.createElement('section');
@@ -58,7 +60,6 @@
     }
     function draw() {
       const s=scenarios[kind];
-      q('[data-example-story]').textContent=s.story;
       q('[data-example-icon]').textContent=s.icon;
       q('[data-example-last]').textContent=last===null?'?':`${last}${s.unit}`;
       q('[data-example-rows]').innerHTML=s.values.map((v,i)=>`<tr${last===v?' class="is-last"':''}><td>${v}${s.unit}</td><td>${(100*s.probabilities[i]).toFixed(2)}%</td><td>${(v*s.probabilities[i]).toFixed(2)}</td><td>${n?(100*counts[i]/n).toFixed(1)+'%':'—'}</td></tr>`).join('');
@@ -72,12 +73,18 @@
       metricList.innerHTML=metrics.map(([label,value,unit,style])=>`<div class="example-metric ${style}"><dt>${label}</dt><dd>${value}<small>${unit}</small></dd></div>`).join('');
       q('[data-example-status]').hidden=!s.cost;
       q('[data-example-status]').textContent=s.cost?`賞金 ${format(sum)}円 − 支出 ${format(spending)}円 = 損益 ${format(net)}円`:'';
-      const variance=s.values.reduce((total,v,i)=>total+(v-mean())**2*s.probabilities[i],0);
-      q('[data-example-variance]').textContent=kind==='delivery'?`Var(X)=½(2−10)²+½(18−10)²=${variance} 分²。AもBも E(X)=10分。`:s.cost?'期待損益：E(X) − 100 = 75 − 100 = −25円／枚。':'E(X)=3.5 は多くの出目を平均した値。実現値は必ず整数。';
       chart();
     }
     function reset() {generation++;busy=false;counts=scenarios[kind].values.map(()=>0);points=[];n=0;sum=0;last=null;root.querySelectorAll('[data-example-run]').forEach(b=>b.disabled=false);draw();}
-    function select(id) {root.classList.remove('is-pairs');pairs.hidden=true;pairButton.setAttribute('aria-pressed','false');kind=id;reset();root.querySelectorAll('[data-example]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.example===id)));formula();}
+    function select(id) {
+      root.classList.remove('is-pairs');pairs.hidden=true;pairButton.setAttribute('aria-pressed','false');kind=id;
+      q('[data-example-story]').innerHTML=scenarios[kind].story;
+      q('[data-example-variance]').innerHTML=kind==='delivery'
+        ? `${inline(String.raw`\mathrm{Var}(X)=\frac12(2-10)^2+\frac12(18-10)^2=64`,'Var(X)=½(2−10)²+½(18−10)²=64')} 分${inline('^2','²')}。AもBも ${inline('E(X)=10')}分。`
+        : scenarios[kind].cost?`期待損益：${inline('E(X)-100=75-100=-25','E(X) − 100 = 75 − 100 = −25')}円／枚。`
+        : `${inline('E(X)=3.5')} は多くの出目を平均した値。実現値は必ず整数。`;
+      reset();root.querySelectorAll('[data-example]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.example===id)));formula();
+    }
     root.querySelectorAll('[data-example]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.example)));
     root.querySelectorAll('[data-example-run]').forEach(b=>b.addEventListener('click',async()=>{
       if(busy) return;busy=true;const token=generation;

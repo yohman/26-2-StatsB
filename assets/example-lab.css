@@ -1,4 +1,6 @@
 .example-lab{padding:clamp(18px,3vw,36px);background:#faf7ef}
+[data-inline-math]{font-family:"Cambria Math","STIX Two Math","Times New Roman",serif;white-space:nowrap}
+[data-inline-math] mjx-container{margin:0!important;font-size:1em!important}
 .example-lab h4{font-size:clamp(24px,3vw,36px);margin:8px 0 20px}
 .example-choices,.example-actions{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
 .example-lab button{font:inherit;padding:10px 16px;border:0;background:#e8e2d5;color:#403b32;cursor:pointer;border-radius:4px}
