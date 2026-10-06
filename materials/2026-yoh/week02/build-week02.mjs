@@ -353,6 +353,36 @@ $$\underbrace{\int_0^{\sqrt2}x^2\,dx}_{\text{平均の値}}=\left[\frac{x^3}{3}\
 const week2Slides = styledSlides.slice(0,28);
 const [removedWeek2Slide] = week2Slides.splice(11,1);
 if (!removedWeek2Slide.includes('## 確率変数の期待値')) throw new Error('Recheck the Week 2 slide 12 removal.');
+if (!week2Slides[11].includes('## 起こりやすさで重みをつける') || !week2Slides[12].includes('Expected value')) throw new Error('Recheck the dice expectation slide merge.');
+week2Slides.splice(11,2,String.raw`## サイコロの期待値は、なぜ3.5？
+
+<!-- _class: dice-expectation -->
+<!-- _footer: 2-2 期待値 ／ 教科書 p.117 -->
+
+🎲 $X$ = 出た目。公平なサイコロでは、どの目も確率 $1/6$。
+
+「出た目 × その目の確率」を、1〜6まで全部足す。
+
+$$
+E(X)=\sum_{x=1}^{6}x\Pr(X=x)
+$$
+
+$$
+=1\times\frac16+2\times\frac16+3\times\frac16+4\times\frac16+5\times\frac16+6\times\frac16
+$$
+
+$$
+\large\color{#167599}{=\frac{1+2+3+4+5+6}{6}=\frac{21}{6}=\boxed{3.5}}
+$$
+
+**何度も振ったときの平均が3.5に近づく。** 1回で3.5の目が出るわけではありません。
+
+<style scoped>
+section { padding: 45px 60px; }
+h2 { font-size: 52px; margin-bottom: 18px; }
+p { font-size: 27px; margin: 8px 0; }
+mjx-container[display="true"] { margin: 14px 0; font-size: 115%; }
+</style>`);
 writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 mkdirSync(week3Directory, {recursive:true});
