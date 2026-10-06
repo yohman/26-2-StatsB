@@ -227,11 +227,19 @@ section.simulation-guide .demo-task { font-size:22px; color:#546757; margin-top:
 section.simulation-guide a { color:#15718b; font-weight:700; font-size:24px; }
 section.simulation-guide footer { color:#546757; }
 `;
-const styledSlides = orderedSlides.map(slide => {
+// Requested edits refer to the original 74-slide teaching deck, before renumbering.
+const removedSlides = new Set([15,22,23,24,25]);
+const revisedOrder = orderedSlides.map((slide,index) => ({number:index+1,slide}));
+// Match only the title line, leaving its body and source notes unchanged.
+revisedOrder[8].slide = revisedOrder[8].slide.replace(/^##[^\n]*/m, '## コインを５回投げて、ロボったは何回？');
+const [weightingFormula] = revisedOrder.splice(16,1);
+revisedOrder.splice(12,0,weightingFormula);
+const revisedSlides = revisedOrder.filter(item => !removedSlides.has(item.number)).map(item => item.slide);
+const styledSlides = revisedSlides.map(slide => {
   const isTextbookFormula = slide.includes('<!-- Adapted from textbook') ||
     /^## (離散分布の平均と分散|連続分布でも|バッテリーが|正規分布|\$t\$ 分布)/m.test(slide);
   return isTextbookFormula ? slide.replace(/^(##[^\n]*)$/m, '$1\n\n<!-- _class: book-reference -->') : slide;
 });
 const output = `${preface.replace('</style>', `${bookStyles}\n</style>`)}\n\n${styledSlides.join('\n\n')}\n`.replace(/[ \t]+$/gm, '');
 writeFileSync(resolve(here, 'w2.md'), output);
-process.stdout.write(`Created w2.md with ${orderedSlides.length} slides in six textbook sections.\n`);
+process.stdout.write(`Created w2.md with ${revisedSlides.length} slides in six textbook sections.\n`);
