@@ -107,6 +107,27 @@ const demo = (links, question) => {
   if(id==='discrete' && question.startsWith('台数は')) d={title:'連続の確率は、区間の面積',sample:'身長モデル：平均170cm、標準偏差6cm　　164〜176cmの区間',math:String.raw`\Pr(164\le X\le176)=\Pr(-1\le Z\le1)\approx68.27\%`,reading:'右のスライダーで塗る範囲を広げると、面積も確率も増える。範囲を1点に縮めると確率0。左の棒1本の確率と比べよう。'};
   if (id==='batting' && question.includes('平均1.6')) d={title:'5打席の平均とばらつき',sample:'1試合の安打数は0〜5の整数。1.6安打という1試合はない。',math:String.raw`E(X)=5(0.32)=1.6\qquad\mathrm{Var}(X)=5(0.32)(0.68)=1.088`,reading:'5打席セットを繰り返し、各安打数の実測の棒を作る。分布の中心を平均、中心からの広がりを分散で表す。'};
   if (!d) throw new Error(`Missing simulation explanation: ${id}`);
+  if (id==='al-discrete') {
+    const groups=[[-1,3],[0,1],[1,2],[2,1],[3,1],[4,4]];
+    const cards=groups.map(([value,count])=>`<div class="al-card-group"><div class="al-card-stack">${Array.from({length:count},()=>`<div class="al-point-card ${value<0?'negative':value===0?'zero':'positive'}">${value<0?'−1':value}</div>`).join('')}</div><div class="al-card-count">${count}枚 / 12枚</div></div>`).join('');
+    return String.raw`## やってみる：ALの確率を、12枚のカードで見る
+
+<!-- _class: simulation-guide al-card-guide -->
+
+<div class="al-card-intro">説明用のポイントゲーム。−1は「1点失う」、4は「4点もらう」。</div>
+
+<div class="al-card-lineup">${cards}</div>
+
+<div class="al-card-caption">よく混ぜて1枚引く。どのカードも同じ確率 1/12。</div>
+
+$$\begin{aligned}E(X)&=\sum_x x\Pr(X=x)\\&=(-1)\frac{3}{12}+0\frac{1}{12}+1\frac{2}{12}+2\frac{1}{12}+3\frac{1}{12}+4\frac{4}{12}=\frac53\approx1.6667\end{aligned}$$
+
+<span class="al-card-takeaway">「4」が4枚なので、$\Pr(X=4)=4/12$。平均では1回あたり約1.67点。</span>
+
+${links[0].replace(/\[[^\]]+\]/, '[やってみよう！]')}
+
+<!-- カードはALの確率を可視化した説明用の例。課題の値を金額として扱っていません。 -->`;
+  }
   const names={lottery:'くじ',dice:'サイコロ',roulette:'ルーレット','al-discrete':'AL期待値',discrete:'離散と連続',combinations:'並び方',batting:'打率',probability:'分布','al-continuous':'AL積分','normal-w2':'正規','t-w2':'t','chi-w2':'カイ二乗',delivery:'配達',coin:'コイン','class-pairs':'2人の組'};
   const task = question.replace('{}'+ '_nC_x', '$'+ '{}_nC_x' +'$');
   // Inline HTML leaves the math visible to Marp's Markdown parser.
@@ -239,6 +260,17 @@ section.simulation-guide mjx-container[display="true"] { font-size:110%; margin:
 section.simulation-guide p { margin:12px 0; line-height:1.6; }
 section.simulation-guide .demo-task { font-size:22px; color:#546757; margin-top:8px; }
 section.simulation-guide a { color:#15718b; font-weight:700; font-size:24px; }
+section.al-card-guide h2 { font-size:37px; margin-bottom:18px; }
+section.al-card-guide .al-card-intro { font-size:23px; color:#385246; }
+section.al-card-guide .al-card-lineup { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin:24px 0 12px; }
+section.al-card-guide .al-card-stack { display:flex; gap:7px; }
+section.al-card-guide .al-point-card { display:flex; align-items:center; justify-content:center; width:62px; height:87px; box-sizing:border-box; border:2px solid #8eb1a0; border-radius:9px; background:#fff; color:#276044; font-family:Georgia,serif; font-size:42px; box-shadow:0 4px 0 #d4e3d9; }
+section.al-card-guide .al-point-card.negative { color:#895139; border-color:#ba8c73; background:#fff5ed; }
+section.al-card-guide .al-point-card.zero { color:#73796f; border-color:#a9b0a5; }
+section.al-card-guide .al-card-count { margin-top:12px; text-align:center; font-size:19px; color:#546757; }
+section.al-card-guide .al-card-caption { font-size:21px; text-align:center; color:#546757; }
+section.al-card-guide mjx-container[display="true"] { font-size:100%; margin:18px 0; }
+section.al-card-guide .al-card-takeaway { font-size:22px; color:#385246; }
 section a[href*="agenda.html?activity="] {
   display:inline-block; padding:12px 24px; border-radius:8px;
   background:#176d82; color:#fff !important; text-decoration:none;
