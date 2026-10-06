@@ -242,6 +242,7 @@
     tabs.forEach(tab => tab.addEventListener('click', () => selectModel(tab.id.replace('w2-','').replace('-tab',''))));
     root.querySelector('[data-w2-family-run]').addEventListener('click', run);
     root.querySelector('[data-w2-family-reset]').addEventListener('click', () => { if (!busy) clear(); });
+    new MutationObserver(() => { updateControls(); draw(); if (busy) controls.querySelectorAll('input, select').forEach(control => { control.disabled = true; }); }).observe(document.documentElement,{attributes:true,attributeFilter:['data-language']});
     updateControls();
     draw();
   }

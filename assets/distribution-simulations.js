@@ -161,6 +161,12 @@
     root.querySelectorAll('[data-dist-mean], [data-dist-sd], [data-dist-band], [data-dist-n]').forEach(control => control.addEventListener('input', syncParameters));
     root.querySelector('[data-dist-run]').addEventListener('click', run);
     root.querySelector('[data-dist-clear]').addEventListener('click', () => { values.length = 0; status.textContent = t('Ready to sample.','試行できます。'); draw(); });
+    new MutationObserver(() => {
+      draw();
+      status.textContent = values.length
+        ? t(`${values.length.toLocaleString()} trials ${busy ? 'generated so far…' : 'generated.'}`, `${values.length.toLocaleString()}回の結果${busy ? 'を生成中…' : 'を生成しました。'}`)
+        : t('Ready to sample.','試行できます。');
+    }).observe(document.documentElement,{attributes:true,attributeFilter:['data-language']});
     draw();
   }
 
