@@ -459,12 +459,19 @@ a { font-size: 29px; font-weight: 700; }
 
 <!-- 2、6、1、3は説明用の結果。ライブの実測平均は試行ごとに変わります。 -->`;
 if (!week2Slides[16].includes('## 赤に100円賭けると') || !week2Slides[17].includes('ルーレットの1回と、長い平均')) throw new Error('Recheck the roulette slide 17 removal and slide 18 redesign.');
+// Reuse the American wheel from the live roulette exploration as a labeled probability diagram.
+const roulettePockets=['0','28','9','26','30','11','7','20','32','17','5','22','34','15','3','24','36','13','1','00','27','10','25','29','12','8','19','31','18','6','21','33','16','4','23','35','14','2'];
+const rouletteRed=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
+const rouletteSectors=roulettePockets.map((p,i)=>`${p==='0'||p==='00'?'#338568':rouletteRed.has(+p)?'#b6474e':'#303c43'} ${i*360/38}deg ${(i+1)*360/38}deg`).join(',');
+const rouletteGraphic=`<div class="slide-roulette" role="img" aria-label="米国式ルーレット：赤18、黒18、緑の0と00の2個"><div class="slide-wheel" style="background:conic-gradient(${rouletteSectors})">${roulettePockets.map((p,i)=>`<span style="transform:rotate(${(i+.5)*360/38}deg) translateY(-128px) rotate(90deg)">${p}</span>`).join('')}<div class="slide-wheel-hub">38<span>ポケット</span></div></div><div class="slide-wheel-label">赤に賭けると、0・00も負け。</div></div>`;
 week2Slides.splice(16,2,String.raw`## やってみる：100円賭けたら、平均いくら？
 
 <!-- _class: simulation-guide roulette-expectation -->
 <!-- _footer: 2-2 期待値 ／ 教科書 p.117 -->
 
 米国式ルーレットで、赤に100円。$X$ は賭け金を差し引いた損益。
+
+${rouletteGraphic}
 
 | <span class="red-outcome">赤：18個</span> | 黒18個 ＋ 緑（0・00）2個 |
 | :---: | :---: |
@@ -481,26 +488,37 @@ $$
 
 **100円賭けるごとに、平均5.26円の損失。**
 
-1回なら勝つことも。1,000回試して、1回あたりの平均損益を比べよう。
+1,000回試して、平均損益がどう変わるか比べよう。
 
 [やってみよう！](https://yohman.github.io/26-2-StatsB/agenda.html?activity=roulette#week-02)
 
 <style scoped>
-section { padding: 42px 65px; }
+section { padding: 42px 55px; }
 h2 { font-size: 43px; margin: 0 0 16px; }
-p { font-size: 25px; margin: 8px 0; }
-table { width: 100%; table-layout: fixed; margin: 10px 0 8px; border: 0; }
+p { font-size: 23px; margin: 8px 0 8px 350px; }
+h2 + p { margin-left:0; }
+table { width: calc(100% - 350px); table-layout: fixed; margin: 10px 0 8px 350px; border: 0; }
 th, td, tr { border: 0 !important; background: transparent !important; }
-th { font-size: 27px; padding: 8px; }
-td { font-size: 29px; padding: 5px 12px; }
+th { font-size: 25px; padding: 8px; }
+td { font-size: 27px; padding: 5px 12px; }
 tbody tr:last-child td { font-size: 24px; color: #65776e; }
 .red-outcome { color: #af3f4d; }
-mjx-container[display="true"] { font-size: 115%; margin: 10px 0; }
-p strong { font-size: 29px; color: #a34a3b; }
+mjx-container[display="true"] { font-size: 105%; margin: 10px 0; }
+p strong { font-size: 26px; color: #a34a3b; }
 a { font-size: 28px; font-weight: 700; }
+.slide-roulette { position:absolute; left:55px; top:192px; width:310px; text-align:center; }
+.slide-wheel { position:relative; width:300px; height:300px; border:5px solid #b4a18a; border-radius:50%; box-sizing:border-box; }
+.slide-wheel > span { position:absolute; left:50%; top:50%; width:0; height:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-family:Arial,sans-serif; font-weight:700; }
+.slide-wheel-hub { position:absolute; inset:49px; border:5px solid #b4a18a; border-radius:50%; background:#edf5ef; display:flex; flex-direction:column; align-items:center; justify-content:center; color:#276044; font-size:66px; font-weight:700; }
+.slide-wheel-hub span { font-size:20px; font-weight:500; }
+.slide-wheel-label { font-size:19px; color:#546757; line-height:1.5; margin-top:20px; }
 </style>`);
+if (!week2Slides[15].includes('Roulette')) throw new Error('Recheck the current slide 16 before deletion.');
+week2Slides.splice(15,1);
 writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
-mkdirSync(week3Directory, {recursive:true});
-writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
-process.stdout.write(`Created Week 2 (${week2Slides.length + alBridge.length} slides, including ${alBridge.length} AL bridge slides) and Week 3 (41 slides).\n`);
+if (!process.argv.includes('--week2-only')) {
+  mkdirSync(week3Directory, {recursive:true});
+  writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
+}
+process.stdout.write(`Created Week 2 (${week2Slides.length + alBridge.length} slides, including ${alBridge.length} AL bridge slides)${process.argv.includes('--week2-only')?'':' and Week 3 (41 slides)'}.\n`);
