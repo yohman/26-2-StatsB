@@ -172,7 +172,9 @@ function slideCard(deck, week) {
   const image = slideThumbnail(deck, week);
   const link = deck.preview ? viewerLink(deck.preview, deck.label, week.week, deck.source) : '';
   const preview = link ? `<a class="file-button slide-preview-button" href="${link}">${bilingual('Preview slides', 'スライドをプレビュー')}<span aria-hidden="true">→</span></a>` : '';
-  return `<article class="slide-card${image ? '' : ' slide-card--no-cover'}">${image && link ? `<a class="slide-cover" href="${link}" aria-label="${escapeHtml(deck.label)}"><img src="${encodeHref(image)}" alt="" loading="lazy"></a>` : ''}<div class="slide-card-body"><h4>${escapeHtml(deck.label)}</h4>${preview}</div></article>`;
+  const browsable = link && /\.pdf$/i.test(deck.preview);
+  const cover = browsable ? `<div class="slide-browser"><a class="slide-cover" href="${link}" aria-label="${escapeHtml(deck.label)}">${image ? `<img src="${encodeHref(image)}" alt="" loading="lazy">` : `<span data-slide-placeholder>${bilingual('Slide preview','スライドプレビュー')}</span>`}<canvas data-slide-canvas hidden role="img"></canvas></a><div class="slide-browse-controls"><button type="button" data-slide-previous aria-label="${escapeHtml(deck.label)}: 前のスライド / Previous slide" disabled>←</button><span data-slide-status aria-live="polite">1</span><button type="button" data-slide-next aria-label="${escapeHtml(deck.label)}: 次のスライド / Next slide">→</button></div></div>` : '';
+  return `<article class="slide-card${cover ? '' : ' slide-card--no-cover'}"${browsable ? ` data-slide-pdf="${escapeHtml(deck.preview)}" data-slide-title="${escapeHtml(deck.label)}"` : ''}>${cover}<div class="slide-card-body"><h4>${escapeHtml(deck.label)}</h4>${preview}</div></article>`;
 }
 
 function coinSimulationMarkup() {

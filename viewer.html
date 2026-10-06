@@ -7,7 +7,7 @@
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="icon" href="favicon.svg?v=20260927-b-mark-1" type="image/svg+xml">
   <link rel="stylesheet" href="assets/stats-styles.css?v=20260909">
-  <link rel="stylesheet" href="assets/viewer-context.css?v=20260929-pdf-links-1">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20261006-slide-swipe-1">
 </head>
 <body class="viewer-page">
   <header class="site-header"><a class="wordmark" href="index.html"><img src="favicon.svg?v=20260927-b-mark-1" alt="" width="42" height="42">2026–2 Statistics B</a><div class="header-tools"><button class="language-toggle" type="button" data-language-toggle aria-label="Switch to English">EN</button></div></header>
@@ -21,6 +21,7 @@
     </section>
   </main>
   <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
+  <script src="assets/slide-browsing.js?v=20261006-slide-swipe-1"></script>
   <script>
     const parameters = new URLSearchParams(location.search);
     const file = parameters.get('file') || '';
@@ -105,7 +106,7 @@
           data: await response.arrayBuffer(),
           docBaseUrl: new URL(encodeURI(path), location.href).href
         }).promise;
-        let activePage = 1;
+        let activePage = Math.max(1, Math.min(pdf.numPages, parseInt(parameters.get('page'), 10) || 1));
         let renderQueue = Promise.resolve();
         const isFullscreen = () => document.fullscreenElement === viewer || viewer.classList.contains('is-fullscreen-fallback');
         const openDestination = async destination => {
@@ -227,6 +228,7 @@
         const showNextPage = () => activePage < pdf.numPages && renderPage(activePage + 1);
         previous.addEventListener('click', showPreviousPage);
         next.addEventListener('click', showNextPage);
+        window.bindSlideSwipe(canvasWrap, showPreviousPage, showNextPage);
         document.addEventListener('keydown', event => {
           const target = event.target;
           const isEditing = target instanceof HTMLElement &&
