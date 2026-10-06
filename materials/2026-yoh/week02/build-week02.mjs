@@ -73,7 +73,7 @@ const slides = [
 // Follow the textbook's six numbered subsections inside Chapter 2, Section 2.
 // Keep the source slides editable and retain Yoh's image-led examples.
 const activity = (id, label, week = 2) => `[${label}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-${String(week).padStart(2, '0')})`;
-const divider = (number, title, pages, question) => `## 第2節　確率分布\n\n<!-- _footer: 2-${number} ${title} ／ 教科書 p.${pages} -->\n\n<large>2-${number}　${title}</large>\n\n教科書 **p.${pages}**\n\n${question}`;
+const divider = (number, title, pages, question) => `## 教科書　第2章・第2節　確率分布\n\n<!-- _class: book-divider -->\n<!-- _footer: 2-${number} ${title} ／ 教科書 p.${pages} -->\n\n<div class="book-heading"><span class="book-number">2-${number}</span><span>${title}</span></div>\n\n<div class="book-page">教科書 p.${pages}</div>\n\n${question}`;
 const demo = (links, question) => `## やってみる\n\n${question}\n\n${links.join('\n\n')}\n\n<small>リンクから講義ページの該当タブを開きます。</small>`;
 const select = (...numbers) => numbers.map(n => slides[n - 1]);
 const blocks = [
@@ -118,6 +118,37 @@ const blocks = [
 const orderedSlides = [slides[0].replace('離散確率分布と二項分布','教科書 第2章 第2節　p.117–129'),
   ...blocks.flatMap(block => [divider(block.n,block.title,block.pages,block.question),
     ...block.body.map(slide => slide.replace(/^(#{1,3}[^\n]*)$/m, `$1\n\n<!-- _footer: 2-${block.n} ${block.title} ／ 教科書 p.${block.pages} -->`))])];
-const output = `${preface}\n\n${orderedSlides.join('\n\n')}\n`.replace(/[ \t]+$/gm, '');
+// A distinct textbook visual language, without changing Yoh's white story slides.
+const bookStyles = `
+section.book-divider {
+  background: #eaf5fb; color: #17374b; text-align: left;
+  padding: 80px 90px; justify-content: center;
+  border-top: 12px solid #4aa8cd;
+}
+section.book-divider h2 {
+  font-size: 24px; font-weight: 600; color: #287c9f;
+  margin: 0 0 48px; letter-spacing: .04em;
+}
+.book-heading {
+  display: flex; align-items: center; gap: 24px;
+  font-size: 50px; font-weight: 700; line-height: 1.4;
+  padding-bottom: 25px; border-bottom: 6px dotted #63b1d0;
+}
+.book-number {
+  background: #4aa8cd; color: white; border-radius: 999px;
+  padding: 3px 25px; font-size: 38px; flex-shrink: 0;
+}
+.book-page { color: #287c9f; font-size: 30px; font-weight: 600; margin-top: 28px; }
+section.book-divider p { font-size: 30px; line-height: 1.65; margin-top: 28px; }
+section.book-reference { background: #f2f9fc; border-top: 8px solid #4aa8cd; }
+section.book-reference h2 { color: #287c9f; }
+section.book-reference footer, section.book-divider footer { color: #287c9f; }
+`;
+const styledSlides = orderedSlides.map(slide => {
+  const isTextbookFormula = slide.includes('<!-- Adapted from textbook') ||
+    /^## (離散分布の平均と分散|連続分布でも|バッテリーが|正規分布|\$t\$ 分布)/m.test(slide);
+  return isTextbookFormula ? slide.replace(/^(##[^\n]*)$/m, '$1\n\n<!-- _class: book-reference -->') : slide;
+});
+const output = `${preface.replace('</style>', `${bookStyles}\n</style>`)}\n\n${styledSlides.join('\n\n')}\n`.replace(/[ \t]+$/gm, '');
 writeFileSync(resolve(here, 'w2.md'), output);
 process.stdout.write(`Created w2.md with ${orderedSlides.length} slides in six textbook sections.\n`);
