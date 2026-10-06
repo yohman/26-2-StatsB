@@ -115,7 +115,7 @@ const blocks = [
   {n:1,title:'確率変数',pages:'117',question:'何が起きるか分からない。その結果を、数で表す。',body:[
     `## くじの賞金を $X$ とする\n\nまだ開いていないくじ。賞金はいくら？\n\n<large>$X\\in\\{0,100,1000\\}$</large>\n\n偶然の結果によって値が決まる「賞金の額」が確率変数 $X$。\n\n<small>$x$ は具体的な値。$Pr(X=100)$ は「賞金が100円になる確率」。</small>`,
     ...select(9),
-    `## 5回投げて、ロボットは何回？\n\n表はロボット、裏はヤギ。$X$ = 5回中の表の回数。\n\n<large>$X\\in\\{0,1,2,3,4,5\\}$</large>\n\n0回も、取りうる結果に含めます。`,
+    `## 5回投げて、ロボットは何回？\n\n<large>🤖 表（ロボット）　🐐 裏（ヤギ）</large>\n\n$X$ = 5回中の表（ロボット）の回数。\n\n<large>$X\\in\\{0,1,2,3,4,5\\}$</large>\n\n0回も、取りうる結果に含めます。`,
     demo([activity('coin','コイン投げを開く',1)],'投げる前に、$X$ が取りうる値を挙げてみよう。')
   ]},
   {n:2,title:'期待値',pages:'117',question:'同じことを何度も繰り返すと、平均はいくら？',body:[
@@ -247,7 +247,7 @@ section.al-calculation small { font-size: 23px; }
 const removedSlides = new Set([15,22,23,24,25]);
 const revisedOrder = orderedSlides.map((slide,index) => ({number:index+1,slide}));
 // Match only the title line, leaving its body and source notes unchanged.
-revisedOrder[8].slide = revisedOrder[8].slide.replace(/^##[^\n]*/m, '## コインを５回投げて、ロボったは何回？');
+revisedOrder[8].slide = revisedOrder[8].slide.replace(/^##[^\n]*/m, '## コインを５回投げて、ロボットは何回？');
 const [weightingFormula] = revisedOrder.splice(16,1);
 revisedOrder.splice(12,0,weightingFormula);
 const revisedSlides = revisedOrder.filter(item => !removedSlides.has(item.number)).map(item => item.slide);
