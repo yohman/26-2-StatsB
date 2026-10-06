@@ -515,6 +515,72 @@ a { font-size: 28px; font-weight: 700; }
 </style>`);
 if (!week2Slides[15].includes('Roulette')) throw new Error('Recheck the current slide 16 before deletion.');
 week2Slides.splice(15,1);
+// Replace the old slides 20 and 21, and redesign their following robot demo.
+if (!week2Slides[19].includes('賞金の頻度') || !week2Slides[20].includes('ロボット工場の検品') || !week2Slides[21].includes('数える値と、測る値')) throw new Error('Recheck the current slides 20–22 before replacing the robot examples.');
+const montySource=readFileSync(resolve(here,'../../../assets/monty-hall.js'),'utf8');
+const robotIcon=montySource.match(/const robot = `([^`]+)`;/)?.[1];
+if (!robotIcon) throw new Error('The established robot icon was not found.');
+const brokenRobot=robotIcon.replace('aria-label="ロボット"','aria-label="壊れたロボット"').replaceAll('#76cbd1','#cba18a').replaceAll('#7ecbd0','#d8b7a5').replace(/<circle cx="(56|94)" cy="66" r="(?:8|3)" fill="[^"]+"\/>/g,'').replace('<path d="M67 82q8 7 16 0"','<path d="M48 59l16 14m0-14L48 73m38-14 16 14m0-14L86 73" fill="none" stroke="#f0ac82" stroke-width="5"/><path d="M67 86q8-7 16 0"');
+const chartAxes='<path d="M55 25V240H505" fill="none" stroke="#708178" stroke-width="2"/>';
+const probabilities=[1,5,10,10,5,1].map(v=>v/32);
+const discreteChart=`<svg viewBox="0 0 550 300" role="img" aria-label="不良台数0から5の確率の棒グラフ。2台の確率31.25%。"><text x="55" y="18" font-size="17">確率</text>${chartAxes}${[0,.1,.2,.3].map(p=>`<text x="5" y="${244-p*590}" font-size="15">${Math.round(p*100)}%</text>`).join('')}${probabilities.map((p,i)=>`<rect x="${78+i*70}" y="${240-p*590}" width="38" height="${p*590}" rx="3" fill="${i===2?'#a85f40':'#8bb5bd'}"/><text x="${97+i*70}" y="264" text-anchor="middle" font-size="20">${i}</text>`).join('')}<text x="237" y="43" text-anchor="middle" fill="#a85f40" font-size="21" font-weight="700">31.25%</text><text x="505" y="290" text-anchor="end" font-size="18">壊れた台数</text></svg>`;
+const heightX=x=>55+(x-145)/50*450, heightY=x=>240-Math.exp(-.5*((x-170)/6)**2)/(6*Math.sqrt(2*Math.PI))*2900;
+const heightPoints=Array.from({length:201},(_,i)=>145+i*.25);
+const heightCurve=heightPoints.map((x,i)=>`${i?'L':'M'}${heightX(x).toFixed(2)} ${heightY(x).toFixed(2)}`).join(' ');
+const shadedHeights=heightPoints.filter(x=>x>=164&&x<=176);
+const heightArea=`M${heightX(164)} 240 ${shadedHeights.map(x=>`L${heightX(x).toFixed(2)} ${heightY(x).toFixed(2)}`).join(' ')} L${heightX(176)} 240Z`;
+const continuousChart=`<svg viewBox="0 0 550 300" role="img" aria-label="平均170cm、標準偏差6cmの身長モデル。164から176cmの曲線下の面積は約68.27%。"><text x="55" y="18" font-size="17">確率密度 f(x)</text>${chartAxes}<path d="${heightArea}" fill="#a9d8d1"/><path d="${heightCurve}" fill="none" stroke="#247c89" stroke-width="4"/>${[152,164,170,176,188].map(x=>`<text x="${heightX(x)}" y="264" text-anchor="middle" font-size="18">${x}</text>`).join('')}<text x="280" y="172" text-anchor="middle" font-size="22" fill="#1b615d" font-weight="700">68.27%</text><text x="505" y="290" text-anchor="end" font-size="18">身長（cm）</text></svg>`;
+const robotStyles=String.raw`<style scoped>
+section { padding:42px 65px; text-align:left; justify-content:center; background:#edf5ef; }
+h2 { font-size:43px; color:#276044; margin:0 0 14px; }
+p { font-size:25px; margin:10px 0; line-height:1.45; }
+.robot-example-layout { display:grid; grid-template-columns:1fr 1fr; gap:38px; align-items:center; margin:10px 0; }
+.robot-line { display:flex; justify-content:space-between; align-items:flex-end; min-height:190px; }
+.robot-item { text-align:center; width:95px; }
+.robot-item svg { display:block; width:95px; height:auto; margin:auto; }
+.robot-item .robot-label { font-size:19px; margin-top:8px; }
+.robot-item.broken .robot-label { color:#a85f40; font-weight:700; }
+.robot-observation { text-align:center; font-size:23px; margin-top:20px; color:#466458; }
+.robot-chart svg { width:100%; height:230px; font-family:'Ubuntu Condensed',sans-serif; fill:#466458; }
+.robot-chart-note { text-align:center; font-size:18px; color:#65766e; margin-top:0; }
+mjx-container[display="true"] { font-size:115%; margin:12px 0; }
+.robot-insight { font-size:26px; font-weight:600; color:#276044; }
+a { font-size:24px; }
+footer { color:#546757; }
+</style>`;
+const discreteRobotSlide=String.raw`## 離散：壊れたロボットは何台？
+
+<!-- _footer: 2-3 確率分布 ／ 教科書 p.118 -->
+
+5台を検品。$X$ = 壊れたロボットの台数。
+
+<div class="robot-example-layout"><div><div class="robot-line">${[false,true,false,true,false].map(b=>`<div class="robot-item ${b?'broken':''}">${b?brokenRobot:robotIcon}<div class="robot-label">${b?'故障':'正常'}</div></div>`).join('')}</div><div class="robot-observation">今回の例：5台中、2台が故障。</div></div><div class="robot-chart">${discreteChart}<div class="robot-chart-note">説明用モデル：各台の故障確率50%、互いに独立。</div></div></div>
+
+$$X\in\{0,1,2,3,4,5\}\qquad\Pr(X=2)=\frac{10}{32}=31.25\%$$
+
+<div class="robot-insight">棒1本が「ちょうど2台」の確率。2.5台という結果はない。</div>
+
+[やってみよう！ 離散](https://yohman.github.io/26-2-StatsB/agenda.html?activity=discrete#week-02)
+
+${robotStyles}`;
+const continuousRobotSlide=String.raw`## 連続：ロボットの身長は何cm？
+
+<!-- _footer: 2-3 確率分布 ／ 教科書 p.118・p.121 -->
+
+1台を選んで測る。$X$ = ロボットの身長（cm）。
+
+<div class="robot-example-layout"><div><div class="robot-line">${[145.5,158.2,170,181.7,193.4].map(h=>`<div class="robot-item">${robotIcon.replace('<svg ',`<svg style="width:${(h/193.4*103).toFixed(1)}px" `)}<div class="robot-label">${h.toFixed(1)} cm</div></div>`).join('')}</div><div class="robot-observation">170.1、170.12… 間の値も取りうる。</div></div><div class="robot-chart">${continuousChart}<div class="robot-chart-note">説明用の正規モデル：平均170cm、標準偏差6cm。</div></div></div>
+
+$$\Pr(164\le X\le176)\approx68.27\%\qquad\Pr(X=170)=0$$
+
+<div class="robot-insight">曲線の高さではなく、区間の面積が確率。</div>
+
+理想的な連続モデルでは、幅のない1点の面積は0。
+
+[やってみよう！ 連続](https://yohman.github.io/26-2-StatsB/agenda.html?activity=continuous#week-02)
+
+${robotStyles}`;
+week2Slides.splice(19,3,discreteRobotSlide,continuousRobotSlide);
 writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 if (!process.argv.includes('--week2-only')) {
