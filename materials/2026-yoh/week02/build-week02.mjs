@@ -350,8 +350,11 @@ $$\underbrace{\int_0^{\sqrt2}x^2\,dx}_{\text{平均の値}}=\left[\frac{x^3}{3}\
 
 [やってみよう！ AL 02](https://yohman.github.io/26-2-StatsB/agenda.html?activity=al-continuous#week-02)`
 ].map(slide => `${slide}\n\n<!-- _footer: AL 02 先取り ／ 教科書 p.121・p.129 -->`);
-writeFileSync(resolve(here, 'w2.md'), deck([...styledSlides.slice(0,28), ...alBridge]));
+const week2Slides = styledSlides.slice(0,28);
+const [removedWeek2Slide] = week2Slides.splice(11,1);
+if (!removedWeek2Slide.includes('## 確率変数の期待値')) throw new Error('Recheck the Week 2 slide 12 removal.');
+writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 mkdirSync(week3Directory, {recursive:true});
 writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
-process.stdout.write(`Created Week 2 (${28 + alBridge.length} slides, including ${alBridge.length} AL bridge slides) and Week 3 (41 slides).\n`);
+process.stdout.write(`Created Week 2 (${week2Slides.length + alBridge.length} slides, including ${alBridge.length} AL bridge slides) and Week 3 (41 slides).\n`);
