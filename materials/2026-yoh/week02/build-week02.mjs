@@ -237,6 +237,11 @@ section.simulation-guide p { margin:12px 0; line-height:1.6; }
 section.simulation-guide .demo-task { font-size:22px; color:#546757; margin-top:8px; }
 section.simulation-guide a { color:#15718b; font-weight:700; font-size:24px; }
 section.simulation-guide footer { color:#546757; }
+section.al-calculation { font-size: 28px; padding: 48px 70px; }
+section.al-calculation h2 { font-size: 42px; margin-bottom: 22px; }
+section.al-calculation mjx-container[display="true"] { font-size: 115%; margin: 22px 0; }
+section.al-calculation .al-calculation-result { color: #287c9f; font-size: 38px; font-weight: 700; margin: 14px 0; }
+section.al-calculation small { font-size: 23px; }
 `;
 // Requested edits refer to the original 74-slide teaching deck, before renumbering.
 const removedSlides = new Set([15,22,23,24,25]);
@@ -303,17 +308,33 @@ $$\int_{0}^{\sqrt2}f(x)\,dx=1$$
 $$E(X)=\sum_x x\Pr(X=x)\quad\longrightarrow\quad\int_0^{\sqrt2}xf(x)\,dx$$
 
 <small>小さな区間の確率は、およそ f(x) × dx。だから x × f(x) × dx を足します。</small>`,
-  String.raw`## f(x)=x を入れると、x × x = x²
+  String.raw`## まずは簡単な例：0〜6で同じ密度
 
-<!-- _class: book-reference -->
+<!-- _class: book-reference al-calculation -->
+<!-- Adapted from Tsumura 2026 Week 2 slide 8: continuous uniform expectation. -->
 
-$$\begin{aligned}E(X)&=\int_0^{\sqrt2}xf(x)\,dx=\int_0^{\sqrt2}x^2\,dx\\&=\left[\frac{x^3}{3}\right]_0^{\sqrt2}=\frac{2\sqrt2}{3}\approx0.9428\end{aligned}$$
+$f(x)=\frac16$（$0\le x\le6$）。どの区間も、同じ幅なら同じ確率。
 
-角括弧は **「上の端の値 − 下の端の値」**。
+$$\begin{aligned}
+E(X)&=\int_0^6 xf(x)\,dx=\frac16\int_0^6 x\,dx\\
+&=\left[\frac{x^2}{12}\right]_0^6\\
+&=\frac{6^2}{12}-\frac{0^2}{12}=3
+\end{aligned}$$
 
-**0.9428は平均の値。94.28％ではない。**
+<div class="al-calculation-result">平均は3。0〜6のちょうど真ん中。</div>
 
-<small>配達の例なら約0.943時間（56.6分）。<br>大きい値に確率が多いので、平均は範囲の真ん中0.7071より大きい。</small>`,
+<small>$x$ の積分は $x^2/2$。$1/6$ を掛けると $x^2/12$。<br>角括弧は「上の端 − 下の端」。AL 02も同じ手順です。</small>`,
+  String.raw`## AL 02：同じ手順で、平均を求める
+
+<!-- _class: book-reference al-calculation -->
+
+$f(x)=x$、区間は $0\le x\le\sqrt2$。だから $xf(x)=x^2$。
+
+$$\begin{aligned}E(X)&=\int_0^{\sqrt2}xf(x)\,dx=\int_0^{\sqrt2}x^2\,dx\\&=\left[\frac{x^3}{3}\right]_0^{\sqrt2}\\&=\frac{(\sqrt2)^3}{3}-\frac{0^3}{3}=\frac{2\sqrt2}{3}\approx0.9428\end{aligned}$$
+
+<div class="al-calculation-result">下の空欄：平均の値は約0.9428</div>
+
+<small>$x^2$ を積分すると $x^3/3$。上の端√2を入れ、下の端0の値を引きます。<br>0.9428は確率ではありません。配達の例なら約56.6分です。</small>`,
   String.raw`## ALの2つの空欄を整理しよう
 
 <!-- _class: book-reference -->
@@ -330,4 +351,4 @@ writeFileSync(resolve(here, 'w2.md'), deck([...styledSlides.slice(0,28), ...alBr
 const week3Directory = resolve(here, '../week03');
 mkdirSync(week3Directory, {recursive:true});
 writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
-process.stdout.write('Created Week 2 (35 slides, including 7 AL bridge slides) and Week 3 (41 slides).\n');
+process.stdout.write(`Created Week 2 (${28 + alBridge.length} slides, including ${alBridge.length} AL bridge slides) and Week 3 (41 slides).\n`);
