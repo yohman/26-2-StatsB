@@ -72,7 +72,12 @@ const slides = [
 
 // Follow the textbook's six numbered subsections inside Chapter 2, Section 2.
 // Keep the source slides editable and retain Yoh's image-led examples.
-const activity = (id, label, week = 2) => `[${label}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-${String(week).padStart(2, '0')})`;
+const activityOrder = ['roulette', 'al-discrete', 'discrete', 'combinations', 'batting', 'probability', 'al-continuous'];
+const activity = (id, label, week = 2) => {
+  const number = activityOrder.indexOf(id) + 1;
+  const title = week === 2 && number ? `${String(number).padStart(2, '0')} ${label.replace(/^\d{2} /, '')}` : label;
+  return `[${title}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-${String(week).padStart(2, '0')})`;
+};
 const divider = (number, title, pages, question) => `## 教科書　第2章・第2節　確率分布\n\n<!-- _class: book-divider -->\n<!-- _footer: 2-${number} ${title} ／ 教科書 p.${pages} -->\n\n<div class="book-heading"><span class="book-number">2-${number}</span><span>${title}</span></div>\n\n<div class="book-page">教科書 p.${pages}</div>\n\n${question}`;
 const demo = (links, question) => `## やってみる\n\n${question}\n\n${links.join('\n\n')}\n\n<small>リンクから講義ページの該当タブを開きます。</small>`;
 const select = (...numbers) => numbers.map(n => slides[n - 1]);
