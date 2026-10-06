@@ -7,22 +7,21 @@ title_ja: 確率分布：離散確率分布(前半)
 title_en: Probability Distributions: Discrete Probability Distributions (Part 1)
 formula: Pr(X=x) = ⁿCₓπˣ(1−π)ⁿ⁻ˣ
 image: assets/images/week-02-expected-value.png
-prepare_en: Review combinations and the notation used for random variables.
+prepare_en: Review the notation used for random variables and probabilities.
 ---
 
 ## Prepare
 
-組合せと確率変数の記号を見直しておきましょう。
+確率変数と確率の記号を見直しておきましょう。
 
 ## In class
 
 - 確率変数と期待値 (random variables and expected values)
 - 確率分布、離散確率分布、連続確率分布 (probability distributions, discrete distributions, continuous distributions)
-- 二項・ベルヌーイ・ポアソン・負の二項分布の特徴 (binomial, Bernoulli, Poisson, and negative-binomial distributions)
 
 ## Textbook
 
-- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+- 第2章 第2節 1〜3「確率変数・期待値・確率分布」p.117–118 (Chapter 2, Section 2, subsections 1–3: Random Variables, Expected Value, Probability Distributions, pp.117–118)
 
 ## Materials
 

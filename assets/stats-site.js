@@ -16,8 +16,8 @@ const bilingual = (english, japanese) => `<span class="lang-en">${english}</span
 // Short student-facing descriptions distilled from teaching-agenda.md.
 const weekFlow = {
   1: { overview:['How a sample supports an inference, then how events and probability describe uncertainty.','標本から推測する流れを学び、事象と確率で不確かさを考えます。'], steps:[['Course setup and the inference process','授業の準備と推測の流れ'],['Population, sample, and possible bias','母集団・標本・偏り'],['Events, probability, and coin-toss practice','事象・確率・コイン投げ'],['Compare results and ask questions','結果の比較と質問']] },
-  2: { overview:['Turn random outcomes into distributions, expected values, and binomial probabilities.','確率変数から分布と期待値を考え、二項分布の確率を求めます。'], steps:[['Random variables and distributions','確率変数と分布'],['Build a probability table','確率表を作る'],['Expected value and binomial practice','期待値と二項分布の演習'],['Check the binomial conditions','二項分布の条件を確認']] },
-  3: { overview:['Compare binomial and Poisson models and decide which fits a counting problem.','二項分布とポアソン分布を比べ、数を数える問題に合うモデルを選びます。'], steps:[['Binomial review and Poisson counts','二項分布の復習とポアソン分布'],['Choose a model for each situation','事例ごとにモデルを選ぶ'],['Calculate and interpret probabilities','確率の計算と解釈'],['Explain the choice of model','モデル選択の理由を確認']] },
+  2: { overview:['Use lottery tickets, dice, and roulette to understand random variables, expected value, and discrete versus continuous distributions (textbook subsections 1–3).','くじ・サイコロ・ルーレットで、確率変数・期待値・離散と連続を学びます（教科書1〜3）。'], steps:[['Random variables','確率変数'],['Expected value','期待値'],['Probability distributions','確率分布'],['Discrete versus continuous','離散と連続']] },
+  3: { overview:['Build binomial and Poisson models, then connect continuous distributions to their means and variances (textbook subsections 4–6).','二項・ポアソン分布から連続確率分布へ進み、分布の平均と分散を考えます（教科書4〜6）。'], steps:[['Discrete probability models','離散確率分布'],['Combinations and batting','組合せと打率'],['Continuous distributions','連続確率分布'],['Distribution means and variances','分布の平均と分散']] },
   4: { overview:['Use binomial and Poisson distributions in applied worksheet problems.','ワークシートの事例で二項分布とポアソン分布を使います。'], steps:[['Choose a model and its parameters','モデルと母数を決める'],['Batting average and gacha cases','打率とガチャの事例'],['Defective items and Poisson counts','不良品とポアソン分布'],['Compare solutions and correct errors','解法を比べて修正']] },
   5: { overview:['Read areas under density curves and use the normal distribution and its table.','確率密度の面積を読み、正規分布と標準正規分布表を使います。'], steps:[['Density and cumulative probability','確率密度と累積確率'],['Sketch and shade probability areas','確率の範囲を図示'],['Standardize and use the normal table','標準化と正規分布表'],['Interpret the result in context','元の単位で結果を解釈']] },
   6: { overview:['Follow sample means into the central limit theorem, then work with t and chi-square distributions.','標本平均と中心極限定理を踏まえ、t分布とカイ二乗分布を学びます。'], steps:[['Samples and the central limit theorem','標本と中心極限定理'],['Compare sample means and variances','標本平均と分散を比較'],['t tables and chi-square examples','t分布表とカイ二乗分布'],['Explain degrees of freedom','自由度の意味を確認']] },
@@ -161,6 +161,7 @@ function slideThumbnail(deck, week) {
   }
   if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
   if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261006-example-flow-1';
+  if (week.week === 3 && deck.label === "Yoh's Week 3 lecture") return 'assets/slide-previews/yoh-w03.png?v=20261007-week-split-1';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
 }
@@ -445,6 +446,37 @@ function distributionSimulationMarkup(type) {
   </section>`;
 }
 
+
+function week23LectureMarkup(week, content) {
+  const n = week.week;
+  const prefix = 'week-' + n;
+  const activities = n === 2 ? [
+    ['examples','Lottery & dice','くじ・サイコロ','<section class="example-lab" data-example-lab data-example-scenarios="lottery,dice"></section>'],
+    ['roulette','Roulette','ルーレット','<div data-roulette></div>'],
+    ['discrete','Discrete vs continuous','離散と連続',week2DiscreteMarkup()]
+  ] : [
+    ['probability','Probability models','確率分布',week2ProbabilityMarkup()],
+    ['combinations','Lineup combinations','ロボットの並び',combinationMarkup()],
+    ['batting','Batting average','打率',battingSimulationMarkup()],
+    ['curves','Normal, t & chi-square','正規・t・カイ二乗',`<div class="distribution-subnav"><span class="distribution-subnav-label">04 · ${bilingual('Choose a distribution','分布を選ぶ')}</span><div class="distribution-subtabs" role="tablist" aria-label="Section 04 distribution options"><button type="button" role="tab" id="week-3-normal-tab" aria-controls="week-3-normal" aria-selected="true" tabindex="0">${bilingual('Normal','正規')}</button><button type="button" role="tab" id="week-3-t-tab" aria-controls="week-3-t" aria-selected="false" tabindex="-1">t</button><button type="button" role="tab" id="week-3-chi-tab" aria-controls="week-3-chi" aria-selected="false" tabindex="-1">${bilingual('Chi-square','カイ二乗')}</button></div></div><div id="week-3-normal" role="tabpanel" aria-labelledby="week-3-normal-tab">${distributionSimulationMarkup('normal')}</div><div id="week-3-t" role="tabpanel" aria-labelledby="week-3-t-tab" hidden>${distributionSimulationMarkup('t')}</div><div id="week-3-chi" role="tabpanel" aria-labelledby="week-3-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div>`],
+    ['examples','Variation & pairs','ばらつき・組合せ','<section class="example-lab" data-example-lab data-example-scenarios="delivery,pairs"></section>']
+  ];
+  return '<div class="lecture-tablist" role="tablist" aria-label="Week ' + n + ' lecture">' +
+    ['slides','explore',...(n === 2 ? ['al'] : [])].map((id,index) => '<button type="button" role="tab" id="' + prefix + '-lecture-' + id + '-tab" aria-controls="' + prefix + '-lecture-' + id + '" aria-selected="' + (index === 0) + '" tabindex="' + (index === 0 ? 0 : -1) + '">' + (id === 'slides' ? bilingual('Lecture','講義') : id === 'explore' ? bilingual('Explore','やってみる') : 'AL') + '</button>').join('') +
+    '</div><div id="' + prefix + '-lecture-slides" role="tabpanel" aria-labelledby="' + prefix + '-lecture-slides-tab">' + content + '</div>' +
+    '<div id="' + prefix + '-lecture-explore" role="tabpanel" aria-labelledby="' + prefix + '-lecture-explore-tab" hidden><div class="simulation-tablist" role="tablist" aria-label="Week ' + n + ' activities">' +
+    activities.map(([id,en,ja],index) => '<button type="button" role="tab" id="' + prefix + '-' + id + '-tab" aria-controls="' + prefix + '-' + id + '" aria-selected="' + (index === 0) + '" tabindex="' + (index === 0 ? 0 : -1) + '">' + String(index+1).padStart(2,'0') + ' <span>' + bilingual(en,ja) + '</span></button>').join('') + '</div>' +
+    activities.map(([id,en,ja,body],index) => '<div id="' + prefix + '-' + id + '" role="tabpanel" aria-labelledby="' + prefix + '-' + id + '-tab"' + (index ? ' hidden' : '') + '>' + body + '</div>').join('') + '</div>' +
+    (n === 2 ? `    <div id="week-2-lecture-al" role="tabpanel" aria-labelledby="week-2-lecture-al-tab" hidden>
+      <div class="simulation-tablist" role="tablist" aria-label="Week 2 AL explorations">
+        <button type="button" role="tab" id="week-2-al-discrete-tab" aria-controls="week-2-al-discrete" aria-selected="true" tabindex="0">01 <span>${bilingual('Weighted average','期待値')}</span></button>
+        <button type="button" role="tab" id="week-2-al-continuous-tab" aria-controls="week-2-al-continuous" aria-selected="false" tabindex="-1">02 <span>${bilingual('Two integrals','2つの積分')}</span></button>
+      </div>
+      <div id="week-2-al-discrete" role="tabpanel" aria-labelledby="week-2-al-discrete-tab">${alExpectationMarkup('discrete')}</div>
+      <div id="week-2-al-continuous" role="tabpanel" aria-labelledby="week-2-al-continuous-tab" hidden>${alExpectationMarkup('continuous')}</div>
+    </div>` : '');
+}
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
@@ -473,38 +505,7 @@ function lectureSection(week) {
       </div>
       <div id="week-6-t" role="tabpanel" aria-labelledby="week-6-t-tab">${distributionSimulationMarkup('t')}</div>
       <div id="week-6-chi" role="tabpanel" aria-labelledby="week-6-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div>
-    </div>` : week.week === 2 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 2 lecture">
-      <button type="button" role="tab" id="week-2-lecture-slides-tab" aria-controls="week-2-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
-      <button type="button" role="tab" id="week-2-lecture-explore-tab" aria-controls="week-2-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore', 'やってみる')}</button>
-      <button type="button" role="tab" id="week-2-lecture-al-tab" aria-controls="week-2-lecture-al" aria-selected="false" tabindex="-1">AL</button>
-    </div>
-    <div id="week-2-lecture-slides" role="tabpanel" aria-labelledby="week-2-lecture-slides-tab">${content}</div>
-    <div id="week-2-lecture-explore" role="tabpanel" aria-labelledby="week-2-lecture-explore-tab" hidden>
-      <div class="simulation-tablist" role="tablist" aria-label="Choose a Week 2 activity">
-        <button type="button" role="tab" id="week-2-examples-tab" aria-controls="week-2-examples" aria-selected="true" tabindex="0">01 <span>${bilingual('Lottery & dice', 'くじ・サイコロ')}</span></button>
-        <button type="button" role="tab" id="week-2-roulette-tab" aria-controls="week-2-roulette" aria-selected="false" tabindex="-1">02 <span>${bilingual('Roulette', 'ルーレット')}</span></button>
-        <button type="button" role="tab" id="week-2-discrete-tab" aria-controls="week-2-discrete" aria-selected="false" tabindex="-1">03 <span>${bilingual('Discrete vs continuous', '離散と連続')}</span></button>
-        <button type="button" role="tab" id="week-2-probability-tab" aria-controls="week-2-probability" aria-selected="false" tabindex="-1">04 <span>${bilingual('Probability models', '確率分布')}</span></button>
-        <button type="button" role="tab" id="week-2-combinations-tab" aria-controls="week-2-combinations" aria-selected="false" tabindex="-1">05 <span>${bilingual('Lineup combinations', 'ロボットの並び')}</span></button>
-        <button type="button" role="tab" id="week-2-batting-tab" aria-controls="week-2-batting" aria-selected="false" tabindex="-1">06 <span>${bilingual('Batting average', '打率')}</span></button>
-        <button type="button" role="tab" id="week-2-curves-tab" aria-controls="week-2-curves" aria-selected="false" tabindex="-1">07 <span>${bilingual('Normal, t & chi-square','正規・t・カイ二乗')}</span></button>
-      </div>
-      <div id="week-2-examples" role="tabpanel" aria-labelledby="week-2-examples-tab"><section class="example-lab" data-example-lab></section></div>
-      <div id="week-2-roulette" role="tabpanel" aria-labelledby="week-2-roulette-tab" hidden><div data-roulette></div></div>
-      <div id="week-2-discrete" role="tabpanel" aria-labelledby="week-2-discrete-tab" hidden>${week2DiscreteMarkup()}</div>
-      <div id="week-2-combinations" role="tabpanel" aria-labelledby="week-2-combinations-tab" hidden>${combinationMarkup()}</div>
-      <div id="week-2-batting" role="tabpanel" aria-labelledby="week-2-batting-tab" hidden>${battingSimulationMarkup()}</div>
-      <div id="week-2-probability" role="tabpanel" aria-labelledby="week-2-probability-tab" hidden>${week2ProbabilityMarkup()}</div>
-      <div id="week-2-curves" role="tabpanel" aria-labelledby="week-2-curves-tab" hidden><div class="distribution-subnav"><span class="distribution-subnav-label">07 · ${bilingual('Choose a distribution','分布を選ぶ')}</span><div class="distribution-subtabs" role="tablist" aria-label="Section 07 distribution options"><button type="button" role="tab" id="week-2-normal-tab" aria-controls="week-2-normal" aria-selected="true" tabindex="0">${bilingual('Normal','正規')}</button><button type="button" role="tab" id="week-2-t-tab" aria-controls="week-2-t" aria-selected="false" tabindex="-1">t</button><button type="button" role="tab" id="week-2-chi-tab" aria-controls="week-2-chi" aria-selected="false" tabindex="-1">${bilingual('Chi-square','カイ二乗')}</button></div></div><div id="week-2-normal" role="tabpanel" aria-labelledby="week-2-normal-tab">${distributionSimulationMarkup('normal')}</div><div id="week-2-t" role="tabpanel" aria-labelledby="week-2-t-tab" hidden>${distributionSimulationMarkup('t')}</div><div id="week-2-chi" role="tabpanel" aria-labelledby="week-2-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div></div>
-    </div>
-    <div id="week-2-lecture-al" role="tabpanel" aria-labelledby="week-2-lecture-al-tab" hidden>
-      <div class="simulation-tablist" role="tablist" aria-label="Week 2 AL explorations">
-        <button type="button" role="tab" id="week-2-al-discrete-tab" aria-controls="week-2-al-discrete" aria-selected="true" tabindex="0">01 <span>${bilingual('Weighted average','期待値')}</span></button>
-        <button type="button" role="tab" id="week-2-al-continuous-tab" aria-controls="week-2-al-continuous" aria-selected="false" tabindex="-1">02 <span>${bilingual('Two integrals','2つの積分')}</span></button>
-      </div>
-      <div id="week-2-al-discrete" role="tabpanel" aria-labelledby="week-2-al-discrete-tab">${alExpectationMarkup('discrete')}</div>
-      <div id="week-2-al-continuous" role="tabpanel" aria-labelledby="week-2-al-continuous-tab" hidden>${alExpectationMarkup('continuous')}</div>
-    </div>` : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
+    </div>` : [2,3].includes(week.week) ? week23LectureMarkup(week, content) : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
     </div>
@@ -652,16 +653,16 @@ function renderAgenda(weeks) {
   const exerciseRoutes = {
     lottery: ['week-2-lecture-explore-tab','week-2-examples-tab'],
     dice: ['week-2-lecture-explore-tab','week-2-examples-tab'],
-    delivery: ['week-2-lecture-explore-tab','week-2-examples-tab'],
-    'class-pairs': ['week-2-lecture-explore-tab','week-2-examples-tab'],
-    'normal-w2': ['week-2-lecture-explore-tab','week-2-curves-tab','week-2-normal-tab'],
-    't-w2': ['week-2-lecture-explore-tab','week-2-curves-tab','week-2-t-tab'],
-    'chi-w2': ['week-2-lecture-explore-tab','week-2-curves-tab','week-2-chi-tab'],
+    delivery: ['week-3-lecture-explore-tab','week-3-examples-tab'],
+    'class-pairs': ['week-3-lecture-explore-tab','week-3-examples-tab'],
+    'normal-w2': ['week-3-lecture-explore-tab','week-3-curves-tab','week-3-normal-tab'],
+    't-w2': ['week-3-lecture-explore-tab','week-3-curves-tab','week-3-t-tab'],
+    'chi-w2': ['week-3-lecture-explore-tab','week-3-curves-tab','week-3-chi-tab'],
     roulette: ['week-2-lecture-explore-tab','week-2-roulette-tab'],
-    combinations: ['week-2-lecture-explore-tab','week-2-combinations-tab'],
-    batting: ['week-2-lecture-explore-tab','week-2-batting-tab'],
+    combinations: ['week-3-lecture-explore-tab','week-3-combinations-tab'],
+    batting: ['week-3-lecture-explore-tab','week-3-batting-tab'],
     discrete: ['week-2-lecture-explore-tab','week-2-discrete-tab'],
-    probability: ['week-2-lecture-explore-tab','week-2-probability-tab'],
+    probability: ['week-3-lecture-explore-tab','week-3-probability-tab'],
     'al-discrete': ['week-2-lecture-al-tab','week-2-al-discrete-tab'],
     'al-continuous': ['week-2-lecture-al-tab','week-2-al-continuous-tab'],
     coin: ['week-1-lecture-simulations-tab','week-1-coin-tab'],

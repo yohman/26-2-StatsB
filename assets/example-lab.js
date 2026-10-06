@@ -17,8 +17,9 @@
   function setup(root) {
     if (root.dataset.ready) return;
     root.dataset.ready='true';
-    root.innerHTML = `<header><p class="section-kicker">${bi('Textbook p.117 & 129','教科書 p.117・129')}</p><h4>${bi('From one result to averages and variation','1回の結果から、平均とばらつきへ')}</h4></header>
-      <div class="example-choices" aria-label="例を選ぶ">${Object.entries(scenarios).map(([id,s])=>`<button type="button" data-example="${id}" aria-pressed="false">${s.icon} ${s.title}</button>`).join('')}</div>
+    const allowed = (root.dataset.exampleScenarios || 'lottery,dice,delivery,pairs').split(',');
+    root.innerHTML = `<header><p class="section-kicker">${allowed.includes('delivery') ? bi('Textbook p.129','教科書 p.129') : bi('Textbook p.117','教科書 p.117')}</p><h4>${bi('From one result to averages and variation','1回の結果から、平均とばらつきへ')}</h4></header>
+      <div class="example-choices" aria-label="例を選ぶ">${Object.entries(scenarios).filter(([id])=>allowed.includes(id)).map(([id,s])=>`<button type="button" data-example="${id}" aria-pressed="false">${s.icon} ${s.title}</button>`).join('')}</div>
       <p data-example-story></p><div class="example-layout"><div><div class="example-result" aria-live="polite"><span data-example-icon></span><strong data-example-last>?</strong><small>${bi('This observed value','今回の実現値')} ${inline('x')}</small></div><div class="example-actions"><button type="button" data-example-run="1">${bi('Try once','1回試す')}</button><button type="button" data-example-run="1000">${bi('Try 1,000 times','1,000回試す')}</button><button type="button" data-example-reset>${bi('Reset','リセット')}</button></div></div>
       <div><table class="example-table"><thead><tr><th>${inline('x')}</th><th>${inline(String.raw`\Pr(X=x)`,'Pr(X=x)')}</th><th>${inline(String.raw`x\Pr(X=x)`,'x Pr(X=x)')}</th><th>${bi('Observed','実測')}</th></tr></thead><tbody data-example-rows></tbody></table><p>${bi('Add each row’s value × probability to get the expectation.','各行の「値 × 確率」を足すと期待値。')}</p><div class="example-formula" data-example-formula></div><p data-example-variance></p></div></div>
       <section class="example-summary" aria-label="試行結果"><dl class="example-metrics" data-example-metrics></dl><p class="example-accounting" data-example-status aria-live="polite"></p></section>
@@ -37,6 +38,7 @@
     root.append(pairs);
     pairs.hidden=true;
     const pairButton=document.createElement('button');pairButton.type='button';pairButton.innerHTML=`🤖 ${bi('Pairs from 22','22人の組')}`;pairButton.setAttribute('aria-pressed','false');root.querySelector('.example-choices').append(pairButton);
+    pairButton.hidden = !allowed.includes('pairs');
     function showPairs() {generation++;busy=false;root.classList.add('is-pairs');pairs.hidden=false;root.querySelectorAll('[data-example]').forEach(b=>b.setAttribute('aria-pressed','false'));pairButton.setAttribute('aria-pressed','true');}
     pairButton.addEventListener('click',showPairs);
     let selected=[], found=new Set();
@@ -146,8 +148,8 @@
     }));
     q('[data-example-reset]').addEventListener('click',reset);
     const requested=new URLSearchParams(location.search).get('activity');
-    select(scenarios[requested]?requested:'lottery');
-    if(requested==='class-pairs') showPairs();
+    select(scenarios[requested] && allowed.includes(requested) ? requested : allowed.find(id=>scenarios[id]));
+    if(requested==='class-pairs' && allowed.includes('pairs')) showPairs();
     pairStatus();
     new MutationObserver(()=>{updateCopy();pairStatus();draw();formula();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-language']});
     document.querySelector('script[src*="mathjax"]')?.addEventListener('load',()=>formula());

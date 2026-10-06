@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -240,6 +240,14 @@ const styledSlides = revisedSlides.map(slide => {
     /^## (離散分布の平均と分散|連続分布でも|バッテリーが|正規分布|\$t\$ 分布)/m.test(slide);
   return isTextbookFormula ? slide.replace(/^(##[^\n]*)$/m, '$1\n\n<!-- _class: book-reference -->') : slide;
 });
-const output = `${preface.replace('</style>', `${bookStyles}\n</style>`)}\n\n${styledSlides.join('\n\n')}\n`.replace(/[ \t]+$/gm, '');
-writeFileSync(resolve(here, 'w2.md'), output);
-process.stdout.write(`Created w2.md with ${revisedSlides.length} slides in six textbook sections.\n`);
+// Keep the agreed 28-slide Week 2 boundary; the remaining textbook sections belong to Week 3.
+if (styledSlides.length !== 69) throw new Error('Recheck the 28-slide split after changing the source deck.');
+const week3Activities = new Set(['probability','combinations','batting','normal-w2','t-w2','chi-w2','delivery','class-pairs']);
+const relink = slide => slide.replace(/(agenda\.html\?activity=([^#]+))#week-02/g,
+  (match, url, id) => week3Activities.has(id) ? `${url}#week-03` : match);
+const deck = slides => `${preface.replace('</style>', `${bookStyles}\n</style>`)}\n\n${slides.map(relink).join('\n\n')}\n`.replace(/[ \t]+$/gm, '');
+writeFileSync(resolve(here, 'w2.md'), deck(styledSlides.slice(0,28)));
+const week3Directory = resolve(here, '../week03');
+mkdirSync(week3Directory, {recursive:true});
+writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
+process.stdout.write('Created Week 2 (28 slides) and Week 3 (41 slides).\n');
