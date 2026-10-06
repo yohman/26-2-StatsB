@@ -418,6 +418,47 @@ a { font-size: 29px; font-weight: 700; }
 </style>
 
 <!-- 2、6、1、3は説明用の結果。ライブの実測平均は試行ごとに変わります。 -->`;
+if (!week2Slides[16].includes('## 赤に100円賭けると') || !week2Slides[17].includes('ルーレットの1回と、長い平均')) throw new Error('Recheck the roulette slide 17 removal and slide 18 redesign.');
+week2Slides.splice(16,2,String.raw`## やってみる：100円賭けたら、平均いくら？
+
+<!-- _class: simulation-guide roulette-expectation -->
+<!-- _footer: 2-2 期待値 ／ 教科書 p.117 -->
+
+米国式ルーレットで、赤に100円。$X$ は賭け金を差し引いた損益。
+
+| <span class="red-outcome">赤：18個</span> | 黒18個 ＋ 緑（0・00）2個 |
+| :---: | :---: |
+| 勝ち：$+100$ 円 | 負け：$-100$ 円 |
+| 確率 $18/38$ | 確率 $20/38$ |
+
+$$
+E(X)=(+100)\times\frac{18}{38}+(-100)\times\frac{20}{38}
+$$
+
+$$
+\Large\color{#a34a3b}{E(X)\approx-5.26\text{ 円}}
+$$
+
+**100円賭けるごとに、平均5.26円の損失。**
+
+1回なら勝つことも。1,000回試して、1回あたりの平均損益を比べよう。
+
+[やってみよう！](https://yohman.github.io/26-2-StatsB/agenda.html?activity=roulette#week-02)
+
+<style scoped>
+section { padding: 42px 65px; }
+h2 { font-size: 43px; margin: 0 0 16px; }
+p { font-size: 25px; margin: 8px 0; }
+table { width: 100%; table-layout: fixed; margin: 10px 0 8px; border: 0; }
+th, td, tr { border: 0 !important; background: transparent !important; }
+th { font-size: 27px; padding: 8px; }
+td { font-size: 29px; padding: 5px 12px; }
+tbody tr:last-child td { font-size: 24px; color: #65776e; }
+.red-outcome { color: #af3f4d; }
+mjx-container[display="true"] { font-size: 115%; margin: 10px 0; }
+p strong { font-size: 29px; color: #a34a3b; }
+a { font-size: 28px; font-weight: 700; }
+</style>`);
 writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 mkdirSync(week3Directory, {recursive:true});
