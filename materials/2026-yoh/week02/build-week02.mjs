@@ -383,6 +383,41 @@ h2 { font-size: 52px; margin-bottom: 18px; }
 p { font-size: 27px; margin: 8px 0; }
 mjx-container[display="true"] { margin: 14px 0; font-size: 115%; }
 </style>`);
+if (!week2Slides[13].includes('やってみる：サイコロの出目と、その平均')) throw new Error('Recheck the dice simulation guide position.');
+week2Slides[13] = String.raw`## やってみる：出目と平均を比べよう
+
+<!-- _class: simulation-guide dice-results -->
+<!-- _footer: 2-2 期待値 ／ 教科書 p.117 -->
+
+| 4回振った結果の例 | 理論の期待値 |
+| :---: | :---: |
+| <span class="dice-faces" aria-label="2、6、1、3の出目">⚁ ⚅ ⚀ ⚂</span> | <span class="dice-target">$3.5$</span> |
+| この4回の平均 | 何度も振ったときの平均の目安 |
+| $\displaystyle\bar{x}=\frac{2+6+1+3}{4}=3$ | $E(X)=3.5$ |
+
+**1回の出目は整数。平均は小数でもよい。**
+
+1,000回振ってみよう。青い線は「そこまでの平均」。$3.5$ に近づく？
+
+[やってみよう！](https://yohman.github.io/26-2-StatsB/agenda.html?activity=dice#week-02)
+
+<style scoped>
+section { padding: 50px 65px; }
+h2 { font-size: 44px; margin: 0 0 18px; }
+table { width: 100%; table-layout: fixed; border: 0; margin: 0 0 15px; }
+thead th { font-size: 26px; color: #567367; font-weight: 600; }
+th, td, tr { border: 0 !important; background: transparent !important; }
+td { padding: 4px 15px; font-size: 24px; vertical-align: middle; }
+th:first-child, td:first-child { width: 58%; }
+.dice-faces { font-family: 'Apple Symbols', 'Arial Unicode MS', sans-serif; font-size: 90px; line-height: 1.35; color: #264d3d; white-space: nowrap; }
+.dice-target { font-size: 80px; color: #167599; line-height: 1.35; }
+tbody tr:last-child td { font-size: 30px; padding-top: 8px; }
+p { font-size: 25px; margin: 8px 0; }
+p strong { color: #264d3d; font-size: 30px; }
+a { font-size: 29px; font-weight: 700; }
+</style>
+
+<!-- 2、6、1、3は説明用の結果。ライブの実測平均は試行ごとに変わります。 -->`;
 writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 mkdirSync(week3Directory, {recursive:true});
