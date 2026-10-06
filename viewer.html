@@ -98,7 +98,7 @@
         if (!window.pdfjsLib) throw new Error('PDF renderer unavailable');
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdfjs/pdf.worker.min.js?v=3.11.174';
         const pdfUrl = new URL(encodeURI(path), location.href);
-        if (path === 'materials/2026-yoh/week02/w2.pdf') pdfUrl.searchParams.set('v', '20261006-expectation-steps-1');
+        if (path === 'materials/2026-yoh/week02/w2.pdf') pdfUrl.searchParams.set('v', '20261006-lottery-opening-1');
         const response = await fetch(pdfUrl.href, { cache: 'no-cache' });
         if (!response.ok) throw new Error('PDF unavailable');
         const pdf = await window.pdfjsLib.getDocument({

@@ -83,8 +83,8 @@ const demo = (links, question) => `## やってみる\n\n${question}\n\n${links.
 const select = (...numbers) => numbers.map(n => slides[n - 1]);
 const blocks = [
   {n:1,title:'確率変数',pages:'117',question:'何が起きるか分からない。その結果を、数で表す。',body:[
+    `## くじの賞金を $X$ とする\n\nまだ開いていないくじ。賞金はいくら？\n\n<large>$X\\in\\{0,100,1000\\}$</large>\n\n偶然の結果によって値が決まる「賞金の額」が確率変数 $X$。\n\n<small>$x$ は具体的な値。$Pr(X=100)$ は「賞金が100円になる確率」。</small>`,
     ...select(9),
-    `## くじの賞金を $X$ とする\n\n0円、100円、1,000円。引く前には、どれになるか分からない。\n\n<large>$X\\in\\{0,100,1000\\}$</large>\n\n引いた後の賞金が、観測した値 $x$。`,
     `## 5回投げて、ロボットは何回？\n\n表はロボット、裏はヤギ。$X$ = 5回中の表の回数。\n\n<large>$X\\in\\{0,1,2,3,4,5\\}$</large>\n\n0回も、取りうる結果に含めます。`,
     demo([activity('coin','コイン投げを開く',1)],'投げる前に、$X$ が取りうる値を挙げてみよう。')
   ]},
@@ -120,7 +120,8 @@ const blocks = [
     demo([activity('al-discrete','06 AL：期待値'),activity('al-continuous','07 AL：2つの積分')],'各項を確認して、ワークシートのセルを埋めよう。')
   ]}
 ];
-const orderedSlides = [slides[0].replace('離散確率分布と二項分布','教科書 第2章 第2節　p.117–129'),
+const lotteryOpening = `## 100円のくじ、買う？\n\n<!-- _footer: 統計学B 第2週 ／ 教科書 第2章 第2節 p.117–129 -->\n\n1枚 **100円**。まだ開いていないくじを、手に持っています。\n\n<large>0円　／　100円　／　1,000円</large>\n\n賞金の確率は、順に **70%　／　25%　／　5%**。\n\n買う？ 買わない？ その理由は？`;
+const orderedSlides = [lotteryOpening,
   ...blocks.flatMap(block => [divider(block.n,block.title,block.pages,block.question),
     ...block.body.map(slide => slide.replace(/^(#{1,3}[^\n]*)$/m, `$1\n\n<!-- _footer: 2-${block.n} ${block.title} ／ 教科書 p.${block.pages} -->`))])];
 // A distinct textbook visual language, without changing Yoh's white story slides.
