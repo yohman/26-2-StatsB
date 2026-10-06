@@ -325,8 +325,15 @@ function battingSimulationMarkup() {
 function week2DiscreteMarkup() {
   return `<section class="week2-probability-lab" data-week2-discrete aria-label="Discrete and continuous probability">
     <header class="week2-lab-heading"><div><p class="section-kicker">${bilingual('TWO WAYS PROBABILITY WORKS','確率の2つの考え方')}</p><h4>${bilingual('Count it—or measure it?','数える？それとも測る？')}</h4></div><p>${bilingual('Move the sliders. Watch the selected values enter the formula, then see that probability in the chart.','スライダーを動かそう。選んだ値を公式に入れると、その確率がグラフに現れます。')}</p></header>
-    <div class="week2-compare-grid">
-      <article class="week2-compare-card week2-discrete-card">
+    <nav class="distribution-subnav" aria-label="Discrete and continuous exploration">
+      <span class="distribution-subnav-label">${bilingual('03 · EXPLORE','03 · やってみる')}</span>
+      <div class="distribution-subtabs" role="tablist" aria-label="Discrete or continuous">
+        <button type="button" role="tab" id="w2-count-tab" aria-controls="w2-count-panel" aria-selected="true" tabindex="0">${bilingual('Discrete','離散')}</button>
+        <button type="button" role="tab" id="w2-measure-tab" aria-controls="w2-measure-panel" aria-selected="false" tabindex="-1">${bilingual('Continuous','連続')}</button>
+      </div>
+    </nav>
+    <div class="week2-compare-panels">
+      <article class="week2-compare-card week2-discrete-card" id="w2-count-panel" role="tabpanel" aria-labelledby="w2-count-tab">
         <div class="week2-card-top"><span class="week2-type-chip">${bilingual('DISCRETE · COUNT','離散 · 個数')}</span><span class="week2-card-icon" aria-hidden="true">🪙</span></div>
         <h5>${bilingual('Heads in 5 tosses','コイン5回の表')}</h5>
         <p>${bilingual('Fair coin · 5 independent tosses · each toss has a 50% chance of heads.','公平なコインを独立に5回投げます。1回ごとの表の確率は50％。')}</p>
@@ -345,7 +352,7 @@ function week2DiscreteMarkup() {
         <p class="week2-chart-link">↓ ${bilingual('The formula gives the highlighted bar.','公式の答えが、色のついた棒になります。')}</p>
         <div class="week2-discrete-bars" data-w2-discrete-bars role="group" aria-label="Probability for each number of heads"></div>
       </article>
-      <article class="week2-compare-card week2-continuous-card">
+      <article class="week2-compare-card week2-continuous-card" id="w2-measure-panel" role="tabpanel" aria-labelledby="w2-measure-tab" hidden>
         <div class="week2-card-top"><span class="week2-type-chip">${bilingual('CONTINUOUS · MEASURE','連続 · 測定')}</span><span class="week2-card-icon" aria-hidden="true">🤖</span></div>
         <h5>${bilingual('Robot height','ロボの身長')}</h5>
         <p>${bilingual('A normal model: mean μ = 170 cm, standard deviation σ = 6 cm.','正規分布の例：平均 μ = 170cm、標準偏差 σ = 6cm。')}</p>
