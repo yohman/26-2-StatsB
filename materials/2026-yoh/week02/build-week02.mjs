@@ -150,7 +150,7 @@ const blocks = [
     demo([activity('al-discrete','06 AL：期待値'),activity('al-continuous','07 AL：2つの積分')],'各項を確認して、ワークシートのセルを埋めよう。')
   ]}
 ];
-const lotteryOpening = `## 100円のくじ、買う？\n\n<!-- _footer: 統計学B 第2週 ／ 教科書 第2章 第2節 p.117–129 -->\n\n1枚 **100円**。まだ開いていないくじを、手に持っています。\n\n<large>0円　／　100円　／　1,000円</large>\n\n賞金の確率は、順に **70%　／　25%　／　5%**。\n\n買う？ 買わない？ その理由は？`;
+const lotteryOpening = `## 100円のくじ、買う？\n\n<!-- _class: lottery-opening -->\n<!-- _footer: 統計学B 第2週 ／ 教科書 第2章 第2節 p.117–129 -->\n\n![bg left:30% fit](images/kuji-ticket.png)\n\n1枚 **100円**。<br>まだ開いていないくじを、手に持っています。\n\n<large>0円　／　100円　／　1,000円</large>\n\n賞金の確率は、順に **70%　／　25%　／　5%**。\n\n買う？ 買わない？ その理由は？\n\n<!-- Lottery-ticket illustration generated with OpenAI image generation. -->`;
 // Each concrete example gets a nearby implementation, rather than a distant list of links.
 // Drop section-end link lists now that each example has its own worked guide.
 for(const block of blocks.filter(b=>[4,5,6].includes(b.n))) block.body.pop();
@@ -218,6 +218,9 @@ section.lottery-example h2 { font-size: 48px; margin-bottom: 22px; }
 section.lottery-example mjx-container[display="true"] { font-size: 105%; margin: 22px 0; }
 section.lottery-example p { margin: 12px 0; }
 section.lottery-example small { font-size: 22px; }
+section.lottery-opening { font-size: 28px; padding: 55px; }
+section.lottery-opening h2 { font-size: 48px; }
+section.lottery-opening large { font-size: 1.65em; }
 section.simulation-guide { background:#edf5ef; text-align:left; padding:48px 70px; font-size:25px; justify-content:center; }
 section.simulation-guide h2 { font-size:39px; color:#276044; margin:0 0 22px; }
 section.simulation-guide .demo-example { font-size:24px; font-weight:600; color:#385246; margin-bottom:8px; }
