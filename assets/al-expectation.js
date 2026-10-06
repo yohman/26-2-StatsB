@@ -109,10 +109,13 @@
       root.querySelector('.al-continuous-controls').hidden = step === 3;
     };
     function graph(svg, n, weighted) {
-      const left = 44, right = 426, bottom = 192, top = 25;
-      const maxY = weighted ? 2.2 : 1.6;
-      const X = x => left + x / a * (right - left);
-      const Y = y => bottom - y / maxY * (bottom - top);
+      // One coordinate unit has the same length on both axes.
+      svg.setAttribute('viewBox', '0 0 380 330');
+      const scale = weighted ? 110 : 165;
+      const left = weighted ? 95 : 65, bottom = 275, top = 28;
+      const right = left + a * scale;
+      const X = x => left + x * scale;
+      const Y = y => bottom - y * scale;
       const f = x => weighted ? x * x : x;
       const width = a / n;
       const rects = Array.from({ length: n }, (_, i) => {
@@ -121,7 +124,8 @@
       }).join('');
       const path = Array.from({ length: 81 }, (_, i) => `${i ? 'L' : 'M'}${X(i / 80 * a)},${Y(f(i / 80 * a))}`).join(' ');
       const marker = `<text x="${left}" y="16">${weighted ? 'x f(x) = x²' : 'f(x) = x'}</text>`;
-      svg.innerHTML = `<line class="al-area-axis" x1="${left}" y1="${bottom}" x2="${right+8}" y2="${bottom}"/><line class="al-area-axis" x1="${left}" y1="${bottom}" x2="${left}" y2="${top}"/>${rects}<path class="al-area-curve" d="${path}"/>${marker}<text x="${left}" y="214" text-anchor="middle">0</text><text x="${right}" y="214" text-anchor="middle">√2 ≈ 1.414</text><text x="236" y="235" text-anchor="middle">x</text><text x="${left-9}" y="${Y(weighted ? 2 : 1)}" text-anchor="end">${weighted ? '2' : '1'}</text>`;
+      const triangle = weighted ? '' : `<path d="M${X(0)},${Y(0)}L${X(a)},${Y(0)}L${X(a)},${Y(a)}Z" fill="#63a8c0" fill-opacity=".25" pointer-events="none"/><path d="M${left},${Y(a)}H${right}V${bottom}" fill="none" stroke="#488a91" stroke-dasharray="4 4" pointer-events="none"/><text x="${left-9}" y="${Y(a)+4}" text-anchor="end">√2</text>`;
+      svg.innerHTML = `${triangle}<line class="al-area-axis" x1="${left}" y1="${bottom}" x2="${right+18}" y2="${bottom}"/><line class="al-area-axis" x1="${left}" y1="${bottom}" x2="${left}" y2="${top}"/>${rects}<path class="al-area-curve" d="${path}"/>${marker}<text x="${left}" y="297" text-anchor="middle">0</text><text x="${right}" y="297" text-anchor="middle">√2 ≈ 1.414</text><text x="${right+24}" y="${bottom+4}">x</text><text x="${(left+right)/2}" y="320" text-anchor="middle">${t('Equal scale on both axes','縦・横は同じ縮尺')}</text><text x="${left-9}" y="${Y(weighted ? 2 : 1)+4}" text-anchor="end">${weighted ? '2' : '1'}</text>`;
     }
     function render() {
       const n = Number(slider.value), width = a / n;
