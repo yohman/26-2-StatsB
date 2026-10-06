@@ -462,18 +462,18 @@ if (!week2Slides[16].includes('## 赤に100円賭けると') || !week2Slides[17]
 // Reuse the American wheel from the live roulette exploration as a labeled probability diagram.
 const roulettePockets=['0','28','9','26','30','11','7','20','32','17','5','22','34','15','3','24','36','13','1','00','27','10','25','29','12','8','19','31','18','6','21','33','16','4','23','35','14','2'];
 const rouletteRed=new Set([1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36]);
-const rouletteSectors=roulettePockets.map((p,i)=>`${p==='0'||p==='00'?'#00843d':rouletteRed.has(+p)?'#e00000':'#080808'} ${i*360/38}deg ${(i+1)*360/38}deg`).join(',');
-const rouletteGraphic=`<div class="slide-roulette" role="img" aria-label="米国式ルーレット：赤18、黒18、緑の0と00の2個"><div class="slide-wheel" style="background:conic-gradient(${rouletteSectors})">${roulettePockets.map((p,i)=>`<span style="transform:rotate(${(i+.5)*360/38}deg) translateY(-126px) rotate(90deg)">${p}</span>`).join('')}<div class="slide-wheel-pocket-dividers" style="background:repeating-conic-gradient(#dab96b 0deg .45deg,transparent .45deg ${360/38}deg)"></div><div class="slide-wheel-number-ring"></div><div class="slide-wheel-hub"><div class="slide-wheel-spindle"></div></div><div class="slide-wheel-ball"></div></div><div class="slide-wheel-label">38ポケット：赤18・黒18・緑2<br>赤に賭けると、0・00も負け。</div></div>`;
+const rouletteSectors=roulettePockets.map((p,i)=>`${p==='0'||p==='00'?'#008000':rouletteRed.has(+p)?'#ffffff':'#000000'} ${i*360/38}deg ${(i+1)*360/38}deg`).join(',');
+const rouletteGraphic=`<div class="slide-roulette" role="img" aria-label="38等分の円：黒18、白18、緑の0と00の2個。通常の赤を白で表示。"><div class="slide-wheel" style="background:conic-gradient(${rouletteSectors})">${roulettePockets.map((p,i)=>`<span style="color:${rouletteRed.has(+p)?'#000000':'#ffffff'};transform:rotate(${(i+.5)*360/38}deg) translateY(-130px) rotate(90deg)">${p}</span>`).join('')}</div><div class="slide-wheel-label">黒18・白18・緑2（0・00）<br>白は通常の赤を表す。</div></div>`;
 week2Slides.splice(16,2,String.raw`## やってみる：100円賭けたら、平均いくら？
 
 <!-- _class: simulation-guide roulette-expectation -->
 <!-- _footer: 2-2 期待値 ／ 教科書 p.117 -->
 
-米国式ルーレットで、赤に100円。$X$ は賭け金を差し引いた損益。
+米国式ルーレットで、赤（図では白）に100円。$X$ は賭け金を差し引いた損益。
 
 ${rouletteGraphic}
 
-| <span class="red-outcome">赤：18個</span> | 黒18個 ＋ 緑（0・00）2個 |
+| <span class="red-outcome">赤（図では白）：18個</span> | 黒18個 ＋ 緑（0・00）2個 |
 | :---: | :---: |
 | 勝ち：$+100$ 円 | 負け：$-100$ 円 |
 | 確率 $18/38$ | 確率 $20/38$ |
@@ -502,20 +502,13 @@ th, td, tr { border: 0 !important; background: transparent !important; }
 th { font-size: 25px; padding: 8px; }
 td { font-size: 27px; padding: 5px 12px; }
 tbody tr:last-child td { font-size: 24px; color: #65776e; }
-.red-outcome { color: #d00000; }
+.red-outcome { color: #000000; }
 mjx-container[display="true"] { font-size: 105%; margin: 10px 0; }
 p strong { font-size: 26px; color: #a34a3b; }
 a { font-size: 28px; font-weight: 700; }
 .slide-roulette { position:absolute; left:55px; top:212px; width:310px; text-align:center; }
-.slide-wheel { position:relative; width:300px; height:300px; border:8px solid #4b2617; border-radius:50%; box-sizing:border-box; box-shadow:0 3px 8px #0005,0 0 0 3px #aa7e35,inset 0 0 0 2px #e3bf6c; }
+.slide-wheel { position:relative; width:300px; height:300px; border:1px solid #000000; border-radius:50%; box-sizing:border-box; }
 .slide-wheel > span { position:absolute; z-index:4; left:50%; top:50%; width:0; height:0; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-family:Arial,sans-serif; font-weight:700; }
-.slide-wheel-pocket-dividers { position:absolute; inset:0; border-radius:50%; }
-.slide-wheel-number-ring { position:absolute; inset:33px; border:2px solid #e3bf6c; border-radius:50%; }
-.slide-wheel-hub { position:absolute; inset:53px; border:4px solid #cbab5f; border-radius:50%; background:radial-gradient(circle at 42% 32%,#bf773f 0%,#89512c 36%,#512b18 68%,#2d150c 100%); box-shadow:inset 0 0 0 3px #5e341c,inset 0 6px 15px #0007; }
-.slide-wheel-spindle { position:absolute; inset:50px; border-radius:50%; background:radial-gradient(circle at 36% 27%,#fff7d5,#cda957 40%,#735115 77%,#f4d891); box-shadow:0 4px 6px #0008,0 0 0 2px #ad863c; }
-.slide-wheel-spindle::before,.slide-wheel-spindle::after { content:''; position:absolute; left:50%; top:50%; width:98px; height:10px; border-radius:8px; transform:translate(-50%,-50%) rotate(32deg); background:linear-gradient(#ffefb0,#b48a32 48%,#68420c); box-shadow:0 2px 3px #0006; }
-.slide-wheel-spindle::after { transform:translate(-50%,-50%) rotate(122deg); }
-.slide-wheel-ball { position:absolute; z-index:5; width:13px; height:13px; left:150px; top:35px; border-radius:50%; background:radial-gradient(circle at 30% 25%,#fff 10%,#f4f2e9 55%,#b8b6af); box-shadow:1px 2px 4px #0009; }
 .slide-wheel-label { font-size:19px; color:#546757; line-height:1.5; margin-top:20px; }
 </style>`);
 if (!week2Slides[15].includes('Roulette')) throw new Error('Recheck the current slide 16 before deletion.');
