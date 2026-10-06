@@ -9,8 +9,9 @@
     root.dataset.ready='true';
     root.innerHTML = `<header><p class="section-kicker">教科書 p.117・129</p><h4>1回の結果から、平均とばらつきへ</h4></header>
       <div class="example-choices" aria-label="例を選ぶ">${Object.entries(scenarios).map(([id,s])=>`<button type="button" data-example="${id}" aria-pressed="false">${s.icon} ${s.title}</button>`).join('')}</div>
-      <p data-example-story></p><div class="example-layout"><div><div class="example-result" aria-live="polite"><span data-example-icon></span><strong data-example-last>?</strong><small>今回の実現値 x</small></div><div class="example-actions"><button type="button" data-example-run="1">1回試す</button><button type="button" data-example-run="1000">1,000回試す</button><button type="button" data-example-reset>リセット</button></div><p data-example-status aria-live="polite"></p></div>
+      <p data-example-story></p><div class="example-layout"><div><div class="example-result" aria-live="polite"><span data-example-icon></span><strong data-example-last>?</strong><small>今回の実現値 x</small></div><div class="example-actions"><button type="button" data-example-run="1">1回試す</button><button type="button" data-example-run="1000">1,000回試す</button><button type="button" data-example-reset>リセット</button></div></div>
       <div><table class="example-table"><thead><tr><th>x</th><th>Pr(X=x)</th><th>x Pr(X=x)</th><th>実測</th></tr></thead><tbody data-example-rows></tbody></table><p>各行の「値 × 確率」を足すと期待値。</p><div class="example-formula" data-example-formula></div><p data-example-variance></p></div></div>
+      <section class="example-summary" aria-label="試行結果"><dl class="example-metrics" data-example-metrics></dl><p class="example-accounting" data-example-status aria-live="polite"></p></section>
       <h5>繰り返すと、平均はどうなる？</h5><svg data-example-chart viewBox="0 0 720 220" role="img" aria-label="試行回数と実測平均。青は実測平均、点線は期待値。"></svg><p class="week2-aha">青：実測平均 ／ 点線：理論の期待値。たくさん試すと近づく傾向があります。毎回、近づくとは限りません。</p>`;
     const pairs = document.createElement('section');
     pairs.className='example-pairs';
@@ -61,7 +62,16 @@
       q('[data-example-icon]').textContent=s.icon;
       q('[data-example-last]').textContent=last===null?'?':`${last}${s.unit}`;
       q('[data-example-rows]').innerHTML=s.values.map((v,i)=>`<tr${last===v?' class="is-last"':''}><td>${v}${s.unit}</td><td>${(100*s.probabilities[i]).toFixed(2)}%</td><td>${(v*s.probabilities[i]).toFixed(2)}</td><td>${n?(100*counts[i]/n).toFixed(1)+'%':'—'}</td></tr>`).join('');
-      q('[data-example-status]').textContent=`${n}回 ／ 実測平均 ${n?(sum/n).toFixed(2):'—'}${s.unit}${s.cost&&n?` ／ 1枚あたり平均損益 ${(sum/n-s.cost).toFixed(2)}円 ／ 合計損益 ${(sum-n*s.cost).toLocaleString()}円`:''}`;
+      const format=(value,decimals=0)=>value.toLocaleString('ja-JP',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
+      const spending=n*s.cost, net=sum-spending;
+      const netClass=net<0?'is-loss':net>0?'is-gain':'';
+      const metrics=[['試行回数',format(n),'回',''],[s.cost?'1枚あたり平均賞金':'実測平均',n?format(sum/n,2):'—',s.unit,'']];
+      if(s.cost) metrics.push(['1枚あたり平均損益',n?format(sum/n-s.cost,2):'—','円',netClass],['合計支出（1枚100円）',format(spending),'円',''],['獲得した賞金の合計',format(sum),'円',''],['合計損益',format(net),'円',`is-net ${netClass}`]);
+      const metricList=q('[data-example-metrics]');
+      metricList.classList.toggle('is-money',Boolean(s.cost));
+      metricList.innerHTML=metrics.map(([label,value,unit,style])=>`<div class="example-metric ${style}"><dt>${label}</dt><dd>${value}<small>${unit}</small></dd></div>`).join('');
+      q('[data-example-status]').hidden=!s.cost;
+      q('[data-example-status]').textContent=s.cost?`賞金 ${format(sum)}円 − 支出 ${format(spending)}円 = 損益 ${format(net)}円`:'';
       const variance=s.values.reduce((total,v,i)=>total+(v-mean())**2*s.probabilities[i],0);
       q('[data-example-variance]').textContent=kind==='delivery'?`Var(X)=½(2−10)²+½(18−10)²=${variance} 分²。AもBも E(X)=10分。`:s.cost?'期待損益：E(X) − 100 = 75 − 100 = −25円／枚。':'E(X)=3.5 は多くの出目を平均した値。実現値は必ず整数。';
       chart();
