@@ -470,14 +470,16 @@ function lectureSection(week) {
     <div id="week-2-lecture-slides" role="tabpanel" aria-labelledby="week-2-lecture-slides-tab">${content}</div>
     <div id="week-2-lecture-explore" role="tabpanel" aria-labelledby="week-2-lecture-explore-tab" hidden>
       <div class="simulation-tablist" role="tablist" aria-label="Choose a Week 2 activity">
-        <button type="button" role="tab" id="week-2-combinations-tab" aria-controls="week-2-combinations" aria-selected="true" tabindex="0">01 <span>${bilingual('Lineup combinations', 'ロボットの並び')}</span></button>
-        <button type="button" role="tab" id="week-2-batting-tab" aria-controls="week-2-batting" aria-selected="false" tabindex="-1">02 <span>${bilingual('Batting average', '打率')}</span></button>
-        <button type="button" role="tab" id="week-2-discrete-tab" aria-controls="week-2-discrete" aria-selected="false" tabindex="-1">03 <span>${bilingual('Discrete vs continuous', '離散と連続')}</span></button>
-        <button type="button" role="tab" id="week-2-probability-tab" aria-controls="week-2-probability" aria-selected="false" tabindex="-1">04 <span>${bilingual('Probability models', '確率分布')}</span></button>
-        <button type="button" role="tab" id="week-2-al-discrete-tab" aria-controls="week-2-al-discrete" aria-selected="false" tabindex="-1">05 <span>${bilingual('AL: weighted average','AL：期待値')}</span></button>
-        <button type="button" role="tab" id="week-2-al-continuous-tab" aria-controls="week-2-al-continuous" aria-selected="false" tabindex="-1">06 <span>${bilingual('AL: two integrals','AL：2つの積分')}</span></button>
+        <button type="button" role="tab" id="week-2-roulette-tab" aria-controls="week-2-roulette" aria-selected="true" tabindex="0">01 <span>${bilingual('Roulette', 'ルーレット')}</span></button>
+        <button type="button" role="tab" id="week-2-combinations-tab" aria-controls="week-2-combinations" aria-selected="false" tabindex="-1">02 <span>${bilingual('Lineup combinations', 'ロボットの並び')}</span></button>
+        <button type="button" role="tab" id="week-2-batting-tab" aria-controls="week-2-batting" aria-selected="false" tabindex="-1">03 <span>${bilingual('Batting average', '打率')}</span></button>
+        <button type="button" role="tab" id="week-2-discrete-tab" aria-controls="week-2-discrete" aria-selected="false" tabindex="-1">04 <span>${bilingual('Discrete vs continuous', '離散と連続')}</span></button>
+        <button type="button" role="tab" id="week-2-probability-tab" aria-controls="week-2-probability" aria-selected="false" tabindex="-1">05 <span>${bilingual('Probability models', '確率分布')}</span></button>
+        <button type="button" role="tab" id="week-2-al-discrete-tab" aria-controls="week-2-al-discrete" aria-selected="false" tabindex="-1">06 <span>${bilingual('AL: weighted average','AL：期待値')}</span></button>
+        <button type="button" role="tab" id="week-2-al-continuous-tab" aria-controls="week-2-al-continuous" aria-selected="false" tabindex="-1">07 <span>${bilingual('AL: two integrals','AL：2つの積分')}</span></button>
       </div>
-      <div id="week-2-combinations" role="tabpanel" aria-labelledby="week-2-combinations-tab">${combinationMarkup()}</div>
+      <div id="week-2-roulette" role="tabpanel" aria-labelledby="week-2-roulette-tab"><div data-roulette></div></div>
+      <div id="week-2-combinations" role="tabpanel" aria-labelledby="week-2-combinations-tab" hidden>${combinationMarkup()}</div>
       <div id="week-2-batting" role="tabpanel" aria-labelledby="week-2-batting-tab" hidden>${battingSimulationMarkup()}</div>
       <div id="week-2-discrete" role="tabpanel" aria-labelledby="week-2-discrete-tab" hidden>${week2DiscreteMarkup()}</div>
       <div id="week-2-probability" role="tabpanel" aria-labelledby="week-2-probability-tab" hidden>${week2ProbabilityMarkup()}</div>
