@@ -5,9 +5,13 @@
 .example-choices,.example-actions{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}
 .example-lab button{font:inherit;padding:10px 16px;border:0;background:#e8e2d5;color:#403b32;cursor:pointer;border-radius:4px}
 .example-lab button[aria-pressed=true],.example-actions button{background:#403b32;color:white}
+.example-actions button[data-example-reset]{background:transparent;color:#766b5c;border:1px solid #c8bfaf}
+.example-actions button[data-example-reset]:hover{background:#eee7d9;color:#403b32}
 .example-lab button:disabled{opacity:.45;cursor:wait}
 .example-lab button:focus-visible{outline:3px solid #16869c;outline-offset:3px}
 .example-layout{display:grid;grid-template-columns:minmax(220px,1fr) minmax(0,2fr);gap:30px;margin:24px 0}
+.example-chart-card{min-width:0}.example-chart-card h5{margin:0 0 12px}.example-chart-card .week2-aha{font-size:13px;margin-top:12px}
+.example-details{margin:20px 0}
 .example-result{display:grid;grid-template-columns:80px 1fr;align-items:center;min-height:100px}
 .example-result>span{font-size:55px;grid-row:span 2}.example-result strong{font-size:42px;font-variant-numeric:tabular-nums}
 .example-result small{font-size:13px;color:#766b5c}
@@ -27,6 +31,6 @@
 .example-metric.is-loss dd{color:#985139}.example-metric.is-gain dd{color:#216550}
 .example-accounting{font-size:14px;color:#766b5c;margin:12px 0 0!important}
 .example-pairs{margin-top:40px}.example-students{display:grid;grid-template-columns:repeat(auto-fit,minmax(65px,1fr));gap:8px}
-.example-lab.is-pairs>[data-example-story],.example-lab.is-pairs>.example-layout,.example-lab.is-pairs>.example-summary,.example-lab.is-pairs>h5,.example-lab.is-pairs>svg,.example-lab.is-pairs>.week2-aha{display:none}
+.example-lab.is-pairs>[data-example-story],.example-lab.is-pairs>.example-layout,.example-lab.is-pairs>.example-details,.example-lab.is-pairs>.example-summary{display:none}
 @media(max-width:700px){.example-metrics.is-money{grid-template-columns:repeat(2,minmax(0,1fr))}.example-metrics{gap:10px}.example-metric{padding:12px}.example-metric dd{font-size:22px}}
 @media(max-width:700px){.example-layout{grid-template-columns:1fr;gap:15px}.example-result{min-height:80px}.example-table th,.example-table td{padding:8px 4px}}

@@ -127,6 +127,12 @@
     const status = root.querySelector('[data-w2-family-status]');
     const aha = root.querySelector('[data-w2-family-aha]');
     const panels = [...root.querySelectorAll('[data-w2-model]')];
+    const rules = {
+      bernoulli: String.raw`\Pr(X=1)=p,\qquad\Pr(X=0)=1-p`,
+      binomial: String.raw`\Pr(X=k)={}_nC_k\,p^k(1-p)^{n-k}`,
+      poisson: String.raw`\Pr(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}`
+    };
+    panels.forEach(panel => { panel.querySelector('.week2-model-formula > div').dataset.displayMath = rules[panel.dataset.w2Model]; });
     const tabs = [...root.querySelectorAll('.week2-model-tabs [role="tab"]')];
     let type = 'binomial', n = 10, p = 0.5, lambda = 2, counts = [], trials = 0, busy = false;
 

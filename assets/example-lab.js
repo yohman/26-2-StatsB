@@ -23,6 +23,14 @@
       <div><table class="example-table"><thead><tr><th>${inline('x')}</th><th>${inline(String.raw`\Pr(X=x)`,'Pr(X=x)')}</th><th>${inline(String.raw`x\Pr(X=x)`,'x Pr(X=x)')}</th><th>${bi('Observed','実測')}</th></tr></thead><tbody data-example-rows></tbody></table><p>${bi('Add each row’s value × probability to get the expectation.','各行の「値 × 確率」を足すと期待値。')}</p><div class="example-formula" data-example-formula></div><p data-example-variance></p></div></div>
       <section class="example-summary" aria-label="試行結果"><dl class="example-metrics" data-example-metrics></dl><p class="example-accounting" data-example-status aria-live="polite"></p></section>
       <h5>${bi('What happens to the average as we repeat?','繰り返すと、平均はどうなる？')}</h5><svg data-example-chart viewBox="0 0 720 220" role="img"></svg><p class="week2-aha">${bi('Blue: observed mean. Dashed line: theoretical expectation. More trials tend to bring them closer, but not on every step.','青：実測平均 ／ 点線：理論の期待値。たくさん試すと近づく傾向があります。毎回、近づくとは限りません。')}</p>`;
+    // Keep the live feedback beside the controls; put the probability table below.
+    const right = root.querySelector('.example-layout > div:last-child');
+    const details = document.createElement('section');
+    details.className = 'example-details';
+    details.append(...right.childNodes);
+    root.querySelector('.example-layout').after(details);
+    right.className = 'example-chart-card';
+    right.append(root.querySelector(':scope > h5'), root.querySelector('[data-example-chart]'), root.querySelector(':scope > .week2-aha'));
     const pairs = document.createElement('section');
     pairs.className='example-pairs';
     pairs.innerHTML=`<h5>${bi('Choose a pair from 22 students','22人から、2人の組を作る')}</h5><p>${bi('Click two students. A–B and B–A are the same pair.','2人をクリック。AさんとBさん、BさんとAさんは同じ1組。')}</p><div class="example-students"></div><p data-pair-status aria-live="polite"></p><div class="example-formula">₂₂C₂ = 22! / (2! × 20!) = 22 × 21 / 2 = 231</div><button type="button" data-pairs-reset>${bi('Reset discovered pairs','組の記録をリセット')}</button>`;
