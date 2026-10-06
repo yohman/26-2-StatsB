@@ -55,6 +55,21 @@
     pairs.querySelector('[data-pairs-reset]').addEventListener('click',()=>{selected=[];found.clear();pairs.querySelectorAll('.example-students button').forEach(b=>b.setAttribute('aria-pressed','false'));pairStatus();});
     let kind='lottery', counts=[], points=[], n=0, sum=0, last=null, busy=false, generation=0;
     const q=s=>root.querySelector(s);
+    const dieAngles = {1:[0,0],2:[-90,0],3:[0,-90],4:[0,90],5:[90,0],6:[0,180]};
+    let dieAnimation;
+    const dieTransform=value=>{const [x,y]=dieAngles[value];return `translateZ(-22px) rotateX(${x}deg) rotateY(${y}deg)`;};
+    function dieMarkup(){
+      const pips={1:[5],2:[1,9],3:[1,5,9],4:[1,3,7,9],5:[1,3,5,7,9],6:[1,3,4,6,7,9]};
+      return `<span class="example-die-stage" aria-hidden="true"><span class="example-die-cube">${[1,2,3,4,5,6].map(value=>`<span class="example-die-face face-${value}">${pips[value].map(cell=>`<i style="grid-area:${Math.ceil(cell/3)} / ${(cell-1)%3+1}"></i>`).join('')}</span>`).join('')}</span></span>`;
+    }
+    async function rollDie(value, rapid){
+      const cube=q('.example-die-cube');
+      if(!cube) return;
+      const [x,y]=dieAngles[value];
+      const duration=matchMedia('(prefers-reduced-motion: reduce)').matches?0:rapid?65:700;
+      dieAnimation=cube.animate([{transform:cube.style.transform||dieTransform(1)},{transform:`translateZ(-22px) rotateX(${x+1080}deg) rotateY(${y+720}deg)`}],{duration,easing:rapid?'linear':'cubic-bezier(.2,.6,.3,1)'});
+      try {await dieAnimation.finished;cube.style.transform=dieTransform(value);dieAnimation.cancel();} catch {}
+    }
     const mean=()=>scenarios[kind].values.reduce((s,x,i)=>s+x*scenarios[kind].probabilities[i],0);
     async function formula() {
       const s=scenario(kind), target=q('[data-example-formula]');
@@ -78,7 +93,10 @@
     }
     function draw() {
       const s=scenario(kind);
-      q('[data-example-icon]').textContent=s.icon;
+      if(kind==='dice') {
+        if(!q('.example-die-cube')) q('[data-example-icon]').innerHTML=dieMarkup();
+        q('.example-die-cube').style.transform=dieTransform(last||1);
+      } else q('[data-example-icon]').textContent=s.icon;
       q('[data-example-last]').textContent=last===null?'?':`${last}${s.unit}`;
       q('[data-example-rows]').innerHTML=s.values.map((v,i)=>`<tr${last===v?' class="is-last"':''}><td>${v}${s.unit}</td><td>${(100*s.probabilities[i]).toFixed(2)}%</td><td>${(v*s.probabilities[i]).toFixed(2)}</td><td>${n?(100*counts[i]/n).toFixed(1)+'%':'—'}</td></tr>`).join('');
       const format=(value,decimals=0)=>value.toLocaleString('ja-JP',{minimumFractionDigits:decimals,maximumFractionDigits:decimals});
@@ -93,7 +111,7 @@
       q('[data-example-status]').textContent=s.cost?t(`Prizes ¥${format(sum)} − Spending ¥${format(spending)} = Profit / loss ¥${format(net)}`,`賞金 ${format(sum)}円 − 支出 ${format(spending)}円 = 損益 ${format(net)}円`):'';
       chart();
     }
-    function reset() {generation++;busy=false;counts=scenarios[kind].values.map(()=>0);points=[];n=0;sum=0;last=null;root.querySelectorAll('[data-example-run]').forEach(b=>b.disabled=false);draw();}
+    function reset() {generation++;dieAnimation?.cancel();busy=false;counts=scenarios[kind].values.map(()=>0);points=[];n=0;sum=0;last=null;root.querySelectorAll('[data-example-run]').forEach(b=>b.disabled=false);draw();}
     function select(id) {
       root.classList.remove('is-pairs');pairs.hidden=true;pairButton.setAttribute('aria-pressed','false');kind=id;
       updateCopy();
@@ -118,6 +136,7 @@
       for(let j=0;j<rounds;j++) {
         if(token!==generation) return;
         const s=scenarios[kind];let r=Math.random(),i=0;while(i<s.values.length-1&&r>=s.probabilities[i]) {r-=s.probabilities[i];i++;}
+        if(kind==='dice' && (rounds===1||j%10===0||j===rounds-1)) {await rollDie(s.values[i],rounds>1);if(token!==generation)return;}
         last=s.values[i];counts[i]++;n++;sum+=last;
         if(n<100||n%5===0||j===rounds-1) points.push({x:n,y:sum/n});
         if(points.length>2000) points=points.filter((_,i)=>i%2===0);
