@@ -422,6 +422,14 @@
 .agenda-page .simulation-tablist button{display:flex;align-items:center;gap:9px;min-height:40px;padding:9px 15px;border:1px solid #c7b9a7;background:transparent;color:var(--course-muted);font:700 11px 'DM Mono',monospace;cursor:pointer}
 .agenda-page .simulation-tablist button span{font:700 12px 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .simulation-tablist button[aria-selected='true']{border-color:var(--course-ink);background:var(--course-ink);color:#fff}
+.distribution-subnav{display:flex;align-items:center;flex-wrap:wrap;gap:12px 20px;margin:0 0 18px;padding:12px 16px;border-left:3px solid #488a91;background:#f4f0e8}
+.distribution-subnav-label{font-size:11px;font-weight:700;letter-spacing:.04em;color:#70695e}
+.distribution-subtabs{display:flex;gap:3px;padding:3px;border-radius:6px;background:#e5dfd3}
+.distribution-subtabs button{min-height:40px;padding:7px 16px;border:0;border-radius:4px;background:transparent;color:#746c60;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer}
+.distribution-subtabs button[aria-selected='true']{background:#fff;color:#286b73;box-shadow:0 1px 3px #403b321a}
+.distribution-subtabs button:hover{color:#286b73}
+.distribution-subtabs button:focus-visible{outline:2px solid #488a91;outline-offset:2px}
+@media(max-width:520px){.distribution-subnav{padding:10px 12px;gap:8px}.distribution-subtabs{width:100%}.distribution-subtabs button{flex:1;padding:7px 10px}}
 .agenda-page .simulation-tablist button:hover,.agenda-page .simulation-tablist button:focus-visible{border-color:var(--course-crimson);outline:2px solid transparent;box-shadow:0 0 0 2px var(--course-crimson)}
 .agenda-page .test-simulation{max-width:950px;color:var(--course-ink)}
 .agenda-page .test-intro h4{margin:0;font:700 clamp(24px,2.8vw,34px)/1.25 Fraunces,'Noto Serif JP',Georgia,serif}
