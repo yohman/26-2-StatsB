@@ -46,7 +46,7 @@ const slides = [
   fromYoh(21),
   fromYoh(22),
   fromYoh(23),
-  newSlide(6, String.raw`## 100円のくじ、買う？\n\n<!-- _class: lottery-example -->\n\n$X$ = 賞金（円）。0円：70% ／ 100円：25% ／ 1,000円：5%。\n\n$$\begin{aligned}E(X)&=\sum_x x\Pr(X=x)\\&=0\Pr(X=0)+100\Pr(X=100)+1000\Pr(X=1000)\\&=0\times0.70+100\times0.25+1000\times0.05\\&=75\text{ 円}\end{aligned}$$\n\n**平均の損益：75円 − 100円 = −25円**\n\n<small>1枚あたり平均25円の損。毎回25円失うわけではありません。</small>`),
+  newSlide(6, String.raw`## 100円のくじ、買う？\n\n<!-- _class: lottery-example -->\n\n$X$ = 賞金（円）。0円：70% ／ 100円：25% ／ 1,000円：5%。\n\n$$\begin{aligned}E(X)&=\sum_x x\Pr(X=x)\\&=0\Pr(X=0)+100\Pr(X=100)+1000\Pr(X=1000)\\&=0\times0.70+100\times0.25+1000\times0.05=75\text{ 円}\end{aligned}$$\n\n<div class="lottery-results"><div class="lottery-prize"><div class="lottery-result-label">もらう賞金の平均（期待値）</div><div class="lottery-result-number">75<span>円</span></div><div class="lottery-result-detail">何度も引いたときの平均賞金</div></div><div class="lottery-loss"><div class="lottery-result-label">代金100円を引いた平均損益</div><div class="lottery-result-number">−25<span>円</span></div><div class="lottery-result-detail">75円 − 100円 = −25円</div></div></div>\n\n<div class="lottery-takeaway">1枚あたり、平均 <strong>25円の損</strong>。毎回25円失うわけではありません。</div>`),
   newSlide(10, String.raw`## 賞金の「地図」が確率分布\n\n$X$ = くじの賞金。取りうる値は **0円、100円、1,000円**。\n\n$Pr(X=0)=0.70\qquad Pr(X=100)=0.25\qquad Pr(X=1000)=0.05$\n\n<large>$0.70+0.25+0.05=1$</large>\n\n値とその確率を並べたものが、確率分布です。`),
   newSlide(11, String.raw`## ロボット工場の検品\n\n5台のロボットを検品。$X$ = 不良品の台数。\n\n<large>$X\in\{0,1,2,3,4,5\}$</large>\n\n「2台が不良」のように、**数えられる値**を取るので離散確率分布。\n\n<small>問い：5台のうち、2台が不良になる確率をどう数える？</small>`),
   newSlide(12, String.raw`## 台数か、動いた時間か\n\n**離散**：5台のうち壊れたロボットは何台？　$0,1,2,3,4,5$\n\n**連続**：1台のバッテリーは何時間動く？　$2.1,2.13,2.137,\ldots$\n\n<large>台数は数える。時間は測る。</large>\n\n<small>今日は「何回起きた？」という離散の問いに進みます。</small>`),
@@ -213,11 +213,19 @@ section.book-divider p { font-size: 30px; line-height: 1.65; margin-top: 28px; }
 section.book-reference { background: #f2f9fc; border-top: 8px solid #4aa8cd; }
 section.book-reference h2 { color: #287c9f; }
 section.book-reference footer, section.book-divider footer { color: #287c9f; }
-section.lottery-example { font-size: 28px; }
-section.lottery-example h2 { font-size: 48px; margin-bottom: 22px; }
-section.lottery-example mjx-container[display="true"] { font-size: 105%; margin: 22px 0; }
-section.lottery-example p { margin: 12px 0; }
-section.lottery-example small { font-size: 22px; }
+section.lottery-example { font-size: 26px; padding: 44px 70px; }
+section.lottery-example h2 { font-size: 48px; margin: 0 0 18px; }
+section.lottery-example mjx-container[display="true"] { font-size: 105%; margin: 18px 0 26px; }
+section.lottery-example p { margin: 8px 0; }
+.lottery-results { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; margin: 8px 0 24px; }
+.lottery-result-label { font-size: 26px; font-weight: 600; }
+.lottery-result-number { font-size: 92px; font-weight: 700; line-height: 1.15; margin: 8px 0; }
+.lottery-result-number span { font-size: 40px; margin-left: 8px; }
+.lottery-prize .lottery-result-number { color: #287c9f; }
+.lottery-loss .lottery-result-number { color: #ac493e; }
+.lottery-result-detail { font-size: 23px; color: #59616a; }
+.lottery-takeaway { font-size: 24px; }
+.lottery-takeaway strong { color: #ac493e; }
 section.lottery-opening { font-size: 28px; padding: 55px; }
 section.lottery-opening h2 { font-size: 48px; }
 section.lottery-opening large { font-size: 1.65em; }
