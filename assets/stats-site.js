@@ -157,7 +157,7 @@ function lectureDecks(materials, week) {
 function slideThumbnail(deck, week) {
   if (deck.preview?.includes('materials/2026-tsumura/')) {
     const number = deck.preview.match(/\/26_(\d{2})_/)?.[1];
-    if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png`;
+    if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png${number === '03' ? '?v=20261007-tsumura-v4' : ''}`;
   }
   if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
   if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261006-example-flow-1';
@@ -608,11 +608,11 @@ function weekShortcuts(weeks, previewAll, today) {
   }).join('')}</nav>`;
 }
 
-function weekCard(week, nextClassDate, previewAll, today) {
+function weekCard(week, nextClassDate, previewAll, today, currentWeek, expandAll) {
   const locked = weekIsLocked(week, previewAll, today);
   const id = `week-${String(week.week).padStart(2, '0')}`;
   if (locked) return `<section class="week-card week-card--locked" id="${id}" aria-label="${escapeHtml(`Week ${week.week}, opens ${week.date}`)}">${weekSummary(week, true)}</section>`;
-  const open = week.week === 1 || previewAll || !!week.release_date;
+  const open = expandAll || week.week === currentWeek;
   const work = week.week === 14 ? '' : `<div class="work-row">${inClassSection(week)}${homeworkSection(week, nextClassDate)}</div>`;
   return `<details class="week-card" id="${id}"${open ? ' open' : ''}><summary>${weekSummary(week, false)}</summary><div class="week-content">${lectureSection(week)}${work}</div></details>`;
 }
@@ -653,9 +653,11 @@ function renderAgenda(weeks) {
   const root = document.querySelector('[data-agenda]');
   if (!root) return;
   const localBrowsing = location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
-  const previewAll = localBrowsing || new URLSearchParams(location.search).get('preview') === 'all';
+  const expandAll = new URLSearchParams(location.search).get('preview') === 'all';
+  const previewAll = localBrowsing || expandAll;
   const today = todayInTokyo();
-  root.innerHTML = `${weekShortcuts(weeks, previewAll, today)}${previewAll ? `<div class="preview-notice">${bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today)).join('')}</div>`;
+  const currentWeek = weeks.filter(week => week.date <= today).at(-1)?.week ?? weeks[0]?.week;
+  root.innerHTML = `${weekShortcuts(weeks, previewAll, today)}${previewAll ? `<div class="preview-notice">${expandAll ? bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示') : bilingual('LOCAL PREVIEW · ALL WEEKS AVAILABLE', 'ローカルプレビュー · 全週を閲覧できます')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today, currentWeek, expandAll)).join('')}</div>`;
   const syncWeekShortcut = () => {
     const requested = location.hash ? document.getElementById(location.hash.slice(1)) : null;
     if (requested?.tagName === 'DETAILS') requested.open = true;

@@ -27,8 +27,8 @@ prepare_en: Review random variables, expected value, and discrete versus continu
 ## Materials
 
 - [Yoh's Week 3 lecture](materials/2026-yoh/week03/w3.pdf) {primary}
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v3.pptx) {supplementary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v3.pdf) {supplementary}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v4.pptx) {supplementary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v4.pdf) {supplementary}
 - [AL用ワークシート](weeks/03-discrete-distributions-ii/03_AL用ワークシート.xlsx) {worksheet}
 - [Yoh 2025 active-learning discrete-distributions slides](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/06_[AL]確率分布_1_離散確率分布.pdf) {yoh}
 - [Yoh 2025 Poisson-distribution lecture](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/w6.pdf) {yoh}
