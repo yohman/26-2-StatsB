@@ -39,7 +39,22 @@
     const rows = root.querySelector('[data-al-rows]');
     const tickets = root.querySelector('[data-al-tickets]');
     const chart = root.querySelector('[data-al-contributions]');
-    const drawButton = root.querySelector('[data-al-sample]');
+    const drawButtons = [...root.querySelectorAll('[data-al-sample]')];
+    let counts = values.map(() => 0), history = [], lastTicket = null;
+    function renderSample() {
+      root.querySelector('[data-al-last]').textContent = last === null ? '?' : String(last);
+      root.querySelector('[data-al-draws]').textContent = draws.toLocaleString();
+      root.querySelector('[data-al-total]').textContent = sum.toLocaleString();
+      root.querySelector('[data-al-average]').textContent = draws ? (sum / draws).toFixed(4) : '—';
+      root.querySelector('[data-al-sample-equation]').textContent = draws ? t(`Observed average = ${sum} ÷ ${draws} = ${(sum / draws).toFixed(4)}`, `実測平均 = 出目の合計 ${sum} ÷ ${draws}回 = ${(sum / draws).toFixed(4)}`) : t('Observed average = sum of outcomes ÷ number of draws', '実測平均 = 出目の合計 ÷ 引いた回数');
+      root.querySelector('[data-al-sample-status]').textContent = draws ? t(`Difference from expectation: ${Math.abs(sum / draws - mean).toFixed(4)}. A finite sample need not equal 1.6667.`, `期待値との差：${Math.abs(sum / draws - mean).toFixed(4)}。有限回の実測平均は、1.6667とぴったり一致するとは限りません。`) : t('First calculate the worksheet. Drawing tickets is an optional check, not how to obtain the exact answer.', 'まずワークシートの計算をしよう。くじは計算結果を確かめるための体験で、正確な答えを求める方法ではありません。');
+      root.querySelector('[data-al-frequencies]').innerHTML = values.map((x,i) => `<tr><th>${x}</th><td>${counts[i]}</td><td>${draws ? (counts[i] / draws * 100).toFixed(1) + '%' : '—'}</td><td>${(weights[i] / 12 * 100).toFixed(1)}%</td></tr>`).join('');
+      tickets.querySelectorAll('.al-ticket').forEach((ticket,i) => ticket.classList.toggle('is-drawn', i === lastTicket));
+      const X = n => 42 + n / Math.max(1,draws) * 440, Y = v => 155 - (v + 1) / 5 * 135;
+      const stride = Math.max(1,Math.ceil(history.length / 400));
+      const points = history.filter((_,i) => i % stride === 0 || i === history.length - 1).map(p => `${X(p.n)},${Y(p.average)}`).join(' ');
+      root.querySelector('[data-al-average-chart]').innerHTML = `<path d="M42 20V155H482" stroke="#b4bdbf" fill="none"/>${[-1,0,2,4].map(v => `<text x="32" y="${Y(v)+4}" text-anchor="end">${v}</text>`).join('')}<path d="M42 ${Y(mean)}H482" stroke="#a77636" stroke-dasharray="5 4"/><text x="48" y="${Y(mean)-7}" fill="#8d662b">${t('Expectation','期待値')} 1.6667</text><polyline points="${points}" stroke="#2876a0" stroke-width="2.5" fill="none"/>${draws ? `<circle cx="${X(draws)}" cy="${Y(sum / draws)}" r="4" fill="#2876a0"/>` : ''}<text x="42" y="179">0</text><text x="482" y="179" text-anchor="end">${draws} ${t('draws','回')}</text>`;
+    }
 
     function render() {
       rows.innerHTML = values.map((x, i) => `<tr class="${i === selected ? 'is-selected' : ''}"><th><button type="button" data-al-row="${i}" aria-pressed="${i === selected}" aria-label="${t('Select outcome ', '値を選ぶ：') + x}">${x}</button></th><td>${fractions[i]}</td><td class="al-product">${revealed.has(i) ? (x * weights[i] / 12).toFixed(4) : '?'}</td></tr>`).join('');
@@ -59,11 +74,7 @@
       } else {
         math(root.querySelector('[data-al-worked]'), String.raw`${values[selected]}\times${fractionTex[selected]}=${revealed.has(selected) ? term.toFixed(4) : '?'}`, `${values[selected]} × ${fractions[selected]} = ${revealed.has(selected) ? term.toFixed(4) : '?'}`);
       }
-      root.querySelector('[data-al-last]').textContent = last === null ? '🤖' : String(last);
-      root.querySelector('[data-al-sample-status]').textContent = draws ? t(
-        `${draws} draws · observed mean ${(sum / draws).toFixed(4)}${totalShown ? ' · expected mean 1.6667' : ''}`,
-        `${draws}回 · 実測平均 ${(sum / draws).toFixed(4)}${totalShown ? ' · 期待値 1.6667' : ''}`)
-        : t('One draw returns a whole-number outcome. Repeated draws let us compare their average with the expectation.', '1回の結果は整数。何度も引くと、その平均を期待値と比べられます。');
+      renderSample();
       root.querySelector('[data-al-aha]').textContent = t(
         'Expectation is a probability-weighted average, not the most likely outcome. It need not be a possible single result. More draws tend to improve agreement, but not on every step.',
         '期待値は「最も出やすい値」ではなく、確率で重みをつけた平均。1回の結果として出ない値でもOK。回数を増やすと平均は近づきやすくなりますが、毎回近づくとは限りません。');
@@ -74,24 +85,28 @@
     });
     root.querySelector('[data-al-reveal-row]').addEventListener('click', () => { revealed.add(selected); totalShown = false; render(); });
     root.querySelector('[data-al-add]').addEventListener('click', () => { revealed = new Set(values.map((_, i) => i)); totalShown = true; render(); });
-    drawButton.addEventListener('click', async () => {
+    drawButtons.forEach(drawButton => drawButton.addEventListener('click', async () => {
       if (busy) return;
-      busy = true; drawButton.disabled = true;
+      busy = true; drawButtons.forEach(button => button.disabled = true);
       const run = generation;
-      for (let i = 0; i < 120 && generation === run; i++) {
+      const batch = Number(drawButton.dataset.alSample);
+      for (let i = 0; i < batch && generation === run; i++) {
         const ticket = Math.floor(Math.random() * 12);
         let end = 0;
-        last = values[weights.findIndex(weight => { end += weight; return ticket < end; })];
+        const outcome = weights.findIndex(weight => { end += weight; return ticket < end; });
+        last = values[outcome]; lastTicket = ticket; counts[outcome]++;
         draws++; sum += last;
-        root.querySelector('[data-al-last]').textContent = String(last);
-        root.querySelector('[data-al-sample-status]').textContent = t(`${draws} draws · observed mean ${(sum / draws).toFixed(4)}`, `${draws}回 · 実測平均 ${(sum / draws).toFixed(4)}`);
-        await pause(18);
+        history.push({n:draws,average:sum / draws});
+        if (history.length > 4000) history = history.filter((_,index) => index % 2 === 0 || index === history.length - 1);
+        renderSample();
+        await pause(batch === 1 ? 250 : batch === 100 ? 25 : 8);
       }
       if (generation !== run) return;
-      busy = false; drawButton.disabled = false; render();
-    });
+      busy = false; drawButtons.forEach(button => button.disabled = false); render();
+    }));
     root.querySelector('[data-al-reset]').addEventListener('click', () => {
-      generation++; busy = false; drawButton.disabled = false;
+      generation++; busy = false; drawButtons.forEach(button => button.disabled = false);
+      counts = values.map(() => 0); history = []; lastTicket = null;
       selected = 0; revealed = new Set([2]); totalShown = false; draws = 0; sum = 0; last = null; render();
     });
     render();

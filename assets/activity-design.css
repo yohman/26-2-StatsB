@@ -1,4 +1,13 @@
 /* One visual vocabulary: blue formula cards, white working/result cards. */
+.al-sampling-card{margin-top:18px;padding:18px;background:#fcfaf5;border-radius:7px}
+.al-sampling-card h5{font-size:20px;margin:0 0 8px}.al-sampling-card>p{font-size:13px;line-height:1.6;margin:8px 0 14px}
+.al-sampling-layout{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:12px;align-items:start}
+.al-sample-metrics{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}.al-sample-metrics>div{padding:12px;background:#eef3f5;border-radius:5px}.al-sample-metrics dt{font-size:12px;color:#596971}.al-sample-metrics dd{margin:6px 0 0;font:600 25px var(--mono);color:#2876a0}.al-sample-metrics>div:last-child dd{color:#916b30}
+.al-sample-equation{font:16px/1.7 'Cambria Math','Times New Roman',serif}
+.al-sampling-layout [data-al-sample-status]{font-size:13px;line-height:1.6;min-height:60px}.al-sampling-layout h6{font-size:15px;margin:8px 0}.al-sampling-layout svg{display:block;width:100%;height:auto}.al-sampling-layout svg text{font:12px var(--sans);fill:#596971}
+.al-sample-frequencies{width:100%;border-collapse:collapse;font-size:12px;text-align:right}.al-sample-frequencies th,.al-sample-frequencies td{padding:6px}.al-sample-frequencies thead{color:#596971}.al-sample-frequencies td:nth-child(3){color:#2876a0}.al-sample-frequencies td:last-child{color:#916b30}
+.al-ticket.is-drawn{outline:3px solid #2876a0;outline-offset:1px;background:#d8ebf7}
+@media(max-width:750px){.al-sampling-layout{grid-template-columns:1fr}.al-sample-metrics dd{font-size:21px}}
 .agenda-page .activity-formula-card{position:relative;background:#edf4f8!important;border:1px solid #c8dce8!important;border-left:4px solid #2876a0!important;border-radius:7px;padding:14px 18px!important;margin:12px 0!important;min-width:0;color:#173e57;text-align:left}
 .agenda-page .activity-formula-label{display:block!important;font:700 10px/1.3 Manrope,sans-serif;letter-spacing:.12em;color:#2876a0;margin:0 0 8px}
 .agenda-page .activity-formula-card > .section-kicker,.agenda-page .activity-formula-card > .week2-equation-label,.agenda-page .activity-formula-card > .batting-formula-label,.agenda-page .activity-formula-card > span:not(.activity-formula-label){display:none}

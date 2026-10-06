@@ -15,7 +15,7 @@
       root.dataset.cardLayout = 'true';
       const formula = root.querySelector('.al-formula-focus');
       root.querySelector('.al-discrete-layout').before(formula);
-      root.querySelector('.al-table-wrap').append(root.querySelector('.al-actions'), root.querySelector('.al-sample-strip'));
+      root.querySelector('.al-table-wrap').append(root.querySelector('.al-actions'));
     });
     document.querySelectorAll(formulaSelectors).forEach(card => {
       card.classList.add('activity-formula-card');
