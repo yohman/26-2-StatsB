@@ -80,7 +80,36 @@ const activity = (id, label, week = 2) => {
   return `[${title}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-${String(week).padStart(2, '0')})`;
 };
 const divider = (number, title, pages, question) => `## 教科書　第2章・第2節　確率分布\n\n<!-- _class: book-divider -->\n<!-- _footer: 2-${number} ${title} ／ 教科書 p.${pages} -->\n\n<div class="book-heading"><span class="book-number">2-${number}</span><span>${title}</span></div>\n\n<div class="book-page">教科書 p.${pages}</div>\n\n${question}`;
-const demo = (links, question) => `## やってみる\n\n${question}\n\n${links.join('\n\n')}\n\n<small>リンクから講義ページの該当タブを開きます。</small>`;
+const demoExamples = {
+  lottery: {title:'くじの賞金と、払ったお金',sample:'結果の例：0円　100円　0円　1,000円　0円',math:String.raw`E(X)=0(0.70)+100(0.25)+1000(0.05)=75\text{ 円}`,reading:'この5枚の賞金平均は220円。繰り返すと青い平均線は75円に近づく傾向。100円の代金を引くと、期待損益は−25円／枚。'},
+  dice: {title:'サイコロの出目と、その平均',sample:'結果の例：2　6　1　3　　この4回の平均は3',math:String.raw`E(X)=1\frac16+2\frac16+\cdots+6\frac16=3.5`,reading:'1回の結果xは整数。青い線は、それまでの出目の平均。3.5の目がなくても、平均は3.5に近づく。'},
+  coin: {title:'コインの表は、毎回50%？',sample:'5回の例：🤖　🐐　🐐　🤖　🐐　　表は2回',math:String.raw`\text{実測の表の割合}=\frac25=40\%\qquad\Pr(\text{表})=50\%`,reading:'少ない回数では50%から離れることもある。横軸は投げた回数、縦軸はその時点までの表の割合。'},
+  roulette: {title:'ルーレットの1回と、長い平均',sample:'赤に100円：赤なら＋100円 ／ 黒・0・00なら−100円',math:String.raw`E(X)=100\frac{18}{38}-100\frac{20}{38}\approx-5.26\text{ 円}`,reading:'単発では勝つこともある。グラフの累積損益と、1回あたりの平均を区別しよう。100円の賭け金に対して、平均損失は約5.26%。'},
+  discrete: {title:'数える値と、測る値',sample:'数える：5回中の表は0〜5回 ／ 測る：身長は170.1、170.12…cm',math:String.raw`\Pr(X=2)={}_5C_2(0.5)^5=\frac{10}{32}=31.25\%`,reading:'左の棒1本は「ちょうど2回」の確率。右の曲線では、区間の面積が確率。スライダーを0幅にすると、1点の確率は0。'},
+  probability: {title:'何を数えるかで、分布が変わる',sample:'1回の成功？ ／ 5回中の成功数？ ／ 1分間の発生数？',math:String.raw`\begin{aligned}\text{ベルヌーイ}:&\quad \Pr(X=1)=p\\\text{二項}:&\quad \Pr(X=x)={}_nC_xp^x(1-p)^{n-x}\\\text{ポアソン}:&\quad\Pr(X=x)=e^{-\lambda}\lambda^x/x!\end{aligned}`,reading:'条件を決めると、理論の棒の高さが決まる。1,000回試した実測の棒と比べよう。'},
+  poisson: {title:'平均2件でも、0件の日がある',sample:'1分間の発生数の例：0件　3件　1件　2件　4件',math:String.raw`\lambda=2\qquad\Pr(X=0)=\frac{e^{-2}2^0}{0!}\approx13.53\%`,reading:'λは平均発生数。毎回2件とは限らない。ポアソンのタブでλ=2を選び、0件の実測の棒と理論値を比べよう。'},
+  combinations: {title:'ロボット2体は、どこに並ぶ？',sample:'並びの例：🤖🤖🐐🐐🐐　　🤖🐐🤖🐐🐐　　🐐🐐🐐🤖🤖',math:String.raw`{}_5C_2=\frac{5!}{2!\,3!}=\frac{5\times4}{2\times1}=10`,reading:'これは10通りのうち3通り。ロボットの位置を変えて新しい並びを保存。nやxを変えると、公式と並びの数が一緒に変わる。'},
+  'class-pairs': {title:'22人から、2人の組を作る',sample:'1番と2番 ／ 2番と1番　　この2つは同じ1組',math:String.raw`{}_{22}C_2=\frac{22!}{2!\,20!}=\frac{22\times21}{2}=231`,reading:'最初の人を22通り、次の人を21通りで選ぶ。逆順の重複を2で割る。実際に2人をクリックして、組の記録を増やそう。'},
+  batting: {title:'5打席で3安打になる確率',sample:'安・安・安・凡・凡　　安・凡・安・凡・安　　順序が違っても3安打',math:String.raw`\Pr(X=3)=\underbrace{{}_5C_3}_{10\text{ 通り}}\underbrace{(0.32)^3(0.68)^2}_{1\text{ 通りの確率}}\approx15.15\%`,reading:'1試合は5打席のセット。1,000試合繰り返すと、3安打の棒が理論値に近づく傾向。1打席の打率32%と、3安打の確率を区別しよう。'},
+  'al-discrete': {title:'AL：値と確率を、1行ずつ掛ける',sample:'値x：−1、0、1、2、3、4　　確率：1/4、1/12、1/6、1/12、1/12、1/3',math:String.raw`E(X)=-\frac14+0+\frac16+\frac16+\frac14+\frac43=\frac53`,reading:'12枚のくじは確率の図。値4のくじは4枚なので、確率は4/12。行をクリックすると「値×確率」の寄与が見える。'},
+  'al-continuous': {title:'AL：長方形を足すと、積分になる',sample:'同じ区間0〜√2でも、f(x)=x と x f(x)=x² は違う面積',math:String.raw`\int_0^{\sqrt2}x\,dx=1\qquad E(X)=\int_0^{\sqrt2}x^2\,dx=\frac{2\sqrt2}{3}`,reading:'左の面積は確率の合計1。右は値で重みをつけた面積で、平均は約0.9428。分割を細かくして、足し算を積分に近づけよう。'},
+  'normal-w2': {title:'正規分布の中心と幅',sample:'μ=60、σ=10なら、平均±2σは40〜80',math:String.raw`X\sim N(60,10^2)\qquad\Pr(40\le X\le80)\approx95.45\%`,reading:'μを動かすと曲線の中心が動く。σを大きくすると広がる。曲線の下の面積と、生成したデータの割合を比べよう。'},
+  't-w2': {title:'小さい標本で、平均を調べる',sample:'標本サイズn=3なら自由度2 ／ n=30なら自由度29',math:String.raw`T=\frac{\bar X-\mu}{s/\sqrt n}\qquad\mathrm{df}=n-1`,reading:'毎回、正規母集団から標本を取り、t値を計算。小標本ではsの推定が不安定なので裾が厚い。nを増やすと標準正規の曲線に近づく。'},
+  'chi-w2': {title:'ばらつきを、二乗して足す',sample:'同じ正規母集団から標本を取り、標本ごとの分散s²を調べる',math:String.raw`\chi^2=\frac{(n-1)s^2}{\sigma^2}\qquad\mathrm{df}=n-1`,reading:'値は0以上。少ない自由度では、右側に長い裾が見える。nを変え、1,000回の実測と理論の曲線を比べよう。'},
+  delivery: {title:'同じ平均でも、安心感は違う',sample:'ロボットA：10、10、10…分 ／ B：2分か18分が半々',math:String.raw`E(B)=\frac{2+18}{2}=10\qquad\mathrm{Var}(B)=\frac{(2-10)^2+(18-10)^2}{2}=64`,reading:'Aの分散は0、Bは64分²。Bの平均線は10分に近づいても、1回の配達は2分か18分。平均とばらつきは別の情報。'}
+};
+const demo = (links, question) => {
+  let id = links[0].match(/activity=([^#]+)/)[1];
+  if (id==='probability' && question.startsWith('ポアソンを')) id='poisson';
+  let d=demoExamples[id];
+  if(id==='dice' && question.startsWith('サイコロを1回')) d={title:'振る前のX、振ったあとのx',sample:'振る前：1〜6のどれか ／ 振ったあとの例：4',math:String.raw`X\in\{1,2,3,4,5,6\}\qquad x=4`,reading:'「1回試す」を押すと、候補から1つの目が決まる。表の実測列に今回の結果が加わる。次に振る前は、またXの値が分からない。'};
+  if(id==='lottery' && question.startsWith('くじを1,000回引く')) d={title:'賞金の頻度が、確率分布を形づくる',sample:'賞金：0円 ／ 100円 ／ 1,000円　　理論の確率：70% ／ 25% ／ 5%',math:String.raw`\Pr(X=0)+\Pr(X=100)+\Pr(X=1000)=0.70+0.25+0.05=1`,reading:'実測列は「その賞金の回数÷引いた枚数」。回数を増やすと、それぞれの割合が理論の確率に近づく傾向がある。'};
+  if(id==='discrete' && question.startsWith('台数は')) d={title:'連続の確率は、区間の面積',sample:'身長モデル：平均170cm、標準偏差6cm　　164〜176cmの区間',math:String.raw`\Pr(164\le X\le176)=\Pr(-1\le Z\le1)\approx68.27\%`,reading:'右のスライダーで塗る範囲を広げると、面積も確率も増える。範囲を1点に縮めると確率0。左の棒1本の確率と比べよう。'};
+  if (id==='batting' && question.includes('平均1.6')) d={title:'5打席の平均とばらつき',sample:'1試合の安打数は0〜5の整数。1.6安打という1試合はない。',math:String.raw`E(X)=5(0.32)=1.6\qquad\mathrm{Var}(X)=5(0.32)(0.68)=1.088`,reading:'5打席セットを繰り返し、各安打数の実測の棒を作る。分布の中心を平均、中心からの広がりを分散で表す。'};
+  if (!d) throw new Error(`Missing simulation explanation: ${id}`);
+  const names={lottery:'くじ',dice:'サイコロ',roulette:'ルーレット','al-discrete':'AL期待値',discrete:'離散と連続',combinations:'並び方',batting:'打率',probability:'分布','al-continuous':'AL積分','normal-w2':'正規','t-w2':'t','chi-w2':'カイ二乗',delivery:'配達',coin:'コイン','class-pairs':'2人の組'};
+  return `## やってみる：${d.title}\n\n<!-- _class: simulation-guide -->\n\n<div class="demo-example">${d.sample}</div>\n\n$$${d.math}$$\n\n${d.reading}\n\n<div class="demo-task">${question.replace('{}'+ '_nC_x', '$'+ '{}_nC_x' +'$')}</div>\n\n${links.map(link=>link.replace(/\[[^\]]+\]/, `[JavaScript${links.length===1?'で試す':'：'+names[link.match(/activity=([^#]+)/)[1]]}]`)).join('　')}\n\n<!-- 数列は説明用の例。確率・期待値は理論値。ライブの実測値は試行ごとに変わります。 -->`;
+};
 const select = (...numbers) => numbers.map(n => slides[n - 1]);
 const blocks = [
   {n:1,title:'確率変数',pages:'117',question:'何が起きるか分からない。その結果を、数で表す。',body:[
@@ -123,6 +152,10 @@ const blocks = [
 ];
 const lotteryOpening = `## 100円のくじ、買う？\n\n<!-- _footer: 統計学B 第2週 ／ 教科書 第2章 第2節 p.117–129 -->\n\n1枚 **100円**。まだ開いていないくじを、手に持っています。\n\n<large>0円　／　100円　／　1,000円</large>\n\n賞金の確率は、順に **70%　／　25%　／　5%**。\n\n買う？ 買わない？ その理由は？`;
 // Each concrete example gets a nearby implementation, rather than a distant list of links.
+// Drop section-end link lists now that each example has its own worked guide.
+for(const block of blocks.filter(b=>[4,5,6].includes(b.n))) block.body.pop();
+const expectationBlock=blocks.find(b=>b.n===2);
+expectationBlock.body[expectationBlock.body.length-1]=demo([activity('al-discrete','AL：期待値')],'各行の値×確率を確認し、期待値の計算をALワークシートで実践しよう。');
 const followups = [
   [/## 確率変数 \$X\$/, 'dice', 'サイコロを1回振る。Xの候補は1〜6、今回のxはどれ？'],
   [/original w5.md section 23 /, 'dice', '1,000回振ってみよう。出目は整数でも、平均は3.5に近づく？'],
@@ -145,9 +178,10 @@ const followups = [
 ];
 for (const block of blocks) block.body = block.body.flatMap(slide => {
   const followup = followups.find(([pattern])=>pattern.test(slide));
-  return followup ? [slide, demo(followup[1]==='t-w2'
-    ? [activity('t-w2','t分布を動かす'),activity('chi-w2','カイ二乗分布を動かす')]
-    : [activity(followup[1],'実例を動かす')],followup[2])] : [slide];
+  if(followup?.[1]==='t-w2') return [slide,
+    demo([activity('t-w2','t分布を動かす')],'標本サイズを3から30へ。t分布の裾はどう変わる？'),
+    demo([activity('chi-w2','カイ二乗分布を動かす')],'nを変えて、ばらつきの統計量を1,000回生成。負の値が出ないことと、右側の裾を確認しよう。')];
+  return followup ? [slide, demo([activity(followup[1],'実例を動かす')],followup[2])] : [slide];
 });
 const lotteryDefinition = blocks[0].body.shift();
 const orderedSlides = [lotteryOpening, lotteryDefinition, slides[14], slides[13],
@@ -184,6 +218,14 @@ section.lottery-example h2 { font-size: 48px; margin-bottom: 22px; }
 section.lottery-example mjx-container[display="true"] { font-size: 105%; margin: 22px 0; }
 section.lottery-example p { margin: 12px 0; }
 section.lottery-example small { font-size: 22px; }
+section.simulation-guide { background:#edf5ef; text-align:left; padding:48px 70px; font-size:25px; justify-content:center; }
+section.simulation-guide h2 { font-size:39px; color:#276044; margin:0 0 22px; }
+section.simulation-guide .demo-example { font-size:24px; font-weight:600; color:#385246; margin-bottom:8px; }
+section.simulation-guide mjx-container[display="true"] { font-size:110%; margin:18px 0; }
+section.simulation-guide p { margin:12px 0; line-height:1.6; }
+section.simulation-guide .demo-task { font-size:22px; color:#546757; margin-top:8px; }
+section.simulation-guide a { color:#15718b; font-weight:700; font-size:24px; }
+section.simulation-guide footer { color:#546757; }
 `;
 const styledSlides = orderedSlides.map(slide => {
   const isTextbookFormula = slide.includes('<!-- Adapted from textbook') ||
