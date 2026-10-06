@@ -10,6 +10,15 @@
 .agenda-page .site-header{border-bottom:0;background:rgba(255,255,255,.94);box-shadow:0 1px 0 rgba(19,47,54,.08)}
 .agenda-page .wordmark span{border:0;border-radius:0;width:auto;height:auto;color:#d9604d;font:600 10px var(--mono)}
 .agenda-main{padding:clamp(28px,5vw,64px) 0 96px}
+.week-shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:8px;margin:0 0 24px}
+.week-shortcut{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-height:68px;padding:9px 4px;border:1px solid #c9bfb3;background:#fffaf3;text-decoration:none;border-radius:3px;transition:background .15s,color .15s}
+.week-shortcut>span{font:500 22px/1 'DM Mono',monospace;color:var(--course-crimson,#ae3f50)}
+.week-shortcut>small{font:500 10px/1.4 'DM Mono',monospace;color:var(--course-muted,#71675c)}
+.week-shortcut.is-scheduled{background:transparent;border-style:dashed}
+.week-shortcut.is-scheduled>span{color:var(--course-muted,#71675c)}
+.week-shortcut:hover,.week-shortcut[aria-current="location"]{background:var(--course-crimson,#ae3f50);border-color:var(--course-crimson,#ae3f50)}
+.week-shortcut:hover>span,.week-shortcut:hover>small,.week-shortcut[aria-current="location"]>span,.week-shortcut[aria-current="location"]>small{color:#fff}
+.week-shortcut:focus-visible{outline:3px solid var(--course-crimson,#ae3f50);outline-offset:3px}
 .agenda-page .agenda-list{padding:0}
 .preview-notice{margin-bottom:22px;padding:10px 14px;background:#163039;color:#fff;font:600 10px var(--mono);letter-spacing:.08em}
 .week-stack{display:grid;gap:clamp(18px,3vw,34px)}

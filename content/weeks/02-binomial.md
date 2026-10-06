@@ -1,6 +1,7 @@
 ---
 week: 2
 date: 2026-10-07
+release_date: 2026-10-06
 publish_at: 2026-01-01T00:00:00+09:00
 title_ja: 確率分布：離散確率分布(前半)
 title_en: Probability Distributions: Discrete Probability Distributions (Part 1)

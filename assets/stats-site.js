@@ -551,11 +551,24 @@ function weekSummary(week, locked) {
   </div>`;
 }
 
+function weekIsLocked(week, previewAll, today) {
+  return week.week !== 1 && !previewAll && today < (week.release_date || week.date);
+}
+
+function weekShortcuts(weeks, previewAll, today) {
+  return `<nav class="week-shortcuts" aria-label="各週へ移動 / Jump to a week">${weeks.map(week => {
+    const number = String(week.week).padStart(2, '0');
+    const locked = weekIsLocked(week, previewAll, today);
+    const date = week.date.slice(5).replace('-', '/');
+    return `<a href="#week-${number}" class="week-shortcut${locked ? ' is-scheduled' : ''}" aria-label="${escapeHtml(`Week ${week.week}: ${week.title_ja}, ${date}${locked ? ', scheduled' : ''}`)}" title="${escapeHtml(week.title_ja)}"><span>${number}</span><small>${date}</small></a>`;
+  }).join('')}</nav>`;
+}
+
 function weekCard(week, nextClassDate, previewAll, today) {
-  const locked = week.week !== 1 && !previewAll && today < week.date;
+  const locked = weekIsLocked(week, previewAll, today);
   const id = `week-${String(week.week).padStart(2, '0')}`;
   if (locked) return `<section class="week-card week-card--locked" id="${id}" aria-label="${escapeHtml(`Week ${week.week}, opens ${week.date}`)}">${weekSummary(week, true)}</section>`;
-  const open = week.week === 1 || previewAll;
+  const open = week.week === 1 || previewAll || !!week.release_date;
   const work = week.week === 14 ? '' : `<div class="work-row">${inClassSection(week)}${homeworkSection(week, nextClassDate)}</div>`;
   return `<details class="week-card" id="${id}"${open ? ' open' : ''}><summary>${weekSummary(week, false)}</summary><div class="week-content">${lectureSection(week)}${work}</div></details>`;
 }
@@ -598,7 +611,21 @@ function renderAgenda(weeks) {
   const localBrowsing = location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
   const previewAll = localBrowsing || new URLSearchParams(location.search).get('preview') === 'all';
   const today = todayInTokyo();
-  root.innerHTML = `${previewAll ? `<div class="preview-notice">${bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today)).join('')}</div>`;
+  root.innerHTML = `${weekShortcuts(weeks, previewAll, today)}${previewAll ? `<div class="preview-notice">${bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today)).join('')}</div>`;
+  const syncWeekShortcut = () => {
+    const requested = location.hash ? document.getElementById(location.hash.slice(1)) : null;
+    if (requested?.tagName === 'DETAILS') requested.open = true;
+    root.querySelectorAll('.week-shortcut').forEach(link => {
+      if (link.hash === location.hash) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  root.querySelectorAll('.week-shortcut').forEach(link => link.addEventListener('click', () => {
+    const card = document.getElementById(link.hash.slice(1));
+    if (card?.tagName === 'DETAILS') card.open = true;
+  }));
+  window.addEventListener('hashchange', syncWeekShortcut);
+  syncWeekShortcut();
   setupActivityTabs(root);
   setupWeekToggles(root);
   // Deck links select a specific exercise without bypassing published release dates.
