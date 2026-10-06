@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="310" viewBox="0 0 760 310">
+<rect width="760" height="310" fill="#f2f9fc"/>
+<path d="M110 245H565V55Z" fill="#b8dae7"/>
+<path d="M110 245H590M110 245V35" fill="none" stroke="#17374b" stroke-width="3"/>
+<path d="M110 245L565 55" stroke="#287c9f" stroke-width="4"/>
+<path d="M565 55V245" stroke="#287c9f" stroke-width="2" stroke-dasharray="6 5"/>
+<g font-family="sans-serif" font-size="23" fill="#17374b">
+<text x="92" y="277">0</text><text x="503" y="280">√2 ≈ 1.414</text>
+<text x="580" y="65">高さ √2</text><text x="232" y="280">底辺 √2</text>
+<text x="255" y="207" font-size="30">面積 = 1 = 100%</text>
+<text x="210" y="50">f(x) = x</text><text x="623" y="250">x</text>
+</g></svg>

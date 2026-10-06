@@ -100,7 +100,14 @@
 
   function continuous(root) {
     const slider = root.querySelector('[data-al-slices]');
-    let selected = 5, exactShown = false;
+    let selected = 1, exactShown = true, step = 1;
+    const goToStep = value => {
+      step = value;
+      root.querySelectorAll('[data-al-guide-panel]').forEach(panel => panel.hidden = Number(panel.dataset.alGuidePanel) !== step);
+      root.querySelectorAll('[data-al-step]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.alStep) === step)));
+      root.querySelector('[data-al-integrals]').textContent = step === 3 ? t('Back to the triangle','三角形に戻る') : t('Next step →','次のステップ →');
+      root.querySelector('.al-continuous-controls').hidden = step === 3;
+    };
     function graph(svg, n, weighted) {
       const left = 44, right = 426, bottom = 192, top = 25;
       const maxY = weighted ? 2.2 : 1.6;
@@ -113,7 +120,7 @@
         return `<rect data-al-rectangle="${i}" role="button" tabindex="0" aria-pressed="${i === selected}" aria-label="${t('Select slice ', '区間を選ぶ：') + (i + 1)}" class="al-area-rectangle ${i === selected ? 'is-selected' : ''}" x="${X(i * width)}" y="${Y(f(mid))}" width="${(right-left)/n}" height="${bottom-Y(f(mid))}"/>`;
       }).join('');
       const path = Array.from({ length: 81 }, (_, i) => `${i ? 'L' : 'M'}${X(i / 80 * a)},${Y(f(i / 80 * a))}`).join(' ');
-      const marker = weighted ? `<line class="al-expectation-marker" x1="${X(exactContinuousMean)}" y1="${top}" x2="${X(exactContinuousMean)}" y2="${bottom}"/><text x="${X(exactContinuousMean)}" y="16" text-anchor="middle">E(X) ≈ 0.9428</text>` : '';
+      const marker = `<text x="${left}" y="16">${weighted ? 'x f(x) = x²' : 'f(x) = x'}</text>`;
       svg.innerHTML = `<line class="al-area-axis" x1="${left}" y1="${bottom}" x2="${right+8}" y2="${bottom}"/><line class="al-area-axis" x1="${left}" y1="${bottom}" x2="${left}" y2="${top}"/>${rects}<path class="al-area-curve" d="${path}"/>${marker}<text x="${left}" y="214" text-anchor="middle">0</text><text x="${right}" y="214" text-anchor="middle">√2 ≈ 1.414</text><text x="236" y="235" text-anchor="middle">x</text><text x="${left-9}" y="${Y(weighted ? 2 : 1)}" text-anchor="end">${weighted ? '2' : '1'}</text>`;
     }
     function render() {
@@ -129,15 +136,20 @@
       math(root.querySelector('[data-al-density-rule]'), String.raw`\Pr(0\le X\le\sqrt2)=\int_0^{\sqrt2}f(x)\,dx`, 'Pr(0 ≤ X ≤ √2) = ∫ f(x) dx');
       math(root.querySelector('[data-al-weighted-rule]'), String.raw`E(X)=\int_0^{\sqrt2}x f(x)\,dx`, 'E(X) = ∫ x f(x) dx');
       root.querySelector('[data-al-density-sum]').textContent = t(`Rectangle sum: ${densitySum.toFixed(6)} = 100%`, `長方形の合計：${densitySum.toFixed(6)} = 100%`);
-      root.querySelector('[data-al-weighted-sum]').textContent = t(`Weighted rectangle sum: ${weightedSum.toFixed(6)}`, `重み付き長方形の合計：${weightedSum.toFixed(6)}`);
-      math(root.querySelector('[data-al-slice-math]'), String.raw`\begin{aligned}\Delta x&=${width.toFixed(4)},\quad x_i=${mid.toFixed(4)}\\\Pr(\text{slice})&\approx f(x_i)\Delta x=${prob.toFixed(6)}\\x_i\Pr(\text{slice})&\approx x_i f(x_i)\Delta x=${contribution.toFixed(6)}\end{aligned}`, `Δx=${width.toFixed(4)}, xᵢ=${mid.toFixed(4)}; slice probability ≈ ${prob.toFixed(6)}; expectation contribution ≈ ${contribution.toFixed(6)}`);
-      root.querySelector('[data-al-slice-story]').textContent = t(`Slice ${selected+1}: probability is height × width. Multiply that probability by x to obtain its contribution to the average. Midpoint rectangles approximate the curved areas.`, `区間${selected+1}：確率は「高さ×幅」。さらにxを掛けると、平均への寄与になります。曲線の面積を、区間の中央の高さの長方形で近似しています。`);
+      root.querySelector('[data-al-weighted-sum]').textContent = t(`Add the contributions: ${weightedSum.toFixed(6)} → exact average 0.942809`, `平均への寄与を足す：${weightedSum.toFixed(6)} → 正確な平均 0.942809`);
+      root.querySelector('[data-al-guide-x]').textContent = mid.toFixed(4);
+      root.querySelector('[data-al-guide-prob]').textContent = `${(prob * 100).toFixed(2)}%`;
+      root.querySelector('[data-al-guide-contribution]').textContent = contribution.toFixed(4);
+      math(root.querySelector('[data-al-slice-math]'), String.raw`${mid.toFixed(4)}\times${prob.toFixed(4)}\approx${contribution.toFixed(4)}`, `${mid.toFixed(4)} × ${prob.toFixed(4)} ≈ ${contribution.toFixed(4)}`);
+      root.querySelector('[data-al-slice-story]').textContent = t(`Highlighted piece ${selected+1}: multiply the value at its center by its approximate probability. Repeat for all ${n} pieces, then add.`, `色のついた区間${selected+1}：中央の値×その区間の確率（近似）。${n}個全部で同じことをして、最後に足します。`);
       root.querySelector('[data-al-exact]').hidden = !exactShown;
       if (exactShown) {
-        math(root.querySelector('[data-al-density-exact]'), String.raw`\int_0^{\sqrt2}x\,dx=\left[\frac{x^2}2\right]_0^{\sqrt2}=1`, '∫ x dx = [x²/2]₀^√2 = 1');
-        math(root.querySelector('[data-al-weighted-exact]'), String.raw`E(X)=\int_0^{\sqrt2}x^2\,dx=\left[\frac{x^3}3\right]_0^{\sqrt2}=\frac{2\sqrt2}3\approx0.942809`, 'E(X) = ∫ x² dx = [x³/3]₀^√2 = 2√2/3 ≈ 0.942809');
+        math(root.querySelector('[data-al-density-exact]'), String.raw`\begin{aligned}\int_0^{\sqrt2}x\,dx&=\left[\frac{x^2}2\right]_0^{\sqrt2}\\&=\frac{(\sqrt2)^2}{2}-\frac{0^2}{2}\\&=\frac22-0=1\end{aligned}`, '∫ x dx = [x²/2]₀^√2 = (√2)²/2 − 0²/2 = 1');
+        math(root.querySelector('[data-al-weighted-exact]'), String.raw`\begin{aligned}\int_0^{\sqrt2}x^2\,dx&=\left[\frac{x^3}3\right]_0^{\sqrt2}\\&=\frac{(\sqrt2)^3}{3}-\frac{0^3}{3}\\&=\frac{2\sqrt2}3\approx0.9428\end{aligned}`, '∫ x² dx = [x³/3]₀^√2 = (√2)³/3 − 0³/3 = 2√2/3 ≈ 0.9428');
       }
       root.querySelector('[data-al-aha]').textContent = t('Left: total probability = 1. Right: expectation, not a percentage. Larger x values get more probability, so the mean lies to the right of the interval midpoint. For this linear density, midpoint rectangles already give total probability 1.', '左は確率の合計＝1。右は期待値で、％ではありません。大きいxほど確率が多いので、平均は区間の真ん中より右にあります。この直線の密度では、中央の高さの長方形で確率の合計がちょうど1になります。');
+      root.querySelector('[data-al-aha]').textContent = t('Aha: more probability lies near the larger values. That is why the average 0.9428 is above the interval midpoint 0.7071.','発見：大きい値のほうに確率が多い。だから平均0.9428は、範囲の真ん中0.7071より大きい。');
+      goToStep(step);
     }
     slider.addEventListener('input', render);
     function select(event) {
@@ -149,8 +161,9 @@
     }
     root.addEventListener('click', select);
     root.addEventListener('keydown', select);
-    root.querySelector('[data-al-integrals]').addEventListener('click', () => { exactShown = true; render(); });
-    root.querySelector('[data-al-reset]').addEventListener('click', () => { slider.value = '12'; selected = 5; exactShown = false; render(); });
+    root.querySelectorAll('[data-al-step]').forEach(button => button.addEventListener('click', () => goToStep(Number(button.dataset.alStep))));
+    root.querySelector('[data-al-integrals]').addEventListener('click', () => goToStep(step === 3 ? 1 : step + 1));
+    root.querySelector('[data-al-reset]').addEventListener('click', () => { slider.value = '4'; selected = 1; step = 1; render(); });
     render();
     return render;
   }

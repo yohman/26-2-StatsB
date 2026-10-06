@@ -246,8 +246,77 @@ const week3Activities = new Set(['probability','combinations','batting','normal-
 const relink = slide => slide.replace(/(agenda\.html\?activity=([^#]+))#week-02/g,
   (match, url, id) => week3Activities.has(id) ? `${url}#week-03` : match);
 const deck = slides => `${preface.replace('</style>', `${bookStyles}\n</style>`)}\n\n${slides.map(relink).join('\n\n')}\n`.replace(/[ \t]+$/gm, '');
-writeFileSync(resolve(here, 'w2.md'), deck(styledSlides.slice(0,28)));
+const alBridge = [
+  `## AL 02：積分を知らなくても、意味はわかる\n\n<!-- _class: book-divider -->\n\n<div class="book-heading"><span class="book-number">AL 02</span><span>2つの空欄、2つの質問</span></div>\n\n<div class="book-page">先取り：教科書 p.121・p.129</div>\n\n上の空欄：確率を全部足すと？\n\n下の空欄：平均の値はいくつ？`,
+  String.raw`## まず、ロボの配達時間を想像しよう
+
+<!-- _class: book-reference -->
+
+$X$ = 配達にかかる時間（説明用の例）。
+
+$0\le X\le\sqrt2\approx1.414$ 時間。$f(x)=x$。
+
+0時間から約1.414時間まで、途中の値も取れます。
+
+**大きい値ほど密度が高い。高さではなく、面積が確率。**
+
+<small>連続確率変数。f(x)は、その時刻ぴったりの確率ではありません。</small>`,
+  String.raw`## 上の空欄：三角形の面積を求める
+
+<!-- _class: book-reference -->
+
+![height:245px](../../../assets/images/al-continuous-triangle.svg)
+
+$$\frac12\times\sqrt2\times\sqrt2=1$$
+
+**確率の合計は1、つまり100%。**`,
+  String.raw`## 積分の記号は「小さな面積を全部足す」
+
+<!-- _class: book-reference -->
+
+$$\int_{0}^{\sqrt2}f(x)\,dx=1$$
+
+**下の0から、上の√2まで**、細い長方形の面積を足す。
+
+長方形の面積 = 高さ $f(x)$ × 小さな幅 $dx$。
+
+<small>∫（インテグラル）は「足し合わせる」。dxは「小さな幅」。<br>長方形を限りなく細かくして、面積を全部足します。</small>`,
+  String.raw`## 下の空欄：くじの平均と同じ！
+
+<!-- _class: book-reference -->
+
+くじ：**賞金 × 確率** を全部足した。
+
+今度は：**時間 × 小さな区間の確率** を全部足す。
+
+$$E(X)=\sum_x x\Pr(X=x)\quad\longrightarrow\quad\int_0^{\sqrt2}xf(x)\,dx$$
+
+<small>小さな区間の確率は、およそ f(x) × dx。だから x × f(x) × dx を足します。</small>`,
+  String.raw`## f(x)=x を入れると、x × x = x²
+
+<!-- _class: book-reference -->
+
+$$\begin{aligned}E(X)&=\int_0^{\sqrt2}xf(x)\,dx=\int_0^{\sqrt2}x^2\,dx\\&=\left[\frac{x^3}{3}\right]_0^{\sqrt2}=\frac{2\sqrt2}{3}\approx0.9428\end{aligned}$$
+
+角括弧は **「上の端の値 − 下の端の値」**。
+
+**0.9428は平均の値。94.28％ではない。**
+
+<small>配達の例なら約0.943時間（56.6分）。<br>大きい値に確率が多いので、平均は範囲の真ん中0.7071より大きい。</small>`,
+  String.raw`## ALの2つの空欄を整理しよう
+
+<!-- _class: book-reference -->
+
+$$\underbrace{\int_0^{\sqrt2}x\,dx}_{\text{確率の合計}}=\left[\frac{x^2}{2}\right]_0^{\sqrt2}=1$$
+
+$$\underbrace{\int_0^{\sqrt2}x^2\,dx}_{\text{平均の値}}=\left[\frac{x^3}{3}\right]_0^{\sqrt2}\approx0.9428$$
+
+**まず三角形 → 次に値×確率 → 最後に空欄を埋める。**
+
+[やってみよう！ AL 02](https://yohman.github.io/26-2-StatsB/agenda.html?activity=al-continuous#week-02)`
+].map(slide => `${slide}\n\n<!-- _footer: AL 02 先取り ／ 教科書 p.121・p.129 -->`);
+writeFileSync(resolve(here, 'w2.md'), deck([...styledSlides.slice(0,28), ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 mkdirSync(week3Directory, {recursive:true});
 writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
-process.stdout.write('Created Week 2 (28 slides) and Week 3 (41 slides).\n');
+process.stdout.write('Created Week 2 (35 slides, including 7 AL bridge slides) and Week 3 (41 slides).\n');

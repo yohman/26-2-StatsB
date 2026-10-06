@@ -73,3 +73,28 @@
 .example-die-face.face-4{transform:rotateY(-90deg) translateZ(22px)}
 .example-die-face.face-5{transform:rotateX(-90deg) translateZ(22px)}
 .example-die-face.face-6{transform:rotateY(180deg) translateZ(22px)}
+.al-guide-given{font-size:15px;line-height:1.7;margin:0 0 18px}
+.al-guide-steps{display:flex;gap:6px;margin:18px 0}
+.al-guide-steps button{flex:1;border:1px solid #c9d7df;background:#f6f9fa;border-radius:5px;padding:13px 10px;font:600 14px var(--sans);color:#456371;cursor:pointer}
+.al-guide-steps button[aria-pressed=true]{background:#286b83;border-color:#286b83;color:white}
+.al-guide-steps button:focus-visible{outline:3px solid #ca9732;outline-offset:3px}
+.al-guide-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.al-continuous-guide [hidden]{display:none!important}
+.al-guide-copy,.al-guide-summary article{padding:20px;background:#fcfaf5;border-radius:7px;min-width:0}
+.al-guide-copy h5,.al-guide-summary h5{font-size:21px;margin:8px 0 14px}
+.al-guide-copy p,.al-guide-layout .al-area-card>p,.al-guide-summary p{font-size:14px;line-height:1.65}
+.agenda-page .al-continuous-guide .al-area-card svg{max-height:300px}
+.al-guide-answer{display:flex;gap:12px;align-items:center;background:#e8f2ec;padding:14px;border-radius:5px}
+.al-guide-answer strong{font-size:25px;color:#286347;white-space:nowrap}
+.al-guide-answer span{font-size:13px}
+.al-guide-symbol{display:flex;gap:16px;align-items:center}
+.al-guide-symbol>strong{font:60px Georgia,serif;color:#286b83}
+.al-guide-warning{color:#765227;background:#f6eedc;padding:12px;border-radius:5px;font-size:13px;line-height:1.6}
+.al-slice-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:16px 0}
+.al-slice-metrics>div{background:#edf4f8;padding:12px;border-radius:5px}
+.al-slice-metrics dt{font-size:11px;color:#5c6c76;min-height:30px}
+.al-slice-metrics dd{margin:8px 0 0;font-size:22px;font-variant-numeric:tabular-nums;color:#286b83}
+.al-guide-summary{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.al-continuous-guide .al-continuous-controls{margin:18px 0}
+.al-continuous-guide .al-formula-focus{padding:12px;font-size:19px;margin:12px 0}
+@media(max-width:750px){.al-guide-layout,.al-guide-summary{grid-template-columns:1fr}.al-guide-steps button{font-size:12px;padding:12px 6px}.al-guide-answer{flex-wrap:wrap}.al-slice-metrics dd{font-size:18px}}
