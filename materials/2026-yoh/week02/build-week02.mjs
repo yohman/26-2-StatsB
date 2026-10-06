@@ -22,6 +22,11 @@ function fromYoh(number) {
   });
   if (number === 21) slide = slide.replace('role a dice', 'roll a die');
   if (number === 27) slide = slide.replace('n回の試行からk回の成功', 'n回の試行からx回の成功');
+  for (const tag of ['xxl','large','center']) {
+    const opens = (slide.match(new RegExp(`<${tag}>`, 'g')) || []).length;
+    const closes = (slide.match(new RegExp(`</${tag}>`, 'g')) || []).length;
+    if (opens > closes) slide += `\n${`</${tag}>`.repeat(opens - closes)}`;
+  }
   return `<!-- Yoh 2025 source PDF slide ${number}; original w5.md section ${number} -->\n${slide}`;
 }
 
@@ -65,6 +70,54 @@ const slides = [
   textbookSlide('120, 130', String.raw`## まれな不良品を数える\n\n1000個の製品で、1個ごとの不良率が0.2%なら、平均不良数は $\lambda=1000\times0.002=2$。\n\n$Pr(X=x)\approx\dfrac{e^{-\lambda}\lambda^x}{x!}$\n\n<large>$Pr(X=0)\approx e^{-2}=0.1353$</large>\n\n<small>不良品ゼロのロットは約13.5%。ポアソン分布では $E(X)=Var(X)=\lambda$。</small>`),
 ];
 
-const output = `${preface}\n\n${slides.join('\n\n')}\n`;
+// Follow the textbook's six numbered subsections inside Chapter 2, Section 2.
+// Keep the source slides editable and retain Yoh's image-led examples.
+const activity = (id, label, week = 2) => `[${label}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-${String(week).padStart(2, '0')})`;
+const divider = (number, title, pages, question) => `## 第2節　確率分布\n\n<!-- _footer: 2-${number} ${title} ／ 教科書 p.${pages} -->\n\n<large>2-${number}　${title}</large>\n\n教科書 **p.${pages}**\n\n${question}`;
+const demo = (links, question) => `## やってみる\n\n${question}\n\n${links.join('\n\n')}\n\n<small>リンクから講義ページの該当タブを開きます。</small>`;
+const select = (...numbers) => numbers.map(n => slides[n - 1]);
+const blocks = [
+  {n:1,title:'確率変数',pages:'117',question:'何が起きるか分からない。その結果を、数で表す。',body:[
+    ...select(9),
+    `## くじの賞金を $X$ とする\n\n0円、100円、1,000円。引く前には、どれになるか分からない。\n\n<large>$X\\in\\{0,100,1000\\}$</large>\n\n引いた後の賞金が、観測した値 $x$。`,
+    `## 5回投げて、ロボットは何回？\n\n表はロボット、裏はヤギ。$X$ = 5回中の表の回数。\n\n<large>$X\\in\\{0,1,2,3,4,5\\}$</large>\n\n0回も、取りうる結果に含めます。`,
+    demo([activity('coin','コイン投げを開く',1)],'投げる前に、$X$ が取りうる値を挙げてみよう。')
+  ]},
+  {n:2,title:'期待値',pages:'117',question:'同じことを何度も繰り返すと、平均はいくら？',body:[
+    ...select(10,11,12,13),
+    `## 起こりやすさで重みをつける\n\n<large>$E(X)=\\sum_x x\\Pr(X=x)$</large>\n\n「結果の値 × その結果の確率」を、全部足す。\n\nサイコロは、どの目も確率 $1/6$。くじは、賞金ごとに確率が違う。`,
+    ...select(14,2,3),
+    `## 赤に100円賭けると\n\n赤18個なら利益100円。黒18個と緑2個なら損失100円。\n\n$E(X)=(+100)\\frac{18}{38}+(-100)\\frac{20}{38}$\n\n<large>$E(X)\\approx-5.26$ 円</large>\n\n<small>米国式ルーレット。賞金ではなく、賭け金を差し引いた利益を $X$ とします。</small>`,
+    slides[4].replace('Why does the house always win?', 'Why does the house have an advantage?'),
+    ...select(7,8),
+    `## 期待値と、実際の結果\n\n1回の結果は +100円か −100円。期待値は −5.26円。\n\n100回なら、期待損益は約 −526円。\n\n<large>勝って終わることもあります。</large>\n\n<small>回数を増やすと、賭け金あたりの平均損益は −5.26%に近づく傾向があります。</small>`,
+    demo([activity('roulette','01 ルーレット'),activity('al-discrete','06 AL：期待値')],'1回の結果と、長く繰り返したときの平均を比べよう。')
+  ]},
+  {n:3,title:'確率分布',pages:'118',question:'何が起きる？ それぞれ、どれくらい起こりやすい？',body:[
+    ...select(15,16,17),
+    demo([activity('discrete','04 離散と連続')],'台数は数える。時間は測る。グラフの違いを確かめよう。')
+  ]},
+  {n:4,title:'離散確率分布',pages:'118–120',question:'決めた回数の成功と、まれな出来事を数える。',body:[
+    ...select(18,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35),
+    demo([activity('combinations','02 ロボットの並び'),activity('batting','03 打率'),activity('probability','05 確率分布')],'並び方を数え、二項分布の公式に結びつけよう。ポアソン分布との違いも比べよう。')
+  ]},
+  {n:5,title:'連続確率分布',pages:'121–128',question:'時間や長さの確率は、曲線の下の面積で考える。',body:[
+    `## バッテリーが4〜6時間もつ確率\n\n<large>$\\Pr(4\\le X\\le6)=\\int_4^6 f(x)\\,dx$</large>\n\n曲線の高さは確率密度。4〜6の間の面積が確率。\n\n全体の面積は1。連続分布では、1つの点の確率は0。`,
+    `## 正規分布\n\nロボット部品の長さが、中心のまわりに左右対称にばらつくモデル。\n\n<large>$X\\sim N(\\mu,\\sigma^2)$</large>\n\n平均 $\\mu$ が中心、標準偏差 $\\sigma$ が幅を決めます。\n\n<small>教科書 p.122–124。標本平均と標準化は第5週で詳しく扱います。</small>`,
+    `## $t$ 分布とカイ二乗分布\n\n**$t$ 分布**：母分散が未知のとき、標本から平均を調べる。\n\n$T=\\dfrac{\\bar X-\\mu}{s/\\sqrt n}$　自由度 $n-1$\n\n**カイ二乗分布**：標準化した値の二乗和。分散を調べるときに使う。\n\n<small>正規母集団からの独立な標本を想定。教科書 p.125–128。第6週で詳しく扱います。</small>`,
+    demo([activity('al-continuous','07 AL：2つの積分'),activity('normal','正規分布',5),activity('t','t 分布',6),activity('chi','カイ二乗分布',6)],'まず密度と面積の違いを確認。正規・t・カイ二乗は後の週で再び扱います。')
+  ]},
+  {n:6,title:'確率分布の平均値と分散',pages:'129',question:'分布の中心と、そこからのばらつきを求める。',body:[
+    `## 同じ平均、違う待ち時間\n\n配達ロボットA：いつも10分。\n\n配達ロボットB：半分は2分、半分は18分。\n\n<large>どちらも平均10分。</large>\n\n授業前に頼むなら、どちらが安心？`,
+    `## 離散分布の平均と分散\n\n$\\mu=E(X)=\\sum_x x\\Pr(X=x)$\n\n$\\sigma^2=\\sum_x(x-\\mu)^2\\Pr(X=x)$\n\n平均は「値 × 確率」の合計。\n分散は「平均からの距離の二乗 × 確率」の合計。`,
+    `## 連続分布でも、重みをつけて足す\n\n$\\mu=\\int_{-\\infty}^{+\\infty}xf(x)\\,dx$\n\n$\\sigma^2=\\int_{-\\infty}^{+\\infty}(x-\\mu)^2f(x)\\,dx$\n\n<large>$\\int f(x)\\,dx=1$ は確率の合計。</large>\n\n$\\int xf(x)\\,dx$ は平均。同じ面積計算でも、足すものが違います。`,
+    `## ALワークシートで確かめる\n\n**離散**：各行の $x_i\\Pr(X=x_i)$ を足すと $5/3\\approx1.6667$。\n\n**連続**：$f(x)=x$、$0\\le x\\le\\sqrt2$。\n\n$\\int_0^{\\sqrt2}f(x)\\,dx=1$\n\n$E(X)=\\int_0^{\\sqrt2}xf(x)\\,dx=\\dfrac{2\\sqrt2}{3}\\approx0.9428$`,
+    demo([activity('al-discrete','06 AL：期待値'),activity('al-continuous','07 AL：2つの積分')],'各項を確認して、ワークシートのセルを埋めよう。')
+  ]}
+];
+const orderedSlides = [slides[0].replace('離散確率分布と二項分布','教科書 第2章 第2節　p.117–129'),
+  ...blocks.flatMap(block => [divider(block.n,block.title,block.pages,block.question),
+    ...block.body.map(slide => slide.replace(/^(#{1,3}[^\n]*)$/m, `$1\n\n<!-- _footer: 2-${block.n} ${block.title} ／ 教科書 p.${block.pages} -->`))])];
+const output = `${preface}\n\n${orderedSlides.join('\n\n')}\n`.replace(/[ \t]+$/gm, '');
 writeFileSync(resolve(here, 'w2.md'), output);
-process.stdout.write(`Created w2.md with ${slides.length} slides (${slides.filter(s => s.startsWith('<!-- Yoh')).length} adapted from Yoh).\n`);
+process.stdout.write(`Created w2.md with ${orderedSlides.length} slides in six textbook sections.\n`);

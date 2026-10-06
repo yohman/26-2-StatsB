@@ -1,0 +1,2 @@
+# Exported lecture PDFs must remain binary, including embedded link annotations.
+*.pdf binary

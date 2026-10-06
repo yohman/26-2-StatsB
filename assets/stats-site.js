@@ -601,6 +601,22 @@ function renderAgenda(weeks) {
   root.innerHTML = `${previewAll ? `<div class="preview-notice">${bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today)).join('')}</div>`;
   setupActivityTabs(root);
   setupWeekToggles(root);
+  // Deck links select a specific exercise without bypassing published release dates.
+  const activity = new URLSearchParams(location.search).get('activity');
+  const exerciseRoutes = {
+    roulette: ['week-2-lecture-explore-tab','week-2-roulette-tab'],
+    combinations: ['week-2-lecture-explore-tab','week-2-combinations-tab'],
+    batting: ['week-2-lecture-explore-tab','week-2-batting-tab'],
+    discrete: ['week-2-lecture-explore-tab','week-2-discrete-tab'],
+    probability: ['week-2-lecture-explore-tab','week-2-probability-tab'],
+    'al-discrete': ['week-2-lecture-explore-tab','week-2-al-discrete-tab'],
+    'al-continuous': ['week-2-lecture-explore-tab','week-2-al-continuous-tab'],
+    coin: ['week-1-lecture-simulations-tab','week-1-coin-tab'],
+    normal: ['week-5-lecture-explore-tab'],
+    t: ['week-6-lecture-explore-tab','week-6-t-tab'],
+    chi: ['week-6-lecture-explore-tab','week-6-chi-tab']
+  };
+  for (const id of exerciseRoutes[activity] || []) document.getElementById(id)?.click();
   document.dispatchEvent(new Event('statsb:agenda-rendered'));
   const requested = location.hash ? document.getElementById(location.hash.slice(1)) : null;
   if (requested?.tagName === 'DETAILS') requested.open = true;

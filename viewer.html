@@ -97,7 +97,9 @@
       try {
         if (!window.pdfjsLib) throw new Error('PDF renderer unavailable');
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdfjs/pdf.worker.min.js?v=3.11.174';
-        const response = await fetch(encodeURI(path));
+        const pdfUrl = new URL(encodeURI(path), location.href);
+        if (path === 'materials/2026-yoh/week02/w2.pdf') pdfUrl.searchParams.set('v', '20261006-book-order-1');
+        const response = await fetch(pdfUrl.href, { cache: 'no-cache' });
         if (!response.ok) throw new Error('PDF unavailable');
         const pdf = await window.pdfjsLib.getDocument({
           data: await response.arrayBuffer(),
@@ -138,6 +140,13 @@
                 continue;
               }
               if (!['http:', 'https:', 'mailto:'].includes(destination.protocol)) continue;
+              if (destination.hostname === 'yohman.github.io' && destination.pathname === '/26-2-StatsB/agenda.html') {
+                const courseAgenda = new URL('agenda.html', location.href);
+                courseAgenda.search = destination.search;
+                courseAgenda.hash = destination.hash;
+                if (new URLSearchParams(location.search).get('preview') === 'all') courseAgenda.searchParams.set('preview', 'all');
+                destination = courseAgenda;
+              }
               link.href = destination.href;
               link.target = '_blank';
               link.rel = 'noopener noreferrer';
