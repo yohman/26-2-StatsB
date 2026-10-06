@@ -54,12 +54,14 @@
       const source = String.raw`\[{}_{${n}}C_{${k}}=\frac{${n}!}{${k}!(${n}-${k})!}=${total}\]`;
       const worked = String.raw`\[\frac{${n}!}{${k}!(${n}-${k})!}=\frac{${numerator}}{(${leftDenominator})(${rightDenominator})}=${total}\]`;
       const detail = root.querySelector('[data-combination-equation-detail]');
-      if (window.MathJax?.typesetClear) window.MathJax.typesetClear([equation, detail]);
-      equation.replaceChildren(document.createTextNode(source));
-      detail.replaceChildren(document.createTextNode(worked));
-      if (window.MathJax?.typesetPromise) {
-        window.MathJax.typesetPromise([equation, detail]).catch(() => {});
-      }
+      [[equation, source, `${n}C${k} = ${n}! / (${k}! × (${n}-${k})!) = ${total}`],
+       [detail, worked, `${n}! / (${k}! × (${n}-${k})!) = ${total}`]].forEach(([target, tex, fallback]) => {
+        const next = tex.slice(2, -2);
+        if (target.dataset.displayMath === next) return;
+        if (!target.querySelector('mjx-container')) target.textContent = fallback;
+        delete target.dataset.mathReady;
+        target.dataset.displayMath = next;
+      });
     }
 
     function row(bits, index, discovered) {
