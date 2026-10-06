@@ -1,0 +1,65 @@
+/* One visual vocabulary: blue formula cards, white working/result cards. */
+.agenda-page .activity-formula-card{position:relative;background:#edf4f8!important;border:1px solid #c8dce8!important;border-left:4px solid #2876a0!important;border-radius:7px;padding:14px 18px!important;margin:12px 0!important;min-width:0;color:#173e57;text-align:left}
+.agenda-page .activity-formula-label{display:block!important;font:700 10px/1.3 Manrope,sans-serif;letter-spacing:.12em;color:#2876a0;margin:0 0 8px}
+.agenda-page .activity-formula-card > .section-kicker,.agenda-page .activity-formula-card > .week2-equation-label,.agenda-page .activity-formula-card > .batting-formula-label,.agenda-page .activity-formula-card > span:not(.activity-formula-label){display:none}
+.agenda-page .activity-formula-card mjx-container{font-size:22px!important;max-width:100%;overflow-x:auto;overflow-y:hidden}
+.agenda-page .activity-formula-card mjx-container[display=true]{margin:8px 0!important;text-align:left!important}
+.agenda-page .activity-formula-card .example-formula{padding:0;color:inherit}
+.agenda-page .activity-formula-card p,.agenda-page .activity-formula-card small{font-size:12px;line-height:1.5;margin:6px 0 0}
+.agenda-page .activity-formula-card p mjx-container{font-size:1em!important}
+.agenda-page .activity-formula-card .event-formula,.agenda-page .activity-formula-card.test-math strong{font-family:"Cambria Math","Times New Roman",serif;font-size:22px;line-height:1.4;color:#173e57}
+.agenda-page .activity-formula-card.test-math>.activity-formula-label{grid-column:1/-1}
+.agenda-page .distribution-formula{display:block}
+.agenda-page .al-worked-math,.agenda-page .al-area-card [data-al-density-rule],.agenda-page .al-area-card [data-al-weighted-rule]{min-height:0}
+.agenda-page .week2-lab-heading{gap:18px;margin-bottom:14px}
+.agenda-page .week2-lab-heading h4,.agenda-page .roulette-lab h4,.agenda-page .batting-intro h4,.agenda-page .combination-heading h4{font-size:clamp(23px,2.2vw,30px);line-height:1.25}
+.agenda-page .week2-compare-card,.agenda-page .al-table-wrap,.agenda-page .al-visual-card,.agenda-page .al-area-card,.agenda-page .week2-family-chart-card,.agenda-page .distribution-chart-wrap,.agenda-page .batting-chart-card{border-radius:7px;padding:16px}
+.agenda-page .week2-compare-grid,.agenda-page .al-discrete-layout,.agenda-page .al-area-grid{gap:14px}
+.agenda-page .al-visual-card h5{font-size:16px;margin-bottom:8px}
+.agenda-page .al-visual-card>p,.agenda-page .al-help{font-size:12px;margin:8px 0}
+.agenda-page .al-table-wrap .al-actions{margin-top:12px;gap:6px}
+.agenda-page .al-actions button{font-size:11px;padding:9px 12px}
+.agenda-page .al-sample-strip{min-height:60px;padding:10px 0 0}
+.agenda-page .al-sample-strip p{font-size:12px}
+.agenda-page .al-area-card svg{max-height:185px}
+.agenda-page .roulette-layout{gap:16px;margin:14px 0}
+.agenda-page .roulette-expectation{border-radius:7px;padding:16px}
+.agenda-page .roulette-expectation p{font-size:12px}
+.agenda-page .roulette-wheel-wrap{height:235px}.agenda-page .roulette-wheel{width:225px;height:225px}
+.agenda-page :is([data-al-reset],[data-w2-family-reset],[data-example-reset],[data-pairs-reset],[data-dist-clear],[data-batting-reset],[data-reset]){background:transparent!important;color:#766b5c!important;border:1px solid #c8bfaf!important;border-radius:4px}
+/* Lottery/dice dashboard: action, live chart, probability table in one row. */
+.agenda-page .example-lab{display:grid;grid-template-columns:180px minmax(0,1fr) minmax(230px,.8fr);gap:8px;padding:14px}
+.agenda-page .example-lab>header,.agenda-page .example-choices,.agenda-page .example-lab>[data-example-story],.agenda-page .example-formula-card,.agenda-page .example-summary,.agenda-page .example-pairs{grid-column:1/-1}
+.agenda-page .example-lab h4{font-size:23px;line-height:1.2;margin:2px 0}
+.agenda-page .example-lab>header{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.agenda-page .example-lab>header h4{font-size:21px;margin:0}
+.agenda-page .example-lab>header .section-kicker{font-size:10px}
+.agenda-page .example-choices{margin:0;gap:6px}
+.agenda-page .example-lab button{font-size:12px;padding:8px 10px;min-height:38px}
+.agenda-page .example-lab>[data-example-story]{font-size:12px;line-height:1.45;margin:0}
+.agenda-page .example-layout{display:contents}
+.agenda-page .example-formula-card{margin:0!important;padding:10px 14px!important}
+.agenda-page .example-formula-card>.activity-formula-label{position:absolute;right:14px;top:10px;margin:0}
+.agenda-page .example-formula-card .example-formula mjx-container{font-size:20px!important}
+.agenda-page .example-formula-card .example-formula mjx-container[display=true]{margin:0!important;padding:0!important}
+.agenda-page .example-formula-card [data-example-variance]{font-size:11px;margin:4px 0 0}
+.agenda-page .activity-control-card,.agenda-page .example-chart-card,.agenda-page .example-details{background:#fff;border:1px solid #e4ded2;border-radius:7px;padding:12px;min-width:0;margin:0}
+.agenda-page .example-result{grid-template-columns:50px 1fr;min-height:85px}
+.agenda-page .example-result>span{font-size:36px}.agenda-page .example-result strong{font-size:26px}.agenda-page .example-result small{font-size:10px}
+.agenda-page .example-actions{gap:7px;margin:12px 0 0;flex-direction:column}
+.agenda-page .example-chart-card h5{font-size:12px;margin:0 0 8px}
+.agenda-page .example-chart-card svg{height:125px}
+.agenda-page .example-chart-card .week2-aha{font-size:11px;line-height:1.4;margin:6px 0 0;padding:0;border:0;background:none}
+.agenda-page .example-table th,.agenda-page .example-table td{padding:6px 4px;font-size:11px}
+.agenda-page .example-table th mjx-container{font-size:12px!important}
+.agenda-page .example-details>p{font-size:10px;line-height:1.5;margin:8px 0 0}
+.agenda-page .example-summary{margin:0}
+.agenda-page .example-metrics,.agenda-page .example-metrics.is-money{grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.agenda-page .example-metric{padding:9px;background:#eee8dd}
+.agenda-page .example-metric dt{font-size:10px;min-height:24px}
+.agenda-page .example-metric dd{font-size:20px;margin-top:3px}.agenda-page .example-metric dd small{font-size:10px}
+.agenda-page .example-accounting{font-size:11px;margin:6px 0 0!important}
+.agenda-page .example-lab.is-pairs>.example-formula-card{display:none}
+.agenda-page .distribution-chart{max-height:260px}.agenda-page .combination-equation{min-height:0}.agenda-page .combination-equation-detail{min-height:0}
+@media(max-width:1000px){.agenda-page .example-lab{grid-template-columns:160px minmax(0,1fr)}.agenda-page .example-details{grid-column:1/-1}.agenda-page .example-metrics,.agenda-page .example-metrics.is-money{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.agenda-page .example-lab{display:block;padding:12px}.agenda-page .example-lab>*,.agenda-page .example-layout>div{margin-bottom:12px}.agenda-page .example-actions{flex-direction:row}.agenda-page .example-metrics,.agenda-page .example-metrics.is-money{grid-template-columns:repeat(2,minmax(0,1fr))}.agenda-page .activity-formula-card mjx-container{font-size:19px!important}}
