@@ -159,7 +159,7 @@ function slideThumbnail(deck, week) {
     if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png`;
   }
   if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
-  if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261006-lottery-opening-1';
+  if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261006-example-flow-1';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
 }
@@ -472,21 +472,25 @@ function lectureSection(week) {
     <div id="week-2-lecture-slides" role="tabpanel" aria-labelledby="week-2-lecture-slides-tab">${content}</div>
     <div id="week-2-lecture-explore" role="tabpanel" aria-labelledby="week-2-lecture-explore-tab" hidden>
       <div class="simulation-tablist" role="tablist" aria-label="Choose a Week 2 activity">
-        <button type="button" role="tab" id="week-2-roulette-tab" aria-controls="week-2-roulette" aria-selected="true" tabindex="0">01 <span>${bilingual('Roulette', 'ルーレット')}</span></button>
-        <button type="button" role="tab" id="week-2-al-discrete-tab" aria-controls="week-2-al-discrete" aria-selected="false" tabindex="-1">02 <span>${bilingual('AL: weighted average','AL：期待値')}</span></button>
-        <button type="button" role="tab" id="week-2-discrete-tab" aria-controls="week-2-discrete" aria-selected="false" tabindex="-1">03 <span>${bilingual('Discrete vs continuous', '離散と連続')}</span></button>
-        <button type="button" role="tab" id="week-2-combinations-tab" aria-controls="week-2-combinations" aria-selected="false" tabindex="-1">04 <span>${bilingual('Lineup combinations', 'ロボットの並び')}</span></button>
-        <button type="button" role="tab" id="week-2-batting-tab" aria-controls="week-2-batting" aria-selected="false" tabindex="-1">05 <span>${bilingual('Batting average', '打率')}</span></button>
-        <button type="button" role="tab" id="week-2-probability-tab" aria-controls="week-2-probability" aria-selected="false" tabindex="-1">06 <span>${bilingual('Probability models', '確率分布')}</span></button>
-        <button type="button" role="tab" id="week-2-al-continuous-tab" aria-controls="week-2-al-continuous" aria-selected="false" tabindex="-1">07 <span>${bilingual('AL: two integrals','AL：2つの積分')}</span></button>
+        <button type="button" role="tab" id="week-2-examples-tab" aria-controls="week-2-examples" aria-selected="true" tabindex="0">01 <span>${bilingual('Lottery & dice', 'くじ・サイコロ')}</span></button>
+        <button type="button" role="tab" id="week-2-roulette-tab" aria-controls="week-2-roulette" aria-selected="false" tabindex="-1">02 <span>${bilingual('Roulette', 'ルーレット')}</span></button>
+        <button type="button" role="tab" id="week-2-al-discrete-tab" aria-controls="week-2-al-discrete" aria-selected="false" tabindex="-1">03 <span>${bilingual('AL: weighted average','AL：期待値')}</span></button>
+        <button type="button" role="tab" id="week-2-discrete-tab" aria-controls="week-2-discrete" aria-selected="false" tabindex="-1">04 <span>${bilingual('Discrete vs continuous', '離散と連続')}</span></button>
+        <button type="button" role="tab" id="week-2-probability-tab" aria-controls="week-2-probability" aria-selected="false" tabindex="-1">05 <span>${bilingual('Probability models', '確率分布')}</span></button>
+        <button type="button" role="tab" id="week-2-combinations-tab" aria-controls="week-2-combinations" aria-selected="false" tabindex="-1">06 <span>${bilingual('Lineup combinations', 'ロボットの並び')}</span></button>
+        <button type="button" role="tab" id="week-2-batting-tab" aria-controls="week-2-batting" aria-selected="false" tabindex="-1">07 <span>${bilingual('Batting average', '打率')}</span></button>
+        <button type="button" role="tab" id="week-2-al-continuous-tab" aria-controls="week-2-al-continuous" aria-selected="false" tabindex="-1">08 <span>${bilingual('AL: two integrals','AL：2つの積分')}</span></button>
+        <button type="button" role="tab" id="week-2-curves-tab" aria-controls="week-2-curves" aria-selected="false" tabindex="-1">09 <span>${bilingual('Normal, t & chi-square','正規・t・カイ二乗')}</span></button>
       </div>
-      <div id="week-2-roulette" role="tabpanel" aria-labelledby="week-2-roulette-tab"><div data-roulette></div></div>
+      <div id="week-2-examples" role="tabpanel" aria-labelledby="week-2-examples-tab"><section class="example-lab" data-example-lab></section></div>
+      <div id="week-2-roulette" role="tabpanel" aria-labelledby="week-2-roulette-tab" hidden><div data-roulette></div></div>
       <div id="week-2-al-discrete" role="tabpanel" aria-labelledby="week-2-al-discrete-tab" hidden>${alExpectationMarkup('discrete')}</div>
       <div id="week-2-discrete" role="tabpanel" aria-labelledby="week-2-discrete-tab" hidden>${week2DiscreteMarkup()}</div>
       <div id="week-2-combinations" role="tabpanel" aria-labelledby="week-2-combinations-tab" hidden>${combinationMarkup()}</div>
       <div id="week-2-batting" role="tabpanel" aria-labelledby="week-2-batting-tab" hidden>${battingSimulationMarkup()}</div>
       <div id="week-2-probability" role="tabpanel" aria-labelledby="week-2-probability-tab" hidden>${week2ProbabilityMarkup()}</div>
       <div id="week-2-al-continuous" role="tabpanel" aria-labelledby="week-2-al-continuous-tab" hidden>${alExpectationMarkup('continuous')}</div>
+      <div id="week-2-curves" role="tabpanel" aria-labelledby="week-2-curves-tab" hidden><div class="simulation-tablist" role="tablist" aria-label="Distribution"><button type="button" role="tab" id="week-2-normal-tab" aria-controls="week-2-normal" aria-selected="true" tabindex="0">正規</button><button type="button" role="tab" id="week-2-t-tab" aria-controls="week-2-t" aria-selected="false" tabindex="-1">t</button><button type="button" role="tab" id="week-2-chi-tab" aria-controls="week-2-chi" aria-selected="false" tabindex="-1">カイ二乗</button></div><div id="week-2-normal" role="tabpanel" aria-labelledby="week-2-normal-tab">${distributionSimulationMarkup('normal')}</div><div id="week-2-t" role="tabpanel" aria-labelledby="week-2-t-tab" hidden>${distributionSimulationMarkup('t')}</div><div id="week-2-chi" role="tabpanel" aria-labelledby="week-2-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div></div>
     </div>` : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
@@ -633,6 +637,13 @@ function renderAgenda(weeks) {
   // Deck links select a specific exercise without bypassing published release dates.
   const activity = new URLSearchParams(location.search).get('activity');
   const exerciseRoutes = {
+    lottery: ['week-2-lecture-explore-tab','week-2-examples-tab'],
+    dice: ['week-2-lecture-explore-tab','week-2-examples-tab'],
+    delivery: ['week-2-lecture-explore-tab','week-2-examples-tab'],
+    'class-pairs': ['week-2-lecture-explore-tab','week-2-examples-tab'],
+    'normal-w2': ['week-2-lecture-explore-tab','week-2-curves-tab','week-2-normal-tab'],
+    't-w2': ['week-2-lecture-explore-tab','week-2-curves-tab','week-2-t-tab'],
+    'chi-w2': ['week-2-lecture-explore-tab','week-2-curves-tab','week-2-chi-tab'],
     roulette: ['week-2-lecture-explore-tab','week-2-roulette-tab'],
     combinations: ['week-2-lecture-explore-tab','week-2-combinations-tab'],
     batting: ['week-2-lecture-explore-tab','week-2-batting-tab'],

@@ -72,9 +72,10 @@ const slides = [
 
 // Follow the textbook's six numbered subsections inside Chapter 2, Section 2.
 // Keep the source slides editable and retain Yoh's image-led examples.
-const activityOrder = ['roulette', 'al-discrete', 'discrete', 'combinations', 'batting', 'probability', 'al-continuous'];
+const activityOrder = ['lottery', 'roulette', 'al-discrete', 'discrete', 'probability', 'combinations', 'batting', 'al-continuous', 'normal-w2'];
 const activity = (id, label, week = 2) => {
-  const number = activityOrder.indexOf(id) + 1;
+  const aliases = {dice:'lottery',delivery:'lottery','class-pairs':'lottery','t-w2':'normal-w2','chi-w2':'normal-w2'};
+  const number = activityOrder.indexOf(aliases[id] || id) + 1;
   const title = week === 2 && number ? `${String(number).padStart(2, '0')} ${label.replace(/^\d{2} /, '')}` : label;
   return `[${title}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-${String(week).padStart(2, '0')})`;
 };
@@ -91,7 +92,7 @@ const blocks = [
   {n:2,title:'期待値',pages:'117',question:'同じことを何度も繰り返すと、平均はいくら？',body:[
     ...select(10,11,12,13),
     `## 起こりやすさで重みをつける\n\n<large>$E(X)=\\sum_x x\\Pr(X=x)$</large>\n\n「結果の値 × その結果の確率」を、全部足す。\n\nサイコロは、どの目も確率 $1/6$。くじは、賞金ごとに確率が違う。`,
-    ...select(14,2,3),
+    ...select(2,3),
     `## 赤に100円賭けると\n\n赤18個なら利益100円。黒18個と緑2個なら損失100円。\n\n$E(X)=(+100)\\frac{18}{38}+(-100)\\frac{20}{38}$\n\n<large>$E(X)\\approx-5.26$ 円</large>\n\n<small>米国式ルーレット。賞金ではなく、賭け金を差し引いた利益を $X$ とします。</small>`,
     slides[4].replace('Why does the house always win?', 'Why does the house have an advantage?'),
     ...select(7,8),
@@ -110,7 +111,7 @@ const blocks = [
     `## バッテリーが4〜6時間もつ確率\n\n<large>$\\Pr(4\\le X\\le6)=\\int_4^6 f(x)\\,dx$</large>\n\n曲線の高さは確率密度。4〜6の間の面積が確率。\n\n全体の面積は1。連続分布では、1つの点の確率は0。`,
     `## 正規分布\n\nロボット部品の長さが、中心のまわりに左右対称にばらつくモデル。\n\n<large>$X\\sim N(\\mu,\\sigma^2)$</large>\n\n平均 $\\mu$ が中心、標準偏差 $\\sigma$ が幅を決めます。\n\n<small>教科書 p.122–124。標本平均と標準化は第5週で詳しく扱います。</small>`,
     `## $t$ 分布とカイ二乗分布\n\n**$t$ 分布**：母分散が未知のとき、標本から平均を調べる。\n\n$T=\\dfrac{\\bar X-\\mu}{s/\\sqrt n}$　自由度 $n-1$\n\n**カイ二乗分布**：標準化した値の二乗和。分散を調べるときに使う。\n\n<small>正規母集団からの独立な標本を想定。教科書 p.125–128。第6週で詳しく扱います。</small>`,
-    demo([activity('al-continuous','07 AL：2つの積分'),activity('normal','正規分布',5),activity('t','t 分布',6),activity('chi','カイ二乗分布',6)],'まず密度と面積の違いを確認。正規・t・カイ二乗は後の週で再び扱います。')
+    demo([activity('al-continuous','AL：2つの積分')],'密度の面積は1。値を掛けた面積は平均。この違いを確かめよう。')
   ]},
   {n:6,title:'確率分布の平均値と分散',pages:'129',question:'分布の中心と、そこからのばらつきを求める。',body:[
     `## 同じ平均、違う待ち時間\n\n配達ロボットA：いつも10分。\n\n配達ロボットB：半分は2分、半分は18分。\n\n<large>どちらも平均10分。</large>\n\n授業前に頼むなら、どちらが安心？`,
@@ -121,7 +122,36 @@ const blocks = [
   ]}
 ];
 const lotteryOpening = `## 100円のくじ、買う？\n\n<!-- _footer: 統計学B 第2週 ／ 教科書 第2章 第2節 p.117–129 -->\n\n1枚 **100円**。まだ開いていないくじを、手に持っています。\n\n<large>0円　／　100円　／　1,000円</large>\n\n賞金の確率は、順に **70%　／　25%　／　5%**。\n\n買う？ 買わない？ その理由は？`;
-const orderedSlides = [lotteryOpening,
+// Each concrete example gets a nearby implementation, rather than a distant list of links.
+const followups = [
+  [/## 確率変数 \$X\$/, 'dice', 'サイコロを1回振る。Xの候補は1〜6、今回のxはどれ？'],
+  [/original w5.md section 23 /, 'dice', '1,000回振ってみよう。出目は整数でも、平均は3.5に近づく？'],
+  [/## 赤に100円賭けると/, 'roulette', '100円を赤に賭けて1回、次に1,000回。実測の平均損益と −5.26円を比べよう。'],
+  [/## 賞金の「地図」/, 'lottery', 'くじを1,000回引く。表の「実測」が70%・25%・5%に近づくか確認しよう。'],
+  [/## ロボット工場の検品/, 'discrete', '5回中の成功数を不良台数と考える。棒をクリックし、0〜5台の確率を比べよう（ここでは不良率50%）。'],
+  [/## 同じロボットでも/, 'probability', '1回ならベルヌーイ、回数固定なら二項、時間内の発生数ならポアソン。モデルを切り替えて試そう。'],
+  [/## ロボットとヤギを5つ/, 'combinations', 'n=5、x=2。ロボット2体の並びを作り、10通りを見つけよう。'],
+  [/original w5.md section 29 /, 'class-pairs', '22人から2人をクリックして組を作る。順序を逆にしても同じ組。22×21÷2=231組を確かめよう。'],
+  [/original w5.md section 36 /, 'combinations', 'nとxを変え、並び方の数と {}_nC_x の値が一致することを確認しよう。'],
+  [/## 5打席で、ちょうど3安打/, 'batting', 'n=5、π=0.32、x=3。「安安安凡凡」だけの確率と、全10通りの確率を比べよう。'],
+  [/## 3安打になる順序/, 'batting', '5打席を1,000試合。3安打の棒が約15.2%になるか、理論値と比べよう。'],
+  [/## 5打席の平均/, 'batting', '同じ5打席セットを繰り返す。安打数の平均1.6と分散1.088を、分布の中心と幅に結びつけよう。'],
+  [/## まれな不良品/, 'probability', 'ポアソンを選び、λ=2で1,000回。0個の棒を確認。理論では約13.5%。'],
+  [/## バッテリーが/, 'al-continuous', '長方形の数を増やし、密度の面積を足す。まずALの f(x)=x で積分を目で確かめよう。'],
+  [/## 正規分布/, 'normal-w2', 'μを動かすと中心、σを動かすと幅が変わる。1,000個の値を生成して曲線と比べよう。'],
+  [/## \$t\$ 分布/, 't-w2', '標本サイズを3から30へ。t分布の裾はどう変わる？ 次はカイ二乗のタブで右側の裾を比べよう。'],
+  [/## 同じ平均、違う待ち時間/, 'delivery', '配達ロボットBを1,000回。2分と18分だけでも平均10分。Aの分散0とBの分散64を比べよう。'],
+  [/## ALワークシートで/, 'al-discrete', '値×確率を1行ずつ計算し、6行の合計5/3を確かめよう。次は「AL：2つの積分」へ。']
+];
+for (const block of blocks) block.body = block.body.flatMap(slide => {
+  const followup = followups.find(([pattern])=>pattern.test(slide));
+  return followup ? [slide, demo(followup[1]==='t-w2'
+    ? [activity('t-w2','t分布を動かす'),activity('chi-w2','カイ二乗分布を動かす')]
+    : [activity(followup[1],'実例を動かす')],followup[2])] : [slide];
+});
+const lotteryDefinition = blocks[0].body.shift();
+const orderedSlides = [lotteryOpening, lotteryDefinition, slides[14], slides[13],
+  demo([activity('lottery','くじを引く')],'1枚引いて、次に1,000枚。賞金の平均75円と、1枚あたりの損益 −25円に近づくか試そう。'),
   ...blocks.flatMap(block => [divider(block.n,block.title,block.pages,block.question),
     ...block.body.map(slide => slide.replace(/^(#{1,3}[^\n]*)$/m, `$1\n\n<!-- _footer: 2-${block.n} ${block.title} ／ 教科書 p.${block.pages} -->`))])];
 // A distinct textbook visual language, without changing Yoh's white story slides.
