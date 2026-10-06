@@ -108,7 +108,10 @@ const demo = (links, question) => {
   if (id==='batting' && question.includes('平均1.6')) d={title:'5打席の平均とばらつき',sample:'1試合の安打数は0〜5の整数。1.6安打という1試合はない。',math:String.raw`E(X)=5(0.32)=1.6\qquad\mathrm{Var}(X)=5(0.32)(0.68)=1.088`,reading:'5打席セットを繰り返し、各安打数の実測の棒を作る。分布の中心を平均、中心からの広がりを分散で表す。'};
   if (!d) throw new Error(`Missing simulation explanation: ${id}`);
   const names={lottery:'くじ',dice:'サイコロ',roulette:'ルーレット','al-discrete':'AL期待値',discrete:'離散と連続',combinations:'並び方',batting:'打率',probability:'分布','al-continuous':'AL積分','normal-w2':'正規','t-w2':'t','chi-w2':'カイ二乗',delivery:'配達',coin:'コイン','class-pairs':'2人の組'};
-  return `## やってみる：${d.title}\n\n<!-- _class: simulation-guide -->\n\n<div class="demo-example">${d.sample}</div>\n\n$$${d.math}$$\n\n${d.reading}\n\n<div class="demo-task">${question.replace('{}'+ '_nC_x', '$'+ '{}_nC_x' +'$')}</div>\n\n${links.map(link=>link.replace(/\[[^\]]+\]/, `[やってみよう！${links.length===1?'':'（'+names[link.match(/activity=([^#]+)/)[1]]+'）'}]`)).join('　')}\n\n<!-- 数列は説明用の例。確率・期待値は理論値。ライブの実測値は試行ごとに変わります。 -->`;
+  const task = question.replace('{}'+ '_nC_x', '$'+ '{}_nC_x' +'$');
+  // Inline HTML leaves the math visible to Marp's Markdown parser.
+  const taskTag = task.includes('$') ? 'span' : 'div';
+  return `## やってみる：${d.title}\n\n<!-- _class: simulation-guide -->\n\n<div class="demo-example">${d.sample}</div>\n\n$$${d.math}$$\n\n${d.reading}\n\n<${taskTag} class="demo-task">${task}</${taskTag}>\n\n${links.map(link=>link.replace(/\[[^\]]+\]/, `[やってみよう！${links.length===1?'':'（'+names[link.match(/activity=([^#]+)/)[1]]+'）'}]`)).join('　')}\n\n<!-- 数列は説明用の例。確率・期待値は理論値。ライブの実測値は試行ごとに変わります。 -->`;
 };
 const select = (...numbers) => numbers.map(n => slides[n - 1]);
 const blocks = [
