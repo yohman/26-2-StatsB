@@ -322,13 +322,29 @@ $0\le X\le\sqrt2\approx1.414$ 時間。$f(x)=x$。
 <small>連続確率変数。f(x)は、その時刻ぴったりの確率ではありません。</small>`,
   String.raw`## 上の空欄：三角形の面積を求める
 
-<!-- _class: book-reference -->
+<!-- _class: book-reference al-total-area -->
 
-![height:245px](../../../assets/images/al-continuous-triangle.svg)
+$$\int_0^{\sqrt2}f(x)\,dx=\int_0^{\sqrt2}x\,dx=\;?$$
+
+**0から√2まで、グラフの下の面積を全部足す。**
+
+求めているのは、この範囲に入る確率。図では三角形の面積です。
+
+![height:175px](../../../assets/images/al-continuous-triangle.svg)
 
 $$\frac12\times\sqrt2\times\sqrt2=1$$
 
-**確率の合計は1、つまり100%。**`,
+**確率の合計は1、つまり100%。**
+
+<style scoped>
+section { padding:36px 60px; justify-content:flex-start; }
+h2 { font-size:41px; margin:0 0 12px; }
+p { font-size:24px; margin:8px 0; }
+p:first-of-type { margin:12px 0 16px; font-size:38px; }
+p:first-of-type mjx-container[display="true"] { font-size:115%; }
+p:has(img) { margin:8px 0; }
+p:last-of-type { color:#287c9f; font-size:28px; }
+</style>`,
   String.raw`## 積分の記号は「小さな面積を全部足す」
 
 <!-- _class: book-reference -->
@@ -351,37 +367,7 @@ $$\int_{0}^{\sqrt2}f(x)\,dx=1$$
 $$E(X)=\sum_x x\Pr(X=x)\quad\longrightarrow\quad\int_0^{\sqrt2}xf(x)\,dx$$
 
 <small>小さな区間の確率は、およそ f(x) × dx。だから x × f(x) × dx を足します。</small>`,
-  String.raw`## まずは簡単な例：0〜6で同じ密度
-
-<!-- _class: book-reference al-calculation -->
-<!-- Adapted from Tsumura 2026 Week 2 slide 8: continuous uniform expectation. -->
-
-$f(x)=\frac16$（$0\le x\le6$）。どの区間も、同じ幅なら同じ確率。
-
-<img class="uniform-chart" src="images/uniform-density.svg" alt="横軸は0〜6時間、縦軸は確率密度。高さ1/6の長方形の全体の面積は1。2〜3時間の面積は1/6。">
-
-$$\begin{aligned}
-E(X)&=\int_0^6 x\times\frac16\,dx\\
-&=\left[\frac{x^2}{12}\right]_0^6\\
-&=\frac{6^2}{12}-\frac{0^2}{12}=3
-\end{aligned}$$
-
-<div class="al-calculation-result">平均は3。0〜6のちょうど真ん中。</div>
-
-<small>$x$ の積分は $x^2/2$。$1/6$ を掛けると $x^2/12$。<br>角括弧は「上の端 − 下の端」。AL 02も同じ手順です。</small>
-
-<style scoped>
-section { padding:42px 55px; justify-content:flex-start; }
-h2 { font-size:42px; margin:0 0 18px; }
-p { font-size:25px; margin:8px 0 18px; }
-.uniform-chart { position:absolute; left:45px; top:195px; width:550px; height:auto; }
-section.al-calculation p:has(mjx-container[display="true"]) { margin:25px 0 12px 560px; width:calc(100% - 560px); }
-section.al-calculation mjx-container[display="true"] { width:100%; font-size:95%; }
-section.al-calculation .al-calculation-result { margin:12px 0 20px 560px; font-size:27px; }
-p:last-of-type { margin-left:560px; font-size:21px; line-height:1.6; }
-small { font-size:21px; }
-</style>`,
-  String.raw`## AL 02：同じ手順で、平均を求める
+  String.raw`## AL 02：値×密度を足して、平均を求める
 
 <!-- _class: book-reference al-calculation -->
 
