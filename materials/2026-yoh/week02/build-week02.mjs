@@ -600,6 +600,10 @@ p { margin:14px 0 0; }
 footer { font-size:14px; }
 </style>`);
 week2Slides.splice(casinoIndex+1,0,...rouletteReferences);
+// Remove the current slide 22: the repeated lottery probability-map example.
+const lotteryMapIndex=week2Slides.findIndex(slide=>slide.includes('## 賞金の「地図」が確率分布'));
+if (lotteryMapIndex < 0) throw new Error('Recheck slide 22 before removing the lottery probability map.');
+week2Slides.splice(lotteryMapIndex,1);
 const discreteOverview=String.raw`## 離散確率分布：何を数える？
 
 <!-- _class: book-reference distribution-overview -->
