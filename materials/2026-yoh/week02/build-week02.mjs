@@ -271,14 +271,14 @@ section.al-card-guide .al-card-count { margin-top:12px; text-align:center; font-
 section.al-card-guide .al-card-caption { font-size:21px; text-align:center; color:#546757; }
 section.al-card-guide mjx-container[display="true"] { font-size:100%; margin:18px 0; }
 section.al-card-guide .al-card-takeaway { font-size:22px; color:#385246; }
-section a[href*="agenda.html?activity="] {
+section a[href*="agenda.html?activity="], section a[href="https://playpager.com/roulette/"] {
   display:inline-block; padding:12px 24px; border-radius:8px;
   background:#176d82; color:#fff !important; text-decoration:none;
   font-size:24px !important; font-weight:700; line-height:1.35;
   border:2px solid #176d82; box-shadow:0 3px 0 #105366;
 }
-section a[href*="agenda.html?activity="]:hover { background:#105366; }
-section a[href*="agenda.html?activity="]:focus-visible { outline:3px solid #d69d30; outline-offset:4px; }
+section a[href*="agenda.html?activity="]:hover, section a[href="https://playpager.com/roulette/"]:hover { background:#105366; }
+section a[href*="agenda.html?activity="]:focus-visible, section a[href="https://playpager.com/roulette/"]:focus-visible { outline:3px solid #d69d30; outline-offset:4px; }
 section.simulation-guide footer { color:#546757; }
 section.al-calculation { font-size: 28px; padding: 48px 70px; }
 section.al-calculation h2 { font-size: 42px; margin-bottom: 22px; }
@@ -575,6 +575,31 @@ $$\Pr(164\le X\le176)\approx68.27\%\qquad\Pr(X=170)=0$$
 
 ${robotStyles}`;
 week2Slides.splice(19,3,discreteRobotSlide,continuousRobotSlide);
+// Insert image references after all index-based edits so later slide edits stay stable.
+const casinoIndex=week2Slides.findIndex(slide=>slide.includes('image-5.png') && slide.includes('![bg]'));
+if (casinoIndex < 0) throw new Error('Casino photo slide was not found.');
+const rouletteReferences=[
+  {title:'ルーレット：どこに賭ける？',image:'roulette-table.png',alt:'ルーレット盤とベット用テーブル',note:'この図とリンク先は0のみの欧州式。次の2図と授業の計算は0・00の米国式。'},
+  {title:'インサイドベット：数字に賭ける',image:'roulette-inside-bets.png',alt:'ルーレットのインサイドベットの位置と種類',note:'米国式ルーレット（0・00）'},
+  {title:'アウトサイドベット：グループに賭ける',image:'roulette-outside-bets.png',alt:'ルーレットのアウトサイドベットの位置と種類',note:'米国式ルーレット（0・00）'},
+].map(({title,image,alt,note})=>`## ${title}
+
+<!-- _class: roulette-reference -->
+<!-- _footer: ${note} -->
+<!-- 図：Yoh提供の画像。ゲーム：https://playpager.com/roulette/ -->
+
+<img class="roulette-reference-image" src="images/${image}" alt="${alt}">
+
+[やってみよう！ ルーレット](https://playpager.com/roulette/)
+
+<style scoped>
+section { padding:36px 60px 50px; justify-content:flex-start; text-align:center; }
+h2 { font-size:40px; margin:0 0 18px; }
+.roulette-reference-image { display:block; width:auto; height:440px; max-width:100%; object-fit:contain; margin:0 auto; }
+p { margin:14px 0 0; }
+footer { font-size:14px; }
+</style>`);
+week2Slides.splice(casinoIndex+1,0,...rouletteReferences);
 writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 if (!process.argv.includes('--week2-only')) {

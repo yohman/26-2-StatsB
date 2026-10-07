@@ -99,7 +99,7 @@
         if (!window.pdfjsLib) throw new Error('PDF renderer unavailable');
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdfjs/pdf.worker.min.js?v=3.11.174';
         const pdfUrl = new URL(encodeURI(path), location.href);
-        if (/^materials\/2026-yoh\/week0[23]\/w[23]\.pdf$/.test(path)) pdfUrl.searchParams.set('v', '20261007-roulette-image-1');
+        if (/^materials\/2026-yoh\/week0[23]\/w[23]\.pdf$/.test(path)) pdfUrl.searchParams.set('v', '20261007-roulette-bets-1');
         const response = await fetch(pdfUrl.href, { cache: 'no-cache' });
         if (!response.ok) throw new Error('PDF unavailable');
         const pdf = await window.pdfjsLib.getDocument({
