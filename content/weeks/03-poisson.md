@@ -15,9 +15,9 @@ prepare_en: Review random variables, expected value, and discrete versus continu
 
 ## In class
 
-- 二項分布の確率、期待値、分散 (binomial probabilities, expected value, and variance)
+- NBAフリースローから二項分布の確率、期待値、分散へ (from NBA free throws to binomial probabilities, expected value, and variance)
 - 打率の事例を使った二項分布の計算 (binomial calculations using a batting-average example)
-- ポアソン分布の確率、期待値、分散 (Poisson probabilities, expected value, and variance)
+- コストコの到着人数からポアソン分布へ (from arrivals at Costco to the Poisson distribution)
 - 連続確率分布と、分布の平均・分散 (continuous probability distributions, distribution means and variances)
 
 ## Textbook

@@ -17,7 +17,7 @@ const bilingual = (english, japanese) => `<span class="lang-en">${english}</span
 const weekFlow = {
   1: { overview:['How a sample supports an inference, then how events and probability describe uncertainty.','標本から推測する流れを学び、事象と確率で不確かさを考えます。'], steps:[['Course setup and the inference process','授業の準備と推測の流れ'],['Population, sample, and possible bias','母集団・標本・偏り'],['Events, probability, and coin-toss practice','事象・確率・コイン投げ'],['Compare results and ask questions','結果の比較と質問']] },
   2: { overview:['Use lottery tickets, dice, and roulette to understand random variables, expected value, and discrete versus continuous distributions (textbook subsections 1–3).','くじ・サイコロ・ルーレットで、確率変数・期待値・離散と連続を学びます（教科書1〜3）。'], steps:[['Random variables','確率変数'],['Expected value','期待値'],['Probability distributions','確率分布'],['Discrete versus continuous','離散と連続']] },
-  3: { overview:['Build binomial and Poisson models, then connect continuous distributions to their means and variances (textbook subsections 4–6).','二項・ポアソン分布から連続確率分布へ進み、分布の平均と分散を考えます（教科書4〜6）。'], steps:[['Discrete probability models','離散確率分布'],['Combinations and batting','組合せと打率'],['Continuous distributions','連続確率分布'],['Distribution means and variances','分布の平均と分散']] },
+3: { overview:['Start with NBA free throws and Costco arrivals to build binomial and Poisson models, then connect continuous distributions to means and variances (textbook subsections 4–6).','NBAフリースローとコストコの到着人数で二項・ポアソン分布を学び、連続分布と平均・分散につなげます（教科書4〜6）。'], steps:[['Discrete probability models','離散確率分布'],['Combinations and batting','組合せと打率'],['Continuous distributions','連続確率分布'],['Distribution means and variances','分布の平均と分散']] },
   4: { overview:['Use binomial and Poisson distributions in applied worksheet problems.','ワークシートの事例で二項分布とポアソン分布を使います。'], steps:[['Choose a model and its parameters','モデルと母数を決める'],['Batting average and gacha cases','打率とガチャの事例'],['Defective items and Poisson counts','不良品とポアソン分布'],['Compare solutions and correct errors','解法を比べて修正']] },
   5: { overview:['Read areas under density curves and use the normal distribution and its table.','確率密度の面積を読み、正規分布と標準正規分布表を使います。'], steps:[['Density and cumulative probability','確率密度と累積確率'],['Sketch and shade probability areas','確率の範囲を図示'],['Standardize and use the normal table','標準化と正規分布表'],['Interpret the result in context','元の単位で結果を解釈']] },
   6: { overview:['Follow sample means into the central limit theorem, then work with t and chi-square distributions.','標本平均と中心極限定理を踏まえ、t分布とカイ二乗分布を学びます。'], steps:[['Samples and the central limit theorem','標本と中心極限定理'],['Compare sample means and variances','標本平均と分散を比較'],['t tables and chi-square examples','t分布表とカイ二乗分布'],['Explain degrees of freedom','自由度の意味を確認']] },
@@ -483,10 +483,12 @@ function week23LectureMarkup(week, content) {
     ['roulette','Roulette','ルーレット','<div data-roulette></div>'],
     ['discrete','Discrete vs continuous','離散と連続',week2DiscreteMarkup()]
   ] : [
-    ['probability','Probability models','確率分布',week2ProbabilityMarkup()],
+    ['nba','NBA free throws','NBAフリースロー','<section class="week3-story-lab" data-week3-story="nba"></section>'],
     ['combinations','Lineup combinations','ロボットの並び',combinationMarkup()],
     ['batting','Batting average','打率',battingSimulationMarkup()],
-    ['curves','Normal, t & chi-square','正規・t・カイ二乗',`<div class="distribution-subnav"><span class="distribution-subnav-label">04 · ${bilingual('Choose a distribution','分布を選ぶ')}</span><div class="distribution-subtabs" role="tablist" aria-label="Section 04 distribution options"><button type="button" role="tab" id="week-3-normal-tab" aria-controls="week-3-normal" aria-selected="true" tabindex="0">${bilingual('Normal','正規')}</button><button type="button" role="tab" id="week-3-t-tab" aria-controls="week-3-t" aria-selected="false" tabindex="-1">t</button><button type="button" role="tab" id="week-3-chi-tab" aria-controls="week-3-chi" aria-selected="false" tabindex="-1">${bilingual('Chi-square','カイ二乗')}</button></div></div><div id="week-3-normal" role="tabpanel" aria-labelledby="week-3-normal-tab">${distributionSimulationMarkup('normal')}</div><div id="week-3-t" role="tabpanel" aria-labelledby="week-3-t-tab" hidden>${distributionSimulationMarkup('t')}</div><div id="week-3-chi" role="tabpanel" aria-labelledby="week-3-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div>`],
+    ['costco','Costco arrivals','コストコの到着人数','<section class="week3-story-lab" data-week3-story="costco"></section>'],
+    ['probability','Probability models','確率分布',week2ProbabilityMarkup()],
+    ['curves','Normal, t & chi-square','正規・t・カイ二乗',`<div class="distribution-subnav"><span class="distribution-subnav-label">06 · ${bilingual('Choose a distribution','分布を選ぶ')}</span><div class="distribution-subtabs" role="tablist" aria-label="Section 06 distribution options"><button type="button" role="tab" id="week-3-normal-tab" aria-controls="week-3-normal" aria-selected="true" tabindex="0">${bilingual('Normal','正規')}</button><button type="button" role="tab" id="week-3-t-tab" aria-controls="week-3-t" aria-selected="false" tabindex="-1">t</button><button type="button" role="tab" id="week-3-chi-tab" aria-controls="week-3-chi" aria-selected="false" tabindex="-1">${bilingual('Chi-square','カイ二乗')}</button></div></div><div id="week-3-normal" role="tabpanel" aria-labelledby="week-3-normal-tab">${distributionSimulationMarkup('normal')}</div><div id="week-3-t" role="tabpanel" aria-labelledby="week-3-t-tab" hidden>${distributionSimulationMarkup('t')}</div><div id="week-3-chi" role="tabpanel" aria-labelledby="week-3-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div>`],
     ['examples','Variation & pairs','ばらつき・組合せ','<section class="example-lab" data-example-lab data-example-scenarios="delivery,pairs"></section>']
   ];
   return '<div class="lecture-tablist" role="tablist" aria-label="Week ' + n + ' lecture">' +
@@ -691,6 +693,8 @@ function renderAgenda(weeks) {
     roulette: ['week-2-lecture-explore-tab','week-2-roulette-tab'],
     combinations: ['week-3-lecture-explore-tab','week-3-combinations-tab'],
     batting: ['week-3-lecture-explore-tab','week-3-batting-tab'],
+    nba: ['week-3-lecture-explore-tab','week-3-nba-tab'],
+    costco: ['week-3-lecture-explore-tab','week-3-costco-tab'],
     discrete: ['week-2-lecture-explore-tab','week-2-discrete-tab','w2-count-tab'],
     continuous: ['week-2-lecture-explore-tab','week-2-discrete-tab','w2-measure-tab'],
     probability: ['week-3-lecture-explore-tab','week-3-probability-tab'],

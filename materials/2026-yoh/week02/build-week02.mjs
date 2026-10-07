@@ -633,9 +633,5 @@ tr:nth-child(even) { background:#eaf4f8; }
 p:last-of-type { font-size:23px; color:#287c9f; }
 </style>`;
 writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, discreteOverview, ...alBridge]));
-const week3Directory = resolve(here, '../week03');
-if (!process.argv.includes('--week2-only')) {
-  mkdirSync(week3Directory, {recursive:true});
-  writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
-}
-process.stdout.write(`Created Week 2 (${week2Slides.length + 1 + alBridge.length} slides, including ${alBridge.length} AL bridge slides)${process.argv.includes('--week2-only')?'':' and Week 3 (41 slides)'}.\n`);
+// Week 3 now has its own narrative builder. Never overwrite it during Week 2 edits.
+process.stdout.write(`Created Week 2 (${week2Slides.length + 1 + alBridge.length} slides, including ${alBridge.length} AL bridge slides).\n`);
