@@ -600,10 +600,38 @@ p { margin:14px 0 0; }
 footer { font-size:14px; }
 </style>`);
 week2Slides.splice(casinoIndex+1,0,...rouletteReferences);
-writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, ...alBridge]));
+const discreteOverview=String.raw`## 離散確率分布：何を数える？
+
+<!-- _class: book-reference distribution-overview -->
+<!-- _footer: 2-3 確率分布 ／ 津村 W02 スライド14をもとに構成 ／ 詳細はWeek 3 -->
+
+**結果が0、1、2…と数えられるとき。数え方で分布を選ぶ。**
+
+| 分布 | 何を数える？ | 身近な例 |
+| :--- | :--- | :--- |
+| **二項分布** / Binomial | 独立な $n$ 回の試行での成功回数。毎回の成功確率は同じ $\pi$。 | コインを5回投げて、ロボット面は何回？ $X\in\{0,1,2,3,4,5\}$ |
+| **ベルヌーイ分布** / Bernoulli | 1回だけ。成功なら $X=1$、失敗なら $X=0$。二項分布の $n=1$。 | コインを1回投げて、ロボット面なら1、ヤギ面なら0。 |
+| **ポアソン分布** / Poisson | 一定の時間・範囲で起きる回数。発生は独立で、平均の発生率は一定とする。 | ロボット受付に1分間で届く注文数。平均 $\lambda$ 件。 |
+
+**5回のコインは二項分布。1回ならベルヌーイ。注文の到着回数ならポアソン。**
+
+<style scoped>
+section { padding:42px 55px; justify-content:center; text-align:left; }
+h2 { font-size:43px; margin:0 0 20px; }
+p { font-size:25px; margin:12px 0 18px; }
+table { width:100%; table-layout:fixed; border-collapse:collapse; margin:12px 0 20px; }
+th:nth-child(1), td:nth-child(1) { width:24%; }
+th:nth-child(2), td:nth-child(2) { width:39%; }
+th:nth-child(3), td:nth-child(3) { width:37%; }
+th { background:#dceef6; color:#287c9f; font-size:24px; padding:12px; border:0; }
+td { font-size:24px; line-height:1.5; padding:15px 12px; border:0; vertical-align:top; }
+tr:nth-child(even) { background:#eaf4f8; }
+p:last-of-type { font-size:23px; color:#287c9f; }
+</style>`;
+writeFileSync(resolve(here, 'w2.md'), deck([...week2Slides, discreteOverview, ...alBridge]));
 const week3Directory = resolve(here, '../week03');
 if (!process.argv.includes('--week2-only')) {
   mkdirSync(week3Directory, {recursive:true});
   writeFileSync(resolve(week3Directory, 'w3.md'), deck(styledSlides.slice(28)));
 }
-process.stdout.write(`Created Week 2 (${week2Slides.length + alBridge.length} slides, including ${alBridge.length} AL bridge slides)${process.argv.includes('--week2-only')?'':' and Week 3 (41 slides)'}.\n`);
+process.stdout.write(`Created Week 2 (${week2Slides.length + 1 + alBridge.length} slides, including ${alBridge.length} AL bridge slides)${process.argv.includes('--week2-only')?'':' and Week 3 (41 slides)'}.\n`);
