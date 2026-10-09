@@ -213,15 +213,18 @@
 .agenda-page .batting-atbat strong{font:800 10px 'DM Mono','Zen Kaku Gothic New',sans-serif}
 .agenda-page .batting-ball{font-size:15px;line-height:1}
 .agenda-page .batting-game-total{min-height:1.4em;margin:10px 0 0;color:#246f58;font:700 15px Fraunces,'Noto Serif JP',Georgia,serif}
-.agenda-page .batting-chart-legend{display:flex;gap:14px;margin:8px 0;color:var(--course-muted);font-size:10px}
-.agenda-page .batting-chart-legend span:before{content:'';display:inline-block;width:9px;height:9px;margin-right:5px;border-radius:2px;background:#ca7650;vertical-align:-1px}
-.agenda-page .batting-chart-legend .batting-legend-model:before{background:#2d8274}
-.agenda-page .batting-chart{display:grid;grid-template-columns:repeat(var(--bin-count,10),minmax(28px,1fr));gap:4px;min-height:151px;overflow-x:auto;align-items:end;padding:0 0 2px;border-bottom:1px solid #bdb3a5}
+.agenda-page .batting-chart-legend{display:flex;flex-wrap:wrap;gap:7px 16px;margin:10px 0 14px;color:var(--course-ink);font-size:11px;font-weight:700}
+.agenda-page .batting-chart-legend>span{display:inline-flex;align-items:center;gap:6px}
+.agenda-page .batting-chart-legend>span:before{content:'';display:block;flex:0 0 10px;width:10px;height:10px;border-radius:2px;background:#ca7650}
+.agenda-page .batting-chart-legend>span.batting-legend-model:before{background:#2d8274}
+.agenda-page .batting-chart{display:grid;grid-template-columns:repeat(var(--bin-count,10),minmax(58px,1fr));gap:4px;min-height:151px;overflow-x:auto;align-items:end;padding:0 0 2px;border-bottom:1px solid #bdb3a5}
 .agenda-page .batting-bin{display:flex;min-width:28px;min-height:145px;flex-direction:column;align-items:center;justify-content:end;gap:2px;color:var(--course-muted);font:700 9px 'DM Mono',monospace}
 .agenda-page .batting-bin-observed{color:#a95336}
 .agenda-page .batting-bin-model{color:#2d8274}
-.agenda-page .batting-bars{display:flex;align-items:end;justify-content:center;gap:3px;width:100%;height:86px}
-.agenda-page .batting-bar{display:block;width:min(32%,14px);min-height:0;border-radius:3px 3px 0 0;transition:height .2s ease}
+.agenda-page .batting-bin-percentages{display:grid;grid-template-columns:1fr 1fr;gap:3px;width:100%;min-width:58px;margin:5px 0;text-align:center;font-size:9px}
+.agenda-page .batting-bin-percentages>span{white-space:nowrap}
+.agenda-page .batting-bars{display:grid;grid-template-columns:1fr 1fr;align-items:end;justify-items:center;gap:3px;width:100%;height:86px}
+.agenda-page .batting-bar{display:block;width:14px;min-height:0;border-radius:3px 3px 0 0;transition:height .2s ease}
 .agenda-page .batting-bar-observed{background:#ca7650}
 .agenda-page .batting-bar-model{background:#2d8274}
 .agenda-page .batting-bin>strong{color:var(--course-ink);font-size:11px}
@@ -274,7 +277,7 @@
 @media(max-width:720px){.agenda-page .distribution-heading{display:block}.agenda-page .distribution-heading>p{margin-top:8px}.agenda-page .distribution-foot{display:block}.agenda-page .distribution-foot .distribution-aha{margin-top:7px}.agenda-page .distribution-formula{display:block}.agenda-page .distribution-formula>span{display:block;margin-bottom:5px}.agenda-page .distribution-chart-wrap{padding:8px 4px}.agenda-page .distribution-chart-wrap svg{min-height:160px}}
 @keyframes batting-reveal{from{opacity:.45;transform:translateY(5px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 @media(prefers-reduced-motion:reduce){.agenda-page .batting-atbat,.agenda-page .batting-bar,.agenda-page .batting-bat,.agenda-page .batting-robot,.agenda-page .batting-swing-ball{animation:none;transition:none}}
-@media(max-width:720px){.agenda-page .batting-intro{display:block}.agenda-page .batting-intro>p{margin-top:9px}.agenda-page .batting-formula-card{grid-template-columns:1fr;padding:14px}.agenda-page .batting-answer{grid-row:2;min-height:80px}.agenda-page .batting-term-key,.agenda-page .batting-calculation-steps{grid-column:auto}.agenda-page .batting-calculation-steps{grid-template-columns:1fr}.agenda-page .batting-formula-card .batting-controls{grid-column:auto}.agenda-page .batting-play-area{grid-template-columns:1fr}.agenda-page .batting-controls .batting-reset{margin-left:0}.agenda-page .batting-chart{grid-template-columns:repeat(var(--bin-count,10),minmax(36px,1fr))}.agenda-page .batting-conditions{display:block}.agenda-page .batting-conditions strong{display:block}}
+@media(max-width:720px){.agenda-page .batting-intro{display:block}.agenda-page .batting-intro>p{margin-top:9px}.agenda-page .batting-formula-card{grid-template-columns:1fr;padding:14px}.agenda-page .batting-answer{grid-row:2;min-height:80px}.agenda-page .batting-term-key,.agenda-page .batting-calculation-steps{grid-column:auto}.agenda-page .batting-calculation-steps{grid-template-columns:1fr}.agenda-page .batting-formula-card .batting-controls{grid-column:auto}.agenda-page .batting-play-area{grid-template-columns:1fr}.agenda-page .batting-controls .batting-reset{margin-left:0}.agenda-page .batting-chart{grid-template-columns:repeat(var(--bin-count,10),minmax(58px,1fr))}.agenda-page .batting-conditions{display:block}.agenda-page .batting-conditions strong{display:block}}
 .agenda-page .lecture-zone [role='tabpanel'][hidden]{display:none}
 .agenda-page .coin-simulation{max-width:850px}
 .agenda-page .coin-simulation-intro{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin:0 0 15px}

@@ -158,15 +158,20 @@
         }
         const observedLabel = document.createElement('span');
         observedLabel.className = 'batting-bin-observed';
-        observedLabel.textContent = `${observed.toFixed(1)}%`;
+        observedLabel.textContent = games ? `${observed.toFixed(1)}%` : '—';
+        observedLabel.title = t(`Simulated results: ${counts[hits]} of ${games} games`, `シミュレーション結果：${games}試合中${counts[hits]}試合`);
         const modelLabel = document.createElement('span');
         modelLabel.className = 'batting-bin-model';
         modelLabel.textContent = `${expectedPercent.toFixed(1)}%`;
+        modelLabel.title = t('Formula prediction', '公式から計算した確率');
+        const percentages = document.createElement('div');
+        percentages.className = 'batting-bin-percentages';
+        percentages.append(observedLabel, modelLabel);
         const label = document.createElement('strong');
         label.textContent = String(hits);
         const caption = document.createElement('small');
         caption.textContent = t('hits', '安打');
-        bin.append(observedLabel, bars, label, caption, modelLabel);
+        bin.append(bars, percentages, label, caption);
         return bin;
       }));
       batchStatus.textContent = games
