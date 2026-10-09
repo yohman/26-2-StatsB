@@ -204,6 +204,8 @@
 .agenda-page .batting-mascot[data-swing="swing"] .batting-robot{transform:rotate(4deg)}
 .agenda-page .batting-mascot[data-swing="hit"] .batting-swing-ball{transform:translate(24px,-20px)}
 .agenda-page .batting-mascot[data-swing="miss"] .batting-swing-ball{transform:translate(-5px,18px)}
+.agenda-page .batting-mascot[data-rapid="true"] .batting-bat,.agenda-page .batting-mascot[data-rapid="true"] .batting-robot,.agenda-page .batting-mascot[data-rapid="true"] .batting-swing-ball{transition-duration:.025s}
+.agenda-page .batting-calculation-steps mjx-container{font-size:17px!important;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
 .agenda-page .batting-atbat{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:66px;border:1px solid #d7d0c4;background:#fff;color:#837c72;transition:background-color .18s ease,transform .18s ease}
 .agenda-page .batting-atbat.is-hit{border-color:#8db9a6;background:#e4f1e9;color:#246f58;animation:batting-reveal .28s ease both}
 .agenda-page .batting-atbat.is-out{background:#eee9e1;animation:batting-reveal .28s ease both}

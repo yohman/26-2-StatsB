@@ -36,6 +36,19 @@
     let counts = Array(n + 1).fill(0);
     let games = 0;
     let busy = false;
+    let runToken = 0;
+
+    // Preserve finished math while the shared renderer prepares its replacement.
+    function inlineMath(target, source, fallback) {
+      if (target.dataset.inlineMath === source) return;
+      if (!target.hasChildNodes()) target.textContent = fallback;
+      delete target.dataset.mathReady;
+      target.dataset.inlineMath = source;
+    }
+    root.querySelectorAll('i').forEach(node => {
+      const symbol = node.textContent.trim();
+      if (['n','x','X','π'].includes(symbol)) inlineMath(node, symbol === 'π' ? String.raw`\pi` : symbol, symbol);
+    });
 
     const wait = ms => new Promise(resolve => window.setTimeout(resolve, ms));
     const sampleGame = () => Array.from({ length: n }, () => Math.random() < p);
@@ -50,9 +63,9 @@
       const percent = probability * 100;
       formulaResult.textContent = `${percent.toFixed(1)}%`;
       answerCaption.textContent = t(`exactly ${x} hit${x === 1 ? '' : 's'} in ${n} at-bats`, `${n}打席でちょうど${x}本の安打`);
-      patternsOutput.textContent = t(`${n}C${x} = ${patterns} possible orders`, `${n}C${x} = ${patterns}通りの順番`);
-      singlePatternOutput.textContent = `${p.toFixed(2)}^${x} × ${(1-p).toFixed(2)}^${remaining} = ${onePattern.toFixed(4)}`;
-      totalOutput.textContent = `${patterns} × ${onePattern.toFixed(4)} = ${probability.toFixed(4)} → ${percent.toFixed(1)}%`;
+      inlineMath(patternsOutput, String.raw`{}_{${n}}C_{${x}}=${patterns}\;\text{${t('orders','通り')}}`, `${n}C${x} = ${patterns}`);
+      inlineMath(singlePatternOutput, String.raw`\begin{gathered}(${p.toFixed(2)})^{${x}}(${(1-p).toFixed(2)})^{${remaining}}\\\approx ${onePattern.toFixed(4)}\end{gathered}`, `${p.toFixed(2)}^${x} × ${(1-p).toFixed(2)}^${remaining} ≈ ${onePattern.toFixed(4)}`);
+      inlineMath(totalOutput, String.raw`\begin{gathered}${patterns}\times(${p.toFixed(2)})^{${x}}(${(1-p).toFixed(2)})^{${remaining}}\\\approx ${probability.toFixed(4)}\approx ${percent.toFixed(2)}\%\end{gathered}`, `${patterns} × ${onePattern.toFixed(4)} ≈ ${percent.toFixed(2)}%`);
       patternExample.replaceChildren(...Array.from({ length:n }, (_, index) => {
         const token = document.createElement('span');
         const hit = index < x;
@@ -98,14 +111,17 @@
       }));
     }
 
-    async function swing(outcome) {
-      if (!mascot) return;
+    async function swing(outcome, rapid = false, own = runToken) {
+      if (!mascot) return true;
       mascot.dataset.swing = 'windup';
-      await wait(95);
+      await wait(rapid ? 12 : 95);
+      if (own !== runToken) return false;
       mascot.dataset.swing = 'swing';
-      await wait(190);
+      await wait(rapid ? 24 : 190);
+      if (own !== runToken) return false;
       mascot.dataset.swing = outcome ? 'hit' : 'miss';
-      await wait(100);
+      await wait(rapid ? 12 : 100);
+      return own === runToken;
     }
 
     function showAtBats(results, revealed = results.length) {
@@ -170,13 +186,15 @@
 
     function setBusy(value) {
       busy = value;
-      buttons.forEach(button => { button.disabled = value; });
+      buttons.forEach(button => { button.disabled = value && !button.hasAttribute('data-batting-reset'); });
       nInput.disabled = value;
       pInput.disabled = value;
     }
 
     function clear() {
-      if (busy) return;
+      runToken++;
+      setBusy(false);
+      if (mascot) {mascot.dataset.swing = 'idle';delete mascot.dataset.rapid;}
       counts = Array(n + 1).fill(0);
       games = 0;
       atBats.replaceChildren();
@@ -187,14 +205,16 @@
 
     async function playOne() {
       if (busy) return;
+      const own = ++runToken;
       setBusy(true);
       const result = sampleGame();
       showAtBats(result, 0);
       gameTotal.textContent = '';
       singleStatus.textContent = t('The next pitch…', '次の投球…');
       for (let index = 0; index < result.length; index += 1) {
-        await swing(result[index]);
+        if (!await swing(result[index], false, own)) return;
         await wait(120);
+        if (own !== runToken) return;
         showAtBats(result, index + 1);
         singleStatus.textContent = t(`At-bat ${index + 1} of ${n}`, `${index + 1} / ${n} 打席目`);
       }
@@ -207,21 +227,26 @@
       setBusy(false);
     }
 
-    async function playBatch() {
+    async function playBatch(amount) {
       if (busy) return;
+      const own = ++runToken;
       setBusy(true);
-      const target = games + 500;
-      batchStatus.textContent = t('Play ball! Simulating 500 games…', 'プレイボール！500試合をシミュレーション中…');
+      const target = games + amount;
+      if (mascot) mascot.dataset.rapid = 'true';
+      singleStatus.textContent = t('Rapid replay · last at-bat of each game', '高速再生 · 各試合の最後の打席');
+      batchStatus.textContent = t(`Play ball! Simulating ${amount} games…`, `プレイボール！${amount}試合をシミュレーション中…`);
       while (games < target) {
-        const chunkEnd = Math.min(target, games + 25);
-        while (games < chunkEnd) {
-          const hits = sampleGame().filter(Boolean).length;
-          counts[hits] += 1;
-          games += 1;
-        }
+        const result = sampleGame();
+        showAtBats(result);
+        if (!await swing(result[result.length-1], true, own)) return;
+        const hits = result.filter(Boolean).length;
+        counts[hits] += 1;
+        games += 1;
+        gameTotal.textContent = t(`Game ${games.toLocaleString()} · ${hits} hits in ${n} at-bats`, `${games.toLocaleString()}試合目 · ${n}打数 ${hits}安打`);
         drawChart();
-        await wait(45);
       }
+      if (mascot) delete mascot.dataset.rapid;
+      singleStatus.textContent = t('Rapid replay complete', '高速再生が完了');
       batchStatus.textContent = t(`${games.toLocaleString()} games played · compare actual vs predicted for ${x} hits`, `${games.toLocaleString()}試合完了 · ${x}本の実測と予測を比べる`);
       setBusy(false);
     }
@@ -238,7 +263,7 @@
       clear();
     });
     root.querySelector('[data-batting-one]').addEventListener('click', playOne);
-    root.querySelector('[data-batting-many]').addEventListener('click', playBatch);
+    root.querySelectorAll('[data-batting-many]').forEach(button => button.addEventListener('click', () => playBatch(Number(button.dataset.battingMany) || 500)));
     root.querySelector('[data-batting-reset]').addEventListener('click', clear);
     new MutationObserver(() => {
       drawChart();

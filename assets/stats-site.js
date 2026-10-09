@@ -298,7 +298,7 @@ function combinationMarkup() {
 
 function battingSimulationMarkup() {
   return `<section class="batting-simulation" data-batting-simulation aria-label="Batting average simulation">
-    <div class="batting-intro"><div><p class="section-kicker">${bilingual('THE TEXTBOOK FORMULA, IN ACTION', '教科書の公式を体験')}</p><h4>${bilingual('What is the chance of exactly x hits?', 'ちょうどx本ヒットする確率は？')}</h4></div><p>${bilingual('Set the number of at-bats, the hit rate, and a hit count. The worked example shows exactly how the textbook formula gets its answer.', '打席数・打率・安打数を選ぶと、教科書の公式が答えを出す手順を順番に示します。')}</p></div>
+    <div class="batting-intro"><div><p class="section-kicker">${bilingual('THE TEXTBOOK FORMULA, IN ACTION', '教科書の公式を体験')}</p><h4>${bilingual('What is the chance of exactly <span data-inline-math="x">x</span> hits?', 'ちょうど<span data-inline-math="x">x</span>本ヒットする確率は？')}</h4></div><p>${bilingual('Set the number of at-bats, the hit rate, and a hit count. The worked example shows exactly how the textbook formula gets its answer.', '打席数・打率・安打数を選ぶと、教科書の公式が答えを出す手順を順番に示します。')}</p></div>
     <div class="batting-formula-card">
       <div class="batting-formula-main"><span class="batting-formula-label">${bilingual('Textbook formula · probability of exactly x hits','教科書の公式 · ちょうどx本になる確率')}</span><div class="batting-equation" data-batting-equation>\\[\\Pr(X=x)={}_nC_x\\,\\pi^x(1-\\pi)^{n-x}\\]</div></div>
       <div class="batting-answer" aria-live="polite"><span>${bilingual('CHANCE OF THIS EXACT RESULT','この結果になる確率')}</span><strong data-batting-formula-result>—</strong><small data-batting-answer-caption></small></div>
@@ -308,10 +308,11 @@ function battingSimulationMarkup() {
         <label><span>${bilingual('Hits to calculate','計算する安打数')} <i>x</i></span> <select data-batting-x aria-label="Number of hits"></select></label>
         <label class="batting-rate-control"><span>${bilingual('Hit chance per at-bat','1打席ごとの打率')} <i>π</i></span> <input id="batting-hit-rate" data-batting-p type="range" min="0.05" max="0.80" step="0.01" value="0.32"><output data-batting-p-label for="batting-hit-rate">32%</output></label>
         <button type="button" data-batting-one>${bilingual('Play one game', '1試合をプレイ')}</button>
-        <button type="button" class="batting-run-button" data-batting-many>${bilingual('Run 500 games', '500試合を実行')}</button>
+        <button type="button" class="batting-run-button" data-batting-many="100">${bilingual('Run 100 games', '100試合を実行')}</button>
+        <button type="button" class="batting-run-button" data-batting-many="500">${bilingual('Run 500 games', '500試合を実行')}</button>
         <button type="button" class="batting-reset" data-batting-reset>${bilingual('Reset', 'リセット')}</button>
       </div>
-      <div class="batting-calculation-steps"><div><b>1</b><span>${bilingual('How many orders give x hits?','x本の安打になる順番は何通り？')}</span><strong data-batting-patterns></strong></div><div><b>2</b><span>${bilingual('Chance of one order (same for each)','1通りの確率（順番が違っても同じ）')}</span><div data-batting-pattern-example class="batting-pattern-example"></div><strong data-batting-single-pattern></strong></div><div><b>3</b><span>${bilingual('Add all orders: chance of x hits','全ての順番を足す：x本の確率')}</span><strong data-batting-total></strong></div></div>
+      <div class="batting-calculation-steps"><div><b>1</b><span>${bilingual('How many orders give <span data-inline-math="x">x</span> hits?','<span data-inline-math="x">x</span>本の安打になる順番は何通り？')}</span><strong data-batting-patterns></strong></div><div><b>2</b><span>${bilingual('Chance of one order (same for each)','1通りの確率（順番が違っても同じ）')}</span><div data-batting-pattern-example class="batting-pattern-example"></div><strong data-batting-single-pattern></strong></div><div><b>3</b><span>${bilingual('Add all orders: chance of <span data-inline-math="x">x</span> hits','全ての順番を足す：<span data-inline-math="x">x</span>本の確率')}</span><strong data-batting-total></strong></div></div>
     </div>
     <div class="batting-conditions"><strong>${bilingual('Why is this binomial?','なぜ二項分布？')}</strong><span>${bilingual('A fixed number of at-bats · two outcomes (hit / out) · independent at-bats · the same hit chance π each time','打席数が決まっている · 結果は2種類（安打／アウト） · 各打席は独立 · 打率πは毎回同じ')}</span></div>
     <p class="batting-assumption">${bilingual('Each at-bat is independent and has the same chance π of a hit.', '各打席は独立で、ヒットの確率πは毎回同じです。')}</p>
