@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+	<meta name="generator" content="LibreOfficeDev 26.8.0.0.alpha0 (MacOSX)"/>
+	<meta name="author" content="Maria Ikegawa"/>
+	<meta name="created" content="2025-09-02T08:09:35"/>
+	<meta name="changedby" content="津村幸治"/>
+	<meta name="changed" content="2026-09-14T13:15:34"/>
+	<meta name="AppVersion" content="16.0300"/>
+	
+	<style type="text/css">
+		body,div,table,thead,tbody,tfoot,tr,th,td,p { font-family:"游ゴシック"; font-size:x-small }
+		a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
+		a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
+		comment { display:none;  } 
+	</style>
+	
+<style>body{margin:24px;font-family:Arial,"Hiragino Sans",sans-serif;background:#fff;color:#292820}table{margin:20px 0;border-collapse:collapse}td,th{white-space:normal!important;overflow-wrap:break-word;min-width:60px;padding:5px;max-width:900px}a{color:#246f65}img{max-width:100%;height:auto}</style><link rel="stylesheet" href="../../worksheet-preview.css"></head>
+
+<body>
+<table cellspacing="0" border="0">
+	<colgroup width="118"></colgroup>
+	<colgroup width="206"></colgroup>
+	<colgroup width="81"></colgroup>
+	<tr><td colspan="3" height="24" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;ある野球選手の打率は3割2分（0.32）である．この選手が5回打席に立つとき，3回ヒットを打つ確率を求めたい．&quot;}"><font color="#000000">ある野球選手の打率は3割2分（0.32）である．この選手が5回打席に立つとき，3回ヒットを打つ確率を求めたい．</font></td></tr>
+	<tr>
+		<td height="24" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+		<td align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+		<td align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 3px solid #000000; border-bottom: 2px double #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;変数名&quot;}"><font color="#000000">変数名</font></td>
+		<td style="border-top: 3px solid #000000; border-bottom: 2px double #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;説明&quot;}"><font color="#000000">説明</font></td>
+		<td style="border-top: 3px solid #000000; border-bottom: 2px double #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;数値&quot;}"><font color="#000000">数値</font></td>
+	</tr>
+	<tr>
+		<td style="border-bottom: 1px solid #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;起こる確率π&quot;}"><font color="#000000">起こる確率π</font></td>
+		<td style="border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;1回の打席でヒットを「打つ」確率&quot;}"><font color="#000000">1回の打席でヒットを「打つ」確率</font></td>
+		<td style="border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;試行回数n&quot;}"><font color="#000000">試行回数n</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;打席に立つ回数&quot;}"><font color="#000000">打席に立つ回数</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 1px solid #000000; border-bottom: 3px solid #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;確率変数X&quot;}"><font color="#000000">確率変数X</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 3px solid #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;ヒットを「打つ」本数&quot;}"><font color="#000000">ヒットを「打つ」本数</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 3px solid #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td height="24" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+		<td align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+		<td align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 3px solid #000000; border-bottom: 2px double #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;数式&quot;}"><font color="#000000">数式</font></td>
+		<td style="border-top: 3px solid #000000; border-bottom: 2px double #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;説明&quot;}"><font color="#000000">説明</font></td>
+		<td style="border-top: 3px solid #000000; border-bottom: 2px double #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;数値&quot;}"><font color="#000000">数値</font></td>
+	</tr>
+	<tr>
+		<td style="border-bottom: 1px solid #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;nCx πx (1-π)n-x&quot;}"><font face="Times New Roman" color="#000000">nCx πx (1-π)n-x</font></td>
+		<td style="border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;二項分布の確率質量関数&quot;}"><font color="#000000">二項分布の確率質量関数</font></td>
+		<td style="border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;nCx&quot;}"><font face="Times New Roman" color="#000000">nCx</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;n回中x回起こる組み合わせ&quot;}"><font color="#000000">n回中x回起こる組み合わせ</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;πx&quot;}"><font face="Times New Roman" color="#000000">πx</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;起こる確率の，起こる回数乗&quot;}"><font color="#000000">起こる確率の，起こる回数乗</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 1px solid #000000; border-bottom: 3px solid #000000; border-left: 3px solid #000000; border-right: 1px dotted #000000" height="24" align="center" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;(1-π)n-x&quot;}"><font face="Times New Roman" color="#000000">(1-π)n-x</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 3px solid #000000; border-left: 1px dotted #000000; border-right: 1px dotted #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;起こらない確率の，起こらない回数乗&quot;}"><font color="#000000">起こらない確率の，起こらない回数乗</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 3px solid #000000; border-left: 1px dotted #000000; border-right: 3px solid #000000" align="left" valign=middle data-sheets-value="{ &quot;1&quot;: 2, &quot;2&quot;: &quot;&quot;}"><font color="#000000"><br></font></td>
+	</tr>
+</table>
+<!-- ************************************************************************** -->
+</body>
+
+</html>

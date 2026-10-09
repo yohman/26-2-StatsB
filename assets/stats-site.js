@@ -129,6 +129,7 @@ function isLectureMaterial(item) {
 }
 
 function isActivityMaterial(item) {
+  if (item.type === 'resource') return false;
   return ['worksheet', 'data', 'notebook'].includes(item.type) ||
     /AL用|ワークシート|practice|data|データ|script|統計表|分布表/i.test(item.label);
 }
@@ -168,6 +169,17 @@ function slideThumbnail(deck, week) {
 
 function fileButton(item, label = bilingual('Download material', '資料をダウンロード')) {
   return `<a class="file-button" href="${encodeHref(item.href)}" download>${label}<span aria-hidden="true">↓</span></a>`;
+}
+
+function activityResource(item, week) {
+  const type = extension(item.href);
+  const worksheet = type === 'XLSX' && /^weeks\/\d{2}-.+\/\d{2}_AL/.test(item.href);
+  const previewFile = worksheet ? `assets/worksheet-previews/w${String(week.week).padStart(2, '0')}/index.html` : type === 'PDF' ? item.href : '';
+  const preview = previewFile ? viewerLink(previewFile, item.label, week.week, worksheet ? item.href : '') : encodeHref(item.href);
+  const name = worksheet ? item.href.split('/').pop() : item.label;
+  const translated = name.split(' / ');
+  const displayName = translated.length === 2 ? bilingual(escapeHtml(translated[1]), escapeHtml(translated[0])) : escapeHtml(name);
+  return `<div class="activity-resource"><strong class="activity-resource-name" title="${escapeHtml(name)}">${displayName}</strong><span class="activity-resource-type">${escapeHtml(type)}</span><div class="activity-resource-actions"><a class="activity-resource-preview" href="${preview}" aria-label="${escapeHtml(name)} · Preview / プレビュー">${previewFile ? bilingual('Preview', 'プレビュー') : bilingual('Open', '開く')}</a><a class="activity-resource-download" href="${encodeHref(item.href)}" download aria-label="${escapeHtml(name)} · Download / ダウンロード">${bilingual('Download', 'ダウンロード')}</a></div></div>`;
 }
 
 function slideCard(deck, week) {
@@ -561,12 +573,13 @@ function lectureSection(week) {
 
 function assignmentTabs(week) {
   const items = week.materials.filter(item => !isLectureMaterial(item) && isActivityMaterial(item));
+  const resources = week.materials.filter(item => item.type === 'resource');
   if (!items.length) return `<div class="activity-empty"><p>${week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('No separate activity file is listed for this week.', '今週は別の授業内課題ファイルはありません。')}</p></div>`;
   const tabs = items.map((item, index) => `<button type="button" role="tab" id="week-${week.week}-tab-${index}" aria-controls="week-${week.week}-panel-${index}" aria-selected="${index === 0}" tabindex="${index === 0 ? '0' : '-1'}">${bilingual(`Activity ${index + 1}`, `アクティビティ${index + 1}`)}</button>`).join('');
   const panels = items.map((item, index) => {
-    const preview = extension(item.href) === 'PDF' ? `<a class="file-button" href="${viewerLink(item.href, item.label, week.week)}">${bilingual('Preview material', '資料をプレビュー')}<span aria-hidden="true">→</span></a>` : '';
     const focus = weekFlow[week.week]?.steps[Math.min(index + 1, 2)];
-    return `<div class="activity-panel" role="tabpanel" id="week-${week.week}-panel-${index}" aria-labelledby="week-${week.week}-tab-${index}"${index === 0 ? '' : ' hidden'}><p class="activity-type">${bilingual('IN-CLASS ACTIVITY', '授業内課題')}</p><h4>${escapeHtml(item.label)}</h4>${focus ? `<p class="activity-description">${bilingual(escapeHtml(focus[0]), escapeHtml(focus[1]))}</p>` : ''}<div class="activity-actions">${preview}${fileButton(item)}</div></div>`;
+    const support = index === 0 && resources.length ? `<p class="activity-resource-heading">${bilingual('Reference for Activity 1', 'アクティビティ1の参考資料')}</p>${resources.map(resource => activityResource(resource, week)).join('')}` : '';
+    return `<div class="activity-panel" role="tabpanel" id="week-${week.week}-panel-${index}" aria-labelledby="week-${week.week}-tab-${index}"${index === 0 ? '' : ' hidden'}><p class="activity-type">${bilingual('IN-CLASS ACTIVITY', '授業内課題')}</p><h4>${escapeHtml(item.label)}</h4>${focus ? `<p class="activity-description">${bilingual(escapeHtml(focus[0]), escapeHtml(focus[1]))}</p>` : ''}<div class="activity-actions">${activityResource(item, week)}${support}</div></div>`;
   }).join('');
   return `<div class="activity-tabs"><div class="activity-tablist" role="tablist" aria-label="${escapeHtml(`Week ${week.week} in-class activities`)}">${tabs}</div>${panels}</div>`;
 }

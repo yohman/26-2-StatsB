@@ -32,4 +32,4 @@ prepare_en: Review random variables, expected value, and discrete versus continu
 - [AL用ワークシート](weeks/03-discrete-distributions-ii/03_AL用ワークシート.xlsx) {worksheet}
 - [Yoh 2025 active-learning discrete-distributions slides](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/06_[AL]確率分布_1_離散確率分布.pdf) {yoh}
 - [Yoh 2025 Poisson-distribution lecture](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/w6.pdf) {yoh}
-- [Yoh Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {worksheet}
+- [ポアソン分布表 / Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {resource}

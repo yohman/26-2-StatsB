@@ -35,6 +35,13 @@
     document.querySelector('[data-viewer-title]').textContent = fullTitle;
     document.querySelector('[data-download]').href = encodeURI(file);
     if (/\.pdf$/i.test(file)) document.querySelector('[data-download]').innerHTML = '<span class="lang-en">DOWNLOAD PDF</span><span class="lang-ja" lang="ja">PDFをダウンロード</span> ↓';
+    if (/\.xlsx$/i.test(source)) {
+      document.querySelector('[data-download]').href = encodeURI(source);
+      document.querySelector('[data-download]').innerHTML = '<span class="lang-en">DOWNLOAD XLSX</span><span class="lang-ja" lang="ja">XLSXをダウンロード</span> ↓';
+      const note = document.createElement('p');
+      note.innerHTML = '<span class="lang-en">Read-only worksheet preview. Download the Excel file to fill in your answers.</span><span class="lang-ja" lang="ja">ワークシートの閲覧用プレビューです。解答を入力するにはExcelファイルをダウンロードしてください。</span>';
+      document.querySelector('.viewer-top').after(note);
+    }
     if (/\.pptx$/i.test(source)) {
       const sourceDownload = document.createElement('a');
       sourceDownload.href = encodeURI(source);
@@ -253,7 +260,15 @@
         showPdfFallback();
       }
     }
-    if (/\.pdf$/i.test(file)) renderPdfPreview(file);
+    if (/^assets\/worksheet-previews\/w\d{2}\/index\.html$/.test(file)) {
+      const frame = document.createElement('iframe');
+      frame.src = file;
+      frame.title = fullTitle;
+      frame.sandbox = '';
+      frame.style.cssText = 'width:100%;height:76vh;min-height:450px;border:1px solid #d8cdbd;background:white';
+      content.replaceChildren(frame);
+    }
+    else if (/\.pdf$/i.test(file)) renderPdfPreview(file);
     else showFileNote();
   </script>
   <script src="assets/stats-site.js?v=20260915-tsumura-materials-v2"></script>
