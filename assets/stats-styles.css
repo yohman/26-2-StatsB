@@ -247,6 +247,27 @@
 .agenda-page .distribution-exam-steps [data-display-math]{font:20px Georgia,serif;min-height:38px}
 .agenda-page .distribution-exam-steps .distribution-exam-answer{background:#e2efe7;border-left-width:6px}
 .agenda-page .distribution-exam-controls{padding:10px;background:#eef4ef;border-radius:8px}
+.exploration-exam{margin:12px 0 16px;padding:15px 18px;border:1px solid #c8d9d5;border-radius:10px;background:#fff;color:#303e3a;line-height:1.55}
+.exploration-exam>header{font-size:11px;font-weight:800;letter-spacing:.05em;color:#17675d}
+.exploration-exam>p{font-size:14px;margin:9px 0}
+.exploration-exam-grid{display:grid;gap:8px;grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.exploration-exam-grid>article{min-width:0;background:#f2f6f3;border-left:3px solid #17675d;padding:10px 12px;overflow-x:auto}
+.exploration-exam-grid>article>b{font-size:11px;color:#17675d}
+.exploration-exam-grid>[data-exam-given]{grid-column:1/-1;display:flex;align-items:center;gap:20px;padding:6px 12px}
+.exploration-exam-grid>[data-exam-given]>b{flex-shrink:0}
+.exploration-exam-grid>[data-exam-answer]{background:#e2efe7;border-left-width:6px}
+.exploration-exam [data-display-math]{font-size:19px;min-height:40px}
+.exploration-exam mjx-container[display="true"]{margin:.35em 0!important}
+.exploration-exam [data-exam-meaning]{font-size:12px;color:#50625a}
+.exploration-exam [data-exam-control]{display:flex;align-items:center;gap:10px;font-size:13px;margin:10px 0}
+.exploration-exam [data-exam-control][hidden]{display:none}
+.exploration-exam [data-exam-control] input{accent-color:#17675d}
+.exploration-exam [data-exam-control] output{font-weight:800}
+/* The worked card replaces these repeated, non-interactive formula summaries. */
+[data-exam-practice]>.story-formulas,
+[data-exam-practice]>.batting-formula-card>.batting-formula-main,
+[data-exam-practice]>.batting-formula-card>.batting-answer{display:none}
+@media(max-width:700px){.exploration-exam-grid{grid-template-columns:minmax(0,1fr)}.exploration-exam-grid>[data-exam-given]{display:block}.exploration-exam{padding:12px}.exploration-exam [data-display-math]{font-size:17px}}
 @media(max-width:650px){.agenda-page .distribution-scenario ol{grid-template-columns:1fr}}
 .agenda-page .distribution-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:0 0 15px}
 .agenda-page .distribution-heading h4{margin:3px 0 0;font:700 clamp(23px,2.6vw,32px)/1.18 Fraunces,'Noto Serif JP',Georgia,serif}
