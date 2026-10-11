@@ -15,7 +15,10 @@
     const t=(en,ja)=>lang==='en'?en:ja;
     let question,given,rule,worked,answer,meaning;
     if(type==='coin') {
-      const n=s.total||10, h=s.heads||0;
+      const n=s.n||s.total||10, h=s.heads||0, p=s.p??.5;
+      if(s.variant) {
+        return {question:t(`Toss a robot/goat coin ${n} times with robot probability ${percent(p)}. How many robot faces do we expect?`, `ロボットが出る確率${percent(p)}のコインを${n}回投げる。ロボットの期待回数は？`),given:String.raw`n=${n},\quad p=${fmt(p)}`,rule:String.raw`E(H)=np`,worked:String.raw`E(H)=${n}\times${fmt(p)}`,answer:String.raw`E(H)=${fmt(n*p)}`,meaning:t('This is an average across many sets, not a guaranteed count in one set. The practice chart shows the probability of each count. The fair-coin game below keeps p = 0.5.', '何セットも繰り返した平均であり、1セットの回数の保証ではありません。練習グラフは各回数の確率。下の公平なコインのゲームはp=0.5のままです。')};
+      }
       question=t(`A fair robot/goat coin is tossed ${n} times. How many robot faces do we expect? What share did we observe?`, `公平なロボット／ヤギのコインを${n}回投げる。ロボットは平均何回？実際の割合は？`);
       given=String.raw`n=${n},\quad p=0.5`;
       rule=String.raw`E(H)=np,\qquad\widehat p=\frac{H}{n}`;
@@ -24,6 +27,10 @@
       meaning=t('The expected count is an average, not a promise. Toss to fill in H and compare H/n with 50%. Each next toss still has probability 1/2.', '期待回数は平均であって保証ではありません。投げてHを数え、H/nを50％と比べよう。次の1回の表の確率は常に1/2です。');
     } else if(type==='monty') {
       const switching=s.strategy==='switch';
+      if(s.variant) {
+        const n=s.doors||3;
+        return {question:t(`${n} doors hide one robot. The host reveals ${n-2} unchosen goat doors. Stay or switch to the one remaining door: what is the win probability?`, `${n}枚のドアにロボット1体。司会者は選ばれていないヤギのドアを${n-2}枚開けます。残った1枚に変更すると勝率は？`),given:String.raw`N=${n},\quad\text{robot}=1`,rule:String.raw`\Pr(\mathrm{stay})=\frac1N,\quad\Pr(\mathrm{switch})=1-\frac1N`,worked:String.raw`\Pr(\mathrm{switch})=1-\frac1{${n}}=\frac{${n-1}}{${n}}`,answer:String.raw`\Pr(\mathrm{switch})\approx${fmt(100*(n-1)/n)}\%`,meaning:t('The host knows where the robot is, always reveals only goats, and leaves exactly one alternative. More doors make switching more valuable. The game below still has three doors.', '司会者は当たりを知り、ヤギだけを開け、変更先を必ず1枚残します。ドアが増えるほど変更が有利。下のゲームは3枚のままです。')};
+      }
       question=t(`Three doors hide one robot and two goats. What is the win probability if you ${switching?'switch':'stay'} after the host reveals a goat?`, `3つのドアにロボット1体とヤギ2匹。司会者がヤギを見せたあと、${switching?'変更':'そのまま'}の勝率は？`);
       given=String.raw`\text{robot}=1,\quad\text{doors}=3`;
       rule=String.raw`\Pr(\mathrm{stay\ wins})=\frac13,\quad\Pr(\mathrm{switch\ wins})=1-\frac13`;
@@ -31,7 +38,7 @@
       answer=String.raw`\Pr(\mathrm{win})=\frac{${switching?2:1}}3\approx${switching?'66.67':'33.33'}\%`;
       meaning=t('The host knows the prize location, always opens an unchosen goat door, and always offers a switch. Switching wins exactly when the first choice was a goat. Compare formula probability with wins ÷ games—not with the share choosing a strategy.', '司会者は当たりを知り、選ばれていないヤギのドアを必ず開け、必ず変更を提案します。最初にヤギを選んだ場合に変更で勝てます。公式と比べるのは「勝ち数÷試合数」です。');
     } else if(type==='lineup'||type==='pairs') {
-      const n=type==='pairs'?22:s.n,k=type==='pairs'?2:s.k;
+      const n=type==='pairs'?(s.n||22):s.n,k=type==='pairs'?2:s.k;
       question=t(`How many ways can we choose ${k} ${type==='pairs'?'students from '+n:'robot positions in a line of '+n+' robots/goats'}?`, type==='pairs'?`${n}人から${k}人の組を作ると何通り？`:`${n}個の位置のうち${k}個をロボット、残りをヤギにすると何通り？`);
       given=String.raw`n=${n},\quad k=${k}`;rule=String.raw`{}_nC_k=\frac{n!}{k!(n-k)!}`;
       worked=String.raw`{}_{${n}}C_{${k}}=\frac{${n}!}{${k}!(${n}-${k})!}`;answer=`{}_{${n}}C_{${k}}=${choose(n,k)}`;
@@ -70,11 +77,22 @@
       answer=String.raw`E(X)\approx-${fmt(2*b/38)}\quad\text{yen per spin}`;
       meaning=t('A win earns one stake in net profit; a loss loses one stake. Over m spins the expected total is m × E(X). Actual profit varies and can be positive; a loss is not guaranteed after any finite number of spins.', '当たりの純利益は賭け金1回分、外れは1回分の損失。m回なら期待合計はm×E(X)。実際の損益は変動し、有限回では利益で終わることもあります。');
     } else if(['lottery','dice','delivery','al-discrete'].includes(type)) {
-      const values=type==='lottery'?[0,100,1000]:type==='dice'?[1,2,3,4,5,6]:type==='delivery'?[2,18]:[-1,0,1,2,3,4];
-      const weights=type==='lottery'?[.7,.25,.05]:type==='dice'?Array(6).fill(1/6):type==='delivery'?[.5,.5]:[3,1,2,1,1,4].map(x=>x/12);
+      const values=type==='lottery'?[0,100,s.prize??1000]:type==='dice'?[1,2,3,4,5,6]:type==='delivery'?[s.early??2,s.late??18]:[-1,0,1,2,3,4];
+      const counts=[3,1,2,1,1,s.fours??4], cards=counts.reduce((a,b)=>a+b,0);
+      const weights=type==='lottery'?[1-.25-(s.jackpot??.05),.25,s.jackpot??.05]:type==='dice'?(s.six===undefined?Array(6).fill(1/6):[...Array(5).fill((1-s.six)/5),s.six]):type==='delivery'?[1-(s.lateProbability??.5),s.lateProbability??.5]:counts.map(x=>x/cards);
       const probs=type==='dice'?Array(6).fill(String.raw`\frac16`):type==='al-discrete'?[String.raw`\frac14`,String.raw`\frac1{12}`,String.raw`\frac16`,String.raw`\frac1{12}`,String.raw`\frac1{12}`,String.raw`\frac13`]:weights.map(String);
       const mean=values.reduce((sum,x,i)=>sum+x*weights[i],0);
       question=type==='lottery'?t('A ¥100 robot lottery pays ¥0, ¥100, or ¥1,000 with chances 70%, 25%, and 5%. Find the expected prize and net profit.', '100円のロボットくじ。賞金0円・100円・1,000円の確率は70％・25％・5％。賞金と純損益の期待値は？'):type==='dice'?t('A robot rolls a fair six-sided die. What is the expected number?', 'ロボットが公平な6面サイコロを振る。出目の期待値は？'):type==='delivery'?t('Robot B delivers in 2 or 18 minutes with equal probability. Find the mean and variance. Compare with A, which always takes 10 minutes.', '配達ロボットBは2分か18分、確率は半々。平均と分散を求め、必ず10分のAと比べよう。'):t('The AL bag has 12 cards: three −1s, one 0, two 1s, one 2, one 3, four 4s. Find the expected card value.', 'ALの袋に12枚：−1が3枚、0が1枚、1が2枚、2が1枚、3が1枚、4が4枚。引く数の期待値は？');
+      if(s.variant) {
+        const cost=s.cost??100, variance=values.reduce((sum,x,i)=>sum+(x-mean)**2*weights[i],0);
+        question=type==='lottery'?t(`A ¥${cost} ticket pays ¥0 / ¥100 / ¥${values[2]} with chances ${weights.map(percent).join(' / ')}. Find expected net profit.`, `${cost}円のくじ。賞金0／100／${values[2]}円、確率${weights.map(percent).join('／')}。純損益の期待値は？`):type==='dice'?t(`A loaded die shows 6 with probability ${percent(weights[5])}; the other five faces share the remaining chance equally. Find E(X).`, `6の確率は${percent(weights[5])}、残りの確率を1〜5で均等に分けるサイコロ。E(X)は？`):type==='delivery'?t(`Delivery takes ${values[0]} or ${values[1]} minutes; the late trip has probability ${percent(weights[1])}. Find mean and variance.`, `配達は${values[0]}分か${values[1]}分。遅い方の確率は${percent(weights[1])}。平均と分散は？`):t(`Keep the original cards, but use ${counts[5]} cards showing 4 (${cards} cards total). Find E(X).`, `元のカードのうち、4のカードを${counts[5]}枚に変更（合計${cards}枚）。E(X)は？`);
+        given=String.raw`x\in\{${values.join(',')}\},\quad\sum_x\Pr(X=x)=1`;
+        rule=String.raw`E(X)=\sum_x x\Pr(X=x)`;
+        worked=String.raw`E(X)=${values.map((x,i)=>String.raw`(${x})\times${type==='al-discrete'?String.raw`\frac{${counts[i]}}{${cards}}`:fmt(weights[i])}`).join('+')}\approx${fmt(mean)}`;
+        answer=type==='lottery'?String.raw`E(\mathrm{profit})=${fmt(mean)}-${cost}=${fmt(mean-cost)}\ \text{yen}`:type==='delivery'?String.raw`E(X)=${fmt(mean)},\quad\mathrm{Var}(X)=${fmt(variance)}`:String.raw`E(X)\approx${fmt(mean)}`;
+        meaning=t('Practice variant: the probability chart and calculation use these new values. The original activity below retains the textbook/worksheet numbers. Reset to return to the original worked example.', '別の数値で練習中。練習グラフと計算は変更後の値を使います。下の元のアクティビティは教科書・課題の数値のまま。元に戻すと最初の例に戻ります。');
+        return {question,given,rule,worked,answer,meaning};
+      }
       given=String.raw`x\in\{${values.join(',')}\},\quad\sum_x\Pr(X=x)=1`;
       rule=String.raw`E(X)=\sum_x x\Pr(X=x)`;
       worked=String.raw`E(X)=${values.map((x,i)=>String.raw`${x<0?'('+x+')':x}\times${probs[i]}`).join('+')}\approx${fmt(mean)}`;
@@ -90,6 +108,10 @@
         meaning=t('Read an area from the normal table. The slider changes the interval and therefore its area. At zero width the probability is zero; density height is not probability.', '正規分布表で面積を読みます。スライダーで区間が変わると面積も変わります。幅0なら確率0。密度の高さは確率ではありません。');
       } else {
         const slices=s.slices||4, width=Math.sqrt(2)/slices;
+        if(s.variant) {
+          const b=s.limit??Math.sqrt(2),c=2/(b*b);
+          return {question:t(`Change the maximum delivery time to b = ${fmt(b)} hours. Use the normalized triangular density f(x) = 2x/b² on 0 ≤ x ≤ b. Find total probability and the mean.`, `配達時間の上限をb=${fmt(b)}時間に変更。0≤x≤bで、面積が1になる密度f(x)=2x/b²を使う。確率の合計と平均は？`),given:String.raw`b=${fmt(b)},\quad f(x)=\frac{2x}{b^2}\approx${fmt(c)}x`,rule:String.raw`\int_0^b f(x)\,dx=1,\quad E(X)=\int_0^b xf(x)\,dx`,worked:String.raw`\int_0^{${fmt(b)}}\frac{2x}{${fmt(b)}^2}\,dx=1`,answer:String.raw`E(X)=\frac{2b}{3}=\frac{2\times${fmt(b)}}3\approx${fmt(2*b/3)}\ \text{hours}`,meaning:t('Changing the endpoint alone would break total probability = 1. We also adjust the slope to 2/b², keeping triangle area equal to 1. The worksheet below still uses b = √2 and f(x) = x.', '上限だけ変えると確率の合計が1になりません。傾きも2/b²に調整すると三角形の面積は常に1。下の課題はb=√2、f(x)=xのままです。')};
+        }
         question=t('Robot delivery time has density f(x)=x for 0 ≤ x ≤ √2 hours (zero outside). Find total probability and expected delivery time.', 'ロボットの配達時間の密度はf(x)=x、0≤x≤√2時間（範囲外は0）。確率の合計と平均配達時間を求めよう。');
         given=String.raw`f(x)=x,\quad0\le x\le\sqrt2,\quad\Delta x=\frac{\sqrt2}{${slices}}\approx${fmt(width)}`;
         rule=String.raw`\Pr(a\le X\le b)=\int_a^b f(x)\,dx,\quad E(X)=\int x f(x)\,dx`;
@@ -108,8 +130,11 @@
     } else if(type==='events') {
       const sets={A:['o','p','r','s'],B:['o','r','u'],C:['t','w'],D:['o','p','q','r','s','t']};
       const expr=s.expression||'A',conditional=expr.includes('|'),union=expr.includes('∪'),intersection=expr.includes('∩');
-      const [a,b]=expr.split(conditional?'|':union?'∪':intersection?'∩':' '),base=conditional?sets[b].length:9;
-      const hits=conditional||intersection?sets[a].filter(x=>sets[b].includes(x)).length:union?new Set([...sets[a],...sets[b]]).size:sets[a].length;
+      const [a,b]=expr.split(conditional?'|':union?'∪':intersection?'∩':' ');
+      const matching=conditional||intersection?sets[a].filter(x=>sets[b].includes(x)):union?[...new Set([...sets[a],...sets[b]])]:sets[a];
+      const weight=cell=>s.variant&&cell==='o'?s.oCount:1;
+      const base=conditional?sets[b].reduce((sum,cell)=>sum+weight(cell),0):s.variant?8+s.oCount:9;
+      const hits=matching.reduce((sum,cell)=>sum+weight(cell),0);
       const tex=expr.replace('|','\\mid ').replace('∩','\\cap ').replace('∪','\\cup ');
       question=t(`Nine equally likely outcomes o–w. Use Figure 6 to find Pr(${expr}).`, `o〜wの9つの結果は同じ確率。図6を使ってPr(${expr})を求めよう。`);
       given=String.raw`\Omega=\{o,p,q,r,s,t,u,v,w\},\quad |\Omega|=9`;
@@ -117,6 +142,12 @@
       worked=String.raw`\Pr(${tex})=\frac{${hits}}{${base}}`;
       answer=String.raw`\Pr(${tex})\approx${fmt(hits/base)}=${fmt(100*hits/base)}\%`;
       meaning=t('Count the highlighted matching squares for the numerator. For a conditional probability, the given event—not all nine squares—is the denominator. Change the event to see exactly which squares count.', '分子は条件に合う色付きマスの数。条件付き確率の分母は9マス全部ではなく、与えられた事象のマスだけ。事象を変えて、数えるマスの変化を見よう。');
+      if(s.variant) {
+        question=t(`Keep the same event memberships, but put ${s.oCount} tickets labeled o and one of each p–w in a bag (${8+s.oCount} tickets). All tickets are equally likely. Find Pr(${expr}).`, `事象の構成はそのまま、oのくじだけ${s.oCount}枚、p〜wは各1枚の袋に変更（合計${8+s.oCount}枚）。どのくじも同じ確率。Pr(${expr})は？`);
+        given=String.raw`\text{o tickets}=${s.oCount},\quad\text{total tickets}=${8+s.oCount}`;
+        rule=conditional?String.raw`\Pr(${a}\mid ${b})=\frac{\text{matching tickets}}{\text{tickets in }${b}}`:String.raw`\Pr(E)=\frac{\text{matching tickets}}{\text{all tickets}}`;
+        meaning=t('Count tickets, not distinct labels. The practice chart shows the new label probabilities; the original Figure 6 grid below still assumes one of each outcome. Its event memberships stay unchanged.', '数えるのはラベルの種類ではなく、くじの枚数。練習グラフは新しい確率です。下の元の図6は各結果1つずつのままで、事象の構成も変えません。');
+      }
     } else return null;
     return {question,given,rule,worked,answer,meaning};
   }
@@ -153,7 +184,10 @@
     root.firstElementChild.after(box);
     let signature='',timer;
     function update() {
-      const [type,s]=state(root),lang=document.documentElement.dataset.language||'ja',en=lang==='en';
+      const [type,original]=state(root),lang=document.documentElement.dataset.language||'ja',en=lang==='en';
+      const variant=root.dataset.examVariant?JSON.parse(root.dataset.examVariant):null;
+      if(variant&&variant.type!==type)delete root.dataset.examVariant;
+      const s=variant?.type===type?{...original,...variant.values,variant:true}:original;
       if(s.population!==undefined&&(!Number.isInteger(s.population)||s.population<2||s.population>1e8||s.error<0||s.error>50))return;
       if(!Object.values(s).every(x=>typeof x!=='number'||Number.isFinite(x)))return;
       const next=JSON.stringify([type,s,lang]);if(signature===next)return;signature=next;
@@ -169,11 +203,17 @@
       box.querySelector('[data-exam-meaning]').textContent=lesson.meaning;
     }
     const queue=()=>{clearTimeout(timer);timer=setTimeout(update,80);};
+    root.addEventListener('statsb:exam-variant',event=>{
+      if(event.detail)root.dataset.examVariant=JSON.stringify(event.detail);
+      else delete root.dataset.examVariant;
+      signature='';update();
+    });
     root.addEventListener('input',queue);root.addEventListener('change',queue);root.addEventListener('click',queue);
     new MutationObserver(records=>{if(records.some(r=>!box.contains(r.target)))queue();}).observe(root,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['hidden','aria-selected','aria-pressed','class']});
     new MutationObserver(queue).observe(document.documentElement,{attributes:true,attributeFilter:['data-language']});
     update();
   }
+  window.StatsExamPractice={build,read:state};
   let queued=false;
   const scan=()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;document.querySelectorAll(roots).forEach(attach);});};
   document.addEventListener('statsb:agenda-rendered',scan);

@@ -28,3 +28,23 @@ assert(Math.abs(Array.from({length:100},(_,k)=>poisson(5,k)).reduce((a,b)=>a+b,0
 assert(build('nba',{n:5,p:.93,k:0,tail:true},'en').answer.includes('100'));
 assert(build('costco',{lambda:5,k:0,tail:true},'en').answer.includes('100'));
 console.log('All bilingual worked-question models and numerical checks passed.');
+const variants={
+  coin:{n:20,p:.75},monty:{doors:10},lottery:{cost:75,prize:1000,jackpot:.05},
+  dice:{six:1},delivery:{early:2,late:18,lateProbability:.25},pairs:{n:10},
+  'al-discrete':{fours:8},'al-continuous':{limit:3},events:{expression:'B|A',oCount:3}
+};
+for(const [type,values] of Object.entries(variants))for(const lang of ['en','ja']) {
+  const lesson=build(type,{...values,variant:true},lang);
+  for(const value of Object.values(lesson))assert(!/NaN|undefined|Infinity/.test(value),`${type}: ${value}`);
+}
+assert(build('coin',{...variants.coin,variant:true},'en').answer.includes('=15'));
+assert(build('monty',{...variants.monty,variant:true},'en').answer.includes('90'));
+assert(build('lottery',{...variants.lottery,variant:true},'en').answer.includes('75-75=0'));
+assert(build('lottery',{cost:100,prize:2000,jackpot:.05,variant:true},'en').answer.includes('125-100=25'));
+assert(build('dice',{...variants.dice,variant:true},'en').answer.includes('6'));
+assert(build('delivery',{...variants.delivery,variant:true},'en').answer.includes('48'));
+assert(build('pairs',{...variants.pairs,variant:true},'en').answer.includes('45'));
+assert(build('al-discrete',{...variants['al-discrete'],variant:true},'en').answer.includes('2.25'));
+assert(build('al-continuous',{...variants['al-continuous'],variant:true},'en').answer.includes('approx2'));
+assert(build('events',{...variants.events,variant:true},'en').worked.includes('frac{4}{6}'));
+console.log('Changed-number variants: break-even price, loaded dice, normalized density, weighted events and other changed givens passed.');

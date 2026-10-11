@@ -247,7 +247,7 @@
 .agenda-page .distribution-exam-steps [data-display-math]{font:20px Georgia,serif;min-height:38px}
 .agenda-page .distribution-exam-steps .distribution-exam-answer{background:#e2efe7;border-left-width:6px}
 .agenda-page .distribution-exam-controls{padding:10px;background:#eef4ef;border-radius:8px}
-.exploration-exam{margin:12px 0 16px;padding:15px 18px;border:1px solid #c8d9d5;border-radius:10px;background:#fff;color:#303e3a;line-height:1.55}
+.exploration-exam{grid-column:1/-1;min-width:0;box-sizing:border-box;margin:12px 0 16px;padding:15px 18px;border:1px solid #c8d9d5;border-radius:10px;background:#fff;color:#303e3a;line-height:1.55}
 .exploration-exam>header{font-size:11px;font-weight:800;letter-spacing:.05em;color:#17675d}
 .exploration-exam>p{font-size:14px;margin:9px 0}
 .exploration-exam-grid{display:grid;gap:8px;grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
@@ -263,6 +263,25 @@
 .exploration-exam [data-exam-control][hidden]{display:none}
 .exploration-exam [data-exam-control] input{accent-color:#17675d}
 .exploration-exam [data-exam-control] output{font-weight:800}
+.example-number-options{margin:9px 0 12px;border:1px solid #b7d0c7;border-radius:7px;background:#f6faf7;padding:9px 12px;font:13px/1.5 Manrope,'Noto Serif JP',sans-serif}
+.example-number-options>summary{color:#17675d;font-weight:800;cursor:pointer;width:fit-content;min-height:24px}
+.example-number-options[open]>summary{margin-bottom:7px}
+.example-number-options>p{font-size:12px;color:#50625a;margin:5px 0 10px}
+.example-number-fields{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end}
+.example-number-fields>label{display:grid;gap:5px;min-width:140px;max-width:240px;font-size:12px;font-weight:700}
+.example-number-fields input[type=range]{accent-color:#17675d;width:150px}
+.example-number-fields input[type=number],.example-number-fields select{font:14px Manrope,sans-serif;min-height:34px;width:100%;padding:4px 8px;border:1px solid #a7bbb1;border-radius:4px;background:white;color:#303e3a}
+.example-number-fields output{font:700 13px 'DM Mono',monospace;color:#17675d}
+.example-number-options [data-number-reset]{margin:10px 0 0;padding:6px 10px;border:1px solid #a7bbb1;border-radius:5px;background:transparent;color:#52635b;font-size:12px;cursor:pointer}
+.example-number-options [data-number-chart]{max-width:520px;margin:12px 0 0;padding:10px;background:#fff;border-radius:6px}
+.example-number-options [data-number-chart] svg{display:block;width:100%;height:auto;max-height:180px;font:12px Manrope,sans-serif;fill:#50625a}
+.example-number-options .number-variant-count{font-size:18px;margin:12px}.number-variant-count strong{font-size:30px;color:#17675d}
+.example-number-options [hidden]{display:none!important}
+.example-number-options[data-number-mode="variant"]>.example-number-body{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 20px;align-items:start}
+.example-number-options[data-number-mode="variant"] .example-number-fields{grid-column:1;grid-row:1}
+.example-number-options[data-number-mode="variant"] [data-number-reset]{grid-column:1;grid-row:2;width:fit-content}
+.example-number-options[data-number-mode="variant"] [data-number-chart]{grid-column:2;grid-row:1/3;margin:0}
+@media(max-width:700px){.example-number-options[data-number-mode="variant"]>.example-number-body{display:block}.example-number-options[data-number-mode="variant"] [data-number-chart]{margin-top:12px}}
 /* The worked card replaces these repeated, non-interactive formula summaries. */
 [data-exam-practice]>.story-formulas,
 [data-exam-practice]>.batting-formula-card>.batting-formula-main,
