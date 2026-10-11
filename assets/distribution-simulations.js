@@ -37,40 +37,50 @@
     let n = Number(nInput?.value || 5);
     let busy = false;
     let latestSample = [];
+    let examMean = 64, examSd = kind === 't' ? 8 : 12;
+    const math = (tex, fallback) => `<div data-display-math="${tex.replaceAll('&','&amp;').replaceAll('"','&quot;')}">${fallback}</div>`;
+    const fmt = value => Number(value.toFixed(3)).toString();
 
-    function scenarioMarkup() {
-      const normal = kind === 'normal';
-      const title = normal ? t('Robot factory: how tall is one robot?', 'ロボット工場：1体の身長は？')
-        : kind === 't' ? t('Quality check: is this batch’s average off target?', '品質チェック：この組の平均身長は目標からどれだけずれた？')
-        : t('Quality check: how uneven are the heights in this batch?', '品質チェック：この組の身長はどれだけばらつく？');
-      const population = normal
-        ? t(`Imagine robot heights follow a normal model with mean ${mean} cm and standard deviation ${sd} cm.`, `ロボットの身長が平均${mean}cm・標準偏差${sd}cmの正規分布に従うと仮定します。`)
-        : t('Imagine a factory whose robot heights follow a normal model: mean 60 cm, standard deviation 10 cm. Each batch is a new independent random sample.', '平均60cm・標準偏差10cmの正規分布に従う身長のロボット工場を想像しよう。毎回、新しい組を独立に無作為抽出します。');
-      const steps = normal ? [
-        t('🤖 Pick 1 robot → measure its height X (cm)', '🤖 1体を選ぶ → 身長X（cm）を測る'),
-        t('📊 Add 1 height to the histogram', '📊 身長のデータを1つグラフへ'),
-        t('🔁 1,000 repeats = 1,000 robots, 1,000 heights', '🔁 1,000回＝1,000体・1,000個の身長')
-      ] : [
-        t(`🤖 Pick ${n} robots → measure their heights`, `🤖 ${n}体を選ぶ → 全員の身長を測る`),
-        kind === 't' ? t('🧮 Find the batch mean and sample SD → calculate 1 t value', '🧮 組の平均と標本標準偏差 → t値を1つ計算') : t('🧮 Find the batch spread → calculate 1 χ² value', '🧮 組のばらつき → χ²値を1つ計算'),
-        t(`🔁 1,000 batches = ${(1000*n).toLocaleString()} robots, 1,000 statistics`, `🔁 1,000組＝${(1000*n).toLocaleString()}体・1,000個の統計量`)
-      ];
-      let latest = t('Run the scenario to see a real example here.', '実行すると、実際に生成した1回分の例がここに出ます。');
-      if (latestSample.length) {
-        const heights = latestSample.map(z => normal ? z : 60 + 10*z);
-        const average = heights.reduce((sum, value) => sum+value, 0)/heights.length;
-        const sampleSd = normal ? 0 : Math.sqrt(heights.reduce((sum, value) => sum+(value-average)**2, 0)/(n-1));
-        latest = normal ? t(`Latest robot: ${heights[0].toFixed(1)} cm → one observation in the chart.`, `直近の1体：${heights[0].toFixed(1)}cm → この身長をグラフへ。`)
-          : t(`Latest batch: ${heights.slice(0,5).map(v=>v.toFixed(1)).join(', ')}${n>5?' …':''} cm · mean ${average.toFixed(2)} cm · sample SD ${sampleSd.toFixed(2)} cm → ${kind==='t'?'t':'χ²'} = ${values.at(-1).toFixed(3)}`, `直近の組：${heights.slice(0,5).map(v=>v.toFixed(1)).join('、')}${n>5?' …':''}cm・平均${average.toFixed(2)}cm・標本標準偏差${sampleSd.toFixed(2)}cm → ${kind==='t'?'t':'χ²'}＝${values.at(-1).toFixed(3)}`);
-      }
-      return `<strong>${title}</strong><p>${population}</p><ol>${steps.map(step=>`<li>${step}</li>`).join('')}</ol><p class="distribution-scenario-result">${latest}</p><small>${normal ? t('Horizontal axis: height (cm). Vertical axis: density—not the probability of one exact height.', '横軸：身長（cm）。縦軸：密度。ある身長ちょうどの確率ではありません。') : t(`The chart shows ${kind==='t'?'t':'χ²'} values, NOT robot heights. One entry represents one whole batch.`, `グラフは身長ではなく${kind==='t'?'t':'χ²'}値。データ1つがロボット1組に対応します。`)}</small>`;
+    function examAnswer() {
+      return kind === 'normal' ? band : kind === 't' ? (examMean-60)/(examSd/Math.sqrt(n)) : (n-1)*examSd**2/100;
     }
+
+    function examMarkup() {
+      const df = n-1, answer = examAnswer();
+      let question, given, substitution, result, meaning;
+      if (kind === 'normal') {
+        const lo = mean-band*sd, hi = mean+band*sd;
+        const probability = [68.27,95.45,99.73][band-1];
+        question = t(`Robot heights are normal. What percentage are between ${lo} and ${hi} cm?`, `ロボットの身長は正規分布に従います。${lo}〜${hi}cmのロボットは何％？`);
+        given = math(String.raw`\mu=${mean},\quad\sigma=${sd},\quad ${lo}\le X\le ${hi}`, `μ = ${mean} cm, σ = ${sd} cm; ${lo} ≤ X ≤ ${hi}`);
+        substitution = math(String.raw`Z_{\rm lower}=\frac{${lo}-${mean}}{${sd}}=-${band},\qquad Z_{\rm upper}=\frac{${hi}-${mean}}{${sd}}=${band}`, `Z lower = (${lo} − ${mean}) / ${sd} = −${band}; Z upper = (${hi} − ${mean}) / ${sd} = ${band}`);
+        result = math(String.raw`\Pr(${lo}\le X\le ${hi})=\Pr(-${band}\le Z\le ${band})\approx ${probability}\%`, `Pr(${lo} ≤ X ≤ ${hi}) ≈ ${probability}%`);
+        meaning = t(`Standardizing turns centimetres into standard-deviation units. Read the area between −${band} and ${band} from a standard normal table. The shaded area is the answer—not the curve’s height.`, `標準化するとcmが「標準偏差何個分」に変わります。標準正規分布表で−${band}〜${band}の面積を読みます。答えは色のついた面積で、曲線の高さではありません。`);
+      } else if (kind === 't') {
+        question = t(`The target mean robot height is 60 cm. For ${n} randomly sampled robots, the mean is ${fmt(examMean)} cm and sample SD is ${fmt(examSd)} cm. Calculate t and its degrees of freedom.`, `ロボットの目標平均身長は60cm。無作為に選んだ${n}体の平均は${fmt(examMean)}cm、標本標準偏差は${fmt(examSd)}cm。t値と自由度を求めよう。`);
+        given = math(String.raw`\mu_0=60,\quad\bar X=${fmt(examMean)},\quad s=${fmt(examSd)},\quad n=${n}`, `μ₀ = 60, X̄ = ${fmt(examMean)}, s = ${fmt(examSd)}, n = ${n}`);
+        substitution = math(String.raw`\mathrm{SE}=\frac{s}{\sqrt n}=\frac{${fmt(examSd)}}{\sqrt{${n}}}\approx ${fmt(examSd/Math.sqrt(n))}`, `SE = ${fmt(examSd)} / √${n} ≈ ${fmt(examSd/Math.sqrt(n))} cm`);
+        result = math(String.raw`t=\frac{\bar X-\mu_0}{s/\sqrt n}=\frac{${fmt(examMean)}-60}{${fmt(examSd)}/\sqrt{${n}}}\approx ${fmt(answer)},\quad\mathrm{df}=${n}-1=${df}`, `t = (${fmt(examMean)} − 60) / (${fmt(examSd)} / √${n}) ≈ ${fmt(answer)}, df = ${df}`);
+        meaning = t(`The batch mean is ${fmt(Math.abs(answer))} estimated standard errors ${answer < 0 ? 'below' : 'above'} the target. We estimate spread using s because the population SD is unknown to the inspector. This t value is NOT a probability; deciding significance requires a t table and a chosen significance level.`, `組の平均は目標から標準誤差${fmt(Math.abs(answer))}個分${answer < 0 ? '下' : '上'}にあります。検査員には母標準偏差が不明なのでsで推定します。t値は確率ではありません。有意かどうかの判断にはt分布表と有意水準が必要です。`);
+      } else {
+        question = t(`A factory claims population SD σ = 10 cm. A random sample of ${n} robots has sample SD s = ${fmt(examSd)} cm. Calculate χ² and its degrees of freedom.`, `工場は母標準偏差σ＝10cmとしています。無作為に選んだ${n}体の標本標準偏差s＝${fmt(examSd)}cm。χ²値と自由度を求めよう。`);
+        given = math(String.raw`\sigma=10,\quad\sigma^2=100,\quad s=${fmt(examSd)},\quad n=${n}`, `σ = 10, σ² = 100, s = ${fmt(examSd)}, n = ${n}`);
+        substitution = math(String.raw`s^2=${fmt(examSd)}^2=${fmt(examSd**2)},\qquad (n-1)s^2=${df}\times ${fmt(examSd**2)}=${fmt(df*examSd**2)}`, `s² = ${fmt(examSd**2)}; (n−1)s² = ${df} × ${fmt(examSd**2)} = ${fmt(df*examSd**2)}`);
+        result = math(String.raw`\chi^2=\frac{(n-1)s^2}{\sigma^2}=\frac{${df}\times ${fmt(examSd**2)}}{100}=${fmt(answer)},\quad\mathrm{df}=${df}`, `χ² = ${df} × ${fmt(examSd**2)} / 100 = ${fmt(answer)}, df = ${df}`);
+        meaning = t(`Square the SD to get variance, multiply by n−1, then divide by the claimed population variance. Larger χ² means greater sample spread. It is NOT a probability. The sample mean does not enter this formula; changing it alone leaves χ² unchanged.`, `標準偏差を二乗して分散にし、n−1を掛け、想定した母分散で割ります。χ²が大きいほど標本のばらつきが大きい。これは確率ではありません。標本平均は式に入らないので、平均だけを変えてもχ²は変わりません。`);
+      }
+      const heights = latestSample.map(z => kind === 'normal' ? z : 60+10*z);
+      const robots = heights.length ? heights.slice(0,8).map(h=>`<span><i style="font-size:${Math.max(12,h/60*32)}px">🤖</i><small>${h.toFixed(1)} cm</small></span>`).join('') : Array.from({length:kind==='normal'?1:Math.min(n,8)},()=>'<span>🤖</span>').join('');
+      const note = kind === 'normal' ? t('Each measurement adds one height. Compare the observed share inside the shaded interval with the calculated probability.', '1回の測定で身長を1つ追加。色の範囲に入った実測の割合を、計算した確率と比べよう。') : t('Teaching model: independent robot heights from a normal population. One batch adds one statistic. The 1,000-batch comparison uses a stable factory (true μ = 60, σ = 10), while the question above stays fixed. Use “Measure a batch → solve” to set a new question from real simulated measurements. Displayed values are rounded.', '授業用モデル：身長は正規母集団から独立に抽出。1組から統計量を1つ追加します。1,000組の比較は安定した工場（真のμ＝60、σ＝10）から抽出し、上の問題は固定します。「1組を測る → 解く」で測定値を新しい問題にできます。表示値は丸めています。');
+      return `<strong>${t('EXAM PRACTICE · Robot quality inspector','試験の練習 · ロボット品質検査員')}</strong><p>${question}</p><div class="distribution-exam-robots">${robots}</div><div class="distribution-exam-steps"><article><b>① ${t('Given','与えられた値')}</b>${given}</article><article><b>② ${t('Substitute','値を代入')}</b>${substitution}</article><article class="distribution-exam-answer"><b>③ ${t('Answer','答え')}</b>${result}</article></div><p>${meaning}</p><small>${note}</small>`;
+    }
+
 
     function modelAndRange() {
       if (kind === 'normal') return { min:mean - 4 * sd, max:mean + 4 * sd, pdf:x => normalPdf(x, mean, sd), label:t('Normal density','正規分布の密度') };
       const df = n - 1;
-      if (kind === 't') return { min:-5, max:5, df, pdf:x => tPdf(x, df), secondary:x => normalPdf(x), label:t('t density','t分布の密度') };
-      return { min:0, max:Math.max(10, df + 4 * Math.sqrt(2 * df)), df, pdf:x => chiPdf(x, df), label:t('Chi-square density','カイ二乗分布の密度') };
+      if (kind === 't') { const limit = Math.max(5, Math.abs(examAnswer())*1.2); return { min:-limit, max:limit, df, pdf:x => tPdf(x, df), secondary:x => normalPdf(x), label:t('t density','t分布の密度') }; }
+      return { min:0, max:Math.max(10, df + 4 * Math.sqrt(2 * df), examAnswer()*1.2), df, pdf:x => chiPdf(x, df), label:t('Chi-square density','カイ二乗分布の密度') };
     }
 
     function chartMarkup() {
@@ -118,8 +128,10 @@
         const px = xPos(mean + multiplier * sd);
         return `<line class="distribution-bound" x1="${px}" x2="${px}" y1="${top}" y2="${baseY}"/>`;
       }).join('') : '';
-      const labelX = kind === 'normal' ? t('Observed value','観測値') : kind === 't' ? 't' : 'χ²';
-      return `<title>${model.label}</title><desc>${t('Simulated histogram and theoretical probability density.','シミュレーションのヒストグラムと理論確率密度。')}</desc>${grid}${modelArea}${bars}${bounds}<path class="distribution-curve" d="${curvePath('y')}"/><path class="distribution-normal-curve" d="${model.secondary ? curvePath('z') : ''}"/><line class="distribution-axis-line" x1="${left}" x2="${width-right}" y1="${baseY}" y2="${baseY}"/>${xTicks}<text class="distribution-axis-label" x="${width-right}" y="${height-5}" text-anchor="end">${labelX}</text>`;
+      const markerX = xPos(examAnswer());
+      const marker = kind === 'normal' ? '' : `<line x1="${markerX}" x2="${markerX}" y1="${top}" y2="${baseY}" stroke="#a15e40" stroke-width="3" stroke-dasharray="5 4"/><text x="${markerX}" y="${top+14}" text-anchor="middle" fill="#a15e40">${t('Answer','答え')}: ${fmt(examAnswer())}</text>`;
+      const labelX = kind === 'normal' ? t('Height (cm)','身長（cm）') : kind === 't' ? 't' : 'χ²';
+      return `<title>${model.label}</title><desc>${t('Simulated histogram and theoretical probability density.','シミュレーションのヒストグラムと理論確率密度。')}</desc>${grid}${modelArea}${bars}${bounds}<path class="distribution-curve" d="${curvePath('y')}"/><path class="distribution-normal-curve" d="${model.secondary ? curvePath('z') : ''}"/>${marker}<line class="distribution-axis-line" x1="${left}" x2="${width-right}" y1="${baseY}" y2="${baseY}"/>${xTicks}<text class="distribution-axis-label" x="${width-right}" y="${height-5}" text-anchor="end">${labelX}</text>`;
     }
 
     function insightText() {
@@ -137,8 +149,19 @@
 
     function draw() {
       chart.innerHTML = chartMarkup();
-      root.querySelector('[data-dist-scenario]').innerHTML = scenarioMarkup();
+      root.querySelector('[data-dist-scenario]').innerHTML = examMarkup();
       root.querySelector('[data-dist-aha]').textContent = insightText();
+      if (kind !== 'normal') {
+        root.querySelector('[data-dist-df]').textContent = `df = ${n-1}`;
+        for (const [key, value] of [['mean',examMean],['sd',examSd]]) {
+          const input = root.querySelector(`[data-dist-exam-${key}]`);
+          if (!input) continue;
+          input.min = Math.min(Number(input.min), value);
+          input.max = Math.max(Number(input.max), value);
+          input.value = value;
+          root.querySelector(`[data-dist-exam-${key}-value]`).textContent = fmt(value);
+        }
+      }
     }
 
     function syncParameters() {
@@ -172,7 +195,6 @@
           if (kind === 'normal') { latestSample = [mean + sd * randomNormal()]; values.push(latestSample[0]); }
           else {
             const sample = Array.from({ length:n }, randomNormal);
-            latestSample = sample;
             const average = sample.reduce((sum, value) => sum + value, 0) / n;
             if (kind === 't') {
               const variance = sample.reduce((sum, value) => sum + (value - average) ** 2, 0) / (n - 1);
@@ -193,6 +215,27 @@
     }
 
     root.querySelectorAll('[data-dist-mean], [data-dist-sd], [data-dist-band], [data-dist-n]').forEach(control => control.addEventListener('input', syncParameters));
+    root.querySelectorAll('[data-dist-exam-mean], [data-dist-exam-sd]').forEach(control => control.addEventListener('input', () => {
+      examMean = Number(root.querySelector('[data-dist-exam-mean]')?.value || examMean);
+      examSd = Number(root.querySelector('[data-dist-exam-sd]').value);
+      latestSample = []; // Manually supplied exam values, not a measured batch.
+      draw();
+    }));
+    root.querySelector('[data-dist-once]').addEventListener('click', () => {
+      if (busy) return;
+      if (kind === 'normal') {
+        latestSample = [mean+sd*randomNormal()]; values.push(latestSample[0]);
+      } else {
+        latestSample = Array.from({length:n}, randomNormal);
+        const avg = latestSample.reduce((a,b)=>a+b,0)/n;
+        const variance = latestSample.reduce((sum,z)=>sum+(z-avg)**2,0)/(n-1);
+        examMean = 60+10*avg;
+        examSd = 10*Math.sqrt(variance);
+        values.push(kind === 't' ? avg/Math.sqrt(variance/n) : (n-1)*variance);
+      }
+      status.textContent = t('New measurements → substitute into the formula above.', '新しい測定値 → 上の公式に代入しました。');
+      draw();
+    });
     root.querySelector('[data-dist-run]').addEventListener('click', run);
     root.querySelector('[data-dist-clear]').addEventListener('click', () => { values.length = 0; latestSample = []; status.textContent = t('Ready to sample.','試行できます。'); draw(); });
     new MutationObserver(() => {

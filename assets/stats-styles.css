@@ -238,6 +238,15 @@
 .agenda-page .distribution-scenario li{padding:10px;background:#eef4ef;border-radius:6px;font-weight:600}
 .agenda-page .distribution-scenario-result{padding:8px 10px;border-left:3px solid #bd8531;background:#f5ecda;font-variant-numeric:tabular-nums}
 .agenda-page .distribution-scenario small{color:#59665e}
+.agenda-page .distribution-exam-robots{display:flex;gap:12px;align-items:end;overflow-x:auto;padding:6px 0}
+.agenda-page .distribution-exam-robots>span{display:grid;text-align:center;font-size:30px;flex:0 0 auto}
+.agenda-page .distribution-exam-robots small{font-size:11px}
+.agenda-page .distribution-exam-steps{display:grid;gap:8px;margin:10px 0}
+.agenda-page .distribution-exam-steps article{padding:10px 14px;background:#f4f6f2;border-left:4px solid #17675d;overflow-x:auto}
+.agenda-page .distribution-exam-steps article>b{font-size:11px;color:#17675d}
+.agenda-page .distribution-exam-steps [data-display-math]{font:20px Georgia,serif;min-height:38px}
+.agenda-page .distribution-exam-steps .distribution-exam-answer{background:#e2efe7;border-left-width:6px}
+.agenda-page .distribution-exam-controls{padding:10px;background:#eef4ef;border-radius:8px}
 @media(max-width:650px){.agenda-page .distribution-scenario ol{grid-template-columns:1fr}}
 .agenda-page .distribution-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:0 0 15px}
 .agenda-page .distribution-heading h4{margin:3px 0 0;font:700 clamp(23px,2.6vw,32px)/1.18 Fraunces,'Noto Serif JP',Georgia,serif}
