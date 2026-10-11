@@ -88,7 +88,7 @@
       }
     }
     function chart() {
-      const s=scenario(kind), mu=mean(), lo=0, hi=Math.max(mu*1.5,...points.map(p=>p.y),1);
+      const s=scenario(kind), mu=mean(), lo=0, hi=Math.max(...s.values,1);
       const x=p=>48+(p.x-1)/Math.max(1,n-1)*648, y=v=>180-(v-lo)/(hi-lo)*152;
       const path=points.map((p,i)=>`${i?'L':'M'}${x(p).toFixed(1)},${y(p.y).toFixed(1)}`).join(' ');
       q('[data-example-chart]').innerHTML=`<line x1="48" x2="696" y1="180" y2="180" stroke="#aaa"/><line x1="48" x2="696" y1="${y(mu)}" y2="${y(mu)}" stroke="#a15e40" stroke-dasharray="5 5"/><text x="48" y="${Math.max(15,y(mu)-8)}" fill="#a15e40">E(X)=${mu}${s.unit}</text><path d="${path}" fill="none" stroke="#16869c" stroke-width="2.5"/>${points.length?`<circle cx="${x(points.at(-1))}" cy="${y(points.at(-1).y)}" r="4" fill="#16869c"/>`:''}<text x="48" y="207">${t("1 trial","1回")}</text><text x="696" y="207" text-anchor="end">${n}${t(" trials","回")}</text>`;

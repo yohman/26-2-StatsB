@@ -150,7 +150,8 @@
 
     function draw() {
       const model = probabilities();
-      const maxPercent = Math.max(...model.map(x => x * 100), ...counts.map(x => trials ? x / trials * 100 : 0), 1);
+      // A probability always uses the same 0–100% scale, independent of samples.
+      const maxPercent = 100;
       chart.style.setProperty('--w2-count', model.length);
       chart.replaceChildren(...model.map((probability, k) => {
         const observed = trials ? counts[k] / trials * 100 : 0;

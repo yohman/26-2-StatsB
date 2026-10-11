@@ -137,7 +137,6 @@
 
     function drawChart() {
       const expected = model();
-      const maxValue = Math.max(1, ...counts, ...expected.map(probability => probability * Math.max(games, 1)));
       chart.style.setProperty('--bin-count', n + 1);
       chart.replaceChildren(...Array.from({ length: n + 1 }, (_, hits) => {
         const observed = games ? counts[hits] / games * 100 : 0;
@@ -147,10 +146,11 @@
         bin.setAttribute('aria-label', t(`${hits} hits: observed ${observed.toFixed(1)}%; expected ${expectedPercent.toFixed(1)}%`, `安打${hits}本：実測 ${observed.toFixed(1)}%、理論値 ${expectedPercent.toFixed(1)}%`));
         const bars = document.createElement('div');
         bars.className = 'batting-bars';
-        for (const [kind, value] of [['observed', counts[hits]], ['model', expected[hits] * Math.max(games, 1)]]) {
+        // Compare percentages on a fixed 0–100% scale, not rescaled counts.
+        for (const [kind, value] of [['observed', observed], ['model', expectedPercent]]) {
           const bar = document.createElement('span');
           bar.className = `batting-bar batting-bar-${kind}`;
-          bar.style.height = `${Math.max(value ? 3 : 0, value / maxValue * 100)}%`;
+          bar.style.height = `${value}%`;
           bar.title = kind === 'observed'
             ? t(`Observed: ${observed.toFixed(1)}%`, `実測：${observed.toFixed(1)}%`)
             : t(`Binomial model: ${expectedPercent.toFixed(1)}%`, `二項分布の理論値：${expectedPercent.toFixed(1)}%`);

@@ -81,7 +81,7 @@
 
     function drawChart() {
       const max = nba ? n : Math.max(x, counts.length - 1, Math.ceil(lambda() + 4 * Math.sqrt(lambda()) + 1));
-      const maxY = Math.min(1, Math.max(.2, ...Array.from({length: max + 1}, (_, i) => pmf(i)), ...counts.map(v => total ? v / total : 0)) * 1.15);
+      const maxY = 1; // Fixed 0–100% probability scale; samples never move theory.
       const width = 600, left = 46, top = 24, bottom = 243, right = 585, step = (right - left) / (max + 1);
       const y = value => bottom - value / maxY * (bottom - top);
       let svg = `<svg viewBox="0 0 ${width} 280" role="img" aria-label="${t('Probability of each count, theory and observed','各人数・成功数の確率：理論と実測')}"><text x="${left}" y="15" fill="#66736f" font-size="12">${t('Probability (%)','確率（％）')}</text>`;

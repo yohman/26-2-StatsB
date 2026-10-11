@@ -59,7 +59,8 @@
         const x = xAt(i / 300);
         return { x, y:model.pdf(x), z:model.secondary ? model.secondary(x) : 0 };
       });
-      const maxY = Math.max(0.001, ...hist, ...curvePoints.map(point => point.y), ...curvePoints.map(point => point.z)) * 1.12;
+      // Keep the density axis tied to the model, never to random sample spikes.
+      const maxY = Math.max(0.001, ...curvePoints.map(point => point.y), ...curvePoints.map(point => point.z)) * 1.5;
       const yPos = y => baseY - y / maxY * plotHeight;
       const curvePath = key => curvePoints.map((point, index) => `${index ? 'L' : 'M'}${xPos(point.x).toFixed(1)},${yPos(point[key]).toFixed(1)}`).join(' ');
       const modelArea = kind === 'normal' ? (() => {
@@ -80,8 +81,9 @@
       const bars = hist.map((value, index) => {
         const barWidth = plotWidth / binCount;
         const x = left + index * barWidth + 1;
-        const y = yPos(value);
-        return `<rect class="distribution-hist-bar" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(1, barWidth-2).toFixed(1)}" height="${Math.max(0, baseY-y).toFixed(1)}"/>`;
+        const y = yPos(Math.min(value, maxY));
+        const overflow = value > maxY;
+        return `<rect class="distribution-hist-bar" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${Math.max(1, barWidth-2).toFixed(1)}" height="${Math.max(0, baseY-y).toFixed(1)}"><title>${value.toFixed(3)}${overflow ? t(' · above the fixed scale', ' · 固定目盛りの上限を超えています') : ''}</title></rect>${overflow ? `<text class="distribution-axis" x="${(x+barWidth/2).toFixed(1)}" y="${top+12}" text-anchor="middle">↑</text>` : ''}`;
       }).join('');
       const bounds = kind === 'normal' ? [-band, band].map(multiplier => {
         const px = xPos(mean + multiplier * sd);
