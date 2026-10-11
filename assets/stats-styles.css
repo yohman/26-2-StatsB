@@ -231,6 +231,14 @@
 .agenda-page .batting-bin>small{font:500 8px 'Zen Kaku Gothic New',sans-serif}
 .agenda-page .batting-model-note{margin:10px 0 0;color:var(--course-muted);font:500 10px/1.5 'DM Mono','Zen Kaku Gothic New',sans-serif}
 .agenda-page .distribution-simulation{max-width:1020px;color:var(--course-ink)}
+.agenda-page .distribution-scenario{padding:14px 16px;margin:0 0 12px;background:#fff;border:1px solid #d7ddd7;border-radius:10px;font-size:13px;line-height:1.5}
+.agenda-page .distribution-scenario>strong{font-size:17px;color:#17675d}
+.agenda-page .distribution-scenario p{margin:7px 0}
+.agenda-page .distribution-scenario ol{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;padding:0;list-style:none;margin:10px 0}
+.agenda-page .distribution-scenario li{padding:10px;background:#eef4ef;border-radius:6px;font-weight:600}
+.agenda-page .distribution-scenario-result{padding:8px 10px;border-left:3px solid #bd8531;background:#f5ecda;font-variant-numeric:tabular-nums}
+.agenda-page .distribution-scenario small{color:#59665e}
+@media(max-width:650px){.agenda-page .distribution-scenario ol{grid-template-columns:1fr}}
 .agenda-page .distribution-heading{display:flex;align-items:end;justify-content:space-between;gap:24px;margin:0 0 15px}
 .agenda-page .distribution-heading h4{margin:3px 0 0;font:700 clamp(23px,2.6vw,32px)/1.18 Fraunces,'Noto Serif JP',Georgia,serif}
 .agenda-page .distribution-heading>p{max-width:55ch;margin:0;color:var(--course-muted);font-size:12px;line-height:1.55}

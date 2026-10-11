@@ -36,6 +36,35 @@
     let band = Number(bandInput?.value || 2);
     let n = Number(nInput?.value || 5);
     let busy = false;
+    let latestSample = [];
+
+    function scenarioMarkup() {
+      const normal = kind === 'normal';
+      const title = normal ? t('Robot factory: how tall is one robot?', 'ロボット工場：1体の身長は？')
+        : kind === 't' ? t('Quality check: is this batch’s average off target?', '品質チェック：この組の平均身長は目標からどれだけずれた？')
+        : t('Quality check: how uneven are the heights in this batch?', '品質チェック：この組の身長はどれだけばらつく？');
+      const population = normal
+        ? t(`Imagine robot heights follow a normal model with mean ${mean} cm and standard deviation ${sd} cm.`, `ロボットの身長が平均${mean}cm・標準偏差${sd}cmの正規分布に従うと仮定します。`)
+        : t('Imagine a factory whose robot heights follow a normal model: mean 60 cm, standard deviation 10 cm. Each batch is a new independent random sample.', '平均60cm・標準偏差10cmの正規分布に従う身長のロボット工場を想像しよう。毎回、新しい組を独立に無作為抽出します。');
+      const steps = normal ? [
+        t('🤖 Pick 1 robot → measure its height X (cm)', '🤖 1体を選ぶ → 身長X（cm）を測る'),
+        t('📊 Add 1 height to the histogram', '📊 身長のデータを1つグラフへ'),
+        t('🔁 1,000 repeats = 1,000 robots, 1,000 heights', '🔁 1,000回＝1,000体・1,000個の身長')
+      ] : [
+        t(`🤖 Pick ${n} robots → measure their heights`, `🤖 ${n}体を選ぶ → 全員の身長を測る`),
+        kind === 't' ? t('🧮 Find the batch mean and sample SD → calculate 1 t value', '🧮 組の平均と標本標準偏差 → t値を1つ計算') : t('🧮 Find the batch spread → calculate 1 χ² value', '🧮 組のばらつき → χ²値を1つ計算'),
+        t(`🔁 1,000 batches = ${(1000*n).toLocaleString()} robots, 1,000 statistics`, `🔁 1,000組＝${(1000*n).toLocaleString()}体・1,000個の統計量`)
+      ];
+      let latest = t('Run the scenario to see a real example here.', '実行すると、実際に生成した1回分の例がここに出ます。');
+      if (latestSample.length) {
+        const heights = latestSample.map(z => normal ? z : 60 + 10*z);
+        const average = heights.reduce((sum, value) => sum+value, 0)/heights.length;
+        const sampleSd = normal ? 0 : Math.sqrt(heights.reduce((sum, value) => sum+(value-average)**2, 0)/(n-1));
+        latest = normal ? t(`Latest robot: ${heights[0].toFixed(1)} cm → one observation in the chart.`, `直近の1体：${heights[0].toFixed(1)}cm → この身長をグラフへ。`)
+          : t(`Latest batch: ${heights.slice(0,5).map(v=>v.toFixed(1)).join(', ')}${n>5?' …':''} cm · mean ${average.toFixed(2)} cm · sample SD ${sampleSd.toFixed(2)} cm → ${kind==='t'?'t':'χ²'} = ${values.at(-1).toFixed(3)}`, `直近の組：${heights.slice(0,5).map(v=>v.toFixed(1)).join('、')}${n>5?' …':''}cm・平均${average.toFixed(2)}cm・標本標準偏差${sampleSd.toFixed(2)}cm → ${kind==='t'?'t':'χ²'}＝${values.at(-1).toFixed(3)}`);
+      }
+      return `<strong>${title}</strong><p>${population}</p><ol>${steps.map(step=>`<li>${step}</li>`).join('')}</ol><p class="distribution-scenario-result">${latest}</p><small>${normal ? t('Horizontal axis: height (cm). Vertical axis: density—not the probability of one exact height.', '横軸：身長（cm）。縦軸：密度。ある身長ちょうどの確率ではありません。') : t(`The chart shows ${kind==='t'?'t':'χ²'} values, NOT robot heights. One entry represents one whole batch.`, `グラフは身長ではなく${kind==='t'?'t':'χ²'}値。データ1つがロボット1組に対応します。`)}</small>`;
+    }
 
     function modelAndRange() {
       if (kind === 'normal') return { min:mean - 4 * sd, max:mean + 4 * sd, pdf:x => normalPdf(x, mean, sd), label:t('Normal density','正規分布の密度') };
@@ -108,6 +137,7 @@
 
     function draw() {
       chart.innerHTML = chartMarkup();
+      root.querySelector('[data-dist-scenario]').innerHTML = scenarioMarkup();
       root.querySelector('[data-dist-aha]').textContent = insightText();
     }
 
@@ -125,6 +155,7 @@
         root.querySelector('[data-dist-df]').textContent = `df = ${n - 1}`;
       }
       values.length = 0;
+      latestSample = [];
       status.textContent = t('Parameters changed. Ready for a fresh run.','設定を変更しました。新しく試せます。');
       draw();
     }
@@ -138,9 +169,10 @@
       const chunks = 10;
       for (let chunk = 0; chunk < chunks; chunk += 1) {
         for (let trial = 0; trial < trials / chunks; trial += 1) {
-          if (kind === 'normal') values.push(mean + sd * randomNormal());
+          if (kind === 'normal') { latestSample = [mean + sd * randomNormal()]; values.push(latestSample[0]); }
           else {
             const sample = Array.from({ length:n }, randomNormal);
+            latestSample = sample;
             const average = sample.reduce((sum, value) => sum + value, 0) / n;
             if (kind === 't') {
               const variance = sample.reduce((sum, value) => sum + (value - average) ** 2, 0) / (n - 1);
@@ -162,7 +194,7 @@
 
     root.querySelectorAll('[data-dist-mean], [data-dist-sd], [data-dist-band], [data-dist-n]').forEach(control => control.addEventListener('input', syncParameters));
     root.querySelector('[data-dist-run]').addEventListener('click', run);
-    root.querySelector('[data-dist-clear]').addEventListener('click', () => { values.length = 0; status.textContent = t('Ready to sample.','試行できます。'); draw(); });
+    root.querySelector('[data-dist-clear]').addEventListener('click', () => { values.length = 0; latestSample = []; status.textContent = t('Ready to sample.','試行できます。'); draw(); });
     new MutationObserver(() => {
       draw();
       status.textContent = values.length
