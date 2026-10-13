@@ -10,6 +10,10 @@ const slide = title => {
 };
 assert(Math.abs((169.8 - 160) / 5 - 1.96) < 1e-12);
 assert(slide('正規分布：このロボット、ゲートを通れる？').includes(String.raw`\frac{169.8-160}{5}=1.96`));
+assert(slide('正規分布：このロボット、ゲートを通れる？').includes('images/normal-height-tail.svg'));
+const curve = fs.readFileSync('materials/2026-yoh/week03/images/normal-height-tail.svg', 'utf8');
+for (const label of ['平均 μ = 160cm', 'σ = 5cm', '169.8cm以上', '求める確率はこの面積']) assert(curve.includes(label));
+assert(curve.includes('fill="#e5aa36"'));
 const normalTable = slide('正規分布表：行1.9、列0.06を読む');
 assert(normalTable.includes('0.02500'));
 assert(normalTable.includes('確率') || normalTable.includes('予測割合'));

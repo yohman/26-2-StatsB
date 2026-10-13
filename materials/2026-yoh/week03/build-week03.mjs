@@ -4,6 +4,35 @@ import {fileURLToPath} from 'node:url';
 
 // Narrative teaching source. The generated w3.md is also editable Marp Markdown.
 const here = dirname(fileURLToPath(import.meta.url));
+// A data chart of N(160, 5²), with one SD and the requested upper-tail area.
+const heightChart = {mean:160, sd:5, threshold:169.8, min:140, max:180};
+function normalHeightChart() {
+  const {mean,sd,threshold,min,max} = heightChart;
+  const px = x => 52+(x-min)/(max-min)*580;
+  const py = x => 238-165*Math.exp(-.5*((x-mean)/sd)**2);
+  const points = (a,b,n=240) => Array.from({length:n+1},(_,i)=>{const x=a+(b-a)*i/n;return `${px(x).toFixed(2)},${py(x).toFixed(2)}`;}).join(' L');
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 350" role="img" aria-labelledby="title desc">
+  <title id="title">平均160cm、標準偏差5cmの正規分布</title>
+  <desc id="desc">平均160cmを中心としたベル曲線。160〜165cmが標準偏差1個分の5cm。169.8cm以上の右側の面積をオレンジで強調。右の裾は図の外にも続く。</desc>
+  <g font-family="Hiragino Sans, Noto Sans JP, sans-serif" fill="#344d57">
+  <text x="52" y="30" font-size="18">確率密度</text>
+  <path d="M${px(threshold)},238 L${points(threshold,max)} L${px(max)},238 Z" fill="#e5aa36" fill-opacity=".8"/>
+  <path d="M${points(min,max)}" fill="none" stroke="#176d82" stroke-width="4"/>
+  <path d="M52 238 H645" fill="none" stroke="#71848e" stroke-width="2"/>
+  <path d="M${px(mean)} 67 V238" stroke="#176d82" stroke-width="2" stroke-dasharray="5 5"/>
+  <path d="M${px(threshold)} 190 V238" stroke="#b57413" stroke-width="2.5" stroke-dasharray="5 4"/>
+  <text x="${px(mean)}" y="43" text-anchor="middle" font-size="22" font-weight="700" fill="#176d82">平均 μ = 160cm</text>
+  ${[145,150,155,160,165,175,180].map(x=>`<path d="M${px(x)} 238 V245" stroke="#71848e"/><text x="${px(x)}" y="266" text-anchor="middle" font-size="18">${x}</text>`).join('')}
+  <path d="M${px(mean)} 290 V299 H${px(mean+sd)} V290" fill="none" stroke="#176d82" stroke-width="2"/>
+  <text x="${px(mean+sd/2)}" y="329" text-anchor="middle" font-size="20" font-weight="700" fill="#176d82">σ = 5cm</text>
+  <text x="510" y="119" font-size="21" font-weight="700" fill="#9b6010">169.8cm以上</text>
+  <text x="510" y="148" font-size="17" fill="#9b6010">求める確率はこの面積</text>
+  <path d="M522 160 V194 L${px(171)},228" fill="none" stroke="#b57413" stroke-width="2"/>
+  <text x="${px(threshold)}" y="287" text-anchor="middle" font-size="19" font-weight="700" fill="#9b6010">169.8</text>
+  <text x="650" y="266" font-size="16">cm</text>
+  </g></svg>`;
+}
+writeFileSync(resolve(here,'images','normal-height-tail.svg'),normalHeightChart());
 const slides = [];
 const add = (title, content, style = '') => {
   slides.push(`${style ? `<!-- _class: ${style} -->\n\n` : ''}## ${title}\n\n${content}`);
@@ -66,7 +95,7 @@ add('ポアソンを使う前に、条件を確認', `**独立**：1人の到着
 add('二項からポアソンへの橋', `${math(String.raw`n\ \text{が大きく},\quad\pi\ \text{が小さく},\quad n\pi=\lambda`)}\n\nたくさんの小さなチャンスから、まれに発生する。\n\n${math(String.raw`B(n,\pi)\approx\mathrm{Poisson}(n\pi)`)}\n\n${go('probability')}\n\n${note('ベルヌーイ・二項・ポアソンの棒を比較。教科書 p.120の近似の考え方。')}`, 'book-reference');
 ref('5','連続確率分布','p.121–128','ロボットは **何体？** から、身長は **何cm？** へ。\n\n測定値には小数もある。**ある範囲に入る確率**を、面積で求める。\n\nこの後の例：高さ制限に通れる？　工場の平均は正しい？　品質は安定している？');
 add('連続の確率：身長がある範囲に入る割合', `身長を $X$ とする。**160.000…cmぴったり**より、**155〜165cm**を考える。\n\n${math(String.raw`\Pr(155<X\le165)=\int_{155}^{165}f(x)\,dx=F(165)-F(155)`)}\n\n**f(x)**：その付近への集まりやすさ。高さそのものは確率ではない。\n\n**F(165) − F(155)**：165cm以下から155cm以下を除き、間の面積を残す。\n\n${note('連続モデルでは一点の確率は0、全範囲の面積は1。丸めた「160.0cm」という測定値は小さな区間を表す。Week 2 AL2の面積と同じ考え方。教科書 p.121。')}`, 'book-reference explained');
-add('正規分布：このロボット、ゲートを通れる？', `**問題**　身長は正規分布、平均160cm・標準偏差5cm。高さ169.8cmの制限を超える確率は？\n\n${math(String.raw`X\sim N(160,5^2),\qquad Z=\frac{X-\mu}{\sigma}`)}\n\n${math(String.raw`z=\frac{169.8-160}{5}=1.96`)}\n\n**9.8cmの差は、標準偏差1.96個分。** 次のスライドで、この右側の面積を読む。\n\n${go('normal-w2')}\n\n${note('仮想の身長モデル。個体の高さ制限超過を計算するために正規分布を使う。測定値が何でも正規分布になるわけではない。教科書 p.122–124。')}`, 'book-reference explained');
+add('正規分布：このロボット、ゲートを通れる？', `**問題**　身長は正規分布、平均160cm・標準偏差5cm。169.8cm以上になる確率は？\n\n<div class="normal-visual-layout"><div><img src="images/normal-height-tail.svg" alt="平均160cm、標準偏差5cmの正規分布。169.8cm以上の右側の面積を強調。"></div><div>\n\n${math(String.raw`X\sim N(160,5^2)`)}\n\n${math(String.raw`Z=\frac{X-\mu}{\sigma}`)}\n\n${math(String.raw`z=\frac{169.8-160}{5}=1.96`)}\n\n**9.8cmの差は、標準偏差1.96個分。**\n\n${go('normal-w2')}\n\n</div></div>\n\n${note('色の面積が169.8cm以上になる確率。次のスライドで表から読む。右の裾は図の外にも続く。仮想の身長モデル。教科書 p.122–124。')}`, 'book-reference explained normal-visual');
 add('正規分布表：行1.9、列0.06を読む', `**求めるもの：高さ制限169.8cmを超える割合。標準化すると z = 1.96。**\n\n| zの行 ＼ 小数第2位の列 | 0.05 | **0.06** | 0.07 |\n| --- | --- | --- | --- |\n| **1.9** | 0.02559 | **0.02500** | 0.02442 |\n\n${math(String.raw`\Pr(X>169.8)=\Pr(Z>1.96)=0.025=2.5\%`)}\n\n**このモデルでは約1,000体中25体が高さ制限を超える。**\n\n${math(String.raw`\Pr(X\le169.8)=0.975,\quad\Pr(150.2<X<169.8)=1-2(0.025)=0.95`)}\n\n${note('教科書の表は右側の面積。通れる割合は97.5％。中央95％は左右の2.5％ずつを除く。予測割合であり、必ず25体になるわけではない。教科書 p.124–125。')}`, 'book-reference explained');
 add('なぜt分布？　工場の平均を標本で調べる', `**問題**　工場は「平均60cm」と説明。でも全ロボットの身長や母標準偏差は分からない。\n\n無作為に **9体** 測ると、平均 **64cm**、標本標準偏差 **6cm**。\n\n${math(String.raw`T=\frac{\bar X-\mu_0}{s/\sqrt n},\qquad\nu=n-1`)}\n\n**σが未知なので s で推定する。** 広がりも推定する不確かさを、t分布で考慮する。\n\n${note('個体の身長でなく「標本平均のずれ」を評価する。小標本だから自動的にt、ではない。独立な正規母集団の標本を仮定。教科書 p.125–127。')}`, 'book-reference explained');
 add('tの計算：平均のずれは、どのくらい大きい？', `${math(String.raw`\mathrm{SE}=\frac{s}{\sqrt n}=\frac6{\sqrt9}=2\ \mathrm{cm},\qquad t=\frac{64-60}{2}=2,\quad\nu=8`)}\n\n**標準誤差SE**：標本平均の揺れの大きさを推定したもの。4cmの差はSEの2個分。\n\n両側5％の目安：t表の **自由度8、上側確率0.025** から **2.306**。\n\n${math(String.raw`|t|=2<2.306`)}\n\n**この標本だけでは、5％水準で「平均60cmと違う」とまでは言えない。**\n\n${go('t-w2')}\n\n${note('t = 2 は確率2％ではない。「違いが示せない」は「平均60cmだと証明した」でもない。ここは後の仮説検定への導入。') }\n\n<!-- Critical value checked against NIST Student t table: df=8, cumulative 0.975 (upper tail 0.025), 2.306. https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm -->`, 'book-reference explained t-worked');
@@ -120,6 +149,10 @@ section.explained table {font-size:22px; margin:15px 0;}
 section.explained th, section.explained td {padding:11px 13px;}
 section.variance-worked .katex-display:first-of-type {font-size:.88em;}
 section.selection-guide table {font-size:21px;}
+.normal-visual-layout {display:grid; grid-template-columns:1.55fr 1fr; gap:24px; align-items:center; margin:16px 0 6px;}
+.normal-visual-layout img {display:block; width:100%; height:auto;}
+section.normal-visual .normal-visual-layout .katex-display {font-size:.9em; margin:12px 0;}
+section.normal-visual .normal-visual-layout p {font-size:23px;}
 section.try {background:#edf5ef; border-top:7px solid #388065;} section.try h2 {color:#2b624b;}
 section.challenge {background:#fff8e8; border-top:9px solid #be8530;}
 section.challenge h2 {color:#825519; margin-bottom:22px;}
