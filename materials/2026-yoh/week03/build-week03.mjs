@@ -82,6 +82,14 @@ section.book-divider {background:#e7f3fa; border-top:12px solid #399ac8;} sectio
 .chapter {font-size:56px; color:#184762; font-weight:800;} .pages {font-size:28px; color:#237da7; margin:15px 0 34px;}
 section.book-reference {background:#f0f7fb; border-top:7px solid #399ac8;} section.book-reference h2 {color:#216a91;}
 section.try {background:#edf5ef; border-top:7px solid #388065;} section.try h2 {color:#2b624b;}
+section.challenge {background:#fff8e8; border-top:9px solid #be8530;}
+section.challenge h2 {color:#825519; margin-bottom:22px;}
+section.challenge strong {color:#825519;}
+.challenge-time {font-size:22px; color:#825519; font-weight:700; margin-bottom:15px;}
+section.challenge .note {color:#796647; font-size:19px;}
+section.challenge-check {background:#edf5ef; border-top:7px solid #388065;}
+section.challenge-check h2 {color:#2b624b;}
+section.challenge-check .katex-display {font-size:1em; margin:19px 0;}
 section a[href*="agenda.html?activity="] {display:inline-block; background:#176d82; color:white; font-weight:700; text-decoration:none; padding:13px 28px; border-radius:8px; font-size:27px;}
 .sequences {display:inline-block; font-size:29px; letter-spacing:14px; line-height:1.45; color:#176d82; margin:0 0 6px 310px;}
 .wide-photo img {width:100%; height:265px; object-fit:cover; border-radius:12px;} .photo-side {display:flex; align-items:center; gap:35px;}
@@ -89,5 +97,101 @@ section a[href*="agenda.html?activity="] {display:inline-block; background:#176d
 section table {width:100%; margin:20px 0; border-collapse:collapse; font-size:23px;} section th {background:#dcecf3; padding:15px; border:0;}
 section td {padding:15px; border:0;} section tr:nth-child(even) {background:#eef3f5;}
 `;
+// Keep independent work after the completed discrete-model explanations, before
+// the story moves on. Only the following slide contains the numerical answers.
+const challengePairs = [
+  {
+    after:'野球ラボ：1打席と1試合を分ける',
+    problem:`<!-- _class: challenge -->
+
+## チャレンジ①　5本で何本入る？
+
+<div class="challenge-time">自分で解く　15分　／　教科書 p.118–120</div>
+
+ロボット選手がフリースローを **5本** 投げる。1本の成功率は **60％**。
+各投球は独立で、成功率は一定とする。成功本数を $X$ とする。
+
+**(1)** ちょうど3本成功する確率を求めよ。
+
+**(2)** 4本以上成功する確率を求めよ。
+
+**(3)** 成功本数の期待値と分散を求めよ。
+
+${note('教科書・電卓可。式と代入の途中も書く。まず自分で計算し、ラボは答え合わせで使おう。')}
+
+<!--
+進行：個人で15分。途中で答えを表示しない。早く終わった学生には、π=0.8に変えたときの(1)(2)の大小を予想してもらう。
+Xは成功本数、n=5、π=0.6。P(X=3)=C(5,3)×0.6^3×0.4^2=10×0.216×0.16=0.3456。
+P(X≥4)=5×0.6^4×0.4+0.6^5=0.2592+0.07776=0.33696。
+E(X)=5×0.6=3本、Var(X)=5×0.6×0.4=1.2本²。
+確認ポイント：組合せ係数の付け忘れ、以上に4を含むこと、1本の成功率とセットの確率の違い。
+-->`,
+    check:`<!-- _class: challenge-check -->
+
+## 答え合わせ①　成功率60％の5本
+
+${math(String.raw`\begin{aligned}
+\Pr(X=3)&={}_5C_3(0.6)^3(0.4)^2=0.3456\\
+\Pr(X\ge4)&={}_5C_4(0.6)^4(0.4)+(0.6)^5=0.33696\\
+E(X)&=5\times0.6=3\\
+\operatorname{Var}(X)&=5\times0.6\times0.4=1.2
+\end{aligned}`)}
+
+**ちょうど3本：34.56％　／　4本以上：33.696％**
+
+${go('nba')}
+
+${note('ラボを n=5、成功率60％に設定。「ちょうど」x=3と「以上」x=4で理論値を確認。期待値は3本、分散の単位は本²。')}`
+  },
+  {
+    after:'二項からポアソンへの橋',
+    problem:`<!-- _class: challenge -->
+
+## チャレンジ②　退勤まで、あと5分
+
+<div class="challenge-time">自分で解く　15分　／　教科書 p.120</div>
+
+コストコのレジに、平均 **10分あたり4人** の客が新しく来る。
+到着は一定の率で独立に起こるポアソン過程とする。
+次の **5分間** の到着人数を $X$ とする。
+
+**(1)** この5分間の平均人数 $\\lambda$ を求めよ。
+
+**(2)** ちょうど2人来る確率と、1人以上来る確率を求めよ。
+
+**(3)** 期待値と分散を求め、$\\lambda=4$ のまま使えない理由を説明せよ。
+
+${note('授業用の仮想設定。教科書・電卓可。式と途中計算を書く。時間の単位をそろえてから代入しよう。')}
+
+<!--
+進行：個人で15分。λの単位を10分から5分へ変えることを最初に確認する。
+λ=4×5/10=2。P(X=2)=2^2e^-2/2!=2e^-2≈0.2706705665=27.0671％。
+P(X≥1)=1-P(X=0)=1-e^-2≈0.8646647168=86.4665％。
+E(X)=Var(X)=λ=2。期待値の単位は人、分散は人²。4は10分間の平均であり、5分間の平均ではない。
+確認ポイント：5分を試行回数n=5と誤解しない。1人以上は1を含む。1から0人の確率を引く。
+-->`,
+    check:`<!-- _class: challenge-check -->
+
+## 答え合わせ②　まず、5分間の平均へ
+
+${math(String.raw`\begin{aligned}
+\lambda&=4\times\frac{5}{10}=2\\
+\Pr(X=2)&=\frac{2^2e^{-2}}{2!}\approx0.2707\\
+\Pr(X\ge1)&=1-\Pr(X=0)=1-e^{-2}\approx0.8647\\
+E(X)&=\operatorname{Var}(X)=2
+\end{aligned}`)}
+
+**ちょうど2人：約27.07％　／　1人以上：約86.47％**
+
+${go('costco')}
+
+${note('ラボを「10分あたり4人」「観察時間5分」に設定。「ちょうど」x=2と「以上」x=1で確認。期待値は2人、分散は2人²。')}`
+  }
+];
+for (const pair of challengePairs) {
+  const index=slides.findIndex(slide=>slide.includes(`## ${pair.after}\n`));
+  if(index<0)throw new Error(`Missing challenge anchor: ${pair.after}`);
+  slides.splice(index+1,0,pair.problem,pair.check);
+}
 writeFileSync(resolve(here, 'w3.md'), `---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 3'\n---\n\n<style>\n${css}\n</style>\n\n${slides.join('\n\n---\n\n')}\n`);
 console.log(`Week 3: ${slides.length} slides. NBA → binomial → Costco → Poisson → continuous → mean & variance.`);

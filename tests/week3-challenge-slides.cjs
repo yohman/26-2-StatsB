@@ -1,0 +1,33 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const {binomial,poisson}=require('../assets/exam-practice.js');
+const source=fs.readFileSync('materials/2026-yoh/week03/w3.md','utf8');
+const slides=source.split(/\n---\n/).filter(s=>/^## /m.test(s));
+assert.equal(slides.length,44);
+const challenges=slides.filter(s=>/<!-- _class: challenge -->/.test(s));
+assert.equal(challenges.length,2);
+for(const slide of challenges){
+  const visible=slide.replace(/<!--[\s\S]*?-->/g,'');
+  assert(visible.includes('15分'));
+  assert(visible.includes('教科書'));
+  assert(!/0\.3456|0\.33696|0\.2707|0\.8647|34\.56|33\.696|27\.07|86\.47/.test(visible),'No numerical answers on the challenge slide');
+}
+assert(slides[15].includes('野球ラボ'));
+assert(slides[16].includes('チャレンジ①'));
+assert(slides[17].includes('答え合わせ①'));
+assert(slides[18].includes('今度は、回数が決まっていない'));
+assert(slides[29].includes('二項からポアソンへの橋'));
+assert(slides[30].includes('チャレンジ②'));
+assert(slides[31].includes('答え合わせ②'));
+assert(slides[32].includes('5　連続確率分布'));
+assert(Math.abs(binomial(5,.6,3)-.3456)<1e-12);
+assert(Math.abs(binomial(5,.6,4)+binomial(5,.6,5)-.33696)<1e-12);
+assert.equal(5*.6,3);
+assert(Math.abs(5*.6*.4-1.2)<1e-12);
+assert.equal(4*5/10,2);
+assert(Math.abs(poisson(2,2)-.2706705664732254)<1e-12);
+assert(Math.abs(1-poisson(2,0)-.8646647167633873)<1e-12);
+assert(slides[17].includes('activity=nba#week-03'));
+assert(slides[31].includes('activity=costco#week-03'));
+assert(slides[30].includes(String.raw`$\lambda$`));
+console.log('Week 3: two 15-minute pauses, separate answer checks, textbook references, working notes and arithmetic verified.');
