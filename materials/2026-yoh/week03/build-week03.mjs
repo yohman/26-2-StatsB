@@ -13,6 +13,10 @@ const add = (title, content, style = '') => {
 const math = value => `$$\n${value}\n$$`;
 const go = (id, label = 'やってみよう！') => `[${label}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-03)`;
 const note = value => `<div class="note">${value}</div>`;
+const importantBadge = '<div class="important-badge">最重要 / VERY IMPORTANT</div>';
+const poissonTableFile = 'other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf';
+const poissonViewerUrl = `https://yohman.github.io/26-2-StatsB/viewer.html?${new URLSearchParams({file:poissonTableFile,title:'ポアソン分布表 / Poisson table',week:'W03',return:'agenda.html#week-03'})}`;
+const poissonViewerLink = `[ポアソン分布表をビューアーで開く ↗](${poissonViewerUrl})`;
 const poissonTableLink = '[ポアソン分布表を開く](https://yohman.github.io/26-2-StatsB/other%20material/2025%20yoh/06_%5BAL%5D%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83_1_%E9%9B%A2%E6%95%A3%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%20%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3/%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E8%A1%A8.pdf)';
 // Exact-probability entries transcribed from the student handout (three decimals).
 const poissonRows = [['0','0.011','0.007','0.004'],['1','0.050','0.034','0.022'],['2','0.112','0.084','0.062'],['3','0.169','0.140','0.113'],['4','0.190','0.175','0.156']];
@@ -41,17 +45,18 @@ add('1本ならベルヌーイ、5本なら二項', `${panels([['1本の結果',
 add('4本成功にも、5通りある', `<div class="sequences">● ● ● ● ×<br>● ● ● × ●<br>● ● × ● ●<br>● × ● ● ●<br>× ● ● ● ●</div>\n\n${math(String.raw`\Pr(X=4)=\underbrace{5}_{\text{並び方}}\times\underbrace{(0.93)^4(0.07)}_{\text{1通りの確率}}\approx26.18\%`)}\n\n${note('● = 成功 ／ × = 失敗。成功数は同じでも、失敗する位置が違う。')}`);
 add('並び方を数える記号：C', `${math(String.raw`{}_nC_x=\frac{n!}{x!(n-x)!},\qquad {}_5C_4=5`)}\n\n${panels([['n','全部で何回？','5本投げる'],['x','成功は何回？','4本成功'],['C','何通り？','失敗する位置が5通り']])}\n\n${note('階乗 n! は n × (n−1) × … × 1。0! = 1。教科書 p.119。')}`, 'book-reference');
 add('ロボットとヤギで、並び方を見よう', `🤖 🤖 🐐 🐐 🐐　　🤖 🐐 🤖 🐐 🐐\n\n5か所にロボット2体を置く。順番は何通り？\n\n${math(String.raw`{}_5C_2=\frac{5!}{2!3!}=10`)}\n\n${go('combinations')}\n\n${note('n と x のスライダーを動かす → 式の数字と、全ての並び方が変わる。')}`, 'try');
-add('二項分布：式を3つに分ける', `${math(String.raw`\Pr(X=x)={}_nC_x\,\pi^x(1-\pi)^{n-x}`)}\n\n${panels([['並び方','ₙCₓ','成功の位置を選ぶ'],['成功','πˣ','x 回成功する'],['失敗','(1−π)ⁿ⁻ˣ','残り n−x 回は失敗']])}\n\n${note('n 回・独立・成功率 π が一定。この条件がそろったときに使う。教科書 p.119。')}`, 'book-reference');
-add('「ちょうど4本」と「4本以上」は違う', `${math(String.raw`\begin{aligned}\Pr(X=4)&\approx26.18\%\\\Pr(X\ge4)&=\Pr(X=4)+\Pr(X=5)\approx95.75\%\end{aligned}`)}\n\n4本以上なら、**4本と5本の両方**を足す。\n\n${note('「以上」は、その値を含む。まず、どの結果を足すかを決めよう。')}`);
+add('二項分布の公式', `<!-- _footer: '' -->\n\n${math(String.raw`\Pr(X=x)={}_nC_x\,\pi^x(1-\pi)^{n-x}`)}`, 'book-reference formula-only');
+add('二項分布：式を3つに分ける', `${importantBadge}\n\n${math(String.raw`\Pr(X=x)={}_nC_x\,\pi^x(1-\pi)^{n-x}`)}\n\n${panels([['並び方','ₙCₓ','成功の位置を選ぶ'],['成功','πˣ','x 回成功する'],['失敗','(1−π)ⁿ⁻ˣ','残り n−x 回は失敗']])}\n\n${note('n 回・独立・成功率 π が一定。この条件がそろったときに使う。教科書 p.119。')}`, 'book-reference');
+add('「ちょうど4本」と「4本以上」は違う', `${math(String.raw`\begin{aligned}\Pr(X=4)&={}_5C_4(0.93)^4(0.07)^1\\&=5\times(0.93)^4\times0.07\approx0.2618\\[10pt]\Pr(X=5)&={}_5C_5(0.93)^5(0.07)^0\\&=1\times(0.93)^5\times1\approx0.6957\end{aligned}`)}\n\n${math(String.raw`\Pr(X\ge4)=\Pr(X=4)+\Pr(X=5)\approx0.9575=95.75\%`)}\n\n${note('n = 5、π = 0.93。「4本以上」は4本と5本の両方を含む。確率は丸める前の値で足す。')}`, 'binomial-worked');
 add('NBAラボ：予想して、投げて、比べる', `${math(String.raw`X\sim B(5,0.93),\qquad\Pr(X\ge4)\approx95.75\%`)}\n\n**①** 1セット5本。何本入った？\n\n**②** 100セット繰り返す。成功数の分布は？\n\n**③** 成功率を65％に変える。どの棒が変わる？\n\n${go('nba')}\n\n${note('線は理論の確率、棒は実測の割合。試行を増やしても毎回一致するわけではない。')}`, 'try');
-add('平均4.65本。でも4.65本は入らない', `${math(String.raw`\begin{aligned}E(X)&=n\pi=5\times0.93=4.65\\\operatorname{Var}(X)&=n\pi(1-\pi)=5\times0.93\times0.07=0.3255\end{aligned}`)}\n\n**期待値**：5本のセットを何度も繰り返した平均。\n\n**分散**：セットごとの成功数のばらつき。\n\n${note('平均は小数でもよい。実際の成功数は0〜5の整数。教科書 p.120。')}`, 'book-reference');
+add('二項分布の期待値と分散', `${importantBadge}\n\n<div class="moment-block"><h3>期待値 E(X)：成功数の平均</h3>\n\n${math(String.raw`E(X)=n\pi=5\times0.93=4.65`)}\n\n</div><div class="moment-block variance-block"><h3>分散 Var(X)：成功数のばらつき</h3>\n\n${math(String.raw`\operatorname{Var}(X)=n\pi(1-\pi)=5\times0.93\times0.07=0.3255`)}\n\n</div>\n\n${note('期待値4.65本は、5本のセットを何度も繰り返した平均。1セットで4.65本入るという意味ではない。分散の単位は本²。教科書 p.120。')}`, 'book-reference moments-important');
 add('NBAの話が、教科書の野球につながる', `打率32％の選手が5打席で **ちょうど3安打**。\n\n${math(String.raw`\Pr(X=3)={}_5C_3(0.32)^3(0.68)^2\approx0.151519`)}\n\n<div class="answer">約15.15％</div>\n\n${note('フリースローの成功 → ヒットに置き換えただけ。教科書 p.118–120の例。')}`, 'book-reference');
 add('野球ラボ：1打席と1試合を分ける', `${math(String.raw`\underbrace{\pi=0.32}_{\text{1打席のヒット率}}\quad\ne\quad\underbrace{\Pr(X=3)\approx0.1515}_{\text{5打席で3安打の確率}}`)}\n\n1試合を5打席として、100試合を繰り返そう。\n\n**3安打の棒**と15.15％を比較する。\n\n${go('batting')}`, 'try');
 add('今度は、回数が決まっていない', `<div class="wide-photo"><img src="images/costco.jpg" alt="Costco"></div>\n\nあなたはコストコでレジ担当。退勤まで、あと10分。\n\nその10分間に、**新しく何人来る？**\n\n${note('一定時間に新しく到着する人数を考えよう。')}`);
 add('平均5人。でも、今日は3人？8人？', `<div class="photo-side"><img src="images/checkout.jpg" alt="Costco checkout"><div><div class="answer">10分で平均5人</div><p>0人、1人、2人、…<br>上限は決まっていない。</p><p>知りたいこと：<br><strong>ちょうど3人？　5人以上？</strong></p></div></div>\n\n${note('仮想の授業モデルです。実際のコストコの測定値ではありません。')}`);
 ref('4','ポアソン分布','p.120','固定した時間・範囲の中に、何件起こるか。\n\n平均の発生数 **λ（ラムダ）** が、分布を決める。');
 add('ポアソンの式と、表のつながり', `${math(String.raw`X\sim\mathrm{Poisson}(\lambda),\qquad \Pr(X=x)=\frac{\lambda^xe^{-\lambda}}{x!}`)}\n\n**この式で計算した確率が、表の中に並んでいる。**\n\n${panels([['平均人数','λ = 5','表では μ = 5.0 の列'],['求めたい人数','x = 3','表では x = 3 の行'],['交点を読む','Pr(X = 3)','「ちょうど3人」の確率']])}\n\n${note('配布表の μ と、スライドの λ は同じ平均発生数。授業では e を計算せず、表から確率を読む。教科書 p.120。')}`, 'book-reference');
-add('ちょうど3人：列と行の交点を読む', `<div class="lookup-layout"><div><div class="lookup-caption">配布ポアソン分布表の抜粋</div>${tableExcerpt(['3'])}</div><div><p><strong>① 平均5人</strong>：μ = 5.0 の列</p><p><strong>② ちょうど3人</strong>：x = 3 の行</p><p><strong>③ 交点の 0.140 を読む</strong></p>\n\n${math(String.raw`\Pr(X=3)\approx0.140`)}\n\n<div class="lookup-answer">約14.0％</div></div></div>\n\n${note('0.140 は「3人以下」ではなく「ちょうど3人」。表の値は小数第3位に丸めてある。')}`, 'table-reading');
+add('ちょうど3人：列と行の交点を読む', `<div class="lookup-layout"><div><div class="lookup-caption">配布ポアソン分布表の抜粋</div>${tableExcerpt(['3'])}</div><div><p><strong>① 平均5人</strong>：μ = 5.0 の列</p><p><strong>② ちょうど3人</strong>：x = 3 の行</p><p><strong>③ 交点の 0.140 を読む</strong></p>\n\n${math(String.raw`\Pr(X=3)\approx0.140`)}\n\n<div class="lookup-answer">約14.0％</div></div></div>\n\n${poissonViewerLink}\n\n${note('0.140 は「3人以下」ではなく「ちょうど3人」。表の値は小数第3位に丸めてある。')}`, 'table-reading');
 add('5人以上：0〜4人を足して、1から引く', `${math(String.raw`\Pr(X\ge5)=1-\{\Pr(X=0)+\cdots+\Pr(X=4)\}`)}\n\n<div class="lookup-layout"><div><div class="lookup-caption">μ = 5.0 の列、x = 0〜4 の5マス</div>${tableExcerpt(['0','1','2','3','4'])}</div><div><p>表の確率を<strong>小数のまま</strong>足す。</p>\n\n${math(String.raw`\begin{aligned}\Pr(X\le4)&\approx0.007+0.034+0.084\\&\quad+0.140+0.175=0.440\\\Pr(X\ge5)&\approx1-0.440=0.560\end{aligned}`)}\n\n<div class="lookup-answer">約56.0％</div></div></div>\n\n${note('「5人以上」なので、引くのは4人まで。x = 5 のマスは引かない。')}`, 'table-reading');
 add('式の中身を、人数で確かめる', `| 求めたいこと | 表で読む場所 | 答えの出し方 |\n| --- | --- | --- |\n| ちょうど3人 | μ = 5.0、x = 3 | 0.140 ≈ 14.0％ |\n| 4人以下 | μ = 5.0、x = 0〜4 | 5マスを足す ≈ 0.440 |\n| 5人以上 | 4人以下の反対 | 1 − 0.440 ≈ 56.0％ |\n\n${poissonTableLink}\n\n${note('表の各マスは「ちょうど x 人」の確率。表の丸めにより、計算機の値（約14.04％・55.95％）とは少し違う。表を使う問題では表の精度で答える。')}`);
 add('コストコラボ：10分間を何度も繰り返す', `${math(String.raw`\lambda=5,\qquad E(X)=\operatorname{Var}(X)=5`)}\n\n**①** 1回の10分間を再生。いつ、何人来た？\n\n**②** 100回繰り返して、人数の棒グラフを作る。\n\n**③** 時間を20分に。平均人数はどう変わる？\n\n${go('costco')}\n\n${note('到着時刻はランダム。平均到着率が一定なら、時間を2倍にするとλも2倍。')}`, 'try');
@@ -92,6 +97,17 @@ section.title .note {color:#b6d3df;} .route {font-size:23px; color:#c0e7f4; marg
 section.book-divider {background:#e7f3fa; border-top:12px solid #399ac8;} section.book-divider h2 {font-size:23px; color:#237da7; margin-bottom:40px;}
 .chapter {font-size:56px; color:#184762; font-weight:800;} .pages {font-size:28px; color:#237da7; margin:15px 0 34px;}
 section.book-reference {background:#f0f7fb; border-top:7px solid #399ac8;} section.book-reference h2 {color:#216a91;}
+.important-badge {position:absolute; top:24px; right:60px; padding:8px 18px; background:#ffe3a3; border:2px solid #b97912; color:#704508; border-radius:7px; font-size:18px; font-weight:800; letter-spacing:.04em;}
+section.formula-only h2 {display:none;}
+section.formula-only .katex-display {font-size:1.9em; margin:0;}
+section.binomial-worked .katex-display {font-size:.98em; margin:15px 0;}
+section.moments-important h2 {margin-bottom:22px;}
+.moment-block {border-left:5px solid #176d82; padding-left:23px; margin:12px 0;}
+.moment-block h3 {font-size:25px; color:#176d82; margin:0;}
+.variance-block {border-color:#886524;}
+.variance-block h3 {color:#886524;}
+section.moments-important .katex-display {font-size:1.03em; margin:10px 0;}
+section.moments-important .note {margin-top:12px;}
 section.try {background:#edf5ef; border-top:7px solid #388065;} section.try h2 {color:#2b624b;}
 section.challenge {background:#fff8e8; border-top:9px solid #be8530;}
 section.challenge h2 {color:#825519; margin-bottom:22px;}
