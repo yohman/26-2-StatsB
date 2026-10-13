@@ -67,12 +67,15 @@
     };
     async function showPage(delta) {
       if (busy || (delta < 0 && pageNumber === 1) || (delta > 0 && total && pageNumber === total)) return;
+      const originFocus=document.activeElement;
+      let cancelled=false;
       busy = true;
       sync();
       try {
         const pdf = await loadPdf(card.dataset.slidePdf);
         total = pdf.numPages;
         const target = Math.max(1, Math.min(total, pageNumber + delta));
+        if(!await window.confirmSlideAdvance(pdf,pageNumber,target,card)){cancelled=true;return;}
         const page = await pdf.getPage(target);
         const base = page.getViewport({ scale: 1 });
         const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -97,6 +100,7 @@
         busy = false;
         const failed = status.textContent === 'Open preview' || status.textContent === 'プレビューを開く';
         sync();
+        if(cancelled&&originFocus?.isConnected)originFocus.focus({preventScroll:true});
         if (failed) status.textContent = document.documentElement.dataset.language === 'en' ? 'Open preview' : 'プレビューを開く';
       }
     }
@@ -104,6 +108,7 @@
     next.addEventListener('click', () => showPage(1));
     window.bindSlideSwipe(cover, () => showPage(-1), () => showPage(1));
     card.addEventListener('keydown', event => {
+      if(document.querySelector('.slide-answer-confirm[open]'))return;
       if (event.altKey || event.ctrlKey || event.metaKey || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
       event.preventDefault();
       showPage(event.key === 'ArrowLeft' ? -1 : 1);

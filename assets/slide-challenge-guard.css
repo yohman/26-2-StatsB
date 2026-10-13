@@ -1,0 +1,9 @@
+.slide-answer-confirm{box-sizing:border-box;width:min(480px,calc(100vw - 36px));padding:28px;border:1px solid #be8530;border-top:6px solid #be8530;border-radius:10px;background:#fffaf0;color:#30372f;box-shadow:0 18px 65px #0005;font:16px/1.65 Manrope,'Hiragino Sans',sans-serif}
+/* Keep the current problem visible behind the confirmation. */
+.slide-answer-confirm::backdrop{background:#17262bb3}
+.slide-answer-confirm h2{margin:0 0 12px;font:700 24px/1.35 Manrope,'Hiragino Sans',sans-serif;color:#825519}
+.slide-answer-confirm p{margin:0 0 24px;font-size:15px}
+.slide-answer-confirm>div{display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap}
+.slide-answer-confirm button{min-height:44px;padding:10px 16px;border:1px solid #a5b2a7;border-radius:5px;background:white;color:#344b40;font:700 14px Manrope,'Hiragino Sans',sans-serif;cursor:pointer}
+.slide-answer-confirm [data-reveal]{background:#825519;border-color:#825519;color:#fff}
+.slide-answer-confirm button:focus-visible{outline:3px solid #176d82;outline-offset:3px}
