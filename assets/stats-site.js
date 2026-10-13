@@ -158,7 +158,7 @@ function lectureDecks(materials, week) {
 function slideThumbnail(deck, week) {
   if (deck.preview?.includes('materials/2026-tsumura/')) {
     const number = deck.preview.match(/\/26_(\d{2})_/)?.[1];
-    if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png${number === '03' ? '?v=20261007-tsumura-v4' : ''}`;
+    if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png${number === '03' ? '?v=20261014-tsumura-v7' : ''}`;
   }
   if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
   if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261007-kuji-image-1';
