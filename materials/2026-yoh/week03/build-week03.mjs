@@ -31,7 +31,8 @@ barChart('nba-distribution.svg',Array.from({length:6},(_,x)=>[1,5,10,10,5,1][x]*
 let poissonProbability=Math.exp(-5);
 barChart('costco-distribution.svg',Array.from({length:15},(_,x)=>x?(poissonProbability*=5/x):poissonProbability),x=>x>=5,'Arrivals in ten minutes · x');
 
-add('最後のフリースロー、誰に任せる？', `<div class="players"><img src="images/curry.png" alt="Stephen Curry"><img src="images/giannis.png" alt="Giannis Antetokounmpo"></div>\n\nカリー？　ヤニス？　「上手そう」から、数字で考えてみる。\n\n${note('現在の選手成績を比較するスライドではありません。')}`, 'opening');
+add('5本連続。本当に？', `<!-- _footer: '' -->\n<!-- _paginate: false -->\n\n![bg cover](images/curry-full-court-still.jpg)\n\n<a class="full-video" href="https://www.youtube.com/watch?v=xt5vzE0QCvk" aria-label="Curryの動画を見る"><span>▶ 動画を見る / Watch video</span></a>\n\n<div class="video-disclosure">映像：Ari Fararooy ／ 編集された映像です。実測の成功率を示すものではありません。</div>\n\n<!-- Screenshot from the supplied video, captured in-browser. Source: https://www.youtube.com/watch?v=xt5vzE0QCvk . Edited-video context: https://www.scrippsnews.com/sports/steph-curry-on-fake-viral-video-of-full-court-shots . Full-court footage is separate from the hypothetical free-throw model. -->`, 'video-opening');
+add('最後のフリースロー、誰に任せる？', `<div class="players"><div><a href="https://www.youtube.com/watch?v=hUOfC2ilXak"><img src="images/curry.png" alt="Stephen Curry：動画を見る"></a><a class="player-stats" href="https://www.nba.com/stats/player/201939?SeasonType=Regular+Season">Curry · NBA公式成績 / Official stats ↗</a></div><div><a href="https://www.youtube.com/watch?v=H0lvVOFt7-A&t=187s"><img src="images/giannis.png" alt="Giannis Antetokounmpo：動画を見る"></a><a class="player-stats" href="https://www.nba.com/stats/player/203507?SeasonType=Regular+Season">Giannis · NBA公式成績 / Official stats ↗</a></div></div>\n\nカリー？　ヤニス？　「上手そう」から、数字で考えてみる。\n\n${note('画像をクリックすると動画へ。公式成績では、シーズンとFT％（フリースロー成功率）を確認しよう。')}`, 'opening');
 add('93％なら、5本全部入る？', `1本の成功率を **93％** として、5本のフリースローを考える。\n\n${panels([['チャンス','5本','何回投げるか'],['1本の成功率','93％','入る／外れる'],['知りたいこと','何本？','5本中の成功数']])}\n\nまず予想：全部成功する確率も93％？\n\n${note('π = 0.93 は授業用の設定。各投球は独立で、成功率は一定と仮定。')}`);
 add('5本全部成功する確率は…', `${math(String.raw`\Pr(X=5)=(0.93)^5\approx0.6957`)}\n\n<div class="answer">約69.57％</div>\n\n1本ごとの93％と、5本全部の確率は違う。\n\n${note('成功・成功・成功・成功・成功 → 独立な5回の確率を掛ける。')}`);
 add('Week 3 · 成功の回数、到着の人数', `NBAからコストコへ。\n\n**回数を固定する** → 二項分布\n\n**時間を固定する** → ポアソン分布\n\n<div class="route">4 離散確率分布　→　5 連続確率分布　→　6 平均値と分散</div>\n\n${note('教科書 第2章 第2節「確率分布」p.118–129 ／ Week 2の続き')}`, 'title');
@@ -79,7 +80,13 @@ section .katex-display {font-size:1.10em; margin:23px 0; text-align:center;}
 .answer {font-size:64px; font-weight:800; color:#176d82; margin:18px 0; text-align:center;}
 .panels {display:flex; gap:20px; margin:24px 0;} .panel {flex:1; background:#edf2f3; padding:22px; border-radius:12px;}
 .label {font-size:20px; color:#69777c;} .value {font-family:Georgia,serif; font-size:39px; color:#176d82; margin:8px 0; font-weight:700;}
-.detail {font-size:20px; color:#48585e;} .players {display:flex; gap:20px;} .players img {width:calc(50% - 10px); height:230px; object-fit:cover; border-radius:12px;}
+.detail {font-size:20px; color:#48585e;} .players {display:flex; gap:20px;} .players > div {flex:1; min-width:0;} .players img {width:100%; height:230px; object-fit:cover; border-radius:12px;}
+.player-stats {display:block; font-size:20px; color:#176d82; margin:10px 0 6px; text-decoration:underline;}
+section.video-opening {padding:0; color:#fff; background:#000;}
+section.video-opening h2 {position:absolute; top:50px; left:60px; color:white; font-size:60px; text-shadow:0 2px 14px #000; z-index:3; pointer-events:none;}
+section.video-opening .full-video {position:absolute; inset:0; display:block; z-index:2; color:white; background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 35%,transparent 60%,rgba(0,0,0,.7));}
+.full-video span {position:absolute; bottom:85px; left:60px; font-size:27px; font-weight:700; background:#176d82; border-radius:8px; padding:13px 25px;}
+.video-disclosure {position:absolute; bottom:25px; left:60px; right:40px; font-size:17px; color:white; z-index:3; pointer-events:none;}
 section.opening h2 {font-size:48px;} section.title {background:#173c50; color:#fff;} section.title h2,section.title strong {color:#fff;}
 section.title .note {color:#b6d3df;} .route {font-size:23px; color:#c0e7f4; margin-top:30px;}
 section.book-divider {background:#e7f3fa; border-top:12px solid #399ac8;} section.book-divider h2 {font-size:23px; color:#237da7; margin-bottom:40px;}
