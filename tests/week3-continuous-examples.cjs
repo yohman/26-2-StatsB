@@ -1,8 +1,8 @@
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const deck = fs.readFileSync('materials/2026-yoh/week03/w3.md', 'utf8');
+const deck = fs.readFileSync('materials/2026-yoh/week06/w6.md', 'utf8');
 const slides = deck.split(/\n---\n/).filter(s => /^## /m.test(s));
-assert.equal(slides.length, 51);
+assert.equal(slides.length, 13);
 const slide = title => {
   const match = slides.find(s => s.includes(`## ${title}\n`));
   assert(match, `Missing ${title}`);
@@ -11,15 +11,15 @@ const slide = title => {
 assert(Math.abs((169.8 - 160) / 5 - 1.96) < 1e-12);
 assert(slide('正規分布：このロボット、ゲートを通れる？').includes(String.raw`\frac{169.8-160}{5}=1.96`));
 assert(slide('正規分布：このロボット、ゲートを通れる？').includes('images/normal-height-tail.svg'));
-const curve = fs.readFileSync('materials/2026-yoh/week03/images/normal-height-tail.svg', 'utf8');
+const curve = fs.readFileSync('materials/2026-yoh/week06/images/normal-height-tail.svg', 'utf8');
 for (const label of ['平均 μ = 160cm', 'σ = 5cm', '169.8cm以上', '求める確率はこの面積']) assert(curve.includes(label));
 assert(curve.includes('fill="#e5aa36"'));
 const normalTable = slide('正規分布表：行1.9、列0.06を読む');
 assert(normalTable.includes('0.02500'));
 assert(normalTable.includes('標準正規分布表をビューアーで開く'));
-assert(normalTable.includes('viewer.html?file=materials%2F2026-yoh%2Fweek03%2Fstandard-normal-table.pdf'));
-assert(fs.existsSync('materials/2026-yoh/week03/standard-normal-table.pdf'));
-assert(fs.readFileSync('content/weeks/03-poisson.md','utf8').includes('[標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week03/standard-normal-table.pdf) {resource}'));
+assert(normalTable.includes('viewer.html?file=materials%2F2026-yoh%2Fweek06%2Fstandard-normal-table.pdf'));
+assert(fs.existsSync('materials/2026-yoh/week06/standard-normal-table.pdf'));
+assert(fs.readFileSync('content/weeks/06-t-chi.md','utf8').includes('[標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week06/standard-normal-table.pdf) {resource}'));
 assert(normalTable.includes('確率') || normalTable.includes('予測割合'));
 assert.equal(6 / Math.sqrt(9), 2);
 assert.equal((64 - 60) / 2, 2);
@@ -38,6 +38,6 @@ assert.equal(Math.sqrt(400), 20);
 assert(slide('同じ平均30分。40分後の授業に間に合う？').includes('**50％**'));
 assert(slide('同じ平均30分。40分後の授業に間に合う？').includes('一般に締切内の確率は決まらない'));
 for (const id of ['normal-w2', 't-w2', 'chi-w2', 'delivery']) {
-  assert(deck.includes(`activity=${id}#week-03`));
+  assert(deck.includes(`activity=${id}#week-06`));
 }
 console.log('Continuous examples: standardization, tail lookup, t, chi-square, expectation, variance, and limitations verified.');

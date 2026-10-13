@@ -1,9 +1,11 @@
-import {writeFileSync} from 'node:fs';
+import {writeFileSync, mkdirSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 // Narrative teaching source. The generated w3.md is also editable Marp Markdown.
 const here = dirname(fileURLToPath(import.meta.url));
+const week06 = resolve(here, '../week06');
+mkdirSync(resolve(week06,'images'), {recursive:true});
 // A data chart of N(160, 5²), with one SD and the requested upper-tail area.
 const heightChart = {mean:160, sd:5, threshold:169.8, min:140, max:180};
 function normalHeightChart() {
@@ -32,7 +34,7 @@ function normalHeightChart() {
   <text x="650" y="266" font-size="16">cm</text>
   </g></svg>`;
 }
-writeFileSync(resolve(here,'images','normal-height-tail.svg'),normalHeightChart());
+writeFileSync(resolve(week06,'images','normal-height-tail.svg'),normalHeightChart());
 const slides = [];
 const add = (title, content, style = '') => {
   slides.push(`${style ? `<!-- _class: ${style} -->\n\n` : ''}## ${title}\n\n${content}`);
@@ -46,8 +48,8 @@ const importantBadge = '<div class="important-badge">最重要 / VERY IMPORTANT<
 const poissonTableFile = 'other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf';
 const poissonViewerUrl = `https://yohman.github.io/26-2-StatsB/viewer.html?${new URLSearchParams({file:poissonTableFile,title:'ポアソン分布表 / Poisson table',week:'W03',return:'agenda.html#week-03'})}`;
 const poissonViewerLink = `[ポアソン分布表をビューアーで開く ↗](${poissonViewerUrl})`;
-const normalTableFile = 'materials/2026-yoh/week03/standard-normal-table.pdf';
-const normalTableViewerUrl = `https://yohman.github.io/26-2-StatsB/viewer.html?${new URLSearchParams({file:normalTableFile,title:'標準正規分布表 / Standard normal table',week:'W03',return:'agenda.html#week-03'})}`;
+const normalTableFile = 'materials/2026-yoh/week06/standard-normal-table.pdf';
+const normalTableViewerUrl = `https://yohman.github.io/26-2-StatsB/viewer.html?${new URLSearchParams({file:normalTableFile,title:'標準正規分布表 / Standard normal table',week:'W06',return:'agenda.html#week-06'})}`;
 const normalTableViewerLink = `[標準正規分布表をビューアーで開く ↗](${normalTableViewerUrl})`;
 const poissonTableLink = '[ポアソン分布表を開く](https://yohman.github.io/26-2-StatsB/other%20material/2025%20yoh/06_%5BAL%5D%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83_1_%E9%9B%A2%E6%95%A3%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%20%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3/%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E8%A1%A8.pdf)';
 // Exact-probability entries transcribed from the student handout (three decimals).
@@ -71,7 +73,7 @@ add('5本連続。本当に？', `<!-- _footer: '' -->\n<!-- _paginate: false --
 add('最後のフリースロー、誰に任せる？', `<div class="players"><div><a href="https://www.youtube.com/watch?v=hUOfC2ilXak"><img src="images/curry.png" alt="Stephen Curry：動画を見る"></a><a class="player-stats" href="https://www.nba.com/stats/player/201939?SeasonType=Regular+Season">Curry · NBA公式成績 / Official stats ↗</a></div><div><a href="https://www.youtube.com/watch?v=H0lvVOFt7-A&t=187s"><img src="images/giannis.png" alt="Giannis Antetokounmpo：動画を見る"></a><a class="player-stats" href="https://www.nba.com/stats/player/203507?SeasonType=Regular+Season">Giannis · NBA公式成績 / Official stats ↗</a></div></div>\n\nカリー？　ヤニス？　「上手そう」から、数字で考えてみる。\n\n${note('画像をクリックすると動画へ。公式成績では、シーズンとFT％（フリースロー成功率）を確認しよう。')}`, 'opening');
 add('93％なら、5本全部入る？', `1本の成功率を **93％** として、5本のフリースローを考える。\n\n${panels([['チャンス','5本','何回投げるか'],['1本の成功率','93％','入る／外れる'],['知りたいこと','何本？','5本中の成功数']])}\n\nまず予想：全部成功する確率も93％？\n\n${note('π = 0.93 は授業用の設定。各投球は独立で、成功率は一定と仮定。')}`);
 add('5本全部成功する確率は…', `${math(String.raw`\Pr(X=5)=(0.93)^5\approx0.6957`)}\n\n<div class="answer">約69.57％</div>\n\n1本ごとの93％と、5本全部の確率は違う。\n\n${note('成功・成功・成功・成功・成功 → 独立な5回の確率を掛ける。')}`);
-add('Week 3 · 成功の回数、到着の人数', `NBAからコストコへ。\n\n**回数を固定する** → 二項分布\n\n**時間を固定する** → ポアソン分布\n\n<div class="route">4 離散確率分布　→　5 連続確率分布　→　6 平均値と分散</div>\n\n${note('教科書 第2章 第2節「確率分布」p.118–129 ／ Week 2の続き')}`, 'title');
+add('Week 3 · 成功の回数、到着の人数', `NBAからコストコへ。\n\n**回数を固定する** → 二項分布\n\n**時間を固定する** → ポアソン分布\n\n<div class="route">4 離散確率分布：二項分布・ポアソン分布</div>\n\n${note('教科書 第2章 第2節 4「離散確率分布」p.118–120 ／ Week 2の続き')}`, 'title');
 ref('4','離散確率分布','p.118–120','成功した回数を数える。\n\nまずは **二項分布**：決まった回数の中で、何回成功するか。');
 add('1本ならベルヌーイ、5本なら二項', `${panels([['1本の結果','0 または 1','外れる = 0 ／ 入る = 1'],['5本の成功数','0〜5','X = 5本のうち入った本数']])}\n\n${math(String.raw`Y\sim\mathrm{Bernoulli}(\pi),\qquad X\sim B(n,\pi)`)}\n\n${note('大文字 X は成功数を表す確率変数。実際に3本入ったら、実現値 x = 3。')}`, 'book-reference');
 add('4本成功にも、5通りある', `<div class="sequences">● ● ● ● ×<br>● ● ● × ●<br>● ● × ● ●<br>● × ● ● ●<br>× ● ● ● ●</div>\n\n${math(String.raw`\Pr(X=4)=\underbrace{5}_{\text{並び方}}\times\underbrace{(0.93)^4(0.07)}_{\text{1通りの確率}}\approx26.18\%`)}\n\n${note('● = 成功 ／ × = 失敗。成功数は同じでも、失敗する位置が違う。')}`);
@@ -337,5 +339,12 @@ for (const pair of challengePairs) {
   if(index<0)throw new Error(`Missing challenge anchor: ${pair.after}`);
   slides.splice(index+1,0,pair.problem,pair.check);
 }
-writeFileSync(resolve(here, 'w3.md'), `---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 3'\n---\n\n<style>\n${css}\n</style>\n\n${slides.join('\n\n---\n\n')}\n`);
-console.log(`Week 3: ${slides.length} slides. NBA → binomial → Costco → Poisson → continuous → mean & variance.`);
+// Split by content, not page numbers: preserve the AL closing slide in Week 3.
+const continuousStart = slides.findIndex(slide=>slide.includes('class="chapter">5　連続確率分布'));
+const alClosing = slides.findIndex(slide=>slide.includes('## AL：式に入れる前に、4つ書く'));
+if (continuousStart < 0 || alClosing <= continuousStart) throw new Error('Missing week split anchors');
+const week06Slides = slides.splice(continuousStart, alClosing-continuousStart).map(slide=>slide.replaceAll('#week-03','#week-06'));
+const document = (week, body) => `---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week ${week}'\n---\n\n<style>\n${css}\n</style>\n\n${body.join('\n\n---\n\n')}\n`;
+writeFileSync(resolve(here,'w3.md'),document(3,slides));
+writeFileSync(resolve(week06,'w6.md'),document(6,week06Slides));
+console.log(`Week 3: ${slides.length} slides, binomial and Poisson plus AL closing. Week 6: ${week06Slides.length} continuous-distribution slides.`);

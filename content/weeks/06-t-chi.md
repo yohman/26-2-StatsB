@@ -21,12 +21,14 @@ prepare_en: Review the difference between sample variance and unbiased sample va
 
 ## Textbook
 
-- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+- 第2章 第2節 5〜6「連続確率分布・確率分布の平均値と分散」p.121–129 (Chapter 2, Section 2, subsections 5–6: Continuous Distributions, Means and Variances, pp.121–129)
 
 ## Materials
 
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pptx) {primary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pdf) {primary}
+- [Yoh's Week 6 lecture](materials/2026-yoh/week06/w6.pdf) {primary}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pptx) {supplementary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pdf) {supplementary}
+- [標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week06/standard-normal-table.pdf) {resource}
 - [AL用ワークシート](weeks/06-continuous-distributions-ii/06_AL用ワークシート.xlsx) {worksheet}
 - [Yoh lecture: sampling distribution of the mean and central limit theorem](other material/2025 yoh/07 確率分布_2_連続確率分布/w8.pdf) {yoh}
 - [Yoh lecture: normal and chi-square distributions](other material/2025 yoh/07 確率分布_2_連続確率分布/w9-6.pdf) {yoh}

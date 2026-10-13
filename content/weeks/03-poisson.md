@@ -18,11 +18,10 @@ prepare_en: Review random variables, expected value, and discrete versus continu
 - NBAフリースローから二項分布の確率、期待値、分散へ (from NBA free throws to binomial probabilities, expected value, and variance)
 - 打率の事例を使った二項分布の計算 (binomial calculations using a batting-average example)
 - コストコの到着人数からポアソン分布へ (from arrivals at Costco to the Poisson distribution)
-- 連続確率分布と、分布の平均・分散 (continuous probability distributions, distribution means and variances)
 
 ## Textbook
 
-- 第2章 第2節 4〜6「離散確率分布・連続確率分布・平均値と分散」p.118–129 (Chapter 2, Section 2, subsections 4–6: Discrete Distributions, Continuous Distributions, Means and Variances, pp.118–129)
+- 第2章 第2節 4「離散確率分布」p.118–120 (Chapter 2, Section 2, subsection 4: Discrete Distributions, pp.118–120)
 
 ## Materials
 
@@ -30,5 +29,4 @@ prepare_en: Review random variables, expected value, and discrete versus continu
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v4.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v4.pdf) {supplementary}
 - [AL用ワークシート](weeks/03-discrete-distributions-ii/03_AL用ワークシート.xlsx) {worksheet}
-- [標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week03/standard-normal-table.pdf) {resource}
 - [ポアソン分布表 / Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {resource}
