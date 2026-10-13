@@ -2,7 +2,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const deck = fs.readFileSync('materials/2026-yoh/week03/w3.md', 'utf8');
 const slides = deck.split(/\n---\n/).filter(s => /^## /m.test(s));
-assert.equal(slides.length, 50);
+assert.equal(slides.length, 51);
 const slide = title => {
   const match = slides.find(s => s.includes(`## ${title}\n`));
   assert(match, `Missing ${title}`);

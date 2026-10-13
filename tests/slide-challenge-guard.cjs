@@ -10,7 +10,7 @@ assert(!isChallengeText('答え合わせ① チャレンジ① 自分で解く')
 const deck=fs.readFileSync('materials/2026-yoh/week03/w3.md','utf8');
 const slides=deck.split(/\n---\n/).filter(s=>/^## /m.test(s));
 const detected=slides.flatMap((s,i)=>isChallengeText(s.replace(/<!--[\s\S]*?-->/g,'').replace(/^## /m,''))?[i+1]:[]);
-assert.deepEqual(detected,[10,21,35]);
+assert.deepEqual(detected,[10,21,36]);
 for(const file of ['agenda.html','viewer.html']){
   const html=fs.readFileSync(file,'utf8');
   assert(html.indexOf('assets/slide-challenge-guard.js')<html.indexOf('assets/slide-browsing.js'));
@@ -44,7 +44,7 @@ console.log('Challenge recognition and shared viewer/thumbnail navigation guards
     const page=await pdf.getPage(n),content=await page.getTextContent();
     if(isChallengeText(content.items.map(x=>x.str||'').join('')))actual.push(n);
   }
-  assert.deepEqual(actual,[10,21,35]);
+  assert.deepEqual(actual,[10,21,36]);
   await pdf.destroy();
-  console.log('Exported PDF challenge pages detected correctly: 10, 21, 35.');
+  console.log('Exported PDF challenge pages detected correctly: 10, 21, 36.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
