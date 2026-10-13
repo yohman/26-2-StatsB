@@ -46,6 +46,9 @@ const importantBadge = '<div class="important-badge">最重要 / VERY IMPORTANT<
 const poissonTableFile = 'other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf';
 const poissonViewerUrl = `https://yohman.github.io/26-2-StatsB/viewer.html?${new URLSearchParams({file:poissonTableFile,title:'ポアソン分布表 / Poisson table',week:'W03',return:'agenda.html#week-03'})}`;
 const poissonViewerLink = `[ポアソン分布表をビューアーで開く ↗](${poissonViewerUrl})`;
+const normalTableFile = 'materials/2026-yoh/week03/standard-normal-table.pdf';
+const normalTableViewerUrl = `https://yohman.github.io/26-2-StatsB/viewer.html?${new URLSearchParams({file:normalTableFile,title:'標準正規分布表 / Standard normal table',week:'W03',return:'agenda.html#week-03'})}`;
+const normalTableViewerLink = `[標準正規分布表をビューアーで開く ↗](${normalTableViewerUrl})`;
 const poissonTableLink = '[ポアソン分布表を開く](https://yohman.github.io/26-2-StatsB/other%20material/2025%20yoh/06_%5BAL%5D%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83_1_%E9%9B%A2%E6%95%A3%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%20%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3/%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E8%A1%A8.pdf)';
 // Exact-probability entries transcribed from the student handout (three decimals).
 const poissonRows = [['0','0.011','0.007','0.004'],['1','0.050','0.034','0.022'],['2','0.112','0.084','0.062'],['3','0.169','0.140','0.113'],['4','0.190','0.175','0.156']];
@@ -96,7 +99,7 @@ add('二項からポアソンへの橋', `${math(String.raw`n\ \text{が大き�
 ref('5','連続確率分布','p.121–128','ロボットは **何体？** から、身長は **何cm？** へ。\n\n測定値には小数もある。**ある範囲に入る確率**を、面積で求める。\n\nこの後の例：高さ制限に通れる？　工場の平均は正しい？　品質は安定している？');
 add('連続の確率：身長がある範囲に入る割合', `身長を $X$ とする。**160.000…cmぴったり**より、**155〜165cm**を考える。\n\n${math(String.raw`\Pr(155<X\le165)=\int_{155}^{165}f(x)\,dx=F(165)-F(155)`)}\n\n**f(x)**：その付近への集まりやすさ。高さそのものは確率ではない。\n\n**F(165) − F(155)**：165cm以下から155cm以下を除き、間の面積を残す。\n\n${note('連続モデルでは一点の確率は0、全範囲の面積は1。丸めた「160.0cm」という測定値は小さな区間を表す。Week 2 AL2の面積と同じ考え方。教科書 p.121。')}`, 'book-reference explained');
 add('正規分布：このロボット、ゲートを通れる？', `**問題**　身長は正規分布、平均160cm・標準偏差5cm。169.8cm以上になる確率は？\n\n<div class="normal-visual-layout"><div><img src="images/normal-height-tail.svg" alt="平均160cm、標準偏差5cmの正規分布。169.8cm以上の右側の面積を強調。"></div><div>\n\n${math(String.raw`X\sim N(160,5^2)`)}\n\n${math(String.raw`Z=\frac{X-\mu}{\sigma}`)}\n\n${math(String.raw`z=\frac{169.8-160}{5}=1.96`)}\n\n**9.8cmの差は、標準偏差1.96個分。**\n\n${go('normal-w2')}\n\n</div></div>\n\n${note('色の面積が169.8cm以上になる確率。次のスライドで表から読む。右の裾は図の外にも続く。仮想の身長モデル。教科書 p.122–124。')}`, 'book-reference explained normal-visual');
-add('正規分布表：行1.9、列0.06を読む', `**求めるもの：高さ制限169.8cmを超える割合。標準化すると z = 1.96。**\n\n| zの行 ＼ 小数第2位の列 | 0.05 | **0.06** | 0.07 |\n| --- | --- | --- | --- |\n| **1.9** | 0.02559 | **0.02500** | 0.02442 |\n\n${math(String.raw`\Pr(X>169.8)=\Pr(Z>1.96)=0.025=2.5\%`)}\n\n**このモデルでは約1,000体中25体が高さ制限を超える。**\n\n${math(String.raw`\Pr(X\le169.8)=0.975,\quad\Pr(150.2<X<169.8)=1-2(0.025)=0.95`)}\n\n${note('教科書の表は右側の面積。通れる割合は97.5％。中央95％は左右の2.5％ずつを除く。予測割合であり、必ず25体になるわけではない。教科書 p.124–125。')}`, 'book-reference explained');
+add('正規分布表：行1.9、列0.06を読む', `**求めるもの：高さ制限169.8cmを超える割合。標準化すると z = 1.96。**\n\n| zの行 ＼ 小数第2位の列 | 0.05 | **0.06** | 0.07 |\n| --- | --- | --- | --- |\n| **1.9** | 0.02559 | **0.02500** | 0.02442 |\n\n${math(String.raw`\Pr(X>169.8)=\Pr(Z>1.96)=0.025=2.5\%`)}\n\n**このモデルでは約1,000体中25体が高さ制限を超える。**\n\n${math(String.raw`\Pr(X\le169.8)=0.975,\quad\Pr(150.2<X<169.8)=1-2(0.025)=0.95`)}\n\n${normalTableViewerLink}\n\n${note('教科書の表は右側の面積。通れる割合は97.5％。中央95％は左右の2.5％ずつを除く。予測割合であり、必ず25体になるわけではない。教科書 p.124–125。')}`, 'book-reference explained normal-table');
 add('なぜt分布？　工場の平均を標本で調べる', `**問題**　工場は「平均60cm」と説明。でも全ロボットの身長や母標準偏差は分からない。\n\n無作為に **9体** 測ると、平均 **64cm**、標本標準偏差 **6cm**。\n\n${math(String.raw`T=\frac{\bar X-\mu_0}{s/\sqrt n},\qquad\nu=n-1`)}\n\n**σが未知なので s で推定する。** 広がりも推定する不確かさを、t分布で考慮する。\n\n${note('個体の身長でなく「標本平均のずれ」を評価する。小標本だから自動的にt、ではない。独立な正規母集団の標本を仮定。教科書 p.125–127。')}`, 'book-reference explained');
 add('tの計算：平均のずれは、どのくらい大きい？', `${math(String.raw`\mathrm{SE}=\frac{s}{\sqrt n}=\frac6{\sqrt9}=2\ \mathrm{cm},\qquad t=\frac{64-60}{2}=2,\quad\nu=8`)}\n\n**標準誤差SE**：標本平均の揺れの大きさを推定したもの。4cmの差はSEの2個分。\n\n両側5％の目安：t表の **自由度8、上側確率0.025** から **2.306**。\n\n${math(String.raw`|t|=2<2.306`)}\n\n**この標本だけでは、5％水準で「平均60cmと違う」とまでは言えない。**\n\n${go('t-w2')}\n\n${note('t = 2 は確率2％ではない。「違いが示せない」は「平均60cmだと証明した」でもない。ここは後の仮説検定への導入。') }\n\n<!-- Critical value checked against NIST Student t table: df=8, cumulative 0.975 (upper tail 0.025), 2.306. https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm -->`, 'book-reference explained t-worked');
 add('なぜカイ二乗？　平均が合っても品質は違う', `**問題**　工場の標準偏差は **10cm** という。9体を測ると標本標準偏差は **15cm**。\n\n平均身長が同じでも、大きすぎる・小さすぎるロボットが多ければ、部品が合わない。\n\n${math(String.raw`\chi^2=\frac{(n-1)s^2}{\sigma_0^2},\qquad\nu=n-1`)}\n\n**標本のばらつきを、工場が主張するばらつきと比べる。**\n\n${note('ここでは分散を調べるカイ二乗分布を使う。s²は不偏分散。平均との差を二乗するためχ²は負にならない。独立な正規母集団の標本を仮定。教科書 p.127–128。')}`, 'book-reference explained');
@@ -153,6 +156,10 @@ section.selection-guide table {font-size:21px;}
 .normal-visual-layout img {display:block; width:100%; height:auto;}
 section.normal-visual .normal-visual-layout .katex-display {font-size:.9em; margin:12px 0;}
 section.normal-visual .normal-visual-layout p {font-size:23px;}
+section.normal-table .katex-display {margin:10px 0;}
+section.normal-table th, section.normal-table td {padding:8px 13px;}
+section.normal-table .note {font-size:16px; margin-top:10px;}
+section.normal-table a[href*="viewer.html?"] {display:inline-block; background:#176d82; color:white; padding:9px 20px; border-radius:8px; font-size:22px; font-weight:700; text-decoration:none;}
 section.try {background:#edf5ef; border-top:7px solid #388065;} section.try h2 {color:#2b624b;}
 section.challenge {background:#fff8e8; border-top:9px solid #be8530;}
 section.challenge h2 {color:#825519; margin-bottom:22px;}

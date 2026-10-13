@@ -30,4 +30,5 @@ prepare_en: Review random variables, expected value, and discrete versus continu
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v4.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_03_確率分布_離散確率分布_後半v4.pdf) {supplementary}
 - [AL用ワークシート](weeks/03-discrete-distributions-ii/03_AL用ワークシート.xlsx) {worksheet}
+- [標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week03/standard-normal-table.pdf) {resource}
 - [ポアソン分布表 / Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {resource}

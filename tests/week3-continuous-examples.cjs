@@ -16,6 +16,10 @@ for (const label of ['平均 μ = 160cm', 'σ = 5cm', '169.8cm以上', '求め�
 assert(curve.includes('fill="#e5aa36"'));
 const normalTable = slide('正規分布表：行1.9、列0.06を読む');
 assert(normalTable.includes('0.02500'));
+assert(normalTable.includes('標準正規分布表をビューアーで開く'));
+assert(normalTable.includes('viewer.html?file=materials%2F2026-yoh%2Fweek03%2Fstandard-normal-table.pdf'));
+assert(fs.existsSync('materials/2026-yoh/week03/standard-normal-table.pdf'));
+assert(fs.readFileSync('content/weeks/03-poisson.md','utf8').includes('[標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week03/standard-normal-table.pdf) {resource}'));
 assert(normalTable.includes('確率') || normalTable.includes('予測割合'));
 assert.equal(6 / Math.sqrt(9), 2);
 assert.equal((64 - 60) / 2, 2);
