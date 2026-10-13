@@ -1,0 +1,35 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const deck = fs.readFileSync('materials/2026-yoh/week03/w3.md', 'utf8');
+const slides = deck.split(/\n---\n/).filter(s => /^## /m.test(s));
+assert.equal(slides.length, 50);
+const slide = title => {
+  const match = slides.find(s => s.includes(`## ${title}\n`));
+  assert(match, `Missing ${title}`);
+  return match;
+};
+assert(Math.abs((169.8 - 160) / 5 - 1.96) < 1e-12);
+assert(slide('正規分布：このロボット、ゲートを通れる？').includes(String.raw`\frac{169.8-160}{5}=1.96`));
+const normalTable = slide('正規分布表：行1.9、列0.06を読む');
+assert(normalTable.includes('0.02500'));
+assert(normalTable.includes('確率') || normalTable.includes('予測割合'));
+assert.equal(6 / Math.sqrt(9), 2);
+assert.equal((64 - 60) / 2, 2);
+const t = slide('tの計算：平均のずれは、どのくらい大きい？');
+assert(t.includes('2.306'));
+assert(t.includes('上側確率0.025'));
+assert(t.includes('証明した'));
+const chi = slide('カイ二乗の計算：ばらつきすぎていない？');
+assert.equal((9 - 1) * 15 ** 2 / 10 ** 2, 18);
+assert(chi.includes('15.507'));
+assert(chi.includes('上側確率0.05'));
+assert(chi.includes('片側5％'));
+assert.equal(10 * .5 + 50 * .5, 30);
+assert.equal((10 - 30) ** 2 * .5 + (50 - 30) ** 2 * .5, 400);
+assert.equal(Math.sqrt(400), 20);
+assert(slide('同じ平均30分。40分後の授業に間に合う？').includes('**50％**'));
+assert(slide('同じ平均30分。40分後の授業に間に合う？').includes('一般に締切内の確率は決まらない'));
+for (const id of ['normal-w2', 't-w2', 'chi-w2', 'delivery']) {
+  assert(deck.includes(`activity=${id}#week-03`));
+}
+console.log('Continuous examples: standardization, tail lookup, t, chi-square, expectation, variance, and limitations verified.');
