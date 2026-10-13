@@ -13,6 +13,10 @@ const add = (title, content, style = '') => {
 const math = value => `$$\n${value}\n$$`;
 const go = (id, label = 'やってみよう！') => `[${label}](https://yohman.github.io/26-2-StatsB/agenda.html?activity=${id}#week-03)`;
 const note = value => `<div class="note">${value}</div>`;
+const poissonTableLink = '[ポアソン分布表を開く](https://yohman.github.io/26-2-StatsB/other%20material/2025%20yoh/06_%5BAL%5D%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83_1_%E9%9B%A2%E6%95%A3%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83%20%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3/%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E8%A1%A8.pdf)';
+// Exact-probability entries transcribed from the student handout (three decimals).
+const poissonRows = [['0','0.011','0.007','0.004'],['1','0.050','0.034','0.022'],['2','0.112','0.084','0.062'],['3','0.169','0.140','0.113'],['4','0.190','0.175','0.156']];
+const tableExcerpt = (selectedRows, mean = '5.0') => `<table class="poisson-lookup"><thead><tr><th><i>x</i> ＼ <i>μ</i></th>${['4.5','5.0','5.5'].map(v=>`<th class="${v===mean?'lookup-column':''}">${v}</th>`).join('')}</tr></thead><tbody>${poissonRows.map(([x,...values])=>`<tr><th class="${selectedRows.includes(x)?'lookup-row':''}">${x}</th>${values.map((v,i)=>`<td class="${['4.5','5.0','5.5'][i]===mean?(selectedRows.includes(x)?'lookup-cell':'lookup-column'):''}">${v}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 const ref = (num, title, pages, content) => add(`教科書 · 第2章 第2節`, `<div class="chapter">${num}　${title}</div><div class="pages">${pages}</div>\n\n${content}`, 'book-divider');
 const panels = items => `<div class="panels">${items.map(([label,value,sub]) => `<div class="panel"><div class="label">${label}</div><div class="value">${value}</div><div class="detail">${sub}</div></div>`).join('')}</div>`;
 function barChart(filename, values, selected, label) {
@@ -45,10 +49,10 @@ add('野球ラボ：1打席と1試合を分ける', `${math(String.raw`\underbra
 add('今度は、回数が決まっていない', `<div class="wide-photo"><img src="images/costco.jpg" alt="Costco"></div>\n\nあなたはコストコでレジ担当。退勤まで、あと10分。\n\nその10分間に、**新しく何人来る？**\n\n${note('一定時間に新しく到着する人数を考えよう。')}`);
 add('平均5人。でも、今日は3人？8人？', `<div class="photo-side"><img src="images/checkout.jpg" alt="Costco checkout"><div><div class="answer">10分で平均5人</div><p>0人、1人、2人、…<br>上限は決まっていない。</p><p>知りたいこと：<br><strong>ちょうど3人？　5人以上？</strong></p></div></div>\n\n${note('仮想の授業モデルです。実際のコストコの測定値ではありません。')}`);
 ref('4','ポアソン分布','p.120','固定した時間・範囲の中に、何件起こるか。\n\n平均の発生数 **λ（ラムダ）** が、分布を決める。');
-add('ポアソン：10分の平均をλにする', `${math(String.raw`X\sim\mathrm{Poisson}(\lambda),\qquad \Pr(X=x)=\frac{\lambda^xe^{-\lambda}}{x!}`)}\n\n${panels([['X','到着人数','10分間に新しく来た人'],['λ','5','その10分間の平均人数'],['x','3','求めたい人数']])}\n\n${note('λ = 平均人数。e ≈ 2.71828 は定数。')}`, 'book-reference');
-add('ちょうど3人、来る確率は？', `${math(String.raw`\Pr(X=3)=\frac{5^3e^{-5}}{3!}=\frac{125\times0.0067379}{6}\approx0.14037`)}\n\n<div class="answer">約14.04％</div>\n\n平均5人だからといって、毎回5人ではない。\n\n${note('3! = 3 × 2 × 1 = 6。λ と x を入れて計算する。')}`);
-add('5人以上？「4人以下」を引けばよい', `${math(String.raw`\begin{aligned}\Pr(X\ge5)&=1-\Pr(X\le4)\\&=1-\sum_{x=0}^{4}\frac{5^xe^{-5}}{x!}\\&\approx1-0.440493=0.559507\end{aligned}`)}\n\n<div class="answer">約55.95％</div>\n\n${note('5人以上は無限に続く。反対側の0〜4人を足して、1から引く。')}`);
-add('式の中身を、人数で確かめる', `| 到着人数 x | 0 | 1 | 2 | 3 | 4 |\n| --- | --- | --- | --- | --- | --- |\n| 確率 | 0.67％ | 3.37％ | 8.42％ | 14.04％ | 17.55％ |\n\n${math(String.raw`\Pr(X\le4)\approx44.05\%,\qquad \Pr(X\ge5)\approx55.95\%`)}\n\n**0〜4人の棒を足す** → 残りが5人以上。\n\n${note('小数のまま足し、最後に丸める。丸めた表の合計にはわずかな誤差がある。')}`);
+add('ポアソンの式と、表のつながり', `${math(String.raw`X\sim\mathrm{Poisson}(\lambda),\qquad \Pr(X=x)=\frac{\lambda^xe^{-\lambda}}{x!}`)}\n\n**この式で計算した確率が、表の中に並んでいる。**\n\n${panels([['平均人数','λ = 5','表では μ = 5.0 の列'],['求めたい人数','x = 3','表では x = 3 の行'],['交点を読む','Pr(X = 3)','「ちょうど3人」の確率']])}\n\n${note('配布表の μ と、スライドの λ は同じ平均発生数。授業では e を計算せず、表から確率を読む。教科書 p.120。')}`, 'book-reference');
+add('ちょうど3人：列と行の交点を読む', `<div class="lookup-layout"><div><div class="lookup-caption">配布ポアソン分布表の抜粋</div>${tableExcerpt(['3'])}</div><div><p><strong>① 平均5人</strong>：μ = 5.0 の列</p><p><strong>② ちょうど3人</strong>：x = 3 の行</p><p><strong>③ 交点の 0.140 を読む</strong></p>\n\n${math(String.raw`\Pr(X=3)\approx0.140`)}\n\n<div class="lookup-answer">約14.0％</div></div></div>\n\n${note('0.140 は「3人以下」ではなく「ちょうど3人」。表の値は小数第3位に丸めてある。')}`, 'table-reading');
+add('5人以上：0〜4人を足して、1から引く', `${math(String.raw`\Pr(X\ge5)=1-\{\Pr(X=0)+\cdots+\Pr(X=4)\}`)}\n\n<div class="lookup-layout"><div><div class="lookup-caption">μ = 5.0 の列、x = 0〜4 の5マス</div>${tableExcerpt(['0','1','2','3','4'])}</div><div><p>表の確率を<strong>小数のまま</strong>足す。</p>\n\n${math(String.raw`\begin{aligned}\Pr(X\le4)&\approx0.007+0.034+0.084\\&\quad+0.140+0.175=0.440\\\Pr(X\ge5)&\approx1-0.440=0.560\end{aligned}`)}\n\n<div class="lookup-answer">約56.0％</div></div></div>\n\n${note('「5人以上」なので、引くのは4人まで。x = 5 のマスは引かない。')}`, 'table-reading');
+add('式の中身を、人数で確かめる', `| 求めたいこと | 表で読む場所 | 答えの出し方 |\n| --- | --- | --- |\n| ちょうど3人 | μ = 5.0、x = 3 | 0.140 ≈ 14.0％ |\n| 4人以下 | μ = 5.0、x = 0〜4 | 5マスを足す ≈ 0.440 |\n| 5人以上 | 4人以下の反対 | 1 − 0.440 ≈ 56.0％ |\n\n${poissonTableLink}\n\n${note('表の各マスは「ちょうど x 人」の確率。表の丸めにより、計算機の値（約14.04％・55.95％）とは少し違う。表を使う問題では表の精度で答える。')}`);
 add('コストコラボ：10分間を何度も繰り返す', `${math(String.raw`\lambda=5,\qquad E(X)=\operatorname{Var}(X)=5`)}\n\n**①** 1回の10分間を再生。いつ、何人来た？\n\n**②** 100回繰り返して、人数の棒グラフを作る。\n\n**③** 時間を20分に。平均人数はどう変わる？\n\n${go('costco')}\n\n${note('到着時刻はランダム。平均到着率が一定なら、時間を2倍にするとλも2倍。')}`, 'try');
 add('同じ「5」でも、二項とは違う', `${panels([['NBA','5本投げる','n = 5 ／ 成功数は0〜5'],['コストコ','平均5人来る','λ = 5 ／ 人数は0,1,2,…']])}\n\n${math(String.raw`\text{二項}:\ E(X)=n\pi\qquad\text{ポアソン}:\ E(X)=\lambda`)}\n\n**試行回数**と**平均発生数**を取り違えない。`);
 add('ポアソンを使う前に、条件を確認', `**独立**：1人の到着が、次の到着を決めない。\n\n**一定の率**：時間帯の途中で混雑度が急変しない。\n\n**小さな時間では、複数の到着はまれ**。\n\n${note('団体客、セール開始、混雑による相互作用があるなら、このモデルが合わない可能性。到着人数だけでは退勤時刻は決まりません。')}`);
@@ -91,6 +95,22 @@ section.challenge-check {background:#edf5ef; border-top:7px solid #388065;}
 section.challenge-check h2 {color:#2b624b;}
 section.challenge-check .katex-display {font-size:1em; margin:19px 0;}
 section a[href*="agenda.html?activity="] {display:inline-block; background:#176d82; color:white; font-weight:700; text-decoration:none; padding:13px 28px; border-radius:8px; font-size:27px;}
+.lookup-layout {display:grid; grid-template-columns: .9fr 1.1fr; gap:36px; align-items:center;}
+.lookup-caption {font-size:19px; color:#536973; margin-bottom:8px;}
+section table.poisson-lookup {font-size:23px; margin:8px 0; text-align:center;}
+section .poisson-lookup th, section .poisson-lookup td {padding:8px 12px; border:1px solid #d5e1e5; background:#fff;}
+section .poisson-lookup .lookup-column {background:#e0eff7; color:#216a91;}
+section .poisson-lookup .lookup-row {background:#fff0cf; color:#805215;}
+section .poisson-lookup .lookup-cell {background:#176d82; color:#fff; font-weight:800; outline:3px solid #e6ad3a; outline-offset:-3px;}
+.lookup-answer {font-size:48px; font-weight:800; text-align:center; color:#176d82;}
+section.table-reading .katex-display {font-size:.95em; margin:14px 0;}
+section.table-reading .note {margin-top:14px;}
+section.poisson-check {padding-top:35px; padding-bottom:42px;}
+section.poisson-check h2 {margin-bottom:10px;}
+section.poisson-check .katex-display {font-size:.88em; margin:10px 0;}
+section.poisson-check .poisson-lookup th, section.poisson-check .poisson-lookup td {padding:6px 12px;}
+section.poisson-check a[href*="agenda.html?activity="] {font-size:22px; padding:8px 22px;}
+section.poisson-check .note {font-size:17px; margin-top:8px;}
 .sequences {display:inline-block; font-size:29px; letter-spacing:14px; line-height:1.45; color:#176d82; margin:0 0 6px 310px;}
 .wide-photo img {width:100%; height:265px; object-fit:cover; border-radius:12px;} .photo-side {display:flex; align-items:center; gap:35px;}
 .photo-side img {width:48%; height:320px; object-fit:cover; border-radius:12px;} .photo-side .answer {font-size:40px; text-align:left;}
@@ -204,33 +224,37 @@ ${note('同じ二項モデルで確認：NBAラボの成功を合格と読み替
 
 **(3)** 期待値と分散を求めよ。平均件数が小数でもよい理由は？
 
-${note('授業用の仮想設定。教科書・電卓可。式と途中計算を書く。時間の単位をそろえてから代入しよう。')}
+${note('教科書・電卓・配布ポアソン分布表を使用可。時間の単位をそろえ、表で読む列と行、途中計算を書く。')}
 
 <!--
 進行：個人で10分。λの時間単位と、2件以上の補集合を確認する。
-λ=3×15/10=4.5。P(X=4)=4.5^4e^-4.5/4!≈0.18980762054、約18.98％。
-P(X≥2)=1-[P(X=0)+P(X=1)]=1-e^-4.5(1+4.5)≈0.93890051904、約93.89％。
+λ=3×15/10=4.5。配布表のμ=4.5列、x=4行からP(X=4)≈0.190、約19.0％。
+同じ列のx=0行は0.011、x=1行は0.050。P(X≥2)≈1-(0.011+0.050)=0.939、約93.9％。
 E(X)=Var(X)=λ=4.5。期待値は4.5件、分散は4.5件²。
 実現値は整数だが、多数の15分間の平均は小数でもよい。平均4.5件は、1回に4.5件届くという意味ではない。
 確認ポイント：2件以上では0件と1件の両方を除く。15分を試行回数n=15と誤解しない。
 -->`,
-    check:`<!-- _class: challenge-check -->
+    check:`<!-- _class: challenge-check poisson-check -->
 
 ## 答え合わせ③　15分間の平均は4.5件
 
+${math(String.raw`\lambda=3\times\frac{15}{10}=4.5\quad\Rightarrow\quad\text{表の }\mu=4.5\text{ の列}`)}
+
+<div class="lookup-layout"><div><div class="lookup-caption">μ = 4.5 の列を読む</div>${tableExcerpt(['0','1','4'],'4.5')}</div><div>
+
 ${math(String.raw`\begin{aligned}
-\lambda&=3\times\frac{15}{10}=4.5\\
-\Pr(X=4)&=\frac{4.5^4e^{-4.5}}{4!}\approx0.1898\\
+\Pr(X=4)&\approx0.190=19.0\%\\
 \Pr(X\ge2)&=1-\{\Pr(X=0)+\Pr(X=1)\}\\
-&=1-e^{-4.5}(1+4.5)\approx0.9389\\
+&\approx1-(0.011+0.050)\\
+&=0.939=93.9\%\\
 E(X)&=\operatorname{Var}(X)=4.5
 \end{aligned}`)}
 
-**ちょうど4件：約18.98％　／　2件以上：約93.89％**
+</div></div>
 
 ${go('costco')}
 
-${note('件数は整数でも、繰り返した平均は小数でよい。ラボは10分あたり3、観察15分、x=4／以上x=2。人数を件数と読み替える。')}`
+${note('表の丸め値で計算。件数は整数でも、繰り返した平均は小数でよい。ラボは10分あたり3、観察15分。')}`
   }
 ];
 for (const pair of challengePairs) {

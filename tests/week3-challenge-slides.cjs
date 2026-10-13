@@ -39,4 +39,16 @@ assert(slides[32].includes(String.raw`$\lambda$`));
 assert(slides[8].includes(String.raw`$6\times5\times4$`));
 assert(slides[18].includes('1個以上が不合格'));
 assert(slides[19].includes(String.raw`\Pr(X\le5)`));
+assert(slides[24].includes('lookup-cell">0.140'));
+assert(slides[24].includes('約14.0％'));
+assert(slides[25].includes('0.007+0.034+0.084'));
+assert(slides[25].includes('1-0.440=0.560'));
+assert(slides[26].includes('ポアソン分布表を開く'));
+assert(slides[32].includes('配布ポアソン分布表を使用可'));
+assert(slides[33].includes('lookup-cell">0.190'));
+assert(slides[33].includes('1-(0.011+0.050)'));
+assert(slides[33].includes('93.9\\%'));
+for (const slide of [slides[24],slides[25],slides[33]]) {
+  assert(!/e\^|2\.71828|0\.0067379/.test(slide),'Poisson solutions use table lookups, not a numerical value of e');
+}
 console.log('Week 3: three 10-minute pauses, distinct scenarios, separate answer checks, references and arithmetic verified.');
