@@ -27,8 +27,8 @@ barChart('nba-distribution.svg',Array.from({length:6},(_,x)=>[1,5,10,10,5,1][x]*
 let poissonProbability=Math.exp(-5);
 barChart('costco-distribution.svg',Array.from({length:15},(_,x)=>x?(poissonProbability*=5/x):poissonProbability),x=>x>=5,'Arrivals in ten minutes · x');
 
-add('最後のフリースロー、誰に任せる？', `<div class="players"><img src="images/curry.png" alt="Stephen Curry"><img src="images/giannis.png" alt="Giannis Antetokounmpo"></div>\n\nカリー？　ヤニス？　「上手そう」から、数字で考えてみる。\n\n${note('写真・ストーリー：Yohの2025年講義。現在の選手成績を比較するスライドではありません。')}`, 'opening');
-add('93％なら、5本全部入る？', `1本の成功率を **93％** として、5本のフリースローを考える。\n\n${panels([['チャンス','5本','何回投げるか'],['1本の成功率','93％','入る／外れる'],['知りたいこと','何本？','5本中の成功数']])}\n\nまず予想：全部成功する確率も93％？\n\n${note('π = 0.93 は2025年スライドから引き継ぐ授業用の設定。各投球は独立で、成功率は一定と仮定。')}`);
+add('最後のフリースロー、誰に任せる？', `<div class="players"><img src="images/curry.png" alt="Stephen Curry"><img src="images/giannis.png" alt="Giannis Antetokounmpo"></div>\n\nカリー？　ヤニス？　「上手そう」から、数字で考えてみる。\n\n${note('現在の選手成績を比較するスライドではありません。')}`, 'opening');
+add('93％なら、5本全部入る？', `1本の成功率を **93％** として、5本のフリースローを考える。\n\n${panels([['チャンス','5本','何回投げるか'],['1本の成功率','93％','入る／外れる'],['知りたいこと','何本？','5本中の成功数']])}\n\nまず予想：全部成功する確率も93％？\n\n${note('π = 0.93 は授業用の設定。各投球は独立で、成功率は一定と仮定。')}`);
 add('5本全部成功する確率は…', `${math(String.raw`\Pr(X=5)=(0.93)^5\approx0.6957`)}\n\n<div class="answer">約69.57％</div>\n\n1本ごとの93％と、5本全部の確率は違う。\n\n${note('成功・成功・成功・成功・成功 → 独立な5回の確率を掛ける。')}`);
 add('Week 3 · 成功の回数、到着の人数', `NBAからコストコへ。\n\n**回数を固定する** → 二項分布\n\n**時間を固定する** → ポアソン分布\n\n<div class="route">4 離散確率分布　→　5 連続確率分布　→　6 平均値と分散</div>\n\n${note('教科書 第2章 第2節「確率分布」p.118–129 ／ Week 2の続き')}`, 'title');
 ref('4','離散確率分布','p.118–120','成功した回数を数える。\n\nまずは **二項分布**：決まった回数の中で、何回成功するか。');
@@ -42,10 +42,10 @@ add('NBAラボ：予想して、投げて、比べる', `${math(String.raw`X\sim
 add('平均4.65本。でも4.65本は入らない', `${math(String.raw`\begin{aligned}E(X)&=n\pi=5\times0.93=4.65\\\operatorname{Var}(X)&=n\pi(1-\pi)=5\times0.93\times0.07=0.3255\end{aligned}`)}\n\n**期待値**：5本のセットを何度も繰り返した平均。\n\n**分散**：セットごとの成功数のばらつき。\n\n${note('平均は小数でもよい。実際の成功数は0〜5の整数。教科書 p.120。')}`, 'book-reference');
 add('NBAの話が、教科書の野球につながる', `打率32％の選手が5打席で **ちょうど3安打**。\n\n${math(String.raw`\Pr(X=3)={}_5C_3(0.32)^3(0.68)^2\approx0.151519`)}\n\n<div class="answer">約15.15％</div>\n\n${note('フリースローの成功 → ヒットに置き換えただけ。教科書 p.118–120の例。')}`, 'book-reference');
 add('野球ラボ：1打席と1試合を分ける', `${math(String.raw`\underbrace{\pi=0.32}_{\text{1打席のヒット率}}\quad\ne\quad\underbrace{\Pr(X=3)\approx0.1515}_{\text{5打席で3安打の確率}}`)}\n\n1試合を5打席として、100試合を繰り返そう。\n\n**3安打の棒**と15.15％を比較する。\n\n${go('batting')}`, 'try');
-add('今度は、回数が決まっていない', `<div class="wide-photo"><img src="images/costco.jpg" alt="Costco"></div>\n\nあなたはコストコでレジ担当。退勤まで、あと10分。\n\nその10分間に、**新しく何人来る？**\n\n${note('Yohの2025年講義のストーリーを、一定時間の到着人数として整理。')}`);
+add('今度は、回数が決まっていない', `<div class="wide-photo"><img src="images/costco.jpg" alt="Costco"></div>\n\nあなたはコストコでレジ担当。退勤まで、あと10分。\n\nその10分間に、**新しく何人来る？**\n\n${note('一定時間に新しく到着する人数を考えよう。')}`);
 add('平均5人。でも、今日は3人？8人？', `<div class="photo-side"><img src="images/checkout.jpg" alt="Costco checkout"><div><div class="answer">10分で平均5人</div><p>0人、1人、2人、…<br>上限は決まっていない。</p><p>知りたいこと：<br><strong>ちょうど3人？　5人以上？</strong></p></div></div>\n\n${note('仮想の授業モデルです。実際のコストコの測定値ではありません。')}`);
 ref('4','ポアソン分布','p.120','固定した時間・範囲の中に、何件起こるか。\n\n平均の発生数 **λ（ラムダ）** が、分布を決める。');
-add('ポアソン：10分の平均をλにする', `${math(String.raw`X\sim\mathrm{Poisson}(\lambda),\qquad \Pr(X=x)=\frac{\lambda^xe^{-\lambda}}{x!}`)}\n\n${panels([['X','到着人数','10分間に新しく来た人'],['λ','5','その10分間の平均人数'],['x','3','求めたい人数']])}\n\n${note('λ = 平均人数。e ≈ 2.71828 は定数。確率式はYohの2025年講義を継承。')}`, 'book-reference');
+add('ポアソン：10分の平均をλにする', `${math(String.raw`X\sim\mathrm{Poisson}(\lambda),\qquad \Pr(X=x)=\frac{\lambda^xe^{-\lambda}}{x!}`)}\n\n${panels([['X','到着人数','10分間に新しく来た人'],['λ','5','その10分間の平均人数'],['x','3','求めたい人数']])}\n\n${note('λ = 平均人数。e ≈ 2.71828 は定数。')}`, 'book-reference');
 add('ちょうど3人、来る確率は？', `${math(String.raw`\Pr(X=3)=\frac{5^3e^{-5}}{3!}=\frac{125\times0.0067379}{6}\approx0.14037`)}\n\n<div class="answer">約14.04％</div>\n\n平均5人だからといって、毎回5人ではない。\n\n${note('3! = 3 × 2 × 1 = 6。λ と x を入れて計算する。')}`);
 add('5人以上？「4人以下」を引けばよい', `${math(String.raw`\begin{aligned}\Pr(X\ge5)&=1-\Pr(X\le4)\\&=1-\sum_{x=0}^{4}\frac{5^xe^{-5}}{x!}\\&\approx1-0.440493=0.559507\end{aligned}`)}\n\n<div class="answer">約55.95％</div>\n\n${note('5人以上は無限に続く。反対側の0〜4人を足して、1から引く。')}`);
 add('式の中身を、人数で確かめる', `| 到着人数 x | 0 | 1 | 2 | 3 | 4 |\n| --- | --- | --- | --- | --- | --- |\n| 確率 | 0.67％ | 3.37％ | 8.42％ | 14.04％ | 17.55％ |\n\n${math(String.raw`\Pr(X\le4)\approx44.05\%,\qquad \Pr(X\ge5)\approx55.95\%`)}\n\n**0〜4人の棒を足す** → 残りが5人以上。\n\n${note('小数のまま足し、最後に丸める。丸めた表の合計にはわずかな誤差がある。')}`);

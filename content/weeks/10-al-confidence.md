@@ -27,5 +27,5 @@ prepare_en: Practise identifying which of the population variance, sample size, 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_10_[AL]_母平均の区間推定・母分散の区間推定v2.pptx) {primary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_10_[AL]_母平均の区間推定・母分散の区間推定v2.pdf) {primary}
 - [AL用ワークシート](weeks/10-al-confidence-intervals/10_AL用ワークシート.xlsx) {worksheet}
-- [Yoh 2025 active-learning confidence-interval slides](other material/2025 yoh/10 母分散の信頼区間 /10_[AL]_母平均の区間推定・母分散の区間推定.pdf) {yoh}
+- [Yoh active-learning confidence-interval slides](other material/2025 yoh/10 母分散の信頼区間 /10_[AL]_母平均の区間推定・母分散の区間推定.pdf) {yoh}
 - [Yoh confidence-interval activity lecture](other material/2025 yoh/10 母分散の信頼区間 /w10 Confidence Interval variance.pdf) {yoh}

@@ -27,7 +27,7 @@ function fromYoh(number) {
     const closes = (slide.match(new RegExp(`</${tag}>`, 'g')) || []).length;
     if (opens > closes) slide += `\n${`</${tag}>`.repeat(opens - closes)}`;
   }
-  return `<!-- Yoh 2025 source PDF slide ${number}; original w5.md section ${number} -->\n${slide}`;
+  return `<!-- Source PDF slide ${number}; original w5.md section ${number} -->\n${slide}`;
 }
 
 const newSlide = (sourcePage, markdown) => `<!-- Adapted from Tsumura 2026 Week 2 slide ${sourcePage}; new editable teaching slide -->\n${markdown.trim().replaceAll(String.raw`\n`, String.fromCharCode(10))}`;

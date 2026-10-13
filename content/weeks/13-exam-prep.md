@@ -30,5 +30,5 @@ prepare_en: Review Week 12 regression and bring questions for final-exam prepara
 - [Tsumura 2026 lecture slides: Part 2 (PDF)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pdf) {primary}
 - [Yoh supplement: interpreting regression results](other material/2025 yoh/12 回帰分析２/12_回帰分析の結果の解釈.pdf) {yoh}
 - [Yoh supplement: regression-result interpretation](other material/2025 yoh/12 回帰分析２/w12 回帰分析２.pdf) {yoh}
-- [Yoh 2025 final-exam practice problems](other material/2025 yoh/13 Practice Exam/re13/※対策問題_2025_統計学_期末試験_工学部.pdf) {worksheet}
-- [Yoh 2025 final-exam review slides](other material/2025 yoh/13 Practice Exam/w13 exam review.pdf) {yoh}
+- [Yoh final-exam practice problems](other material/2025 yoh/13 Practice Exam/re13/※対策問題_2025_統計学_期末試験_工学部.pdf) {worksheet}
+- [Yoh final-exam review slides](other material/2025 yoh/13 Practice Exam/w13 exam review.pdf) {yoh}

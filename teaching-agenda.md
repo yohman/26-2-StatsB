@@ -262,7 +262,7 @@ Every meeting is 100 minutes. Explanations are deliberately broken into **12-min
 
 ### Week 13 — Regression interpretation and final-exam review
 
-**Content and materials.** Use Tsumura's Week 13 Part 2 deck to examine incorrect interpretations of regression results, then review representative problems from the course. Yoh #12 and the 2025 practice problems remain supplements; the answer key is not student-facing.
+**Content and materials.** Use Tsumura's Week 13 Part 2 deck to examine incorrect interpretations of regression results, then review representative problems from the course. Yoh #12 and the practice problems remain supplements; the answer key is not student-facing.
 
 | Minutes | Plan |
 | --- | --- |

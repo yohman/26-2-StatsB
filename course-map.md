@@ -17,7 +17,7 @@ This working map follows Tsumura's 2026 sequence and uses the matching Tsumura P
 | 10 | [AL] Interval estimation | Yoh #10 active-learning material | `10-al-confidence-intervals` |
 | 11 | Hypothesis-test process, two-group examples, p values | Yoh #11: hypotheses, significance, rejection regions | `11-hypothesis-testing` |
 | 12 | Regression analysis, Part 1: correlation / causation and Excel regression | Yoh #02 | `12-regression-analysis` |
-| 13 | Regression-result interpretation, Part 2, followed by final-exam review | Yoh #12 and 2025 practice problems | `13-exam-prep` |
+| 13 | Regression-result interpretation, Part 2, followed by final-exam review | Yoh #12 and practice problems | `13-exam-prep` |
 | 14 | Final examination | No scheduled lecture or practice material | `14-final-exam` |
 
 ## Curation choices

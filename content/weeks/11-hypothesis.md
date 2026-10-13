@@ -30,5 +30,5 @@ prepare_en: Review the different purposes of confidence intervals and hypothesis
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_11_統計的仮説検定v3.pdf) {primary}
 - [AL用ワークシート](weeks/11-hypothesis-testing/11_AL用ワークシート.xlsx) {worksheet}
 - [Practice](weeks/11-hypothesis-testing/11_Hypothesis-Testing_Practice_Yoh.pdf) {worksheet}
-- [Yoh 2025 hypothesis-testing slides](other material/2025 yoh/11 仮設検定/11_統計的仮説検定.pdf) {yoh}
+- [Yoh hypothesis-testing slides](other material/2025 yoh/11 仮設検定/11_統計的仮説検定.pdf) {yoh}
 - [Yoh hypothesis-testing lecture](other material/2025 yoh/11 仮設検定/w11 仮設検定.pdf) {yoh}
