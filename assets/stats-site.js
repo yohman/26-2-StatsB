@@ -156,6 +156,7 @@ function lectureDecks(materials, week) {
 }
 
 function slideThumbnail(deck, week) {
+  if (deck.preview?.endsWith('/week03/practice-quiz.pdf')) return 'assets/slide-previews/week03-practice-quiz.png?v=20261014';
   if (deck.preview?.includes('materials/2026-tsumura/')) {
     const number = deck.preview.match(/\/26_(\d{2})_/)?.[1];
     if (number) return `assets/slide-previews/w${number}${number === '12' ? (deck.preview.includes('後半') ? '-b' : '-a') : ''}.png${number === '03' ? '?v=20261014-tsumura-v7' : ''}`;
