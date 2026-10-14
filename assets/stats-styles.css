@@ -706,25 +706,23 @@
 @media(max-width:880px){.agenda-page .monty-play-grid{grid-template-columns:1fr}.agenda-page .monty-intro{grid-template-columns:1fr;gap:6px}}
 @media(max-width:520px){.agenda-page .simulation-tablist button{flex:1;justify-content:center;padding:9px 5px}.agenda-page .monty-stage,.agenda-page .monty-results{padding:14px}.agenda-page .monty-doors{gap:8px}.agenda-page .monty-door-face{border-width:3px;border-radius:35px 35px 4px 4px}.agenda-page .monty-door-caption{font-size:9px}.agenda-page .monty-door-handle{width:7px;height:7px}.agenda-page .monty-feedback-slot{height:112px;min-height:112px}.agenda-page .monty-decision button{flex:1 1 130px}.agenda-page .monty-outcome{flex-wrap:wrap;padding:10px}.agenda-page .monty-outcome-mark{width:36px;height:36px;flex-basis:36px}.agenda-page .monty-outcome button{width:100%;min-height:32px}.agenda-page .monty-chart-head span{display:none}.agenda-page .monty-winloss{grid-template-columns:1fr}.agenda-page .monty-winloss-key{grid-column:1}}
 @media(prefers-reduced-motion:reduce){.agenda-page .monty-door-face,.agenda-page .monty-winloss-track span{transition:none}.agenda-page .monty-door.is-open .monty-door-face,.agenda-page .monty-door.is-winner .monty-door-face,.agenda-page .monty-stage.is-batch-flash .monty-door.is-open .monty-door-face,.agenda-page .monty-chart-last{animation:none}}
-.agenda-page .slide-card{min-width:0;background:var(--course-paper)}
+.agenda-page .slide-card{min-width:0;background:var(--course-paper);border:1px solid #d8d1c7;border-radius:8px;overflow:hidden}
 .agenda-page .slide-cover{display:block;background:#e3ded7}
 .agenda-page .slide-cover img{display:block;width:100%;aspect-ratio:16/9;object-fit:contain;background:#fff}
-.agenda-page .slide-card-body{padding:10px 12px}
-.agenda-page .slide-card h4{margin:0 0 9px;font:700 12px/1.35 Manrope,'Zen Kaku Gothic New',sans-serif;letter-spacing:0}
-.agenda-page .slide-card:not(:first-child){display:grid;grid-template-columns:80px minmax(0,1fr);align-items:start}
-.agenda-page .slide-card:not(:first-child) .slide-cover img{width:100%;height:auto;min-height:0;aspect-ratio:4/3;object-fit:contain}
-.agenda-page .slide-card:not(:first-child).slide-card--no-cover{grid-template-columns:1fr}
-.agenda-page .slide-card:not(:first-child) .slide-card-body{padding:9px}
-.agenda-page .slide-card:not(:first-child) h4{font-size:11px}
+.agenda-page .slide-card .slide-card-body{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;padding:14px 16px}
+.agenda-page .slide-card .slide-card-body h4{flex:1 1 160px;min-width:0;margin:0;font:700 15px/1.5 Manrope,'Zen Kaku Gothic New',sans-serif;letter-spacing:0;overflow-wrap:anywhere}
+.agenda-page .slide-card .slide-card-body h4 .lang-ja{font-family:Manrope,'Zen Kaku Gothic New',sans-serif}
 .agenda-page .file-button{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:37px;padding:8px 11px;background:var(--course-ink);color:#fff;text-decoration:none;font:700 10px/1.2 Manrope,'Zen Kaku Gothic New',sans-serif;text-align:left}
 .agenda-page .file-button:hover,.agenda-page .file-button:focus-visible{background:var(--course-crimson);color:#fff}
 .agenda-page .file-button>span:last-child{flex:0 0 auto;font-size:15px;line-height:1}
+.agenda-page .slide-card .slide-preview-button{display:inline-flex;flex:0 0 auto;gap:10px;min-height:36px;width:auto;padding:8px 11px;border:1px solid #cec5b8;border-radius:5px;background:transparent;color:var(--course-ink);font:700 12px/1.4 Manrope,'Zen Kaku Gothic New',sans-serif;white-space:nowrap}
+.agenda-page .slide-card .slide-preview-button:hover,.agenda-page .slide-card .slide-preview-button:focus-visible{background:#ece5da;border-color:#9c8c77;color:var(--course-ink)}
+.agenda-page .slide-card a:focus-visible{outline:3px solid var(--course-crimson);outline-offset:-3px}
 .agenda-page .more-slides{display:grid;gap:9px;margin-top:7px}
 .agenda-page .more-slides-heading{margin:0;color:var(--course-muted);font:700 11px Manrope,'Zen Kaku Gothic New',sans-serif}
 .agenda-page .more-slides-list{display:grid;gap:9px}
-.agenda-page .more-slides .slide-card{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:start}
-.agenda-page .more-slides .slide-cover img{width:100%;height:auto;min-height:0;aspect-ratio:4/3;object-fit:contain}
-.agenda-page .more-slides .slide-card--no-cover{grid-template-columns:1fr}
+.agenda-page .more-slides .slide-card{display:block}
+.agenda-page .activity-panel .slide-grid{margin-top:18px}
 .agenda-page .work-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
 .agenda-page .activity-zone,.agenda-page .homework-zone{min-height:245px;padding:0;border:0}
 .agenda-page .activity-zone{background:var(--course-activity);border-left:3px solid var(--course-ochre)}
@@ -845,13 +843,9 @@
 .agenda-page .slide-browser .slide-cover{position:relative;display:grid;place-items:center;aspect-ratio:16/9;overflow:hidden;touch-action:pan-y pinch-zoom}
 .agenda-page .slide-card .slide-browser .slide-cover img,.agenda-page .slide-card .slide-browser .slide-cover canvas{width:100%;height:100%;aspect-ratio:auto;object-fit:contain;background:#fff}
 .agenda-page .slide-browser .slide-cover [hidden]{display:none!important}
-.agenda-page .slide-browse-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 8px;background:#e3ded7}
-.agenda-page .slide-browse-controls button{width:44px;height:38px;border:0;border-radius:3px;background:transparent;color:var(--course-ink,#433c33);font-size:23px;cursor:pointer}
+.agenda-page .slide-browse-controls{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 10px;border-top:1px solid #e1dbd2;border-bottom:1px solid #e1dbd2;background:#f7f4ee}
+.agenda-page .slide-browse-controls button{width:40px;height:36px;min-height:0;padding:0;border:0;border-radius:4px;background:transparent;color:var(--course-ink,#433c33);font:500 20px/1 Manrope,sans-serif;cursor:pointer}
 .agenda-page .slide-browse-controls button:hover:not(:disabled){background:var(--course-ink,#433c33);color:white}
 .agenda-page .slide-browse-controls button:disabled{opacity:.3;cursor:default}
 .agenda-page .slide-browse-controls button:focus-visible{outline:3px solid var(--course-crimson,#ae3f50);outline-offset:2px}
-.agenda-page .slide-browse-controls span{font:500 11px 'DM Mono',monospace}
-.agenda-page .more-slides .slide-card[data-slide-pdf] .slide-browser,.agenda-page .slide-card[data-slide-pdf]:not(:first-child) .slide-browser{display:contents}
-.agenda-page .more-slides .slide-card[data-slide-pdf] .slide-cover,.agenda-page .slide-card[data-slide-pdf]:not(:first-child) .slide-cover{grid-column:1;grid-row:1;align-self:start}
-.agenda-page .more-slides .slide-card[data-slide-pdf] .slide-card-body,.agenda-page .slide-card[data-slide-pdf]:not(:first-child) .slide-card-body{grid-column:2;grid-row:1}
-.agenda-page .more-slides .slide-card[data-slide-pdf] .slide-browse-controls,.agenda-page .slide-card[data-slide-pdf]:not(:first-child) .slide-browse-controls{grid-column:1/-1;grid-row:2}
+.agenda-page .slide-browse-controls span{font:500 12px/1.3 'DM Mono',monospace;color:var(--course-muted)}

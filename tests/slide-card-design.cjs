@@ -1,0 +1,16 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const source=fs.readFileSync('assets/stats-site.js','utf8');
+const context=vm.createContext({URLSearchParams});
+vm.runInContext(source.replace(/setupLanguage\(\);\s*setupMenu\(\);\s*loadAgenda\(\);\s*$/,''),context);
+context.deck={label:'追加練習クイズ / Optional practice quiz',preview:'materials/2026-yoh/week03/practice-quiz.pdf'};
+const card=vm.runInContext('slideCard(deck,{week:3})',context);
+assert(card.includes('<h4><span class="lang-en">Optional practice quiz</span><span class="lang-ja" lang="ja">追加練習クイズ</span></h4>'));
+for(const token of ['data-slide-next','data-slide-previous','data-slide-status','data-slide-pdf','Open slides','スライドを開く'])assert(card.includes(token));
+const css=fs.readFileSync('assets/stats-styles.css','utf8');
+assert(css.includes('.agenda-page .slide-card .slide-card-body h4{'));
+assert(css.includes('font:700 15px/1.5 Manrope'));
+assert(css.includes('.agenda-page .slide-card .slide-preview-button{'));
+assert(!css.includes('.slide-browser{display:contents}'));
+console.log('Shared slide cards: scoped typography, bilingual titles, compact open action, and browsing controls preserved.');
