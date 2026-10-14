@@ -1,6 +1,7 @@
 import {writeFileSync, mkdirSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import {walkthrough,walkthroughStyle} from './challenge-walkthrough.mjs';
 
 // Narrative teaching source. The generated w3.md is also editable Marp Markdown.
 const here = dirname(fileURLToPath(import.meta.url));
@@ -334,7 +335,36 @@ ${go('costco')}
 ${note('表の丸め値で計算。件数は整数でも、繰り返した平均は小数でよい。ラボは10分あたり3、観察15分。')}`
   }
 ];
-for (const pair of challengePairs) {
+const lectureWalkthroughs = [
+  {
+    title:'答え合わせ①　同じ3人なら、同じチーム',
+    given:String.raw`候補は $n=6$ 人、選ぶ人数は $x=3$ 人。順番は区別しない。<br>Aさんを固定すると、候補は5人、選ぶ人数は2人。`,
+    formula:String.raw`\begin{aligned}{}_nC_x&=\frac{n!}{x!(n-x)!}\\\text{1人を固定}&:\ {}_{n-1}C_{x-1}\end{aligned}`,
+    substitution:String.raw`\begin{aligned}{}_6C_3&=\frac{6!}{3!3!}\\&=\frac{6\times5\times4}{3\times2\times1}=20\\{}_5C_2&=\frac{5!}{2!3!}=10\end{aligned}`,
+    result:'自由に選ぶ：20通り。Aさんを含む：10通り。',
+    note:'6×5×4は選ぶ順番まで数える。同じ3人の並べ方3!=6通りで割る。ロボットの並びラボでも確認できる。'
+  },
+  {
+    title:'答え合わせ②　不合格は、全て合格の反対',
+    given:String.raw`$X$ は合格個数。$n=6,\ \pi=0.85,\ 1-\pi=0.15$。<br>ちょうど5個合格：$X=5$。1個以上不合格：$X\le5$。`,
+    formula:String.raw`\begin{aligned}\Pr(X=x)&={}_nC_x\pi^x(1-\pi)^{n-x}\\\Pr(X<n)&=1-\Pr(X=n)\\E(X)&=n\pi\\\operatorname{Var}(X)&=n\pi(1-\pi)\end{aligned}`,
+    substitution:String.raw`\begin{aligned}\Pr(X=5)&={}_6C_5(0.85)^5(0.15)^1\\&\approx0.3993\\\Pr(X\le5)&=1-(0.85)^6\approx0.6229\\E(X)&=6\times0.85=5.1\\\operatorname{Var}(X)&=6\times0.85\times0.15=0.765\end{aligned}`,
+    result:'5個合格：約39.93％。1個以上不合格：約62.29％。',
+    note:'期待値は5.1個、分散は0.765個²。各検査は独立で、合格率は一定。NBAラボでも同じ二項モデルを確認できる。'
+  },
+  {
+    title:'答え合わせ③　15分間の平均は4.5件',
+    given:String.raw`平均10分あたり3件。観察時間 $t=15$ 分。$X$ は問い合わせ件数。<br>求める確率：$X=4$ と $X\ge2$。`,
+    formula:String.raw`\begin{aligned}\lambda&=\text{1分あたりの平均件数}\times t\\\Pr(X=x)&=\frac{\lambda^xe^{-\lambda}}{x!}\\\Pr(X\ge k)&=1-\sum_{x=0}^{k-1}\Pr(X=x)\\E(X)&=\operatorname{Var}(X)=\lambda\end{aligned}`,
+    substitution:String.raw`\begin{aligned}\lambda&=\frac{3}{10}\times15=4.5\\\text{表の }\mu=4.5&:\ P_0=0.011,\ P_1=0.050\\&\phantom{:}\ P_4=0.190\\\Pr(X\ge2)&\approx1-(0.011+0.050)\\&=0.939\\E(X)&=\operatorname{Var}(X)=4.5\end{aligned}`,
+    result:'ちょうど4件：約19.0％。2件以上：約93.9％。',
+    note:'P₀・P₁・P₄は、表のx=0・1・4行の「ちょうど」の確率。期待値4.5件、分散4.5件²。表の丸め値を使用。'
+  }
+];
+for (const [i,pair] of challengePairs.entries()) {
+  const lab=['combinations','nba','costco'][i];
+  const answer={...lectureWalkthroughs[i],note:lectureWalkthroughs[i].note+` <a href="https://yohman.github.io/26-2-StatsB/agenda.html?activity=${lab}#week-03">ラボで確認 ↗</a>`};
+  pair.check=walkthrough(answer);
   const index=slides.findIndex(slide=>slide.includes(`## ${pair.after}\n`));
   if(index<0)throw new Error(`Missing challenge anchor: ${pair.after}`);
   slides.splice(index+1,0,pair.problem,pair.check);
@@ -344,7 +374,7 @@ const continuousStart = slides.findIndex(slide=>slide.includes('class="chapter">
 const alClosing = slides.findIndex(slide=>slide.includes('## AL：式に入れる前に、4つ書く'));
 if (continuousStart < 0 || alClosing <= continuousStart) throw new Error('Missing week split anchors');
 const week06Slides = slides.splice(continuousStart, alClosing-continuousStart).map(slide=>slide.replaceAll('#week-03','#week-06'));
-const document = (week, body) => `---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week ${week}'\n---\n\n<style>\n${css}\n</style>\n\n${body.join('\n\n---\n\n')}\n`;
+const document = (week, body) => `---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week ${week}'\n---\n\n<style>\n${css}${week===3?`\n${walkthroughStyle}`:''}\n</style>\n\n${body.join('\n\n---\n\n')}\n`;
 writeFileSync(resolve(here,'w3.md'),document(3,slides));
 writeFileSync(resolve(week06,'w6.md'),document(6,week06Slides));
 console.log(`Week 3: ${slides.length} slides, binomial and Poisson plus AL closing. Week 6: ${week06Slides.length} continuous-distribution slides.`);

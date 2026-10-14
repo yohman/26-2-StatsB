@@ -89,6 +89,19 @@ section.poisson-check .note {font-size:17px; margin-top:8px;}
 section table {width:100%; margin:20px 0; border-collapse:collapse; font-size:23px;} section th {background:#dcecf3; padding:15px; border:0;}
 section td {padding:15px; border:0;} section tr:nth-child(even) {background:#eef3f5;}
 
+
+section.worked-answer {font-size:25px; padding:32px 60px 70px;}
+section.worked-answer h2 {font-size:38px; margin-bottom:10px;}
+.worked-label {font-size:20px; font-weight:800; color:#2b624b; margin:4px 0;}
+.worked-given {font-size:23px; margin:0 0 8px;}
+.worked-columns {display:grid; grid-template-columns:1fr 1.15fr; gap:26px; align-items:start;}
+.worked-columns > div + div {border-left:2px solid #b7d1c2; padding-left:26px;}
+section.worked-answer .katex-display {font-size:.83em; margin:8px 0; text-align:left;}
+.worked-result {border-top:2px solid #b7d1c2; margin-top:9px; padding-top:6px;}
+.worked-result p {font-size:26px; color:#215d45; font-weight:700; margin:4px 0;}
+section.worked-answer .note {font-size:17px; margin-top:6px;}
+section.worked-answer .note a {font-size:17px; padding:0; background:none; color:#176d82; text-decoration:underline;}
+
 </style>
 
 ## 余った時間で、もう一歩！
@@ -124,23 +137,38 @@ section td {padding:15px; border:0;} section tr:nth-child(even) {background:#eef
 
 ---
 
-<!-- _class: challenge-check -->
+<!-- _class: challenge-check worked-answer -->
 
 ## 答え合わせ①　選ばない場合を引く
 
+<div class="worked-label">① 与えられた条件</div>
+<div class="worked-given">
+
+候補は $n=8$ 体、選ぶ数は $x=3$ 体。人気ロボットはA・Bの2体。<br>順番は区別しない。AもBも選ばない場合、候補は6体。
+
+</div>
+<div class="worked-columns"><div>
+<div class="worked-label">② 公式（文字のまま）</div>
+
 $$
-\begin{aligned}
-\text{(1) 全て}&:\quad {}_8C_3=\frac{8\times7\times6}{3\times2\times1}=56\\
-\text{(2) 少なくとも一方}&:\quad {}_8C_3-{}_6C_3=56-20=36\\
-\text{(3) 両方}&:\quad {}_6C_1=6
-\end{aligned}
+\begin{aligned}{}_nC_x&=\frac{n!}{x!(n-x)!}\\\text{少なくとも一方}&:\ {}_nC_x-{}_{n-2}C_x\\\text{両方}&:\ {}_{n-2}C_{x-2}\end{aligned}
 $$
 
-**(2)** 全56通りから、AもBも選ばない20通りを引く。
+</div><div>
+<div class="worked-label">③ 数値を代入・計算</div>
 
-**(3)** AとBを先に選ぶ。残り6体から、あと1体だけ選ぶ。
+$$
+\begin{aligned}{}_8C_3&=\frac{8\times7\times6}{3\times2\times1}=56\\{}_8C_3-{}_6C_3&=56-20=36\\{}_6C_1&=6\end{aligned}
+$$
 
-<div class="note">Aを含む場合とBを含む場合を単純に足すと、両方を含む6通りを二重に数えてしまう。</div>
+</div></div>
+<div class="worked-result">
+<div class="worked-label">④ 答え・意味</div>
+
+制限なし：56通り。少なくとも一方：36通り。両方：6通り。
+
+</div>
+<div class="note">少なくとも一方は、全てから「どちらも選ばない」を引く。両方を固定すると、あと1体を残り6体から選ぶ。</div>
 
 ---
 
@@ -163,22 +191,38 @@ $$
 
 ---
 
-<!-- _class: challenge-check -->
+<!-- _class: challenge-check worked-answer -->
 
 ## 答え合わせ②　「以上」は複数の結果を足す
 
+<div class="worked-label">① 与えられた条件</div>
+<div class="worked-given">
+
+$X$ は成功回数。$n=8,\ \pi=0.75,\ 1-\pi=0.25$。<br>ちょうど6回：$X=6$。7回以上：$X=7$ または $8$。各配達は独立。
+
+</div>
+<div class="worked-columns"><div>
+<div class="worked-label">② 公式（文字のまま）</div>
+
 $$
-\begin{aligned}
-X&\sim\operatorname{Bin}(8,0.75)\\
-\Pr(X=6)&={}_8C_6(0.75)^6(0.25)^2\approx0.3115=31.15\%\\
-\Pr(X\ge7)&={}_8C_7(0.75)^7(0.25)+{}_8C_8(0.75)^8\\
-&\approx0.2670+0.1001=0.3671=36.71\%\\
-E(X)&=8\times0.75=6\\
-\operatorname{Var}(X)&=8\times0.75\times0.25=1.5
-\end{aligned}
+\begin{aligned}\Pr(X=x)&={}_nC_x\pi^x(1-\pi)^{n-x}\\\Pr(X\ge k)&=\sum_{x=k}^{n}\Pr(X=x)\\E(X)&=n\pi\\\operatorname{Var}(X)&=n\pi(1-\pi)\end{aligned}
 $$
 
-<div class="note">8回の配達を何度も繰り返したとき、平均成功回数は6回。毎回必ず6回成功するという意味ではない。</div>
+</div><div>
+<div class="worked-label">③ 数値を代入・計算</div>
+
+$$
+\begin{aligned}\Pr(X=6)&={}_8C_6(0.75)^6(0.25)^2\\\Pr(X\ge7)&={}_8C_7(0.75)^7(0.25)\\&\quad+{}_8C_8(0.75)^8\\&\approx0.2670+0.1001=0.3671\\E(X)&=8\times0.75=6\\\operatorname{Var}(X)&=8\times0.75\times0.25=1.5\end{aligned}
+$$
+
+</div></div>
+<div class="worked-result">
+<div class="worked-label">④ 答え・意味</div>
+
+6回成功：約31.15％。7回以上成功：約36.71％。
+
+</div>
+<div class="note">期待値6回、分散1.5回²。平均6回とは、毎回必ず6回成功するという意味ではない。</div>
 
 ---
 
@@ -202,25 +246,35 @@ $$
 
 ---
 
-<!-- _class: challenge-check poisson-check -->
+<!-- _class: challenge-check worked-answer -->
 
 ## 答え合わせ③　時間をそろえて、表を読む
 
+<div class="worked-label">① 与えられた条件</div>
+<div class="worked-given">
+
+平均10分あたり2冊。観察時間 $t=15$ 分。$X$ は返却冊数。<br>求める確率：$X=2$ と $X\ge3$。一定の率で独立に返却される。
+
+</div>
+<div class="worked-columns"><div>
+<div class="worked-label">② 公式（文字のまま）</div>
+
 $$
-\lambda=2\times\frac{15}{10}=3\quad\Rightarrow\quad\text{表の }\mu=3.0\text{ の列}
+\begin{aligned}\lambda&=\text{1分あたりの平均冊数}\times t\\\Pr(X=x)&=\frac{\lambda^xe^{-\lambda}}{x!}\\\Pr(X\ge k)&=1-\sum_{x=0}^{k-1}\Pr(X=x)\\E(X)&=\operatorname{Var}(X)=\lambda\end{aligned}
 $$
 
-| 表の行 $x$ | 0冊 | 1冊 | 2冊 |
-| --- | --- | --- | --- |
-| $\Pr(X=x)$ | 0.050 | 0.149 | 0.224 |
+</div><div>
+<div class="worked-label">③ 数値を代入・計算</div>
 
 $$
-\begin{aligned}
-\Pr(X=2)&\approx0.224=22.4\%\\
-\Pr(X\ge3)&=1-\{\Pr(X=0)+\Pr(X=1)+\Pr(X=2)\}\\
-&\approx1-(0.050+0.149+0.224)=0.577=57.7\%\\
-E(X)&=\operatorname{Var}(X)=3
-\end{aligned}
+\begin{aligned}\lambda&=\frac{2}{10}\times15=3\\\text{表の }\mu=3.0&:\ P_0=0.050,\ P_1=0.149\\&\phantom{:}\ P_2=0.224\\\Pr(X\ge3)&\approx1-(0.050+0.149+0.224)\\&=0.577\\E(X)&=\operatorname{Var}(X)=3\end{aligned}
 $$
 
-<div class="note">表の丸め値を使用。期待値は3冊、分散は3冊²。15分だからλ=15、ではない。</div>
+</div></div>
+<div class="worked-result">
+<div class="worked-label">④ 答え・意味</div>
+
+ちょうど2冊：約22.4％。3冊以上：約57.7％。
+
+</div>
+<div class="note">P₀・P₁・P₂は、表のx=0・1・2行の「ちょうど」の確率。期待値3冊、分散3冊²。表の丸め値を使用。</div>

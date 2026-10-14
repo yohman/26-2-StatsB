@@ -14,8 +14,8 @@ assert.equal(8*.75*.25,1.5);
 assert(Math.abs(poisson(3,2)-.22404180765538775)<1e-12);
 assert(Math.abs(1-(.050+.149+.224)-.577)<1e-12);
 assert(slides[5].includes(String.raw`$\lambda$`));
-assert(slides[6].includes(String.raw`$\Pr(X=x)$`));
-assert(!/e\^|2\.71828/.test(slides[6]));
+assert(slides[6].includes(String.raw`\Pr(X=x)`));
+assert(!/2\.71828/.test(slides[6]));
 assert(fs.readFileSync('content/weeks/03-poisson.md','utf8').includes('practice-quiz.pdf'));
 (async()=>{
   const pdfjs=require('../assets/vendor/pdfjs/pdf.min.js');
