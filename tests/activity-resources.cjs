@@ -12,9 +12,16 @@ for (const name of fs.readdirSync(path.join(root, 'content/weeks'))) {
   context.week = week;
   const markup = vm.runInContext('assignmentTabs(week)', context);
   if ([3,4].includes(week.week)) {
-    assert.equal((markup.match(/role="tab"/g) || []).length, 1);
+    assert.equal((markup.match(/role="tab"/g) || []).length, week.week === 3 ? 2 : 1);
     assert.match(markup, /Reference for Activity 1/);
     assert.match(markup, /Poisson distribution table/);
+  }
+  if (week.week === 3) {
+    assert.match(markup,/Practice quiz/);
+    assert.match(markup,/追加練習クイズ/);
+    assert.match(markup,/data-slide-pdf="materials\/2026-yoh\/week03\/practice-quiz.pdf"/);
+    const lecture=vm.runInContext('lectureSection(week)',context);
+    assert(!lecture.includes('practice-quiz.pdf'),'Quiz belongs only to the activity tab');
   }
   for (const item of week.materials.filter(item => item.href.endsWith('.xlsx'))) {
     assert(!/解答|answer|課題/i.test(item.href));

@@ -130,7 +130,7 @@ function isLectureMaterial(item) {
 
 function isActivityMaterial(item) {
   if (item.type === 'resource') return false;
-  return ['worksheet', 'data', 'notebook'].includes(item.type) ||
+  return ['worksheet', 'data', 'notebook', 'quiz'].includes(item.type) ||
     /AL用|ワークシート|practice|data|データ|script|統計表|分布表/i.test(item.label);
 }
 
@@ -578,11 +578,12 @@ function lectureSection(week) {
 }
 
 function assignmentTabs(week) {
-  const items = week.materials.filter(item => !isLectureMaterial(item) && isActivityMaterial(item));
+  const items = week.materials.filter(item => !isLectureMaterial(item) && isActivityMaterial(item)).sort((a,b)=>Number(a.type === 'quiz')-Number(b.type === 'quiz'));
   const resources = week.materials.filter(item => item.type === 'resource');
   if (!items.length) return `<div class="activity-empty"><p>${week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('No separate activity file is listed for this week.', '今週は別の授業内課題ファイルはありません。')}</p></div>`;
-  const tabs = items.map((item, index) => `<button type="button" role="tab" id="week-${week.week}-tab-${index}" aria-controls="week-${week.week}-panel-${index}" aria-selected="${index === 0}" tabindex="${index === 0 ? '0' : '-1'}">${bilingual(`Activity ${index + 1}`, `アクティビティ${index + 1}`)}</button>`).join('');
+  const tabs = items.map((item, index) => `<button type="button" role="tab" id="week-${week.week}-tab-${index}" aria-controls="week-${week.week}-panel-${index}" aria-selected="${index === 0}" tabindex="${index === 0 ? '0' : '-1'}">${item.type === 'quiz' ? bilingual('Practice quiz', '追加練習クイズ') : bilingual(`Activity ${index + 1}`, `アクティビティ${index + 1}`)}</button>`).join('');
   const panels = items.map((item, index) => {
+    if (item.type === 'quiz') return `<div class="activity-panel" role="tabpanel" id="week-${week.week}-panel-${index}" aria-labelledby="week-${week.week}-tab-${index}"${index === 0 ? '' : ' hidden'}><p class="activity-type">${bilingual('OPTIONAL PRACTICE', '時間があれば挑戦')}</p><h4>${bilingual('Three extra challenges', '追加チャレンジ3問')}</h4><p class="activity-description">${bilingual('Combinations, binomial and Poisson. Allow about five minutes per question. Each worked answer is protected by a confirmation before you advance.', '組合せ・二項分布・ポアソン分布。各問5分が目安です。答え合わせに進む前に、確認画面が表示されます。')}</p><div class="slide-grid">${slideCard({label:item.label,preview:item.href,type:item.type},week)}</div></div>`;
     const focus = weekFlow[week.week]?.steps[Math.min(index + 1, 2)];
     const support = index === 0 && resources.length ? `<p class="activity-resource-heading">${bilingual('Reference for Activity 1', 'アクティビティ1の参考資料')}</p>${resources.map(resource => activityResource(resource, week)).join('')}` : '';
     return `<div class="activity-panel" role="tabpanel" id="week-${week.week}-panel-${index}" aria-labelledby="week-${week.week}-tab-${index}"${index === 0 ? '' : ' hidden'}><p class="activity-type">${bilingual('IN-CLASS ACTIVITY', '授業内課題')}</p><h4>${escapeHtml(item.label)}</h4>${focus ? `<p class="activity-description">${bilingual(escapeHtml(focus[0]), escapeHtml(focus[1]))}</p>` : ''}<div class="activity-actions">${activityResource(item, week)}${support}</div></div>`;
