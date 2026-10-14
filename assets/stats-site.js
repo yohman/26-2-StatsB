@@ -164,6 +164,7 @@ function slideThumbnail(deck, week) {
   if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
   if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261007-kuji-image-1';
   if (week.week === 3 && deck.label === "Yoh's Week 3 lecture") return 'assets/slide-previews/yoh-w03.png?v=20261007-week-split-1';
+  if (week.week === 4 && deck.label === "Yoh's Week 4 lecture") return 'assets/slide-previews/yoh-w04.png?v=20261014';
   if (week.week === 6 && deck.label === "Yoh's Week 6 lecture") return 'assets/slide-previews/yoh-w06.png?v=20261014';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
@@ -524,6 +525,11 @@ function week23LectureMarkup(week, content) {
     </div>` : '');
 }
 
+function week4LectureMarkup(content) {
+  const labs=[['hits','AL 01 · Batting','AL 01 · 打率'],['gacha','AL 02 · Gacha','AL 02 · ガチャ'],['defects','AL 03 · Defects','AL 03 · 不良品']];
+  return `<div class="lecture-tablist" role="tablist" aria-label="Week 4 lecture"><button type="button" role="tab" id="week-4-lecture-slides-tab" aria-controls="week-4-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button><button type="button" role="tab" id="week-4-lecture-explore-tab" aria-controls="week-4-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore the AL','ALをやってみる')}</button></div><div id="week-4-lecture-slides" role="tabpanel" aria-labelledby="week-4-lecture-slides-tab">${content}</div><div id="week-4-lecture-explore" role="tabpanel" aria-labelledby="week-4-lecture-explore-tab" hidden><div class="simulation-tablist" role="tablist" aria-label="Week 4 AL explorations">${labs.map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-4-${id}-tab" aria-controls="week-4-${id}" aria-selected="${!i}" tabindex="${i?-1:0}">${bilingual(en,ja)}</button>`).join('')}</div>${labs.map(([id],i)=>`<div id="week-4-${id}" role="tabpanel" aria-labelledby="week-4-${id}-tab"${i?' hidden':''}><section class="week4-al" data-week4-al="${id}"></section></div>`).join('')}</div>`;
+}
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
@@ -538,7 +544,7 @@ function lectureSection(week) {
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
   const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>`;
-  const lectureBody = week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">
+  const lectureBody = week.week === 4 ? week4LectureMarkup(content) : week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">
       <button type="button" role="tab" id="week-5-lecture-slides-tab" aria-controls="week-5-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-5-lecture-explore-tab" aria-controls="week-5-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
     </div><div id="week-5-lecture-slides" role="tabpanel" aria-labelledby="week-5-lecture-slides-tab">${content}</div><div id="week-5-lecture-explore" role="tabpanel" aria-labelledby="week-5-lecture-explore-tab" hidden>${distributionSimulationMarkup('normal')}</div>`
@@ -718,6 +724,9 @@ function renderAgenda(weeks) {
     batting: ['week-3-lecture-explore-tab','week-3-batting-tab'],
     nba: ['week-3-lecture-explore-tab','week-3-nba-tab'],
     costco: ['week-3-lecture-explore-tab','week-3-costco-tab'],
+    'al4-hits': ['week-4-lecture-explore-tab','week-4-hits-tab'],
+    'al4-gacha': ['week-4-lecture-explore-tab','week-4-gacha-tab'],
+    'al4-defects': ['week-4-lecture-explore-tab','week-4-defects-tab'],
     discrete: ['week-2-lecture-explore-tab','week-2-discrete-tab','w2-count-tab'],
     continuous: ['week-2-lecture-explore-tab','week-2-discrete-tab','w2-measure-tab'],
     probability: ['week-3-lecture-explore-tab','week-3-probability-tab'],

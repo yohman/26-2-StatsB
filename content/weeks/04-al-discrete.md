@@ -20,12 +20,13 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 
 ## Textbook
 
-- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+- 第2章 第2節 4「離散確率分布」p.118–120 (Chapter 2, Section 2, subsection 4: Discrete Probability Distributions, pp.118–120)
 
 ## Materials
 
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pptx) {primary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pdf) {primary}
+- [Yoh's Week 4 lecture](materials/2026-yoh/week04/w4.pdf) {primary}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pptx) {supplementary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pdf) {supplementary}
 - [AL用ワークシート](weeks/04-al-discrete-distributions/04_AL用ワークシート.xlsx) {worksheet}
 - [Yoh active-learning discrete-distributions slides](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/06_[AL]確率分布_1_離散確率分布.pdf) {yoh}
 - [Yoh discrete-distributions activity lecture](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/w6.pdf) {yoh}
