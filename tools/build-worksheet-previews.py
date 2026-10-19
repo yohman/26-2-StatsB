@@ -54,3 +54,6 @@ for relative in files:
         style = '<style>body{margin:24px;font-family:Arial,"Hiragino Sans",sans-serif;background:#fff;color:#292820}table{margin:20px 0;border-collapse:collapse}td,th{white-space:normal!important;overflow-wrap:break-word;min-width:60px;padding:5px;max-width:900px}a{color:#246f65}img{max-width:100%;height:auto}</style>'
         (destination / 'index.html').write_text(html.replace('</head>', style + '<link rel="stylesheet" href="../../worksheet-preview.css"></head>'))
         print(f"{relative} -> {destination.relative_to(ROOT)}")
+
+# Keep mathematical labels readable inside the script-free preview iframe.
+subprocess.run(["node", str(ROOT / "tools/render-worksheet-math.cjs")], check=True)
