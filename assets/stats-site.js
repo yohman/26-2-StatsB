@@ -125,7 +125,7 @@ function viewerLink(file, title, week, source = '') {
 }
 
 function isLectureMaterial(item) {
-  return ['primary', 'supplementary', 'standard', 'yoh'].includes(item.type);
+  return ['primary', 'supplementary', 'standard', 'yoh', 'news-example'].includes(item.type);
 }
 
 function isActivityMaterial(item) {
@@ -156,6 +156,8 @@ function lectureDecks(materials, week) {
 }
 
 function slideThumbnail(deck, week) {
+  const news = deck.preview?.match(/\/week04\/(news-[a-z-]+)\.pdf$/);
+  if (news) return `assets/slide-previews/week04-${news[1]}.png?v=20261020`;
   if (deck.preview?.endsWith('/week03/practice-quiz.pdf')) return 'assets/slide-previews/week03-practice-quiz.png?v=20261014';
   if (deck.preview?.includes('materials/2026-tsumura/')) {
     const number = deck.preview.match(/\/26_(\d{2})_/)?.[1];
@@ -534,16 +536,18 @@ function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
   const primary = decks.filter(deck => deck.type === 'primary');
-  const other = decks.filter(deck => deck.type !== 'primary');
+  const other = decks.filter(deck => deck.type !== 'primary' && deck.type !== 'news-example');
+  const newsExamples = decks.filter(deck => deck.type === 'news-example');
   const orientation = week.week === 1 ? primary.filter(deck => deck.preview.includes('26_00_')) : [];
   const visible = week.week === 1 ? primary.filter(deck => !orientation.includes(deck)) : !primary.length ? decks : primary;
   const more = week.week === 1 ? [...other, ...orientation] : !primary.length ? [] : other;
   const slideList = visible.map(deck => slideCard(deck, week)).join('');
+  const choices = newsExamples.length ? `<section class="news-example-choices"><p class="more-slides-heading">${bilingual('News examples to choose from · 4 slides each', 'ニュース例題の候補 · 各4枚')}</p><div class="news-example-grid">${newsExamples.map(deck=>slideCard(deck,week)).join('')}</div></section>` : '';
   const extra = more.length ? `<div class="more-slides"><p class="more-slides-heading">${bilingual('Supplementary slides', '補助スライド')}</p><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></div>` : '';
   const description = plan ? bilingual(escapeHtml(plan.overview[0]), escapeHtml(plan.overview[1])) : bilingual(escapeHtml(week.title_en), escapeHtml(week.title_ja));
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
-  const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${extra}</div>` : ''}</div>`;
+  const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${newsExamples.length?'':extra}</div>` : ''}${choices}${newsExamples.length?`<div class="news-example-supplement">${extra}</div>`:''}</div>`;
   const lectureBody = week.week === 4 ? week4LectureMarkup(content) : week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">
       <button type="button" role="tab" id="week-5-lecture-slides-tab" aria-controls="week-5-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-5-lecture-explore-tab" aria-controls="week-5-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>

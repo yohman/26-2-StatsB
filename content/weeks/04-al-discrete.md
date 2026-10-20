@@ -25,6 +25,9 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 ## Materials
 
 - [Yoh's Week 4 lecture](materials/2026-yoh/week04/w4.pdf) {primary}
+- [ニュース例題① AIニュースの正確性 / News example 1: AI news accuracy](materials/2026-yoh/week04/news-ai-news-errors.pdf) {news-example}
+- [ニュース例題② AIの友だち / News example 2: AI companions](materials/2026-yoh/week04/news-ai-companions.pdf) {news-example}
+- [ニュース例題③ AIへの怒り / News example 3: Anger about AI](materials/2026-yoh/week04/news-genz-ai-anger.pdf) {news-example}
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pdf) {supplementary}
 - [AL用ワークシート](weeks/04-al-discrete-distributions/04_AL用ワークシート.xlsx) {worksheet}
