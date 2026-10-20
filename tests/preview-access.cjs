@@ -12,7 +12,7 @@ function boot(href){
 }
 const root='https://yohman.github.io/26-2-StatsB/';
 for(const page of ['index.html','agenda.html','viewer.html','review.html','teaching-plan.html']){
-  assert(fs.readFileSync(page,'utf8').includes('assets/preview-access.js?v=20261020'));
+  assert(fs.readFileSync(page,'utf8').includes('assets/preview-access.js?v=20261020b'));
   assert.equal(boot(root+page).redirect,root+'unavailable.html');
   assert.equal(boot(root+page+'?preview=all').redirect,root+'unavailable.html');
   assert.equal(boot(root+page+'?p').redirect,undefined);
