@@ -16,6 +16,7 @@
     if (!target.pathname.endsWith('.html') && !target.pathname.endsWith('/')) return null;
     if (target.pathname.endsWith('/unavailable.html')) return null;
     target.searchParams.set('p', '');
+    if (url.searchParams.get('preview') === 'all') target.searchParams.set('preview', 'all');
     // Back buttons in the viewer also retain preview mode.
     if (target.searchParams.has('return')) {
       const back = withPreview(target.searchParams.get('return'));

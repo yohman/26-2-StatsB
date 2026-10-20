@@ -18,7 +18,7 @@ for(const page of ['index.html','agenda.html','viewer.html','review.html','teach
   assert.equal(boot(root+page+'?p').redirect,undefined);
 }
 for(const root of ['http://127.0.0.1:8133/','http://localhost:8133/','http://[::1]:8133/','file:///tmp/'])assert.equal(boot(root+'agenda.html').redirect,undefined);
-const run=boot(root+'agenda.html?p#week-04');
+const run=boot(root+'agenda.html?p&preview=all#week-04');
 function anchor(raw){return {href:new URL(raw,root).href,getAttribute:()=>raw,hasAttribute:()=>false,setAttribute:(_,value)=>{raw=value;},value:()=>raw};}
 const viewer=anchor('viewer.html?file=materials/test.pdf&return=agenda.html%23week-04');
 const external=anchor('https://www.nytimes.com/');
@@ -26,7 +26,9 @@ const pdf=anchor('materials/test.pdf');
 run.links.push(viewer,external,pdf);run.ready();
 const target=new URL(viewer.value());
 assert(target.searchParams.has('p'));
+assert.equal(target.searchParams.get('preview'),'all');
 assert(new URL(target.searchParams.get('return')).searchParams.has('p'));
+assert.equal(new URL(target.searchParams.get('return')).searchParams.get('preview'),'all');
 assert.equal(external.value(),'https://www.nytimes.com/');
 assert.equal(pdf.value(),'materials/test.pdf');
 console.log('Public ?p visibility gate, local exemption and preview-preserving navigation verified.');
