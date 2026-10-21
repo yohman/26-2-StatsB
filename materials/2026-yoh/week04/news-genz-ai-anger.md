@@ -127,6 +127,31 @@ section.news-answer .katex-display{font-size:1.1em;margin:14px 0}
 section.news-answer .note{font-size:18px;margin-top:12px}
 </style>
 
+<style>
+section.companion-given{font-size:25px} section.companion-given .news-question{font-size:27px;line-height:1.5}
+section.companion-given .katex-display{font-size:1.02em;margin:17px 0}
+section.companion-formula .katex-display{font-size:1.06em;margin:16px 0}
+section.companion-chart{padding:35px 62px 60px;background:#fbfaf6}
+section.companion-chart h2{font-size:40px;margin-bottom:14px}
+section.companion-chart .katex-display{font-size:1.04em;margin:10px 0}
+.companion-chart-legend{font-size:21px;margin:4px 0 8px}
+.companion-chart-legend strong{color:#176d82} .companion-chart-legend em{color:#92641c;font-style:normal;font-weight:700}
+.companion-distribution{width:100%;height:315px;display:block}
+section.companion-chart .note{font-size:17px;margin-top:5px}
+</style>
+<style>
+section.answer-visual{padding:36px 62px 66px;background:#fbfaf6}
+section.answer-visual h2{font-size:37px;margin-bottom:12px}
+.answer-visual-summary{font-size:25px;font-weight:700;color:#215d45;margin:10px 0}
+.answer-visual-legend{font-size:20px;margin:8px 0;color:#40555f}
+.answer-visual-legend b{color:#176d82}.answer-visual-legend strong{color:#a57020}
+.answer-visual-chart{display:block;width:100%;height:325px}
+section.answer-visual .note{font-size:18px;margin-top:10px}
+.answer-models{font-size:24px;width:100%;margin-top:30px}
+.answer-models th,.answer-models td{padding:18px 22px;border-bottom:2px solid #d9e1e3}
+.answer-models td:last-child{color:#176d82;font-weight:700}
+</style>
+
 <!-- _class: news-opening -->
 
 ## AIを使う。でも、腹が立つ？
@@ -155,7 +180,7 @@ section.news-answer .note{font-size:18px;margin-top:12px}
 
 <!-- Sources: https://www.nytimes.com/2026/04/09/style/gen-z-ai-gallup-study.html
 Data and thumbnail: https://news.gallup.com/poll/708224/gen-adoption-steady-skepticism-climbs.aspx
-Reported p=0.31. Classroom model n=4, independent trials, constant p. -->
+Reported p=0.31. Classroom model n=4, p=0.31, independent trials, constant p. -->
 
 ---
 
@@ -214,3 +239,90 @@ $$
 31％なのに、4人組なら「少なくとも1人いる」は約77％になる。
 
 <div class="note">感情についての自己申告。31％がAIを使わないという意味ではなく、AIが怒りの原因だと証明した調査でもない。</div>
+
+---
+
+<!-- _class: answer-visual -->
+
+## 図で確認　答えに含める棒
+
+<div class="answer-visual-summary">求めた確率：約77.33％</div>
+
+<div class="answer-visual-legend">青：求めた結果　灰：それ以外</div>
+
+<svg class="answer-visual-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 325" role="img" aria-label="図で確認　答えに含める棒"><g font-family="Hiragino Sans,Noto Sans JP,sans-serif" fill="#40555f"><path d="M95 246H1080" stroke="#d9e1e3"/><text x="80" y="252" text-anchor="end" font-size="18">0%</text><path d="M95 198.5H1080" stroke="#d9e1e3"/><text x="80" y="204.5" text-anchor="end" font-size="18">12.5%</text><path d="M95 151H1080" stroke="#d9e1e3"/><text x="80" y="157" text-anchor="end" font-size="18">25%</text><path d="M95 103.5H1080" stroke="#d9e1e3"/><text x="80" y="109.5" text-anchor="end" font-size="18">37.5%</text><path d="M95 56H1080" stroke="#d9e1e3"/><text x="80" y="62" text-anchor="end" font-size="18">50%</text><rect data-count="0" data-probability="0.22667120999999993" x="126.52" y="159.86494020000004" width="133.96" height="86.13505979999998" fill="#bdcbd0"/><text x="193.5" y="149.86494020000004" text-anchor="middle" fill="#40555f" font-size="19">22.7%</text><text x="193.5" y="275" text-anchor="middle" font-size="18">0</text><rect data-count="1" data-probability="0.40735115999999993" x="323.52" y="91.20655920000002" width="133.96" height="154.79344079999998" fill="#176d82"/><text x="390.5" y="81.20655920000002" text-anchor="middle" fill="#176d82" font-size="19">40.7%</text><text x="390.5" y="275" text-anchor="middle" font-size="18">1</text><rect data-count="2" data-probability="0.27451925999999993" x="520.52" y="141.68268120000002" width="133.96" height="104.31731879999998" fill="#176d82"/><text x="587.5" y="131.68268120000002" text-anchor="middle" fill="#176d82" font-size="19">27.5%</text><text x="587.5" y="275" text-anchor="middle" font-size="18">2</text><rect data-count="3" data-probability="0.08222315999999999" x="717.52" y="214.7551992" width="133.96" height="31.244800799999997" fill="#176d82"/><text x="784.5" y="204.7551992" text-anchor="middle" fill="#176d82" font-size="19">8.2%</text><text x="784.5" y="275" text-anchor="middle" font-size="18">3</text><rect data-count="4" data-probability="0.009235209999999999" x="914.52" y="242.4906202" width="133.96" height="3.5093797999999996" fill="#176d82"/><text x="981.5" y="232.4906202" text-anchor="middle" fill="#176d82" font-size="19">0.9%</text><text x="981.5" y="275" text-anchor="middle" font-size="18">4</text><path d="M95 246H1080" stroke="#71848e"/><text x="1080" y="314" text-anchor="end" font-size="20">X（人）</text></g></svg>
+
+<div class="note"> 31％は調査の報告値。4人・独立・一定の確率は授業用の仮定。このクラスや日本全体への推定ではない。</div>
+
+---
+
+<!-- _class: challenge -->
+
+## チャレンジ①　平均個数と、ばらつきは？
+
+<div class="challenge-time">自分で解く　3分 ／ 教科書 p.119–120</div>
+
+$X$＝AIに怒りを感じると答える人の数。
+
+$n=4,\quad\pi=0.31$。独立・一定の確率を仮定する。
+
+**(1)** 同じ条件の組・期間を繰り返すとき、$X$ の期待値と分散を求めよ。
+
+**(2)** 期待値を「起こる確率」と言い換えてよいか？
+
+**(3)** 現実では、独立・一定の確率という仮定が崩れるのはどんな場合か？
+
+<div class="note">期待値は個数の単位、分散はその単位の2乗。前の確率問題と同じXを使う。</div>
+
+---
+
+<!-- _class: challenge-check worked-answer -->
+
+## 答え合わせ　期待値は、確率ではなく個数
+
+<div class="worked-label">① 与えられた条件</div>
+<div class="worked-given">
+
+$X$＝AIに怒りを感じると答える人の数。
+
+$n=4,\quad\pi=0.31$。独立・一定の確率を仮定する。
+
+</div>
+<div class="worked-columns"><div>
+<div class="worked-label">② 公式（文字のまま）</div>
+
+$$
+\begin{aligned}E(X)&=n\pi\\\operatorname{Var}(X)&=n\pi(1-\pi)\end{aligned}
+$$
+
+</div><div>
+<div class="worked-label">③ 数値を代入・計算</div>
+
+$$
+\begin{aligned}E(X)&=4\times0.31=1.24\\\operatorname{Var}(X)&=4\times0.31\times0.69\\&=0.8556\end{aligned}
+$$
+
+</div></div>
+<div class="worked-result">
+<div class="worked-label">④ 答え・意味</div>
+
+期待値 1.24人。分散 0.8556人²。
+
+同じ条件を繰り返した平均であり、毎回この個数になる保証ではない。
+
+</div>
+<div class="note">期待値を％にしても、事象の確率にはならない。仮定が崩れる例：友人同士の意見が似る。年齢層や時期で割合が変わる。</div>
+
+---
+
+<!-- _class: answer-visual -->
+
+## 図で確認　平均と、結果のばらつき
+
+<div class="answer-visual-summary">期待値 1.24人。分散 0.8556人²。</div>
+
+<div class="answer-visual-legend">灰：各結果の確率　赤い破線：期待値</div>
+
+<svg class="answer-visual-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 325" role="img" aria-label="図で確認　平均と、結果のばらつき"><g font-family="Hiragino Sans,Noto Sans JP,sans-serif" fill="#40555f"><path d="M95 246H1080" stroke="#d9e1e3"/><text x="80" y="252" text-anchor="end" font-size="18">0%</text><path d="M95 198.5H1080" stroke="#d9e1e3"/><text x="80" y="204.5" text-anchor="end" font-size="18">12.5%</text><path d="M95 151H1080" stroke="#d9e1e3"/><text x="80" y="157" text-anchor="end" font-size="18">25%</text><path d="M95 103.5H1080" stroke="#d9e1e3"/><text x="80" y="109.5" text-anchor="end" font-size="18">37.5%</text><path d="M95 56H1080" stroke="#d9e1e3"/><text x="80" y="62" text-anchor="end" font-size="18">50%</text><rect data-count="0" data-probability="0.22667120999999993" x="126.52" y="159.86494020000004" width="133.96" height="86.13505979999998" fill="#bdcbd0"/><text x="193.5" y="149.86494020000004" text-anchor="middle" fill="#40555f" font-size="19">22.7%</text><text x="193.5" y="275" text-anchor="middle" font-size="18">0</text><rect data-count="1" data-probability="0.40735115999999993" x="323.52" y="91.20655920000002" width="133.96" height="154.79344079999998" fill="#bdcbd0"/><text x="390.5" y="81.20655920000002" text-anchor="middle" fill="#40555f" font-size="19">40.7%</text><text x="390.5" y="275" text-anchor="middle" font-size="18">1</text><rect data-count="2" data-probability="0.27451925999999993" x="520.52" y="141.68268120000002" width="133.96" height="104.31731879999998" fill="#bdcbd0"/><text x="587.5" y="131.68268120000002" text-anchor="middle" fill="#40555f" font-size="19">27.5%</text><text x="587.5" y="275" text-anchor="middle" font-size="18">2</text><rect data-count="3" data-probability="0.08222315999999999" x="717.52" y="214.7551992" width="133.96" height="31.244800799999997" fill="#bdcbd0"/><text x="784.5" y="204.7551992" text-anchor="middle" fill="#40555f" font-size="19">8.2%</text><text x="784.5" y="275" text-anchor="middle" font-size="18">3</text><rect data-count="4" data-probability="0.009235209999999999" x="914.52" y="242.4906202" width="133.96" height="3.5093797999999996" fill="#bdcbd0"/><text x="981.5" y="232.4906202" text-anchor="middle" fill="#40555f" font-size="19">0.9%</text><text x="981.5" y="275" text-anchor="middle" font-size="18">4</text><path d="M437.78 42V250" stroke="#9b5146" stroke-width="3" stroke-dasharray="7 5"/><text x="437.78" y="26" text-anchor="middle" fill="#9b5146" font-size="21">平均 1.24人</text><path d="M95 246H1080" stroke="#71848e"/><text x="1080" y="314" text-anchor="end" font-size="20">X（人）</text></g></svg>
+
+<div class="note">平均は赤い破線。分散 0.8556人² は、この平均からの距離の2乗を確率で重みづけした値。 一番高い棒と、期待値の位置は同じとは限らない。</div>

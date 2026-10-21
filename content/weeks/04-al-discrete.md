@@ -28,9 +28,9 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 - [ニュース例題① AIニュースの正確性 / News example 1: AI news accuracy](materials/2026-yoh/week04/news-ai-news-errors.pdf) {news-example}
 - [ニュース例題② AIの友だち / News example 2: AI companions](materials/2026-yoh/week04/news-ai-companions.pdf) {news-example}
 - [ニュース例題③ AIへの怒り / News example 3: Anger about AI](materials/2026-yoh/week04/news-genz-ai-anger.pdf) {news-example}
+- [クマの人身被害 / Bear incidents](materials/2026-yoh/week04/news-poisson-bears.pdf) {news-example}
+- [ネット上の不審な通信 / Unsolicited internet traffic](materials/2026-yoh/week04/news-poisson-cyber.pdf) {news-example}
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pdf) {supplementary}
 - [AL用ワークシート](weeks/04-al-discrete-distributions/04_AL用ワークシート.xlsx) {worksheet}
-- [Yoh active-learning discrete-distributions slides](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/06_[AL]確率分布_1_離散確率分布.pdf) {yoh}
-- [Yoh discrete-distributions activity lecture](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/w6.pdf) {yoh}
 - [ポアソン分布表 / Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {resource}

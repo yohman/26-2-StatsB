@@ -166,7 +166,7 @@ function slideThumbnail(deck, week) {
   if (week.week === 1 && deck.label === "Yoh's Week 1 lecture") return 'assets/slide-previews/yoh-w01.png?v=20260930';
   if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261007-kuji-image-1';
   if (week.week === 3 && deck.label === "Yoh's Week 3 lecture") return 'assets/slide-previews/yoh-w03.png?v=20261007-week-split-1';
-  if (week.week === 4 && deck.label === "Yoh's Week 4 lecture") return 'assets/slide-previews/yoh-w04.png?v=20261014';
+  if (week.week === 4 && deck.label === "Yoh's Week 4 lecture") return 'assets/slide-previews/yoh-w04.png?v=20261021-answer-visuals';
   if (week.week === 6 && deck.label === "Yoh's Week 6 lecture") return 'assets/slide-previews/yoh-w06.png?v=20261014';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
@@ -542,7 +542,8 @@ function lectureSection(week) {
   const visible = week.week === 1 ? primary.filter(deck => !orientation.includes(deck)) : !primary.length ? decks : primary;
   const more = week.week === 1 ? [...other, ...orientation] : !primary.length ? [] : other;
   const slideList = visible.map(deck => slideCard(deck, week)).join('');
-  const choices = newsExamples.length ? `<section class="news-example-choices"><p class="more-slides-heading">${bilingual('News examples to choose from · 4 slides each', 'ニュース例題の候補 · 各4枚')}</p><div class="news-example-grid">${newsExamples.map(deck=>slideCard(deck,week)).join('')}</div></section>` : '';
+  const newsGroups = [['binomial','Binomial exercises','二項分布の演習',newsExamples.filter(deck=>!deck.preview.includes('/news-poisson-'))],['poisson','Poisson exercises','ポアソン分布の演習',newsExamples.filter(deck=>deck.preview.includes('/news-poisson-'))]];
+  const choices = newsExamples.length ? `<section class="news-example-choices"><p class="more-slides-heading">${bilingual('News exercises', 'ニュース演習')}</p><div class="news-exercise-tabs" role="tablist" aria-label="News exercise distribution">${newsGroups.map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-${week.week}-news-${id}-tab" aria-controls="week-${week.week}-news-${id}" aria-selected="${!i}" tabindex="${i?-1:0}">${bilingual(en,ja)}</button>`).join('')}</div>${newsGroups.map(([id,,,items],i)=>`<div id="week-${week.week}-news-${id}" role="tabpanel" aria-labelledby="week-${week.week}-news-${id}-tab"${i?' hidden':''}><div class="news-example-grid">${items.map(deck=>slideCard(deck,week)).join('')}</div></div>`).join('')}</section>` : '';
   const extra = more.length ? `<div class="more-slides"><p class="more-slides-heading">${bilingual('Supplementary slides', '補助スライド')}</p><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></div>` : '';
   const description = plan ? bilingual(escapeHtml(plan.overview[0]), escapeHtml(plan.overview[1])) : bilingual(escapeHtml(week.title_en), escapeHtml(week.title_ja));
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';

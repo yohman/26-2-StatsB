@@ -2,6 +2,8 @@ import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {walkthrough} from '../week03/challenge-walkthrough.mjs';
+import {addReviewExercises} from './review-exercises.mjs';
+import {attachLectureVisuals,answerVisualStyle} from './result-charts.mjs';
 const here=dirname(fileURLToPath(import.meta.url));
 mkdirSync(resolve(here,'images'),{recursive:true});
 const root=resolve(here,'../../..');
@@ -88,7 +90,21 @@ add('5人のうち、ちょうど2人？',`<div class="news-step">GIVEN / 与え
 add('ニュースの数字を、二項分布へ',`<div class="news-step">FORMULA / 公式と代入</div>\n\n${M(String.raw`\Pr(X=x)={}_nC_x\pi^x(1-\pi)^{n-x}`)}\n\n${M(String.raw`\Pr(X=2)={}_5C_2\,(0.10)^2(0.90)^3`)}\n\n**5人のどの2人か** × **該当する2人** × **該当しない3人**\n\n${N('1通りの並びの確率は0.10²×0.90³。その並び方を5C2で数え、全部足します。教科書 p.118–119。')}`,'book-reference');
 add('答えは7.29％。何の確率？',`<div class="news-step">SOLUTION / 計算と答え</div>\n\n${M(String.raw`{}_5C_2=\frac{5\times4}{2\times1}=10`)}\n\n${M(String.raw`\begin{aligned}\Pr(X=2)&=10\times0.01\times0.729\\&=0.0729=\boxed{7.29\%}\end{aligned}`)}\n\n**5人組を繰り返し作ったとき、ちょうど2人が該当する組は約7.29％。**\n\n${N('個人の割合10％と、5人中ちょうど2人の確率7.29％は別の量。AI利用の善悪や、不正の有無はこの計算では判断できません。')}`,'news-solution');
 slides.splice(7,0,...slides.splice(originalLength));
+addReviewExercises(slides);
+// Keep question/answer numbering sequential after inserting the short checks.
+let exerciseNumber=0;
+for(let i=0;i<slides.length;i++)if(/^## チャレンジ/m.test(slides[i])){
+ const label=String.fromCodePoint(0x2460+exerciseNumber++);
+ slides[i]=slides[i].replace(/(## チャレンジ)[①-⑳]/,`$1${label}`);
+ slides[i+1]=slides[i+1].replace(/## 答え合わせ[①-⑳]?　/,`## 答え合わせ${label}　`);
+}
+slides[1]=slides[1].replace('**チャレンジ3問**','**10分チャレンジ3問**').replace('3つのALは、同じ公式を別の場面で使う練習です。','途中の3分チェックは必要に応じて。3つのALは、同じ公式を別の場面で使う練習です。');
+// The 100-pull hook belongs to its worksheet, after the review and challenges.
+const gachaOpening=slides.shift().replace('今日は「当たりそう」を','ここでは「当たりそう」を');
+const gachaStart=slides.findIndex(s=>s.includes('## AL 02　0.05％を、式に入る数にする'));
+slides.splice(gachaStart,0,gachaOpening);
+slides.splice(0,slides.length,...attachLectureVisuals(slides));
 const newsStyle=`<style>.news-layout{display:grid;grid-template-columns:370px 1fr;gap:42px;align-items:center}.news-layout img{max-width:370px;max-height:375px;object-fit:contain}.news-layout p{margin:10px 0}.news-layout a{font-size:23px}.news-credit{font-size:15px;color:#706e68}.news-step{font-size:20px;letter-spacing:.08em;color:#176d82;font-weight:700;margin-bottom:12px}section.news-article .note{font-size:17px;margin-top:15px}section.news-solution{background:#edf5ef}section.news-solution .katex-display{font-size:1.15em}section.news-solution .note{font-size:20px}</style>`;
 const extraStyle=`<style>.w4-slide-characters{display:flex;justify-content:center;align-items:center;gap:40px;margin:12px 0}.w4-slide-characters img{width:130px;height:130px}.w4-slide-characters span{font-size:42px;color:#176d82;font-weight:700}.w4-table-chart{display:grid;grid-template-columns:1.15fr 1fr;gap:25px;align-items:center}.w4-table-chart img{width:100%}.al-table th,.al-table td{padding:7px 10px}.al-table .katex-display{margin:8px 0}.al-table .note{font-size:17px}</style>`;
-writeFileSync(resolve(here,'w4.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 4'\n---\n\n${style}\n${extraStyle}\n${newsStyle}\n\n${slides.join('\n\n---\n\n')}\n`);
-console.log(`Week 4: ${slides.length} slides; news calculation, review, three guarded challenges, three worksheet walkthroughs.`);
+writeFileSync(resolve(here,'w4.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 4'\n---\n\n${style}\n${extraStyle}\n${newsStyle}\n${answerVisualStyle}\n\n${slides.join('\n\n---\n\n')}\n`);
+console.log(`Week 4: ${slides.length} slides; three 10-minute challenges, five short checks, rate explanation and three worksheet walkthroughs.`);

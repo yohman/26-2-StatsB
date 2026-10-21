@@ -2,6 +2,9 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import {dirname,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {newsExamples} from './news-examples.mjs';
+import {newsMoments} from './news-moments.mjs';
+import {companionProbabilitySlides,companionChart,companionStyle} from './ai-companion-exercise.mjs';
+import {newsAnswerVisual,answerVisualStyle} from './result-charts.mjs';
 const here=dirname(fileURLToPath(import.meta.url));
 const reference=readFileSync(resolve(here,'w4.md'),'utf8');
 const shared=reference.match(/<style>[\s\S]*?<\/style>/)[0];
@@ -30,15 +33,19 @@ section.news-answer h2{font-size:40px;color:#2b624b;margin-bottom:14px}
 section.news-answer .katex-display{font-size:1.1em;margin:14px 0}
 .news-result{font-size:29px;font-weight:700;color:#215d45;border-top:2px solid #b7d1c2;padding-top:12px;margin-top:14px}
 section.news-answer .note{font-size:18px;margin-top:12px}
-</style>`;
-for(const e of newsExamples){
-  const sourceNotes=`<!-- Sources: ${e.article}\nData and thumbnail: ${e.primary}\nReported p=${e.p}. Classroom model n=${e.n}, independent trials, constant p. -->`;
+</style>\n\n${companionStyle}`;
+for(const e of newsExamples.filter(e=>!process.argv[2]||e.id===process.argv[2])){
+  const sourceNotes=`<!-- Sources: ${e.article}\nData and thumbnail: ${e.primary}\nReported p=${e.id==='ai-companions'?0.72:e.p}. Classroom model n=${e.n}, p=${e.p}, independent trials, constant p. -->`;
   const slides=[
     slide(e.titleJa,`<div class="news-opening-layout"><div>\n\n[![width:510px](images/${e.thumbnail})](${e.primary})\n\n<div class="news-credit">${e.credit}</div>\n\n</div><div>\n\n<div class="news-outlet">${e.outlet}　${e.date}</div>\n\n${e.hook}\n\n${e.finding}\n\n<div class="news-links">\n\n[記事を読む](${e.article})　[元データ](${e.primary})\n\n</div></div></div>\n\n${note(e.context)}\n\n${sourceNotes}`,'news-opening'),
     slide(e.givenTitle,`<div class="news-kicker">GIVEN / 与えられた条件と問題</div>\n\n${e.variable}\n\n${e.setup}\n\n${math(e.values)}\n\n<div class="news-question">${e.question}</div>\n\n${note(e.assumption)}`,'news-given'),
     slide('公式に、ニュースの数値を代入',`<div class="news-kicker">FORMULA / 文字の公式、そして代入</div>\n\n${math(e.formula)}\n\n${math(e.substitution)}\n\n**${e.factors}**\n\n${note(e.takeaway)}`,'book-reference news-formula'),
     slide('計算と、答えの意味',`<div class="news-kicker">SOLUTION / 途中計算と答え</div>\n\n${math(e.calculation)}\n\n<div class="news-result">${e.result}</div>\n\n${e.interpretation}\n\n${note(e.caution)}`,'news-answer')
   ];
-  writeFileSync(resolve(here,`news-${e.id}.md`),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 4 · ニュース例題'\n---\n\n${shared}\n${styles}\n\n${slides.join('\n\n---\n\n')}\n`);
+  if(e.id==='ai-companions')slides.splice(1,3,...companionProbabilitySlides(e));
+  slides.push(...newsMoments(e).map(s=>e.id==='ai-companions'?s.replace('チャレンジ①','チャレンジ②'):s));
+  slides.splice(4,0,e.id==='ai-companions'?companionChart(e):newsAnswerVisual(e));
+  slides.push(newsAnswerVisual(e,true));
+  writeFileSync(resolve(here,`news-${e.id}.md`),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 4 · ニュース例題'\n---\n\n${shared}\n${styles}\n${answerVisualStyle}\n\n${slides.join('\n\n---\n\n')}\n`);
   console.log(`${e.id}: ${slides.length} slides`);
 }

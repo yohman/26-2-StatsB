@@ -723,6 +723,10 @@
 .agenda-page .more-slides-list{display:grid;gap:9px}
 .agenda-page .news-example-choices,.agenda-page .news-example-supplement{grid-column:1/-1;min-width:0}
 .agenda-page .news-example-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.agenda-page .news-exercise-tabs{display:flex;gap:24px;border-bottom:1px solid #c8bbab;margin:8px 0 20px}
+.agenda-page .news-exercise-tabs button{font:inherit;font-size:17px;font-weight:700;background:transparent;border:0;border-bottom:3px solid transparent;padding:10px 2px;color:#776b60;cursor:pointer}
+.agenda-page .news-exercise-tabs button[aria-selected="true"]{color:#176d82;border-bottom-color:#176d82}
+.agenda-page .news-exercise-tabs button:focus-visible{outline:2px solid #176d82;outline-offset:3px}
 .agenda-page .news-example-grid .slide-card{display:block}
 .agenda-page .news-example-supplement .more-slides-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 @media(max-width:900px){.agenda-page .news-example-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
