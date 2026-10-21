@@ -9,9 +9,14 @@ const {pathToFileURL}=require('node:url');
  pdfjs.GlobalWorkerOptions.workerSrc=path.resolve('assets/vendor/pdfjs/pdf.worker.min.js');
  const {isChallengeText}=require('../assets/slide-challenge-guard.js');
  for(const e of poissonExamples){
-  assert.equal(e.rate*e.time,e.lambda);
+  assert.equal(e.n?e.n*e.p:e.rate*e.time,e.lambda);
   const base=`materials/2026-yoh/week04/news-${e.id}`;
   const md=fs.readFileSync(base+'.md','utf8');
+  if(e.id==='poisson-bears'){
+   assert.equal(e.n,100);assert.equal(e.p,.02);
+   assert(!md.includes('\\lambda=rt')&&!md.includes('n=2000'));
+   assert(md.includes('100\\times0.02=2')&&md.includes('授業用の仮定'));
+  }
   const slides=md.split(/\n---\n/).filter(s=>/^## /m.test(s));
   assert.equal(slides.length,8);
   assert(slides[4].includes('<svg')&&slides[7].includes('<svg'));

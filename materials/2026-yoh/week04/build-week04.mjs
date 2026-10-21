@@ -43,7 +43,7 @@ challenge('①','7台の配送ロボット',String.raw`各ロボットが時間�
 **(2)** 1台以上が遅れる確率は？
 
 **(3)** 間に合う台数の期待値と分散は？`,'p.118–120');
-slides.push(walkthrough({title:'答え合わせ①　遅れるのは、全台成功の反対',given:String.raw`$X$ は時間内に到着した台数。$n=7,\ \pi=0.8$。`,formula:String.raw`\begin{aligned}\Pr(X=x)&={}_nC_x\pi^x(1-\pi)^{n-x}\\\Pr(X<n)&=1-\Pr(X=n)\\E(X)&=n\pi\\\operatorname{Var}(X)&=n\pi(1-\pi)\end{aligned}`,substitution:String.raw`\begin{aligned}\Pr(X=5)&={}_7C_5(0.8)^5(0.2)^2\\&=0.2752512\\\Pr(X\le6)&=1-(0.8)^7=0.7902848\\E(X)&=7\times0.8=5.6\\\operatorname{Var}(X)&=7\times0.8\times0.2=1.12\end{aligned}`,result:'ちょうど5台：約27.53％。1台以上遅れる：約79.03％。',note:'期待値5.6台、分散1.12台²。Xは遅れた台数ではなく、時間内に到着した台数。'}));
+slides.push(walkthrough({title:'答え合わせ①　遅れるのは、全台成功の反対',given:String.raw`$X$ は時間内に到着した台数。$n=7,\ \pi=0.8$。`,formula:String.raw`\begin{aligned}\Pr(X=x)&={}_nC_x\pi^x(1-\pi)^{n-x}\\\Pr(X<n)&=1-\Pr(X=n)\\E(X)&=n\pi\\\operatorname{Var}(X)&=n\pi(1-\pi)\end{aligned}`,substitution:String.raw`\begin{aligned}\Pr(X=5)&={}_7C_5(0.8)^5(0.2)^2\\&=0.2752512\approx27.53\%\\\Pr(X=7)&={}_7C_7(0.8)^7(0.2)^0\\&=1\times0.2097152\times1\approx20.97\%\\\Pr(X\le6)&=1-\Pr(X=7)\\&=1-0.2097152\approx79.03\%\\E(X)&=7\times0.8=5.6\\\operatorname{Var}(X)&=7\times0.8\times0.2=1.12\end{aligned}`,result:'ちょうど5台：約27.53％。1台以上遅れる：約79.03％。',note:'全7台が間に合う確率は約20.97％。その反対が「1台以上遅れる」。期待値5.6台、分散1.12台²。'}));
 challenge('②','80回のカプセル抽選',String.raw`1回の当たり確率は **1％**。80回、独立に抽選する。確率は変わらない。
 
 **(1)** 1回以上当たる確率は？
@@ -51,7 +51,7 @@ challenge('②','80回のカプセル抽選',String.raw`1回の当たり確率�
 **(2)** 当たり個数の期待値と分散は？
 
 **(3)** 「80回×1％＝80％だから、当たる確率80％」は正しい？`,'p.119–120');
-slides.push(walkthrough({title:'答え合わせ②　期待個数と当選確率を分ける',given:String.raw`$X$ は当たり個数。$n=80,\ \pi=0.01$。`,formula:String.raw`\begin{aligned}\Pr(X\ge1)&=1-(1-\pi)^n\\E(X)&=n\pi\\\operatorname{Var}(X)&=n\pi(1-\pi)\end{aligned}`,substitution:String.raw`\begin{aligned}\Pr(X\ge1)&=1-(0.99)^{80}\\&\approx0.552477\\E(X)&=80\times0.01=0.8\\\operatorname{Var}(X)&=80\times0.01\times0.99\\&=0.792\end{aligned}`,result:'1回以上当たる：約55.25％。期待値0.8個、分散0.792個²。',note:'nπは平均個数。1個以上当たる確率とは別の量なので、80％とは言えない。'}));
+slides.push(walkthrough({title:'答え合わせ②　期待個数と当選確率を分ける',given:String.raw`$X$ は当たり個数。$n=80,\ \pi=0.01$。`,formula:String.raw`\begin{aligned}\Pr(X=x)&={}_nC_x\pi^x(1-\pi)^{n-x}\\\Pr(X\ge1)&=1-\Pr(X=0)\\E(X)&=n\pi\\\operatorname{Var}(X)&=n\pi(1-\pi)\end{aligned}`,substitution:String.raw`\begin{aligned}\Pr(X=0)&={}_{80}C_0(0.01)^0(0.99)^{80}\\&=1\times1\times(0.99)^{80}\approx44.75\%\\\Pr(X\ge1)&=1-\Pr(X=0)\\&=1-(0.99)^{80}\approx55.25\%\\E(X)&=80\times0.01=0.8\\\operatorname{Var}(X)&=80\times0.01\times0.99=0.792\end{aligned}`,result:'1回以上当たる：約55.25％。期待値0.8個、分散0.792個²。',note:'X＝0は「80回すべて外れ」。X＝80は「80回すべて当たり」で、別の出来事。nπは平均個数であり、当選確率ではない。'}));
 challenge('③','2,500個のセンサーを出荷',String.raw`不良率は **1,000個あたり2個**。2,500個を出荷する。
 不良品数 $X$ はポアソン分布で近似できるとする。
 
@@ -60,7 +60,7 @@ challenge('③','2,500個のセンサーを出荷',String.raw`不良率は **1,0
 **(2)** 不良品が1個以下である確率を、配布表で求めよ。
 
 **(3)** 1個以下の反対は、何個以上？`,'p.120');
-slides.push(walkthrough({title:'答え合わせ③　1個以下は、0個と1個',given:String.raw`$n=2500,\ \pi=2/1000=0.002$。ポアソン近似を使う。`,formula:String.raw`\begin{aligned}\lambda&=n\pi\\E(X)&=\operatorname{Var}(X)=\lambda\\\Pr(X\le1)&=\Pr(X=0)+\Pr(X=1)\end{aligned}`,substitution:String.raw`\begin{aligned}\lambda&=2500\times0.002=5\\E(X)&\approx5,\quad\operatorname{Var}(X)\approx5\\\text{表の }\mu=5.0&:\ P_0=0.007,\ P_1=0.034\\\Pr(X\le1)&\approx0.007+0.034=0.041\end{aligned}`,result:'不良品1個以下：約4.1％。その反対は2個以上。',note:'期待値5個、近似分散5個²。表の丸め値を使用。不良品は独立・不良率一定と仮定。'}));
+slides.push(walkthrough({title:'答え合わせ③　1個以下は、0個と1個',given:String.raw`$n=2500,\ \pi=2/1000=0.002$。ポアソン近似を使う。`,formula:String.raw`\begin{aligned}\lambda&=n\pi\\E(X)&=\operatorname{Var}(X)=\lambda\\\Pr(X\le1)&=\Pr(X=0)+\Pr(X=1)\end{aligned}`,substitution:String.raw`\begin{aligned}\lambda&=2500\times0.002=5\\E(X)&\approx5,\quad\operatorname{Var}(X)\approx5\\\text{表の }\mu=5.0:\quad\Pr(X=0)&\approx0.007=0.7\%\\\Pr(X=1)&\approx0.034=3.4\%\\\Pr(X\le1)&\approx0.007+0.034=4.1\%\end{aligned}`,result:'不良品1個以下：約4.1％。その反対は2個以上。',note:'期待値5個、近似分散5個²。表の丸め値を使用。不良品は独立・不良率一定と仮定。'}));
 ref('AL　3つのシートを解く','p.118–120','**01 打率**　全ての結果を並べる。\n\n**02 ガチャ**　余事象で、1個以上を求める。\n\n**03 不良品**　ポアソン近似で、平均と分散を読む。');
 add('AL 01　5打席で、何本打つ？',`<div class="w4-slide-characters"><img src="images/robot.svg" alt="打者ロボット"><span>⚾ × 5</span></div>\n\n$X$＝安打数。$n=5$、$\\pi=0.32$、$1-\\pi=0.68$。\n\n**0本から5本まで、全部の確率を計算する。**\n\n${N('シート「打率の事例_応用」。D6に0.32、D7に5。F7:F12はx=0〜5。')}`);
 add('AL 01　ワークシートの4列は、式の4部分',`${M(String.raw`\underbrace{{}_nC_x}_{H\text{列}}\ \underbrace{\pi^x}_{I\text{列}}\ \underbrace{(1-\pi)^{n-x}}_{J\text{列}}=\underbrace{\Pr(X=x)}_{G\text{列}}`)}\n\n| 列 | 入れるもの | x=3 の場合 |\n| --- | --- | --- |\n| H | 組合せ | $\\,{}_5C_3=10$ |\n| I | 成功の確率 | $0.32^3=0.032768$ |\n| J | 失敗の確率 | $0.68^2=0.4624$ |\n| G | H × I × J | $0.151519232$ |\n\n${N('Excelなら、H10=COMBIN($D$7,F10)、I10=$D$6^F10、J10=(1-$D$6)^($D$7-F10)、G10=H10*I10*J10。')}`,'explained');
@@ -91,20 +91,78 @@ add('ニュースの数字を、二項分布へ',`<div class="news-step">FORMULA
 add('答えは7.29％。何の確率？',`<div class="news-step">SOLUTION / 計算と答え</div>\n\n${M(String.raw`{}_5C_2=\frac{5\times4}{2\times1}=10`)}\n\n${M(String.raw`\begin{aligned}\Pr(X=2)&=10\times0.01\times0.729\\&=0.0729=\boxed{7.29\%}\end{aligned}`)}\n\n**5人組を繰り返し作ったとき、ちょうど2人が該当する組は約7.29％。**\n\n${N('個人の割合10％と、5人中ちょうど2人の確率7.29％は別の量。AI利用の善悪や、不正の有無はこの計算では判断できません。')}`,'news-solution');
 slides.splice(7,0,...slides.splice(originalLength));
 addReviewExercises(slides);
-// Keep question/answer numbering sequential after inserting the short checks.
-let exerciseNumber=0;
-for(let i=0;i<slides.length;i++)if(/^## チャレンジ/m.test(slides[i])){
- const label=String.fromCodePoint(0x2460+exerciseNumber++);
- slides[i]=slides[i].replace(/(## チャレンジ)[①-⑳]/,`$1${label}`);
- slides[i+1]=slides[i+1].replace(/## 答え合わせ[①-⑳]?　/,`## 答え合わせ${label}　`);
-}
+// Replace the older schoolwork example with the complete AI-companion story.
+const oldStory=slides.findIndex(s=>s.includes('## 宿題、どこまでAIに頼る？'));
+if(oldStory<0||!slides[oldStory+5].includes('期待値は、確率ではなく個数'))throw Error('Unexpected old news sequence');
+slides.splice(oldStory,6);
 slides[1]=slides[1].replace('**チャレンジ3問**','**10分チャレンジ3問**').replace('3つのALは、同じ公式を別の場面で使う練習です。','途中の3分チェックは必要に応じて。3つのALは、同じ公式を別の場面で使う練習です。');
 // The 100-pull hook belongs to its worksheet, after the review and challenges.
 const gachaOpening=slides.shift().replace('今日は「当たりそう」を','ここでは「当たりそう」を');
 const gachaStart=slides.findIndex(s=>s.includes('## AL 02　0.05％を、式に入る数にする'));
 slides.splice(gachaStart,0,gachaOpening);
 slides.splice(0,slides.length,...attachLectureVisuals(slides));
+// Homework is independent work: do not include worked answers or guided labs.
+const homeworkStart=slides.findIndex(s=>s.includes('AL　3つのシートを解く'));
+if(homeworkStart<0)throw Error('Missing homework section');
+slides.splice(homeworkStart);
+add('AL 01・02・03　宿題',`ここからは、**自分で取り組む課題**です。\n\n配布ワークシートの各シートを読み、設問に答えてください。\n\n**01 打率　／　02 ガチャ　／　03 不良品**`);
+add('AL 01　打率',`打率 **0.32** の選手が、**5打席**に立つ。\n\nワークシート「打率の事例_応用」の設問に答えてください。`);
+add('AL 02　ガチャ',`レアの排出率は **0.05％**。**100回**引く。\n\nワークシート「ガチャの事例」の設問に答えてください。`);
+add('AL 03　不良品',`不良率は **1,000個あたり2個**。**3,500個**を出荷する。\n\nワークシート「不良品の事例」の設問に答えてください。`);
+add('宿題の提出',`ワークシートに入力し、指定セルの値を **UNIPA** の小テストで回答してください。\n\n締切と提出方法は、授業予定ページ・UNIPAの最新案内を確認してください。`);
+// Retain the editable standalone source, but present it inside the main deck only.
+const openingSource=readFileSync(resolve(here,'news-ai-companions.md'),'utf8');
+const openingStart=openingSource.indexOf('<!-- _class: news-opening -->');
+if(openingStart<0)throw Error('Missing AI-companion opening');
+const openingSlides=openingSource.slice(openingStart).trim().split(/\n\n---\n\n/);
+if(openingSlides.length!==8)throw Error('Expected complete eight-slide AI story');
+const openingStyles=[...openingSource.matchAll(/<style>[\s\S]*?<\/style>/g)].slice(1).map(m=>m[0]).join('\n\n');
+slides.unshift(...openingSlides);
+const poissonIntro=slides.findIndex(s=>s.includes('<div class="chapter">ポアソン近似</div>'));
+if(poissonIntro!==19)throw Error('Poisson section no longer starts at original slide 20');
+slides.splice(poissonIntro,0,`<!-- _class: poisson-person -->
+
+## ポアソンは、どんな人？
+
+<div class="poisson-person-layout"><div>
+
+![height:450px](images/poisson-portrait.jpg)
+
+</div><div>
+
+### シメオン＝ドニ・ポアソン
+
+<div class="poisson-person-name">Siméon Denis Poisson<br>1781–1840 ／ フランス</div>
+
+**数学者・物理学者。**
+
+1837年、裁判の判断を確率で研究した著書で、いま「ポアソン分布」と呼ぶ分布を示した。
+
+この授業では、**まれな出来事が何回起こるか** を考えるために使う。
+
+</div></div>
+
+<div class="poisson-person-source">肖像：F.-S. Delpech（歴史的版画）／ 略歴：<a href="https://mathshistory.st-andrews.ac.uk/Biographies/Poisson/">University of St Andrews · MacTutor</a></div>
+
+<!-- Biography source: https://mathshistory.st-andrews.ac.uk/Biographies/Poisson/
+Portrait reused unchanged from the supplied archived course asset. -->`);
+// Open the Poisson section with the article and its nπ-based classroom exercise.
+const bearSource=readFileSync(resolve(here,'news-poisson-bears.md'),'utf8');
+const bearStart=bearSource.indexOf('<!-- _class: news-opening -->');
+if(bearStart<0)throw Error('Missing bear article opening');
+const bearSlides=bearSource.slice(bearStart).trim().split(/\n\n---\n\n/);
+if(bearSlides.length!==8||bearSlides.some(s=>s.includes('\\lambda=rt')))throw Error('Expected eight nπ bear slides');
+slides.splice(poissonIntro,0,...bearSlides);
+// Keep question/answer numbering sequential across the story and review.
+let exerciseNumber=0;
+for(let i=0;i<slides.length;i++)if(/^## チャレンジ/m.test(slides[i])){
+ const label=String.fromCodePoint(0x2460+exerciseNumber++);
+ slides[i]=slides[i].replace(/(## チャレンジ)[①-⑳]/,`$1${label}`);
+ slides[i+1]=slides[i+1].replace(/## 答え合わせ[①-⑳]?　/,`## 答え合わせ${label}　`);
+}
+add('時間が余ったら　任意のニュース演習',`本編はここまで。残り時間に合わせて、**1つだけ** 選ぼう。\n\n**二項分布**\n\n[AIニュースの正確性](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-ai-news-errors.pdf&week=W04)　／　[AIへの怒り](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-genz-ai-anger.pdf&week=W04)\n\n**ポアソン分布**\n\n[クマの人身被害](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-poisson-bears.pdf&week=W04)　／　[ネット上の不審な通信](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-poisson-cyber.pdf&week=W04)\n\n${N('どの演習も、問題・公式・代入・答え・グラフを含む。本編の理解を優先し、残りは復習に使ってよい。')}`);
 const newsStyle=`<style>.news-layout{display:grid;grid-template-columns:370px 1fr;gap:42px;align-items:center}.news-layout img{max-width:370px;max-height:375px;object-fit:contain}.news-layout p{margin:10px 0}.news-layout a{font-size:23px}.news-credit{font-size:15px;color:#706e68}.news-step{font-size:20px;letter-spacing:.08em;color:#176d82;font-weight:700;margin-bottom:12px}section.news-article .note{font-size:17px;margin-top:15px}section.news-solution{background:#edf5ef}section.news-solution .katex-display{font-size:1.15em}section.news-solution .note{font-size:20px}</style>`;
 const extraStyle=`<style>.w4-slide-characters{display:flex;justify-content:center;align-items:center;gap:40px;margin:12px 0}.w4-slide-characters img{width:130px;height:130px}.w4-slide-characters span{font-size:42px;color:#176d82;font-weight:700}.w4-table-chart{display:grid;grid-template-columns:1.15fr 1fr;gap:25px;align-items:center}.w4-table-chart img{width:100%}.al-table th,.al-table td{padding:7px 10px}.al-table .katex-display{margin:8px 0}.al-table .note{font-size:17px}</style>`;
-writeFileSync(resolve(here,'w4.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 4'\n---\n\n${style}\n${extraStyle}\n${newsStyle}\n${answerVisualStyle}\n\n${slides.join('\n\n---\n\n')}\n`);
-console.log(`Week 4: ${slides.length} slides; three 10-minute challenges, five short checks, rate explanation and three worksheet walkthroughs.`);
+const portraitStyle=`<style>section.poisson-person{padding:34px 62px 65px}section.poisson-person h2{font-size:43px;margin-bottom:12px}.poisson-person-layout{display:grid;grid-template-columns:350px 1fr;gap:50px;align-items:center}.poisson-person-layout img{height:450px;width:auto;max-width:350px;object-fit:contain}.poisson-person-layout p{font-size:27px;line-height:1.55;margin:16px 0}.poisson-person-layout h3{font-size:30px;color:#176d82;margin:0 0 12px}.poisson-person-name{font-size:24px;color:#60717a;line-height:1.4}.poisson-person-source{font-size:15px;color:#65747b;margin-top:8px}.poisson-person-source a{color:#176d82}</style>`;
+writeFileSync(resolve(here,'w4.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 4'\n---\n\n${style}\n${extraStyle}\n${newsStyle}\n${openingStyles}\n${answerVisualStyle}\n${portraitStyle}\n\n${slides.join('\n\n---\n\n')}\n`);
+console.log(`Week 4: ${slides.length} slides; integrated AI story, three 10-minute challenges, three short checks, homework prompts, and optional scenarios.`);

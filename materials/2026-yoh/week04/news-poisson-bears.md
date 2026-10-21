@@ -137,13 +137,13 @@ section.answer-visual .note{font-size:18px;margin-top:10px}
 
 <!-- _class: news-opening -->
 
-## クマ被害、次の2日間に1件以上？
+## 100日間で、クマが現れる日は？
 
 <div class="news-opening-layout"><div>
 
 [![width:510px](images/poisson-bears.png)](https://apnews.com/article/japan-bear-attack-army-12a2a3233790deeefd9ec379d0121f33)
 
-<div class="news-credit">記事画面：AP。演習の数値：環境省「R07年度人身被害件数」</div>
+<div class="news-credit">記事画面：AP。被害件数：環境省。演習の日数・出現確率は授業用の仮定。</div>
 
 </div><div>
 
@@ -159,7 +159,7 @@ section.answer-visual .note{font-size:18px;margin-top:10px}
 
 </div></div></div>
 
-<div class="note">数えるのは人身被害の「件数」。同じ月の被害者37人とは区別する。記事の報道時点と、後に集計された速報値は異なる。</div>
+<div class="note">記事と公的集計は、クマ被害の現実を知る入口。次の100日・1日あたり2％は、記事の実測値ではない。</div>
 
 <!-- Sources: https://apnews.com/article/japan-bear-attack-army-12a2a3233790deeefd9ec379d0121f33 | https://www.env.go.jp/nature/choju/effort/effort12/r07injury-qe.pdf -->
 
@@ -167,19 +167,19 @@ section.answer-visual .note{font-size:18px;margin-top:10px}
 
 <!-- _class: news-given -->
 
-## 同じ条件が続くと仮定した、2日間
+## 100日間に、1日以上クマが現れる？
 
-$X$＝秋田県全体で2日間に発生するクマの人身被害件数。
+ある集落では、1日にクマが現れる確率を2％と仮定する。100日間観察する。
 
-2025年10月と同じ平均頻度が続き、各事件は独立に起きると仮定する。
+$X$＝100日間のうち、クマが現れた日数。ポアソン分布で近似する。
 
 $$
-r=\frac{31}{31}=1\ \text{件/日},\qquad t=2\ \text{日}
+n=100\ \text{日},\qquad\pi=2\%=0.02
 $$
 
-<div class="news-question">2日間に、少なくとも1件起きる確率を求めよ。</div>
+<div class="news-question">100日間に、少なくとも1日クマが現れる確率を求めよ。</div>
 
-<div class="note">平均頻度一定・独立は授業用の仮定。季節や地域で頻度が変わる現実の被害を、そのまま予測するものではない。</div>
+<div class="note">100日・2％は計算しやすい授業用の仮定。各日は独立・確率一定とする。同じ日に何頭いても1日と数え、クマの頭数は数えない。</div>
 
 ---
 
@@ -190,18 +190,16 @@ $$
 <div class="challenge-time">自分で解く　3〜5分 ／ 教科書 p.120</div>
 
 $$
-\Pr(X=x)=\frac{e^{-\lambda}\lambda^x}{x!},\qquad\lambda=rt
+\Pr(X=x)=\frac{e^{-\lambda}\lambda^x}{x!},\qquad\lambda=n\pi
 $$
 
 $$
 \Pr(X\ge1)=1-\Pr(X=0)
 $$
 
-$$
-\lambda=rt=1\times2=2,\qquad\Pr(X\ge1)=1-\frac{e^{-2}2^0}{0!}
-$$
+まず、前のスライドの $n$ と $\pi$ から期待値を求めよう。
 
-<div class="note">「1件以上」の反対は「0件」。表の平均2.0の列と、0の行を探そう。　eの値は計算せず、配布のポアソン分布表を使う。</div>
+<div class="note">「1日以上」の反対は「0日」。まずλを求め、表の同じ列と0の行を探そう。　eの値は計算せず、配布のポアソン分布表を使う。</div>
 
 ---
 
@@ -209,9 +207,13 @@ $$
 
 ## 分布表を読んで、答えを出す
 
+$$
+\lambda=n\pi=100\times0.02=2
+$$
+
 <div class="lookup-layout"><div><table class="poisson-lookup"><thead><tr><th>行 x ／ 列 μ</th><th class="lookup-column">2.0</th></tr></thead><tbody><tr><th class="lookup-row">0</th><td class="lookup-cell">0.135</td></tr></tbody></table></div><div class="table-explanation">
 
-配布表の抜粋。表の $\mu$ は、公式の $\lambda$ と同じ「期間内の平均」。
+配布表の抜粋。表の $\mu$ は、公式の $\lambda$ と同じ「期待値」。
 
 [ポアソン分布表を開く](https://yohman.github.io/26-2-StatsB/viewer.html?p=&file=other+material%2F2025+yoh%2F06_%5BAL%5D%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83_1_%E9%9B%A2%E6%95%A3%E7%A2%BA%E7%8E%87%E5%88%86%E5%B8%83+%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%2F%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E8%A1%A8.pdf&title=%E3%83%9D%E3%82%A2%E3%82%BD%E3%83%B3%E5%88%86%E5%B8%83%E8%A1%A8&week=W04&return=agenda.html%3Fp%23week-04)
 
@@ -221,9 +223,9 @@ $$
 \Pr(X\ge1)\approx1-0.135=\boxed{0.865=86.5\%}
 $$
 
-<div class="news-result">この仮定の下で、県全体の2日間に1件以上起きる確率。あなたが襲われる確率ではない。</div>
+<div class="news-result">このモデルで、100日間に少なくとも1日クマが現れる確率は約86.5％。</div>
 
-<div class="note">10月の平均を冬や全国へ広げない。被害の集中もあるため、独立・一定頻度の仮定には限界がある。</div>
+<div class="note">数えるのは出現した日数で、クマの頭数・襲われる確率ではない。季節や同じクマの再出現で、独立・確率一定の仮定は崩れうる。ポアソン近似と表の丸めを使う。</div>
 
 <div class="note">表は小数第3位に丸められているため、答えは近似値。</div>
 
@@ -237,7 +239,7 @@ $$
 
 <div class="answer-visual-legend">青：求めた結果　灰：それ以外</div>
 
-<svg class="answer-visual-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 325" role="img" aria-label="図で確認　答えに含める棒"><g font-family="Hiragino Sans,Noto Sans JP,sans-serif" fill="#40555f"><path d="M95 246H1080" stroke="#d9e1e3"/><text x="80" y="252" text-anchor="end" font-size="18">0%</text><path d="M95 198.5H1080" stroke="#d9e1e3"/><text x="80" y="204.5" text-anchor="end" font-size="18">7.5%</text><path d="M95 151H1080" stroke="#d9e1e3"/><text x="80" y="157" text-anchor="end" font-size="18">15%</text><path d="M95 103.5H1080" stroke="#d9e1e3"/><text x="80" y="109.5" text-anchor="end" font-size="18">22.5%</text><path d="M95 56H1080" stroke="#d9e1e3"/><text x="80" y="62" text-anchor="end" font-size="18">30%</text><rect data-count="0" data-probability="0.1353352832366127" x="109.32727272727273" y="160.28765395014528" width="60.8909090909091" height="85.71234604985472" fill="#bdcbd0"/><text x="139.77272727272728" y="275" text-anchor="middle" font-size="18">0</text><rect data-count="1" data-probability="0.2706705664732254" x="198.87272727272727" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#176d82"/><text x="229.3181818181818" y="64.57530790029057" text-anchor="middle" fill="#176d82" font-size="19">27.1%</text><text x="229.3181818181818" y="275" text-anchor="middle" font-size="18">1</text><rect data-count="2" data-probability="0.2706705664732254" x="288.41818181818184" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#176d82"/><text x="318.8636363636364" y="64.57530790029057" text-anchor="middle" fill="#176d82" font-size="19">27.1%</text><text x="318.8636363636364" y="275" text-anchor="middle" font-size="18">2</text><rect data-count="3" data-probability="0.18044704431548358" x="377.9636363636364" y="131.71687193352705" width="60.8909090909091" height="114.28312806647295" fill="#176d82"/><text x="408.40909090909093" y="121.71687193352705" text-anchor="middle" fill="#176d82" font-size="19">18.0%</text><text x="408.40909090909093" y="275" text-anchor="middle" font-size="18">3</text><rect data-count="4" data-probability="0.09022352215774179" x="467.5090909090909" y="188.85843596676352" width="60.8909090909091" height="57.14156403323648" fill="#176d82"/><text x="497.95454545454544" y="178.85843596676352" text-anchor="middle" fill="#176d82" font-size="19">9.0%</text><text x="497.95454545454544" y="275" text-anchor="middle" font-size="18">4</text><rect data-count="5" data-probability="0.036089408863096716" x="557.0545454545454" y="223.1433743867054" width="60.8909090909091" height="22.856625613294586" fill="#176d82"/><text x="587.5" y="213.1433743867054" text-anchor="middle" fill="#176d82" font-size="19">3.6%</text><text x="587.5" y="275" text-anchor="middle" font-size="18">5</text><rect data-count="6" data-probability="0.012029802954365572" x="646.5999999999999" y="238.38112479556847" width="60.8909090909091" height="7.6188752044315295" fill="#176d82"/><text x="677.0454545454545" y="228.38112479556847" text-anchor="middle" fill="#176d82" font-size="19">1.2%</text><text x="677.0454545454545" y="275" text-anchor="middle" font-size="18">6</text><rect data-count="7" data-probability="0.0034370865583901633" x="736.1454545454545" y="243.82317851301957" width="60.8909090909091" height="2.1768214869804368" fill="#176d82"/><text x="766.5909090909091" y="233.82317851301957" text-anchor="middle" fill="#176d82" font-size="19">0.3%</text><text x="766.5909090909091" y="275" text-anchor="middle" font-size="18">7</text><rect data-count="8" data-probability="0.0008592716395975408" x="825.690909090909" y="245.4557946282549" width="60.8909090909091" height="0.5442053717451092" fill="#176d82"/><text x="856.1363636363636" y="235.4557946282549" text-anchor="middle" fill="#176d82" font-size="19">0.09%</text><text x="856.1363636363636" y="275" text-anchor="middle" font-size="18">8</text><rect data-count="9" data-probability="0.00019094925324389796" x="915.2363636363636" y="245.87906547294554" width="60.8909090909091" height="0.12093452705446871" fill="#176d82"/><text x="945.6818181818182" y="235.87906547294554" text-anchor="middle" fill="#176d82" font-size="19">0.02%</text><text x="945.6818181818182" y="275" text-anchor="middle" font-size="18">9</text><rect data-count="10+" data-probability="0.000046498075017109564" x="1004.7818181818182" y="245.97055121915582" width="60.8909090909091" height="0.029448780844169395" fill="#176d82"/><text x="1035.2272727272727" y="235.97055121915582" text-anchor="middle" fill="#176d82" font-size="19">&lt;0.01%</text><text x="1035.2272727272727" y="275" text-anchor="middle" font-size="18">10+</text><path d="M95 246H1080" stroke="#71848e"/><text x="1080" y="314" text-anchor="end" font-size="20">X（件）　末尾はまとめた確率</text></g></svg>
+<svg class="answer-visual-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 325" role="img" aria-label="図で確認　答えに含める棒"><g font-family="Hiragino Sans,Noto Sans JP,sans-serif" fill="#40555f"><path d="M95 246H1080" stroke="#d9e1e3"/><text x="80" y="252" text-anchor="end" font-size="18">0%</text><path d="M95 198.5H1080" stroke="#d9e1e3"/><text x="80" y="204.5" text-anchor="end" font-size="18">7.5%</text><path d="M95 151H1080" stroke="#d9e1e3"/><text x="80" y="157" text-anchor="end" font-size="18">15%</text><path d="M95 103.5H1080" stroke="#d9e1e3"/><text x="80" y="109.5" text-anchor="end" font-size="18">22.5%</text><path d="M95 56H1080" stroke="#d9e1e3"/><text x="80" y="62" text-anchor="end" font-size="18">30%</text><rect data-count="0" data-probability="0.1353352832366127" x="109.32727272727273" y="160.28765395014528" width="60.8909090909091" height="85.71234604985472" fill="#bdcbd0"/><text x="139.77272727272728" y="275" text-anchor="middle" font-size="18">0</text><rect data-count="1" data-probability="0.2706705664732254" x="198.87272727272727" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#176d82"/><text x="229.3181818181818" y="64.57530790029057" text-anchor="middle" fill="#176d82" font-size="19">27.1%</text><text x="229.3181818181818" y="275" text-anchor="middle" font-size="18">1</text><rect data-count="2" data-probability="0.2706705664732254" x="288.41818181818184" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#176d82"/><text x="318.8636363636364" y="64.57530790029057" text-anchor="middle" fill="#176d82" font-size="19">27.1%</text><text x="318.8636363636364" y="275" text-anchor="middle" font-size="18">2</text><rect data-count="3" data-probability="0.18044704431548358" x="377.9636363636364" y="131.71687193352705" width="60.8909090909091" height="114.28312806647295" fill="#176d82"/><text x="408.40909090909093" y="121.71687193352705" text-anchor="middle" fill="#176d82" font-size="19">18.0%</text><text x="408.40909090909093" y="275" text-anchor="middle" font-size="18">3</text><rect data-count="4" data-probability="0.09022352215774179" x="467.5090909090909" y="188.85843596676352" width="60.8909090909091" height="57.14156403323648" fill="#176d82"/><text x="497.95454545454544" y="178.85843596676352" text-anchor="middle" fill="#176d82" font-size="19">9.0%</text><text x="497.95454545454544" y="275" text-anchor="middle" font-size="18">4</text><rect data-count="5" data-probability="0.036089408863096716" x="557.0545454545454" y="223.1433743867054" width="60.8909090909091" height="22.856625613294586" fill="#176d82"/><text x="587.5" y="213.1433743867054" text-anchor="middle" fill="#176d82" font-size="19">3.6%</text><text x="587.5" y="275" text-anchor="middle" font-size="18">5</text><rect data-count="6" data-probability="0.012029802954365572" x="646.5999999999999" y="238.38112479556847" width="60.8909090909091" height="7.6188752044315295" fill="#176d82"/><text x="677.0454545454545" y="228.38112479556847" text-anchor="middle" fill="#176d82" font-size="19">1.2%</text><text x="677.0454545454545" y="275" text-anchor="middle" font-size="18">6</text><rect data-count="7" data-probability="0.0034370865583901633" x="736.1454545454545" y="243.82317851301957" width="60.8909090909091" height="2.1768214869804368" fill="#176d82"/><text x="766.5909090909091" y="233.82317851301957" text-anchor="middle" fill="#176d82" font-size="19">0.3%</text><text x="766.5909090909091" y="275" text-anchor="middle" font-size="18">7</text><rect data-count="8" data-probability="0.0008592716395975408" x="825.690909090909" y="245.4557946282549" width="60.8909090909091" height="0.5442053717451092" fill="#176d82"/><text x="856.1363636363636" y="235.4557946282549" text-anchor="middle" fill="#176d82" font-size="19">0.09%</text><text x="856.1363636363636" y="275" text-anchor="middle" font-size="18">8</text><rect data-count="9" data-probability="0.00019094925324389796" x="915.2363636363636" y="245.87906547294554" width="60.8909090909091" height="0.12093452705446871" fill="#176d82"/><text x="945.6818181818182" y="235.87906547294554" text-anchor="middle" fill="#176d82" font-size="19">0.02%</text><text x="945.6818181818182" y="275" text-anchor="middle" font-size="18">9</text><rect data-count="10+" data-probability="0.000046498075017109564" x="1004.7818181818182" y="245.97055121915582" width="60.8909090909091" height="0.029448780844169395" fill="#176d82"/><text x="1035.2272727272727" y="235.97055121915582" text-anchor="middle" fill="#176d82" font-size="19">&lt;0.01%</text><text x="1035.2272727272727" y="275" text-anchor="middle" font-size="18">10+</text><path d="M95 246H1080" stroke="#71848e"/><text x="1080" y="314" text-anchor="end" font-size="20">X（日）　末尾はまとめた確率</text></g></svg>
 
 <div class="note"> 棒はポアソンモデルの丸め前の確率。解答は配布表の小数第3位を使うため、丸めの差がある。</div>
 
@@ -245,11 +247,11 @@ $$
 
 <!-- _class: challenge -->
 
-## チャレンジ②　平均個数と、ばらつきは？
+## チャレンジ②　期待値と分散を求めよう
 
 <div class="challenge-time">自分で解く　3分 ／ 教科書 p.119–120</div>
 
-$X$＝秋田県全体の2日間の人身被害件数。$r=1$件/日、$t=2$日。
+$X$＝100日間のうちクマが現れた日数。$n=100$日、$\pi=0.02$。
 
 独立・一定頻度のポアソンモデルを仮定する。
 
@@ -270,7 +272,7 @@ $X$＝秋田県全体の2日間の人身被害件数。$r=1$件/日、$t=2$日�
 <div class="worked-label">① 与えられた条件</div>
 <div class="worked-given">
 
-$X$＝秋田県全体の2日間の人身被害件数。$r=1$件/日、$t=2$日。
+$X$＝100日間のうちクマが現れた日数。$n=100$日、$\pi=0.02$。
 
 独立・一定頻度のポアソンモデルを仮定する。
 
@@ -279,26 +281,26 @@ $X$＝秋田県全体の2日間の人身被害件数。$r=1$件/日、$t=2$日�
 <div class="worked-label">② 公式（文字のまま）</div>
 
 $$
-\begin{aligned}\lambda&=rt\\E(X)&=\lambda\\\operatorname{Var}(X)&=\lambda\end{aligned}
+\begin{aligned}\lambda&=n\pi\\E(X)&=\lambda\\\operatorname{Var}(X)&=\lambda\end{aligned}
 $$
 
 </div><div>
 <div class="worked-label">③ 数値を代入・計算</div>
 
 $$
-\begin{aligned}\lambda&=1\times2=2\\E(X)&=2\\\operatorname{Var}(X)&=2\end{aligned}
+\begin{aligned}\lambda&=100\times0.02=2\\E(X)&=2\\\operatorname{Var}(X)&=2\end{aligned}
 $$
 
 </div></div>
 <div class="worked-result">
 <div class="worked-label">④ 答え・意味</div>
 
-期待値 2件。分散 2件²。
+期待値 2日。分散 2日²。
 
 同じ条件を繰り返した平均であり、毎回この個数になる保証ではない。
 
 </div>
-<div class="note">期待値を％にしても、事象の確率にはならない。仮定が崩れる例：10月の平均を冬や全国へ広げない。被害の集中もあるため、独立・一定頻度の仮定には限界がある。</div>
+<div class="note">期待値を％にしても、事象の確率にはならない。仮定が崩れる例：数えるのは出現した日数で、クマの頭数・襲われる確率ではない。季節や同じクマの再出現で、独立・確率一定の仮定は崩れうる。ポアソン近似と表の丸めを使う。</div>
 
 ---
 
@@ -306,10 +308,10 @@ $$
 
 ## 図で確認　平均と、結果のばらつき
 
-<div class="answer-visual-summary">期待値 2件。分散 2件²。</div>
+<div class="answer-visual-summary">期待値 2日。分散 2日²。</div>
 
 <div class="answer-visual-legend">灰：各結果の確率　赤い破線：期待値</div>
 
-<svg class="answer-visual-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 325" role="img" aria-label="図で確認　平均と、結果のばらつき"><g font-family="Hiragino Sans,Noto Sans JP,sans-serif" fill="#40555f"><path d="M95 246H1080" stroke="#d9e1e3"/><text x="80" y="252" text-anchor="end" font-size="18">0%</text><path d="M95 198.5H1080" stroke="#d9e1e3"/><text x="80" y="204.5" text-anchor="end" font-size="18">7.5%</text><path d="M95 151H1080" stroke="#d9e1e3"/><text x="80" y="157" text-anchor="end" font-size="18">15%</text><path d="M95 103.5H1080" stroke="#d9e1e3"/><text x="80" y="109.5" text-anchor="end" font-size="18">22.5%</text><path d="M95 56H1080" stroke="#d9e1e3"/><text x="80" y="62" text-anchor="end" font-size="18">30%</text><rect data-count="0" data-probability="0.1353352832366127" x="109.32727272727273" y="160.28765395014528" width="60.8909090909091" height="85.71234604985472" fill="#bdcbd0"/><text x="139.77272727272728" y="275" text-anchor="middle" font-size="18">0</text><rect data-count="1" data-probability="0.2706705664732254" x="198.87272727272727" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#bdcbd0"/><text x="229.3181818181818" y="275" text-anchor="middle" font-size="18">1</text><rect data-count="2" data-probability="0.2706705664732254" x="288.41818181818184" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#bdcbd0"/><text x="318.8636363636364" y="275" text-anchor="middle" font-size="18">2</text><rect data-count="3" data-probability="0.18044704431548358" x="377.9636363636364" y="131.71687193352705" width="60.8909090909091" height="114.28312806647295" fill="#bdcbd0"/><text x="408.40909090909093" y="275" text-anchor="middle" font-size="18">3</text><rect data-count="4" data-probability="0.09022352215774179" x="467.5090909090909" y="188.85843596676352" width="60.8909090909091" height="57.14156403323648" fill="#bdcbd0"/><text x="497.95454545454544" y="275" text-anchor="middle" font-size="18">4</text><rect data-count="5" data-probability="0.036089408863096716" x="557.0545454545454" y="223.1433743867054" width="60.8909090909091" height="22.856625613294586" fill="#bdcbd0"/><text x="587.5" y="275" text-anchor="middle" font-size="18">5</text><rect data-count="6" data-probability="0.012029802954365572" x="646.5999999999999" y="238.38112479556847" width="60.8909090909091" height="7.6188752044315295" fill="#bdcbd0"/><text x="677.0454545454545" y="275" text-anchor="middle" font-size="18">6</text><rect data-count="7" data-probability="0.0034370865583901633" x="736.1454545454545" y="243.82317851301957" width="60.8909090909091" height="2.1768214869804368" fill="#bdcbd0"/><text x="766.5909090909091" y="275" text-anchor="middle" font-size="18">7</text><rect data-count="8" data-probability="0.0008592716395975408" x="825.690909090909" y="245.4557946282549" width="60.8909090909091" height="0.5442053717451092" fill="#bdcbd0"/><text x="856.1363636363636" y="275" text-anchor="middle" font-size="18">8</text><rect data-count="9" data-probability="0.00019094925324389796" x="915.2363636363636" y="245.87906547294554" width="60.8909090909091" height="0.12093452705446871" fill="#bdcbd0"/><text x="945.6818181818182" y="275" text-anchor="middle" font-size="18">9</text><rect data-count="10+" data-probability="0.000046498075017109564" x="1004.7818181818182" y="245.97055121915582" width="60.8909090909091" height="0.029448780844169395" fill="#bdcbd0"/><text x="1035.2272727272727" y="275" text-anchor="middle" font-size="18">10+</text><path d="M318.8636363636364 42V250" stroke="#9b5146" stroke-width="3" stroke-dasharray="7 5"/><text x="318.8636363636364" y="26" text-anchor="middle" fill="#9b5146" font-size="21">平均 2件</text><path d="M95 246H1080" stroke="#71848e"/><text x="1080" y="314" text-anchor="end" font-size="20">X（件）　末尾はまとめた確率</text></g></svg>
+<svg class="answer-visual-chart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 325" role="img" aria-label="図で確認　平均と、結果のばらつき"><g font-family="Hiragino Sans,Noto Sans JP,sans-serif" fill="#40555f"><path d="M95 246H1080" stroke="#d9e1e3"/><text x="80" y="252" text-anchor="end" font-size="18">0%</text><path d="M95 198.5H1080" stroke="#d9e1e3"/><text x="80" y="204.5" text-anchor="end" font-size="18">7.5%</text><path d="M95 151H1080" stroke="#d9e1e3"/><text x="80" y="157" text-anchor="end" font-size="18">15%</text><path d="M95 103.5H1080" stroke="#d9e1e3"/><text x="80" y="109.5" text-anchor="end" font-size="18">22.5%</text><path d="M95 56H1080" stroke="#d9e1e3"/><text x="80" y="62" text-anchor="end" font-size="18">30%</text><rect data-count="0" data-probability="0.1353352832366127" x="109.32727272727273" y="160.28765395014528" width="60.8909090909091" height="85.71234604985472" fill="#bdcbd0"/><text x="139.77272727272728" y="275" text-anchor="middle" font-size="18">0</text><rect data-count="1" data-probability="0.2706705664732254" x="198.87272727272727" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#bdcbd0"/><text x="229.3181818181818" y="275" text-anchor="middle" font-size="18">1</text><rect data-count="2" data-probability="0.2706705664732254" x="288.41818181818184" y="74.57530790029057" width="60.8909090909091" height="171.42469209970943" fill="#bdcbd0"/><text x="318.8636363636364" y="275" text-anchor="middle" font-size="18">2</text><rect data-count="3" data-probability="0.18044704431548358" x="377.9636363636364" y="131.71687193352705" width="60.8909090909091" height="114.28312806647295" fill="#bdcbd0"/><text x="408.40909090909093" y="275" text-anchor="middle" font-size="18">3</text><rect data-count="4" data-probability="0.09022352215774179" x="467.5090909090909" y="188.85843596676352" width="60.8909090909091" height="57.14156403323648" fill="#bdcbd0"/><text x="497.95454545454544" y="275" text-anchor="middle" font-size="18">4</text><rect data-count="5" data-probability="0.036089408863096716" x="557.0545454545454" y="223.1433743867054" width="60.8909090909091" height="22.856625613294586" fill="#bdcbd0"/><text x="587.5" y="275" text-anchor="middle" font-size="18">5</text><rect data-count="6" data-probability="0.012029802954365572" x="646.5999999999999" y="238.38112479556847" width="60.8909090909091" height="7.6188752044315295" fill="#bdcbd0"/><text x="677.0454545454545" y="275" text-anchor="middle" font-size="18">6</text><rect data-count="7" data-probability="0.0034370865583901633" x="736.1454545454545" y="243.82317851301957" width="60.8909090909091" height="2.1768214869804368" fill="#bdcbd0"/><text x="766.5909090909091" y="275" text-anchor="middle" font-size="18">7</text><rect data-count="8" data-probability="0.0008592716395975408" x="825.690909090909" y="245.4557946282549" width="60.8909090909091" height="0.5442053717451092" fill="#bdcbd0"/><text x="856.1363636363636" y="275" text-anchor="middle" font-size="18">8</text><rect data-count="9" data-probability="0.00019094925324389796" x="915.2363636363636" y="245.87906547294554" width="60.8909090909091" height="0.12093452705446871" fill="#bdcbd0"/><text x="945.6818181818182" y="275" text-anchor="middle" font-size="18">9</text><rect data-count="10+" data-probability="0.000046498075017109564" x="1004.7818181818182" y="245.97055121915582" width="60.8909090909091" height="0.029448780844169395" fill="#bdcbd0"/><text x="1035.2272727272727" y="275" text-anchor="middle" font-size="18">10+</text><path d="M318.8636363636364 42V250" stroke="#9b5146" stroke-width="3" stroke-dasharray="7 5"/><text x="318.8636363636364" y="26" text-anchor="middle" fill="#9b5146" font-size="21">平均 2日</text><path d="M95 246H1080" stroke="#71848e"/><text x="1080" y="314" text-anchor="end" font-size="20">X（日）　末尾はまとめた確率</text></g></svg>
 
-<div class="note">平均は赤い破線。分散 2件² は、この平均からの距離の2乗を確率で重みづけした値。 一番高い棒と、期待値の位置は同じとは限らない。</div>
+<div class="note">平均は赤い破線。分散 2日² は、この平均からの距離の2乗を確率で重みづけした値。 一番高い棒と、期待値の位置は同じとは限らない。</div>

@@ -2,6 +2,8 @@ import {walkthrough} from '../week03/challenge-walkthrough.mjs';
 const math=s=>`$$\n${s}\n$$`;
 const slide=(title,body,kind)=>`<!-- _class: ${kind} -->\n\n## ${title}\n\n${body}`;
 export const companionStyle=`<style>
+section.worked-answer{padding-top:24px}
+section.worked-answer .katex-display{font-size:.78em;margin:5px 0}
 section.companion-given{font-size:25px} section.companion-given .news-question{font-size:27px;line-height:1.5}
 section.companion-given .katex-display{font-size:1.02em;margin:17px 0}
 section.companion-formula .katex-display{font-size:1.06em;margin:16px 0}
@@ -15,7 +17,7 @@ section.companion-chart .note{font-size:17px;margin-top:5px}
 </style>`;
 export function companionProbabilitySlides(e){return [
  slide(e.givenTitle,`${e.setup}\n\n${e.variable}\n\n${math(e.values)}\n\n<div class="news-question">\n\n(1) ちょうど5人：$\\Pr(X=5)$ は？\n\n(2) 5人以上：$\\Pr(X\\ge5)$ は？\n\n</div>\n\n<div class="note">${e.assumption}</div>`,'news-given companion-given'),
- slide('チャレンジ①　「5人」と「5人以上」',`<div class="challenge-time">自分で解く　5分 ／ 教科書 p.118–119</div>\n\n${math(e.formula)}\n\n${math(e.substitution)}\n\n${math(String.raw`\Pr(X\ge5)=\Pr(X=5)+\Pr(X=6)`)}\n\n**5人以上は、5人と6人の2通り。**\n\n<div class="note">${e.takeaway}</div>`,'book-reference companion-formula'),
+ slide('チャレンジ①　「5人」と「5人以上」',`<div class="challenge-time">自分で解く　5分 ／ 教科書 p.118–119</div>\n\n${math(e.formula)}\n\n**ヒント：「ちょうど」と「以上」で、含める人数はどう違う？**\n\n前のスライドから $n$・$\\pi$・$x$ を読み取り、自分で公式に代入しよう。\n\n<div class="note">「以上」に含まれる人数をすべて書き出し、それぞれの確率をどう組み合わせるか考えよう。</div>`,'book-reference companion-formula'),
  walkthrough({title:'答え合わせ　同じ分母で、2つの確率を足す',given:String.raw`$n=6,\ \pi=\frac34$。独立・確率一定の授業モデル。$3^5=243,\ 3^6=729,\ 4^6=4096$。`,formula:String.raw`\begin{aligned}\Pr(X=x)&={}_nC_x\pi^x(1-\pi)^{n-x}\\\Pr(X\ge k)&=\sum_{x=k}^{n}\Pr(X=x)\end{aligned}`,substitution:e.calculation,result:e.result,note:'分数のままで正解。％表示は参考。記事の72％と、授業モデルの75％を区別する。'})
 ];}
 export function companionChart(e){

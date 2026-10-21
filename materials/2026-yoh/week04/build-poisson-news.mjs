@@ -30,13 +30,13 @@ section.news-answer .note{font-size:18px;margin-top:10px}
 section.news-answer table{font-size:23px;margin:8px 0} section.news-answer th,section.news-answer td{padding:6px 12px}
 .news-result{font-size:25px;font-weight:700;color:#215d45;border-top:2px solid #b7d1c2;padding-top:12px;margin-top:12px}
 </style>`;
-for(const e of poissonExamples){
+for(const e of poissonExamples.filter(e=>!process.argv[2]||e.id===process.argv[2])){
  const table=`<table class="poisson-lookup"><thead><tr><th>行 x ／ 列 μ</th><th class="lookup-column">${e.lambda.toFixed(1)}</th></tr></thead><tbody>${e.rows.map((x,i)=>`<tr><th class="lookup-row">${x}</th><td class="lookup-cell">${e.cells[i].toFixed(3)}</td></tr>`).join('')}</tbody></table>`;
  const slides=[
   slide(e.titleJa,`<div class="news-opening-layout"><div>\n\n[![width:510px](images/${e.thumbnail})](${e.article})\n\n<div class="news-credit">${e.credit}</div>\n\n</div><div>\n\n<div class="news-outlet">${e.outlet}</div>\n\n${e.hook}\n\n${e.finding}\n\n<div class="news-links">\n\n[記事を読む](${e.article})　[元データ](${e.primary})\n\n</div></div></div>\n\n${note(e.context)}\n\n<!-- Sources: ${e.article} | ${e.primary} -->`,'news-opening'),
   slide(e.givenTitle,`${e.given}\n\n${math(e.values)}\n\n<div class="news-question">${e.question}</div>\n\n${note(e.assumption)}`,'news-given'),
-  slide('チャレンジ①　公式に代入して、表へ',`<div class="challenge-time">自分で解く　3〜5分 ／ 教科書 p.120</div>\n\n${math(String.raw`\Pr(X=x)=\frac{e^{-\lambda}\lambda^x}{x!},\qquad\lambda=rt`)}\n\n${math(e.event)}\n\n${math(e.substitution)}\n\n${note(e.instruction+'　eの値は計算せず、配布のポアソン分布表を使う。')}`,'book-reference news-formula'),
-  slide('分布表を読んで、答えを出す',`<div class="lookup-layout"><div>${table}</div><div class="table-explanation">\n\n配布表の抜粋。表の $\\mu$ は、公式の $\\lambda$ と同じ「期間内の平均」。\n\n[ポアソン分布表を開く](${tableLink})\n\n</div></div>\n\n${math(e.calculation)}\n\n<div class="news-result">${e.interpretation}</div>\n\n${note(e.caution)}\n\n${note('表は小数第3位に丸められているため、答えは近似値。')}`,'news-answer')
+  slide('チャレンジ①　公式に代入して、表へ',`<div class="challenge-time">自分で解く　3〜5分 ／ 教科書 p.120</div>\n\n${math(String.raw`\Pr(X=x)=\frac{e^{-\lambda}\lambda^x}{x!},\qquad\lambda=${e.n?String.raw`n\pi`:'rt'}`)}\n\n${math(e.event)}\n\n${e.n?'まず、前のスライドの $n$ と $\\pi$ から期待値を求めよう。':math(e.substitution)}\n\n${note(e.instruction+'　eの値は計算せず、配布のポアソン分布表を使う。')}`,'book-reference news-formula'),
+  slide('分布表を読んで、答えを出す',`${e.n?math(e.substitution)+'\n\n':''}<div class="lookup-layout"><div>${table}</div><div class="table-explanation">\n\n配布表の抜粋。表の $\\mu$ は、公式の $\\lambda$ と同じ「期待値」。\n\n[ポアソン分布表を開く](${tableLink})\n\n</div></div>\n\n${math(e.calculation)}\n\n<div class="news-result">${e.interpretation}</div>\n\n${note(e.caution)}\n\n${note('表は小数第3位に丸められているため、答えは近似値。')}`,'news-answer')
  ];
  slides.push(...newsMoments(e,true));
  slides.splice(4,0,newsAnswerVisual(e,false,true));

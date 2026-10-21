@@ -44,7 +44,7 @@ export const newsExamples = [
     substitution:String.raw`\Pr(X=5)={}_6C_5\left(\frac34\right)^5\left(\frac14\right)`,
     factors:'経験なしの1人の選び方は6通り。分母はどちらの結果も4の6乗。',
     tailAnswer:2187/4096,
-    calculation:String.raw`\begin{aligned}{}_6C_5&=6\\\Pr(X=5)&=\frac{6\times3^5}{4^6}=\frac{1458}{4096}\\\Pr(X=6)&=\left(\frac34\right)^6=\frac{729}{4096}\\\Pr(X\ge5)&=\frac{1458+729}{4096}=\frac{2187}{4096}\end{aligned}`,
+    calculation:String.raw`\begin{aligned}\Pr(X=5)&={}_6C_5\left(\frac34\right)^5\left(\frac14\right)^{6-5}\\&=6\times\frac{243}{1024}\times\frac14\approx35.60\%\\\Pr(X=6)&={}_6C_6\left(\frac34\right)^6\left(\frac14\right)^{6-6}\\&=1\times\frac{729}{4096}\times1\approx17.80\%\\\Pr(X\ge5)&=\frac{1458+729}{4096}=\frac{2187}{4096}\approx53.39\%\end{aligned}`,
     result:'ちょうど5人：1458/4096 ≈ 35.60％。5人以上：2187/4096 ≈ 53.39％。',
     interpretation:'「5人以上」は、5人と6人の2通り。分母が同じなので、分子を足すだけ。',
     caution:'利用経験から、依存・孤独・恋愛関係の有無は判断できない。友人同士の利用行動が独立とは限らない。',

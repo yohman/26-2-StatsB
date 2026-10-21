@@ -36,7 +36,7 @@ export function distributionVisual({title,n,p,lambda,cutoff,select=()=>false,sec
  return `<!-- _class: answer-visual -->\n\n## ${title}\n\n<div class="answer-visual-summary">${summary}</div>\n\n<div class="answer-visual-legend">${visibleLegend}</div>\n\n${svg}\n\n<div class="note">${momentNote} ${note}</div>`;
 }
 export function newsAnswerVisual(e,moments=false,poisson=false){
- const base={title:moments?'図で確認　平均と、結果のばらつき':'図で確認　答えに含める棒',n:e.n,p:e.p,lambda:poisson?e.lambda:undefined,unit:e.id==='ai-news-errors'||e.id==='poisson-bears'?'件':e.id==='poisson-cyber'?'個':'人',moments};
+ const base={title:moments?'図で確認　平均と、結果のばらつき':'図で確認　答えに含める棒',n:e.n,p:e.p,lambda:poisson?e.lambda:undefined,unit:e.id==='poisson-bears'?'日':e.id==='ai-news-errors'?'件':e.id==='poisson-cyber'?'個':'人',moments};
  if(moments)return distributionVisual({...base,summary:`期待値 ${Number((poisson?e.lambda:e.n*e.p).toFixed(6))}${base.unit}。分散 ${Number((poisson?e.lambda:e.n*e.p*(1-e.p)).toFixed(8))}${base.unit}²。`,legend:'灰：各結果の確率　赤い破線：期待値',note:'一番高い棒と、期待値の位置は同じとは限らない。'});
  const threshold=poisson?(e.id==='poisson-bears'?1:3):e.atLeast;
  return distributionVisual({...base,select:x=>threshold!==undefined?x>=threshold:x===e.x,summary:poisson?`求めた確率：約${(100*e.answer).toFixed(1)}％（配布表の値で計算）`:`求めた確率：約${(100*e.answer).toFixed(2)}％`,note:poisson?'棒はポアソンモデルの丸め前の確率。解答は配布表の小数第3位を使うため、丸めの差がある。':e.assumption});
@@ -46,7 +46,6 @@ export function attachLectureVisuals(slides){
   ['答えは7.29％', {n:5,p:.1,select:x=>x===2,summary:'ちょうど2人：7.29％。青い1本だけを読む。',unit:'人'}],
   ['期待値は、確率ではなく個数',{n:5,p:.1,moments:true,summary:'期待値0.5人、分散0.45人²。',unit:'人'}],
   ['2回と3回の確率を足す',{n:5,p:.4,select:x=>x===2,second:x=>x===3,legend:'青：2回 34.56％　＋　黄：3回 23.04％',summary:'2〜3回成功：57.6％。',unit:'回'}],
-  ['90分に合わせて平均を変える',{lambda:3,select:x=>x>=1,moments:true,summary:'1件以上：約95.0％。平均3件、分散3件²。',unit:'件',note:'解答は配布表の丸め値。棒は丸め前のモデル。'}],
   ['遅れるのは、全台成功の反対',{n:7,p:.8,select:x=>x===5,second:x=>x<7&&x!==5,moments:true,legend:'青：ちょうど5台　青＋黄：6台以下＝少なくとも1台遅れる',summary:'ちょうど5台：27.53％。1台以上遅れる：79.03％。',unit:'台'}],
   ['期待個数と当選確率を分ける',{n:80,p:.01,cutoff:5,select:x=>x>=1,moments:true,summary:'1個以上：55.25％。平均0.8個、分散0.792個²。'}],
   ['1個以下は、0個と1個',{lambda:5,select:x=>x<=1,moments:true,summary:'0個と1個を足して約4.1％。平均5個、近似分散5個²。',note:'解答は配布表の丸め値。棒は丸め前のモデル。'}],
@@ -59,7 +58,7 @@ export function attachLectureVisuals(slides){
  ];
  const output=[];
  for(const s of slides){output.push(s);const title=s.match(/^## (.+)$/m)?.[1];
-  if(title?.includes('何が固定されているか'))output.push(`<!-- _class: answer-visual -->\n\n## 図で確認　条件からモデルを選ぶ\n\n<table class="answer-models"><tr><th>場面</th><th>確認する条件</th><th>答え</th></tr><tr><td>A シュート</td><td>5回・独立・成功率一定</td><td>二項分布</td></tr><tr><td>B 不良品</td><td>多数・低い不良率・近似の指定</td><td>ポアソン近似 λ＝5</td></tr><tr><td>C 天井つきガチャ</td><td>外れるほど成功率が上がる</td><td>通常の二項は使えない</td></tr><tr><td>D 注文</td><td>一定頻度 × 90分</td><td>ポアソン λ＝3</td></tr></table>\n\n<div class="note">「独立」「一定」を確認してから、式を選ぶ。</div>`);
+  if(title?.includes('何が固定されているか'))output.push(`<!-- _class: answer-visual -->\n\n## 図で確認　条件からモデルを選ぶ\n\n<table class="answer-models"><tr><th>場面</th><th>確認する条件</th><th>答え</th></tr><tr><td>A シュート</td><td>5回・独立・成功率一定</td><td>二項分布</td></tr><tr><td>B 不良品</td><td>多数・低い不良率・近似の指定</td><td>ポアソン近似 λ＝nπ＝5</td></tr><tr><td>C 天井つきガチャ</td><td>外れるほど成功率が上がる</td><td>通常の二項は使えない</td></tr></table>\n\n<div class="note">「独立」「一定」を確認してから、式を選ぶ。</div>`);
   else {const spec=specs.find(([key])=>title?.includes(key));if(spec)output.push(distributionVisual({title:`図で確認　${title.replace(/^答え合わせ[①-⑳]?　/,'')}`,...spec[1]}));}
  }
  return output;

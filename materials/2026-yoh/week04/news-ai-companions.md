@@ -128,6 +128,8 @@ section.news-answer .note{font-size:18px;margin-top:12px}
 </style>
 
 <style>
+section.worked-answer{padding-top:24px}
+section.worked-answer .katex-display{font-size:.78em;margin:5px 0}
 section.companion-given{font-size:25px} section.companion-given .news-question{font-size:27px;line-height:1.5}
 section.companion-given .katex-display{font-size:1.02em;margin:17px 0}
 section.companion-formula .katex-display{font-size:1.06em;margin:16px 0}
@@ -218,17 +220,11 @@ $$
 \Pr(X=x)={}_nC_x\pi^x(1-\pi)^{n-x}
 $$
 
-$$
-\Pr(X=5)={}_6C_5\left(\frac34\right)^5\left(\frac14\right)
-$$
+**ヒント：「ちょうど」と「以上」で、含める人数はどう違う？**
 
-$$
-\Pr(X\ge5)=\Pr(X=5)+\Pr(X=6)
-$$
+前のスライドから $n$・$\pi$・$x$ を読み取り、自分で公式に代入しよう。
 
-**5人以上は、5人と6人の2通り。**
-
-<div class="note">教科書 p.119：6C5＝6C1＝6。3⁵＝243、3⁶＝729、4⁶＝4096。答えは分数のままでよい。</div>
+<div class="note">「以上」に含まれる人数をすべて書き出し、それぞれの確率をどう組み合わせるか考えよう。</div>
 
 ---
 
@@ -253,7 +249,7 @@ $$
 <div class="worked-label">③ 数値を代入・計算</div>
 
 $$
-\begin{aligned}{}_6C_5&=6\\\Pr(X=5)&=\frac{6\times3^5}{4^6}=\frac{1458}{4096}\\\Pr(X=6)&=\left(\frac34\right)^6=\frac{729}{4096}\\\Pr(X\ge5)&=\frac{1458+729}{4096}=\frac{2187}{4096}\end{aligned}
+\begin{aligned}\Pr(X=5)&={}_6C_5\left(\frac34\right)^5\left(\frac14\right)^{6-5}\\&=6\times\frac{243}{1024}\times\frac14\approx35.60\%\\\Pr(X=6)&={}_6C_6\left(\frac34\right)^6\left(\frac14\right)^{6-6}\\&=1\times\frac{729}{4096}\times1\approx17.80\%\\\Pr(X\ge5)&=\frac{1458+729}{4096}=\frac{2187}{4096}\approx53.39\%\end{aligned}
 $$
 
 </div></div>
@@ -285,7 +281,7 @@ $$
 
 <!-- _class: challenge -->
 
-## チャレンジ②　平均個数と、ばらつきは？
+## チャレンジ②　期待値と分散を求めよう
 
 <div class="challenge-time">自分で解く　3分 ／ 教科書 p.119–120</div>
 

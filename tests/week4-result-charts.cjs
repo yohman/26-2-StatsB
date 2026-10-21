@@ -17,5 +17,5 @@ for(const name of files){
   }
  }
 }
-assert.equal(charts,23); // 13 lecture distributions + 10 news distributions; model-selection uses a table.
+assert.equal(charts,18); // Integrated bear example adds two charts; homework answers remain excluded.
 console.log(`${charts} editable distributions conserve probability; every worked answer has its visual follow-up.`);
