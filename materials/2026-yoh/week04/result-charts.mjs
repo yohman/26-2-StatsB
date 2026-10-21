@@ -16,7 +16,7 @@ section.answer-visual .note{font-size:18px;margin-top:10px}
 </style>`;
 const clean=s=>s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 const percent=q=>q>0&&q*100<.005?'&lt;0.01%':`${(q*100).toFixed(q<.001?2:1)}%`;
-export function distributionVisual({title,n,p,lambda,cutoff,select=()=>false,second=()=>false,legend='青：求めた結果　灰：それ以外',summary='',unit='個',note='',moments=false}){
+export function distributionVisual({title,n,p,lambda,cutoff,select=()=>false,second=()=>false,legend='青：求めた結果　灰：それ以外',summary='',unit='個',note='',moments=false,labelZero=false}){
  const poisson=lambda!==undefined, mean=poisson?lambda:n*p, variance=poisson?lambda:n*p*(1-p);
  const max=cutoff??(poisson?Math.ceil(mean+4*Math.sqrt(mean))+1:n);
  const masses=Array.from({length:max+1},(_,x)=>poisson?pois(lambda,x):bin(n,p,x));
@@ -26,7 +26,7 @@ export function distributionVisual({title,n,p,lambda,cutoff,select=()=>false,sec
  const labels=masses.map((_,x)=>hasTail&&x===masses.length-1?`${x}+`:String(x));
  const bars=masses.map((q,x)=>{
   const cx=left+step*(x+.5),h=q/ymax*height,color=select(x)?'#176d82':second(x)?'#be8530':'#bdcbd0';
-  return `<rect data-count="${labels[x]}" data-probability="${q}" x="${cx-step*.34}" y="${bottom-h}" width="${step*.68}" height="${h}" fill="${color}"/>${masses.length<=10||select(x)?`<text x="${cx}" y="${bottom-h-10}" text-anchor="middle" fill="${color==='#bdcbd0'?'#40555f':color}" font-size="19">${percent(q)}</text>`:''}<text x="${cx}" y="275" text-anchor="middle" font-size="18">${labels[x]}</text>`;
+  return `<rect data-count="${labels[x]}" data-probability="${q}" x="${cx-step*.34}" y="${bottom-h}" width="${step*.68}" height="${h}" fill="${color}"/>${masses.length<=10||select(x)||(labelZero&&x===0)?`<text x="${cx}" y="${bottom-h-10}" text-anchor="middle" fill="${color==='#bdcbd0'?'#40555f':color}" font-size="19">${percent(q)}</text>`:''}<text x="${cx}" y="275" text-anchor="middle" font-size="18">${labelZero&&x===0?'0日':labels[x]}</text>`;
  }).join('');
  const mx=left+step*(mean+.5);
  const marker=moments&&mean<=max?`<path d="M${mx} 42V250" stroke="#9b5146" stroke-width="3" stroke-dasharray="7 5"/><text x="${mx}" y="26" text-anchor="middle" fill="#9b5146" font-size="21">平均 ${Number(mean.toFixed(6))}${unit}</text>`:'';
@@ -36,7 +36,7 @@ export function distributionVisual({title,n,p,lambda,cutoff,select=()=>false,sec
  return `<!-- _class: answer-visual -->\n\n## ${title}\n\n<div class="answer-visual-summary">${summary}</div>\n\n<div class="answer-visual-legend">${visibleLegend}</div>\n\n${svg}\n\n<div class="note">${momentNote} ${note}</div>`;
 }
 export function newsAnswerVisual(e,moments=false,poisson=false){
- const base={title:moments?'図で確認　平均と、結果のばらつき':'図で確認　答えに含める棒',n:e.n,p:e.p,lambda:poisson?e.lambda:undefined,unit:e.id==='poisson-bears'?'日':e.id==='ai-news-errors'?'件':e.id==='poisson-cyber'?'個':'人',moments};
+ const base={title:moments?'図で確認　平均と、結果のばらつき':'図で確認　答えに含める棒',n:e.n,p:e.p,lambda:poisson?e.lambda:undefined,unit:e.id==='poisson-bears'?'日':e.id==='ai-news-errors'?'件':e.id==='poisson-cyber'?'個':'人',moments,labelZero:e.id==='poisson-bears'&&!moments,...(e.id==='poisson-bears'&&!moments?{legend:'灰：0日（100日間、一度もクマが現れない）　青：1日以上'}:{})};
  if(moments)return distributionVisual({...base,summary:`期待値 ${Number((poisson?e.lambda:e.n*e.p).toFixed(6))}${base.unit}。分散 ${Number((poisson?e.lambda:e.n*e.p*(1-e.p)).toFixed(8))}${base.unit}²。`,legend:'灰：各結果の確率　赤い破線：期待値',note:'一番高い棒と、期待値の位置は同じとは限らない。'});
  const threshold=poisson?(e.id==='poisson-bears'?1:3):e.atLeast;
  return distributionVisual({...base,select:x=>threshold!==undefined?x>=threshold:x===e.x,summary:poisson?`求めた確率：約${(100*e.answer).toFixed(1)}％（配布表の値で計算）`:`求めた確率：約${(100*e.answer).toFixed(2)}％`,note:poisson?'棒はポアソンモデルの丸め前の確率。解答は配布表の小数第3位を使うため、丸めの差がある。':e.assumption});

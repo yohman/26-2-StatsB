@@ -26,6 +26,7 @@ assert.deepEqual(slides.flatMap(s=>{const m=s.match(/^## チャレンジ([①-�
 assert(slides[19].includes('poisson-bears.png'));
 assert(slides[20].includes('n=100')&&slides[20].includes('0.02'));
 assert(slides[23].includes('日'));
+assert(slides[23].includes('13.5%')&&slides[23].includes('100日間、一度もクマが現れない'));
 assert(!slides.slice(19,27).some(s=>s.includes('カメラ')||s.includes('npi')));
 assert(slides[27].includes('poisson-portrait.jpg')&&slides[27].includes('1837'));
 assert(slides[28].includes('<div class="chapter">ポアソン近似</div>'));
