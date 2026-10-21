@@ -15,7 +15,13 @@ assert(Math.abs(gachaChance(80,.01)-.5524767862)<1e-10);
 assert(Math.abs(poisson(5,0)+poisson(5,1)-.04042768199)<1e-10);
 const read=p=>fs.readFileSync(p,'utf8');
 const slides=read('materials/2026-yoh/week04/w4.md').split(/\n---\n/).filter(s=>/^## /m.test(s));
-assert.equal(slides.length,47);
+assert.equal(slides.length,50);
+assert(slides[35].includes('80回のカプセル抽選'));
+for(const [i,label] of ['AL 01','AL 02','AL 03'].entries()){
+ const guide=slides[47+i];
+ assert(guide.includes(label+'　解答ガイド')&&guide.includes('\\boxed{\\phantom'));
+ for(const answer of ['0.151519232','0.04878247','0.049975','期待値0.05','分散は7'])assert(!guide.includes(answer));
+}
 const deliveryAnswer=slides.find(s=>s.includes('遅れるのは、全台成功の反対'));
 const gachaAnswer=slides.find(s=>s.includes('期待個数と当選確率を分ける'));
 for(const step of ['\\Pr(X=0)&={}_{80}C_0(0.01)^0(0.99)^{80}','1-\\Pr(X=0)','44.75\\%','80回すべて外れ'])assert(gachaAnswer.includes(step));
@@ -33,7 +39,7 @@ assert(slides[28].includes('<div class="chapter">ポアソン近似</div>'));
 assert(slides[31].includes('期待値 $E(X)$'));
 assert(slides[0].includes('## AIの友だち、もう普通？'));
 assert(slides[8].includes('## 今日の流れ'));
-assert(slides.at(-1).includes('任意のニュース演習'));
+assert(slides[46].includes('任意のニュース演習'));
 assert(!slides.some(s=>s.includes('## 100回引いたら、当たる？')));
 assert.equal(slides.filter(s=>s.includes('<!-- _class: answer-visual -->')).length,7);
 slides.forEach((s,i)=>{if(s.includes('worked-answer')&&!s.includes('<style>'))assert(/_class: (answer-visual|companion-chart)/.test(slides[i+1]));});
@@ -72,7 +78,7 @@ assert(markup.includes('Optional scenarios')&&markup.includes('時間が余っ�
  const pdfjs=require('../assets/vendor/pdfjs/pdf.min.js');
  pdfjs.GlobalWorkerOptions.workerSrc=require('node:path').resolve('assets/vendor/pdfjs/pdf.worker.min.js');
  const pdf=await pdfjs.getDocument({data:new Uint8Array(fs.readFileSync('materials/2026-yoh/week04/w4.pdf'))}).promise;
- assert.equal(pdf.numPages,47);
+ assert.equal(pdf.numPages,50);
  const guarded=[];
  for(let n=1;n<=pdf.numPages;n++){
   const content=await(await pdf.getPage(n)).getTextContent();
@@ -82,5 +88,5 @@ assert(markup.includes('Optional scenarios')&&markup.includes('時間が余っ�
  const links=(await(await pdf.getPage(1)).getAnnotations()).filter(a=>a.subtype==='Link');
  assert(links.some(a=>a.url?.includes('apnews.com')));
  await pdf.destroy();
- console.log('Week 4: 47 slides; integrated nπ bear example, eight challenges, homework prompts only.');
+ console.log('Week 4: 50 slides; final three AL guides show setup but leave numerical answers blank.');
 })().catch(e=>{console.error(e);process.exitCode=1;});

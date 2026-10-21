@@ -1,4 +1,39 @@
 (() => {
+  // Shared by the full viewer and the agenda's inline slide previews.
+  window.bindSlidePageInput = (status, getState, jump) => {
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.inputMode = 'numeric';
+    input.pattern = '[0-9]*';
+    input.className = 'slide-page-input';
+    input.setAttribute('data-slide-page-input', '');
+    input.setAttribute('aria-label', 'Slide number / スライド番号');
+    input.title = 'Enter a slide number / スライド番号を入力';
+    const count = document.createElement('span');
+    status.replaceChildren(input, count);
+    const sync = () => {
+      const {page, total, busy} = getState();
+      input.value = String(page);
+      input.disabled = !!busy;
+      count.textContent = total ? ` / ${total}` : ' / …';
+    };
+    const commit = async () => {
+      const value = input.value.trim();
+      const {page, total, busy} = getState();
+      if (busy || !/^\d+$/.test(value) || !Number.isSafeInteger(Number(value))) { sync(); return; }
+      const target = Math.max(1, total ? Math.min(total, Number(value)) : Number(value));
+      try { if (target !== page) await jump(target); } finally { sync(); }
+    };
+    input.addEventListener('keydown', event => {
+      event.stopPropagation();
+      if (event.key === 'Enter') { event.preventDefault(); commit(); }
+      if (event.key === 'Escape') { event.preventDefault(); sync(); }
+    });
+    input.addEventListener('change', commit);
+    input.addEventListener('focus', () => input.select());
+    sync();
+    return sync;
+  };
   // Deliberate horizontal swipes only: leave taps, scrolling and pinch zoom alone.
   window.bindSlideSwipe = (surface, previous, next) => {
     let start = null, ignoreClickUntil = 0;
@@ -54,10 +89,12 @@
     const status = card.querySelector('[data-slide-status]');
     const links = [cover, card.querySelector('.slide-preview-button')].filter(Boolean);
     let pageNumber = 1, total = 0, busy = false;
+    const syncPageInput = window.bindSlidePageInput(status,
+      () => ({page:pageNumber, total, busy}), target => showPage(target-pageNumber));
     const sync = () => {
       previous.disabled = busy || pageNumber === 1;
       next.disabled = busy || (total > 0 && pageNumber === total);
-      status.textContent = total ? `${pageNumber} / ${total}` : String(pageNumber);
+      syncPageInput();
       cover.setAttribute('aria-busy', String(busy));
       links.forEach(link => {
         const url = new URL(link.href, location.href);
@@ -95,19 +132,18 @@
         pageNumber = target;
       } catch (error) {
         console.error('Slide thumbnail preview failed:', error);
-        status.textContent = document.documentElement.dataset.language === 'en' ? 'Open preview' : 'プレビューを開く';
+        status.title = document.documentElement.dataset.language === 'en' ? 'Open preview' : 'プレビューを開く';
       } finally {
         busy = false;
-        const failed = status.textContent === 'Open preview' || status.textContent === 'プレビューを開く';
         sync();
         if(cancelled&&originFocus?.isConnected)originFocus.focus({preventScroll:true});
-        if (failed) status.textContent = document.documentElement.dataset.language === 'en' ? 'Open preview' : 'プレビューを開く';
       }
     }
     previous.addEventListener('click', () => showPage(-1));
     next.addEventListener('click', () => showPage(1));
     window.bindSlideSwipe(cover, () => showPage(-1), () => showPage(1));
     card.addEventListener('keydown', event => {
+      if (event.target.matches?.('input,textarea,select,[contenteditable]')) return;
       if(document.querySelector('.slide-answer-confirm[open]'))return;
       if (event.altKey || event.ctrlKey || event.metaKey || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
       event.preventDefault();

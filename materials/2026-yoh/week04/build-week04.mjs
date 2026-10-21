@@ -161,6 +161,43 @@ for(let i=0;i<slides.length;i++)if(/^## チャレンジ/m.test(slides[i])){
  slides[i+1]=slides[i+1].replace(/## 答え合わせ[①-⑳]?　/,`## 答え合わせ${label}　`);
 }
 add('時間が余ったら　任意のニュース演習',`本編はここまで。残り時間に合わせて、**1つだけ** 選ぼう。\n\n**二項分布**\n\n[AIニュースの正確性](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-ai-news-errors.pdf&week=W04)　／　[AIへの怒り](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-genz-ai-anger.pdf&week=W04)\n\n**ポアソン分布**\n\n[クマの人身被害](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-poisson-bears.pdf&week=W04)　／　[ネット上の不審な通信](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=materials%2F2026-yoh%2Fweek04%2Fnews-poisson-cyber.pdf&week=W04)\n\n${N('どの演習も、問題・公式・代入・答え・グラフを含む。本編の理解を優先し、残りは復習に使ってよい。')}`);
+// Appendix: show how to set up the homework, without supplying cell results.
+add('AL 01　解答ガイド：打率',String.raw`**与えられた値**：$n=5,\ \pi=0.32$。$X$＝安打数。
+
+${M(String.raw`\Pr(X=x)={}_nC_x\pi^x(1-\pi)^{n-x}`)}
+
+**例：$x=3$ の行は、ここまで組み立てる。**
+
+${M(String.raw`\Pr(X=3)={}_5C_3(0.32)^3(0.68)^2=\boxed{\phantom{0.000000}}`)}
+
+| $x$ | 0 | 1 | 2 | 3 | 4 | 5 |
+| --- | --- | --- | --- | --- | --- | --- |
+| $\Pr(X=x)$ | 自分で | 自分で | 自分で | 自分で | 自分で | 自分で |
+
+${N('組合せ・成功の項・失敗の項をそれぞれ計算し、最後に掛ける。数値とExcelの各セルは自分で完成させる。')}`,'book-reference');
+add('AL 02　解答ガイド：ガチャ',String.raw`**与えられた値**：$n=100,\ \pi=0.0005$。$X$＝レア個数。
+
+${M(String.raw`\Pr(X=0)={}_nC_0\pi^0(1-\pi)^n`)}
+
+${M(String.raw`\Pr(X\ge1)=1-\Pr(X=0)=1-(0.9995)^{100}=\boxed{\phantom{0.000000}}`)}
+
+${M(String.raw`E(X)=n\pi=100\times0.0005=\boxed{\phantom{0.00}}`)}
+
+${M(String.raw`\operatorname{Var}(X)=n\pi(1-\pi)=100\times0.0005\times0.9995=\boxed{\phantom{0.000000}}`)}
+
+${N('1個以上の反対は0個。確率・期待個数・分散を混ぜずに、空欄とワークシートを自分で完成させる。')}`,'book-reference');
+add('AL 03　解答ガイド：不良品',String.raw`**与えられた値**：$n=3500,\ \pi=\frac{2}{1000}=0.002$。ポアソン近似を使う。
+
+${M(String.raw`\lambda=n\pi=3500\times0.002=\boxed{\phantom{00}}`)}
+
+${M(String.raw`\text{ポアソンモデルでは}\qquad E(X)=\lambda,\qquad\operatorname{Var}(X)=\lambda`)}
+
+| 求めるもの | 式の組み立て | 最終値 |
+| --- | --- | --- |
+| 期待値 | $n\pi$ | 自分で計算 |
+| ポアソン近似の分散 | $\lambda$ | 自分で計算 |
+
+${N('問題の「ポアソン分布で近似」という指定を確認する。最終値とExcelの各セルは自分で完成させる。教科書p.120。')}`,'book-reference');
 const newsStyle=`<style>.news-layout{display:grid;grid-template-columns:370px 1fr;gap:42px;align-items:center}.news-layout img{max-width:370px;max-height:375px;object-fit:contain}.news-layout p{margin:10px 0}.news-layout a{font-size:23px}.news-credit{font-size:15px;color:#706e68}.news-step{font-size:20px;letter-spacing:.08em;color:#176d82;font-weight:700;margin-bottom:12px}section.news-article .note{font-size:17px;margin-top:15px}section.news-solution{background:#edf5ef}section.news-solution .katex-display{font-size:1.15em}section.news-solution .note{font-size:20px}</style>`;
 const extraStyle=`<style>.w4-slide-characters{display:flex;justify-content:center;align-items:center;gap:40px;margin:12px 0}.w4-slide-characters img{width:130px;height:130px}.w4-slide-characters span{font-size:42px;color:#176d82;font-weight:700}.w4-table-chart{display:grid;grid-template-columns:1.15fr 1fr;gap:25px;align-items:center}.w4-table-chart img{width:100%}.al-table th,.al-table td{padding:7px 10px}.al-table .katex-display{margin:8px 0}.al-table .note{font-size:17px}</style>`;
 const portraitStyle=`<style>section.poisson-person{padding:34px 62px 65px}section.poisson-person h2{font-size:43px;margin-bottom:12px}.poisson-person-layout{display:grid;grid-template-columns:350px 1fr;gap:50px;align-items:center}.poisson-person-layout img{height:450px;width:auto;max-width:350px;object-fit:contain}.poisson-person-layout p{font-size:27px;line-height:1.55;margin:16px 0}.poisson-person-layout h3{font-size:30px;color:#176d82;margin:0 0 12px}.poisson-person-name{font-size:24px;color:#60717a;line-height:1.4}.poisson-person-source{font-size:15px;color:#65747b;margin-top:8px}.poisson-person-source a{color:#176d82}</style>`;

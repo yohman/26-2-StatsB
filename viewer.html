@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex">
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="icon" href="favicon.svg?v=20260927-b-mark-1" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/stats-styles.css?v=20260909">
+  <link rel="stylesheet" href="assets/stats-styles.css?v=20261021-page-jump">
   <link rel="stylesheet" href="assets/viewer-context.css?v=20261006-slide-swipe-1">
   <link rel="stylesheet" href="assets/slide-challenge-guard.css?v=20261014-1">
 </head>
@@ -24,7 +24,7 @@
   </main>
   <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
   <script src="assets/slide-challenge-guard.js?v=20261014-1"></script>
-  <script src="assets/slide-browsing.js?v=20261014-answer-guard-1"></script>
+  <script src="assets/slide-browsing.js?v=20261021-page-jump"></script>
   <script>
     const parameters = new URLSearchParams(location.search);
     const file = parameters.get('file') || '';
@@ -199,7 +199,7 @@
             context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
             await page.render({ canvasContext: context, viewport }).promise;
             await renderLinks(page, viewport);
-            pageStatus.textContent = `${requestedPage} / ${pdf.numPages}`;
+            syncPageInput();
             previous.disabled = requestedPage === 1;
             next.disabled = requestedPage === pdf.numPages;
           });
@@ -240,8 +240,10 @@
           navigating=true;
           try {
             if(await window.confirmSlideAdvance(pdf,activePage,targetPage,viewer))await renderPage(targetPage);
-          } finally {navigating=false;}
+          } finally {navigating=false;syncPageInput();}
         }
+        const syncPageInput = window.bindSlidePageInput(pageStatus,
+          () => ({page:activePage,total:pdf.numPages,busy:navigating}), navigateTo);
         const showPreviousPage = () => activePage > 1 && navigateTo(activePage - 1);
         const showNextPage = () => activePage < pdf.numPages && navigateTo(activePage + 1);
         previous.addEventListener('click', showPreviousPage);
