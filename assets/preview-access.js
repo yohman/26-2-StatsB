@@ -1,13 +1,7 @@
-// Public course UI requires ?p. This is a visibility gate, not authentication.
-// PDFs, source files and other static assets remain publicly addressable.
+// Public pages stay accessible. ?p enables the agenda's all-weeks preview.
+// This is a publishing convenience, not authentication.
 (() => {
   const url = new URL(location.href);
-  const local = url.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
-  if (!local && !url.searchParams.has('p')) {
-    document.documentElement.style.visibility = 'hidden';
-    location.replace(new URL('../unavailable.html', document.currentScript.src).href);
-    return;
-  }
   if (!url.searchParams.has('p')) return;
   const courseRoot = new URL('../', document.currentScript.src);
   const withPreview = value => {

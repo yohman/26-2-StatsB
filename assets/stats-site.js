@@ -688,12 +688,20 @@ function setupWeekToggles(root) {
   });
 }
 
+function agendaPreviewMode(location) {
+  const localBrowsing = location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
+  const parameters = new URLSearchParams(location.search);
+  const instructorPreview = parameters.has('p');
+  return {
+    expandAll: instructorPreview || (localBrowsing && parameters.get('preview') === 'all'),
+    previewAll: localBrowsing || instructorPreview
+  };
+}
+
 function renderAgenda(weeks) {
   const root = document.querySelector('[data-agenda]');
   if (!root) return;
-  const localBrowsing = location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname);
-  const expandAll = new URLSearchParams(location.search).get('preview') === 'all';
-  const previewAll = localBrowsing || expandAll;
+  const {expandAll, previewAll} = agendaPreviewMode(location);
   const today = todayInTokyo();
   const currentWeek = weeks.filter(week => week.date <= today).at(-1)?.week ?? weeks[0]?.week;
   root.innerHTML = `${weekShortcuts(weeks, previewAll, today)}${previewAll ? `<div class="preview-notice">${expandAll ? bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示') : bilingual('LOCAL PREVIEW · ALL WEEKS AVAILABLE', 'ローカルプレビュー · 全週を閲覧できます')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today, currentWeek, expandAll)).join('')}</div>`;
