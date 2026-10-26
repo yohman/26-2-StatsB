@@ -9,8 +9,12 @@
   const uniformMoments=b=>({mean:b/2,variance:b*b/12,sd:b/Math.sqrt(12)});
   const randomNormal=()=>Math.sqrt(-2*Math.log(Math.max(Number.EPSILON,Math.random())))*Math.cos(2*Math.PI*Math.random());
   const number=x=>Number(x.toFixed(4)).toString();
+  function midpointAreas(n,b=20){
+    const width=b/n,rectangles=Array.from({length:n},(_,i)=>{const midpoint=(i+.5)*width,height=3*midpoint**2/b**3;return {midpoint,height,area:width*height};});
+    return {width,rectangles,total:rectangles.reduce((sum,r)=>sum+r.area,0)};
+  }
   const escape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
-  function chart({min=0,max=20,pdf=x=>1/20,lo=5,hi=10,mean=null,ticks=null,samples=[],title='確率密度 f(x)',xlabel='x',cdf=false,rectangles=0,labels=[],yMax=null,point=null}={}){
+  function chart({min=0,max=20,pdf=x=>1/20,lo=5,hi=10,mean=null,ticks=null,samples=[],title='確率密度 f(x)',xlabel='x',cdf=false,rectangles=0,rectangleLabels=false,rectangleHighlight=null,labels=[],yMax=null,point=null}={}){
     const W=700,H=330,L=62,R=24,T=38,B=64,base=H-B,pw=W-L-R,ph=base-T;
     const xs=Array.from({length:401},(_,i)=>min+(max-min)*i/400);
     const ymax=yMax??(cdf?1.08:Math.max(...xs.map(x=>pdf(x)),.001)*1.28);
@@ -22,9 +26,9 @@
     const histogram=Array(24).fill(0),bw=(max-min)/24;
     samples.forEach(v=>{if(v>=min&&v<=max)histogram[Math.min(23,Math.floor((v-min)/bw))]++;});
     const bars=histogram.map((n,i)=>{const y=n/Math.max(1,samples.length)/bw,clipped=y>ymax;return `<rect x="${X(min+i*bw)+1}" y="${Y(Math.min(y,ymax))}" width="${pw/24-2}" height="${base-Y(Math.min(y,ymax))}" fill="#287f74" opacity=".35"/>${clipped?`<text x="${X(min+(i+.5)*bw)}" y="${T+13}" text-anchor="middle">↑</text>`:''}`;}).join('');
-    const rects=rectangles?Array.from({length:rectangles},(_,i)=>{const dx=(max-min)/rectangles,x=min+i*dx;return `<rect x="${X(x)}" y="${Y(pdf(x+dx/2))}" width="${pw/rectangles}" height="${base-Y(pdf(x+dx/2))}" fill="#287f74" fill-opacity=".1" stroke="#287f74"/>`;}).join(''):'';
+    const rects=rectangles?Array.from({length:rectangles},(_,i)=>{const dx=(max-min)/rectangles,x=min+i*dx;return `<rect x="${X(x)}" y="${Y(pdf(x+dx/2))}" width="${pw/rectangles}" height="${base-Y(pdf(x+dx/2))}" fill="${rectangleHighlight===i?'#d99361':'#287f74'}" fill-opacity="${rectangleHighlight===i?'.65':'.1'}" stroke="#287f74"/>${rectangleLabels?`<text x="${X(x+dx/2)}" y="${base+44}" text-anchor="middle" fill="#176d82">A${i+1}</text>`:''}`;}).join(''):'';
     const xt=ticks||Array.from({length:5},(_,i)=>min+(max-min)*i/4);
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${escape(title)}"><title>${escape(title)}</title><g font-family="Arial,Hiragino Sans,sans-serif" font-size="15" fill="#425560"><text x="${L}" y="22" font-weight="bold">${escape(title)}</text>${[0,.5,1].map(f=>{const y=ymax*f;return `<line x1="${L}" x2="${W-R}" y1="${Y(y)}" y2="${Y(y)}" stroke="#dce3e3"/><text x="${L-8}" y="${Y(y)+5}" text-anchor="end">${number(y)}</text>`;}).join('')}${shade}${rects}${cdf?'':bars}<path d="${path}" fill="none" stroke="#176d82" stroke-width="3.5"/>${mean!==null?`<line x1="${X(mean)}" x2="${X(mean)}" y1="${T}" y2="${base}" stroke="#176d82" stroke-dasharray="5 5"/><text x="${X(mean)}" y="${T-7}" text-anchor="middle">μ = ${number(mean)}</text>`:''}${labels.map(({x,text})=>`<line x1="${X(x)}" x2="${X(x)}" y1="${T+25}" y2="${base}" stroke="#ae653c" stroke-dasharray="4 3"/><text x="${X(x)}" y="${T+20}" text-anchor="middle">${escape(text)}</text>`).join('')}<path d="M${L},${T}V${base}H${W-R}" stroke="#61737c" fill="none"/>${xt.map(x=>`<path d="M${X(x)},${base}v6" stroke="#61737c"/><text x="${X(x)}" y="${base+25}" text-anchor="middle">${number(x)}</text>`).join('')}<text x="${W-R}" y="${H-8}" text-anchor="end">${escape(xlabel)}</text></g></svg>`;
   }
-  return {normalPdf,normalCdf,upper,uniformCdf,triangularCdf,uniformMoments,randomNormal,number,chart};
+  return {normalPdf,normalCdf,upper,uniformCdf,triangularCdf,uniformMoments,randomNormal,number,midpointAreas,chart};
 });

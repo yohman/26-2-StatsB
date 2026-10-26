@@ -54,8 +54,25 @@ export function createWeek5CompactStory(options){
   keep(23,'この山は確率密度です。同じ幅で比べれば、高いところほど結果を含みやすい。ただし、縦の高さそのものを確率とは読みません。','This is probability density. For equal-width intervals, higher density means more probability. The curve’s height alone is not a probability.');
   keep(25);
   keep(26);
-  keep(29);
-  keep(31,'4個から64個へ、長方形を細かくしました。段差が小さくなり、線の下の面積に近づきます。幅をさらに小さくしていった先が、積分です。','We have gone from four rectangles to sixty-four. The smaller steps follow the line more closely. Taking the widths towards zero leads to the integral.');
+  const rectangleFigure=(count,highlight=null)=>options.fig(`rectangle-midpoint-${count}${highlight===null?'':`-${highlight}`}`,{max:20,pdf:x=>3*x*x/8000,lo:0,hi:0,rectangles:count,rectangleLabels:count===4,rectangleHighlight:highlight,yMax:.19,title:`${count}個の長方形 · 中点の高さ`,xlabel:'x'});
+  add('まず、4個の長方形。',`${math(String.raw`f(x)=\frac{3x^2}{8000}\qquad(0\le x\le20)`)}\n\n${rectangleFigure(4)}\n\n幅は5。高さは、それぞれの区間の中央で読む。`,'model-visual',[29],
+    'ここでは曲がった密度f(x)=3x²/8000を使います。0〜20を4等分するので幅は5。中央は2.5、7.5、12.5、17.5です。その場所の密度を長方形の高さにして、幅かける高さを足しましょう。',
+    'Use the curved density f(x)=3x²/8000 on zero to twenty. Four equal intervals have width five and midpoints 2.5, 7.5, 12.5 and 17.5. Read each height at its midpoint, then add width times height.');
+  paired('1個目は、「幅 × 高さ」',[String.raw`\Delta x=\frac{20}{4}=5,\qquad x_1^*=2.5`,String.raw`f(2.5)=\frac{3(2.5)^2}{8000}=0.00234375`,String.raw`A_1=5\times0.00234375=0.01171875`],options.fig('rectangle-first-closeup',{min:0,max:5,pdf:x=>3*x*x/8000,lo:0,hi:0,rectangles:1,rectangleLabels:true,rectangleHighlight:0,yMax:.012,title:'1個目だけを拡大 · 縦軸の目盛りも拡大',xlabel:'x',ticks:[0,2.5,5]}),'色を付けた1個目の面積。',[29],
+    'まず一つだけ計算しよう。最初の区間0〜5の中央は2.5。fに2.5を入れると高さ0.00234375。それに幅5を掛けて面積0.01171875です。高さそのものと、面積を区別してください。',
+    'Calculate only the first rectangle. The midpoint of zero to five is 2.5. Substituting into f gives height 0.00234375. Multiply by width five to obtain area 0.01171875. Distinguish height from area.');
+  paired('4個を足すと、98.4375％',[String.raw`S_4=\sum_{i=1}^{4}A_i`,String.raw`\begin{aligned}S_4={}&0.01171875+0.10546875\\&+0.29296875+0.57421875\end{aligned}`,String.raw`=0.984375=98.4375\%`],rectangleFigure(4),'長方形の合計は、曲線の下の面積1の近似。',[29],
+    '残りの中央は7.5、12.5、17.5。どれも5×f(中央)で計算します。4個の面積を足すと0.984375。曲線の下の本当の面積1より少し小さい。確率の合計が不足しているのではなく、長方形で近似したための差です。',
+    'Apply five times f(midpoint) to the remaining rectangles. The four areas sum to 0.984375, slightly below the true curved area of one. This is approximation error, not missing probability in the density.');
+  paired('16個なら、99.9023％',[String.raw`\Delta x=\frac{20}{16}=1.25`,String.raw`S_{16}=1.25\bigl[f(0.625)+\cdots+f(19.375)\bigr]`,String.raw`=0.9990234375\approx99.9023\%`],rectangleFigure(16),String.raw`最初の面積：$1.25\times f(0.625)=0.00018310546875$`,[30],
+    '今度は16等分。幅1.25で、最初の中央は0.625です。同じ幅かける高さを16回計算して足すと0.9990234375。本当の面積1との差は、4個のときより小さくなりました。',
+    'With sixteen intervals, each width is 1.25 and the first midpoint is 0.625. Add sixteen width-times-height contributions to get 0.9990234375. The gap from the true area of one is smaller than with four rectangles.');
+  paired('64個なら、99.9939％',[String.raw`\Delta x=\frac{20}{64}=0.3125`,String.raw`S_{64}=0.3125\bigl[f(0.15625)+\cdots+f(19.84375)\bigr]`,String.raw`=0.9999389648\ldots\approx99.9939\%`],rectangleFigure(64),String.raw`最初の面積：$0.3125\times f(0.15625)\approx0.00000286102$`,[31],
+    '64等分なら幅0.3125。最初の中央は0.15625で、高さはfにこの値を入れて読みます。64個の合計は約0.999939です。少しずつ幅を小さくすると、長方形の合計が曲線の面積に近づいていきます。',
+    'With sixty-four intervals, width is 0.3125 and the first midpoint is 0.15625. Evaluate f at each midpoint and add the sixty-four areas to get about 0.999939. Finer rectangles bring the sum closer to the curved area.');
+  paired('積分なら、面積はちょうど1。',[String.raw`\int_0^{20}\frac{3x^2}{8000}\,dx`,String.raw`=\left[\frac{x^3}{8000}\right]_0^{20}`,String.raw`=\frac{20^3-0^3}{8000}=1`],options.fig('rectangle-exact-area',{max:20,pdf:x=>3*x*x/8000,lo:0,hi:20,yMax:.19,title:'曲線の下の全体の面積 = 1',xlabel:'x'}),'4個：0.984375　16個：0.999023　64個：0.999939',[32],
+    '積分は幅を限りなく細かくした先の面積です。3x²の積分でx³になり、上端20と下端0を入れると8000÷8000で1。4個、16個、64個の計算が、この値に近づく流れを確認してください。',
+    'The integral gives the limiting area as widths shrink towards zero. Integrating 3x² gives x³. Evaluate at twenty and zero to obtain 8000 divided by 8000, exactly one. Compare this with the four-, sixteen- and sixty-four-rectangle sums.');
   add('小さな面積を、全部足す',`${math(String.raw`\sum_i f(x_i)\Delta x\ \longrightarrow\ \int_a^b f(x)\,dx`)}\n\n小片は「高さ × 幅」。全体の面積は ${String.raw`$\int_{-\infty}^{\infty}f(x)\,dx=1$`}。`,'explain',[32,33,34,35],
     '一つの面積は、高さかける幅。Σはそれを全部足す記号です。欲しい区間だけなら、その区間の確率。取りうる値を全部含めれば、合計は1になります。',
     'Each little area is height times width. The summation adds them. Integrating a chosen interval gives its probability, while integrating over every possible value gives total probability 1.');
@@ -136,7 +153,7 @@ export function createWeek5CompactStory(options){
   add('標準化だけでは、形は変わらない。',`平均0・標準偏差1にそろえても、\nもとの分布が正規とは限らない。`,'statement',[150,151],
     '標準化は中心と尺度を変える操作なので、山の形そのものは変わりません。一般の母集団の標本平均を正規近似するには、有限分散などの条件と十分な標本数が必要です。',
     'Standardization changes centre and scale, while preserving the distribution’s shape. A normal approximation for sample means from other populations needs conditions such as finite variance and a sufficiently large sample.');
-  if(slides.length!==52)throw Error(`Expected 52 edited slides, got ${slides.length}`);
+  if(slides.length!==56)throw Error(`Expected 56 edited slides, got ${slides.length}`);
   if(slideTermKeys.length!==slides.length)throw Error('Statistical terminology must follow the slide order');
   slides.forEach((slide,i)=>{
     const keys=slideTermKeys[i];

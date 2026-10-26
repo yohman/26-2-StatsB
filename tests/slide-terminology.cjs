@@ -23,4 +23,4 @@ for(const term of ['確率変数','確率密度関数','累積分布関数','期
 const style=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/terms-week05.mjs'),'utf8');
 assert.match(style,/stat-term-ja\{font-size:22px/);
 assert.match(style,/stat-term-en\{font-size:18px/);
-console.log(`Bilingual terminology: ${dictionary.size} consistent terms across all 48 statistical slides; Japanese primary, English secondary.`);
+console.log(`Bilingual terminology: ${dictionary.size} consistent terms across all ${map.slides.length-4} statistical slides; Japanese primary, English secondary.`);

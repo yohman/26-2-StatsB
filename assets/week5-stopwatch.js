@@ -16,7 +16,28 @@
       return Math.abs(difference)<1e-12?a.attempt-b.attempt:difference;
     }).slice(0,10)};
   }
-  const api={TARGET,formatSeconds,summary,roundedBucket,chartBounds,recordLists};
+  function bellModel(trials){
+    if(trials.length<5)return {kind:'reference',count:trials.length,mean:TARGET,sd:.1};
+    let mean=0,squares=0;
+    trials.forEach((value,i)=>{const difference=value-mean;mean+=difference/(i+1);squares+=difference*(value-mean);});
+    const sd=Math.sqrt(Math.max(0,squares/(trials.length-1)));
+    return {kind:sd>0?'fitted':'degenerate',count:trials.length,mean,sd};
+  }
+  function bellGraphic(trials,tolerance,labels={}){
+    const model=bellModel(trials),{mean,sd}=model;
+    const low=0,high=Math.max(2,mean+4*sd,...trials.map(v=>v*1.05)),left=56,right=720,top=28,base=180,bins=20,width=high/bins;
+    const X=x=>left+(x-low)/high*(right-left),counts=Array(bins).fill(0);
+    trials.forEach(v=>counts[Math.min(bins-1,Math.floor(v/width))]++);
+    const pdf=x=>sd>0?Math.exp(-.5*((x-mean)/sd)**2)/(sd*Math.sqrt(2*Math.PI)):0;
+    const peak=sd>0?pdf(mean):0,max=Math.max(peak,...counts.map(n=>trials.length?n/trials.length/width:0),1)*1.15;
+    const Y=y=>base-y/max*(base-top);
+    // Include the mean explicitly, even when a very narrow fitted peak falls between uniform x samples.
+    const xs=[...Array.from({length:401},(_,i)=>i*high/400),...Array.from({length:161},(_,i)=>mean+(i-80)*sd/20)].filter(x=>x>=0&&x<=high).sort((a,b)=>a-b);
+    const path=xs.map((x,i)=>`${i?'L':'M'}${X(x).toFixed(3)},${Y(pdf(x)).toFixed(3)}`).join(' ');
+    const bars=counts.map((n,i)=>`<rect x="${X(i*width)+1}" y="${Y(trials.length?n/trials.length/width:0)}" width="${(right-left)/bins-2}" height="${base-Y(trials.length?n/trials.length/width:0)}" class="sw-bell-bar"/>`).join('');
+    return `<svg viewBox="0 0 760 230" role="img" aria-label="${labels.chart||'Observed histogram and illustrative normal curve'}"><text x="${left}" y="16">${labels.density||'Density'}</text><rect x="${X(TARGET-tolerance)}" y="${top}" width="${X(TARGET+tolerance)-X(TARGET-tolerance)}" height="${base-top}" class="sw-window"/>${bars}${sd>0?`<path d="${path}" class="sw-bell-curve ${model.kind}"/>`:''}<line x1="${X(TARGET)}" x2="${X(TARGET)}" y1="${top}" y2="${base}" class="sw-target-line"/><text x="${X(TARGET)}" y="${top+12}" text-anchor="middle">${labels.target||'Target'} 1 s</text><path d="M${left},${top}V${base}H${right}" class="sw-axis" fill="none"/>${[0,.5,1].map(f=>`<text x="${left-8}" y="${Y(max*f)+4}" text-anchor="end">${(max*f).toFixed(1)}</text>`).join('')}${Array.from({length:5},(_,i)=>i*high/4).map(v=>`<text x="${X(v)}" y="205" text-anchor="middle">${v.toFixed(high>10?1:2)}</text>`).join('')}<text x="${right}" y="225" text-anchor="end">${labels.seconds||'Seconds'}</text></svg>`;
+  }
+  const api={TARGET,formatSeconds,summary,roundedBucket,chartBounds,recordLists,bellModel,bellGraphic};
   if(typeof module==='object'&&module.exports)module.exports=api;
   if(!global.document)return;
   const dual=(en,ja)=>`<span class="lang-en" lang="en">${en}</span><span class="lang-ja" lang="ja">${ja}</span>`;
@@ -43,6 +64,7 @@
         <div class="sw-chart-legend"><span class="sw-legend-within">${dual('Within window','範囲内')}</span><span class="sw-legend-outside">${dual('Outside window','範囲外')}</span></div>
         <div class="sw-chart" data-plot></div>
         <p class="sw-chart-note">${dual('Zoom with + / − or scroll over the chart. Hover, tap, or focus a dot to read its seconds. Edge triangles mark records outside the view. Zoom changes the view, not the success window or results.','＋ / − またはグラフ上のスクロールで拡大・縮小。点に触れるか、マウスやキーボードで選ぶと秒数を表示。表示範囲の外の記録は端の三角です。拡大しても、成功の範囲や記録は変わりません。')}</p>
+        <section class="sw-bell-panel"><h5>${dual('Your records and a bell curve','記録の形と、ベル曲線')}</h5><p class="sw-bell-terms">${dual('Normal distribution · illustrative fit','正規分布 <small>Normal distribution</small> · 参考の当てはめ')}</p><div class="sw-chart" data-bell></div><div class="sw-bell-legend"><span>${dual('Bars: observed density','棒：実測の密度')}</span><span>${dual('Line: illustrative normal curve','線：参考の正規曲線')}</span></div><p class="sw-bell-summary" data-bell-summary></p><p class="sw-chart-note" data-bell-note></p></section>
         <div class="sw-history-heading"><h5>${dual('Your records','自分の記録')}</h5><button type="button" data-clear>${dual('Clear trials','記録を消す')}</button></div>
         <div class="sw-records-grid"><section><h6>${dual('Top 10','トップ10')}</h6><p class="sw-records-note">${dual('Closest to 1 second. Ties: earlier attempt first.','1秒に近い順。同じずれなら、先の記録を優先。')}</p><ol class="sw-history sw-best" data-best aria-label="Top 10 records / トップ10"></ol></section><section><h6>${dual('Last 10','直近10回')}</h6><p class="sw-records-note">${dual('Newest first.','新しい記録から表示。')}</p><ol class="sw-history" data-history aria-label="Last 10 attempts / 直近10回"></ol></section></div>
         <p class="sw-model-note">${dual('X = your next stopping time. These are your observations, not a uniform or normal model.','X＝次に止めるまでの時間。これは自分の実測で、一様分布や正規分布を仮定していません。')}</p>
@@ -88,6 +110,10 @@
       q('[data-zoom-level]').textContent=`${Number(zoom.toPrecision(4))}×`;
       q('[data-zoom-in]').disabled=zoom>=10000;
       q('[data-zoom-out]').disabled=zoom<=.01;
+      const bell=bellModel(trials);
+      q('[data-bell]').innerHTML=bellGraphic(trials,tolerance,{chart:t('Recorded stopping times and an illustrative normal curve','停止時間の実測と参考の正規曲線'),density:t('Density','密度 / Density'),target:t('Target','目標'),seconds:t('Seconds','秒 / Seconds')});
+      q('[data-bell-summary]').textContent=bell.kind==='fitted'?t(`Fitted to ${bell.count} attempts · mean ${bell.mean.toFixed(6)} s · sample SD ${bell.sd.toFixed(6)} s`,`${bell.count}回の記録から当てはめ · 平均 ${bell.mean.toFixed(6)} 秒 · 標準偏差 ${bell.sd.toFixed(6)} 秒`):bell.kind==='reference'?t('Reference only: assumed mean 1 s and SD 0.1 s. After 5 attempts, the line uses your measured mean and sample SD.','最初は参考図：平均1秒・標準偏差0.1秒を仮定。5回記録すると、自分の平均と標本標準偏差で曲線を描きます。'):t('All recorded times are identical. A fitted bell curve needs nonzero spread.','記録がすべて同じ値です。ばらつきが0のため、ベル曲線は当てはめられません。');
+      q('[data-bell-note]').textContent=t('The line is an illustrative normal fit, not evidence that stopping times follow a normal distribution. Height is density, not probability. The shaded band marks 0.9–1.1 s. The observed share above is counted from your records, not this curve.','曲線は参考の正規モデルで、停止時間が正規分布に従う証拠ではありません。高さは密度で、確率ではありません。帯は0.9〜1.1秒。上の実測の割合は、この曲線ではなく記録を数えた値です。');
       paint();
     }
     q('[data-toggle]').addEventListener('click',()=>{
