@@ -30,7 +30,7 @@ export const glossary={
   standardError:['標準誤差','Standard error']
 };
 
-// Group ruby for compounds, with kana and okurigana outside the annotated kanji.
+// Pronunciations are validated as whole terms, then anchored to individual kanji.
 export const readings={
   measurement:'そくていせいど',randomVariable:'かくりつへんすう',
   pointProbability:[['1点','いってん'],'の',['確率','かくりつ']],
@@ -46,7 +46,22 @@ export const readings={
   central:[['中央','ちゅうおう'],'の',['区間','くかん'],['確率','かくりつ']],
   sampleMean:'ひょうほんへいきん',standardError:'ひょうじゅんごさ'
 };
-const ruby=(kanji,kana)=>`<ruby>${kanji}<rt>${kana}</rt></ruby>`;
+const characterReadings={
+  '測':'そく','定':'てい','精':'せい','度':'ど','確':'かく','率':'りつ',
+  '変':'へん','数':'すう','1':'いっ','点':'てん','区':'く','間':'かん','丸':'ま',
+  '連':'れん','続':'ぞく','分':'ぶん','布':'ぷ','密':'みつ','関':'かん',
+  '近':'きん','似':'じ','積':'せき','一':'いち','様':'よう','累':'るい',
+  '期':'き','待':'たい','値':'ち','散':'さん','標':'ひょう','準':'じゅん',
+  '偏':'へん','差':'さ','正':'せい','規':'き','平':'へい','均':'きん',
+  '化':'か','得':'とく','表':'ひょう','上':'うわ','側':'がわ','下':'した',
+  '中':'ちゅう','央':'おう','本':'ほん','誤':'ご','母':'ぼ','集':'しゅう','団':'だん'
+};
+const ruby=(kanji,kana)=>{
+  const characters=[...kanji];
+  const readings=characters.map(character=>characterReadings[character]);
+  if(readings.some(reading=>!reading)||readings.join('')!==kana)throw Error(`Check character-level furigana: ${kanji} / ${kana}`);
+  return characters.map((character,i)=>`<ruby>${character}<rt>${readings[i]}</rt></ruby>`).join('');
+};
 export function rubyTerm(key){
   const reading=readings[key];
   if(!reading)throw Error(`Missing furigana for statistical term: ${key}`);
@@ -134,8 +149,9 @@ section .stat-terms{position:absolute;left:70px;right:70px;bottom:48px;display:f
 section .stat-term{display:flex;flex-direction:column;gap:5px;max-width:380px}
 section .stat-term-ja{font-size:22px;font-weight:600;color:#334d59}
 section .stat-term-en{font-size:18px;font-weight:400;color:#687b84;letter-spacing:.015em}
-section ruby{ruby-position:over;ruby-align:space-around}
-section rt{font-size:.46em;font-weight:400;letter-spacing:.02em;color:inherit;line-height:1.2}
+section ruby{ruby-position:over;ruby-align:center}
+section rt{font-size:.38em;font-weight:400;letter-spacing:0;text-align:center;color:inherit;line-height:1.2}
+section h1 rt,section h2 rt,section h3 rt,section.book-divider .chapter rt,section.queue-story .queue-question rt{font-size:.28em}
 section .stat-term-ja{padding-top:12px}
 section .stat-term-ja rt{font-size:11px;color:#536b77}
 section.single-visual.has-stat-terms img{height:410px}

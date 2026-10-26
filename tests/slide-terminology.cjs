@@ -36,8 +36,29 @@ console.log(`Bilingual terminology: ${dictionary.size} consistent terms across a
   assert(rubyTerm('intervalProbability').includes('</ruby>の<ruby>'));
   const math='$$\n\\text{分散}=1\n$$',link='[標準化](https://example.com/分散)',image='![確率](images/分散.svg)';
   const result=annotateJapaneseTerms(`## 期待値\n\n${math}\n\n${link}\n\n${image}\n\n<div title="分散">分散</div>`);
-  assert(result.includes('## <ruby>期待値<rt>きたいち</rt></ruby>'));
+  assert(result.includes('## <ruby>期<rt>き</rt></ruby><ruby>待<rt>たい</rt></ruby><ruby>値<rt>ち</rt></ruby>'));
   assert(result.includes(math));assert(result.includes(link));assert(result.includes(image));
-  assert(result.includes('<div title="分散"><ruby>分散<rt>ぶんさん</rt></ruby></div>'));
+  assert(result.includes('<div title="分散"><ruby>分<rt>ぶん</rt></ruby><ruby>散<rt>さん</rt></ruby></div>'));
+  for(const slide of deck){
+    for(const match of slide.matchAll(/<ruby>([^<]+)<rt>([^<]+)<\/rt><\/ruby>/g))assert.equal([...match[1]].length,1,'Each reading is anchored to one character');
+  }
+  assert(style.includes('ruby-align:center'));
+  assert(!style.includes('ruby-align:space-around'));
+  assert(style.includes('section h1 rt,section h2 rt,section h3 rt'));
+  assert(style.includes('font-size:.28em'));
+  const pdfjs=require('../assets/vendor/pdfjs/pdf.min.js');
+  pdfjs.GlobalWorkerOptions.workerSrc=path.join(root,'assets/vendor/pdfjs/pdf.worker.min.js');
+  const pdf=await pdfjs.getDocument({data:new Uint8Array(fs.readFileSync(path.join(root,'materials/2026-yoh/week05/w5.pdf')))}).promise;
+  const text=(await(await pdf.getPage(34)).getTextContent()).items;
+  for(const [kanji,kana] of [['分','ぶん'],['散','さん'],['標','ひょう'],['準','じゅん'],['偏','へん'],['差','さ']]){
+    const base=text.find(item=>item.str===kanji&&item.height>25&&item.transform[5]>430);
+    assert(base,`Title character ${kanji} exists in the final PDF`);
+    const reading=text.find(item=>item.str===kana&&item.height>0&&item.height<12&&item.transform[5]>base.transform[5]);
+    assert(reading,`Title reading ${kana} exists above ${kanji}`);
+    assert(Math.abs((base.transform[4]+base.width/2)-(reading.transform[4]+reading.width/2))<0.2,`${kana} is centered above ${kanji}`);
+    assert(Math.abs(reading.height/base.height-0.28)<0.01,'Large-title readings use the smaller 28% size');
+  }
+  await pdf.destroy();
+  console.log('Final PDF: each title reading is centered above its kanji, with smaller 28% title text.');
   console.log('Book-style ruby: all readings supplied, okurigana preserved, and formulas, links and image paths protected.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
