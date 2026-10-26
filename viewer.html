@@ -8,7 +8,7 @@
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="icon" href="favicon.svg?v=20260927-b-mark-1" type="image/svg+xml">
   <link rel="stylesheet" href="assets/stats-styles.css?v=20261021-page-jump">
-  <link rel="stylesheet" href="assets/viewer-context.css?v=20261006-slide-swipe-1">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20261021-slide-notes-1">
   <link rel="stylesheet" href="assets/slide-challenge-guard.css?v=20261014-1">
 </head>
 <body class="viewer-page">
@@ -25,6 +25,7 @@
   <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
   <script src="assets/slide-challenge-guard.js?v=20261014-1"></script>
   <script src="assets/slide-browsing.js?v=20261021-page-jump"></script>
+  <script src="assets/slide-notes.js?v=20261021-1"></script>
   <script>
     const parameters = new URLSearchParams(location.search);
     const file = parameters.get('file') || '';
@@ -105,6 +106,7 @@
       canvasWrap.append(pageSurface);
       viewer.append(toolbar, canvasWrap);
       content.replaceChildren(viewer);
+      const narration=window.bindSlideNotes?.({file:path,after:viewer});
       try {
         if (!window.pdfjsLib) throw new Error('PDF renderer unavailable');
         window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'assets/vendor/pdfjs/pdf.worker.min.js?v=3.11.174';
@@ -151,12 +153,12 @@
                 continue;
               }
               if (!['http:', 'https:', 'mailto:'].includes(destination.protocol)) continue;
-              if (destination.hostname === 'yohman.github.io' && destination.pathname === '/26-2-StatsB/agenda.html') {
-                const courseAgenda = new URL('agenda.html', location.href);
-                courseAgenda.search = destination.search;
-                courseAgenda.hash = destination.hash;
-                if (new URLSearchParams(location.search).get('preview') === 'all') courseAgenda.searchParams.set('preview', 'all');
-                destination = courseAgenda;
+              if (destination.hostname === 'yohman.github.io' && /^\/26-2-StatsB\/(agenda|viewer)\.html$/.test(destination.pathname)) {
+                const coursePage = new URL(destination.pathname.split('/').pop(), location.href);
+                coursePage.search = destination.search;
+                coursePage.hash = destination.hash;
+                if (new URLSearchParams(location.search).get('preview') === 'all') coursePage.searchParams.set('preview', 'all');
+                destination = coursePage;
               }
               link.href = destination.href;
               link.target = '_blank';
@@ -199,6 +201,7 @@
             context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
             await page.render({ canvasContext: context, viewport }).promise;
             await renderLinks(page, viewport);
+            narration?.show(requestedPage);
             syncPageInput();
             previous.disabled = requestedPage === 1;
             next.disabled = requestedPage === pdf.numPages;
@@ -273,7 +276,7 @@
         showPdfFallback();
       }
     }
-    if (/^assets\/worksheet-previews\/w\d{2}\/index\.html$/.test(file)) {
+    if (/^assets\/worksheet-previews\/w\d{2}\/index\.html$/.test(file) || file === 'materials/2026-yoh/week05/normal-upper-tail-table.html') {
       const frame = document.createElement('iframe');
       frame.src = file + (file === 'assets/worksheet-previews/w04/index.html' ? '?v=20261019-latex' : '');
       frame.title = fullTitle;

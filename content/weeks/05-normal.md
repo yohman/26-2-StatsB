@@ -21,12 +21,15 @@ prepare_en: Review the difference between continuous and discrete variables.
 
 ## Textbook
 
-- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+- 第2章 第2節 5「連続確率分布」p.121–125・正規分布表まで (Chapter 2, Section 2.5: Continuous distributions, pp.121–125, through the normal table)
+- 第2章 第2節 6「確率分布の平均値と分散」p.129 (Chapter 2, Section 2.6: Expected value and variance, p.129)
 
 ## Materials
 
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pptx) {primary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf) {primary}
+- [Yoh's Week 5 lecture](materials/2026-yoh/week05/w5.pdf) {primary}
+- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pptx) {supplementary}
+- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf) {supplementary}
+- [標準正規分布表：上側確率 / Standard normal table: upper tail](materials/2026-yoh/week05/normal-upper-tail-table.html) {resource}
 - [AL用ワークシート](weeks/05-continuous-distributions-i/05_AL用ワークシート.xlsx) {worksheet}
 - [Yoh continuous-distributions lecture: density, CDF, and standard deviation](other material/2025 yoh/07 確率分布_2_連続確率分布/w7 CDF PDF SD.pdf) {yoh}
 - [Yoh continuous-distributions lecture: normal distribution](other material/2025 yoh/07 確率分布_2_連続確率分布/w7.pdf) {yoh}

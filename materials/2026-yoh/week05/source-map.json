@@ -1,0 +1,683 @@
+{
+  "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
+  "pacing": "52 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Keep consequential visual reveals and standalone core formulas. Bilingual narration follows the revised pages.",
+  "decisions": [
+    {
+      "retain": "Separate race media and stopwatch beats; density then shaded area; coarse then fine rectangles; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
+    },
+    {
+      "combine": "Measurement precision; uniform setup; arithmetic steps; mean and variance calculations; worked solutions alongside their charts"
+    },
+    {
+      "defer": "Chi-square / goodness-of-fit / Pearson / Koala, outside official Week5 scope"
+    },
+    {
+      "appendix": "Individual values versus sample means and standardization conditions, textbook p.123"
+    }
+  ],
+  "slides": [
+    {
+      "slide": 1,
+      "title": "パリ2024 · 男子100m決勝",
+      "layout": "race-media race-video",
+      "sourceBeats": [],
+      "sources": [
+        "https://www.youtube.com/watch?v=GHw-eTs4Yes"
+      ]
+    },
+    {
+      "slide": 2,
+      "title": "この写真だけで、分かる？",
+      "layout": "race-media race-finish",
+      "sourceBeats": [],
+      "sources": [
+        "https://worldathletics.org/competitions/olympic-games/the-xxxiii-olympic-games-7153115/news/article/paris-2024-olympics-report-men-100m"
+      ]
+    },
+    {
+      "slide": 3,
+      "title": "0.005秒を、見る。",
+      "layout": "race-media race-scan",
+      "sourceBeats": [],
+      "sources": [
+        "https://www.hodinkee.com/articles/olympics-2024-mens-100m-photo-finish"
+      ]
+    },
+    {
+      "slide": 4,
+      "title": "今度は、自分で1秒。",
+      "layout": "watch-bridge",
+      "sourceBeats": [],
+      "sources": []
+    },
+    {
+      "slide": 5,
+      "title": "身長、何cmまで測る？",
+      "layout": "precision",
+      "yoh75": "2–12",
+      "yoh109": "2–13",
+      "sourceBeats": [
+        12,
+        13,
+        14,
+        15
+      ]
+    },
+    {
+      "slide": 6,
+      "title": "1点の確率",
+      "layout": "hero-math",
+      "yoh75": "2–12",
+      "yoh109": "2–13",
+      "sourceBeats": [
+        16
+      ]
+    },
+    {
+      "slide": 7,
+      "title": "「160cmと記録」は、区間の話",
+      "layout": "explain",
+      "yoh75": "2–12",
+      "yoh109": "2–13",
+      "sourceBeats": [
+        17,
+        18,
+        19,
+        20
+      ]
+    },
+    {
+      "slide": 8,
+      "title": "教科書 · 第2章 第2節",
+      "layout": "book-divider",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        22
+      ]
+    },
+    {
+      "slide": 9,
+      "title": "確率密度 $f(x)$",
+      "layout": "single-visual",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        23
+      ]
+    },
+    {
+      "slide": 10,
+      "title": "区間に入る確率は、この面積",
+      "layout": "single-visual",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        25
+      ]
+    },
+    {
+      "slide": 11,
+      "title": "区間の確率",
+      "layout": "hero-math long",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        26
+      ]
+    },
+    {
+      "slide": 12,
+      "title": "大きな長方形で近似する",
+      "layout": "single-visual",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        29
+      ]
+    },
+    {
+      "slide": 13,
+      "title": "さらに、細かく",
+      "layout": "single-visual",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        31
+      ]
+    },
+    {
+      "slide": 14,
+      "title": "小さな面積を、全部足す",
+      "layout": "explain",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        32,
+        33,
+        34,
+        35
+      ]
+    },
+    {
+      "slide": 15,
+      "title": "ラーメン、あと何分？",
+      "layout": "model-visual",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        36,
+        37,
+        38,
+        39
+      ]
+    },
+    {
+      "slide": 16,
+      "title": "チャレンジ①　ラーメンの待ち時間",
+      "layout": "challenge",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        40
+      ]
+    },
+    {
+      "slide": 17,
+      "title": "答え合わせ① · 面積の計算",
+      "layout": "calculation answer",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        41,
+        42,
+        43
+      ]
+    },
+    {
+      "slide": 18,
+      "title": "この面積が、25％",
+      "layout": "visual-link",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        44,
+        45
+      ]
+    },
+    {
+      "slide": 19,
+      "title": "累積分布関数",
+      "layout": "hero-math long",
+      "official": "6–10",
+      "textbook": "121–122",
+      "yoh75": "14–17,25–30",
+      "yoh109": "14–17,25–30",
+      "sourceBeats": [
+        47
+      ]
+    },
+    {
+      "slide": 20,
+      "title": "$f(x)$：cまでの面積",
+      "layout": "single-visual",
+      "official": "6–10",
+      "textbook": "121–122",
+      "yoh75": "14–17,25–30",
+      "yoh109": "14–17,25–30",
+      "sourceBeats": [
+        48
+      ]
+    },
+    {
+      "slide": 21,
+      "title": "$F(c)$：その面積を、高さにする",
+      "layout": "single-visual",
+      "official": "6–10",
+      "textbook": "121–122",
+      "yoh75": "14–17,25–30",
+      "yoh109": "14–17,25–30",
+      "sourceBeats": [
+        49
+      ]
+    },
+    {
+      "slide": 22,
+      "title": "別の店では、20〜60分なら？",
+      "layout": "explain",
+      "official": "6–10",
+      "textbook": "121–122",
+      "yoh75": "14–17,25–30",
+      "yoh109": "14–17,25–30",
+      "sourceBeats": [
+        52,
+        53,
+        54,
+        55,
+        56,
+        57
+      ]
+    },
+    {
+      "slide": 23,
+      "title": "累積確率の差で、80％",
+      "layout": "worked",
+      "official": "6–10",
+      "textbook": "121–122",
+      "yoh75": "14–17,25–30",
+      "yoh109": "14–17,25–30",
+      "sourceBeats": [
+        58,
+        59,
+        60,
+        61
+      ]
+    },
+    {
+      "slide": 24,
+      "title": "教科書 · 第2章 第2節",
+      "layout": "book-divider",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        62
+      ]
+    },
+    {
+      "slide": 25,
+      "title": "連続変数の期待値",
+      "layout": "hero-math",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        65
+      ]
+    },
+    {
+      "slide": 26,
+      "title": "配達ロボットの期待時間は、6分",
+      "layout": "worked",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        68,
+        69,
+        70,
+        71,
+        72,
+        73
+      ]
+    },
+    {
+      "slide": 27,
+      "title": "分散",
+      "layout": "hero-math long",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        75
+      ]
+    },
+    {
+      "slide": 28,
+      "title": "分散から、標準偏差へ",
+      "layout": "calculation",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        77,
+        78,
+        79,
+        80,
+        81,
+        82
+      ]
+    },
+    {
+      "slide": 29,
+      "title": "中心と、ばらつきを見る",
+      "layout": "visual-link",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        83,
+        84
+      ]
+    },
+    {
+      "slide": 30,
+      "title": "教科書 · 第2章 第2節",
+      "layout": "book-divider",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        85
+      ]
+    },
+    {
+      "slide": 31,
+      "title": "正規分布：中心と、ばらつき",
+      "layout": "model-visual",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        86,
+        87,
+        88,
+        89
+      ]
+    },
+    {
+      "slide": 32,
+      "title": "標準偏差が小さいと、狭い山",
+      "layout": "single-visual",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        90
+      ]
+    },
+    {
+      "slide": 33,
+      "title": "標準偏差が大きいと、広い山",
+      "layout": "single-visual",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        91
+      ]
+    },
+    {
+      "slide": 34,
+      "title": "正規分布の密度",
+      "layout": "hero-math long",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        92
+      ]
+    },
+    {
+      "slide": 35,
+      "title": "標準化の公式",
+      "layout": "hero-math long",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        95
+      ]
+    },
+    {
+      "slide": 36,
+      "title": "60点は、標準偏差1個ぶん上",
+      "layout": "worked",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108
+      ]
+    },
+    {
+      "slide": 37,
+      "title": "教科書 · 第2章 第2節",
+      "layout": "book-divider",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        109
+      ]
+    },
+    {
+      "slide": 38,
+      "title": "この表は、右側の面積",
+      "layout": "model-visual",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        110,
+        111,
+        112
+      ]
+    },
+    {
+      "slide": 39,
+      "title": "まず、1.9の行",
+      "layout": "lookup stage-1",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        114
+      ]
+    },
+    {
+      "slide": 40,
+      "title": "次に、0.06の列",
+      "layout": "lookup stage-2",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        115
+      ]
+    },
+    {
+      "slide": 41,
+      "title": "交点は、0.02500",
+      "layout": "lookup stage-3",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        116
+      ]
+    },
+    {
+      "slide": 42,
+      "title": "1.96より右は、2.5％",
+      "layout": "worked",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        117,
+        118
+      ]
+    },
+    {
+      "slide": 43,
+      "title": "−1.96より左も、2.5％",
+      "layout": "worked",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        119,
+        120,
+        121
+      ]
+    },
+    {
+      "slide": 44,
+      "title": "＋1.96より左は、97.5％",
+      "layout": "worked",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        122,
+        123,
+        124,
+        125,
+        126
+      ]
+    },
+    {
+      "slide": 45,
+      "title": "真ん中は、両方の尾を引く",
+      "layout": "worked",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        127,
+        128,
+        129,
+        130,
+        131
+      ]
+    },
+    {
+      "slide": 46,
+      "title": "チャレンジ②　70点以上は、何％？",
+      "layout": "challenge",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        132
+      ]
+    },
+    {
+      "slide": 47,
+      "title": "答え合わせ② · 70点以上",
+      "layout": "worked",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        133,
+        134,
+        135,
+        136,
+        137
+      ]
+    },
+    {
+      "slide": 48,
+      "title": "チャレンジ③　30点から70点なら？",
+      "layout": "challenge",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        138
+      ]
+    },
+    {
+      "slide": 49,
+      "title": "答え合わせ③ · 30〜70点",
+      "layout": "worked",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        139,
+        140,
+        141,
+        142
+      ]
+    },
+    {
+      "slide": 50,
+      "title": "確率は、面積。",
+      "layout": "statement",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        143,
+        144
+      ]
+    },
+    {
+      "slide": 51,
+      "title": "補足：1人の点数と、n人の平均",
+      "layout": "calculation",
+      "textbook": "123",
+      "yoh75": "44–50",
+      "yoh109": "46–51",
+      "sourceBeats": [
+        145,
+        146,
+        147,
+        148,
+        149
+      ]
+    },
+    {
+      "slide": 52,
+      "title": "標準化だけでは、形は変わらない。",
+      "layout": "statement",
+      "textbook": "123",
+      "yoh75": "44–50",
+      "yoh109": "46–51",
+      "sourceBeats": [
+        150,
+        151
+      ]
+    }
+  ]
+}

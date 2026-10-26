@@ -1,0 +1,20 @@
+import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
+import math from '../../../assets/week5-math.js';
+import {createWeek5CompactStory,compactStyle} from './compact-week05.mjs';
+const here=dirname(fileURLToPath(import.meta.url)),root=resolve(here,'../../..');
+mkdirSync(resolve(here,'images'),{recursive:true});
+for(const icon of ['robot','goat'])copyFileSync(resolve(here,`../week04/images/${icon}.svg`),resolve(here,`images/${icon}.svg`));
+const course='https://yohman.github.io/26-2-StatsB/';
+const tryIt=id=>`[やってみよう！](${course}agenda.html?p&activity=w5-${id}#week-05)`;
+const tableLink=`[標準正規分布表を開く](${course}viewer.html?${new URLSearchParams({p:'',file:'materials/2026-yoh/week05/normal-upper-tail-table.html',title:'標準正規分布表：上側確率',week:'W05',return:'agenda.html?p#week-05'})})`;
+const fig=(id,config)=>{writeFileSync(resolve(here,`images/${id}.svg`),math.chart(config));return `![width:1030px](images/${id}.svg)`;};
+const normal=(id,lo,hi,options={})=>fig(id,{min:-4,max:4,pdf:x=>math.normalPdf(x),lo,hi,mean:0,ticks:[-4,-2,0,2,4],title:'標準正規分布',xlabel:'z',...options});
+const {slides,mapping,notes}=createWeek5CompactStory({fig,normal,tryIt,tableLink});
+writeFileSync(resolve(here,'w5.notes.json'),JSON.stringify(notes,null,2)+'\n');
+writeFileSync(resolve(here,'w5.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 5'\n---\n\n${compactStyle}\n\n${slides.join('\n\n---\n\n')}\n`);
+writeFileSync(resolve(here,'source-map.json'),JSON.stringify({official:'materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf',pacing:'52 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Keep consequential visual reveals and standalone core formulas. Bilingual narration follows the revised pages.',decisions:[{retain:'Separate race media and stopwatch beats; density then shaded area; coarse then fine rectangles; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers'},{combine:'Measurement precision; uniform setup; arithmetic steps; mean and variance calculations; worked solutions alongside their charts'},{defer:'Chi-square / goodness-of-fit / Pearson / Koala, outside official Week5 scope'},{appendix:'Individual values versus sample means and standardization conditions, textbook p.123'}],slides:mapping},null,2));
+// The shared table and explorations remain unchanged by this presentation-only revision.
+if(!readFileSync(resolve(here,'normal-upper-tail-table.html'),'utf8').includes('0.02500'))throw Error('Missing normal table');
+console.log(`Week 5: ${slides.length} story beats; ${mapping.filter(s=>s.layout.includes('hero-math')).length} single-line formula slides; race-to-stopwatch opening.`);

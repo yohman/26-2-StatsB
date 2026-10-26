@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "deck": "materials/2026-yoh/week05/w5.pdf",
+  "slides": [
+    {
+      "page": 1,
+      "title": "パリ2024 · 男子100m決勝",
+      "ja": "今日は、まずこのレースを見よう。最後の瞬間、誰が勝ったと思う？ 動画を止めて予想してもらい、次の写真へ進みます。出典：日本テレビのパリ2024男子100m決勝動画。https://www.youtube.com/watch?v=GHw-eTs4Yes",
+      "en": "Watch the race first. Who do you think won? Pause at the finish and ask for predictions before showing the photograph. Source: Nippon TV's Paris 2024 men's 100m final video. https://www.youtube.com/watch?v=GHw-eTs4Yes",
+      "sources": [
+        "https://www.youtube.com/watch?v=GHw-eTs4Yes"
+      ]
+    },
+    {
+      "page": 2,
+      "title": "この写真だけで、分かる？",
+      "ja": "この瞬間の写真だけなら、誰が先に到着したように見える？ 判定するのは頭や足ではなく、胴体がフィニッシュラインに達した順番です。次に、判定用の画像を見よう。写真：Dan Vernon / World Athletics。https://worldathletics.org/competitions/olympic-games/the-xxxiii-olympic-games-7153115/news/article/paris-2024-olympics-report-men-100m",
+      "en": "Who looks first in this ordinary photograph? The finish is judged by the torso reaching the line, rather than the head or foot. Next, show the image used for the decision. Photo: Dan Vernon / World Athletics. https://worldathletics.org/competitions/olympic-games/the-xxxiii-olympic-games-7153115/news/article/paris-2024-olympics-report-men-100m",
+      "sources": [
+        "https://worldathletics.org/competitions/olympic-games/the-xxxiii-olympic-games-7153115/news/article/paris-2024-olympics-report-men-100m"
+      ]
+    },
+    {
+      "page": 3,
+      "title": "0.005秒を、見る。",
+      "ja": "これは普通の一瞬の写真ではありません。フィニッシュラインを細く連続して撮り、時間の順につなげた画像です。赤い線で胴体を判定します。公式表示は2人とも9.79秒ですが、細かく読むとライルズ9.784秒、トンプソン9.789秒。差は0.005秒です。陸上の公式タイムには独自の記録規則があり、普通の四捨五入の例には使いません。投影用に判定領域を大きく表示しています。クリックで全画像と解説を開けます。画像提供：OMEGA。https://www.hodinkee.com/articles/olympics-2024-mens-100m-photo-finish",
+      "en": "This scan joins successive narrow views of the finish line across time. The red lines mark the athletes' torsos. Both official times read 9.79 seconds, while the finer readings are 9.784 for Lyles and 9.789 for Thompson, a gap of 0.005 seconds. Athletics has its own time-recording rules, so do not use those official times as an ordinary rounding example. The slide enlarges the judging area. Click to see the complete image and explanation. Photo courtesy OMEGA. https://www.hodinkee.com/articles/olympics-2024-mens-100m-photo-finish",
+      "sources": [
+        "https://www.hodinkee.com/articles/olympics-2024-mens-100m-photo-finish"
+      ]
+    },
+    {
+      "page": 4,
+      "title": "今度は、自分で1秒。",
+      "ja": "では、今度は自分で測ろう。スタートとストップは同じボタン。1.000000秒ぴったりを狙って、何回か止めてみてください。表示が細かくなるほど、ぴったり一致は難しく見えるよね。そこで「0.9秒から1.1秒までなら？」と条件を変えます。この範囲なら、どれだけ入ったかな。表示の小数6桁は、マイクロ秒の測定精度を保証しません。これはブラウザの時計を使う授業用の再現で、OMEGA公式製品ではありません。",
+      "en": "Now try timing one second yourself. Use the same button to start and stop. Aim for 1.000000 seconds several times. More displayed digits make an exact match look harder. Then ask how many results fall between 0.9 and 1.1 seconds. An interval gives us a useful condition to count. Six displayed decimal places do not guarantee microsecond accuracy. This classroom recreation uses the browser clock and is not an official OMEGA product.",
+      "sources": []
+    },
+    {
+      "page": 5,
+      "title": "身長、何cmまで測る？",
+      "ja": "ロボットの身長は160cm。でも、小数第1位、第2位と測ると、もっと細かい値が見えてくる。「ぴったり160」と「丸めて160」は同じ条件かな？",
+      "en": "The robot is 160 centimetres tall. With more decimal places, we can measure more precisely. Is exactly 160 the same condition as a rounded measurement of 160?"
+    },
+    {
+      "page": 6,
+      "title": "1点の確率",
+      "ja": "連続モデルでは、ぴったり一つの値を取る確率は0になります。少し変に聞こえるよね。次で、どういう意味かを確かめよう。",
+      "en": "In a continuous model, the probability of one exact value is zero. That sounds strange, so let’s unpack what it means."
+    },
+    {
+      "page": 7,
+      "title": "「160cmと記録」は、区間の話",
+      "ja": "160cmの人が存在しないという意味ではありません。一点は幅0なので確率も0。四捨五入して160cmになる区間には幅があり、この付近に密度があれば正の確率があります。",
+      "en": "A zero point probability does not mean nobody can have that height. An exact point has zero width. A rounded measurement covers an interval, with positive probability where the density is positive."
+    },
+    {
+      "page": 8,
+      "title": "教科書 · 第2章 第2節",
+      "ja": "教科書の121〜122ページを開いてください。まずは、連続する値の確率を、面積で表す考え方です。",
+      "en": "Open the textbook to pages 121–122. We are starting with how area represents probability for a continuous variable."
+    },
+    {
+      "page": 9,
+      "title": "確率密度 $f(x)$",
+      "ja": "この山は確率密度です。同じ幅で比べれば、高いところほど結果を含みやすい。ただし、縦の高さそのものを確率とは読みません。",
+      "en": "This is probability density. For equal-width intervals, higher density means more probability. The curve’s height alone is not a probability."
+    },
+    {
+      "page": 10,
+      "title": "区間に入る確率は、この面積",
+      "ja": "知りたい範囲に色を付けました。この色の付いた面積が、その範囲に結果が入る確率です。",
+      "en": "We have shaded the interval we care about. Its area under the curve gives the probability of an outcome in that interval."
+    },
+    {
+      "page": 11,
+      "title": "区間の確率",
+      "ja": "左は「Xがaからbの間に入る確率」。右は「aからbまで、密度の下の面積を求める」。同じことを二つの書き方で表しています。",
+      "en": "The left side asks for the probability that X lies between a and b. The right side calculates the area under the density over that interval."
+    },
+    {
+      "page": 12,
+      "title": "大きな長方形で近似する",
+      "ja": "まず、大きな長方形を4個並べてみます。線の下の面積に、だいたい合わせたい。角のところに、ずれが見えるよね。",
+      "en": "Start with four large rectangles. They give us a way to approximate the area. Notice the gaps and overhangs along the line."
+    },
+    {
+      "page": 13,
+      "title": "さらに、細かく",
+      "ja": "4個から64個へ、長方形を細かくしました。段差が小さくなり、線の下の面積に近づきます。幅をさらに小さくしていった先が、積分です。",
+      "en": "We have gone from four rectangles to sixty-four. The smaller steps follow the line more closely. Taking the widths towards zero leads to the integral."
+    },
+    {
+      "page": 14,
+      "title": "小さな面積を、全部足す",
+      "ja": "一つの面積は、高さかける幅。Σはそれを全部足す記号です。欲しい区間だけなら、その区間の確率。取りうる値を全部含めれば、合計は1になります。",
+      "en": "Each little area is height times width. The summation adds them. Integrating a chosen interval gives its probability, while integrating over every possible value gives total probability 1."
+    },
+    {
+      "page": 15,
+      "title": "ラーメン、あと何分？",
+      "ja": "実際のお店の調査ではなく、0〜20分の一様分布を仮定します。全体の幅20に高さ1/20を掛けて面積は1。区間の確率を出すには、その区間の幅を掛けよう。",
+      "en": "Assume a uniform wait from zero to twenty minutes for this classroom model. Width twenty times height one twentieth gives total area 1. An interval probability needs that interval’s width."
+    },
+    {
+      "page": 16,
+      "title": "チャレンジ①　ラーメンの待ち時間",
+      "ja": "ここで5分、自分で考えてみよう。5分から10分までの範囲を図に描いて、その部分の横幅と高さを確認してください。答え合わせは次のスライドからです。",
+      "en": "Take five minutes to work this out. Sketch the interval from 5 to 10 minutes and identify its width and height. We will check the answer afterwards."
+    },
+    {
+      "page": 17,
+      "title": "答え合わせ① · 面積の計算",
+      "ja": "まず区間の確率の公式を書き、下端5、上端10、密度1/20を入れます。横幅5に高さ1/20を掛けて25％。式の各数字を、自分の図と対応させてください。",
+      "en": "Start with the interval-probability formula, then insert bounds five and ten and density one twentieth. Width five times height one twentieth gives 25 percent. Match each value to your sketch."
+    },
+    {
+      "page": 18,
+      "title": "この面積が、25％",
+      "ja": "全体20分のうち、同じ高さの5分ぶんだから4分の1です。やってみようで区間を動かす前に、広げたら面積がどう変わるか予想してみよう。",
+      "en": "Five of the twenty minutes at the same height give one quarter of the area. Predict what will happen when you widen the interval, then test it interactively."
+    },
+    {
+      "page": 19,
+      "title": "累積分布関数",
+      "ja": "F(c)は「cまで」の累積確率です。密度の左側からcまでの面積を集めます。小さいfが密度、大きいFが累積を表すことに注意しよう。",
+      "en": "F(c) accumulates probability up to c. It adds the area under the density from the far left through c. Lowercase f denotes density, and uppercase F denotes cumulative probability."
+    },
+    {
+      "page": 20,
+      "title": "$f(x)$：cまでの面積",
+      "ja": "ここからは、右上がりの密度を持つ別のモデルです。cを10にしたとき、左側の色の付いた面積に注目してください。先ほどの一様分布とは形が違います。",
+      "en": "We are switching to a different model with increasing density. Look at the shaded area up to c = 10. This is no longer the uniform model."
+    },
+    {
+      "page": 21,
+      "title": "$F(c)$：その面積を、高さにする",
+      "ja": "前の密度の色の面積が、こちらでは高さ0.25として現れます。cを右へ動かせば、足した面積は減りません。Fは0から1へ累積していきます。",
+      "en": "The shaded density area now appears as a height of 0.25. Moving c right can only add area or leave it unchanged. The CDF accumulates from 0 towards 1."
+    },
+    {
+      "page": 22,
+      "title": "別の店では、20〜60分なら？",
+      "ja": "ここからは別のお店の、新しい仮定です。60分までの90％には、20分までの10％も入っています。欲しい区間だけを取り出すには、どうすればよいかな？",
+      "en": "These are new assumptions for another restaurant. The ninety percent up to sixty minutes already includes the ten percent up to twenty. How can we isolate the interval between them?"
+    },
+    {
+      "page": 23,
+      "title": "累積確率の差で、80％",
+      "ja": "大きい累積から、小さい累積を引くと80％。図は、この累積の値に合う密度の一例です。やってみようでは、同じ確率がfでは面積、Fでは高さになる対応を見よう。",
+      "en": "Subtract the earlier cumulative probability from the later one to get eighty percent. This chart shows one compatible density. Explore how probability appears as area under f and height on F."
+    },
+    {
+      "page": 24,
+      "title": "教科書 · 第2章 第2節",
+      "ja": "教科書129ページの、期待値と分散につなげます。分布が分かったら、今度は「中心はどこ？」「どれくらい散らばる？」です。",
+      "en": "Turn to page 129 for expectation and variance. Once we have a distribution, we can ask about its centre and how spread out it is."
+    },
+    {
+      "page": 25,
+      "title": "連続変数の期待値",
+      "ja": "くじやサイコロでは「値かける確率」を足しました。連続でも同じです。小さな幅の確率f(x)dxに値xを掛け、全体で足したものが期待値です。",
+      "en": "For a lottery or die roll, we added value times probability. The continuous version weights each small probability contribution f(x)dx by x and accumulates across the distribution."
+    },
+    {
+      "page": 26,
+      "title": "配達ロボットの期待時間は、6分",
+      "ja": "ロボットは0〜12分で一様に到着すると仮定します。期待値の公式に密度1/12を入れ、上端と下端で計算すると6分。図のつり合う中心です。毎回6分で来るという約束ではありません。",
+      "en": "Assume a uniform delivery time from zero to twelve minutes. Insert density one twelfth into the expectation formula and evaluate at the endpoints to get six minutes, the balance point on the chart."
+    },
+    {
+      "page": 27,
+      "title": "分散",
+      "ja": "同じ期待時間でも、毎回ほぼ同じか、大きく変わるかでは違うよね。平均との差を二乗して、確率で重みを付けて足す。それが分散です。",
+      "en": "The same expected wait can come with very different variability. Variance weights the squared distance from the mean by probability and adds those contributions."
+    },
+    {
+      "page": 28,
+      "title": "分散から、標準偏差へ",
+      "ja": "中心6からのずれを二乗して積分します。上端と下端を入れると、216から−216を引いて36で割るので12。分散の単位は分の二乗です。平方根を取ると標準偏差約3.46分になります。",
+      "en": "Integrate squared deviations from six. The endpoint calculation is (216 − (−216))/36 = 12, in minutes squared. Taking the square root gives a standard deviation of about 3.46 minutes."
+    },
+    {
+      "page": 29,
+      "title": "中心と、ばらつきを見る",
+      "ja": "中心は6分、色はそこから標準偏差一つぶんの範囲です。色の面積が分散12を表すわけではありません。配達時間の幅を変えて、中心とばらつきがどう変わるか確かめよう。",
+      "en": "The centre is six minutes, and the shading marks one standard deviation each way. Its area is not the variance. Explore how changing the delivery window changes the mean and spread."
+    },
+    {
+      "page": 30,
+      "title": "教科書 · 第2章 第2節",
+      "ja": "教科書122〜123ページ、正規分布に進みます。面積で確率を考えるルールは、そのままです。今度は山の形が決まっています。",
+      "en": "Turn to pages 122–123 for the normal distribution. Probability still means area. We are now using a particular family of bell-shaped densities."
+    },
+    {
+      "page": 31,
+      "title": "正規分布：中心と、ばらつき",
+      "ja": "左右対称の釣鐘型です。Nの最初の数が平均μ、二つ目が分散σ²。この書き方で二つ目を標準偏差と間違えないようにしよう。",
+      "en": "This bell is symmetric. In N(μ,σ²), the first parameter is the mean and the second is the variance. Do not read the second parameter as the standard deviation."
+    },
+    {
+      "page": 32,
+      "title": "標準偏差が小さいと、狭い山",
+      "ja": "標準偏差が小さいと、平均付近にぎゅっと集まります。全体の面積は1なので、狭くなると山は高くなります。",
+      "en": "A smaller standard deviation concentrates probability close to the mean. Since total area stays 1, the narrower bell is taller."
+    },
+    {
+      "page": 33,
+      "title": "標準偏差が大きいと、広い山",
+      "ja": "標準偏差が大きいと、広く散らばるので山は低くなります。直前と軸の目盛りは同じ。高さだけでなく、幅も見比べてください。",
+      "en": "A larger standard deviation spreads probability out, making the bell lower. Both charts use the same scales, so compare width as well as height."
+    },
+    {
+      "page": 34,
+      "title": "正規分布の密度",
+      "ja": "この式が、さっきの山の形を作っています。今日はこの積分を手で解くのではなく、標準化して表を使います。ここに出てくるπは円周率です。",
+      "en": "This density formula generates the bell shape. Today we will use standardization and a table to find areas. The π here is the circle constant."
+    },
+    {
+      "page": 35,
+      "title": "標準化の公式",
+      "ja": "毎回あの密度を積分する代わりに、中心を0、標準偏差を1にそろえます。平均との差を標準偏差で割ると「中心から何個ぶん？」という位置になります。もとが正規なら、Zは標準正規分布です。",
+      "en": "Instead of integrating each normal density afresh, put its centre at zero and its standard deviation at one. The formula measures distance from the mean in standard deviation units. Normal X gives standard normal Z."
+    },
+    {
+      "page": 36,
+      "title": "60点は、標準偏差1個ぶん上",
+      "ja": "授業用に平均50、標準偏差10の正規モデルを考えます。60点を標準化するとz=1。これは100％ではなく、標準偏差一つぶん上という位置です。平均や標準偏差を変えて、同じ60点を比べてみよう。",
+      "en": "For a hypothetical normal score model with mean fifty and standard deviation ten, a score of sixty gives z = 1. That describes location, not 100 percent probability. Explore how the same score changes meaning under different parameters."
+    },
+    {
+      "page": 37,
+      "title": "教科書 · 第2章 第2節",
+      "ja": "教科書124〜125ページの表につなげます。表を使う前に、表の数字がどの面積なのかを必ず確認しよう。",
+      "en": "Turn to pages 124–125 for the normal table. Before reading any number, identify which area the table reports."
+    },
+    {
+      "page": 38,
+      "title": "この表は、右側の面積",
+      "ja": "使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。",
+      "en": "Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first."
+    },
+    {
+      "page": 39,
+      "title": "まず、1.9の行",
+      "ja": "z=1.96を探します。まず1.9の行。小数第1位までの部分で、行を決めてください。",
+      "en": "Locate z = 1.96. First use 1.9 to choose the row. Keep your finger on that row."
+    },
+    {
+      "page": 40,
+      "title": "次に、0.06の列",
+      "ja": "次に0.06の列。1.9足す0.06で1.96になります。行を押さえたまま、列との交点を見ます。",
+      "en": "Next find column 0.06. Adding 1.9 and 0.06 gives 1.96. Follow the row to its intersection with that column."
+    },
+    {
+      "page": 41,
+      "title": "交点は、0.02500",
+      "ja": "交点は0.02500。これはzの値ではなく、右側にある面積の大きさです。",
+      "en": "The intersection reads 0.02500. That number is the right-tail probability, rather than another z-score."
+    },
+    {
+      "page": 42,
+      "title": "1.96より右は、2.5％",
+      "ja": "行1.9と列0.06の交点は0.02500。表の数字は右の尾の面積で、100を掛けると2.5％です。どこの確率か、図を指さして説明してみよう。",
+      "en": "Row 1.9 and column 0.06 meet at 0.02500. That is the right-tail area, or 2.5 percent. Point to the region your answer describes."
+    },
+    {
+      "page": 43,
+      "title": "−1.96より左も、2.5％",
+      "ja": "マイナス1.96より左なら、左右対称を使います。右の1.96より先と同じ面積なので2.5％。マイナスの位置でも、確率がマイナスにはなりません。",
+      "en": "Use symmetry for the region below negative 1.96. It matches the right tail above positive 1.96, so its probability is also 2.5 percent."
+    },
+    {
+      "page": 44,
+      "title": "＋1.96より左は、97.5％",
+      "ja": "今度はプラス1.96より左の全部。全体1から、小さい右の尾を引きます。答えが大きい確率になっていることを、図の色の広さでも確認しよう。",
+      "en": "For everything below positive 1.96, subtract the small right tail from 1. The large shaded region confirms why the answer is 97.5 percent."
+    },
+    {
+      "page": 45,
+      "title": "真ん中は、両方の尾を引く",
+      "ja": "−1から＋1の中央は、左右の尾を二回引きます。この表なら約68.27％。教科書の丸め値で68.28％になるのは矛盾ではありません。やってみようで右、左、真ん中を切り替えてみよう。",
+      "en": "For the central interval from negative one to positive one, remove both tails. Our table gives about 68.27 percent. The textbook’s rounding gives 68.28 percent. Explore the different shaded regions."
+    },
+    {
+      "page": 46,
+      "title": "チャレンジ②　70点以上は、何％？",
+      "ja": "ここで5分、自分で解いてみよう。N(50,100)の二つ目の数は何だった？　70点の位置を標準化して、欲しい側を図に描いてください。",
+      "en": "Take five minutes on your own. Recall what the second parameter in N(50,100) means. Standardize seventy and shade the side the question asks for."
+    },
+    {
+      "page": 47,
+      "title": "答え合わせ② · 70点以上",
+      "ja": "分散100の平方根が標準偏差10です。70点を標準化すると2。表の2.0の行、0.00の列を読むと0.02275なので、右側の確率は2.275％です。",
+      "en": "The standard deviation is the square root of one hundred. Standardizing seventy gives z = 2. Read row 2.0 and column 0.00 to get 0.02275, or 2.275 percent."
+    },
+    {
+      "page": 48,
+      "title": "チャレンジ③　30点から70点なら？",
+      "ja": "もう一問、5分で考えてみよう。同じ点数のモデルで、30点から70点までです。両端を標準化して、どの面積が欲しいかを先に決めてください。",
+      "en": "Take five minutes for the interval from thirty to seventy under the same score model. Standardize both boundaries and sketch the required area before calculating."
+    },
+    {
+      "page": 49,
+      "title": "答え合わせ③ · 30〜70点",
+      "ja": "両端を標準化すると−2と＋2です。全体1から、先ほどの尾0.02275を二回引いて95.45％。式の引き算が、図のどの部分に対応するかを説明してみよう。",
+      "en": "Standardize the two boundaries to negative two and positive two. Subtract the previous tail probability twice from 1 to get 95.45 percent. Match the subtraction to the chart."
+    },
+    {
+      "page": 50,
+      "title": "確率は、面積。",
+      "ja": "欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。",
+      "en": "Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks."
+    },
+    {
+      "page": 51,
+      "title": "補足：1人の点数と、n人の平均",
+      "ja": "補足です。独立なn人の平均は、1人の値よりばらつきが小さく、標準偏差はσ/√n。問題が個人の値なのか、標本平均なのかを確認しよう。正規母集団なら独立な標本の平均も正規分布です。",
+      "en": "Optional extension: the mean of n independent observations has standard deviation σ/√n. Check whether a problem concerns one value or a sample mean. Independent samples from a normal population have a normally distributed mean."
+    },
+    {
+      "page": 52,
+      "title": "標準化だけでは、形は変わらない。",
+      "ja": "標準化は中心と尺度を変える操作なので、山の形そのものは変わりません。一般の母集団の標本平均を正規近似するには、有限分散などの条件と十分な標本数が必要です。",
+      "en": "Standardization changes centre and scale, while preserving the distribution’s shape. A normal approximation for sample means from other populations needs conditions such as finite variance and a sufficiently large sample."
+    }
+  ]
+}

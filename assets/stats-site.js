@@ -167,6 +167,7 @@ function slideThumbnail(deck, week) {
   if (week.week === 2 && deck.label === "Yoh's Week 2 lecture") return 'assets/slide-previews/yoh-w02.png?v=20261007-kuji-image-1';
   if (week.week === 3 && deck.label === "Yoh's Week 3 lecture") return 'assets/slide-previews/yoh-w03.png?v=20261007-week-split-1';
   if (week.week === 4 && deck.label === "Yoh's Week 4 lecture") return 'assets/slide-previews/yoh-w04.png?v=20261021-integrated-story';
+  if (week.week === 5 && deck.preview?.endsWith('/week05/w5.pdf')) return 'assets/slide-previews/yoh-w05.png?v=20261026-race-opening';
   if (week.week === 6 && deck.label === "Yoh's Week 6 lecture") return 'assets/slide-previews/yoh-w06.png?v=20261014';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
@@ -551,7 +552,9 @@ function lectureSection(week) {
   const lectureBody = week.week === 4 ? week4LectureMarkup(content) : week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">
       <button type="button" role="tab" id="week-5-lecture-slides-tab" aria-controls="week-5-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-5-lecture-explore-tab" aria-controls="week-5-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
-    </div><div id="week-5-lecture-slides" role="tabpanel" aria-labelledby="week-5-lecture-slides-tab">${content}</div><div id="week-5-lecture-explore" role="tabpanel" aria-labelledby="week-5-lecture-explore-tab" hidden>${distributionSimulationMarkup('normal')}</div>`
+    </div><div id="week-5-lecture-slides" role="tabpanel" aria-labelledby="week-5-lecture-slides-tab">${content}</div><div id="week-5-lecture-explore" role="tabpanel" aria-labelledby="week-5-lecture-explore-tab" hidden>
+      <div class="simulation-tablist" role="tablist" aria-label="Week 5 explorations">${[['stopwatch','Stop at 1 second','1秒で止めよう'],['area','Area & integrals','面積と積分'],['cdf','PDF & CDF','PDFとCDF'],['moments','Expectation & variance','期待値と分散'],['normal','Standardization','標準化'],['table','Normal table','正規分布表']].map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-5-${id}-tab" aria-controls="week-5-${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${String(i+1).padStart(2,'0')} <span>${bilingual(en,ja)}</span></button>`).join('')}</div>
+      ${['stopwatch','area','cdf','moments','normal','table'].map((id,i)=>`<div id="week-5-${id}" role="tabpanel" aria-labelledby="week-5-${id}-tab"${i?' hidden':''}><section class="w5-lab" ${id==='stopwatch'?'data-week5-stopwatch':`data-week5-lab="${id}"`}></section></div>`).join('')}</div>`
     : week.week === 6 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 6 lecture">
       <button type="button" role="tab" id="week-6-lecture-slides-tab" aria-controls="week-6-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-6-lecture-explore-tab" aria-controls="week-6-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
@@ -745,7 +748,13 @@ function renderAgenda(weeks) {
     'al-discrete': ['week-2-lecture-al-tab','week-2-al-discrete-tab'],
     'al-continuous': ['week-2-lecture-al-tab','week-2-al-continuous-tab'],
     coin: ['week-1-lecture-simulations-tab','week-1-coin-tab'],
-    normal: ['week-5-lecture-explore-tab'],
+    normal: ['week-5-lecture-explore-tab','week-5-normal-tab'],
+    'w5-area': ['week-5-lecture-explore-tab','week-5-area-tab'],
+    'w5-stopwatch': ['week-5-lecture-explore-tab','week-5-stopwatch-tab'],
+    'w5-cdf': ['week-5-lecture-explore-tab','week-5-cdf-tab'],
+    'w5-moments': ['week-5-lecture-explore-tab','week-5-moments-tab'],
+    'w5-normal': ['week-5-lecture-explore-tab','week-5-normal-tab'],
+    'w5-table': ['week-5-lecture-explore-tab','week-5-table-tab'],
     t: ['week-6-lecture-explore-tab','week-6-t-tab'],
     chi: ['week-6-lecture-explore-tab','week-6-chi-tab']
   };
