@@ -38,7 +38,7 @@
   window.bindSlideSwipe = (surface, previous, next) => {
     let start = null, ignoreClickUntil = 0;
     surface.addEventListener('touchstart', event => {
-      start = event.touches.length === 1 ? {
+      start = event.touches.length === 1 && surface.dataset?.slideZoomed !== 'true' ? {
         x: event.touches[0].clientX, y: event.touches[0].clientY, time: Date.now()
       } : null;
     }, { passive: true });
@@ -49,7 +49,7 @@
     surface.addEventListener('touchend', event => {
       const origin = start;
       start = null;
-      if (!origin || event.touches.length || event.changedTouches.length !== 1) return;
+      if (!origin || surface.dataset?.slideZoomed === 'true' || event.touches.length || event.changedTouches.length !== 1) return;
       const dx = event.changedTouches[0].clientX - origin.x;
       const dy = event.changedTouches[0].clientY - origin.y;
       if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5 || Date.now() - origin.time > 1000) return;

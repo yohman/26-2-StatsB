@@ -8,7 +8,7 @@
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="icon" href="favicon.svg?v=course-family-20261026" type="image/svg+xml">
   <link rel="stylesheet" href="assets/stats-styles.css?v=20261021-page-jump">
-  <link rel="stylesheet" href="assets/viewer-context.css?v=20261021-slide-notes-1">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20261026-slide-zoom">
   <link rel="stylesheet" href="assets/slide-challenge-guard.css?v=20261014-1">
 </head>
 <body class="viewer-page">
@@ -24,7 +24,8 @@
   </main>
   <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
   <script src="assets/slide-challenge-guard.js?v=20261014-1"></script>
-  <script src="assets/slide-browsing.js?v=20261021-page-jump"></script>
+  <script src="assets/slide-browsing.js?v=20261026-zoom-pan"></script>
+  <script src="assets/slide-zoom.js?v=20261026-1"></script>
   <script src="assets/slide-notes.js?v=20261021-1"></script>
   <script>
     const parameters = new URLSearchParams(location.search);
@@ -120,6 +121,7 @@
         }).promise;
         let activePage = Math.max(1, Math.min(pdf.numPages, parseInt(parameters.get('page'), 10) || 1));
         let renderQueue = Promise.resolve();
+        let slideZoom;
         const isFullscreen = () => document.fullscreenElement === viewer || viewer.classList.contains('is-fullscreen-fallback');
         const openDestination = async destination => {
           const target = typeof destination === 'string' ? await pdf.getDestination(destination) : destination;
@@ -184,19 +186,20 @@
             linkLayer.replaceChildren();
             const page = await pdf.getPage(requestedPage);
             const baseViewport = page.getViewport({ scale: 1 });
-            const availableWidth = Math.max(320, Math.min(1400, canvasWrap.clientWidth - 32));
+            const availableWidth = Math.max(280, Math.min(1400, canvasWrap.getBoundingClientRect().width - 32));
             const availableHeight = Math.max(200, canvasWrap.clientHeight - 32);
             const scale = isFullscreen()
               ? Math.min(2.5, availableWidth / baseViewport.width, availableHeight / baseViewport.height)
               : Math.min(1.7, availableWidth / baseViewport.width);
             const viewport = page.getViewport({ scale });
-            const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+            const pixelRatio = Math.min((window.devicePixelRatio || 1) * (slideZoom?.scale || 1), 4);
             canvas.width = Math.floor(viewport.width * pixelRatio);
             canvas.height = Math.floor(viewport.height * pixelRatio);
             canvas.style.width = `${Math.floor(viewport.width)}px`;
             canvas.style.height = `${Math.floor(viewport.height)}px`;
             pageSurface.style.width = canvas.style.width;
             pageSurface.style.height = canvas.style.height;
+            slideZoom?.setPageSize(Math.floor(viewport.width), Math.floor(viewport.height), isFullscreen());
             const context = canvas.getContext('2d');
             context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
             await page.render({ canvasContext: context, viewport }).promise;
@@ -208,6 +211,8 @@
           });
           return renderQueue;
         };
+        slideZoom = window.bindSlideZoom({viewport:canvasWrap, surface:pageSurface, toolbar, before:fullscreen,
+          onSettled:() => renderPage(activePage)});
         const syncFullscreen = () => {
           const expanded = isFullscreen();
           fullscreen.innerHTML = expanded ? makeLabel('EXIT FULL SCREEN', '全画面を終了') : makeLabel('FULL SCREEN', '全画面');
@@ -242,7 +247,10 @@
           if(navigating||targetPage===activePage)return;
           navigating=true;
           try {
-            if(await window.confirmSlideAdvance(pdf,activePage,targetPage,viewer))await renderPage(targetPage);
+            if(await window.confirmSlideAdvance(pdf,activePage,targetPage,viewer)){
+              slideZoom.fit(false);
+              await renderPage(targetPage);
+            }
           } finally {navigating=false;syncPageInput();}
         }
         const syncPageInput = window.bindSlidePageInput(pageStatus,
@@ -257,6 +265,11 @@
           const isEditing = target instanceof HTMLElement &&
             (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
           if (isEditing || document.querySelector('.slide-answer-confirm[open]') || event.altKey || event.ctrlKey || event.metaKey) return;
+          if (event.key === 'Escape' && slideZoom.scale > 1.001) {
+            event.preventDefault();
+            slideZoom.fit();
+            return;
+          }
           if (event.key === 'Escape' && viewer.classList.contains('is-fullscreen-fallback')) {
             event.preventDefault();
             exitFallbackFullscreen();
