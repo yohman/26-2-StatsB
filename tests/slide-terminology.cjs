@@ -8,7 +8,7 @@ const dictionary=new Map();
 for(const slide of map.slides){
   const terms=slide.terms;
   assert(Array.isArray(terms));
-  if(slide.slide<=4){assert.equal(terms.length,0,'Story images stay uncluttered');continue;}
+  if(slide.slide<=4||slide.layout.includes('queue-story')){assert.equal(terms.length,0,'Story images stay uncluttered');continue;}
   assert(terms.length>=1&&terms.length<=3,'Only the key terms for the current concept');
   assert.match(deck[slide.slide-1],/class="stat-terms"/);
   for(const {ja,en} of terms){
@@ -25,7 +25,7 @@ for(const term of ['確率変数','確率密度関数','累積分布関数','期
 const style=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/terms-week05.mjs'),'utf8');
 assert.match(style,/stat-term-ja\{font-size:22px/);
 assert.match(style,/stat-term-en\{font-size:18px/);
-console.log(`Bilingual terminology: ${dictionary.size} consistent terms across all ${map.slides.length-4} statistical slides; Japanese primary, English secondary.`);
+console.log(`Bilingual terminology: ${dictionary.size} consistent terms across all ${map.slides.filter(s=>s.terms.length).length} statistical slides; Japanese primary, English secondary.`);
 (async()=>{
   const {glossary,readings,rubyTerm,annotateJapaneseTerms}=await import('../materials/2026-yoh/week05/terms-week05.mjs');
   for(const key of Object.keys(glossary)){

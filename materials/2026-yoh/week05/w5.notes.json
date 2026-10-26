@@ -80,270 +80,286 @@
     },
     {
       "page": 12,
-      "title": "まず、4個の長方形。",
-      "ja": "ここでは曲がった密度f(x)=3x²/8000を使います。0〜20を4等分するので幅は5。中央は2.5、7.5、12.5、17.5です。その場所の密度を長方形の高さにして、幅かける高さを足しましょう。",
-      "en": "Use the curved density f(x)=3x²/8000 on zero to twenty. Four equal intervals have width five and midpoints 2.5, 7.5, 12.5 and 17.5. Read each height at its midpoint, then add width times height."
+      "title": "王道家、この行列、何分待つ？",
+      "ja": "みんな、柏の王道家で並んだことある？ 友達とラーメンを食べに来たら、この行列。「座れるまで何分かな？」と考えるよね。この写真だけでは待ち時間の確率は分かりません。次から計算しやすい授業用のモデルを仮定します。写真は柏の店舗の実際の行列ですが、モデルの数値は実測値ではありません。実際には20分を超えて待つこともあります。写真出典：鷺の停車場 / Reiherbahnhof。https://reiherbahnhof.hatenablog.com/entry/2025/05/07/080430 店舗確認：https://oudouya.com/shop-info/",
+      "en": "Have you queued at Oudouya in Kashiwa? Imagine arriving with classmates and seeing this line. How many minutes until we can sit down? A photograph cannot tell us the waiting-time distribution. Next we will assume a convenient classroom model, not measured Oudouya data. Actual waits can exceed twenty minutes. Photo: Reiherbahnhof, published May 2025. https://reiherbahnhof.hatenablog.com/entry/2025/05/07/080430 Shop location: https://oudouya.com/shop-info/",
+      "sources": [
+        "https://reiherbahnhof.hatenablog.com/entry/2025/05/07/080430",
+        "https://oudouya.com/shop-info/"
+      ]
     },
     {
       "page": 13,
-      "title": "1個目は、「幅 × 高さ」",
-      "ja": "まず一つだけ計算しよう。最初の区間0〜5の中央は2.5。fに2.5を入れると高さ0.00234375。それに幅5を掛けて面積0.01171875です。高さそのものと、面積を区別してください。",
-      "en": "Calculate only the first rectangle. The midpoint of zero to five is 2.5. Substituting into f gives height 0.00234375. Multiply by width five to obtain area 0.01171875. Distinguish height from area."
+      "title": "座れるまでの待ち時間を、X分とする",
+      "ja": "Xは列に並んでから席に案内されるまでの時間、単位は分です。注文からラーメンが出るまでの時間ではありません。王道家で並ぶ場面を想像して、この授業だけの曲がった密度を仮定します。0〜20分、長い側ほど密度が高いモデルです。実測ではなく、現実の待ち時間を保証しません。0〜20を4等分すると幅5分、中央は2.5、7.5、12.5、17.5分です。高さは確率ではなく密度。幅を掛けると、その待ち時間区間の確率を近似できます。",
+      "en": "X is minutes from joining the queue until being seated, not the time from ordering to receiving ramen. Imagine the Oudouya queue but assume this hypothetical density on zero to twenty minutes. Longer waits have greater density in this model. It is not measured shop data or a guarantee of real waits. Four intervals have width five minutes and midpoints 2.5, 7.5, 12.5 and 17.5. Height is density; multiply by width to approximate the probability of a wait in that interval."
     },
     {
       "page": 14,
+      "title": "1個目は、「幅 × 高さ」",
+      "ja": "最初の長方形は、並んでから0〜5分で座れる確率を近似しています。中央は2.5分。fに2.5を入れると高さ0.00234375。それに幅5分を掛けて面積0.01171875、約1.17％です。実際の曲線の面積とは少し違います。高さそのものと、確率を表す面積を区別してください。",
+      "en": "The first rectangle approximates the chance of being seated within zero to five minutes in our classroom model. The midpoint is 2.5 minutes. Its height is 0.00234375; multiply by width five to get 0.01171875, about 1.17 percent. This rectangle is not the exact curved area. Distinguish density from probability."
+    },
+    {
+      "page": 15,
       "title": "4個を足すと、98.4375％",
       "ja": "残りの中央は7.5、12.5、17.5。どれも5×f(中央)で計算します。4個の面積を足すと0.984375。曲線の下の本当の面積1より少し小さい。確率の合計が不足しているのではなく、長方形で近似したための差です。",
       "en": "Apply five times f(midpoint) to the remaining rectangles. The four areas sum to 0.984375, slightly below the true curved area of one. This is approximation error, not missing probability in the density."
     },
     {
-      "page": 15,
+      "page": 16,
       "title": "16個なら、99.9023％",
       "ja": "今度は16等分。幅1.25で、最初の中央は0.625です。同じ幅かける高さを16回計算して足すと0.9990234375。本当の面積1との差は、4個のときより小さくなりました。",
       "en": "With sixteen intervals, each width is 1.25 and the first midpoint is 0.625. Add sixteen width-times-height contributions to get 0.9990234375. The gap from the true area of one is smaller than with four rectangles."
     },
     {
-      "page": 16,
+      "page": 17,
       "title": "64個なら、99.9939％",
       "ja": "64等分なら幅0.3125。最初の中央は0.15625で、高さはfにこの値を入れて読みます。64個の合計は約0.999939です。少しずつ幅を小さくすると、長方形の合計が曲線の面積に近づいていきます。",
       "en": "With sixty-four intervals, width is 0.3125 and the first midpoint is 0.15625. Evaluate f at each midpoint and add the sixty-four areas to get about 0.999939. Finer rectangles bring the sum closer to the curved area."
     },
     {
-      "page": 17,
+      "page": 18,
       "title": "積分なら、面積はちょうど1。",
-      "ja": "積分は幅を限りなく細かくした先の面積です。3x²の積分でx³になり、上端20と下端0を入れると8000÷8000で1。4個、16個、64個の計算が、この値に近づく流れを確認してください。",
-      "en": "The integral gives the limiting area as widths shrink towards zero. Integrating 3x² gives x³. Evaluate at twenty and zero to obtain 8000 divided by 8000, exactly one. Compare this with the four-, sixteen- and sixty-four-rectangle sums."
+      "ja": "積分は幅を限りなく細かくした先の面積です。3x²の積分でx³になり、上端20と下端0を入れると1。これは授業用モデルで0〜20分のどこかで座れる確率が100％という意味。20分ちょうど待つという意味でも、実際の王道家で必ず20分以内に座れるという意味でもありません。4個、16個、64個の近似が、この全体の面積に近づきます。",
+      "en": "The integral gives the limiting area as widths shrink. Integrating 3x² gives x³; evaluating at twenty and zero gives one. This means a wait somewhere between zero and twenty has probability one under the assumed model. It does not mean the wait is exactly twenty, or that real Oudouya customers are seated within twenty minutes. The rectangle sums approach this total area."
     },
     {
-      "page": 18,
+      "page": 19,
+      "title": "15分以内に座れる確率は？",
+      "ja": "さて、このモデルなら15分以内に座れるかな？ Xは並び始めてから着席までの分数。欲しいのは0〜15分の面積です。まず区間の確率の公式を書き、密度と上端15を代入します。3x²の積分はx³。15の三乗3375を8000で割って、0.421875、約42.2％です。右側の残り約57.8％は15分より長く待つ確率。写真から出した数字ではなく、仮定した密度から出した数字です。",
+      "en": "Under this assumed model, what is the chance of being seated within fifteen minutes? X measures joining the queue to seating. Start with the interval-probability formula, then insert the given density and upper bound fifteen. Integrating 3x² gives x³. Fifteen cubed is 3375; divide by 8000 to obtain 0.421875, or about 42.2 percent. The remaining area is about 57.8 percent for waits longer than fifteen. These numbers follow the hypothetical density, not the photograph."
+    },
+    {
+      "page": 20,
       "title": "小さな面積を、全部足す",
       "ja": "一つの面積は、高さかける幅。Σはそれを全部足す記号です。欲しい区間だけなら、その区間の確率。取りうる値を全部含めれば、合計は1になります。",
       "en": "Each little area is height times width. The summation adds them. Integrating a chosen interval gives its probability, while integrating over every possible value gives total probability 1."
     },
     {
-      "page": 19,
-      "title": "ラーメン、あと何分？",
-      "ja": "実際のお店の調査ではなく、0〜20分の一様分布を仮定します。全体の幅20に高さ1/20を掛けて面積は1。区間の確率を出すには、その区間の幅を掛けよう。",
-      "en": "Assume a uniform wait from zero to twenty minutes for this classroom model. Width twenty times height one twentieth gives total area 1. An interval probability needs that interval’s width."
+      "page": 21,
+      "title": "別のモデル：待ち時間が一様なら？",
+      "ja": "ここからは別の練習モデルです。さっきの王道家を想像した曲がった密度と混ぜないでね。今度は0〜20分の一様分布を仮定します。全体の幅20に高さ1/20を掛けて面積は1。区間の確率を出すには、その区間の幅を掛けよう。どちらのモデルも実際のお店を調査したデータではありません。",
+      "en": "Switch to a different practice model, not the curved density used with the Oudouya story. Now assume a uniform wait from zero to twenty minutes. Width twenty times height one twentieth gives total area one. An interval probability needs that interval’s width. Neither model is measured restaurant data."
     },
     {
-      "page": 20,
+      "page": 22,
       "title": "チャレンジ①　ラーメンの待ち時間",
       "ja": "ここで5分、自分で考えてみよう。5分から10分までの範囲を図に描いて、その部分の横幅と高さを確認してください。答え合わせは次のスライドからです。",
       "en": "Take five minutes to work this out. Sketch the interval from 5 to 10 minutes and identify its width and height. We will check the answer afterwards."
     },
     {
-      "page": 21,
+      "page": 23,
       "title": "答え合わせ① · 面積の計算",
       "ja": "まず区間の確率の公式を書き、下端5、上端10、密度1/20を入れます。横幅5に高さ1/20を掛けて25％。式の各数字を、自分の図と対応させてください。",
       "en": "Start with the interval-probability formula, then insert bounds five and ten and density one twentieth. Width five times height one twentieth gives 25 percent. Match each value to your sketch."
     },
     {
-      "page": 22,
+      "page": 24,
       "title": "この面積が、25％",
       "ja": "全体20分のうち、同じ高さの5分ぶんだから4分の1です。やってみようで区間を動かす前に、広げたら面積がどう変わるか予想してみよう。",
       "en": "Five of the twenty minutes at the same height give one quarter of the area. Predict what will happen when you widen the interval, then test it interactively."
     },
     {
-      "page": 23,
+      "page": 25,
       "title": "累積分布関数",
       "ja": "F(c)は「cまで」の累積確率です。密度の左側からcまでの面積を集めます。小さいfが密度、大きいFが累積を表すことに注意しよう。",
       "en": "F(c) accumulates probability up to c. It adds the area under the density from the far left through c. Lowercase f denotes density, and uppercase F denotes cumulative probability."
     },
     {
-      "page": 24,
+      "page": 26,
       "title": "$f(x)$：cまでの面積",
       "ja": "ここからは、右上がりの密度を持つ別のモデルです。cを10にしたとき、左側の色の付いた面積に注目してください。先ほどの一様分布とは形が違います。",
       "en": "We are switching to a different model with increasing density. Look at the shaded area up to c = 10. This is no longer the uniform model."
     },
     {
-      "page": 25,
+      "page": 27,
       "title": "$F(c)$：その面積を、高さにする",
       "ja": "前の密度の色の面積が、こちらでは高さ0.25として現れます。cを右へ動かせば、足した面積は減りません。Fは0から1へ累積していきます。",
       "en": "The shaded density area now appears as a height of 0.25. Moving c right can only add area or leave it unchanged. The CDF accumulates from 0 towards 1."
     },
     {
-      "page": 26,
+      "page": 28,
       "title": "別の店では、20〜60分なら？",
       "ja": "ここからは別のお店の、新しい仮定です。60分までの90％には、20分までの10％も入っています。欲しい区間だけを取り出すには、どうすればよいかな？",
       "en": "These are new assumptions for another restaurant. The ninety percent up to sixty minutes already includes the ten percent up to twenty. How can we isolate the interval between them?"
     },
     {
-      "page": 27,
+      "page": 29,
       "title": "累積確率の差で、80％",
       "ja": "大きい累積から、小さい累積を引くと80％。図は、この累積の値に合う密度の一例です。やってみようでは、同じ確率がfでは面積、Fでは高さになる対応を見よう。",
       "en": "Subtract the earlier cumulative probability from the later one to get eighty percent. This chart shows one compatible density. Explore how probability appears as area under f and height on F."
     },
     {
-      "page": 28,
+      "page": 30,
       "title": "教科書 · 第2章 第2節",
       "ja": "教科書129ページの、期待値と分散につなげます。分布が分かったら、今度は「中心はどこ？」「どれくらい散らばる？」です。",
       "en": "Turn to page 129 for expectation and variance. Once we have a distribution, we can ask about its centre and how spread out it is."
     },
     {
-      "page": 29,
+      "page": 31,
       "title": "連続変数の期待値",
       "ja": "くじやサイコロでは「値かける確率」を足しました。連続でも同じです。小さな幅の確率f(x)dxに値xを掛け、全体で足したものが期待値です。",
       "en": "For a lottery or die roll, we added value times probability. The continuous version weights each small probability contribution f(x)dx by x and accumulates across the distribution."
     },
     {
-      "page": 30,
+      "page": 32,
       "title": "配達ロボットの期待時間は、6分",
       "ja": "ロボットは0〜12分で一様に到着すると仮定します。期待値の公式に密度1/12を入れ、上端と下端で計算すると6分。図のつり合う中心です。毎回6分で来るという約束ではありません。",
       "en": "Assume a uniform delivery time from zero to twelve minutes. Insert density one twelfth into the expectation formula and evaluate at the endpoints to get six minutes, the balance point on the chart."
     },
     {
-      "page": 31,
+      "page": 33,
       "title": "分散",
       "ja": "同じ期待時間でも、毎回ほぼ同じか、大きく変わるかでは違うよね。平均との差を二乗して、確率で重みを付けて足す。それが分散です。",
       "en": "The same expected wait can come with very different variability. Variance weights the squared distance from the mean by probability and adds those contributions."
     },
     {
-      "page": 32,
+      "page": 34,
       "title": "分散から、標準偏差へ",
       "ja": "中心6からのずれを二乗して積分します。上端と下端を入れると、216から−216を引いて36で割るので12。分散の単位は分の二乗です。平方根を取ると標準偏差約3.46分になります。",
       "en": "Integrate squared deviations from six. The endpoint calculation is (216 − (−216))/36 = 12, in minutes squared. Taking the square root gives a standard deviation of about 3.46 minutes."
     },
     {
-      "page": 33,
+      "page": 35,
       "title": "中心と、ばらつきを見る",
       "ja": "中心は6分、色はそこから標準偏差一つぶんの範囲です。色の面積が分散12を表すわけではありません。配達時間の幅を変えて、中心とばらつきがどう変わるか確かめよう。",
       "en": "The centre is six minutes, and the shading marks one standard deviation each way. Its area is not the variance. Explore how changing the delivery window changes the mean and spread."
     },
     {
-      "page": 34,
+      "page": 36,
       "title": "教科書 · 第2章 第2節",
       "ja": "教科書122〜123ページ、正規分布に進みます。面積で確率を考えるルールは、そのままです。今度は山の形が決まっています。",
       "en": "Turn to pages 122–123 for the normal distribution. Probability still means area. We are now using a particular family of bell-shaped densities."
     },
     {
-      "page": 35,
+      "page": 37,
       "title": "正規分布：中心と、ばらつき",
       "ja": "左右対称の釣鐘型です。Nの最初の数が平均μ、二つ目が分散σ²。この書き方で二つ目を標準偏差と間違えないようにしよう。",
       "en": "This bell is symmetric. In N(μ,σ²), the first parameter is the mean and the second is the variance. Do not read the second parameter as the standard deviation."
     },
     {
-      "page": 36,
+      "page": 38,
       "title": "標準偏差が小さいと、狭い山",
       "ja": "標準偏差が小さいと、平均付近にぎゅっと集まります。全体の面積は1なので、狭くなると山は高くなります。",
       "en": "A smaller standard deviation concentrates probability close to the mean. Since total area stays 1, the narrower bell is taller."
     },
     {
-      "page": 37,
+      "page": 39,
       "title": "標準偏差が大きいと、広い山",
       "ja": "標準偏差が大きいと、広く散らばるので山は低くなります。直前と軸の目盛りは同じ。高さだけでなく、幅も見比べてください。",
       "en": "A larger standard deviation spreads probability out, making the bell lower. Both charts use the same scales, so compare width as well as height."
     },
     {
-      "page": 38,
+      "page": 40,
       "title": "正規分布の密度",
       "ja": "この式が、さっきの山の形を作っています。今日はこの積分を手で解くのではなく、標準化して表を使います。ここに出てくるπは円周率です。",
       "en": "This density formula generates the bell shape. Today we will use standardization and a table to find areas. The π here is the circle constant."
     },
     {
-      "page": 39,
+      "page": 41,
       "title": "標準化の公式",
       "ja": "毎回あの密度を積分する代わりに、中心を0、標準偏差を1にそろえます。平均との差を標準偏差で割ると「中心から何個ぶん？」という位置になります。もとが正規なら、Zは標準正規分布です。",
       "en": "Instead of integrating each normal density afresh, put its centre at zero and its standard deviation at one. The formula measures distance from the mean in standard deviation units. Normal X gives standard normal Z."
     },
     {
-      "page": 40,
+      "page": 42,
       "title": "60点は、標準偏差1個ぶん上",
       "ja": "授業用に平均50、標準偏差10の正規モデルを考えます。60点を標準化するとz=1。これは100％ではなく、標準偏差一つぶん上という位置です。平均や標準偏差を変えて、同じ60点を比べてみよう。",
       "en": "For a hypothetical normal score model with mean fifty and standard deviation ten, a score of sixty gives z = 1. That describes location, not 100 percent probability. Explore how the same score changes meaning under different parameters."
     },
     {
-      "page": 41,
+      "page": 43,
       "title": "教科書 · 第2章 第2節",
       "ja": "教科書124〜125ページの表につなげます。表を使う前に、表の数字がどの面積なのかを必ず確認しよう。",
       "en": "Turn to pages 124–125 for the normal table. Before reading any number, identify which area the table reports."
     },
     {
-      "page": 42,
+      "page": 44,
       "title": "この表は、右側の面積",
       "ja": "使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。",
       "en": "Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first."
     },
     {
-      "page": 43,
+      "page": 45,
       "title": "まず、1.9の行",
       "ja": "z=1.96を探します。まず1.9の行。小数第1位までの部分で、行を決めてください。",
       "en": "Locate z = 1.96. First use 1.9 to choose the row. Keep your finger on that row."
     },
     {
-      "page": 44,
+      "page": 46,
       "title": "次に、0.06の列",
       "ja": "次に0.06の列。1.9足す0.06で1.96になります。行を押さえたまま、列との交点を見ます。",
       "en": "Next find column 0.06. Adding 1.9 and 0.06 gives 1.96. Follow the row to its intersection with that column."
     },
     {
-      "page": 45,
+      "page": 47,
       "title": "交点は、0.02500",
       "ja": "交点は0.02500。これはzの値ではなく、右側にある面積の大きさです。",
       "en": "The intersection reads 0.02500. That number is the right-tail probability, rather than another z-score."
     },
     {
-      "page": 46,
+      "page": 48,
       "title": "1.96より右は、2.5％",
       "ja": "行1.9と列0.06の交点は0.02500。表の数字は右の尾の面積で、100を掛けると2.5％です。どこの確率か、図を指さして説明してみよう。",
       "en": "Row 1.9 and column 0.06 meet at 0.02500. That is the right-tail area, or 2.5 percent. Point to the region your answer describes."
     },
     {
-      "page": 47,
+      "page": 49,
       "title": "−1.96より左も、2.5％",
       "ja": "マイナス1.96より左なら、左右対称を使います。右の1.96より先と同じ面積なので2.5％。マイナスの位置でも、確率がマイナスにはなりません。",
       "en": "Use symmetry for the region below negative 1.96. It matches the right tail above positive 1.96, so its probability is also 2.5 percent."
     },
     {
-      "page": 48,
+      "page": 50,
       "title": "＋1.96より左は、97.5％",
       "ja": "今度はプラス1.96より左の全部。全体1から、小さい右の尾を引きます。答えが大きい確率になっていることを、図の色の広さでも確認しよう。",
       "en": "For everything below positive 1.96, subtract the small right tail from 1. The large shaded region confirms why the answer is 97.5 percent."
     },
     {
-      "page": 49,
+      "page": 51,
       "title": "真ん中は、両方の尾を引く",
       "ja": "−1から＋1の中央は、左右の尾を二回引きます。この表なら約68.27％。教科書の丸め値で68.28％になるのは矛盾ではありません。やってみようで右、左、真ん中を切り替えてみよう。",
       "en": "For the central interval from negative one to positive one, remove both tails. Our table gives about 68.27 percent. The textbook’s rounding gives 68.28 percent. Explore the different shaded regions."
     },
     {
-      "page": 50,
+      "page": 52,
       "title": "チャレンジ②　70点以上は、何％？",
       "ja": "ここで5分、自分で解いてみよう。N(50,100)の二つ目の数は何だった？　70点の位置を標準化して、欲しい側を図に描いてください。",
       "en": "Take five minutes on your own. Recall what the second parameter in N(50,100) means. Standardize seventy and shade the side the question asks for."
     },
     {
-      "page": 51,
+      "page": 53,
       "title": "答え合わせ② · 70点以上",
       "ja": "分散100の平方根が標準偏差10です。70点を標準化すると2。表の2.0の行、0.00の列を読むと0.02275なので、右側の確率は2.275％です。",
       "en": "The standard deviation is the square root of one hundred. Standardizing seventy gives z = 2. Read row 2.0 and column 0.00 to get 0.02275, or 2.275 percent."
     },
     {
-      "page": 52,
+      "page": 54,
       "title": "チャレンジ③　30点から70点なら？",
       "ja": "もう一問、5分で考えてみよう。同じ点数のモデルで、30点から70点までです。両端を標準化して、どの面積が欲しいかを先に決めてください。",
       "en": "Take five minutes for the interval from thirty to seventy under the same score model. Standardize both boundaries and sketch the required area before calculating."
     },
     {
-      "page": 53,
+      "page": 55,
       "title": "答え合わせ③ · 30〜70点",
       "ja": "両端を標準化すると−2と＋2です。全体1から、先ほどの尾0.02275を二回引いて95.45％。式の引き算が、図のどの部分に対応するかを説明してみよう。",
       "en": "Standardize the two boundaries to negative two and positive two. Subtract the previous tail probability twice from 1 to get 95.45 percent. Match the subtraction to the chart."
     },
     {
-      "page": 54,
+      "page": 56,
       "title": "確率は、面積。",
       "ja": "欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。",
       "en": "Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks."
     },
     {
-      "page": 55,
+      "page": 57,
       "title": "補足：1人の点数と、n人の平均",
       "ja": "補足です。独立なn人の平均は、1人の値よりばらつきが小さく、標準偏差はσ/√n。問題が個人の値なのか、標本平均なのかを確認しよう。正規母集団なら独立な標本の平均も正規分布です。",
       "en": "Optional extension: the mean of n independent observations has standard deviation σ/√n. Check whether a problem concerns one value or a sample mean. Independent samples from a normal population have a normally distributed mean."
     },
     {
-      "page": 56,
+      "page": 58,
       "title": "標準化だけでは、形は変わらない。",
       "ja": "標準化は中心と尺度を変える操作なので、山の形そのものは変わりません。一般の母集団の標本平均を正規近似するには、有限分散などの条件と十分な標本数が必要です。",
       "en": "Standardization changes centre and scale, while preserving the distribution’s shape. A normal approximation for sample means from other populations needs conditions such as finite variance and a sufficiently large sample."
