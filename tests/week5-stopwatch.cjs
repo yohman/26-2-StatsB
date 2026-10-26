@@ -18,6 +18,13 @@ assert.deepEqual(M.roundedBucket(10,2),{low:9.995,high:10.005});
 assert.deepEqual(M.chartBounds(1),{low:0,high:2});
 assert.deepEqual(M.chartBounds(10),{low:.9,high:1.1});
 assert.deepEqual(M.chartBounds(.5),{low:0,high:3});
+const recordInput=[1,1.02,.98,1.3,.7,1.04,.96,1.05,.95,1.06,.94,1.07];
+const ranked=M.recordLists(recordInput);
+assert.equal(ranked.best.length,10);assert.equal(ranked.latest.length,10);
+assert.deepEqual(ranked.latest.map(x=>x.attempt),[12,11,10,9,8,7,6,5,4,3]);
+assert.deepEqual(ranked.best.map(x=>x.attempt),[1,2,3,6,7,8,9,10,11,12]);
+assert.deepEqual(recordInput,[1,1.02,.98,1.3,.7,1.04,.96,1.05,.95,1.06,.94,1.07],'Ranking never mutates observations');
+assert.deepEqual(M.recordLists([]),{latest:[],best:[]});
 class Element{
   constructor(){this.dataset={};this.style={};this.listeners={};this.classList={add(){}};this.value='';}
   addEventListener(type,handler){this.listeners[type]=handler;}
@@ -60,6 +67,14 @@ click('[data-zoom-fit]');assert.notEqual(elements['[data-zoom-level]'].textConte
 assert(elements['[data-probability]'].textContent.includes('0.9 ≤ X ≤ 1.1'));
 click('[data-clear]');assert.equal(elements['[data-time]'].textContent,'00.000000');
 assert(elements['[data-probability]'].textContent.includes('0 / 0 = —'));
+for(const seconds of recordInput){now+=10000;click('[data-toggle]');now+=seconds*1000;click('[data-toggle]');}
+assert.equal((elements['[data-best]'].innerHTML.match(/<li /g)||[]).length,10);
+assert.equal((elements['[data-history]'].innerHTML.match(/<li /g)||[]).length,10);
+assert(elements['[data-best]'].innerHTML.startsWith('<li class="within"><span>1<small>#1</small>'));
+assert(elements['[data-history]'].innerHTML.startsWith('<li class="within"><span>#12</span>'));
+assert(elements['[data-best]'].innerHTML.includes('ずれ')||elements['[data-best]'].innerHTML.includes('Error'));
+click('[data-clear]');assert(elements['[data-best]'].innerHTML.includes('No trials yet.'));
+assert(elements['[data-history]'].innerHTML.includes('No trials yet.'));
 const site=fs.readFileSync('assets/stats-site.js','utf8'),agenda=fs.readFileSync('agenda.html','utf8');
 assert(site.includes("'w5-stopwatch': ['week-5-lecture-explore-tab','week-5-stopwatch-tab']"));
 assert(site.includes("['stopwatch','Stop at 1 second','1秒で止めよう']"));

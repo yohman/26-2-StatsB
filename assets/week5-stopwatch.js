@@ -9,7 +9,14 @@
   }
   function roundedBucket(value,places){const half=.5*10**(-places);return {low:value-half,high:value+half};}
   function chartBounds(zoom){const half=1/zoom;return {low:Math.max(0,TARGET-half),high:TARGET+half};}
-  const api={TARGET,formatSeconds,summary,roundedBucket,chartBounds};
+  function recordLists(trials){
+    const records=trials.map((seconds,i)=>({seconds,attempt:i+1,error:seconds-TARGET}));
+    return {latest:records.slice(-10).reverse(),best:[...records].sort((a,b)=>{
+      const difference=Math.abs(a.error)-Math.abs(b.error);
+      return Math.abs(difference)<1e-12?a.attempt-b.attempt:difference;
+    }).slice(0,10)};
+  }
+  const api={TARGET,formatSeconds,summary,roundedBucket,chartBounds,recordLists};
   if(typeof module==='object'&&module.exports)module.exports=api;
   if(!global.document)return;
   const dual=(en,ja)=>`<span class="lang-en" lang="en">${en}</span><span class="lang-ja" lang="ja">${ja}</span>`;
@@ -36,7 +43,8 @@
         <div class="sw-chart-legend"><span class="sw-legend-within">${dual('Within window','範囲内')}</span><span class="sw-legend-outside">${dual('Outside window','範囲外')}</span></div>
         <div class="sw-chart" data-plot></div>
         <p class="sw-chart-note">${dual('Zoom with + / − or scroll over the chart. Hover, tap, or focus a dot to read its seconds. Edge triangles mark records outside the view. Zoom changes the view, not the success window or results.','＋ / − またはグラフ上のスクロールで拡大・縮小。点に触れるか、マウスやキーボードで選ぶと秒数を表示。表示範囲の外の記録は端の三角です。拡大しても、成功の範囲や記録は変わりません。')}</p>
-        <div class="sw-history-heading"><h5>${dual('Recent attempts','最近の記録')}</h5><button type="button" data-clear>${dual('Clear trials','記録を消す')}</button></div><ol class="sw-history" data-history></ol>
+        <div class="sw-history-heading"><h5>${dual('Your records','自分の記録')}</h5><button type="button" data-clear>${dual('Clear trials','記録を消す')}</button></div>
+        <div class="sw-records-grid"><section><h6>${dual('Top 10','トップ10')}</h6><p class="sw-records-note">${dual('Closest to 1 second. Ties: earlier attempt first.','1秒に近い順。同じずれなら、先の記録を優先。')}</p><ol class="sw-history sw-best" data-best aria-label="Top 10 records / トップ10"></ol></section><section><h6>${dual('Last 10','直近10回')}</h6><p class="sw-records-note">${dual('Newest first.','新しい記録から表示。')}</p><ol class="sw-history" data-history aria-label="Last 10 attempts / 直近10回"></ol></section></div>
         <p class="sw-model-note">${dual('X = your next stopping time. These are your observations, not a uniform or normal model.','X＝次に止めるまでの時間。これは自分の実測で、一様分布や正規分布を仮定していません。')}</p>
       </section></div>`;
     const q=selector=>root.querySelector(selector);
@@ -58,7 +66,15 @@
         q('[data-last]').innerHTML=`<p class="sw-error ${hit?'within':''}">${error>=0?'+':'−'}${Math.abs(error).toFixed(6)} s <span>${t(error>=0?'late':'early',error>=0?'遅い':'早い')}</span></p><p>${t(`At ${places} decimal places, the display is ${formatSeconds(last,places)}.`,`小数${places}桁では ${formatSeconds(last,places)} と表示されます。`)}</p><p class="sw-rounding">${t('Recorded values that round to that display:','この表示に丸められる記録値の範囲：')}<br>${bucket.low.toFixed(places+1)} ≤ x &lt; ${bucket.high.toFixed(places+1)} s<br>${t('This describes rounding, not the physical accuracy of the clock.','これは丸めの説明で、時計の測定精度を保証する範囲ではありません。')}</p>`;
       }
       q('[data-status]').textContent=running?t('Running. Stop when you think it is 1 second.','計測中。1秒だと思ったらストップ。'):last===undefined?t('Ready when you are.','準備ができたらスタート。'):t('Result saved. Start begins a new attempt from zero.','記録しました。スタートで0秒から次の挑戦。');
-      q('[data-history]').innerHTML=trials.slice(-6).map((seconds,i)=>{const hit=Math.abs(seconds-TARGET)<=tolerance+1e-12;return `<li><span>#${trials.length-Math.min(6,trials.length)+i+1}</span><b>${formatSeconds(seconds,6)} s</b><span>${t(hit?'Within window':'Outside window',hit?'範囲内':'範囲外')}</span></li>`;}).reverse().join('')||`<li>${t('No trials yet.','まだ記録がありません。')}</li>`;
+      const records=recordLists(trials),empty=`<li>${t('No trials yet.','まだ記録がありません。')}</li>`;
+      q('[data-history]').innerHTML=records.latest.map(({seconds,attempt,error})=>{
+        const hit=Math.abs(error)<=tolerance+1e-12;
+        return `<li class="${hit?'within':'outside'}"><span>#${attempt}</span><b>${formatSeconds(seconds,6)} s<small>${t(hit?'Within window':'Outside window',hit?'範囲内':'範囲外')}</small></b></li>`;
+      }).join('')||empty;
+      q('[data-best]').innerHTML=records.best.map(({seconds,attempt,error},i)=>{
+        const hit=Math.abs(error)<=tolerance+1e-12;
+        return `<li class="${hit?'within':'outside'}"><span>${i+1}<small>#${attempt}</small></span><b>${formatSeconds(seconds,6)} s<small>${t('Error','ずれ')} ${error>=0?'+':'−'}${Math.abs(error).toFixed(6)} s</small></b></li>`;
+      }).join('')||empty;
       const {low,high}=chartBounds(zoom),tickPlaces=Math.min(6,Math.max(1,Math.ceil(-Math.log10((high-low)/4))+1));
       const position=seconds=>50+Math.max(0,Math.min(1,(seconds-low)/(high-low)))*660;
       const marks=trials.map((seconds,i)=>{
