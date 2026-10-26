@@ -23,7 +23,7 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal((deck.match(/<!-- _class: challenge -->/g)||[]).length,3);
+assert.equal((deck.match(/<!-- _class: challenge(?: has-stat-terms)? -->/g)||[]).length,3);
 assert.ok(slideCount>=50&&slideCount<=55,'About half of the requested 105-slide pacing');
 assert.equal(sourceMap.slides.filter(s=>s.layout==='kiss-frame').length,0);
 ['paris100-video.jpg','paris100-finish.jpg','paris100-omega-scan.jpg','omega-stopwatch.png'].forEach((name,i)=>assert.ok(slideBodies[i].includes(`images/${name}`)));
@@ -33,7 +33,7 @@ assert.ok(slideBodies[3].includes('activity=w5-stopwatch'));
 const formulas=sourceMap.slides.filter(s=>s.layout.includes('hero-math'));
 assert.ok(formulas.length>=7,'Core formulas retain a full-screen single-line treatment');
 for(const slide of formulas){
-  const body=slideBodies[slide.slide-1].replace(/<!--[\s\S]*?-->/g,'').trim();
+  const body=slideBodies[slide.slide-1].replace(/<!--[\s\S]*?-->/g,'').replace(/<aside class="stat-terms"[\s\S]*?<\/aside>/g,'').trim();
   assert.equal((body.match(/\$\$/g)||[]).length,2,'One complete formula per hero slide');
   assert.ok(!body.includes('\\begin{aligned}'),'No multi-line formula stacks');
   assert.ok(!body.includes('!['),'Formula slides have no competing chart');

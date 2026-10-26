@@ -1,5 +1,6 @@
 import {createWeek5Story,storyStyle} from './story-week05.mjs';
 import {createWeek5Notes} from './notes-week05.mjs';
+import {glossary,slideTermKeys,terminology,terminologyStyle} from './terms-week05.mjs';
 
 // Preserve the long-form source. This editorial pass combines routine steps,
 // while retaining sequences in which the changing image or withheld answer matters.
@@ -136,6 +137,12 @@ export function createWeek5CompactStory(options){
     '標準化は中心と尺度を変える操作なので、山の形そのものは変わりません。一般の母集団の標本平均を正規近似するには、有限分散などの条件と十分な標本数が必要です。',
     'Standardization changes centre and scale, while preserving the distribution’s shape. A normal approximation for sample means from other populations needs conditions such as finite variance and a sufficiently large sample.');
   if(slides.length!==52)throw Error(`Expected 52 edited slides, got ${slides.length}`);
+  if(slideTermKeys.length!==slides.length)throw Error('Statistical terminology must follow the slide order');
+  slides.forEach((slide,i)=>{
+    const keys=slideTermKeys[i];
+    mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
+    if(keys.length)slides[i]=slide.replace(/<!-- _class: (.*?) -->/,'<!-- _class: $1 has-stat-terms -->')+'\n\n'+terminology(keys);
+  });
   return {slides,mapping,notes:{version:1,deck:'materials/2026-yoh/week05/w5.pdf',slides:narration}};
 }
 
@@ -149,4 +156,5 @@ section.model-visual{padding:36px 65px 45px}section.model-visual h2{font-size:41
 section.visual-link{padding:34px 60px 45px}section.visual-link h2{font-size:43px;margin-bottom:8px}section.visual-link img{height:440px;width:1030px;object-fit:contain}section.visual-link p{font-size:25px;margin:8px 0}
 section.worked{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto 1fr auto;gap:14px 26px;padding:45px 55px 55px;text-align:left;align-content:center;align-items:center}section.worked h2{grid-column:1/-1;font-size:43px;margin:0 0 8px}section.worked .worked-copy{min-width:0}section.worked .worked-copy .katex-display{font-size:27px;text-align:left;margin:26px 0}section.worked .worked-visual{min-width:0}section.worked img{width:100%;height:320px;object-fit:contain}section.worked>p{grid-column:1/-1;font-size:22px;margin:0}section.worked .worked-visual p{margin:0}
 section.worked a,section.visual-link a,section.model-visual a{display:inline-block;background:#176d82;color:white;text-decoration:none;border-radius:7px;padding:8px 19px;font-size:23px;font-weight:700}section.model-visual a{font-size:21px;padding:7px 17px}
+${terminologyStyle}
 </style>`);

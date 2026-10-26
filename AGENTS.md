@@ -8,3 +8,9 @@
 
 - Pair every exercise answer with a graphic or chart that explains the result, in addition to the given values, symbolic formula, substitution, and solution. Use a follow-up visual slide when the calculation slide would become crowded.
 - Highlight the outcomes included in the probability. For expected value and variance, show the distribution and mark its mean. Label any tail aggregation, approximation, and table rounding.
+
+# Bilingual statistical terminology
+
+- Always pair key Japanese statistical terms with their English equivalents in authored lecture slides. Keep Japanese primary and English smaller and visually secondary, using a consistent style across the deck.
+- Keep formulas prominent and story/photo slides uncluttered. Use a shared terminology component and glossary so repeated English labels remain consistent.
+- Commit and push completed course updates after each task, excluding unrelated personal files and Finder metadata.
