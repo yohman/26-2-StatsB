@@ -32,7 +32,9 @@ console.log(`Bilingual terminology: ${dictionary.size} consistent terms across a
     assert(readings[key],`Reading supplied for ${key}`);
     assert.match(rubyTerm(key),/<ruby>[^<]+<rt>[ぁ-ゖー]+<\/rt><\/ruby>/);
   }
-  assert.equal(rubyTerm('rounding'),'<ruby>丸<rt>ま</rt></ruby>め');
+  assert.equal(rubyTerm('rounding'),'<ruby>丸<rt>まる</rt></ruby>め');
+  assert(annotateJapaneseTerms('丸めた').includes('<ruby>丸<rt>まる</rt></ruby>めた'));
+  assert(!deck.join('\n').includes('<ruby>丸<rt>ま</rt></ruby>'));
   assert(rubyTerm('intervalProbability').includes('</ruby>の<ruby>'));
   const math='$$\n\\text{分散}=1\n$$',link='[標準化](https://example.com/分散)',image='![確率](images/分散.svg)';
   const result=annotateJapaneseTerms(`## 期待値\n\n${math}\n\n${link}\n\n${image}\n\n<div title="分散">分散</div>`);

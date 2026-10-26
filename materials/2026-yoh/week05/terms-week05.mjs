@@ -34,7 +34,7 @@ export const glossary={
 export const readings={
   measurement:'そくていせいど',randomVariable:'かくりつへんすう',
   pointProbability:[['1点','いってん'],'の',['確率','かくりつ']],
-  interval:'くかん',rounding:[['丸','ま'],'め'],continuous:'れんぞくかくりつぶんぷ',
+  interval:'くかん',rounding:[['丸','まる'],'め'],continuous:'れんぞくかくりつぶんぷ',
   density:'かくりつみつどかんすう',probability:'かくりつ',
   intervalProbability:[['区間','くかん'],'の',['確率','かくりつ']],
   approximation:'きんじ',integral:'ていせきぶん',uniform:'いちようぶんぷ',
@@ -48,13 +48,14 @@ export const readings={
 };
 const characterReadings={
   '測':'そく','定':'てい','精':'せい','度':'ど','確':'かく','率':'りつ',
-  '変':'へん','数':'すう','1':'いっ','点':'てん','区':'く','間':'かん','丸':'ま',
+  '変':'へん','数':'すう','1':'いっ','点':'てん','区':'く','間':'かん','丸':'まる',
   '連':'れん','続':'ぞく','分':'ぶん','布':'ぷ','密':'みつ','関':'かん',
   '近':'きん','似':'じ','積':'せき','一':'いち','様':'よう','累':'るい',
   '期':'き','待':'たい','値':'ち','散':'さん','標':'ひょう','準':'じゅん',
   '偏':'へん','差':'さ','正':'せい','規':'き','平':'へい','均':'きん',
   '化':'か','得':'とく','表':'ひょう','上':'うわ','側':'がわ','下':'した',
-  '中':'ちゅう','央':'おう','本':'ほん','誤':'ご','母':'ぼ','集':'しゅう','団':'だん'
+  '中':'ちゅう','央':'おう','本':'ほん','誤':'ご','母':'ぼ','集':'しゅう','団':'だん',
+  '四':'し','捨':'しゃ','五':'ご','入':'にゅう'
 };
 const ruby=(kanji,kana)=>{
   const characters=[...kanji];
@@ -69,7 +70,7 @@ export function rubyTerm(key){
 }
 export function annotateJapaneseTerms(markdown){
   const terms=new Map(Object.keys(glossary).map(key=>[glossary[key][0],rubyTerm(key)]));
-  for(const [ja,kana] of [['平均値','へいきんち'],['確率密度','かくりつみつど'],['連続変数','れんぞくへんすう'],['母集団','ぼしゅうだん'],['母標準偏差','ぼひょうじゅんへんさ']])terms.set(ja,ruby(ja,kana));
+  for(const [ja,kana] of [['平均値','へいきんち'],['確率密度','かくりつみつど'],['連続変数','れんぞくへんすう'],['母集団','ぼしゅうだん'],['母標準偏差','ぼひょうじゅんへんさ'],['四捨五入','ししゃごにゅう']])terms.set(ja,ruby(ja,kana));
   const pattern=new RegExp([...terms.keys()].sort((a,b)=>b.length-a.length).join('|'),'g');
   // Preserve formulas, images, links, comments and attributes exactly as authored.
   const protectedParts=/(\$\$[\s\S]*?\$\$|\$[^$\n]*\$|<!--[\s\S]*?-->|<[^>]*>|!?\[[^\]]*\]\([^)]*\)|https?:\/\/[^\s<]+)/g;

@@ -47,7 +47,7 @@ export function createWeek5CompactStory(options){
     'ロボットの身長は160cm。でも、小数第1位、第2位と測ると、もっと細かい値が見えてくる。「ぴったり160」と「丸めて160」は同じ条件かな？',
     'The robot is 160 centimetres tall. With more decimal places, we can measure more precisely. Is exactly 160 the same condition as a rounded measurement of 160?');
   keep(16);
-  add('「160cmと記録」は、区間の話',`${math(String.raw`\Pr(159.5\le X<160.5)>0`)}\n\n1点の幅は0。丸めた記録には、幅がある。`,'explain',[17,18,19,20],
+  add('「160cmと記録」は、区間の話',`${math(String.raw`\Pr(159.5\le X<160.5)>0`)}\n\n1点の幅は0。\n\n四捨五入して160cmと記録した値には、幅がある。`,'explain',[17,18,19,20],
     '160cmの人が存在しないという意味ではありません。一点は幅0なので確率も0。四捨五入して160cmになる区間には幅があり、この付近に密度があれば正の確率があります。',
     'A zero point probability does not mean nobody can have that height. An exact point has zero width. A rounded measurement covers an interval, with positive probability where the density is positive.');
   keep(22);
