@@ -30,6 +30,37 @@ export const glossary={
   standardError:['標準誤差','Standard error']
 };
 
+// Group ruby for compounds, with kana and okurigana outside the annotated kanji.
+export const readings={
+  measurement:'そくていせいど',randomVariable:'かくりつへんすう',
+  pointProbability:[['1点','いってん'],'の',['確率','かくりつ']],
+  interval:'くかん',rounding:[['丸','ま'],'め'],continuous:'れんぞくかくりつぶんぷ',
+  density:'かくりつみつどかんすう',probability:'かくりつ',
+  intervalProbability:[['区間','くかん'],'の',['確率','かくりつ']],
+  approximation:'きんじ',integral:'ていせきぶん',uniform:'いちようぶんぷ',
+  cdf:'るいせきぶんぷかんすう',cumulative:'るいせきかくりつ',expectation:'きたいち',
+  variance:'ぶんさん',sd:'ひょうじゅんへんさ',normal:'せいきぶんぷ',mean:'へいきん',
+  standardization:'ひょうじゅんか',standardNormal:'ひょうじゅんせいきぶんぷ',
+  zScore:'ひょうじゅんとくてん',normalTable:'ひょうじゅんせいきぶんぷひょう',
+  upperTail:'うわがわかくりつ',lowerTail:'したがわかくりつ',
+  central:[['中央','ちゅうおう'],'の',['区間','くかん'],['確率','かくりつ']],
+  sampleMean:'ひょうほんへいきん',standardError:'ひょうじゅんごさ'
+};
+const ruby=(kanji,kana)=>`<ruby>${kanji}<rt>${kana}</rt></ruby>`;
+export function rubyTerm(key){
+  const reading=readings[key];
+  if(!reading)throw Error(`Missing furigana for statistical term: ${key}`);
+  return typeof reading==='string'?ruby(glossary[key][0],reading):reading.map(part=>typeof part==='string'?part:ruby(...part)).join('');
+}
+export function annotateJapaneseTerms(markdown){
+  const terms=new Map(Object.keys(glossary).map(key=>[glossary[key][0],rubyTerm(key)]));
+  for(const [ja,kana] of [['平均値','へいきんち'],['確率密度','かくりつみつど'],['連続変数','れんぞくへんすう'],['母集団','ぼしゅうだん'],['母標準偏差','ぼひょうじゅんへんさ']])terms.set(ja,ruby(ja,kana));
+  const pattern=new RegExp([...terms.keys()].sort((a,b)=>b.length-a.length).join('|'),'g');
+  // Preserve formulas, images, links, comments and attributes exactly as authored.
+  const protectedParts=/(\$\$[\s\S]*?\$\$|\$[^$\n]*\$|<!--[\s\S]*?-->|<[^>]*>|!?\[[^\]]*\]\([^)]*\)|https?:\/\/[^\s<]+)/g;
+  return markdown.split(protectedParts).map((part,i)=>i%2?part:part.replace(pattern,term=>terms.get(term))).join('');
+}
+
 export const slideTermKeys=[
   [],[],[],[],
   ['measurement'],
@@ -91,7 +122,7 @@ export function terminology(keys){
   return `<aside class="stat-terms" aria-label="統計用語 / Statistical terms">${keys.map(key=>{
     if(!glossary[key])throw Error(`Missing English statistical term: ${key}`);
     const [ja,en]=glossary[key];
-    return `<span class="stat-term"><span class="stat-term-ja" lang="ja">${ja}</span><span class="stat-term-en" lang="en">${en}</span></span>`;
+    return `<span class="stat-term"><span class="stat-term-ja" lang="ja">${rubyTerm(key)}</span><span class="stat-term-en" lang="en">${en}</span></span>`;
   }).join('')}</aside>`;
 }
 
@@ -101,6 +132,10 @@ section .stat-terms{position:absolute;left:70px;right:70px;bottom:48px;display:f
 section .stat-term{display:flex;flex-direction:column;gap:5px;max-width:380px}
 section .stat-term-ja{font-size:22px;font-weight:600;color:#334d59}
 section .stat-term-en{font-size:18px;font-weight:400;color:#687b84;letter-spacing:.015em}
+section ruby{ruby-position:over;ruby-align:space-around}
+section rt{font-size:.46em;font-weight:400;letter-spacing:.02em;color:inherit;line-height:1.2}
+section .stat-term-ja{padding-top:12px}
+section .stat-term-ja rt{font-size:11px;color:#536b77}
 section.single-visual.has-stat-terms img{height:410px}
 section.visual-link.has-stat-terms img{height:390px}
 section.model-visual.has-stat-terms img{height:315px}

@@ -12,5 +12,6 @@
 # Bilingual statistical terminology
 
 - Always pair key Japanese statistical terms with their English equivalents in authored lecture slides. Keep Japanese primary and English smaller and visually secondary, using a consistent style across the deck.
+- Add book-style hiragana furigana above key Japanese terms using semantic ruby text. Keep readings above their kanji, leave okurigana unannotated, and keep the English equivalent below.
 - Keep formulas prominent and story/photo slides uncluttered. Use a shared terminology component and glossary so repeated English labels remain consistent.
 - Commit and push completed course updates after each task, excluding unrelated personal files and Finder metadata.

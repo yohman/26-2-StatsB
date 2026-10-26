@@ -1,6 +1,6 @@
 import {createWeek5Story,storyStyle} from './story-week05.mjs';
 import {createWeek5Notes} from './notes-week05.mjs';
-import {glossary,slideTermKeys,terminology,terminologyStyle} from './terms-week05.mjs';
+import {glossary,slideTermKeys,terminology,terminologyStyle,annotateJapaneseTerms} from './terms-week05.mjs';
 
 // Preserve the long-form source. This editorial pass combines routine steps,
 // while retaining sequences in which the changing image or withheld answer matters.
@@ -158,7 +158,7 @@ export function createWeek5CompactStory(options){
   slides.forEach((slide,i)=>{
     const keys=slideTermKeys[i];
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
-    if(keys.length)slides[i]=slide.replace(/<!-- _class: (.*?) -->/,'<!-- _class: $1 has-stat-terms -->')+'\n\n'+terminology(keys);
+    if(keys.length)slides[i]=annotateJapaneseTerms(slide).replace(/<!-- _class: (.*?) -->/,'<!-- _class: $1 has-stat-terms -->')+'\n\n'+terminology(keys);
   });
   return {slides,mapping,notes:{version:1,deck:'materials/2026-yoh/week05/w5.pdf',slides:narration}};
 }

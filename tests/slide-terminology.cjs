@@ -15,7 +15,9 @@ for(const slide of map.slides){
     assert(ja&&en);
     if(dictionary.has(ja))assert.equal(dictionary.get(ja),en,'Repeated terms use the same translation');
     dictionary.set(ja,en);
-    assert(deck[slide.slide-1].includes(`lang="ja">${ja}</span>`));
+    const japanese=deck[slide.slide-1].match(/<aside class="stat-terms"[\s\S]*?<\/aside>/)[0];
+    assert(japanese.replace(/<rt>[^<]*<\/rt>/g,'').replace(/<[^>]*>/g,'').includes(ja));
+    assert.match(japanese,/<ruby>[^<]+<rt>[ぁ-ゖー]+<\/rt><\/ruby>/);
     assert(deck[slide.slide-1].includes(`lang="en">${en}</span>`));
   }
 }
@@ -24,3 +26,18 @@ const style=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/terms-week
 assert.match(style,/stat-term-ja\{font-size:22px/);
 assert.match(style,/stat-term-en\{font-size:18px/);
 console.log(`Bilingual terminology: ${dictionary.size} consistent terms across all ${map.slides.length-4} statistical slides; Japanese primary, English secondary.`);
+(async()=>{
+  const {glossary,readings,rubyTerm,annotateJapaneseTerms}=await import('../materials/2026-yoh/week05/terms-week05.mjs');
+  for(const key of Object.keys(glossary)){
+    assert(readings[key],`Reading supplied for ${key}`);
+    assert.match(rubyTerm(key),/<ruby>[^<]+<rt>[ぁ-ゖー]+<\/rt><\/ruby>/);
+  }
+  assert.equal(rubyTerm('rounding'),'<ruby>丸<rt>ま</rt></ruby>め');
+  assert(rubyTerm('intervalProbability').includes('</ruby>の<ruby>'));
+  const math='$$\n\\text{分散}=1\n$$',link='[標準化](https://example.com/分散)',image='![確率](images/分散.svg)';
+  const result=annotateJapaneseTerms(`## 期待値\n\n${math}\n\n${link}\n\n${image}\n\n<div title="分散">分散</div>`);
+  assert(result.includes('## <ruby>期待値<rt>きたいち</rt></ruby>'));
+  assert(result.includes(math));assert(result.includes(link));assert(result.includes(image));
+  assert(result.includes('<div title="分散"><ruby>分散<rt>ぶんさん</rt></ruby></div>'));
+  console.log('Book-style ruby: all readings supplied, okurigana preserved, and formulas, links and image paths protected.');
+})().catch(error=>{console.error(error);process.exitCode=1;});
