@@ -51,7 +51,8 @@ console.log(`Bilingual terminology: ${dictionary.size} consistent terms across a
   const pdfjs=require('../assets/vendor/pdfjs/pdf.min.js');
   pdfjs.GlobalWorkerOptions.workerSrc=path.join(root,'assets/vendor/pdfjs/pdf.worker.min.js');
   const pdf=await pdfjs.getDocument({data:new Uint8Array(fs.readFileSync(path.join(root,'materials/2026-yoh/week05/w5.pdf')))}).promise;
-  const text=(await(await pdf.getPage(34)).getTextContent()).items;
+  const variancePage=map.slides.find(slide=>slide.title==='分散から、標準偏差へ').slide;
+  const text=(await(await pdf.getPage(variancePage)).getTextContent()).items;
   for(const [kanji,kana] of [['分','ぶん'],['散','さん'],['標','ひょう'],['準','じゅん'],['偏','へん'],['差','さ']]){
     const base=text.find(item=>item.str===kanji&&item.height>25&&item.transform[5]>430);
     assert(base,`Title character ${kanji} exists in the final PDF`);

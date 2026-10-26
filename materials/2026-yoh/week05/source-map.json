@@ -1,6 +1,6 @@
 {
   "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
-  "pacing": "58 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Show midpoint-area calculations for 4, 16 and 64 rectangles before the integral. Bilingual narration follows the revised pages.",
+  "pacing": "60 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Show midpoint-area calculations for 4, 16 and 64 rectangles before the integral. Bilingual narration follows the revised pages.",
   "decisions": [
     {
       "retain": "Separate race media and stopwatch beats; density then shaded area; numerical rectangle sums; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
@@ -136,8 +136,8 @@
     },
     {
       "slide": 9,
-      "title": "確率密度 $f(x)$",
-      "layout": "single-visual",
+      "title": "ロボットの身長は、160cm付近に集まる",
+      "layout": "model-visual",
       "official": "4–10",
       "textbook": "121–122",
       "yoh75": "13–30",
@@ -149,13 +149,17 @@
         {
           "ja": "確率密度関数",
           "en": "Probability density function (PDF)"
+        },
+        {
+          "ja": "正規分布",
+          "en": "Normal distribution"
         }
       ]
     },
     {
       "slide": 10,
-      "title": "区間に入る確率は、この面積",
-      "layout": "single-visual",
+      "title": "155〜165cmの確率は、この面積",
+      "layout": "visual-link",
       "official": "4–10",
       "textbook": "121–122",
       "yoh75": "13–30",
@@ -194,6 +198,30 @@
     },
     {
       "slide": 12,
+      "title": "確率密度には、いろいろな形がある",
+      "layout": "explain",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        23,
+        25,
+        26
+      ],
+      "terms": [
+        {
+          "ja": "確率密度関数",
+          "en": "Probability density function (PDF)"
+        },
+        {
+          "ja": "正規分布",
+          "en": "Normal distribution"
+        }
+      ]
+    },
+    {
+      "slide": 13,
       "title": "王道家、この行列、何分待つ？",
       "layout": "race-media queue-story",
       "sourceBeats": [],
@@ -204,8 +232,26 @@
       "terms": []
     },
     {
-      "slide": 13,
-      "title": "座れるまでの待ち時間を、X分とする",
+      "slide": 14,
+      "title": "待ち時間なら、こんな形も考えられる",
+      "layout": "model-visual queue-model",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        29
+      ],
+      "terms": [
+        {
+          "ja": "確率密度関数",
+          "en": "Probability density function (PDF)"
+        }
+      ]
+    },
+    {
+      "slide": 15,
+      "title": "この待ち時間を、4個の長方形で近似する",
       "layout": "model-visual queue-model",
       "official": "4–10",
       "textbook": "121–122",
@@ -226,7 +272,7 @@
       ]
     },
     {
-      "slide": 14,
+      "slide": 16,
       "title": "1個目は、「幅 × 高さ」",
       "layout": "worked",
       "official": "4–10",
@@ -244,7 +290,7 @@
       ]
     },
     {
-      "slide": 15,
+      "slide": 17,
       "title": "4個を足すと、98.4375％",
       "layout": "worked",
       "official": "4–10",
@@ -262,7 +308,7 @@
       ]
     },
     {
-      "slide": 16,
+      "slide": 18,
       "title": "16個なら、99.9023％",
       "layout": "worked",
       "official": "4–10",
@@ -280,7 +326,7 @@
       ]
     },
     {
-      "slide": 17,
+      "slide": 19,
       "title": "64個なら、99.9939％",
       "layout": "worked",
       "official": "4–10",
@@ -298,7 +344,7 @@
       ]
     },
     {
-      "slide": 18,
+      "slide": 20,
       "title": "積分なら、面積はちょうど1。",
       "layout": "worked",
       "official": "4–10",
@@ -316,7 +362,7 @@
       ]
     },
     {
-      "slide": 19,
+      "slide": 21,
       "title": "15分以内に座れる確率は？",
       "layout": "worked",
       "official": "4–10",
@@ -338,7 +384,7 @@
       ]
     },
     {
-      "slide": 20,
+      "slide": 22,
       "title": "小さな面積を、全部足す",
       "layout": "explain",
       "official": "4–10",
@@ -359,7 +405,7 @@
       ]
     },
     {
-      "slide": 21,
+      "slide": 23,
       "title": "別のモデル：待ち時間が一様なら？",
       "layout": "model-visual",
       "official": "4–10",
@@ -384,7 +430,7 @@
       ]
     },
     {
-      "slide": 22,
+      "slide": 24,
       "title": "チャレンジ①　ラーメンの待ち時間",
       "layout": "challenge",
       "official": "4–10",
@@ -406,7 +452,7 @@
       ]
     },
     {
-      "slide": 23,
+      "slide": 25,
       "title": "答え合わせ① · 面積の計算",
       "layout": "calculation answer",
       "official": "4–10",
@@ -430,7 +476,7 @@
       ]
     },
     {
-      "slide": 24,
+      "slide": 26,
       "title": "この面積が、25％",
       "layout": "visual-link",
       "official": "4–10",
@@ -449,7 +495,7 @@
       ]
     },
     {
-      "slide": 25,
+      "slide": 27,
       "title": "累積分布関数",
       "layout": "hero-math long",
       "official": "6–10",
@@ -467,7 +513,7 @@
       ]
     },
     {
-      "slide": 26,
+      "slide": 28,
       "title": "$f(x)$：cまでの面積",
       "layout": "single-visual",
       "official": "6–10",
@@ -489,7 +535,7 @@
       ]
     },
     {
-      "slide": 27,
+      "slide": 29,
       "title": "$F(c)$：その面積を、高さにする",
       "layout": "single-visual",
       "official": "6–10",
@@ -511,7 +557,7 @@
       ]
     },
     {
-      "slide": 28,
+      "slide": 30,
       "title": "別の店では、20〜60分なら？",
       "layout": "explain",
       "official": "6–10",
@@ -534,7 +580,7 @@
       ]
     },
     {
-      "slide": 29,
+      "slide": 31,
       "title": "累積確率の差で、80％",
       "layout": "worked",
       "official": "6–10",
@@ -559,7 +605,7 @@
       ]
     },
     {
-      "slide": 30,
+      "slide": 32,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "11–13",
@@ -579,7 +625,7 @@
       ]
     },
     {
-      "slide": 31,
+      "slide": 33,
       "title": "連続変数の期待値",
       "layout": "hero-math",
       "official": "11–13",
@@ -595,7 +641,7 @@
       ]
     },
     {
-      "slide": 32,
+      "slide": 34,
       "title": "配達ロボットの期待時間は、6分",
       "layout": "worked",
       "official": "11–13",
@@ -620,7 +666,7 @@
       ]
     },
     {
-      "slide": 33,
+      "slide": 35,
       "title": "分散",
       "layout": "hero-math long",
       "official": "11–13",
@@ -636,7 +682,7 @@
       ]
     },
     {
-      "slide": 34,
+      "slide": 36,
       "title": "分散から、標準偏差へ",
       "layout": "calculation",
       "official": "11–13",
@@ -661,7 +707,7 @@
       ]
     },
     {
-      "slide": 35,
+      "slide": 37,
       "title": "中心と、ばらつきを見る",
       "layout": "visual-link",
       "official": "11–13",
@@ -682,7 +728,7 @@
       ]
     },
     {
-      "slide": 36,
+      "slide": 38,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "14–18",
@@ -700,7 +746,7 @@
       ]
     },
     {
-      "slide": 37,
+      "slide": 39,
       "title": "正規分布：中心と、ばらつき",
       "layout": "model-visual",
       "official": "14–18",
@@ -729,7 +775,7 @@
       ]
     },
     {
-      "slide": 38,
+      "slide": 40,
       "title": "標準偏差が小さいと、狭い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -747,7 +793,7 @@
       ]
     },
     {
-      "slide": 39,
+      "slide": 41,
       "title": "標準偏差が大きいと、広い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -765,7 +811,7 @@
       ]
     },
     {
-      "slide": 40,
+      "slide": 42,
       "title": "正規分布の密度",
       "layout": "hero-math long",
       "official": "14–18",
@@ -787,7 +833,7 @@
       ]
     },
     {
-      "slide": 41,
+      "slide": 43,
       "title": "標準化の公式",
       "layout": "hero-math long",
       "official": "14–18",
@@ -809,7 +855,7 @@
       ]
     },
     {
-      "slide": 42,
+      "slide": 44,
       "title": "60点は、標準偏差1個ぶん上",
       "layout": "worked",
       "official": "14–18",
@@ -845,7 +891,7 @@
       ]
     },
     {
-      "slide": 43,
+      "slide": 45,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "19–26",
@@ -863,7 +909,7 @@
       ]
     },
     {
-      "slide": 44,
+      "slide": 46,
       "title": "この表は、右側の面積",
       "layout": "model-visual",
       "official": "19–26",
@@ -883,7 +929,7 @@
       ]
     },
     {
-      "slide": 45,
+      "slide": 47,
       "title": "まず、1.9の行",
       "layout": "lookup stage-1",
       "official": "19–26",
@@ -901,7 +947,7 @@
       ]
     },
     {
-      "slide": 46,
+      "slide": 48,
       "title": "次に、0.06の列",
       "layout": "lookup stage-2",
       "official": "19–26",
@@ -919,7 +965,7 @@
       ]
     },
     {
-      "slide": 47,
+      "slide": 49,
       "title": "交点は、0.02500",
       "layout": "lookup stage-3",
       "official": "19–26",
@@ -937,7 +983,7 @@
       ]
     },
     {
-      "slide": 48,
+      "slide": 50,
       "title": "1.96より右は、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -956,7 +1002,7 @@
       ]
     },
     {
-      "slide": 49,
+      "slide": 51,
       "title": "−1.96より左も、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -976,7 +1022,7 @@
       ]
     },
     {
-      "slide": 50,
+      "slide": 52,
       "title": "＋1.96より左は、97.5％",
       "layout": "worked",
       "official": "19–26",
@@ -998,7 +1044,7 @@
       ]
     },
     {
-      "slide": 51,
+      "slide": 53,
       "title": "真ん中は、両方の尾を引く",
       "layout": "worked",
       "official": "19–26",
@@ -1020,7 +1066,7 @@
       ]
     },
     {
-      "slide": 52,
+      "slide": 54,
       "title": "チャレンジ②　70点以上は、何％？",
       "layout": "challenge",
       "official": "19–26",
@@ -1042,7 +1088,7 @@
       ]
     },
     {
-      "slide": 53,
+      "slide": 55,
       "title": "答え合わせ② · 70点以上",
       "layout": "worked",
       "official": "19–26",
@@ -1068,7 +1114,7 @@
       ]
     },
     {
-      "slide": 54,
+      "slide": 56,
       "title": "チャレンジ③　30点から70点なら？",
       "layout": "challenge",
       "official": "19–26",
@@ -1090,7 +1136,7 @@
       ]
     },
     {
-      "slide": 55,
+      "slide": 57,
       "title": "答え合わせ③ · 30〜70点",
       "layout": "worked",
       "official": "19–26",
@@ -1115,7 +1161,7 @@
       ]
     },
     {
-      "slide": 56,
+      "slide": 58,
       "title": "確率は、面積。",
       "layout": "statement",
       "official": "19–26",
@@ -1138,7 +1184,7 @@
       ]
     },
     {
-      "slide": 57,
+      "slide": 59,
       "title": "補足：1人の点数と、n人の平均",
       "layout": "calculation",
       "textbook": "123",
@@ -1163,7 +1209,7 @@
       ]
     },
     {
-      "slide": 58,
+      "slide": 60,
       "title": "標準化だけでは、形は変わらない。",
       "layout": "statement",
       "textbook": "123",
