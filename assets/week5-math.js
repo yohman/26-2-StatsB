@@ -4,6 +4,17 @@
   // Abramowitz-Stegun 7.1.26; absolute CDF error < 8e-8.
   function normalCdf(z){if(z===0)return .5;const a=Math.abs(z)/Math.SQRT2,t=1/(1+.3275911*a);const erf=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-.284496736)*t+.254829592)*t*Math.exp(-a*a);return .5*(1+Math.sign(z)*erf);}
   const upper=z=>1-normalCdf(z);
+  // The printed upper-tail table uses positive z to two decimal places.
+  function normalTableLookup(z){
+    if(!Number.isFinite(z))throw new RangeError('A finite z-score is required');
+    const hundred=Math.round((Math.abs(z)+1e-12)*100),lookupZ=hundred/100;
+    const inRange=hundred<=309,row=Math.floor(hundred/10),col=hundred%10;
+    const tail=inRange?Number(upper(lookupZ).toFixed(5)):null;
+    return {z,lookupZ,signedZ:z<0?-lookupZ:lookupZ,inRange,row,col,tail,
+      rounded:Math.abs(Math.abs(z)-lookupZ)>1e-10,
+      probability:inRange?Number((z<0?1-tail:tail).toFixed(5)):upper(z),
+      rows:inRange?[...new Set([Math.max(0,row-1),row,Math.min(30,row+1)])]:[]};
+  }
   const uniformCdf=(x,b)=>Math.max(0,Math.min(1,x/b));
   const triangularCdf=(x,b)=>uniformCdf(x,b)**2;
   const uniformMoments=b=>({mean:b/2,variance:b*b/12,sd:b/Math.sqrt(12)});
@@ -32,5 +43,5 @@
     const plottedMarkers=markers.map(({x,y})=>`<circle cx="${X(x)}" cy="${Y(y)}" r="5" fill="#af6339"/>`).join('');
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${escape(title)}"><title>${escape(title)}</title><g font-family="Arial,Hiragino Sans,sans-serif" font-size="15" fill="#425560"><text x="${L}" y="22" font-weight="bold">${escape(title)}</text>${[0,.5,1].map(f=>{const y=ymax*f;return `<line x1="${L}" x2="${W-R}" y1="${Y(y)}" y2="${Y(y)}" stroke="#dce3e3"/><text x="${L-8}" y="${Y(y)+5}" text-anchor="end">${number(y)}</text>`;}).join('')}${shade}${comparisons}${rects}${cdf?'':bars}<path d="${path}" fill="none" stroke="#176d82" stroke-width="3.5"/>${plottedMarkers}${mean!==null?`<line x1="${X(mean)}" x2="${X(mean)}" y1="${T}" y2="${base}" stroke="#176d82" stroke-dasharray="5 5"/><text x="${X(mean)}" y="${T-7}" text-anchor="middle">μ = ${number(mean)}</text>`:''}${labels.map(({x,text})=>`<line x1="${X(x)}" x2="${X(x)}" y1="${T+25}" y2="${base}" stroke="#ae653c" stroke-dasharray="4 3"/><text x="${X(x)}" y="${T+20}" text-anchor="middle">${escape(text)}</text>`).join('')}<path d="M${L},${T}V${base}H${W-R}" stroke="#61737c" fill="none"/>${xt.map(x=>`<path d="M${X(x)},${base}v6" stroke="#61737c"/><text x="${X(x)}" y="${base+25}" text-anchor="middle">${number(x)}</text>`).join('')}<text x="${W-R}" y="${H-8}" text-anchor="end">${escape(xlabel)}</text></g></svg>`;
   }
-  return {normalPdf,normalCdf,upper,uniformCdf,triangularCdf,uniformMoments,randomNormal,number,midpointAreas,chart};
+  return {normalPdf,normalCdf,upper,normalTableLookup,uniformCdf,triangularCdf,uniformMoments,randomNormal,number,midpointAreas,chart};
 });

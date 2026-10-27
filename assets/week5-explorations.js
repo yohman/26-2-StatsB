@@ -8,6 +8,14 @@
   const n=M.number;
   const control=(key,en,ja,min,max,step,value)=>`<label class="w5-control">${dual(en,ja)} <output data-value="${key}">${value}</output><input type="range" data-input="${key}" min="${min}" max="${max}" step="${step}" value="${value}"></label>`;
   const titles={area:['Ramen: probability is an area','ラーメン待ち：確率は面積'],cdf:['By this time: cumulative probability','ここまでに：累積確率'],moments:['Robot delivery: expectation & variance','ロボット配達：期待値と分散'],normal:['Exam scores: convert X to Z','試験の点数：XをZに変える'],table:['Read the upper-tail normal table','上側確率の正規分布表を読む']};
+  function lookupView(lookup){
+    if(!lookup.inRange)return `<p class="w5-lookup-warning">${t(`|z| = ${n(Math.abs(lookup.z))} is outside this printed table (0.00–3.09). No table cell is selected. The answer shown uses numerical calculation, not a table lookup.`,`|z|＝${n(Math.abs(lookup.z))}は、この表の範囲（0.00〜3.09）外です。該当するセルはありません。表示した答えは表の値ではなく、数値計算によるものです。`)}</p>`;
+    const {row,col,lookupZ,tail}=lookup;
+    return `<p class="w5-lookup-convention">${t('Upper-tail table · area to the RIGHT of a positive z · textbook p.124','上側確率の表：正のzより右側の面積 · 教科書 p.124')}</p>
+      <p class="w5-lookup-address">${t('Row','行')} <b>${(row/10).toFixed(1)}</b> ＋ ${t('column','列')} <b>${(col/100).toFixed(2)}</b> ＝ <b>${lookupZ.toFixed(2)}</b></p>
+      <div class="w5-table-wrap"><table class="w5-table"><caption>${t('Highlighted intersection = upper-tail probability','色付きの交点＝表から読む上側確率')}</caption><thead><tr><th scope="col">z</th>${Array.from({length:10},(_,i)=>`<th scope="col" class="${col===i?'is-col':''}">${(i/100).toFixed(2)}</th>`).join('')}</tr></thead><tbody>${lookup.rows.map(r=>`<tr><th scope="row" class="${r===row?'is-row':''}">${(r/10).toFixed(1)}</th>${Array.from({length:10},(_,i)=>`<td class="${r===row&&i===col?'is-answer':r===row?'is-row':col===i?'is-col':''}"${r===row&&i===col?' aria-current="true"':''}>${M.upper((r*10+i)/100).toFixed(5)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+      <p class="w5-lookup-value">${t('Read the highlighted cell','色付きのセルを読む')}：<strong>${tail.toFixed(5)}</strong></p>`;
+  }
   function setup(root){
     if(root.dataset.ready)return;root.dataset.ready='true';const kind=root.dataset.week5Lab,isNormal=kind==='normal',isTable=kind==='table';
     let b=kind==='moments'?12:20,lo=5,hi=10,mu=50,sd=10,x=60,z=1.96,samples=[],mode='upper',epoch=0,busy=false;
@@ -21,7 +29,8 @@
       <section class="w5-card"><h5>${dual('③ See what the answer means','③ 答えを図で確かめる')}</h5>
       ${isTable?`<div class="w5-modes">${[['upper','Right tail','右側'],['negative','Left of −z','−zの左側'],['lower','Left of +z','＋zの左側'],['central','Between −z and z','−z〜＋z']].map(([id,en,ja])=>`<button type="button" data-mode="${id}" aria-pressed="${id==='upper'}">${dual(en,ja)}</button>`).join('')}</div>`:''}
       <div data-chart class="w5-chart"></div><div class="w5-key"><span>${dual('Model (fixed)','理論（固定）')}</span><span>${dual('Requested probability','求める確率')}</span>${!isTable?`<span>${dual('Measured (histogram)','実測（ヒストグラム）')}</span>`:''}</div>
-      ${isTable?`<div data-lookup></div><a class="w5-table-link" href="viewer.html?file=materials%2F2026-yoh%2Fweek05%2Fnormal-upper-tail-table.html&title=Standard%20normal%20table&week=W05&return=agenda.html%23week-05" target="_blank">${dual('Open the complete table','分布表の全体を開く')} ↗</a>`:`<div class="w5-actions"><span class="w5-robot" data-robot>${robot}</span><button type="button" data-run="1">${dual('Measure 1','1回測る')}</button><button type="button" data-run="100">${dual('100 measurements','100回')}</button><button type="button" data-run="1000">${dual('1,000 measurements','1,000回')}</button><button type="button" data-stop hidden>${dual('Stop','停止')}</button><button type="button" data-reset>${dual('Reset','リセット')}</button></div><p class="w5-status" data-status role="status"></p><div class="w5-results" data-results></div>`}
+      ${isTable||isNormal?`<section class="w5-lookup"><h5>${dual('④ Derive the answer from the table','④ 表から答えを導く')}</h5><div data-lookup></div><div class="w5-lookup-calculation" data-lookup-calculation></div><a class="w5-table-link" href="viewer.html?file=materials%2F2026-yoh%2Fweek05%2Fnormal-upper-tail-table.html&title=Standard%20normal%20table&week=W05&return=agenda.html%23week-05" target="_blank" rel="noopener">${dual('Open the complete table','分布表の全体を開く')} ↗</a></section>`:''}
+      ${!isTable?`<div class="w5-actions"><span class="w5-robot" data-robot>${robot}</span><button type="button" data-run="1">${dual('Measure 1','1回測る')}</button><button type="button" data-run="100">${dual('100 measurements','100回')}</button><button type="button" data-run="1000">${dual('1,000 measurements','1,000回')}</button><button type="button" data-stop hidden>${dual('Stop','停止')}</button><button type="button" data-reset>${dual('Reset','リセット')}</button></div><p class="w5-status" data-status role="status"></p><div class="w5-results" data-results></div>`:''}
       <p class="w5-note" data-note></p></section></div>`;
     const q=s=>root.querySelector(s);
     function reset(){epoch++;busy=false;samples=[];q('[data-robot]')?.classList.remove('is-running');sync();draw();}
@@ -49,10 +58,15 @@
         graphic=M.chart({max:b,pdf:()=>1/b,lo:b/2-m.sd,hi:b/2+m.sd,mean:m.mean,samples,title:t('Same mean, wider range → greater spread','範囲を広げると、ばらつきも大きくなる'),xlabel:t('Delivery time (minutes)','配達時間（分）'),labels:[{x:m.mean-m.sd,text:'μ − σ'},{x:m.mean+m.sd,text:'μ + σ'}]});
         metrics.push([t('Variance (min²)','分散（分²）'),n(m.variance)]);
       }else if(isNormal){
-        z=(x-mu)/sd;answer=M.upper(z);formula=String.raw`X\sim N(\mu,\sigma^2),\qquad Z=\frac{X-\mu}{\sigma}\sim N(0,1)`;
+        z=(x-mu)/sd;const lookup=M.normalTableLookup(z);answer=lookup.probability;formula=String.raw`X\sim N(\mu,\sigma^2),\qquad Z=\frac{X-\mu}{\sigma}\sim N(0,1)`;
         question=t(`Assume scores follow N(${mu}, ${sd**2}). What is the probability of scoring ${x} or higher? σ=${sd} is the population SD.`,`得点XはN(${mu}, ${sd**2})に従うとする。${x}点以上の確率は？ 母標準偏差σ＝${sd}。`);
-        sub=String.raw`z=\frac{${x}-${mu}}{${sd}}=${n(z)},\qquad\Pr(X\ge${x})=\Pr(Z\ge${n(z)})\approx${n(answer)}`;
-        reading=t(`The score is ${n(z)} population SDs above the mean. This is ONE score, not a sample mean.`,`平均から標準偏差${n(z)}個分の位置。これは1人の得点。標本平均ではない。`);
+        sub=String.raw`\begin{aligned}z&=\frac{${x}-${mu}}{${sd}}\approx${lookup.signedZ.toFixed(2)}\\\Pr(X\ge${x})&=\Pr(Z\ge${n(z)})\approx${answer.toFixed(5)}\end{aligned}`;
+        reading=t(`z = ${n(z)}: ${n(Math.abs(z))} population SDs ${z<0?'below':'above'} the mean. This is ONE score, not a sample mean.`,`z＝${n(z)}：平均より標準偏差${n(Math.abs(z))}個分${z<0?'下':'上'}。これは1人の得点で、標本平均ではありません。`);
+        q('[data-lookup]').innerHTML=lookupView(lookup);
+        if(lookup.inRange){
+          const calculation=z<0?String.raw`\begin{aligned}\Pr(Z\ge-${lookup.lookupZ.toFixed(2)})&=1-\Pr(Z>${lookup.lookupZ.toFixed(2)})\\&=1-${lookup.tail.toFixed(5)}\\&=${answer.toFixed(5)}\end{aligned}`:String.raw`\Pr(Z\ge${lookup.lookupZ.toFixed(2)})=${lookup.tail.toFixed(5)}`;
+          q('[data-lookup-calculation]').innerHTML=`<p>${z<0?t('For a negative z, symmetry gives the area left of +|z|. Subtract the table value from 1.','zが負なら、左右対称より＋|z|の左側と同じ面積。表の値を全体1から引きます。'):t('For a nonnegative z, read the upper-tail value directly.','zが0以上なら、表の上側確率をそのまま使います。')}</p>${math(calculation,t('Probability from the table','表から求める確率'))}<p class="w5-lookup-rounding">${lookup.rounded?t(`Exact z = ${n(z)}; round to ${lookup.signedZ.toFixed(2)} for the table. The displayed answer is this table approximation.`,`z＝${n(z)}を小数第2位の${lookup.signedZ.toFixed(2)}に丸めて表を読みます。表示した答えは、この表による近似です。`):t('Table probabilities are rounded to 5 decimal places. Multiply by 100 to express the answer as a percentage.','表の確率は小数第5位に丸めています。100を掛けると百分率になります。')}</p>${math(String.raw`${answer.toFixed(5)}\times100=${(answer*100).toFixed(3)}\%`,pct(answer))}`;
+        }else q('[data-lookup-calculation]').innerHTML='';
         graphic=M.chart({min:Math.min(mu-4*sd,x-sd),max:Math.max(mu+4*sd,x+sd),pdf:v=>M.normalPdf(v,mu,sd),lo:x,hi:Infinity,mean:mu,samples,title:t('Normal density: area to the right of x','正規密度：x以上の面積'),xlabel:t('Score','点数'),labels:[{x,text:`x = ${x}`}]});
         metrics.push(['z',n(z)]);
       }else{
@@ -64,20 +78,24 @@
         reading=t(mode==='upper'?'Read directly.':mode==='negative'?'By symmetry, the left tail at −z equals the right tail at +z.':mode==='lower'?'Everything minus the right tail.':'Everything minus both equal tails.',mode==='upper'?'表をそのまま読む。':mode==='negative'?'左右対称なので、−zの左側＝＋zの右側。':mode==='lower'?'全体1から右側の面積を引く。':'全体1から左右の尾を両方引く。');
         const min=-4,max=4,a=mode==='upper'?z:mode==='lower'?min:mode==='negative'?min:-z,c=mode==='upper'?max:mode==='lower'?z:mode==='negative'?-z:z;
         graphic=M.chart({min,max,pdf:M.normalPdf,lo:a,hi:c,mean:0,title:t('Shaded area = requested probability','色の面積＝求める確率'),xlabel:'z',ticks:[-4,-2,0,2,4]});
-        const hundred=Math.round(z*100),row=Math.floor(hundred/10),col=hundred%10;
-        const rows=Array.from(new Set([Math.max(0,row-1),row,Math.min(30,row+1)]));
-        q('[data-lookup]').innerHTML=`<p>${t('Row','行')} <b>${(row/10).toFixed(1)}</b> ＋ ${t('column','列')} <b>0.0${col}</b> ＝ <b>${z.toFixed(2)}</b></p><div class="w5-table-wrap"><table class="w5-table"><thead><tr><th>z</th>${Array.from({length:10},(_,i)=>`<th class="${col===i?'is-col':''}">.0${i}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr><th class="${r===row?'is-row':''}">${(r/10).toFixed(1)}</th>${Array.from({length:10},(_,i)=>`<td class="${r===row&&i===col?'is-answer':r===row?'is-row':col===i?'is-col':''}">${M.upper((r*10+i)/100).toFixed(5)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+        q('[data-lookup]').innerHTML=lookupView(M.normalTableLookup(z));
       }
       q('[data-symbolic]').innerHTML=math(formula,t('The general formula','文字のままの公式'));q('[data-substitution]').innerHTML=math(sub,t('Calculation using the selected values','選んだ値を入れた計算'));
       q('[data-question]').textContent=question;q('[data-answer]').textContent=kind==='moments'?`${n(answer)} ${t('min','分')}`:pct(answer);q('[data-reading]').textContent=reading;q('[data-chart]').innerHTML=graphic;
       note=isTable?t('Table values are rounded to 5 decimals, just like a printed lookup table. If your table gives 0-to-z areas instead, the arithmetic is different.','表は小数第5位に丸めています。0〜zの面積を示す別の表では、計算方法が変わるので表の図を必ず確認。'):isNormal?t('Illustrative normal population, independent measurements. Standardizing a non-normal variable does NOT make it normal. Samples do not rescale the theoretical curve.','授業用の正規母集団から独立に測定。正規分布でない変数を標準化しても、正規分布にはならない。実測を増やしても理論の曲線・目盛りは固定。'):t('Illustrative model, not real shop data. Each click measures one new wait. Green histogram = observations; blue curve = fixed model. ↑ indicates a bar above the fixed scale.','実際の店のデータではなく授業モデル。1回＝新しい待ち時間を1つ測定。緑の棒は実測、青い線は固定した理論。↑は固定目盛りを超えた棒。');
       if(kind==='cdf')note=t('The rising PDF and the curved CDF describe the same triangular model. The integral includes the entire density to the LEFT of c.','右上がりのPDFと曲線のCDFは同じ三角形モデル。積分はcの左側にある密度の面積を全部足す。');
       q('[data-note]').textContent=note;
+      // Keep the selected intersection visible without scrolling the whole page.
+      if(isNormal||isTable){
+        const wrap=q('[data-lookup] .w5-table-wrap'),cell=q('[data-lookup] .is-answer');
+        if(wrap&&cell&&wrap.scrollWidth>wrap.clientWidth)wrap.scrollLeft=Math.max(0,cell.offsetLeft+cell.offsetWidth/2-wrap.clientWidth/2);
+      }
       if(!isTable){
         const sampleMean=samples.length?samples.reduce((a,v)=>a+v,0)/samples.length:null;
         const inside=samples.filter(v=>kind==='normal'?v>=x:kind==='area'?v>=lo&&v<=hi:kind==='cdf'?v<=hi:false).length;
         const second=kind==='moments'?[t('Measured mean (min)','実測の平均（分）'),sampleMean===null?'—':n(sampleMean)]:[t('Measured share','実測の割合'),samples.length?pct(inside/samples.length):'—'];
-        q('[data-results]').innerHTML=[[t('Measurements','測定回数'),samples.length.toLocaleString()],second,...metrics,[t(kind==='moments'?'Expected time (min)':'Model probability',kind==='moments'?'期待値（分）':'理論確率'),kind==='moments'?n(answer):pct(answer)]].slice(0,4).map(([a,v])=>`<div><span>${a}</span><b>${v}</b></div>`).join('');
+        const modelLabel=kind==='moments'?t('Expected time (min)','期待値（分）'):isNormal?(M.normalTableLookup(z).inRange?t('Table approximation','表の近似確率'):t('Numerical model (outside table)','数値計算（表の範囲外）')):t('Model probability','理論確率');
+        q('[data-results]').innerHTML=[[t('Measurements','測定回数'),samples.length.toLocaleString()],second,...metrics,[modelLabel,kind==='moments'?n(answer):pct(answer)]].slice(0,4).map(([a,v])=>`<div><span>${a}</span><b>${v}</b></div>`).join('');
         q('[data-status]').textContent=samples.length?t(`Latest: ${n(samples.at(-1))}. Each observation is random; the formula stays fixed.`,`今回の実現値：${n(samples.at(-1))}。測定結果は変わるが、公式の予測は変わらない。`):t('Predict first, then measure.','まず予想してから、測ろう。');
       }
     }
