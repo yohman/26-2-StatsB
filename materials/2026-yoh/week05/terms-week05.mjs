@@ -90,6 +90,7 @@ export const slideTermKeys=[
   ['density','normal'],
   [],
   [],
+  [],
   ['density'],
   ['density'],
   ['integral','probability'],
