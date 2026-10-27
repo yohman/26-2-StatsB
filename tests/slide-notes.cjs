@@ -19,6 +19,7 @@ for(const [i,note] of data.slides.entries()){
   assert.equal(note.title,mapping[i].title);
   assert(note.ja.length>=30&&note.en.length>=50,`Substantive bilingual note on page ${i+1}`);
   assert(!/Yoh.?2025|元のスライド|Teaching source/.test(note.ja+note.en));
+  assert(!/津村|Tsumura/i.test(note.ja+note.en),'Teaching narration must not refer to Tsumura slides');
   uniqueJa.add(note.ja);uniqueEn.add(note.en);
 }
 assert.equal(uniqueJa.size,data.slides.length);assert.equal(uniqueEn.size,data.slides.length);

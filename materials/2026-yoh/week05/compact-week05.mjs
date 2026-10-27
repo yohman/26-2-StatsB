@@ -184,12 +184,12 @@ export function createWeek5CompactStory(options){
   keep(90);
   keep(91);
   add('分散と標準偏差を、取り違えない',`分散は、標準偏差を2乗したもの。\n\n${math(String.raw`\sigma^2=36\quad\Rightarrow\quad \sigma=\sqrt{36}=6`)}\n\n**標準化で割るのは、36ではなく6。**`,'explain',[95],
-    '津村スライド18の標準化では、分母は分散の平方根です。ここは新しい公式を増やす話ではなく、σ²という記号をσに戻す平方根の計算です。分散36と与えられたら標準偏差は6。36で割ってはいけません。次の問題では、どちらが与えられたかを最初に確認しよう。',
-    'In Tsumura slide 18, standardization divides by the square root of variance. This is simply reading σ² and taking its square root to recover σ, not an extra distribution formula. A variance of thirty-six means standard deviation six. Do not divide by thirty-six. Always identify which quantity the question supplies.');
+    '標準化では、分母は分散の平方根です。ここは新しい公式を増やす話ではなく、σ²という記号をσに戻す平方根の計算です。分散36と与えられたら標準偏差は6。36で割ってはいけません。次の問題では、どちらが与えられたかを最初に確認しよう。',
+    'Standardization divides by the square root of variance. This is simply reading σ² and taking its square root to recover σ, not an extra distribution formula. A variance of thirty-six means standard deviation six. Do not divide by thirty-six. Always identify which quantity the question supplies.');
 
   add('正規分布の密度',math(String.raw`f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`),'hero-math long',[92],
-    '教科書p.122、津村のスライド15と17にある密度です。今日はこの式に数を入れて積分することはしません。平均と分散が変わると曲線が変わること、そして毎回積分する代わりに標準化して一つの表を使うことへつなげます。',
-    'This density appears on textbook page 122 and Tsumura slides 15 and 17. We will not evaluate its integral by hand. It explains why mean and variance determine the curve, and motivates standardizing so a single table can replace repeated integration.');
+    '教科書p.122にある密度です。今日はこの式に数を入れて積分することはしません。平均と分散が変わると曲線が変わること、そして毎回積分する代わりに標準化して一つの表を使うことへつなげます。',
+    'This density appears on textbook page 122. We will not evaluate its integral by hand. It explains why mean and variance determine the curve, and motivates standardizing so a single table can replace repeated integration.');
   keep(95,'毎回あの密度を積分する代わりに、中心を0、標準偏差を1にそろえます。平均との差を標準偏差で割ると「中心から何個ぶん？」という位置になります。もとが正規なら、Zは標準正規分布です。','Instead of integrating each normal density afresh, put its centre at zero and its standard deviation at one. The formula measures distance from the mean in standard deviation units. Normal X gives standard normal Z.');
   paired('60点は、標準偏差1個ぶん上',[String.raw`z=\frac{x-\mu}{\sigma}`,String.raw`z=\frac{60-50}{10}=1`],figure(106),`仮定：平均50点、標準偏差10点の正規分布。\n\n${options.tryIt('normal')}`,[98,99,100,101,102,103,104,105,106,107,108],
     '授業用に平均50、標準偏差10の正規モデルを考えます。60点を標準化するとz=1。これは100％ではなく、標準偏差一つぶん上という位置です。平均や標準偏差を変えて、同じ60点を比べてみよう。',

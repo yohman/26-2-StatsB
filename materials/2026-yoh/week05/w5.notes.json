@@ -257,8 +257,8 @@
     {
       "page": 32,
       "title": "分散と標準偏差を、取り違えない",
-      "ja": "津村スライド18の標準化では、分母は分散の平方根です。ここは新しい公式を増やす話ではなく、σ²という記号をσに戻す平方根の計算です。分散36と与えられたら標準偏差は6。36で割ってはいけません。次の問題では、どちらが与えられたかを最初に確認しよう。",
-      "en": "In Tsumura slide 18, standardization divides by the square root of variance. This is simply reading σ² and taking its square root to recover σ, not an extra distribution formula. A variance of thirty-six means standard deviation six. Do not divide by thirty-six. Always identify which quantity the question supplies.",
+      "ja": "標準化では、分母は分散の平方根です。ここは新しい公式を増やす話ではなく、σ²という記号をσに戻す平方根の計算です。分散36と与えられたら標準偏差は6。36で割ってはいけません。次の問題では、どちらが与えられたかを最初に確認しよう。",
+      "en": "Standardization divides by the square root of variance. This is simply reading σ² and taking its square root to recover σ, not an extra distribution formula. A variance of thirty-six means standard deviation six. Do not divide by thirty-six. Always identify which quantity the question supplies.",
       "formulaRef": {
         "pages": "123",
         "relation": "application",
@@ -268,8 +268,8 @@
     {
       "page": 33,
       "title": "正規分布の密度",
-      "ja": "教科書p.122、津村のスライド15と17にある密度です。今日はこの式に数を入れて積分することはしません。平均と分散が変わると曲線が変わること、そして毎回積分する代わりに標準化して一つの表を使うことへつなげます。",
-      "en": "This density appears on textbook page 122 and Tsumura slides 15 and 17. We will not evaluate its integral by hand. It explains why mean and variance determine the curve, and motivates standardizing so a single table can replace repeated integration.",
+      "ja": "教科書p.122にある密度です。今日はこの式に数を入れて積分することはしません。平均と分散が変わると曲線が変わること、そして毎回積分する代わりに標準化して一つの表を使うことへつなげます。",
+      "en": "This density appears on textbook page 122. We will not evaluate its integral by hand. It explains why mean and variance determine the curve, and motivates standardizing so a single table can replace repeated integration.",
       "formulaRef": {
         "pages": "122",
         "label": "教科書 p.122 · 正規分布の確率密度"
