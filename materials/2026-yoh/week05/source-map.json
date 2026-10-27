@@ -255,11 +255,10 @@
     {
       "slide": 15,
       "title": "王道家、この行列、何分待つ？",
-      "layout": "race-media queue-story",
+      "layout": "race-media queue-story queue-portrait",
       "sourceBeats": [],
       "sources": [
-        "https://reiherbahnhof.hatenablog.com/entry/2025/05/07/080430",
-        "https://oudouya.com/shop-info/"
+        "User-supplied image: images/oudouya-kashiwa-night-supplied.png"
       ],
       "terms": []
     },

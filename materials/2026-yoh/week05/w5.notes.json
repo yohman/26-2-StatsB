@@ -102,11 +102,10 @@
     {
       "page": 15,
       "title": "王道家、この行列、何分待つ？",
-      "ja": "みんな、柏の王道家で並んだことある？ 友達とラーメンを食べに来たら、この行列。「座れるまで何分かな？」と考えるよね。この写真だけでは待ち時間の確率は分かりません。次から計算しやすい授業用のモデルを仮定します。写真は柏の店舗の実際の行列ですが、モデルの数値は実測値ではありません。実際には20分を超えて待つこともあります。写真出典：鷺の停車場 / Reiherbahnhof。https://reiherbahnhof.hatenablog.com/entry/2025/05/07/080430 店舗確認：https://oudouya.com/shop-info/",
-      "en": "Have you queued at Oudouya in Kashiwa? Imagine arriving with classmates and seeing this line. How many minutes until we can sit down? A photograph cannot tell us the waiting-time distribution. Next we will assume a convenient classroom model, not measured Oudouya data. Actual waits can exceed twenty minutes. Photo: Reiherbahnhof, published May 2025. https://reiherbahnhof.hatenablog.com/entry/2025/05/07/080430 Shop location: https://oudouya.com/shop-info/",
+      "ja": "みんな、柏の王道家で並んだことある？ 友達とラーメンを食べに来たら、この行列。「座れるまで何分かな？」と考えるよね。この写真だけでは待ち時間の確率は分かりません。次から計算しやすい授業用のモデルを仮定します。モデルの数値は実測値ではなく、実際には20分を超えて待つこともあります。写真は利用者提供です。",
+      "en": "Have you queued at Oudouya in Kashiwa? Imagine arriving with classmates and seeing this line. How many minutes until we can sit down? A photograph cannot tell us the waiting-time distribution. Next we will assume a convenient classroom model, not measured Oudouya data. Actual waits can exceed twenty minutes. This photograph was supplied by the user.",
       "sources": [
-        "https://reiherbahnhof.hatenablog.com/entry/2025/05/07/080430",
-        "https://oudouya.com/shop-info/"
+        "User-supplied image: images/oudouya-kashiwa-night-supplied.png"
       ]
     },
     {
