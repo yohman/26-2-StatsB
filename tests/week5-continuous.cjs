@@ -53,7 +53,12 @@ for(const item of sourceMap.slides.filter(s=>s.practiceAnswer)){
   assert(body.includes('!['),'Every solution has an explanatory chart');
 }
 const formulas=sourceMap.slides.filter(s=>s.layout.includes('hero-math'));
-assert.equal(formulas.length,7);
+assert.equal(formulas.length,4);
+for(const item of sourceMap.slides.slice(20,27)){
+  assert(slideBodies[item.slide-1].includes('ロボット'),'Slides 21–27 retain the concrete robot example');
+  assert(slideBodies[item.slide-1].includes('実測データではありません'),'Classroom assumptions remain explicit');
+  assert(slideBodies[item.slide-1].includes('!['),'Each example has its own explanatory chart');
+}
 for(const item of sourceMap.slides){
   const body=slideBodies[item.slide-1];
   if(/\$/.test(body)){

@@ -1,6 +1,7 @@
 import {createWeek5Story,storyStyle} from './story-week05.mjs';
 import {createWeek5Notes} from './notes-week05.mjs';
 import {glossary,terminology,terminologyStyle,annotateJapaneseTerms} from './terms-week05.mjs';
+import probability from '../../../assets/week5-math.js';
 
 // Preserve the long-form source. This editorial pass combines routine steps,
 // while retaining sequences in which the changing image or withheld answer matters.
@@ -140,15 +141,42 @@ export function createWeek5CompactStory(options){
   add('区間の確率は、その部分の面積',`${ramenFigure('ramen-interval-area',15,20)}\n\n色の面積＝15〜20分待つ確率。\n\n0〜5分待つより、15〜20分待つほうが起こりやすい。\n\n<small>同じ5分幅の面積を比較。授業用の仮定で、王道家の実測データではありません。</small>`,'model-visual queue-model',[26,32],
     '教科書p.121〜122と同じように、区間の確率を面積として読みます。色の部分は15〜20分待つ確率です。0〜5分と15〜20分は同じ5分幅。この図では右側の面積が大きいので、15〜20分待つほうが起こりやすい。高さの数値そのものが確率なのではありません。今日はこの曲線から細かな百分率を手計算しません。ここで必要なのは、区間を選び、その下の面積が確率だと理解することです。',
     'Read interval probability as area, as on textbook pages 121–122. The shading represents a wait of fifteen to twenty minutes. Compare it with zero to five: both intervals have width five, but the right-hand area is larger. Thus fifteen to twenty is more likely in this hypothetical picture. Height alone is not probability. We will not calculate a numerical percentage from this illustrative curve; identify the interval and the area underneath.');
-  add('積分の記号は、面積を表す',`${math(String.raw`\Pr(a\le X\le b)=\int_a^b f(x)\,dx`)}\n\naからbまでの、曲線の下の面積。\n\n**まずは「どの面積か」を読めればよい。**\n\n<small class="book-note">教科書 p.121–122 · 積分を面積として理解する</small>`,'explain',[26,32],
-    '教科書が強調しているのは、積分の計算手順よりも面積の概念です。積分記号の下のaが左端、上のbが右端。f(x)は曲線の高さを表します。この式全体はaからbまでの下の面積、つまりその区間に入る確率です。新しい曲線を自分で作る必要はありません。このあと累積分布関数の意味を確認し、標準化と正規分布表に進みます。',
-    'The textbook emphasizes the area concept rather than integration technique. The lower limit a is the left endpoint, and the upper limit b is the right endpoint. The density f(x) describes the curve’s height. The complete expression means area underneath between a and b, hence probability of that interval. There is no need to invent a curve. Next review the cumulative distribution function, then concentrate on standardization and the normal table.');
-  keep(47,'F(c)は「cまで」の累積確率です。密度の左側からcまでの面積を集めます。小さいfが密度、大きいFが累積を表すことに注意しよう。','F(c) accumulates probability up to c. It adds the area under the density from the far left through c. Lowercase f denotes density, and uppercase F denotes cumulative probability.');
-  keep(48);
-  keep(49,'直前の密度の色の面積が、こちらでは高さ0.25として現れます。cを右へ動かせば、足した面積は減りません。Fは0から1へ累積していきます。','The shaded density area now appears as a height of 0.25. Moving c right can only add area or leave it unchanged. The CDF accumulates from 0 towards 1.');
-  keep(62);
-  keep(65,'津村のスライド12、教科書p.129の期待値です。値に確率を掛けて全体を足す、という考え方を確認します。今日はこの積分を手で計算する演習は行いません。中心を表すμという記号を読めるようにし、次の標準化につなげよう。','Review expected value from Tsumura slide 12 and textbook page 129: weight values by probability and add across the distribution. We will not assign hand integration today. Read μ as the centre and prepare to use it in standardization.');
-  keep(75,'津村のスライド13、教科書p.129の分散です。平均との差を二乗して重み付きで足した、ばらつきの量。今日は定義の確認だけ。これからの問題では分散と標準偏差を取り違えず、標準化の分母に標準偏差を使うことが重要です。','Review variance from Tsumura slide 13 and textbook page 129: a probability-weighted squared distance from the mean. Today we use the definition without hand-integration exercises. The practical priority is to distinguish variance from standard deviation before choosing the denominator in standardization.');
+  const robotAssumption='授業用の仮定：ロボットの身長は平均160cm、標準偏差5cmの正規分布。実測データではありません。';
+  const robotChart=(id,extra={})=>options.fig(id,{min:140,max:180,pdf:heightPdf,lo:0,hi:0,mean:160,ticks:[140,150,155,160,165,170,180],xlabel:'ロボットの身長（cm）',title:'ロボット工場 · 身長の分布（仮定）',...extra});
+  paired('ロボットが、155〜165cmに収まる確率',[
+    String.raw`\Pr(a\le X\le b)=\int_a^b f(x)\,dx`,
+    String.raw`\Pr(155\le X\le165)=\int_{155}^{165}f(x)\,dx`,
+  ],robotChart('robot-interval-example',{lo:155,hi:165}),`出荷条件が155〜165cmなら、色の面積が条件を満たす割合。\n\n<small>${robotAssumption}</small>`,[26,32],
+    'さっきのロボット工場に戻ろう。出荷できる身長を155〜165cmと決めたら、何割が条件を満たす？ Xは1体の身長です。一般式のaに155、bに165を入れると右の色の面積になります。積分の手計算はせず、区間と面積の対応を読もう。この授業用モデルなら約68％です。実測の合格率ではありません。',
+    'Return to the robot factory. Suppose the shipping requirement is a height between 155 and 165 cm. X is the height of one robot. Replacing a and b with those limits identifies the shaded area, or the fraction meeting the requirement. We are reading the integral as area, not doing hand integration. The classroom normal model gives about 68 percent, not a measured factory pass rate.');
+  paired('160cm以下のロボットは、何割？',[
+    String.raw`F(c)=\Pr(X\le c)`,
+    String.raw`F(160)=\Pr(X\le160)=0.50`,
+  ],robotChart('robot-cumulative-question',{lo:140,hi:160}),`160cm以下＝左側から160cmまで、すべて含める。\n\n<small>${robotAssumption}</small>`,[47],
+    '今度は160cm以下なら入れる作業スペースを考えよう。155という下限はなく、160以下を全部数えます。このモデルは160を中心に左右対称なので半分、50％です。Fのかっこは上限を表します。F(160)は160cmの1点の確率ではなく、160cm以下をすべて含む確率です。',
+    'Imagine a workspace accepting robots no taller than 160 cm. Include every height up to 160, with no lower cutoff at 155. Symmetry around 160 gives one half, or 50 percent. The argument of F is the upper limit. F(160) is not the probability at one exact height; it is the probability accumulated through that height.');
+  add('密度の図：160cmまでの「面積」',`${robotChart('robot-cumulative-density',{lo:140,hi:160})}\n\n${math(String.raw`\Pr(X\le160)=0.50`)}\n\n色の面積が50％。曲線の高さを50％とは読まない。\n\n<small>${robotAssumption}</small>`,'model-visual robot-example',[48],
+    '同じ条件を密度の図で見よう。横軸はロボットの身長、縦軸は密度。160までの色の面積が50％です。160での曲線の高さが0.50なのではありません。画面の140より左にも非常に小さい尾が続きますが、図では省略しています。次の図では、この同じ50％を高さとして描きます。',
+    'Read the same condition on the density plot. The horizontal axis is robot height and the vertical axis is density. The shaded area through 160 is 50 percent; the density height at 160 is not 0.50. The tiny tail below the displayed 140 cm boundary continues beyond the plot. Next represent this same accumulated probability as a height.');
+  add('累積分布の図：同じ50％を「高さ」にする',`${robotChart('robot-cumulative-function',{pdf:x=>probability.normalCdf((x-160)/5),cdf:true,mean:null,yMax:1,title:'160cm以下の割合を、高さで読む',point:{x:160,y:.5}})}\n\n${math(String.raw`F(160)=0.50`)}\n\n横160cmから上へ進むと、縦0.50＝50％。\n\n<small>${robotAssumption}</small>`,'model-visual robot-example',[49],
+    'ロボットは同じ、問いも160cm以下で同じ。変わったのは縦軸です。今は累積確率なので、横160から曲線まで上がり、左に読むと0.50。直前の密度の面積が、この図の高さになりました。横の身長を大きくすれば、含めるロボットは増えるので曲線は下がりません。',
+    'The robots and the question are unchanged: what fraction are no taller than 160 cm? The vertical axis now measures cumulative probability. Move up from 160 to the curve, then left to read 0.50. The previous density area becomes the height on this graph. Increasing the height threshold includes more robots, so the cumulative curve cannot decrease.');
+  add('ロボット工場：中心と、ばらつきを知りたい',`${robotChart('robot-moments-question')}\n\n設計の中心は160cm。実際の身長は、その周りに散らばる。\n\n**中心を表すのが期待値。散らばりを表すのが分散。**\n\n<small>${robotAssumption}</small>`,'model-visual robot-example',[62],
+    '工場の担当者なら、合格する割合だけでなく、中心はどこか、どれくらいばらつくかも知りたいよね。ここでは中心160cm、その周りに小さな違いがある、と仮定しています。次の2枚は教科書p.129の期待値と分散の定義をこの身長に結び付けます。新しい積分計算の課題にはしません。',
+    'A factory manager needs more than a pass percentage: where is the centre, and how much do heights vary around it? Our assumed model centres at 160 cm with manufacturing variation around that value. The next two slides connect the textbook definitions of expected value and variance to this height scenario. They are conceptual illustrations, not new hand-integration exercises.');
+  paired('期待値：たくさんのロボットの平均身長',[
+    String.raw`E(X)=\int_{-\infty}^{\infty}x f(x)\,dx`,
+    String.raw`E(X)=160\ \mathrm{cm}`,
+  ],robotChart('robot-expectation-example'),`このモデルの中心は160cm。全員が160cmという意味ではない。\n\n<small>${robotAssumption}</small>`,[65],
+    '期待値のXをロボットの身長として読もう。身長に起こりやすさを掛けて全体を足すと、長い目で見た平均になります。このモデルは中心160の左右対称な正規分布なので期待値は160cm。積分を暗算した結果ではなく、与えたモデルの性質です。全員が160cmとは言っていません。',
+    'Read X as robot height. Weight each height by how often it occurs and add across the distribution to obtain the long-run average. Our symmetric normal model has expected height 160 cm. We use the given model property rather than pretending to calculate the integral mentally. Individual robots still vary; expected height does not mean every robot is 160 cm tall.');
+  paired('分散',[
+    String.raw`\operatorname{Var}(X)=\int_{-\infty}^{\infty}(x-\mu)^2f(x)\,dx`,
+    String.raw`\mu=160,\quad\sigma=5\ \mathrm{cm}`,
+    String.raw`\operatorname{Var}(X)=5^2=25\ \mathrm{cm}^2`,
+  ],robotChart('robot-variance-example',{lo:155,hi:165,labels:[{x:155,text:'μ − σ'},{x:165,text:'μ + σ'}]}),`ロボットの身長が160cmから、どれくらい散らばるか。\n\n<small>${robotAssumption}</small>`,[75],
+    '同じロボットの身長で分散を読もう。xから中心160を引き、その差を二乗して、起こりやすさで重み付けして足します。ここでは標準偏差5cmをモデルの条件として与えているので、分散は5の二乗で25平方cmです。分散25と標準偏差5を混同しないでね。図の155と165は中心から標準偏差1個ぶん離れた位置です。',
+    'Variance describes the spread of robot heights around 160 cm. Subtract the mean, square the difference, then weight it by the density and accumulate. The model gives standard deviation 5 cm, so variance is 25 square centimetres. Distinguish variance 25 from standard deviation 5. The highlighted 155 and 165 boundaries lie one standard deviation on each side of the centre.');
   keep(85);
   add('正規分布：中心と、ばらつき',`${math(String.raw`X\sim N(\mu,\sigma^2)\qquad E(X)=\mu,\quad\operatorname{Var}(X)=\sigma^2`)}\n\n${figure(86)}`,'model-visual',[86,87,88,89],
     '左右対称の釣鐘型です。Nの最初の数が平均μ、二つ目が分散σ²。この書き方で二つ目を標準偏差と間違えないようにしよう。',
@@ -259,6 +287,7 @@ section.explain{font-size:30px}section.explain h2{font-size:43px}section.explain
 section.precision img{height:160px}section.precision .katex-display{font-size:54px}section.precision p{font-size:30px;margin:16px 0}
 section.calculation .katex-display{font-size:43px;margin:32px 0}section.calculation h2{font-size:43px}section.calculation.answer{background:#edf5ef}
 section.model-visual{padding:36px 65px 45px}section.model-visual h2{font-size:41px;margin-bottom:10px}section.model-visual p{font-size:25px;margin:10px 0}section.model-visual .katex-display{font-size:34px;margin:8px 0}section.model-visual img{height:355px;width:1030px;object-fit:contain}
+section.robot-example small,section.worked small{font-size:17px;color:#687b84}section.model-visual.robot-example.has-stat-terms img{height:270px}section.robot-example p{margin:7px 0}section.robot-example .katex-display{font-size:30px;margin:6px 0}
 section.visual-link{padding:34px 60px 45px}section.visual-link h2{font-size:43px;margin-bottom:8px}section.visual-link img{height:440px;width:1030px;object-fit:contain}section.visual-link p{font-size:25px;margin:8px 0}
 section.worked{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto 1fr auto;gap:14px 26px;padding:45px 55px 55px;text-align:left;align-content:center;align-items:center}section.worked h2{grid-column:1/-1;font-size:43px;margin:0 0 8px}section.worked .worked-copy{min-width:0}section.worked .worked-copy .katex-display{font-size:27px;text-align:left;margin:26px 0}section.worked .worked-visual{min-width:0}section.worked img{width:100%;height:320px;object-fit:contain}section.worked>p{grid-column:1/-1;font-size:22px;margin:0}section.worked .worked-visual p{margin:0}
 section.worked a,section.visual-link a,section.model-visual a{display:inline-block;background:#176d82;color:white;text-decoration:none;border-radius:7px;padding:8px 19px;font-size:23px;font-weight:700}section.model-visual a{font-size:21px;padding:7px 17px}

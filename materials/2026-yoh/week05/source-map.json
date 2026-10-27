@@ -442,8 +442,8 @@
     },
     {
       "slide": 21,
-      "title": "積分の記号は、面積を表す",
-      "layout": "explain",
+      "title": "ロボットが、155〜165cmに収まる確率",
+      "layout": "worked",
       "official": "4–10",
       "textbook": "121–122",
       "yoh75": "13–30",
@@ -473,8 +473,8 @@
     },
     {
       "slide": 22,
-      "title": "累積分布関数",
-      "layout": "hero-math long",
+      "title": "160cm以下のロボットは、何割？",
+      "layout": "worked",
       "official": "6–10",
       "textbook": "121–122",
       "yoh75": "14–17,25–30",
@@ -503,8 +503,8 @@
     },
     {
       "slide": 23,
-      "title": "$f(x)$：cまでの面積",
-      "layout": "single-visual",
+      "title": "密度の図：160cmまでの「面積」",
+      "layout": "model-visual robot-example",
       "official": "6–10",
       "textbook": "121–122",
       "yoh75": "14–17,25–30",
@@ -533,8 +533,8 @@
     },
     {
       "slide": 24,
-      "title": "$F(c)$：その面積を、高さにする",
-      "layout": "single-visual",
+      "title": "累積分布の図：同じ50％を「高さ」にする",
+      "layout": "model-visual robot-example",
       "official": "6–10",
       "textbook": "121–122",
       "yoh75": "14–17,25–30",
@@ -563,8 +563,8 @@
     },
     {
       "slide": 25,
-      "title": "教科書 · 第2章 第2節",
-      "layout": "book-divider",
+      "title": "ロボット工場：中心と、ばらつきを知りたい",
+      "layout": "model-visual robot-example",
       "official": "11–13",
       "textbook": "129",
       "sourceBeats": [
@@ -587,8 +587,8 @@
     },
     {
       "slide": 26,
-      "title": "連続変数の期待値",
-      "layout": "hero-math",
+      "title": "期待値：たくさんのロボットの平均身長",
+      "layout": "worked",
       "official": "11–13",
       "textbook": "129",
       "sourceBeats": [
@@ -611,7 +611,7 @@
     {
       "slide": 27,
       "title": "分散",
-      "layout": "hero-math long",
+      "layout": "worked",
       "official": "11–13",
       "textbook": "129",
       "sourceBeats": [
