@@ -76,6 +76,7 @@ assert(slideBodies[8].includes('density-robot-height.svg'));
 assert(slideBodies[9].includes('density-robot-height-area.svg'));
 assert(slideBodies[12].includes('値の集まり方が違えば'));
 assert(slideBodies[17].includes('density-oudouya-wait.svg'));
+assert(slideBodies[17].includes('0〜5分待つより、15〜20分待つほうが起こりやすい。'));
 assert(slideBodies[17].includes('実測データではありません'));
 assert(slideBodies[4].includes('155〜165cm'));
 assert(slideBodies[6].includes('\\Pr(155\\le X\\le165)>0'));
