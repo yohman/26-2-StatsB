@@ -1,12 +1,12 @@
 {
   "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
-  "pacing": "69 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Show midpoint-area calculations for 4, 16 and 64 rectangles before the integral. Bilingual narration follows the revised pages.",
+  "pacing": "58 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow textbook pp.121–125: density and area, CDF, normal distribution, standardization and table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Finish with moments from p.129. Bilingual narration follows the revised pages.",
   "decisions": [
     {
-      "retain": "Separate race media and stopwatch beats; density then shaded area; numerical rectangle sums; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
+      "retain": "Separate race media and stopwatch beats; density then shaded area; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
     },
     {
-      "combine": "Measurement precision; uniform setup; arithmetic steps; mean and variance calculations; worked solutions alongside their charts"
+      "combine": "Measurement precision; uniform setup; arithmetic steps; mean and variance calculations at the end; worked solutions alongside their charts"
     },
     {
       "defer": "Chi-square / goodness-of-fit / Pearson / Koala, outside official Week5 scope"
@@ -198,28 +198,6 @@
     },
     {
       "slide": 12,
-      "title": "ロボットの身長：155〜165cmの確率",
-      "layout": "worked robot-height-answer",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        26
-      ],
-      "terms": [
-        {
-          "ja": "標準化",
-          "en": "Standardization"
-        },
-        {
-          "ja": "区間の確率",
-          "en": "Interval probability"
-        }
-      ]
-    },
-    {
-      "slide": 13,
       "title": "確率密度には、いろいろな形がある",
       "layout": "explain",
       "official": "4–10",
@@ -243,7 +221,7 @@
       ]
     },
     {
-      "slide": 14,
+      "slide": 13,
       "title": "ラーメン店の行列",
       "layout": "race-media queue-story queue-history",
       "sourceBeats": [],
@@ -253,7 +231,7 @@
       "terms": []
     },
     {
-      "slide": 15,
+      "slide": 14,
       "title": "なんでんかんでんのラーメン",
       "layout": "race-media queue-story queue-bowl",
       "sourceBeats": [],
@@ -263,7 +241,7 @@
       "terms": []
     },
     {
-      "slide": 16,
+      "slide": 15,
       "title": "王道家、この行列、何分待つ？",
       "layout": "race-media queue-story queue-portrait",
       "sourceBeats": [],
@@ -273,7 +251,7 @@
       "terms": []
     },
     {
-      "slide": 17,
+      "slide": 16,
       "title": "王道家のラーメンとご飯",
       "layout": "race-media queue-story queue-bowl",
       "sourceBeats": [],
@@ -283,7 +261,7 @@
       "terms": []
     },
     {
-      "slide": 18,
+      "slide": 17,
       "title": "待ち時間なら、こんな形も考えられる",
       "layout": "model-visual queue-model",
       "official": "4–10",
@@ -301,260 +279,71 @@
       ]
     },
     {
-      "slide": 19,
-      "title": "x²は、こんな曲線をつくる",
-      "layout": "worked quadratic-shape",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        29
-      ],
-      "terms": [
-        {
-          "ja": "二次関数",
-          "en": "Quadratic function"
-        }
-      ]
-    },
-    {
-      "slide": 20,
-      "title": "cは、曲線の高さを調整する倍率",
-      "layout": "worked quadratic-scaling",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        29
-      ],
-      "terms": [
-        {
-          "ja": "確率",
-          "en": "Probability"
-        }
-      ]
-    },
-    {
-      "slide": 21,
-      "title": "ここからは、授業用の仮定モデル",
-      "layout": "explain quadratic-assumption",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        29
-      ],
-      "terms": [
-        {
-          "ja": "確率密度関数",
-          "en": "Probability density function (PDF)"
-        }
-      ]
-    },
-    {
-      "slide": 22,
-      "title": "全体の面積を1にして、cを決める",
-      "layout": "calculation",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        32
-      ],
-      "terms": [
-        {
-          "ja": "定積分",
-          "en": "Definite integral"
-        },
-        {
-          "ja": "確率",
-          "en": "Probability"
-        }
-      ]
-    },
-    {
-      "slide": 23,
-      "title": "上限20分なら、8000は20の3乗",
-      "layout": "worked",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        32
-      ],
-      "terms": [
-        {
-          "ja": "確率密度関数",
-          "en": "Probability density function (PDF)"
-        },
-        {
-          "ja": "確率",
-          "en": "Probability"
-        }
-      ]
-    },
-    {
-      "slide": 24,
-      "title": "この待ち時間を、4個の長方形で近似する",
+      "slide": 18,
+      "title": "全体の面積は、1＝100％",
       "layout": "model-visual queue-model",
       "official": "4–10",
       "textbook": "121–122",
       "yoh75": "13–30",
       "yoh109": "9–30",
       "sourceBeats": [
-        29
-      ],
-      "terms": [
-        {
-          "ja": "近似",
-          "en": "Approximation"
-        },
-        {
-          "ja": "確率密度関数",
-          "en": "Probability density function (PDF)"
-        }
-      ]
-    },
-    {
-      "slide": 25,
-      "title": "1個目は、「幅 × 高さ」",
-      "layout": "worked",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        29
-      ],
-      "terms": [
-        {
-          "ja": "近似",
-          "en": "Approximation"
-        }
-      ]
-    },
-    {
-      "slide": 26,
-      "title": "4個を足すと、98.4375％",
-      "layout": "worked",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        29
-      ],
-      "terms": [
-        {
-          "ja": "近似",
-          "en": "Approximation"
-        }
-      ]
-    },
-    {
-      "slide": 27,
-      "title": "16個なら、99.9023％",
-      "layout": "worked",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        30
-      ],
-      "terms": [
-        {
-          "ja": "近似",
-          "en": "Approximation"
-        }
-      ]
-    },
-    {
-      "slide": 28,
-      "title": "64個なら、99.9939％",
-      "layout": "worked",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        31
-      ],
-      "terms": [
-        {
-          "ja": "近似",
-          "en": "Approximation"
-        }
-      ]
-    },
-    {
-      "slide": 29,
-      "title": "積分なら、面積はちょうど1。",
-      "layout": "worked",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
         32
       ],
       "terms": [
         {
-          "ja": "定積分",
-          "en": "Definite integral"
+          "ja": "確率密度関数",
+          "en": "Probability density function (PDF)"
+        },
+        {
+          "ja": "確率",
+          "en": "Probability"
         }
       ]
     },
     {
-      "slide": 30,
-      "title": "15分以内に座れる確率は？",
-      "layout": "worked",
+      "slide": 19,
+      "title": "区間の確率は、その部分の面積",
+      "layout": "model-visual queue-model",
       "official": "4–10",
       "textbook": "121–122",
       "yoh75": "13–30",
       "yoh109": "9–30",
       "sourceBeats": [
+        26,
         32
       ],
       "terms": [
         {
           "ja": "区間の確率",
           "en": "Interval probability"
-        },
-        {
-          "ja": "定積分",
-          "en": "Definite integral"
         }
       ]
     },
     {
-      "slide": 31,
-      "title": "小さな面積を、全部足す",
+      "slide": 20,
+      "title": "積分の記号は、面積を表す",
       "layout": "explain",
       "official": "4–10",
       "textbook": "121–122",
       "yoh75": "13–30",
       "yoh109": "9–30",
       "sourceBeats": [
-        32,
-        33,
-        34,
-        35
+        26,
+        32
       ],
       "terms": [
         {
           "ja": "定積分",
           "en": "Definite integral"
+        },
+        {
+          "ja": "区間の確率",
+          "en": "Interval probability"
         }
       ]
     },
     {
-      "slide": 32,
+      "slide": 21,
       "title": "別のモデル：待ち時間が一様なら？",
       "layout": "model-visual",
       "official": "4–10",
@@ -579,7 +368,7 @@
       ]
     },
     {
-      "slide": 33,
+      "slide": 22,
       "title": "チャレンジ①　ラーメンの待ち時間",
       "layout": "challenge",
       "official": "4–10",
@@ -601,7 +390,7 @@
       ]
     },
     {
-      "slide": 34,
+      "slide": 23,
       "title": "答え合わせ① · 面積の計算",
       "layout": "calculation answer",
       "official": "4–10",
@@ -625,7 +414,7 @@
       ]
     },
     {
-      "slide": 35,
+      "slide": 24,
       "title": "この面積が、25％",
       "layout": "visual-link",
       "official": "4–10",
@@ -644,7 +433,7 @@
       ]
     },
     {
-      "slide": 36,
+      "slide": 25,
       "title": "累積分布関数",
       "layout": "hero-math long",
       "official": "6–10",
@@ -662,7 +451,7 @@
       ]
     },
     {
-      "slide": 37,
+      "slide": 26,
       "title": "$f(x)$：cまでの面積",
       "layout": "single-visual",
       "official": "6–10",
@@ -684,7 +473,7 @@
       ]
     },
     {
-      "slide": 38,
+      "slide": 27,
       "title": "$F(c)$：その面積を、高さにする",
       "layout": "single-visual",
       "official": "6–10",
@@ -706,7 +495,7 @@
       ]
     },
     {
-      "slide": 39,
+      "slide": 28,
       "title": "別の店では、20〜60分なら？",
       "layout": "explain",
       "official": "6–10",
@@ -729,7 +518,7 @@
       ]
     },
     {
-      "slide": 40,
+      "slide": 29,
       "title": "累積確率の差で、80％",
       "layout": "worked",
       "official": "6–10",
@@ -754,130 +543,7 @@
       ]
     },
     {
-      "slide": 41,
-      "title": "教科書 · 第2章 第2節",
-      "layout": "book-divider",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        62
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        },
-        {
-          "ja": "分散",
-          "en": "Variance"
-        }
-      ]
-    },
-    {
-      "slide": 42,
-      "title": "連続変数の期待値",
-      "layout": "hero-math",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        65
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        }
-      ]
-    },
-    {
-      "slide": 43,
-      "title": "配達ロボットの期待時間は、6分",
-      "layout": "worked",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        68,
-        69,
-        70,
-        71,
-        72,
-        73
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        },
-        {
-          "ja": "一様分布",
-          "en": "Uniform distribution"
-        }
-      ]
-    },
-    {
-      "slide": 44,
-      "title": "分散",
-      "layout": "hero-math long",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        75
-      ],
-      "terms": [
-        {
-          "ja": "分散",
-          "en": "Variance"
-        }
-      ]
-    },
-    {
-      "slide": 45,
-      "title": "分散から、標準偏差へ",
-      "layout": "calculation",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        77,
-        78,
-        79,
-        80,
-        81,
-        82
-      ],
-      "terms": [
-        {
-          "ja": "分散",
-          "en": "Variance"
-        },
-        {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
-        }
-      ]
-    },
-    {
-      "slide": 46,
-      "title": "中心と、ばらつきを見る",
-      "layout": "visual-link",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        83,
-        84
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        },
-        {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
-        }
-      ]
-    },
-    {
-      "slide": 47,
+      "slide": 30,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "14–18",
@@ -895,7 +561,7 @@
       ]
     },
     {
-      "slide": 48,
+      "slide": 31,
       "title": "正規分布：中心と、ばらつき",
       "layout": "model-visual",
       "official": "14–18",
@@ -924,7 +590,7 @@
       ]
     },
     {
-      "slide": 49,
+      "slide": 32,
       "title": "標準偏差が小さいと、狭い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -942,7 +608,7 @@
       ]
     },
     {
-      "slide": 50,
+      "slide": 33,
       "title": "標準偏差が大きいと、広い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -960,7 +626,7 @@
       ]
     },
     {
-      "slide": 51,
+      "slide": 34,
       "title": "正規分布の密度",
       "layout": "hero-math long",
       "official": "14–18",
@@ -982,7 +648,7 @@
       ]
     },
     {
-      "slide": 52,
+      "slide": 35,
       "title": "標準化の公式",
       "layout": "hero-math long",
       "official": "14–18",
@@ -1004,7 +670,7 @@
       ]
     },
     {
-      "slide": 53,
+      "slide": 36,
       "title": "60点は、標準偏差1個ぶん上",
       "layout": "worked",
       "official": "14–18",
@@ -1040,7 +706,7 @@
       ]
     },
     {
-      "slide": 54,
+      "slide": 37,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "19–26",
@@ -1058,7 +724,7 @@
       ]
     },
     {
-      "slide": 55,
+      "slide": 38,
       "title": "この表は、右側の面積",
       "layout": "model-visual",
       "official": "19–26",
@@ -1078,7 +744,7 @@
       ]
     },
     {
-      "slide": 56,
+      "slide": 39,
       "title": "まず、1.9の行",
       "layout": "lookup stage-1",
       "official": "19–26",
@@ -1096,7 +762,7 @@
       ]
     },
     {
-      "slide": 57,
+      "slide": 40,
       "title": "次に、0.06の列",
       "layout": "lookup stage-2",
       "official": "19–26",
@@ -1114,7 +780,7 @@
       ]
     },
     {
-      "slide": 58,
+      "slide": 41,
       "title": "交点は、0.02500",
       "layout": "lookup stage-3",
       "official": "19–26",
@@ -1132,7 +798,7 @@
       ]
     },
     {
-      "slide": 59,
+      "slide": 42,
       "title": "1.96より右は、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1151,7 +817,7 @@
       ]
     },
     {
-      "slide": 60,
+      "slide": 43,
       "title": "−1.96より左も、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1171,7 +837,7 @@
       ]
     },
     {
-      "slide": 61,
+      "slide": 44,
       "title": "＋1.96より左は、97.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1193,7 +859,7 @@
       ]
     },
     {
-      "slide": 62,
+      "slide": 45,
       "title": "真ん中は、両方の尾を引く",
       "layout": "worked",
       "official": "19–26",
@@ -1215,7 +881,7 @@
       ]
     },
     {
-      "slide": 63,
+      "slide": 46,
       "title": "チャレンジ②　70点以上は、何％？",
       "layout": "challenge",
       "official": "19–26",
@@ -1237,7 +903,7 @@
       ]
     },
     {
-      "slide": 64,
+      "slide": 47,
       "title": "答え合わせ② · 70点以上",
       "layout": "worked",
       "official": "19–26",
@@ -1263,7 +929,7 @@
       ]
     },
     {
-      "slide": 65,
+      "slide": 48,
       "title": "チャレンジ③　30点から70点なら？",
       "layout": "challenge",
       "official": "19–26",
@@ -1285,7 +951,7 @@
       ]
     },
     {
-      "slide": 66,
+      "slide": 49,
       "title": "答え合わせ③ · 30〜70点",
       "layout": "worked",
       "official": "19–26",
@@ -1310,7 +976,130 @@
       ]
     },
     {
-      "slide": 67,
+      "slide": 50,
+      "title": "教科書 · 第2章 第2節",
+      "layout": "book-divider",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        62
+      ],
+      "terms": [
+        {
+          "ja": "期待値",
+          "en": "Expected value"
+        },
+        {
+          "ja": "分散",
+          "en": "Variance"
+        }
+      ]
+    },
+    {
+      "slide": 51,
+      "title": "連続変数の期待値",
+      "layout": "hero-math",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        65
+      ],
+      "terms": [
+        {
+          "ja": "期待値",
+          "en": "Expected value"
+        }
+      ]
+    },
+    {
+      "slide": 52,
+      "title": "配達ロボットの期待時間は、6分",
+      "layout": "worked",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        68,
+        69,
+        70,
+        71,
+        72,
+        73
+      ],
+      "terms": [
+        {
+          "ja": "期待値",
+          "en": "Expected value"
+        },
+        {
+          "ja": "一様分布",
+          "en": "Uniform distribution"
+        }
+      ]
+    },
+    {
+      "slide": 53,
+      "title": "分散",
+      "layout": "hero-math long",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        75
+      ],
+      "terms": [
+        {
+          "ja": "分散",
+          "en": "Variance"
+        }
+      ]
+    },
+    {
+      "slide": 54,
+      "title": "分散から、標準偏差へ",
+      "layout": "calculation",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        77,
+        78,
+        79,
+        80,
+        81,
+        82
+      ],
+      "terms": [
+        {
+          "ja": "分散",
+          "en": "Variance"
+        },
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ]
+    },
+    {
+      "slide": 55,
+      "title": "中心と、ばらつきを見る",
+      "layout": "visual-link",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        83,
+        84
+      ],
+      "terms": [
+        {
+          "ja": "期待値",
+          "en": "Expected value"
+        },
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ]
+    },
+    {
+      "slide": 56,
       "title": "確率は、面積。",
       "layout": "statement",
       "official": "19–26",
@@ -1333,7 +1122,7 @@
       ]
     },
     {
-      "slide": 68,
+      "slide": 57,
       "title": "補足：1人の点数と、n人の平均",
       "layout": "calculation",
       "textbook": "123",
@@ -1358,7 +1147,7 @@
       ]
     },
     {
-      "slide": 69,
+      "slide": 58,
       "title": "標準化だけでは、形は変わらない。",
       "layout": "statement",
       "textbook": "123",

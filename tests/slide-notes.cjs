@@ -12,7 +12,7 @@ const data=JSON.parse(fs.readFileSync('materials/2026-yoh/week05/w5.notes.json',
 const mapping=JSON.parse(fs.readFileSync('materials/2026-yoh/week05/source-map.json','utf8')).slides;
 assert.equal(data.deck,deck);
 assert.equal(data.slides.length,mapping.length);
-assert.equal(data.slides.length,69);
+assert.equal(data.slides.length,58);
 const uniqueJa=new Set(),uniqueEn=new Set();
 for(const [i,note] of data.slides.entries()){
   assert.equal(note.page,i+1);
@@ -48,7 +48,7 @@ function setup(fetch){
   assert.equal(surface.caption.children[2].lang,'en');
   notes.show(40);assert.equal(surface.caption.dataset.slide,'40');
   notes.show(1);assert.equal(surface.caption.children[1].textContent,data.slides[0].ja);
-  notes.show(69);assert.equal(surface.caption.dataset.slide,'69');
+  notes.show(58);assert.equal(surface.caption.dataset.slide,'58');
   const other=new Element();bind({file:deck,after:other});assert.equal(calls,1,'Cache shared notes requests');
   const unsupported=new Element();await bind({file:'other.pdf',after:unsupported}).ready;
   assert.equal(unsupported.caption,undefined);assert.equal(calls,1,'No missing notes requests for other decks');
@@ -58,5 +58,5 @@ function setup(fetch){
   assert(failed.caption.hidden,'Notes failure is isolated from PDF preview');
   const viewer=fs.readFileSync('viewer.html','utf8');
   assert(viewer.indexOf('narration?.show(requestedPage)')>viewer.indexOf('await page.render'));
-  console.log('Slide captions: 69 bilingual notes, exact page alignment, challenge safety, navigation, late loading, caching and failure isolation verified.');
+  console.log('Slide captions: 58 bilingual notes, exact page alignment, challenge safety, navigation, late loading, caching and failure isolation verified.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
