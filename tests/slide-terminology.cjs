@@ -21,7 +21,7 @@ for(const slide of map.slides){
     assert(deck[slide.slide-1].includes(`lang="en">${en}</span>`));
   }
 }
-for(const term of ['確率変数','確率密度関数','累積分布関数','期待値','分散','標準偏差','正規分布','標準化','標本平均','標準誤差'])assert(dictionary.has(term));
+for(const term of ['確率変数','確率密度関数','累積分布関数','期待値','分散','標準偏差','正規分布','標準化','標準得点','標準正規分布表'])assert(dictionary.has(term));
 const style=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/terms-week05.mjs'),'utf8');
 assert.match(style,/stat-term-ja\{font-size:22px/);
 assert.match(style,/stat-term-en\{font-size:18px/);
@@ -51,12 +51,12 @@ console.log(`Bilingual terminology: ${dictionary.size} consistent terms across a
   const pdfjs=require('../assets/vendor/pdfjs/pdf.min.js');
   pdfjs.GlobalWorkerOptions.workerSrc=path.join(root,'assets/vendor/pdfjs/pdf.worker.min.js');
   const pdf=await pdfjs.getDocument({data:new Uint8Array(fs.readFileSync(path.join(root,'materials/2026-yoh/week05/w5.pdf')))}).promise;
-  const variancePage=map.slides.find(slide=>slide.title==='分散から、標準偏差へ').slide;
+  const variancePage=map.slides.find(slide=>slide.title==='分散と標準偏差を、取り違えない').slide;
   const text=(await(await pdf.getPage(variancePage)).getTextContent()).items;
   for(const [kanji,kana] of [['分','ぶん'],['散','さん'],['標','ひょう'],['準','じゅん'],['偏','へん'],['差','さ']]){
-    const base=text.find(item=>item.str===kanji&&item.height>25&&item.transform[5]>430);
+    const base=text.find(item=>item.str===kanji&&item.height>25&&item.transform[5]>300);
     assert(base,`Title character ${kanji} exists in the final PDF`);
-    const reading=text.find(item=>item.str===kana&&item.height>0&&item.height<12&&item.transform[5]>base.transform[5]);
+    const reading=text.find(item=>item.str===kana&&item.height>0&&item.height<12&&item.transform[5]>base.transform[5]&&item.transform[5]<base.transform[5]+base.height*1.5);
     assert(reading,`Title reading ${kana} exists above ${kanji}`);
     assert(Math.abs((base.transform[4]+base.width/2)-(reading.transform[4]+reading.width/2))<0.2,`${kana} is centered above ${kanji}`);
     assert(Math.abs(reading.height/base.height-0.28)<0.01,'Large-title readings use the smaller 28% size');

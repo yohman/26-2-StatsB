@@ -1,18 +1,40 @@
 {
   "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
-  "pacing": "58 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow textbook pp.121–125: density and area, CDF, normal distribution, standardization and table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Finish with moments from p.129. Bilingual narration follows the revised pages.",
+  "pacing": "57 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 11–13 for expectation/variance definitions, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with six interleaved z-score/table challenges, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
   "decisions": [
     {
       "retain": "Separate race media and stopwatch beats; density then shaded area; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
     },
     {
-      "combine": "Measurement precision; uniform setup; arithmetic steps; mean and variance calculations at the end; worked solutions alongside their charts"
+      "combine": "Brief density/CDF/moments definitions without hand integration; worked z-score and table solutions alongside their charts"
     },
     {
       "defer": "Chi-square / goodness-of-fit / Pearson / Koala, outside official Week5 scope"
     },
     {
-      "appendix": "Individual values versus sample means and standardization conditions, textbook p.123"
+      "omit": "Sample-mean appendix, uniform-density calculations and extra Q notation; keep the AL focus on individual values and normal-table skills"
+    }
+  ],
+  "curriculum": [
+    {
+      "tsumura": "4–10",
+      "textbook": "121–122",
+      "role": "brief density, area and CDF background"
+    },
+    {
+      "tsumura": "11–13",
+      "textbook": "129",
+      "role": "definitions only; no integration exercises"
+    },
+    {
+      "tsumura": "15–18",
+      "textbook": "122–123",
+      "role": "normal shape, SD, standardization; individual-value application is labeled"
+    },
+    {
+      "tsumura": "20–26",
+      "textbook": "124–125",
+      "role": "main practice: upper tail, symmetry, complement and intervals"
     }
   ],
   "slides": [
@@ -21,6 +43,7 @@
       "title": "パリ2024 · 男子100m決勝",
       "layout": "race-media race-video",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [
         "https://www.youtube.com/watch?v=GHw-eTs4Yes"
       ],
@@ -31,6 +54,7 @@
       "title": "この写真だけで、分かる？",
       "layout": "race-media race-finish",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [
         "https://worldathletics.org/competitions/olympic-games/the-xxxiii-olympic-games-7153115/news/article/paris-2024-olympics-report-men-100m"
       ],
@@ -41,6 +65,7 @@
       "title": "0.005秒を、見る。",
       "layout": "race-media race-scan",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [
         "https://www.hodinkee.com/articles/olympics-2024-mens-100m-photo-finish"
       ],
@@ -51,11 +76,38 @@
       "title": "今度は、自分で1秒。",
       "layout": "watch-bridge",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [],
       "terms": []
     },
     {
       "slide": 5,
+      "title": "今日のゴール：標準化して、表で読む",
+      "layout": "explain",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "standardization",
+        "zScore"
+      ],
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "標準得点",
+          "en": "Z-score"
+        }
+      ]
+    },
+    {
+      "slide": 6,
       "title": "身長、何cmまで測る？",
       "layout": "precision",
       "yoh75": "2–12",
@@ -66,6 +118,13 @@
         14,
         15
       ],
+      "termKeys": [
+        "measurement"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 確率密度と面積（例への適用）"
+      },
       "terms": [
         {
           "ja": "測定精度",
@@ -74,7 +133,7 @@
       ]
     },
     {
-      "slide": 6,
+      "slide": 7,
       "title": "1点の確率",
       "layout": "hero-math",
       "yoh75": "2–12",
@@ -82,6 +141,14 @@
       "sourceBeats": [
         16
       ],
+      "termKeys": [
+        "randomVariable",
+        "pointProbability"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 確率密度と面積（例への適用）"
+      },
       "terms": [
         {
           "ja": "確率変数",
@@ -94,7 +161,7 @@
       ]
     },
     {
-      "slide": 7,
+      "slide": 8,
       "title": "155〜165cmなら、区間に幅がある",
       "layout": "explain",
       "yoh75": "2–12",
@@ -105,6 +172,14 @@
         19,
         20
       ],
+      "termKeys": [
+        "interval",
+        "intervalProbability"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 確率密度と面積（例への適用）"
+      },
       "terms": [
         {
           "ja": "区間",
@@ -117,7 +192,7 @@
       ]
     },
     {
-      "slide": 8,
+      "slide": 9,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "4–10",
@@ -127,6 +202,9 @@
       "sourceBeats": [
         22
       ],
+      "termKeys": [
+        "continuous"
+      ],
       "terms": [
         {
           "ja": "連続確率分布",
@@ -135,7 +213,7 @@
       ]
     },
     {
-      "slide": 9,
+      "slide": 10,
       "title": "ロボットの身長は、160cm付近に集まる",
       "layout": "model-visual",
       "official": "4–10",
@@ -144,6 +222,10 @@
       "yoh109": "9–30",
       "sourceBeats": [
         23
+      ],
+      "termKeys": [
+        "density",
+        "normal"
       ],
       "terms": [
         {
@@ -157,7 +239,7 @@
       ]
     },
     {
-      "slide": 10,
+      "slide": 11,
       "title": "155〜165cmの確率は、この面積",
       "layout": "visual-link",
       "official": "4–10",
@@ -167,6 +249,9 @@
       "sourceBeats": [
         25
       ],
+      "termKeys": [
+        "intervalProbability"
+      ],
       "terms": [
         {
           "ja": "区間の確率",
@@ -175,7 +260,7 @@
       ]
     },
     {
-      "slide": 11,
+      "slide": 12,
       "title": "区間の確率",
       "layout": "hero-math long",
       "official": "4–10",
@@ -185,19 +270,27 @@
       "sourceBeats": [
         26
       ],
+      "termKeys": [
+        "integral",
+        "intervalProbability"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 確率密度と面積（例への適用）"
+      },
       "terms": [
-        {
-          "ja": "区間の確率",
-          "en": "Interval probability"
-        },
         {
           "ja": "定積分",
           "en": "Definite integral"
+        },
+        {
+          "ja": "区間の確率",
+          "en": "Interval probability"
         }
       ]
     },
     {
-      "slide": 12,
+      "slide": 13,
       "title": "確率密度には、いろいろな形がある",
       "layout": "explain",
       "official": "4–10",
@@ -209,6 +302,10 @@
         25,
         26
       ],
+      "termKeys": [
+        "density",
+        "normal"
+      ],
       "terms": [
         {
           "ja": "確率密度関数",
@@ -221,47 +318,51 @@
       ]
     },
     {
-      "slide": 13,
+      "slide": 14,
       "title": "ラーメン店の行列",
       "layout": "race-media queue-story queue-history",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [
         "User-supplied image: images/ramen-queue-history-supplied.png"
       ],
       "terms": []
     },
     {
-      "slide": 14,
+      "slide": 15,
       "title": "なんでんかんでんのラーメン",
       "layout": "race-media queue-story queue-bowl",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [
         "User-supplied image: images/nandenkanden-ramen-supplied.png"
       ],
       "terms": []
     },
     {
-      "slide": 15,
+      "slide": 16,
       "title": "王道家、この行列、何分待つ？",
       "layout": "race-media queue-story queue-portrait",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [
         "User-supplied image: images/oudouya-kashiwa-night-supplied.png"
       ],
       "terms": []
     },
     {
-      "slide": 16,
+      "slide": 17,
       "title": "王道家のラーメンとご飯",
       "layout": "race-media queue-story queue-bowl",
       "sourceBeats": [],
+      "termKeys": [],
       "sources": [
         "User-supplied image: images/oudouya-ramen-rice-supplied.png"
       ],
       "terms": []
     },
     {
-      "slide": 17,
+      "slide": 18,
       "title": "待ち時間なら、こんな形も考えられる",
       "layout": "model-visual queue-model",
       "official": "4–10",
@@ -271,23 +372,9 @@
       "sourceBeats": [
         29
       ],
-      "terms": [
-        {
-          "ja": "確率密度関数",
-          "en": "Probability density function (PDF)"
-        }
-      ]
-    },
-    {
-      "slide": 18,
-      "title": "全体の面積は、1＝100％",
-      "layout": "model-visual queue-model",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        32
+      "termKeys": [
+        "density",
+        "probability"
       ],
       "terms": [
         {
@@ -302,6 +389,32 @@
     },
     {
       "slide": 19,
+      "title": "全体の面積は、1＝100％",
+      "layout": "model-visual queue-model",
+      "official": "4–10",
+      "textbook": "121–122",
+      "yoh75": "13–30",
+      "yoh109": "9–30",
+      "sourceBeats": [
+        32
+      ],
+      "termKeys": [
+        "density",
+        "probability"
+      ],
+      "terms": [
+        {
+          "ja": "確率密度関数",
+          "en": "Probability density function (PDF)"
+        },
+        {
+          "ja": "確率",
+          "en": "Probability"
+        }
+      ]
+    },
+    {
+      "slide": 20,
       "title": "区間の確率は、その部分の面積",
       "layout": "model-visual queue-model",
       "official": "4–10",
@@ -312,24 +425,9 @@
         26,
         32
       ],
-      "terms": [
-        {
-          "ja": "区間の確率",
-          "en": "Interval probability"
-        }
-      ]
-    },
-    {
-      "slide": 20,
-      "title": "積分の記号は、面積を表す",
-      "layout": "explain",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        26,
-        32
+      "termKeys": [
+        "integral",
+        "intervalProbability"
       ],
       "terms": [
         {
@@ -344,96 +442,37 @@
     },
     {
       "slide": 21,
-      "title": "別のモデル：待ち時間が一様なら？",
-      "layout": "model-visual",
+      "title": "積分の記号は、面積を表す",
+      "layout": "explain",
       "official": "4–10",
       "textbook": "121–122",
       "yoh75": "13–30",
       "yoh109": "9–30",
       "sourceBeats": [
-        36,
-        37,
-        38,
-        39
+        26,
+        32
       ],
+      "termKeys": [
+        "integral",
+        "intervalProbability"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 確率密度と面積（例への適用）"
+      },
       "terms": [
         {
-          "ja": "一様分布",
-          "en": "Uniform distribution"
+          "ja": "定積分",
+          "en": "Definite integral"
         },
         {
-          "ja": "確率密度関数",
-          "en": "Probability density function (PDF)"
+          "ja": "区間の確率",
+          "en": "Interval probability"
         }
       ]
     },
     {
       "slide": 22,
-      "title": "チャレンジ①　ラーメンの待ち時間",
-      "layout": "challenge",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        40
-      ],
-      "terms": [
-        {
-          "ja": "一様分布",
-          "en": "Uniform distribution"
-        },
-        {
-          "ja": "区間の確率",
-          "en": "Interval probability"
-        }
-      ]
-    },
-    {
-      "slide": 23,
-      "title": "答え合わせ① · 面積の計算",
-      "layout": "calculation answer",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        41,
-        42,
-        43
-      ],
-      "terms": [
-        {
-          "ja": "区間の確率",
-          "en": "Interval probability"
-        },
-        {
-          "ja": "定積分",
-          "en": "Definite integral"
-        }
-      ]
-    },
-    {
-      "slide": 24,
-      "title": "この面積が、25％",
-      "layout": "visual-link",
-      "official": "4–10",
-      "textbook": "121–122",
-      "yoh75": "13–30",
-      "yoh109": "9–30",
-      "sourceBeats": [
-        44,
-        45
-      ],
-      "terms": [
-        {
-          "ja": "区間の確率",
-          "en": "Interval probability"
-        }
-      ]
-    },
-    {
-      "slide": 25,
       "title": "累積分布関数",
       "layout": "hero-math long",
       "official": "6–10",
@@ -443,15 +482,27 @@
       "sourceBeats": [
         47
       ],
+      "termKeys": [
+        "cdf",
+        "cumulative"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 分布関数と区間の確率"
+      },
       "terms": [
         {
           "ja": "累積分布関数",
           "en": "Cumulative distribution function (CDF)"
+        },
+        {
+          "ja": "累積確率",
+          "en": "Cumulative probability"
         }
       ]
     },
     {
-      "slide": 26,
+      "slide": 23,
       "title": "$f(x)$：cまでの面積",
       "layout": "single-visual",
       "official": "6–10",
@@ -461,10 +512,18 @@
       "sourceBeats": [
         48
       ],
+      "termKeys": [
+        "cdf",
+        "cumulative"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 分布関数と区間の確率"
+      },
       "terms": [
         {
-          "ja": "確率密度関数",
-          "en": "Probability density function (PDF)"
+          "ja": "累積分布関数",
+          "en": "Cumulative distribution function (CDF)"
         },
         {
           "ja": "累積確率",
@@ -473,7 +532,7 @@
       ]
     },
     {
-      "slide": 27,
+      "slide": 24,
       "title": "$F(c)$：その面積を、高さにする",
       "layout": "single-visual",
       "official": "6–10",
@@ -483,6 +542,14 @@
       "sourceBeats": [
         49
       ],
+      "termKeys": [
+        "cdf",
+        "cumulative"
+      ],
+      "formulaRef": {
+        "pages": "121–122",
+        "label": "教科書 p.121–122 · 分布関数と区間の確率"
+      },
       "terms": [
         {
           "ja": "累積分布関数",
@@ -491,59 +558,86 @@
         {
           "ja": "累積確率",
           "en": "Cumulative probability"
+        }
+      ]
+    },
+    {
+      "slide": 25,
+      "title": "教科書 · 第2章 第2節",
+      "layout": "book-divider",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        62
+      ],
+      "termKeys": [
+        "expectation",
+        "variance"
+      ],
+      "terms": [
+        {
+          "ja": "期待値",
+          "en": "Expected value"
+        },
+        {
+          "ja": "分散",
+          "en": "Variance"
+        }
+      ]
+    },
+    {
+      "slide": 26,
+      "title": "連続変数の期待値",
+      "layout": "hero-math",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        65
+      ],
+      "termKeys": [
+        "expectation"
+      ],
+      "formulaRef": {
+        "pages": "129",
+        "label": "教科書 p.129 · 期待値と分散"
+      },
+      "terms": [
+        {
+          "ja": "期待値",
+          "en": "Expected value"
+        }
+      ]
+    },
+    {
+      "slide": 27,
+      "title": "分散",
+      "layout": "hero-math long",
+      "official": "11–13",
+      "textbook": "129",
+      "sourceBeats": [
+        75
+      ],
+      "termKeys": [
+        "variance",
+        "sd"
+      ],
+      "formulaRef": {
+        "pages": "129",
+        "label": "教科書 p.129 · 期待値と分散"
+      },
+      "terms": [
+        {
+          "ja": "分散",
+          "en": "Variance"
+        },
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
         }
       ]
     },
     {
       "slide": 28,
-      "title": "別の店では、20〜60分なら？",
-      "layout": "explain",
-      "official": "6–10",
-      "textbook": "121–122",
-      "yoh75": "14–17,25–30",
-      "yoh109": "14–17,25–30",
-      "sourceBeats": [
-        52,
-        53,
-        54,
-        55,
-        56,
-        57
-      ],
-      "terms": [
-        {
-          "ja": "累積確率",
-          "en": "Cumulative probability"
-        }
-      ]
-    },
-    {
-      "slide": 29,
-      "title": "累積確率の差で、80％",
-      "layout": "worked",
-      "official": "6–10",
-      "textbook": "121–122",
-      "yoh75": "14–17,25–30",
-      "yoh109": "14–17,25–30",
-      "sourceBeats": [
-        58,
-        59,
-        60,
-        61
-      ],
-      "terms": [
-        {
-          "ja": "累積分布関数",
-          "en": "Cumulative distribution function (CDF)"
-        },
-        {
-          "ja": "区間の確率",
-          "en": "Interval probability"
-        }
-      ]
-    },
-    {
-      "slide": 30,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "14–18",
@@ -553,15 +647,28 @@
       "sourceBeats": [
         85
       ],
+      "termKeys": [
+        "normal",
+        "mean",
+        "sd"
+      ],
       "terms": [
         {
           "ja": "正規分布",
           "en": "Normal distribution"
+        },
+        {
+          "ja": "平均",
+          "en": "Mean"
+        },
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
         }
       ]
     },
     {
-      "slide": 31,
+      "slide": 29,
       "title": "正規分布：中心と、ばらつき",
       "layout": "model-visual",
       "official": "14–18",
@@ -574,6 +681,15 @@
         88,
         89
       ],
+      "termKeys": [
+        "normal",
+        "mean",
+        "sd"
+      ],
+      "formulaRef": {
+        "pages": "122–123,129",
+        "label": "教科書 p.122–123・129 · 正規分布、平均と分散"
+      },
       "terms": [
         {
           "ja": "正規分布",
@@ -584,13 +700,13 @@
           "en": "Mean"
         },
         {
-          "ja": "分散",
-          "en": "Variance"
+          "ja": "標準偏差",
+          "en": "Standard deviation"
         }
       ]
     },
     {
-      "slide": 32,
+      "slide": 30,
       "title": "標準偏差が小さいと、狭い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -600,15 +716,23 @@
       "sourceBeats": [
         90
       ],
+      "termKeys": [
+        "sd",
+        "normal"
+      ],
       "terms": [
         {
           "ja": "標準偏差",
           "en": "Standard deviation"
+        },
+        {
+          "ja": "正規分布",
+          "en": "Normal distribution"
         }
       ]
     },
     {
-      "slide": 33,
+      "slide": 31,
       "title": "標準偏差が大きいと、広い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -618,15 +742,54 @@
       "sourceBeats": [
         91
       ],
+      "termKeys": [
+        "sd",
+        "normal"
+      ],
       "terms": [
         {
           "ja": "標準偏差",
           "en": "Standard deviation"
+        },
+        {
+          "ja": "正規分布",
+          "en": "Normal distribution"
         }
       ]
     },
     {
-      "slide": 34,
+      "slide": 32,
+      "title": "分散と標準偏差を、取り違えない",
+      "layout": "explain",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "standardization",
+        "zScore"
+      ],
+      "formulaRef": {
+        "pages": "123",
+        "relation": "application",
+        "label": "教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18"
+      },
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "標準得点",
+          "en": "Z-score"
+        }
+      ]
+    },
+    {
+      "slide": 33,
       "title": "正規分布の密度",
       "layout": "hero-math long",
       "official": "14–18",
@@ -636,19 +799,27 @@
       "sourceBeats": [
         92
       ],
+      "termKeys": [
+        "density",
+        "normal"
+      ],
+      "formulaRef": {
+        "pages": "122",
+        "label": "教科書 p.122 · 正規分布の確率密度"
+      },
       "terms": [
-        {
-          "ja": "正規分布",
-          "en": "Normal distribution"
-        },
         {
           "ja": "確率密度関数",
           "en": "Probability density function (PDF)"
+        },
+        {
+          "ja": "正規分布",
+          "en": "Normal distribution"
         }
       ]
     },
     {
-      "slide": 35,
+      "slide": 34,
       "title": "標準化の公式",
       "layout": "hero-math long",
       "official": "14–18",
@@ -658,19 +829,28 @@
       "sourceBeats": [
         95
       ],
+      "termKeys": [
+        "standardization",
+        "zScore"
+      ],
+      "formulaRef": {
+        "pages": "123",
+        "relation": "application",
+        "label": "教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18"
+      },
       "terms": [
         {
           "ja": "標準化",
           "en": "Standardization"
         },
         {
-          "ja": "標準正規分布",
-          "en": "Standard normal distribution"
+          "ja": "標準得点",
+          "en": "Z-score"
         }
       ]
     },
     {
-      "slide": 36,
+      "slide": 35,
       "title": "60点は、標準偏差1個ぶん上",
       "layout": "worked",
       "official": "14–18",
@@ -690,14 +870,46 @@
         107,
         108
       ],
+      "termKeys": [
+        "standardization",
+        "zScore"
+      ],
+      "formulaRef": {
+        "pages": "123",
+        "relation": "application",
+        "label": "教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18"
+      },
       "terms": [
         {
-          "ja": "平均",
-          "en": "Mean"
+          "ja": "標準化",
+          "en": "Standardization"
         },
         {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
+          "ja": "標準得点",
+          "en": "Z-score"
+        }
+      ]
+    },
+    {
+      "slide": 36,
+      "title": "チャレンジ①　ロボットの身長をzに直す",
+      "layout": "challenge",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "standardization",
+        "zScore"
+      ],
+      "practiceFocus": "z-scores-and-table",
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
         },
         {
           "ja": "標準得点",
@@ -707,6 +919,38 @@
     },
     {
       "slide": 37,
+      "title": "答え合わせ① · 標準偏差を出してから、標準化",
+      "layout": "worked practice-answer",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "standardization",
+        "zScore"
+      ],
+      "formulaRef": {
+        "pages": "123",
+        "relation": "application",
+        "label": "教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18"
+      },
+      "practiceAnswer": true,
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "標準得点",
+          "en": "Z-score"
+        }
+      ]
+    },
+    {
+      "slide": 38,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "19–26",
@@ -716,15 +960,23 @@
       "sourceBeats": [
         109
       ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
       "terms": [
         {
           "ja": "標準正規分布表",
           "en": "Standard normal table"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
         }
       ]
     },
     {
-      "slide": 38,
+      "slide": 39,
       "title": "この表は、右側の面積",
       "layout": "model-visual",
       "official": "19–26",
@@ -736,7 +988,19 @@
         111,
         112
       ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124",
+        "label": "教科書 p.124 · 上側確率と表の読み方"
+      },
       "terms": [
+        {
+          "ja": "標準正規分布表",
+          "en": "Standard normal table"
+        },
         {
           "ja": "上側確率",
           "en": "Upper-tail probability"
@@ -744,7 +1008,7 @@
       ]
     },
     {
-      "slide": 39,
+      "slide": 40,
       "title": "まず、1.9の行",
       "layout": "lookup stage-1",
       "official": "19–26",
@@ -754,15 +1018,23 @@
       "sourceBeats": [
         114
       ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
       "terms": [
         {
           "ja": "標準正規分布表",
           "en": "Standard normal table"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
         }
       ]
     },
     {
-      "slide": 40,
+      "slide": 41,
       "title": "次に、0.06の列",
       "layout": "lookup stage-2",
       "official": "19–26",
@@ -772,15 +1044,23 @@
       "sourceBeats": [
         115
       ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
       "terms": [
         {
           "ja": "標準正規分布表",
           "en": "Standard normal table"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
         }
       ]
     },
     {
-      "slide": 41,
+      "slide": 42,
       "title": "交点は、0.02500",
       "layout": "lookup stage-3",
       "official": "19–26",
@@ -790,15 +1070,23 @@
       "sourceBeats": [
         116
       ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
       "terms": [
         {
           "ja": "標準正規分布表",
           "en": "Standard normal table"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
         }
       ]
     },
     {
-      "slide": 42,
+      "slide": 43,
       "title": "1.96より右は、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -809,7 +1097,19 @@
         117,
         118
       ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124",
+        "label": "教科書 p.124 · 上側確率と表の読み方"
+      },
       "terms": [
+        {
+          "ja": "標準正規分布表",
+          "en": "Standard normal table"
+        },
         {
           "ja": "上側確率",
           "en": "Upper-tail probability"
@@ -817,7 +1117,69 @@
       ]
     },
     {
-      "slide": 43,
+      "slide": 44,
+      "title": "チャレンジ②　行と列を、自分で探す",
+      "layout": "challenge",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        114
+      ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124",
+        "label": "教科書 p.124 · 上側確率と表の読み方"
+      },
+      "practiceFocus": "z-scores-and-table",
+      "terms": [
+        {
+          "ja": "標準正規分布表",
+          "en": "Standard normal table"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 45,
+      "title": "答え合わせ② · 1.2の行、0.08の列",
+      "layout": "worked practice-answer",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        114
+      ],
+      "termKeys": [
+        "normalTable",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124",
+        "label": "教科書 p.124 · 上側確率と表の読み方"
+      },
+      "practiceAnswer": true,
+      "terms": [
+        {
+          "ja": "標準正規分布表",
+          "en": "Standard normal table"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 46,
       "title": "−1.96より左も、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -829,15 +1191,89 @@
         120,
         121
       ],
+      "termKeys": [
+        "lowerTail",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124–125",
+        "label": "教科書 p.124–125 · 左右対称・全体から引く"
+      },
       "terms": [
         {
           "ja": "下側確率",
           "en": "Lower-tail probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
         }
       ]
     },
     {
-      "slide": 44,
+      "slide": 47,
+      "title": "チャレンジ③　マイナスのzなら、どちら側？",
+      "layout": "challenge",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        121
+      ],
+      "termKeys": [
+        "lowerTail",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124–125",
+        "label": "教科書 p.124–125 · 左右対称・全体から引く"
+      },
+      "practiceFocus": "z-scores-and-table",
+      "terms": [
+        {
+          "ja": "下側確率",
+          "en": "Lower-tail probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 48,
+      "title": "答え合わせ③ · 左右対称を使う",
+      "layout": "worked practice-answer",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        121
+      ],
+      "termKeys": [
+        "lowerTail",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124–125",
+        "label": "教科書 p.124–125 · 左右対称・全体から引く"
+      },
+      "practiceAnswer": true,
+      "terms": [
+        {
+          "ja": "下側確率",
+          "en": "Lower-tail probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 49,
       "title": "＋1.96より左は、97.5％",
       "layout": "worked",
       "official": "19–26",
@@ -851,15 +1287,89 @@
         125,
         126
       ],
+      "termKeys": [
+        "lowerTail",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124–125",
+        "label": "教科書 p.124–125 · 左右対称・全体から引く"
+      },
       "terms": [
         {
-          "ja": "累積確率",
-          "en": "Cumulative probability"
+          "ja": "下側確率",
+          "en": "Lower-tail probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
         }
       ]
     },
     {
-      "slide": 45,
+      "slide": 50,
+      "title": "チャレンジ④　表の値が、そのまま答えになる？",
+      "layout": "challenge",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        124
+      ],
+      "termKeys": [
+        "lowerTail",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124–125",
+        "label": "教科書 p.124–125 · 左右対称・全体から引く"
+      },
+      "practiceFocus": "z-scores-and-table",
+      "terms": [
+        {
+          "ja": "下側確率",
+          "en": "Lower-tail probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 51,
+      "title": "答え合わせ④ · 全体1から、右の尾を引く",
+      "layout": "worked practice-answer",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        124
+      ],
+      "termKeys": [
+        "lowerTail",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "124–125",
+        "label": "教科書 p.124–125 · 左右対称・全体から引く"
+      },
+      "practiceAnswer": true,
+      "terms": [
+        {
+          "ja": "下側確率",
+          "en": "Lower-tail probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 52,
       "title": "真ん中は、両方の尾を引く",
       "layout": "worked",
       "official": "19–26",
@@ -873,16 +1383,93 @@
         130,
         131
       ],
+      "termKeys": [
+        "central",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "122,125",
+        "relation": "application",
+        "label": "教科書 p.122・125 · 区間の差と両側の尾"
+      },
       "terms": [
         {
           "ja": "中央の区間確率",
           "en": "Central interval probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
         }
       ]
     },
     {
-      "slide": 46,
-      "title": "チャレンジ②　70点以上は、何％？",
+      "slide": 53,
+      "title": "チャレンジ⑤　左右の幅が違う区間",
+      "layout": "challenge",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        128
+      ],
+      "termKeys": [
+        "central",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "122,125",
+        "relation": "application",
+        "label": "教科書 p.122・125 · 区間の差と両側の尾"
+      },
+      "practiceFocus": "z-scores-and-table",
+      "terms": [
+        {
+          "ja": "中央の区間確率",
+          "en": "Central interval probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 54,
+      "title": "答え合わせ⑤ · 異なる二つの尾を引く",
+      "layout": "worked practice-answer",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        128
+      ],
+      "termKeys": [
+        "central",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "122,125",
+        "relation": "application",
+        "label": "教科書 p.122・125 · 区間の差と両側の尾"
+      },
+      "practiceAnswer": true,
+      "terms": [
+        {
+          "ja": "中央の区間確率",
+          "en": "Central interval probability"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 55,
+      "title": "チャレンジ⑥　70点以上は、何％？",
       "layout": "challenge",
       "official": "19–26",
       "textbook": "124–125",
@@ -891,32 +1478,16 @@
       "sourceBeats": [
         132
       ],
-      "terms": [
-        {
-          "ja": "標準化",
-          "en": "Standardization"
-        },
-        {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
-        }
-      ]
-    },
-    {
-      "slide": 47,
-      "title": "答え合わせ② · 70点以上",
-      "layout": "worked",
-      "official": "19–26",
-      "textbook": "124–125",
-      "yoh75": "51–61",
-      "yoh109": "52–62",
-      "sourceBeats": [
-        133,
-        134,
-        135,
-        136,
-        137
+      "termKeys": [
+        "standardization",
+        "upperTail"
       ],
+      "formulaRef": {
+        "pages": "123–125",
+        "relation": "application",
+        "label": "教科書 p.123–125 · 標準化と表の例への適用"
+      },
+      "practiceFocus": "z-scores-and-table",
       "terms": [
         {
           "ja": "標準化",
@@ -929,178 +1500,40 @@
       ]
     },
     {
-      "slide": 48,
-      "title": "チャレンジ③　30点から70点なら？",
-      "layout": "challenge",
-      "official": "19–26",
-      "textbook": "124–125",
-      "yoh75": "51–61",
-      "yoh109": "52–62",
-      "sourceBeats": [
-        138
-      ],
-      "terms": [
-        {
-          "ja": "標準化",
-          "en": "Standardization"
-        },
-        {
-          "ja": "中央の区間確率",
-          "en": "Central interval probability"
-        }
-      ]
-    },
-    {
-      "slide": 49,
-      "title": "答え合わせ③ · 30〜70点",
-      "layout": "worked",
-      "official": "19–26",
-      "textbook": "124–125",
-      "yoh75": "51–61",
-      "yoh109": "52–62",
-      "sourceBeats": [
-        139,
-        140,
-        141,
-        142
-      ],
-      "terms": [
-        {
-          "ja": "標準化",
-          "en": "Standardization"
-        },
-        {
-          "ja": "中央の区間確率",
-          "en": "Central interval probability"
-        }
-      ]
-    },
-    {
-      "slide": 50,
-      "title": "教科書 · 第2章 第2節",
-      "layout": "book-divider",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        62
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        },
-        {
-          "ja": "分散",
-          "en": "Variance"
-        }
-      ]
-    },
-    {
-      "slide": 51,
-      "title": "連続変数の期待値",
-      "layout": "hero-math",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        65
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        }
-      ]
-    },
-    {
-      "slide": 52,
-      "title": "配達ロボットの期待時間は、6分",
-      "layout": "worked",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        68,
-        69,
-        70,
-        71,
-        72,
-        73
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        },
-        {
-          "ja": "一様分布",
-          "en": "Uniform distribution"
-        }
-      ]
-    },
-    {
-      "slide": 53,
-      "title": "分散",
-      "layout": "hero-math long",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        75
-      ],
-      "terms": [
-        {
-          "ja": "分散",
-          "en": "Variance"
-        }
-      ]
-    },
-    {
-      "slide": 54,
-      "title": "分散から、標準偏差へ",
-      "layout": "calculation",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        77,
-        78,
-        79,
-        80,
-        81,
-        82
-      ],
-      "terms": [
-        {
-          "ja": "分散",
-          "en": "Variance"
-        },
-        {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
-        }
-      ]
-    },
-    {
-      "slide": 55,
-      "title": "中心と、ばらつきを見る",
-      "layout": "visual-link",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        83,
-        84
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        },
-        {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
-        }
-      ]
-    },
-    {
       "slide": 56,
-      "title": "確率は、面積。",
+      "title": "答え合わせ⑥ · 元の点数から、上側確率へ",
+      "layout": "worked practice-answer",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "standardization",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "123–125",
+        "relation": "application",
+        "label": "教科書 p.123–125 · 標準化と表の例への適用"
+      },
+      "practiceAnswer": true,
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 57,
+      "title": "ここからは、ALに自分で取り組もう。",
       "layout": "statement",
       "official": "19–26",
       "textbook": "124–125",
@@ -1110,52 +1543,9 @@
         143,
         144
       ],
-      "terms": [
-        {
-          "ja": "確率",
-          "en": "Probability"
-        },
-        {
-          "ja": "確率密度関数",
-          "en": "Probability density function (PDF)"
-        }
-      ]
-    },
-    {
-      "slide": 57,
-      "title": "補足：1人の点数と、n人の平均",
-      "layout": "calculation",
-      "textbook": "123",
-      "yoh75": "44–50",
-      "yoh109": "46–51",
-      "sourceBeats": [
-        145,
-        146,
-        147,
-        148,
-        149
-      ],
-      "terms": [
-        {
-          "ja": "標本平均",
-          "en": "Sample mean"
-        },
-        {
-          "ja": "標準誤差",
-          "en": "Standard error"
-        }
-      ]
-    },
-    {
-      "slide": 58,
-      "title": "標準化だけでは、形は変わらない。",
-      "layout": "statement",
-      "textbook": "123",
-      "yoh75": "44–50",
-      "yoh109": "46–51",
-      "sourceBeats": [
-        150,
-        151
+      "termKeys": [
+        "standardization",
+        "normalTable"
       ],
       "terms": [
         {
@@ -1163,8 +1553,8 @@
           "en": "Standardization"
         },
         {
-          "ja": "正規分布",
-          "en": "Normal distribution"
+          "ja": "標準正規分布表",
+          "en": "Standard normal table"
         }
       ]
     }

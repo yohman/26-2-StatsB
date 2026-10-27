@@ -1,6 +1,6 @@
 import {createWeek5Story,storyStyle} from './story-week05.mjs';
 import {createWeek5Notes} from './notes-week05.mjs';
-import {glossary,slideTermKeys,terminology,terminologyStyle,annotateJapaneseTerms} from './terms-week05.mjs';
+import {glossary,terminology,terminologyStyle,annotateJapaneseTerms} from './terms-week05.mjs';
 
 // Preserve the long-form source. This editorial pass combines routine steps,
 // while retaining sequences in which the changing image or withheld answer matters.
@@ -9,17 +9,69 @@ export function createWeek5CompactStory(options){
   const slides=[],mapping=[],narration=[];
   const math=tex=>`$$\n${tex}\n$$`;
   const figure=n=>full.slides[n-1].match(/!\[[^\]]*\]\([^\n]+?\)/)?.[0]||'';
-  const formula=n=>full.slides[n-1].match(/\$\$\n([\s\S]+?)\n\$\$/)?.[1]||'';
+  const formula=n=>(full.slides[n-1].match(/\$\$\n([\s\S]+?)\n\$\$/)?.[1]||'').replace(/Q\(([^)]+)\)/g,'\\Pr(Z>$1)');
   const sourceBody=n=>full.slides[n-1].replace(/^<!-- _class: [^>]+ -->\n\n## [^\n]+\n\n/,'').replace(/\n\n<!--[\s\S]*$/,'');
+  function vocabulary(ids,layout){
+    if(/queue-story|race-media|watch-bridge/.test(layout))return [];
+    const n=ids[0];
+    if(n<=15)return ['measurement'];
+    if(n===16)return ['randomVariable','pointProbability'];
+    if(n<=20)return ['interval','intervalProbability'];
+    if(n===22)return ['continuous'];
+    if(n===23)return ['density','normal'];
+    if(n===25)return ['intervalProbability'];
+    if(n===26)return ['integral','intervalProbability'];
+    if(n<=35)return ['density','probability'];
+    if(n<=61)return ['cdf','cumulative'];
+    if(n===62)return ['expectation','variance'];
+    if(n<=74)return ['expectation'];
+    if(n<=84)return ['variance','sd'];
+    if(n<=89)return ['normal','mean','sd'];
+    if(n<=91)return ['sd','normal'];
+    if(n===92)return ['density','normal'];
+    if(n<=108)return ['standardization','zScore'];
+    if(n<=118)return ['normalTable','upperTail'];
+    if(n<=121)return ['lowerTail','upperTail'];
+    if(n<=126)return ['lowerTail','upperTail'];
+    if(n<=131)return ['central','upperTail'];
+    if(n<=137)return ['standardization','upperTail'];
+    return ['standardization','normalTable'];
+  }
+  function formulaSource(ids){
+    const n=ids[0];
+    if(n<=35)return {pages:'121–122',label:'教科書 p.121–122 · 確率密度と面積（例への適用）'};
+    if(n<=61)return {pages:'121–122',label:'教科書 p.121–122 · 分布関数と区間の確率'};
+    if(n<=84)return {pages:'129',label:'教科書 p.129 · 期待値と分散'};
+    if(n<=89)return {pages:'122–123,129',label:'教科書 p.122–123・129 · 正規分布、平均と分散'};
+    if(n<=94)return {pages:'122',label:'教科書 p.122 · 正規分布の確率密度'};
+    if(n<=108)return {pages:'123',relation:'application',label:'教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18'};
+    if(n<=118)return {pages:'124',label:'教科書 p.124 · 上側確率と表の読み方'};
+    if(n<=126)return {pages:'124–125',label:'教科書 p.124–125 · 左右対称・全体から引く'};
+    if(n<=131)return {pages:'122,125',relation:'application',label:'教科書 p.122・125 · 区間の差と両側の尾'};
+    return {pages:'123–125',relation:'application',label:'教科書 p.123–125 · 標準化と表の例への適用'};
+  }
   function add(title,body,layout,ids,ja,en){
     const source=full.mapping[ids[0]-1];
-    mapping.push({...source,slide:slides.length+1,title,layout,sourceBeats:ids});
+    const formulaRef=/\$/.test(body+title)?formulaSource(ids):null;
+    const keys=vocabulary(ids,layout);
+    mapping.push({...source,slide:slides.length+1,title,layout,sourceBeats:ids,termKeys:keys,...(formulaRef?{formulaRef}:{})});
+    if(formulaRef)body+=`\n\n<aside class="formula-ref">${formulaRef.label}</aside>`;
     slides.push(`<!-- _class: ${layout} -->\n\n## ${title}\n\n${body}`);
     const first=originalNotes[ids[0]-1];
-    narration.push({page:slides.length,title,ja:ja||first.ja,en:en||first.en});
+    narration.push({page:slides.length,title,ja:ja||first.ja,en:en||first.en,...(formulaRef?{formulaRef}:{})});
   }
   const keep=(n,ja,en)=>{const s=full.mapping[n-1];add(s.title,sourceBody(n),s.layout,[n],ja,en);};
   const paired=(title,tex,graphic,after,ids,ja,en)=>add(title,`<div class="worked-copy">\n\n${tex.map(math).join('\n\n')}\n\n</div>\n\n<div class="worked-visual">\n\n${graphic}\n\n</div>\n\n${after||''}`,'worked',ids,ja,en);
+
+  const zFormula=String.raw`z=\frac{x-\mu}{\sigma}`;
+  const practice=(no,title,given,question,ids,ja,en,minutes=3)=>{
+    add(`チャレンジ${no}　${title}`,`<div class="pause">自分で解く　${minutes}分</div>\n\n${given}\n\n**${question}**`,'challenge',ids,ja,en);
+    mapping.at(-1).practiceFocus='z-scores-and-table';
+  };
+  const solution=(no,title,given,symbolic,substitution,graphic,result,ids,ja,en)=>{
+    add(`答え合わせ${no} · ${title}`,`<div class="worked-copy">\n\n<p class="given">① 与えられた条件：${given}</p>\n\n<p class="step-label">② 公式（文字のまま）</p>\n\n${math(symbolic)}\n\n<p class="step-label">③ 代入・計算</p>\n\n${substitution.map(math).join('\n\n')}\n\n</div>\n\n<div class="worked-visual">\n\n${graphic}\n\n</div>\n\n④ 答え・意味：${result}`,'worked practice-answer',ids,ja,en);
+    mapping.at(-1).practiceAnswer=true;
+  };
 
   const video='https://www.youtube.com/watch?v=GHw-eTs4Yes';
   const finish='https://worldathletics.org/competitions/olympic-games/the-xxxiii-olympic-games-7153115/news/article/paris-2024-olympics-report-men-100m';
@@ -27,7 +79,7 @@ export function createWeek5CompactStory(options){
   function opening(title,body,layout,ja,en,sources){
     add(title,body,layout,[1],ja,en);
     const item=mapping.at(-1);
-    for(const key of Object.keys(item))if(!['slide','title','layout','sourceBeats'].includes(key))delete item[key];
+    for(const key of Object.keys(item))if(!['slide','title','layout','sourceBeats','termKeys'].includes(key))delete item[key];
     item.sourceBeats=[];item.sources=sources;
     narration.at(-1).sources=sources;
   }
@@ -43,6 +95,9 @@ export function createWeek5CompactStory(options){
   opening('今度は、自分で1秒。',`<img class="watch-photo" src="images/omega-stopwatch.png" alt="OMEGAの文字を入れた授業用ストップウォッチ。小数6桁のデジタル表示">\n\n<div class="watch-invitation"><h3>ぴったり1秒で、<br>止められる？</h3><p>1.000000 秒</p><a href="https://yohman.github.io/26-2-StatsB/agenda.html?p&amp;activity=w5-stopwatch#week-05">やってみよう！</a><small>授業用の再現 / Classroom recreation<br>OMEGA公式の計測器ではありません。</small></div>`,'watch-bridge',
     'では、今度は自分で測ろう。スタートとストップは同じボタン。1.000000秒ぴったりを狙って、何回か止めてみてください。表示が細かくなるほど、ぴったり一致は難しく見えるよね。そこで「0.9秒から1.1秒までなら？」と条件を変えます。この範囲なら、どれだけ入ったかな。表示の小数6桁は、マイクロ秒の測定精度を保証しません。これはブラウザの時計を使う授業用の再現で、OMEGA公式製品ではありません。',
     'Now try timing one second yourself. Use the same button to start and stop. Aim for 1.000000 seconds several times. More displayed digits make an exact match look harder. Then ask how many results fall between 0.9 and 1.1 seconds. An interval gives us a useful condition to count. Six displayed decimal places do not guarantee microsecond accuracy. This classroom recreation uses the browser clock and is not an official OMEGA product.',[]);
+  add('今日のゴール：標準化して、表で読む',`標準偏差を確認する。\n\n値をzに直す。\n\n右・左・区間の面積を、表から求める。\n\n**このあと何度か、自分で解く時間を取ります。**`,'explain',[95],
+    '今日の中心は、ALに必要な標準化と表の読み方です。標準偏差を確認し、平均との差を割ってzを求め、欲しい領域を描き、表を読みます。途中のチャレンジはすべてこの練習。ALそのもののセルの答えは示さず、別の数値で練習します。',
+    'Today concentrates on standardization and table reading for the AL. Check the standard deviation, find z, sketch the required region, then read the table. Every classroom challenge practices these skills with separate values, without supplying the homework cell answers.');
   add('身長、何cmまで測る？',`${figure(12)}\n\n${math(String.raw`160\quad 160.0\quad 160.000\ldots`)}\n\n「ぴったり160cm」と「155〜165cm」は、同じ？`,'precision',[12,13,14,15],
     'ロボットの身長を160cmと呼んでも、小数を細かくするともっと詳しい値が見えてきます。「ぴったり160cm」と「155〜165cmの範囲に入る」は同じ条件かな？ このあとも同じ155〜165cmの区間を使います。まず一点と幅のある範囲の違いを考えよう。',
     'Calling a robot 160 cm tall leaves its finer measurement unspecified. Is exactly 160 cm the same condition as a height between 155 and 165 cm? Keep that same interval throughout the coming example. First distinguish an exact point from a range with width.');
@@ -86,40 +141,42 @@ export function createWeek5CompactStory(options){
     '教科書p.121〜122と同じように、区間の確率を面積として読みます。色の部分は15〜20分待つ確率です。0〜5分と15〜20分は同じ5分幅。この図では右側の面積が大きいので、15〜20分待つほうが起こりやすい。高さの数値そのものが確率なのではありません。今日はこの曲線から細かな百分率を手計算しません。ここで必要なのは、区間を選び、その下の面積が確率だと理解することです。',
     'Read interval probability as area, as on textbook pages 121–122. The shading represents a wait of fifteen to twenty minutes. Compare it with zero to five: both intervals have width five, but the right-hand area is larger. Thus fifteen to twenty is more likely in this hypothetical picture. Height alone is not probability. We will not calculate a numerical percentage from this illustrative curve; identify the interval and the area underneath.');
   add('積分の記号は、面積を表す',`${math(String.raw`\Pr(a\le X\le b)=\int_a^b f(x)\,dx`)}\n\naからbまでの、曲線の下の面積。\n\n**まずは「どの面積か」を読めればよい。**\n\n<small class="book-note">教科書 p.121–122 · 積分を面積として理解する</small>`,'explain',[26,32],
-    '教科書が強調しているのは、積分の計算手順よりも面積の概念です。積分記号の下のaが左端、上のbが右端。f(x)は曲線の高さを表します。この式全体はaからbまでの下の面積、つまりその区間に入る確率です。新しい曲線を自分で作る必要はありません。次は面積を簡単な掛け算で確かめられる一様な例を使い、それから累積分布関数へ進みます。',
-    'The textbook emphasizes the area concept rather than integration technique. The lower limit a is the left endpoint, and the upper limit b is the right endpoint. The density f(x) describes the curve’s height. The complete expression means area underneath between a and b, hence probability of that interval. There is no need to invent a curve. Next use a uniform illustration whose area follows from simple multiplication, then move to the cumulative distribution function.');
-  add('別のモデル：待ち時間が一様なら？',`面積を簡単な掛け算で確認する、授業用の例。\n\n${math(String.raw`f(x)=\frac1{20}\quad(0\le x\le20)`)}\n\n${figure(39)}`,'model-visual',[36,37,38,39],
-    'ここは面積の意味を確認するための簡単な練習です。王道家の実際の待ち時間のモデルではありません。今度は0〜20分の一様分布を仮定します。全体の幅20に高さ1/20を掛けて面積は1。区間の確率を出すには、その区間の幅を掛けよう。どちらのモデルも実際のお店を調査したデータではありません。',
-    'Use a simple practice illustration to check the meaning of area, not a model of actual Oudouya waiting times. Now assume a uniform wait from zero to twenty minutes. Width twenty times height one twentieth gives total area one. An interval probability needs that interval’s width. Neither model is measured restaurant data.');
-  keep(40);
-  add('答え合わせ① · 面積の計算',`${math(formula(41))}\n\n${math(String.raw`\Pr(5\le X\le10)=\int_5^{10}\frac1{20}\,dx`)}\n\n${math(String.raw`=(10-5)\times\frac1{20}=0.25=25\%`)}`,'calculation answer',[41,42,43],
-    'まず区間の確率の公式を書き、下端5、上端10、密度1/20を入れます。横幅5に高さ1/20を掛けて25％。式の各数字を、自分の図と対応させてください。',
-    'Start with the interval-probability formula, then insert bounds five and ten and density one twentieth. Width five times height one twentieth gives 25 percent. Match each value to your sketch.');
-  add('この面積が、25％',`${figure(44)}\n\n${options.tryIt('area')}`,'visual-link',[44,45],
-    '全体20分のうち、同じ高さの5分ぶんだから4分の1です。やってみようで区間を動かす前に、広げたら面積がどう変わるか予想してみよう。',
-    'Five of the twenty minutes at the same height give one quarter of the area. Predict what will happen when you widen the interval, then test it interactively.');
+    '教科書が強調しているのは、積分の計算手順よりも面積の概念です。積分記号の下のaが左端、上のbが右端。f(x)は曲線の高さを表します。この式全体はaからbまでの下の面積、つまりその区間に入る確率です。新しい曲線を自分で作る必要はありません。このあと累積分布関数の意味を確認し、標準化と正規分布表に進みます。',
+    'The textbook emphasizes the area concept rather than integration technique. The lower limit a is the left endpoint, and the upper limit b is the right endpoint. The density f(x) describes the curve’s height. The complete expression means area underneath between a and b, hence probability of that interval. There is no need to invent a curve. Next review the cumulative distribution function, then concentrate on standardization and the normal table.');
   keep(47,'F(c)は「cまで」の累積確率です。密度の左側からcまでの面積を集めます。小さいfが密度、大きいFが累積を表すことに注意しよう。','F(c) accumulates probability up to c. It adds the area under the density from the far left through c. Lowercase f denotes density, and uppercase F denotes cumulative probability.');
   keep(48);
-  keep(49,'前の密度の色の面積が、こちらでは高さ0.25として現れます。cを右へ動かせば、足した面積は減りません。Fは0から1へ累積していきます。','The shaded density area now appears as a height of 0.25. Moving c right can only add area or leave it unchanged. The CDF accumulates from 0 towards 1.');
-  add('別の店では、20〜60分なら？',`${math(String.raw`F(20)=0.10,\qquad F(60)=0.90`)}\n\n20分以内は10％、60分以内は90％。\n\n**20分より長く、60分以内に呼ばれる確率は？**`,'explain',[52,53,54,55,56,57],
-    'ここからは別のお店の、新しい仮定です。60分までの90％には、20分までの10％も入っています。欲しい区間だけを取り出すには、どうすればよいかな？',
-    'These are new assumptions for another restaurant. The ninety percent up to sixty minutes already includes the ten percent up to twenty. How can we isolate the interval between them?');
-  paired('累積確率の差で、80％',[formula(58),String.raw`\Pr(20<X\le60)=0.90-0.10=80\%`],figure(60),options.tryIt('cdf'),[58,59,60,61],
-    '大きい累積から、小さい累積を引くと80％。図は、この累積の値に合う密度の一例です。やってみようでは、同じ確率がfでは面積、Fでは高さになる対応を見よう。',
-    'Subtract the earlier cumulative probability from the later one to get eighty percent. This chart shows one compatible density. Explore how probability appears as area under f and height on F.');
+  keep(49,'直前の密度の色の面積が、こちらでは高さ0.25として現れます。cを右へ動かせば、足した面積は減りません。Fは0から1へ累積していきます。','The shaded density area now appears as a height of 0.25. Moving c right can only add area or leave it unchanged. The CDF accumulates from 0 towards 1.');
+  keep(62);
+  keep(65,'津村のスライド12、教科書p.129の期待値です。値に確率を掛けて全体を足す、という考え方を確認します。今日はこの積分を手で計算する演習は行いません。中心を表すμという記号を読めるようにし、次の標準化につなげよう。','Review expected value from Tsumura slide 12 and textbook page 129: weight values by probability and add across the distribution. We will not assign hand integration today. Read μ as the centre and prepare to use it in standardization.');
+  keep(75,'津村のスライド13、教科書p.129の分散です。平均との差を二乗して重み付きで足した、ばらつきの量。今日は定義の確認だけ。これからの問題では分散と標準偏差を取り違えず、標準化の分母に標準偏差を使うことが重要です。','Review variance from Tsumura slide 13 and textbook page 129: a probability-weighted squared distance from the mean. Today we use the definition without hand-integration exercises. The practical priority is to distinguish variance from standard deviation before choosing the denominator in standardization.');
   keep(85);
   add('正規分布：中心と、ばらつき',`${math(String.raw`X\sim N(\mu,\sigma^2)\qquad E(X)=\mu,\quad\operatorname{Var}(X)=\sigma^2`)}\n\n${figure(86)}`,'model-visual',[86,87,88,89],
     '左右対称の釣鐘型です。Nの最初の数が平均μ、二つ目が分散σ²。この書き方で二つ目を標準偏差と間違えないようにしよう。',
     'This bell is symmetric. In N(μ,σ²), the first parameter is the mean and the second is the variance. Do not read the second parameter as the standard deviation.');
   keep(90);
   keep(91);
-  keep(92);
+  add('分散と標準偏差を、取り違えない',`分散は、標準偏差を2乗したもの。\n\n${math(String.raw`\sigma^2=36\quad\Rightarrow\quad \sigma=\sqrt{36}=6`)}\n\n**標準化で割るのは、36ではなく6。**`,'explain',[95],
+    '津村スライド18の標準化では、分母は分散の平方根です。ここは新しい公式を増やす話ではなく、σ²という記号をσに戻す平方根の計算です。分散36と与えられたら標準偏差は6。36で割ってはいけません。次の問題では、どちらが与えられたかを最初に確認しよう。',
+    'In Tsumura slide 18, standardization divides by the square root of variance. This is simply reading σ² and taking its square root to recover σ, not an extra distribution formula. A variance of thirty-six means standard deviation six. Do not divide by thirty-six. Always identify which quantity the question supplies.');
+
+  add('正規分布の密度',math(String.raw`f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`),'hero-math long',[92],
+    '教科書p.122、津村のスライド15と17にある密度です。今日はこの式に数を入れて積分することはしません。平均と分散が変わると曲線が変わること、そして毎回積分する代わりに標準化して一つの表を使うことへつなげます。',
+    'This density appears on textbook page 122 and Tsumura slides 15 and 17. We will not evaluate its integral by hand. It explains why mean and variance determine the curve, and motivates standardizing so a single table can replace repeated integration.');
   keep(95,'毎回あの密度を積分する代わりに、中心を0、標準偏差を1にそろえます。平均との差を標準偏差で割ると「中心から何個ぶん？」という位置になります。もとが正規なら、Zは標準正規分布です。','Instead of integrating each normal density afresh, put its centre at zero and its standard deviation at one. The formula measures distance from the mean in standard deviation units. Normal X gives standard normal Z.');
   paired('60点は、標準偏差1個ぶん上',[String.raw`z=\frac{x-\mu}{\sigma}`,String.raw`z=\frac{60-50}{10}=1`],figure(106),`仮定：平均50点、標準偏差10点の正規分布。\n\n${options.tryIt('normal')}`,[98,99,100,101,102,103,104,105,106,107,108],
     '授業用に平均50、標準偏差10の正規モデルを考えます。60点を標準化するとz=1。これは100％ではなく、標準偏差一つぶん上という位置です。平均や標準偏差を変えて、同じ60点を比べてみよう。',
     'For a hypothetical normal score model with mean fifty and standard deviation ten, a score of sixty gives z = 1. That describes location, not 100 percent probability. Explore how the same score changes meaning under different parameters.');
+  practice('①','ロボットの身長をzに直す','正規分布を仮定。平均160cm、分散49cm²。','標準偏差は？ 身長146cmと167cmを、それぞれzに直すと？',[95],
+    '最初は表を使いません。分散と標準偏差を区別し、二つの身長を標準化してください。平均より上か下かも、符号と対応させて考えよう。この問題は練習用で、ALのセルを埋める答えではありません。',
+    'No table is needed yet. Distinguish variance from standard deviation and standardize the two heights. Connect the sign of z with being above or below the mean. These practice values are separate from the AL homework.');
+  solution('①','標準偏差を出してから、標準化','平均160cm、分散49cm²、身長146cm・167cm。',zFormula,
+    [String.raw`\sigma=\sqrt{49}=7`,String.raw`z_1=\frac{146-160}{7}=-2`,String.raw`z_2=\frac{167-160}{7}=1`],
+    options.fig('practice-z-heights',{min:132,max:188,pdf:x=>Math.exp(-.5*((x-160)/7)**2)/(7*Math.sqrt(2*Math.PI)),lo:0,hi:0,mean:160,yMax:.08,ticks:[132,146,160,167,174,188],labels:[{x:146,text:'146cm: z = −2'},{x:167,text:'167cm: z = 1'}],title:'平均から標準偏差何個分、離れている？',xlabel:'身長（cm）'}),
+    '146cmは平均より2個分下。167cmは1個分上。zは確率ではなく位置。',[95],
+    '分散49の平方根を取って標準偏差7。146から160を引いて7で割ると−2、167なら1です。図で平均より左と右を確認しよう。zの値そのものを百分率にしないことが重要です。',
+    'Take the square root of forty-nine to get standard deviation seven. Substituting the first height gives negative two; the second gives positive one. Match these positions to the chart. A z-score describes location, not a probability percentage.');
   keep(109);
-  add('この表は、右側の面積',`${math(String.raw`Q(z)=\Pr(Z>z)`)}\n\n${figure(111)}\n\n${options.tableLink}`,'model-visual',[110,111,112],
+  add('この表は、右側の面積',`${math(String.raw`\Pr(Z>z)`)}\n\n${figure(111)}\n\n${options.tableLink}`,'model-visual',[110,111,112],
     '使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。','Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first.');
   keep(114,'z=1.96を探します。まず1.9の行。小数第1位までの部分で、行を決めてください。','Locate z = 1.96. First use 1.9 to choose the row. Keep your finger on that row.');
   keep(115);
@@ -127,48 +184,66 @@ export function createWeek5CompactStory(options){
   paired('1.96より右は、2.5％',[formula(117)],figure(118),'',[117,118],
     '行1.9と列0.06の交点は0.02500。表の数字は右の尾の面積で、100を掛けると2.5％です。どこの確率か、図を指さして説明してみよう。',
     'Row 1.9 and column 0.06 meet at 0.02500. That is the right-tail area, or 2.5 percent. Point to the region your answer describes.');
+  practice('②','行と列を、自分で探す','Zは標準正規分布に従う。z＝1.28。',String.raw`$\Pr(Z>1.28)$ は？ 行・列・表の値・百分率を書く。`,[114],
+    '教科書の1.96と同じ手順を、別の値で試そう。どの行と列を使ったかも残してください。表が上側確率を示すことと、百分率への換算を忘れずに。まだ次の答え合わせを開かず、自分で表を探します。',
+    'Repeat the textbook lookup procedure with a different z. Record the row and column as well as the probability. Confirm that this is an upper-tail table and convert the decimal to a percentage before revealing the next slide.');
+  solution('②','1.2の行、0.08の列','標準正規分布、z＝1.28。',String.raw`\Pr(Z>z)`,
+    [String.raw`1.28=1.2+0.08`,String.raw`\Pr(Z>1.28)=0.10027`,String.raw`0.10027\times100=10.027\%`],
+    options.normal('practice-table-128',1.28,4,{title:'色の面積：1.28より右',labels:[{x:1.28,text:'1.28'}]}),
+    '1.28より右の確率は約10.03％。',[114],
+    '1.2の行を見つけ、0.08の列との交点を読みます。0.10027を百分率にすると10.027％。図の右の小さな面積が答えです。1.28をそのまま確率として読んだり、0.10027％と書いたりしないようにしよう。',
+    'Use row 1.2 and column 0.08. Their intersection is 0.10027, which is 10.027 percent. The answer is the small right-tail area on the chart. Do not interpret 1.28 as a probability or label the decimal probability as a percentage without multiplying by one hundred.');
   paired('−1.96より左も、2.5％',[formula(121)],figure(120),'左右対称なので、同じ距離の尾は同じ面積。',[119,120,121],
     'マイナス1.96より左なら、左右対称を使います。右の1.96より先と同じ面積なので2.5％。マイナスの位置でも、確率がマイナスにはなりません。',
     'Use symmetry for the region below negative 1.96. It matches the right tail above positive 1.96, so its probability is also 2.5 percent.');
+  practice('③','マイナスのzなら、どちら側？','Zは標準正規分布に従う。',String.raw`$\Pr(Z<-0.84)$ を求め、曲線に求める部分を塗る。`,[121],
+    '負のzが出たときは、確率まで負になるわけではありません。左右対称を利用し、表のどこを読めばよいか考えてください。まず欲しい左側の面積を図に塗ってから、表を使おう。',
+    'A negative z does not produce negative probability. Use symmetry to decide which positive-z table entry is relevant. Shade the requested left-hand region first, then look up the corresponding entry.');
+  solution('③','左右対称を使う','標準正規分布、境界は−0.84。',String.raw`\Pr(Z<-z)=\Pr(Z>z)`,
+    [String.raw`\Pr(Z<-0.84)=\Pr(Z>0.84)`,String.raw`=0.20045=20.045\%`],
+    options.normal('practice-negative-084',-4,-.84,{title:'色の面積：−0.84より左',labels:[{x:-.84,text:'−0.84'}]}),
+    '0.8の行・0.04の列。約20.05％。',[121],
+    '教科書p.124の左右対称と同じ方法です。−0.84より左は、＋0.84より右と同じ。表の0.8行、0.04列で0.20045を読み、約20.05％になります。求める面積は平均0の左です。',
+    'Apply the symmetry used on textbook page 124. The region below negative 0.84 matches the region above positive 0.84. Row 0.8 and column 0.04 give 0.20045, about 20.05 percent. The requested region lies left of zero.');
   paired('＋1.96より左は、97.5％',[formula(124),String.raw`\Pr(Z<1.96)=1-0.02500=97.5\%`],figure(126),'',[122,123,124,125,126],
     '今度はプラス1.96より左の全部。全体1から、小さい右の尾を引きます。答えが大きい確率になっていることを、図の色の広さでも確認しよう。',
     'For everything below positive 1.96, subtract the small right tail from 1. The large shaded region confirms why the answer is 97.5 percent.');
+  practice('④','表の値が、そのまま答えになる？','Zは標準正規分布に従う。',String.raw`$\Pr(Z<1.35)$ を求める。表はどちら側の面積を示している？`,[124],
+    '今度は正の境界より左を求めます。表から読める部分と、問題が求める部分は同じでしょうか？ 全体の面積が1であることを使って考えよう。答えは図の面積の広さとも照らし合わせます。',
+    'This time the requested region lies below a positive boundary. Compare that region with the area reported by the table. Use total area one, and check whether your numerical answer matches the size of the region you shaded.');
+  solution('④','全体1から、右の尾を引く','標準正規分布、境界は1.35。',String.raw`\Pr(Z<z)=1-\Pr(Z>z)`,
+    [String.raw`\Pr(Z>1.35)=0.08851`,String.raw`\Pr(Z<1.35)=1-0.08851`,String.raw`=0.91149=91.149\%`],
+    options.normal('practice-complement-135',-4,1.35,{title:'色の面積：1.35より左',labels:[{x:1.35,text:'1.35'}]}),
+    '1.3の行・0.05の列。求める左側は約91.15％。',[124],
+    '表の1.3行と0.05列で、まず右側0.08851を読みます。しかし欲しいのは左側なので1から引きます。0.91149、約91.15％。小さい尾の8.851％と、求める大きい面積を取り違えないようにしよう。',
+    'First read the right-tail probability 0.08851 at row 1.3 and column 0.05. The question asks for the left side, so subtract from one. The result is 0.91149, about 91.15 percent. Distinguish the small omitted tail from the large requested area.');
   paired('真ん中は、両方の尾を引く',[formula(128),String.raw`1-2(0.15866)=0.68268\approx68.27\%`],figure(130),`教科書の丸め値では68.28％。\n\n${options.tryIt('table')}`,[127,128,129,130,131],
     '−1から＋1の中央は、左右の尾を二回引きます。この表なら約68.27％。教科書の丸め値で68.28％になるのは矛盾ではありません。やってみようで右、左、真ん中を切り替えてみよう。',
     'For the central interval from negative one to positive one, remove both tails. Our table gives about 68.27 percent. The textbook’s rounding gives 68.28 percent. Explore the different shaded regions.');
-  keep(132);
-  paired('答え合わせ② · 70点以上',[String.raw`z=\frac{x-\mu}{\sigma}=\frac{70-50}{\sqrt{100}}=2`,String.raw`Q(2)=0.02275`,String.raw`\Pr(X\ge70)=\Pr(Z\ge2)=2.275\%`],figure(137),'表：2.0の行、0.00の列。',[133,134,135,136,137],
-    '分散100の平方根が標準偏差10です。70点を標準化すると2。表の2.0の行、0.00の列を読むと0.02275なので、右側の確率は2.275％です。',
-    'The standard deviation is the square root of one hundred. Standardizing seventy gives z = 2. Read row 2.0 and column 0.00 to get 0.02275, or 2.275 percent.');
-  keep(138);
-  paired('答え合わせ③ · 30〜70点',[formula(139),formula(140),String.raw`\Pr(-2\le Z\le2)=1-2(0.02275)=95.45\%`],figure(142),'',[139,140,141,142],
-    '両端を標準化すると−2と＋2です。全体1から、先ほどの尾0.02275を二回引いて95.45％。式の引き算が、図のどの部分に対応するかを説明してみよう。',
-    'Standardize the two boundaries to negative two and positive two. Subtract the previous tail probability twice from 1 to get 95.45 percent. Match the subtraction to the chart.');
-  keep(62);
-  keep(65,'くじやサイコロでは「値かける確率」を足しました。連続でも同じです。小さな幅の確率f(x)dxに値xを掛け、全体で足したものが期待値です。','For a lottery or die roll, we added value times probability. The continuous version weights each small probability contribution f(x)dx by x and accumulates across the distribution.');
-  paired('配達ロボットの期待時間は、6分',[String.raw`E(X)=\int_0^{12}x\frac1{12}\,dx`,String.raw`=\left[\frac{x^2}{24}\right]_0^{12}=6\text{ 分}`],figure(73),'授業用モデル：0〜12分の一様分布、密度1/12。',[68,69,70,71,72,73],
-    'ロボットは0〜12分で一様に到着すると仮定します。期待値の公式に密度1/12を入れ、上端と下端で計算すると6分。図のつり合う中心です。毎回6分で来るという約束ではありません。',
-    'Assume a uniform delivery time from zero to twelve minutes. Insert density one twelfth into the expectation formula and evaluate at the endpoints to get six minutes, the balance point on the chart.');
-  keep(75,'同じ期待時間でも、毎回ほぼ同じか、大きく変わるかでは違うよね。平均との差を二乗して、確率で重みを付けて足す。それが分散です。','The same expected wait can come with very different variability. Variance weights the squared distance from the mean by probability and adds those contributions.');
-  add('分散から、標準偏差へ',`${math(String.raw`\operatorname{Var}(X)=\int_0^{12}(x-6)^2\frac1{12}\,dx`)}\n\n${math(String.raw`=\left[\frac{(x-6)^3}{36}\right]_0^{12}=12\text{ 分}^2`)}\n\n${math(String.raw`\sigma=\sqrt{\operatorname{Var}(X)}=\sqrt{12}\approx3.46\text{ 分}`)}`,'calculation',[77,78,79,80,81,82],
-    '中心6からのずれを二乗して積分します。上端と下端を入れると、216から−216を引いて36で割るので12。分散の単位は分の二乗です。平方根を取ると標準偏差約3.46分になります。',
-    'Integrate squared deviations from six. The endpoint calculation is (216 − (−216))/36 = 12, in minutes squared. Taking the square root gives a standard deviation of about 3.46 minutes.');
-  add('中心と、ばらつきを見る',`${figure(83)}\n\n${options.tryIt('moments')}`,'visual-link',[83,84],
-    '中心は6分、色はそこから標準偏差一つぶんの範囲です。色の面積が分散12を表すわけではありません。配達時間の幅を変えて、中心とばらつきがどう変わるか確かめよう。',
-    'The centre is six minutes, and the shading marks one standard deviation each way. Its area is not the variance. Explore how changing the delivery window changes the mean and spread.');
-  add('確率は、面積。',`ここからは、ALワークシートに自分で取り組もう。`,'statement',[143,144],
+  practice('⑤','左右の幅が違う区間','Zは標準正規分布に従う。',String.raw`$\Pr(-0.50<Z<1.50)$ は？ 左右の尾を別々に求める。`,[128],
+    '中央の区間でも、左右が対称とは限りません。今回は境界の距離が違います。同じ尾を2回引く方法が使えるかを考え、必要な二つの表の値を探してください。図を描くと引く場所が分かります。',
+    'A central interval need not be symmetric. The two boundaries are different distances from zero. Decide whether subtracting the same tail twice would work, then find the two separate table values. Sketching the interval will show which areas to remove.',4);
+  solution('⑤','異なる二つの尾を引く','標準正規分布、区間−0.50〜1.50。',String.raw`\Pr(a<Z<b)=F(b)-F(a)`,
+    [String.raw`F(-0.50)=0.30854`,String.raw`F(1.50)=1-0.06681=0.93319`,String.raw`0.93319-0.30854=0.62465`,String.raw`=62.465\%`],
+    options.normal('practice-asymmetric-interval',-.5,1.5,{title:'色の面積：−0.50から1.50まで',labels:[{x:-.5,text:'−0.50'},{x:1.5,text:'1.50'}]}),
+    '約62.47％。同じ尾を2回引かない。',[128],
+    '教科書p.122の累積の差とp.124〜125の左右対称・補集合を組み合わせます。左の尾は0.30854、右の尾は0.06681で異なる値です。1から両方を引くと0.62465。式では左側の累積を差し引く形でも同じです。約62.47％になります。',
+    'Combine the interval difference on textbook page 122 with symmetry and complements on pages 124–125. The left tail is 0.30854 and the right tail is 0.06681, so they cannot be doubled as if equal. Subtracting both from one gives 0.62465, or about 62.47 percent. The displayed cumulative difference is equivalent.');
+  add('チャレンジ⑥　70点以上は、何％？',sourceBody(132),'challenge',[132],
+    '最後は元の単位の点数から始めます。分散から標準偏差を確認し、境界の点数を標準化し、求める面積を描いて表を読もう。この練習では途中式も必ず残し、ALに一人で取り組む準備をします。',
+    'Finish by starting in the original score units. Identify the standard deviation from the variance, standardize the boundary, sketch the region, and read the table. Keep the intermediate steps as preparation for independent AL work.');
+  mapping.at(-1).practiceFocus='z-scores-and-table';
+  solution('⑥','元の点数から、上側確率へ','平均50点、分散100点²、境界70点。',zFormula,
+    [String.raw`\sigma=\sqrt{100}=10,\quad z=\frac{70-50}{10}=2`,String.raw`\Pr(X\ge70)=\Pr(Z\ge2)`,String.raw`=0.02275=2.275\%`],
+    figure(137),'表の2.0行・0.00列。70点以上は約2.28％。',[133],
+    'まず与えられた分散100の平方根を取って標準偏差10。標準化の公式の文字を確認してから70、50、10を入れ、z=2です。表の2.0行・0.00列で0.02275を読むので2.275％。元の点数で欲しかった右側の面積と一致しているか確かめよう。',
+    'Start from the givens: variance one hundred means standard deviation ten. Check the symbolic standardization rule, then insert seventy, fifty and ten to get z=2. Row 2.0 and column 0.00 give 0.02275, or 2.275 percent. Confirm that this is the right-hand region originally requested.');
+  add('ここからは、ALに自分で取り組もう。',`標準偏差を確認。zに直す。表を読み、面積を選ぶ。\n\n[ALワークシートを開く](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=assets%2Fworksheet-previews%2Fw05%2Findex.html&title=AL&week=W05&source=weeks%2F05-continuous-distributions-i%2F05_AL用ワークシート.xlsx)\n\n${options.tableLink}\n\n各セルの答えは示しません。`,'statement',[143,144],
     '欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。',
     'Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks.');
-  add('補足：1人の点数と、n人の平均',`教科書 p.123\n\n${math(String.raw`\text{1人：}\quad Z=\frac{X-\mu}{\sigma}`)}\n\n${math(String.raw`\text{平均：}\quad Z=\frac{\bar X-\mu}{\sigma/\sqrt n}`)}`,'calculation',[145,146,147,148,149],
-    '補足です。独立なn人の平均は、1人の値よりばらつきが小さく、標準偏差はσ/√n。問題が個人の値なのか、標本平均なのかを確認しよう。正規母集団なら独立な標本の平均も正規分布です。',
-    'Optional extension: the mean of n independent observations has standard deviation σ/√n. Check whether a problem concerns one value or a sample mean. Independent samples from a normal population have a normally distributed mean.');
-  add('標準化だけでは、形は変わらない。',`平均0・標準偏差1にそろえても、\nもとの分布が正規とは限らない。`,'statement',[150,151],
-    '標準化は中心と尺度を変える操作なので、山の形そのものは変わりません。一般の母集団の標本平均を正規近似するには、有限分散などの条件と十分な標本数が必要です。',
-    'Standardization changes centre and scale, while preserving the distribution’s shape. A normal approximation for sample means from other populations needs conditions such as finite variance and a sufficiently large sample.');
-  if(slides.length!==58)throw Error(`Expected 58 edited slides, got ${slides.length}`);
-  if(slideTermKeys.length!==slides.length)throw Error('Statistical terminology must follow the slide order');
+  if(slides.length!==57)throw Error(`Expected 57 focused slides, got ${slides.length}`);
   slides.forEach((slide,i)=>{
-    const keys=slideTermKeys[i];
+    const keys=mapping[i].termKeys;
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
     if(keys.length)slides[i]=annotateJapaneseTerms(slide).replace(/<!-- _class: (.*?) -->/,'<!-- _class: $1 has-stat-terms -->')+'\n\n'+terminology(keys);
   });
@@ -187,6 +262,6 @@ section.model-visual{padding:36px 65px 45px}section.model-visual h2{font-size:41
 section.visual-link{padding:34px 60px 45px}section.visual-link h2{font-size:43px;margin-bottom:8px}section.visual-link img{height:440px;width:1030px;object-fit:contain}section.visual-link p{font-size:25px;margin:8px 0}
 section.worked{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto 1fr auto;gap:14px 26px;padding:45px 55px 55px;text-align:left;align-content:center;align-items:center}section.worked h2{grid-column:1/-1;font-size:43px;margin:0 0 8px}section.worked .worked-copy{min-width:0}section.worked .worked-copy .katex-display{font-size:27px;text-align:left;margin:26px 0}section.worked .worked-visual{min-width:0}section.worked img{width:100%;height:320px;object-fit:contain}section.worked>p{grid-column:1/-1;font-size:22px;margin:0}section.worked .worked-visual p{margin:0}
 section.worked a,section.visual-link a,section.model-visual a{display:inline-block;background:#176d82;color:white;text-decoration:none;border-radius:7px;padding:8px 19px;font-size:23px;font-weight:700}section.model-visual a{font-size:21px;padding:7px 17px}
-section .book-note{font-size:19px;color:#176d82}section.queue-model .book-note{color:#176d82}
+section .formula-ref{position:absolute;top:13px;right:32px;max-width:1170px;font-size:17px;color:#176d82;font-weight:500;line-height:1.25}section.practice-answer{padding-top:65px}section.practice-answer .given{font-size:21px;line-height:1.6;margin:0 0 12px}section.practice-answer .step-label{font-size:18px;color:#176d82;margin:6px 0}section.practice-answer .worked-copy .katex-display{font-size:22px;margin:12px 0}section.practice-answer .worked-copy{align-self:center}section .book-note{font-size:19px;color:#176d82}section.queue-model .book-note{color:#176d82}section.practice-answer .katex-display>.katex{text-align:left}
 ${terminologyStyle}
 </style>`);

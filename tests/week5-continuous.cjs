@@ -33,66 +33,80 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal((deck.match(/<!-- _class: challenge(?: has-stat-terms)? -->/g)||[]).length,3);
-assert.ok(slideCount===58,'Textbook-led lecture without the quadratic and numerical rectangle detour');
-assert.equal(sourceMap.slides.filter(s=>s.layout==='kiss-frame').length,0);
-['paris100-video.jpg','paris100-finish.jpg','paris100-omega-scan.jpg','omega-stopwatch.png'].forEach((name,i)=>assert.ok(slideBodies[i].includes(`images/${name}`)));
-assert.ok(slideBodies[0].includes('https://www.youtube.com/watch?v=GHw-eTs4Yes'));
-assert.ok(slideBodies[2].includes('https://www.hodinkee.com/articles/olympics-2024-mens-100m-photo-finish'));
-assert.ok(slideBodies[3].includes('activity=w5-stopwatch'));
-const formulas=sourceMap.slides.filter(s=>s.layout.includes('hero-math'));
-assert.ok(formulas.length>=7,'Core formulas retain a full-screen single-line treatment');
-for(const slide of formulas){
-  const body=slideBodies[slide.slide-1].replace(/<!--[\s\S]*?-->/g,'').replace(/<aside class="stat-terms"[\s\S]*?<\/aside>/g,'').trim();
-  assert.equal((body.match(/\$\$/g)||[]).length,2,'One complete formula per hero slide');
-  assert.ok(!body.includes('\\begin{aligned}'),'No multi-line formula stacks');
-  assert.ok(!body.includes('!['),'Formula slides have no competing chart');
-  assert.match(body,/\$\$\s*$/,'Explanations belong on the next slide');
-}
-assert.ok(!deck.includes('class="w5-columns"'));
-assert.ok(!deck.includes('class="panels"'));
-assert.deepEqual(sourceMap.slides.filter(s=>s.layout==='challenge').map(s=>s.slide),[22,46,48]);
-assert.deepEqual(sourceMap.slides.filter(s=>s.layout.startsWith('lookup')).map(s=>s.slide),[39,40,41]);
+assert.equal(slideCount,57);
 const bodyFor=title=>{
   const item=sourceMap.slides.find(s=>s.title===title);
   assert(item,`Missing slide: ${title}`);
   return slideBodies[item.slide-1];
 };
-for(const title of ['累積確率の差で、80％','配達ロボットの期待時間は、6分','60点は、標準偏差1個ぶん上','1.96より右は、2.5％','−1.96より左も、2.5％','＋1.96より左は、97.5％','真ん中は、両方の尾を引く','答え合わせ② · 70点以上','答え合わせ③ · 30〜70点'])
-  assert(bodyFor(title).includes('!['),'Worked answer retains its explanatory chart');
-assert(bodyFor('標準偏差が小さいと、狭い山').includes('story-normal-narrow'));
-assert(bodyFor('標準偏差が大きいと、広い山').includes('story-normal-wide'));
+const challenges=sourceMap.slides.filter(s=>s.layout==='challenge');
+assert.equal(challenges.length,6);
+assert.deepEqual(challenges.map(s=>s.slide),[36,44,47,50,53,55]);
+for(const item of challenges){
+  assert.equal(item.practiceFocus,'z-scores-and-table');
+  assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
+}
+assert(!challenges.some(s=>/ラーメン|積分|一様/.test(s.title)));
+for(const item of sourceMap.slides.filter(s=>s.practiceAnswer)){
+  const body=slideBodies[item.slide-1];
+  for(const label of ['① 与えられた条件','② 公式','③ 代入','④ 答え'])assert(body.includes(label));
+  assert(body.includes('!['),'Every solution has an explanatory chart');
+}
+const formulas=sourceMap.slides.filter(s=>s.layout.includes('hero-math'));
+assert.equal(formulas.length,7);
+for(const item of sourceMap.slides){
+  const body=slideBodies[item.slide-1];
+  if(/\$/.test(body)){
+    assert(item.formulaRef?.pages,`Missing textbook page on ${item.title}`);
+    assert(body.includes('class="formula-ref"'));
+    assert(body.replace(/<rt>[^<]*<\/rt>/g,'').replace(/<[^>]*>/g,'').includes(item.formulaRef.label));
+  }
+}
+for(const item of formulas){
+  const body=slideBodies[item.slide-1].replace(/<!--[\s\S]*?-->/g,'').replace(/<aside class="(?:stat-terms|formula-ref)"[\s\S]*?<\/aside>/g,'').trim();
+  assert.equal((body.match(/\$\$/g)||[]).length,2);
+  assert(!body.includes('\\begin{aligned}'));
+  assert(!body.includes('!['));
+  assert.match(body,/\$\$\s*$/);
+}
+assert.equal(sourceMap.slides.find(s=>s.title==='正規分布の密度').formulaRef.pages,'122');
+const zSource=sourceMap.slides.find(s=>s.title==='標準化の公式').formulaRef;
+assert.equal(zSource.pages,'123');
+assert.equal(zSource.relation,'application','Do not present the individual-value application as a verbatim sample-mean formula');
+assert(bodyFor('標準化の公式').includes('津村18'));
+assert(!/Q\(|cx\^2|8000|rectangle-midpoint|\\operatorname\{erf\}|\\bar X/.test(deck),'No extra notation, density-fitting or sample-mean detour');
+assert(!deck.includes('\\frac1{20}'));
+assert(!deck.includes('\\frac1{12}'));
+assert(bodyFor('分散と標準偏差を、取り違えない').includes('\\sqrt{36}=6'));
+assert(bodyFor('答え合わせ① · 標準偏差を出してから、標準化').includes('\\frac{146-160}{7}=-2'));
+assert(bodyFor('答え合わせ② · 1.2の行、0.08の列').includes('0.10027'));
+assert(bodyFor('答え合わせ③ · 左右対称を使う').includes('0.20045'));
+assert(bodyFor('答え合わせ④ · 全体1から、右の尾を引く').includes('0.91149'));
+assert(bodyFor('答え合わせ⑤ · 異なる二つの尾を引く').includes('0.62465'));
+assert(bodyFor('答え合わせ⑥ · 元の点数から、上側確率へ').includes('2.275'));
+near(M.upper(1.28),.10027,5e-6);
+near(M.upper(.84),.20045,5e-6);
+near(1-M.upper(1.35),.91149,5e-6);
+near(1-M.upper(.5)-M.upper(1.5),.62465,1e-5);
+for(const title of ['待ち時間なら、こんな形も考えられる','全体の面積は、1＝100％','区間の確率は、その部分の面積']){
+  assert(bodyFor(title).includes('王道家の実測データではありません'));
+  assert(bodyFor(title).includes('!['));
+}
 for(const [title,image] of [['ラーメン店の行列','ramen-queue-history-supplied.png'],['なんでんかんでんのラーメン','nandenkanden-ramen-supplied.png'],['王道家、この行列、何分待つ？','oudouya-kashiwa-night-supplied.png'],['王道家のラーメンとご飯','oudouya-ramen-rice-supplied.png']])
   assert(bodyFor(title).includes(`images/${image}`));
-assert(bodyFor('王道家、この行列、何分待つ？').includes('queue-portrait'));
-assert(bodyFor('王道家のラーメンとご飯').includes('queue-bowl'));
-for(const title of ['待ち時間なら、こんな形も考えられる','全体の面積は、1＝100％','区間の確率は、その部分の面積']){
-  const body=bodyFor(title);
-  assert(body.includes('!['));
-  assert(body.includes('王道家の実測データではありません'));
-  assert(!body.includes('$$'),'Ramen illustrates shapes and areas without density arithmetic');
-}
-assert(bodyFor('区間の確率は、その部分の面積').includes('0〜5分待つより、15〜20分待つほうが起こりやすい。'));
-assert(bodyFor('全体の面積は、1＝100％').includes('ramen-total-area'));
-assert(bodyFor('積分の記号は、面積を表す').includes('教科書 p.121'));
-assert(!/cx\^2|8000|0\.984375|quadratic-|rectangle-midpoint/.test(deck),'No quadratic fitting or numerical rectangle detour');
+['paris100-video.jpg','paris100-finish.jpg','paris100-omega-scan.jpg','omega-stopwatch.png'].forEach((name,i)=>assert(slideBodies[i].includes(`images/${name}`)));
+assert(bodyFor('標準偏差が小さいと、狭い山').includes('story-normal-narrow'));
+assert(bodyFor('標準偏差が大きいと、広い山').includes('story-normal-wide'));
 const pageFor=title=>sourceMap.slides.find(s=>s.title===title).slide;
-assert(pageFor('累積確率の差で、80％')<pageFor('正規分布：中心と、ばらつき'));
-assert(pageFor('答え合わせ③ · 30〜70点')<pageFor('連続変数の期待値'),'Textbook pp.122–125 precede p.129');
-assert(slideBodies[8].includes('density-robot-height.svg'));
-assert(slideBodies[9].includes('density-robot-height-area.svg'));
-assert(bodyFor('確率密度には、いろいろな形がある').includes('値の集まり方が違えば'));
-assert(slideBodies[4].includes('155〜165cm'));
-assert(slideBodies[6].includes('\\Pr(155\\le X\\le165)>0'));
-assert(!slideBodies[6].includes('159.5'));
-const heightSvg=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/images/density-robot-height.svg'),'utf8');
-assert(heightSvg.includes('身長（cm）'));
-const notes=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/week05/w5.notes.json'))).slides;
-assert(!notes.some(note=>/c=3|3\/8000|x²の前|長方形.*計算/.test(note.ja)));
-assert(notes[pageFor('確率密度には、いろいろな形がある')-1].en.includes('not bending a normal distribution'));
-for(const key of ['area','cdf','moments','normal','table'])assert.ok(deck.includes(`activity=w5-${key}`));
-assert.ok(!deck.includes('Yohの2025'));assert.ok(!/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(deck));
-assert.ok(sourceMap.decisions.some(d=>/Chi-square/.test(d.defer||'')));
+assert(pageFor('分散')<pageFor('正規分布：中心と、ばらつき'),'Tsumura definitions precede the normal-distribution section');
+assert(pageFor('正規分布の密度')<pageFor('標準化の公式'));
+assert.equal(sourceMap.slides.at(-1).title,'ここからは、ALに自分で取り組もう。');
+assert(sourceMap.slides.at(-1).sourceBeats.includes(143));
+for(const key of ['normal','table'])assert(deck.includes(`activity=w5-${key}`));
+assert(sourceMap.curriculum.some(s=>s.tsumura==='20–26'));
+assert(!deck.includes('Yohの2025'));
+assert(!/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(deck));
+assert(sourceMap.decisions.some(d=>/Chi-square/.test(d.defer||'')));
 const week=fs.readFileSync(path.join(root,'content/weeks/05-normal.md'),'utf8');
 assert.match(week,/week05\/w5.pdf\) \{primary\}/);assert.match(week,/前半v6.pdf\) \{supplementary\}/);
 assert.match(week,/date: 2026-10-28/);
@@ -115,11 +129,11 @@ console.log('Week 5: density/CDF/moments/normal-table mathematics, fixed model s
     for(const a of await page.getAnnotations())if(a.url)destinations.push(a.url);
   }
   assert.deepEqual(challenges,sourceMap.slides.filter(s=>s.layout==='challenge').map(s=>s.slide));
-  for(const key of ['area','cdf','moments','normal','table'])assert.ok(destinations.some(d=>d.includes(`activity=w5-${key}`)));
+  for(const key of ['normal','table'])assert.ok(destinations.some(d=>d.includes(`activity=w5-${key}`)));
   assert.ok(destinations.some(d=>d.includes('normal-upper-tail-table.html')));
   assert.ok(destinations.includes('https://www.youtube.com/watch?v=GHw-eTs4Yes'));
   assert.ok(destinations.includes('https://www.hodinkee.com/articles/olympics-2024-mens-100m-photo-finish'));
   assert.ok(destinations.some(d=>d.includes('activity=w5-stopwatch')));
   await pdf.destroy();
-  console.log(`Final PDF: ${slideCount} individual story beats; ${formulas.length} isolated formulas; answer guards on ${challenges.join(', ')}; all five exploration links and table links verified.`);
+  console.log(`Final PDF: ${slideCount} individual story beats; ${formulas.length} isolated formulas; answer guards on ${challenges.join(', ')}; focused exploration links, formula references and table links verified.`);
 })().catch(error=>{console.error(error);process.exitCode=1;});

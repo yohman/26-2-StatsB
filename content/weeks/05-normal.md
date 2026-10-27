@@ -15,9 +15,10 @@ prepare_en: Review the difference between continuous and discrete variables.
 
 ## In class
 
-- 連続確率分布、確率密度関数、積分、累積確率 (continuous distributions, probability density functions, integration, and cumulative probability)
-- 確率分布の期待値と分散 (expected value and variance of probability distributions)
-- 正規分布、標準正規分布、標準正規分布表の読み方 (normal distribution, standardized normal distribution, and the normal table)
+- 確率密度と面積、期待値と分散を短く確認 (brief review of density, area, expected value, and variance)
+- 重点：分散と標準偏差を区別し、zに標準化する (focus: distinguish variance from standard deviation and calculate z-scores)
+- 標準正規分布表で、上側・下側・区間の確率を読む (use the standard normal table for upper tails, lower tails, and intervals)
+- 途中の6つのチャレンジで練習してから、ALに自分で取り組む (six interleaved practice challenges before independent AL work)
 
 ## Textbook
 
