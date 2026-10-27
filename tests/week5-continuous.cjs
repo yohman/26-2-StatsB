@@ -80,6 +80,7 @@ assert.ok(sourceMap.decisions.some(d=>/Chi-square/.test(d.defer||'')));
 const week=fs.readFileSync(path.join(root,'content/weeks/05-normal.md'),'utf8');
 assert.match(week,/week05\/w5.pdf\) \{primary\}/);assert.match(week,/前半v6.pdf\) \{supplementary\}/);
 assert.match(week,/date: 2026-10-28/);
+assert(!week.includes('{yoh}'),'The three archived Yoh decks are not listed in Week 5');
 const viewer=fs.readFileSync(path.join(root,'viewer.html'),'utf8');
 assert.ok(viewer.includes("file === 'materials/2026-yoh/week05/normal-upper-tail-table.html'"));
 assert.ok(viewer.includes("frame.sandbox = ''"),'Table preview must remain script-free');
