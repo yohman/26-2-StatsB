@@ -75,6 +75,9 @@ export function createWeek5CompactStory(options){
   opening('王道家、この行列、何分待つ？',`<img src="images/oudouya-kashiwa-night-supplied.png" alt="夜の柏・王道家の店先から歩道へ続く行列。利用者提供の写真。">`,'race-media queue-story queue-portrait',
     'みんな、柏の王道家で並んだことある？ 友達とラーメンを食べに来たら、この行列。「座れるまで何分かな？」と考えるよね。この写真だけでは待ち時間の確率は分かりません。次から計算しやすい授業用のモデルを仮定します。モデルの数値は実測値ではなく、実際には20分を超えて待つこともあります。写真は利用者提供です。',
     'Have you queued at Oudouya in Kashiwa? Imagine arriving with classmates and seeing this line. How many minutes until we can sit down? A photograph cannot tell us the waiting-time distribution. Next we will assume a convenient classroom model, not measured Oudouya data. Actual waits can exceed twenty minutes. This photograph was supplied by the user.', ['User-supplied image: images/oudouya-kashiwa-night-supplied.png']);
+  opening('王道家のラーメンとご飯',`<img src="images/oudouya-ramen-rice-supplied.png" alt="赤いカウンターに並ぶ王道家のラーメンとご飯。利用者提供の写真。">`,'race-media queue-story queue-bowl',
+    '行列の先には、このラーメンとご飯。友達と「早く食べたいね」と話しながら待つ場面を想像しよう。では、座れるまで何分待つだろう？ 次から待ち時間を授業用のモデルで考えます。写真から確率や待ち時間が分かるわけではなく、モデルの数値は王道家の実測データではありません。',
+    'Here is the ramen and rice at the end of the queue. Imagine waiting with friends, looking forward to this meal. How many minutes until we can sit down? Next, consider that waiting time through a classroom model. The photograph does not supply probabilities or measured waiting times, and the model is not based on observed Oudouya data.', ['User-supplied image: images/oudouya-ramen-rice-supplied.png']);
   const rectangleFigure=(count,highlight=null)=>options.fig(`rectangle-midpoint-${count}${highlight===null?'':`-${highlight}`}`,{max:20,pdf:x=>3*x*x/8000,lo:0,hi:0,rectangles:count,rectangleLabels:count===4,rectangleHighlight:highlight,yMax:.19,title:`${count}個の長方形 · 中点の高さ`,xlabel:'待ち時間（分）'});
   add('待ち時間なら、こんな形も考えられる',`列に並んでから座れるまでの時間を、X分とする。\n\n${options.fig('density-oudouya-wait',{max:20,pdf:x=>3*x*x/8000,lo:0,hi:0,yMax:.19,title:'長い待ち時間の側に集まりやすい仮定モデル',xlabel:'待ち時間（分）',ticks:[0,5,10,15,20]})}\n\n0〜5分より、15〜20分に入りやすいモデル。\n\n<small>授業用の仮定：0〜20分。王道家の実測データではありません。</small>`,'model-visual queue-model',[29],
     'ここから横軸は身長ではなく、並んでから座れるまでの時間です。今回は混んだ店で短い待ち時間より長い待ち時間に集まりやすい状況を想像し、右に向かって高くなる密度を仮定します。同じ5分幅で0〜5分と15〜20分を比べると、右側の面積が大きい。身長の釣鐘型とは違いますが、これも確率密度です。高さそのものではなく区間の面積を読みます。これは実際の王道家の待ち時間を調べた結果ではなく、0〜20分に収まる授業用の単純化。実際の待ち時間は20分を超えることもあります。次でこの曲線に式を与え、長方形で面積を近似します。',
@@ -189,7 +192,7 @@ export function createWeek5CompactStory(options){
   add('標準化だけでは、形は変わらない。',`平均0・標準偏差1にそろえても、\nもとの分布が正規とは限らない。`,'statement',[150,151],
     '標準化は中心と尺度を変える操作なので、山の形そのものは変わりません。一般の母集団の標本平均を正規近似するには、有限分散などの条件と十分な標本数が必要です。',
     'Standardization changes centre and scale, while preserving the distribution’s shape. A normal approximation for sample means from other populations needs conditions such as finite variance and a sufficiently large sample.');
-  if(slides.length!==66)throw Error(`Expected 66 edited slides, got ${slides.length}`);
+  if(slides.length!==67)throw Error(`Expected 67 edited slides, got ${slides.length}`);
   if(slideTermKeys.length!==slides.length)throw Error('Statistical terminology must follow the slide order');
   slides.forEach((slide,i)=>{
     const keys=slideTermKeys[i];
