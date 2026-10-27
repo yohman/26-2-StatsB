@@ -1,5 +1,6 @@
 // One shared vocabulary and visual treatment across explanations, formulas and answers.
 export const glossary={
+  quadratic:['二次関数','Quadratic function'],
   measurement:['測定精度','Measurement precision'],
   randomVariable:['確率変数','Random variable'],
   pointProbability:['1点の確率','Point probability'],
@@ -32,6 +33,7 @@ export const glossary={
 
 // Pronunciations are validated as whole terms, then anchored to individual kanji.
 export const readings={
+  quadratic:'にじかんすう',
   measurement:'そくていせいど',randomVariable:'かくりつへんすう',
   pointProbability:[['1点','いってん'],'の',['確率','かくりつ']],
   interval:'くかん',rounding:[['丸','まる'],'め'],continuous:'れんぞくかくりつぶんぷ',
@@ -47,6 +49,7 @@ export const readings={
   sampleMean:'ひょうほんへいきん',standardError:'ひょうじゅんごさ'
 };
 const characterReadings={
+  '二':'に','次':'じ',
   '測':'そく','定':'てい','精':'せい','度':'ど','確':'かく','率':'りつ',
   '変':'へん','数':'すう','1':'いっ','点':'てん','区':'く','間':'かん','丸':'まる',
   '連':'れん','続':'ぞく','分':'ぶん','布':'ぷ','密':'みつ','関':'かん',
@@ -93,6 +96,8 @@ export const slideTermKeys=[
   [],
   [],
   ['density'],
+  ['quadratic'],
+  ['probability'],
   ['density'],
   ['integral','probability'],
   ['density','probability'],
