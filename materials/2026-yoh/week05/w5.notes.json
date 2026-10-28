@@ -290,12 +290,35 @@
     },
     {
       "page": 35,
+      "title": "チャレンジ②　自分の身長を、zに直そう",
+      "ja": "今度はロボットではなく自分の身長です。単位はcm。日本の20〜29歳の調査平均と標準偏差を使い、どちらの基準と比べたか書いて計算しよう。全世代の平均ではなく、授業用に選んだ若年層の基準です。身長を公表する必要はなく、架空の身長でも構いません。大小を評価する問題ではなく、平均との差を共通の単位で表す練習です。出典：https://www.mhlw.go.jp/content/001435374.pdf#page=2",
+      "en": "Use your own height in centimetres, or a hypothetical height if you prefer. Choose and name one reference group from Japan's surveyed 20–29-year-olds, then calculate your z-score and interpret its sign. These are age-specific sample statistics used as classroom references, not an all-age population average or a judgment about height. Nobody needs to share their measurement. Source: https://www.mhlw.go.jp/content/001435374.pdf#page=2",
+      "sources": [
+        "https://www.mhlw.go.jp/content/001435374.pdf#page=2"
+      ]
+    },
+    {
+      "page": 36,
+      "title": "答え合わせ② · Yohの177cmを、同じ基準で比べる",
+      "ja": "Yohの身長177cmを例に、同じ20〜29歳男性の基準と比べます。177から170.3を引くと6.7cm。これを標準偏差6.3cmで割ると約1.06です。平均より標準偏差約1.06個分上という位置で、確率や百分率ではありません。Yoh自身の年齢層を推定した比較ではなく、学生と同じ基準での例です。曲線は報告値から描いた正規近似で、調査の実際のヒストグラムではありません。出典：https://www.mhlw.go.jp/content/001435374.pdf#page=2",
+      "en": "For Yoh's height of 177 cm, use the same male 20–29 reference as in the question. Subtract 170.3 to obtain 6.7 cm, then divide by the reference SD of 6.3 cm. The result is approximately +1.06 standard deviations above that group's mean, not 1.06 percent. This intentionally uses the student-age reference rather than implying Yoh belongs to that age group. The curve is an illustrative normal approximation, not an observed survey histogram. Source: https://www.mhlw.go.jp/content/001435374.pdf#page=2",
+      "formulaRef": {
+        "pages": "123",
+        "relation": "application",
+        "label": "教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18"
+      },
+      "sources": [
+        "https://www.mhlw.go.jp/content/001435374.pdf#page=2"
+      ]
+    },
+    {
+      "page": 37,
       "title": "教科書 · 第2章 第2節",
       "ja": "教科書124〜125ページの表につなげます。表を使う前に、表の数字がどの面積なのかを必ず確認しよう。",
       "en": "Turn to pages 124–125 for the normal table. Before reading any number, identify which area the table reports."
     },
     {
-      "page": 36,
+      "page": 38,
       "title": "この表は、右側の面積",
       "ja": "使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。",
       "en": "Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first.",
@@ -305,25 +328,25 @@
       }
     },
     {
-      "page": 37,
+      "page": 39,
       "title": "まず、1.9の行",
       "ja": "z=1.96を探します。まず1.9の行。小数第1位までの部分で、行を決めてください。",
       "en": "Locate z = 1.96. First use 1.9 to choose the row. Keep your finger on that row."
     },
     {
-      "page": 38,
+      "page": 40,
       "title": "次に、0.06の列",
       "ja": "次に0.06の列。1.9足す0.06で1.96になります。行を押さえたまま、列との交点を見ます。",
       "en": "Next find column 0.06. Adding 1.9 and 0.06 gives 1.96. Follow the row to its intersection with that column."
     },
     {
-      "page": 39,
+      "page": 41,
       "title": "交点は、0.02500",
       "ja": "交点は0.02500。これはzの値ではなく、右側にある面積の大きさです。",
       "en": "The intersection reads 0.02500. That number is the right-tail probability, rather than another z-score."
     },
     {
-      "page": 40,
+      "page": 42,
       "title": "1.96より右は、2.5％",
       "ja": "行1.9と列0.06の交点は0.02500。表の数字は右の尾の面積で、100を掛けると2.5％です。どこの確率か、図を指さして説明してみよう。",
       "en": "Row 1.9 and column 0.06 meet at 0.02500. That is the right-tail area, or 2.5 percent. Point to the region your answer describes.",
@@ -333,8 +356,8 @@
       }
     },
     {
-      "page": 41,
-      "title": "チャレンジ②　行と列を、自分で探す",
+      "page": 43,
+      "title": "チャレンジ③　行と列を、自分で探す",
       "ja": "教科書の1.96と同じ手順を、別の値で試そう。どの行と列を使ったかも残してください。表が上側確率を示すことと、百分率への換算を忘れずに。まだ次の答え合わせを開かず、自分で表を探します。",
       "en": "Repeat the textbook lookup procedure with a different z. Record the row and column as well as the probability. Confirm that this is an upper-tail table and convert the decimal to a percentage before revealing the next slide.",
       "formulaRef": {
@@ -343,8 +366,8 @@
       }
     },
     {
-      "page": 42,
-      "title": "答え合わせ② · 1.2の行、0.08の列",
+      "page": 44,
+      "title": "答え合わせ③ · 1.2の行、0.08の列",
       "ja": "1.2の行を見つけ、0.08の列との交点を読みます。0.10027を百分率にすると10.027％。図の右の小さな面積が答えです。1.28をそのまま確率として読んだり、0.10027％と書いたりしないようにしよう。",
       "en": "Use row 1.2 and column 0.08. Their intersection is 0.10027, which is 10.027 percent. The answer is the small right-tail area on the chart. Do not interpret 1.28 as a probability or label the decimal probability as a percentage without multiplying by one hundred.",
       "formulaRef": {
@@ -353,7 +376,7 @@
       }
     },
     {
-      "page": 43,
+      "page": 45,
       "title": "−1.96より左も、2.5％",
       "ja": "マイナス1.96より左なら、左右対称を使います。右の1.96より先と同じ面積なので2.5％。マイナスの位置でも、確率がマイナスにはなりません。",
       "en": "Use symmetry for the region below negative 1.96. It matches the right tail above positive 1.96, so its probability is also 2.5 percent.",
@@ -363,8 +386,8 @@
       }
     },
     {
-      "page": 44,
-      "title": "チャレンジ③　マイナスのzなら、どちら側？",
+      "page": 46,
+      "title": "チャレンジ④　マイナスのzなら、どちら側？",
       "ja": "負のzが出たときは、確率まで負になるわけではありません。左右対称を利用し、表のどこを読めばよいか考えてください。まず欲しい左側の面積を図に塗ってから、表を使おう。",
       "en": "A negative z does not produce negative probability. Use symmetry to decide which positive-z table entry is relevant. Shade the requested left-hand region first, then look up the corresponding entry.",
       "formulaRef": {
@@ -373,8 +396,8 @@
       }
     },
     {
-      "page": 45,
-      "title": "答え合わせ③ · 左右対称を使う",
+      "page": 47,
+      "title": "答え合わせ④ · 左右対称を使う",
       "ja": "教科書p.124の左右対称と同じ方法です。−0.84より左は、＋0.84より右と同じ。表の0.8行、0.04列で0.20045を読み、約20.05％になります。求める面積は平均0の左です。",
       "en": "Apply the symmetry used on textbook page 124. The region below negative 0.84 matches the region above positive 0.84. Row 0.8 and column 0.04 give 0.20045, about 20.05 percent. The requested region lies left of zero.",
       "formulaRef": {
@@ -383,7 +406,7 @@
       }
     },
     {
-      "page": 46,
+      "page": 48,
       "title": "＋1.96より左は、97.5％",
       "ja": "今度はプラス1.96より左の全部。全体1から、小さい右の尾を引きます。答えが大きい確率になっていることを、図の色の広さでも確認しよう。",
       "en": "For everything below positive 1.96, subtract the small right tail from 1. The large shaded region confirms why the answer is 97.5 percent.",
@@ -393,8 +416,8 @@
       }
     },
     {
-      "page": 47,
-      "title": "チャレンジ④　表の値が、そのまま答えになる？",
+      "page": 49,
+      "title": "チャレンジ⑤　表の値が、そのまま答えになる？",
       "ja": "今度は正の境界より左を求めます。表から読める部分と、問題が求める部分は同じでしょうか？ 全体の面積が1であることを使って考えよう。答えは図の面積の広さとも照らし合わせます。",
       "en": "This time the requested region lies below a positive boundary. Compare that region with the area reported by the table. Use total area one, and check whether your numerical answer matches the size of the region you shaded.",
       "formulaRef": {
@@ -403,8 +426,8 @@
       }
     },
     {
-      "page": 48,
-      "title": "答え合わせ④ · 全体1から、右の尾を引く",
+      "page": 50,
+      "title": "答え合わせ⑤ · 全体1から、右の尾を引く",
       "ja": "表の1.3行と0.05列で、まず右側0.08851を読みます。しかし欲しいのは左側なので1から引きます。0.91149、約91.15％。小さい尾の8.851％と、求める大きい面積を取り違えないようにしよう。",
       "en": "First read the right-tail probability 0.08851 at row 1.3 and column 0.05. The question asks for the left side, so subtract from one. The result is 0.91149, about 91.15 percent. Distinguish the small omitted tail from the large requested area.",
       "formulaRef": {
@@ -413,7 +436,7 @@
       }
     },
     {
-      "page": 49,
+      "page": 51,
       "title": "真ん中は、両方の尾を引く",
       "ja": "−1から＋1の中央は、左右の尾を二回引きます。この表なら約68.27％。教科書の丸め値で68.28％になるのは矛盾ではありません。やってみようで右、左、真ん中を切り替えてみよう。",
       "en": "For the central interval from negative one to positive one, remove both tails. Our table gives about 68.27 percent. The textbook’s rounding gives 68.28 percent. Explore the different shaded regions.",
@@ -424,8 +447,8 @@
       }
     },
     {
-      "page": 50,
-      "title": "チャレンジ⑤　左右の幅が違う区間",
+      "page": 52,
+      "title": "チャレンジ⑥　左右の幅が違う区間",
       "ja": "中央の区間でも、左右が対称とは限りません。今回は境界の距離が違います。同じ尾を2回引く方法が使えるかを考え、必要な二つの表の値を探してください。図を描くと引く場所が分かります。",
       "en": "A central interval need not be symmetric. The two boundaries are different distances from zero. Decide whether subtracting the same tail twice would work, then find the two separate table values. Sketching the interval will show which areas to remove.",
       "formulaRef": {
@@ -435,8 +458,8 @@
       }
     },
     {
-      "page": 51,
-      "title": "答え合わせ⑤ · 異なる二つの尾を引く",
+      "page": 53,
+      "title": "答え合わせ⑥ · 異なる二つの尾を引く",
       "ja": "教科書p.122の累積の差とp.124〜125の左右対称・補集合を組み合わせます。左の尾は0.30854、右の尾は0.06681で異なる値です。1から両方を引くと0.62465。式では左側の累積を差し引く形でも同じです。約62.47％になります。",
       "en": "Combine the interval difference on textbook page 122 with symmetry and complements on pages 124–125. The left tail is 0.30854 and the right tail is 0.06681, so they cannot be doubled as if equal. Subtracting both from one gives 0.62465, or about 62.47 percent. The displayed cumulative difference is equivalent.",
       "formulaRef": {
@@ -446,8 +469,8 @@
       }
     },
     {
-      "page": 52,
-      "title": "チャレンジ⑥　70点以上は、何％？",
+      "page": 54,
+      "title": "チャレンジ⑦　70点以上は、何％？",
       "ja": "最後は元の単位の点数から始めます。分散から標準偏差を確認し、境界の点数を標準化し、求める面積を描いて表を読もう。この練習では途中式も必ず残し、ALに一人で取り組む準備をします。",
       "en": "Finish by starting in the original score units. Identify the standard deviation from the variance, standardize the boundary, sketch the region, and read the table. Keep the intermediate steps as preparation for independent AL work.",
       "formulaRef": {
@@ -457,8 +480,8 @@
       }
     },
     {
-      "page": 53,
-      "title": "答え合わせ⑥ · 元の点数から、上側確率へ",
+      "page": 55,
+      "title": "答え合わせ⑦ · 元の点数から、上側確率へ",
       "ja": "まず与えられた分散100の平方根を取って標準偏差10。標準化の公式の文字を確認してから70、50、10を入れ、z=2です。表の2.0行・0.00列で0.02275を読むので2.275％。元の点数で欲しかった右側の面積と一致しているか確かめよう。",
       "en": "Start from the givens: variance one hundred means standard deviation ten. Check the symbolic standardization rule, then insert seventy, fifty and ten to get z=2. Row 2.0 and column 0.00 give 0.02275, or 2.275 percent. Confirm that this is the right-hand region originally requested.",
       "formulaRef": {
@@ -468,7 +491,7 @@
       }
     },
     {
-      "page": 54,
+      "page": 56,
       "title": "ここからは、ALに自分で取り組もう。",
       "ja": "欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。",
       "en": "Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks."

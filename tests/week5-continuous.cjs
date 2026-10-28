@@ -33,23 +33,30 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal(slideCount,54);
+assert.equal(slideCount,56);
 const bodyFor=title=>{
   const item=sourceMap.slides.find(s=>s.title===title);
   assert(item,`Missing slide: ${title}`);
   return slideBodies[item.slide-1];
 };
 const challenges=sourceMap.slides.filter(s=>s.layout==='challenge');
-assert.equal(challenges.length,6);
-assert.deepEqual(challenges.map(s=>s.slide),[33,41,44,47,50,52]);
+assert.equal(challenges.length,7);
+assert.deepEqual(challenges.map(s=>s.slide),[33,35,43,46,49,52,54]);
 for(const item of challenges){
   assert.equal(item.practiceFocus,'z-scores-and-table');
   assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
 }
 assert(!challenges.some(s=>/ラーメン|積分|一様/.test(s.title)));
-const finalHint=bodyFor('チャレンジ⑥　70点以上は、何％？').replace(/<rt>[^<]*<\/rt>/g,'').replace(/<[^>]*>/g,'');
+const finalHint=bodyFor('チャレンジ⑦　70点以上は、何％？').replace(/<rt>[^<]*<\/rt>/g,'').replace(/<[^>]*>/g,'');
 assert(finalHint.includes('1つ目は平均、2つ目は分散。標準偏差は分散の平方根。'));
 assert(!finalHint.includes('2.275'),'The hint must not reveal the answer');
+const personal=bodyFor('チャレンジ②　自分の身長を、zに直そう');
+for(const value of ['170.3cm','6.3cm','157.6cm','5.6cm','2023','001435374.pdf'])assert(personal.includes(value));
+assert(!personal.includes('1.06349'),'Keep the personal-height answer on its protected answer slide');
+const yoh=bodyFor('答え合わせ② · Yohの177cmを、同じ基準で比べる');
+assert(yoh.includes('\\frac{177-170.3}{6.3}'));
+assert(yoh.includes('1.06349'));
+near((177-170.3)/6.3,1.063492063492,1e-10);
 for(const item of sourceMap.slides.filter(s=>s.practiceAnswer)){
   const body=slideBodies[item.slide-1];
   for(const label of ['① 与えられた条件','② 公式','③ 代入','④ 答え'])assert(body.includes(label));
@@ -87,11 +94,11 @@ assert(!deck.includes('\\frac1{20}'));
 assert(!deck.includes('\\frac1{12}'));
 assert(bodyFor('分散と標準偏差を、取り違えない').includes('\\sqrt{36}=6'));
 assert(bodyFor('答え合わせ① · 標準偏差を出してから、標準化').includes('\\frac{146-160}{7}=-2'));
-assert(bodyFor('答え合わせ② · 1.2の行、0.08の列').includes('0.10027'));
-assert(bodyFor('答え合わせ③ · 左右対称を使う').includes('0.20045'));
-assert(bodyFor('答え合わせ④ · 全体1から、右の尾を引く').includes('0.91149'));
-assert(bodyFor('答え合わせ⑤ · 異なる二つの尾を引く').includes('0.62465'));
-assert(bodyFor('答え合わせ⑥ · 元の点数から、上側確率へ').includes('2.275'));
+assert(bodyFor('答え合わせ③ · 1.2の行、0.08の列').includes('0.10027'));
+assert(bodyFor('答え合わせ④ · 左右対称を使う').includes('0.20045'));
+assert(bodyFor('答え合わせ⑤ · 全体1から、右の尾を引く').includes('0.91149'));
+assert(bodyFor('答え合わせ⑥ · 異なる二つの尾を引く').includes('0.62465'));
+assert(bodyFor('答え合わせ⑦ · 元の点数から、上側確率へ').includes('2.275'));
 near(M.upper(1.28),.10027,5e-6);
 near(M.upper(.84),.20045,5e-6);
 near(1-M.upper(1.35),.91149,5e-6);

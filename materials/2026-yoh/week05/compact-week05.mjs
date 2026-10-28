@@ -188,6 +188,20 @@ export function createWeek5CompactStory(options){
     '146cmは平均より2個分下。167cmは1個分上。zは確率ではなく位置。',[95],
     '分散49の平方根を取って標準偏差7。146から160を引いて7で割ると−2、167なら1です。図で平均より左と右を確認しよう。zの値そのものを百分率にしないことが重要です。',
     'Take the square root of forty-nine to get standard deviation seven. Substituting the first height gives negative two; the second gives positive one. Match these positions to the chart. A z-score describes location, not a probability percentage.');
+  const heightSource='https://www.mhlw.go.jp/content/001435374.pdf#page=2';
+  practice('②','自分の身長を、zに直そう',`自分の身長を測るか、分かる値を使う（cm）。\n\n| 日本の20〜29歳 | 平均 / Mean | 標準偏差 / SD |\n| :--- | ---: | ---: |\n| 男性 / Men | 170.3cm | 6.3cm |\n| 女性 / Women | 157.6cm | 5.6cm |`,
+    'どちらかの基準を選んでzを計算。平均より上？ 下？',[95],
+    `今度はロボットではなく自分の身長です。単位はcm。日本の20〜29歳の調査平均と標準偏差を使い、どちらの基準と比べたか書いて計算しよう。全世代の平均ではなく、授業用に選んだ若年層の基準です。身長を公表する必要はなく、架空の身長でも構いません。大小を評価する問題ではなく、平均との差を共通の単位で表す練習です。出典：${heightSource}`,
+    `Use your own height in centimetres, or a hypothetical height if you prefer. Choose and name one reference group from Japan's surveyed 20–29-year-olds, then calculate your z-score and interpret its sign. These are age-specific sample statistics used as classroom references, not an all-age population average or a judgment about height. Nobody needs to share their measurement. Source: ${heightSource}`,3);
+  slides[slides.length-1]+=`\n\n<small>身長の共有は不要。架空の値でもOK。</small>\n\n<small class="book-note"><a href="${heightSource}">出典：厚生労働省・令和5年（2023）国民健康・栄養調査 第14表 p.106</a></small>`;
+  mapping.at(-1).sources=[heightSource];narration.at(-1).sources=[heightSource];
+  solution('②','Yohの177cmを、同じ基準で比べる','身長177cm。男性20〜29歳の基準：平均170.3cm、標準偏差6.3cm。',zFormula,
+    [String.raw`z=\frac{177-170.3}{6.3}`,String.raw`=\frac{6.7}{6.3}=1.06349\ldots\approx+1.06`],
+    options.fig('practice-personal-height',{min:145,max:195,pdf:x=>probability.normalPdf(x,170.3,6.3),lo:0,hi:0,mean:170.3,ticks:[150,160,170.3,180,190],labels:[{x:177,text:'Yoh 177cm: z ≈ +1.06'}],title:'日本の男性20〜29歳を基準に比較',xlabel:'身長（cm）· 曲線は正規近似の図'}),
+    `平均より、標準偏差約1.06個分上。1.06％ではない。<br><small class="book-note"><a href="${heightSource}">厚生労働省・2023年調査 第14表 p.106（20〜29歳）</a></small>`,[95],
+    `Yohの身長177cmを例に、同じ20〜29歳男性の基準と比べます。177から170.3を引くと6.7cm。これを標準偏差6.3cmで割ると約1.06です。平均より標準偏差約1.06個分上という位置で、確率や百分率ではありません。Yoh自身の年齢層を推定した比較ではなく、学生と同じ基準での例です。曲線は報告値から描いた正規近似で、調査の実際のヒストグラムではありません。出典：${heightSource}`,
+    `For Yoh's height of 177 cm, use the same male 20–29 reference as in the question. Subtract 170.3 to obtain 6.7 cm, then divide by the reference SD of 6.3 cm. The result is approximately +1.06 standard deviations above that group's mean, not 1.06 percent. This intentionally uses the student-age reference rather than implying Yoh belongs to that age group. The curve is an illustrative normal approximation, not an observed survey histogram. Source: ${heightSource}`);
+  mapping.at(-1).sources=[heightSource];narration.at(-1).sources=[heightSource];
   keep(109);
   add('この表は、右側の面積',`${math(String.raw`\Pr(Z>z)`)}\n\n${figure(111)}\n\n${options.tableLink}`,'model-visual',[110,111,112],
     '使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。','Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first.');
@@ -197,10 +211,10 @@ export function createWeek5CompactStory(options){
   paired('1.96より右は、2.5％',[formula(117)],figure(118),'',[117,118],
     '行1.9と列0.06の交点は0.02500。表の数字は右の尾の面積で、100を掛けると2.5％です。どこの確率か、図を指さして説明してみよう。',
     'Row 1.9 and column 0.06 meet at 0.02500. That is the right-tail area, or 2.5 percent. Point to the region your answer describes.');
-  practice('②','行と列を、自分で探す','Zは標準正規分布に従う。z＝1.28。',String.raw`$\Pr(Z>1.28)$ は？ 行・列・表の値・百分率を書く。`,[114],
+  practice('③','行と列を、自分で探す','Zは標準正規分布に従う。z＝1.28。',String.raw`$\Pr(Z>1.28)$ は？ 行・列・表の値・百分率を書く。`,[114],
     '教科書の1.96と同じ手順を、別の値で試そう。どの行と列を使ったかも残してください。表が上側確率を示すことと、百分率への換算を忘れずに。まだ次の答え合わせを開かず、自分で表を探します。',
     'Repeat the textbook lookup procedure with a different z. Record the row and column as well as the probability. Confirm that this is an upper-tail table and convert the decimal to a percentage before revealing the next slide.');
-  solution('②','1.2の行、0.08の列','標準正規分布、z＝1.28。',String.raw`\Pr(Z>z)`,
+  solution('③','1.2の行、0.08の列','標準正規分布、z＝1.28。',String.raw`\Pr(Z>z)`,
     [String.raw`1.28=1.2+0.08`,String.raw`\Pr(Z>1.28)=0.10027`,String.raw`0.10027\times100=10.027\%`],
     options.normal('practice-table-128',1.28,4,{title:'色の面積：1.28より右',labels:[{x:1.28,text:'1.28'}]}),
     '1.28より右の確率は約10.03％。',[114],
@@ -209,10 +223,10 @@ export function createWeek5CompactStory(options){
   paired('−1.96より左も、2.5％',[formula(121)],figure(120),'左右対称なので、同じ距離の尾は同じ面積。',[119,120,121],
     'マイナス1.96より左なら、左右対称を使います。右の1.96より先と同じ面積なので2.5％。マイナスの位置でも、確率がマイナスにはなりません。',
     'Use symmetry for the region below negative 1.96. It matches the right tail above positive 1.96, so its probability is also 2.5 percent.');
-  practice('③','マイナスのzなら、どちら側？','Zは標準正規分布に従う。',String.raw`$\Pr(Z<-0.84)$ を求め、曲線に求める部分を塗る。`,[121],
+  practice('④','マイナスのzなら、どちら側？','Zは標準正規分布に従う。',String.raw`$\Pr(Z<-0.84)$ を求め、曲線に求める部分を塗る。`,[121],
     '負のzが出たときは、確率まで負になるわけではありません。左右対称を利用し、表のどこを読めばよいか考えてください。まず欲しい左側の面積を図に塗ってから、表を使おう。',
     'A negative z does not produce negative probability. Use symmetry to decide which positive-z table entry is relevant. Shade the requested left-hand region first, then look up the corresponding entry.');
-  solution('③','左右対称を使う','標準正規分布、境界は−0.84。',String.raw`\Pr(Z<-z)=\Pr(Z>z)`,
+  solution('④','左右対称を使う','標準正規分布、境界は−0.84。',String.raw`\Pr(Z<-z)=\Pr(Z>z)`,
     [String.raw`\Pr(Z<-0.84)=\Pr(Z>0.84)`,String.raw`=0.20045=20.045\%`],
     options.normal('practice-negative-084',-4,-.84,{title:'色の面積：−0.84より左',labels:[{x:-.84,text:'−0.84'}]}),
     '0.8の行・0.04の列。約20.05％。',[121],
@@ -221,10 +235,10 @@ export function createWeek5CompactStory(options){
   paired('＋1.96より左は、97.5％',[formula(124),String.raw`\Pr(Z<1.96)=1-0.02500=97.5\%`],figure(126),'',[122,123,124,125,126],
     '今度はプラス1.96より左の全部。全体1から、小さい右の尾を引きます。答えが大きい確率になっていることを、図の色の広さでも確認しよう。',
     'For everything below positive 1.96, subtract the small right tail from 1. The large shaded region confirms why the answer is 97.5 percent.');
-  practice('④','表の値が、そのまま答えになる？','Zは標準正規分布に従う。',String.raw`$\Pr(Z<1.35)$ を求める。表はどちら側の面積を示している？`,[124],
+  practice('⑤','表の値が、そのまま答えになる？','Zは標準正規分布に従う。',String.raw`$\Pr(Z<1.35)$ を求める。表はどちら側の面積を示している？`,[124],
     '今度は正の境界より左を求めます。表から読める部分と、問題が求める部分は同じでしょうか？ 全体の面積が1であることを使って考えよう。答えは図の面積の広さとも照らし合わせます。',
     'This time the requested region lies below a positive boundary. Compare that region with the area reported by the table. Use total area one, and check whether your numerical answer matches the size of the region you shaded.');
-  solution('④','全体1から、右の尾を引く','標準正規分布、境界は1.35。',String.raw`\Pr(Z<z)=1-\Pr(Z>z)`,
+  solution('⑤','全体1から、右の尾を引く','標準正規分布、境界は1.35。',String.raw`\Pr(Z<z)=1-\Pr(Z>z)`,
     [String.raw`\Pr(Z>1.35)=0.08851`,String.raw`\Pr(Z<1.35)=1-0.08851`,String.raw`=0.91149=91.149\%`],
     options.normal('practice-complement-135',-4,1.35,{title:'色の面積：1.35より左',labels:[{x:1.35,text:'1.35'}]}),
     '1.3の行・0.05の列。求める左側は約91.15％。',[124],
@@ -233,20 +247,20 @@ export function createWeek5CompactStory(options){
   paired('真ん中は、両方の尾を引く',[formula(128),String.raw`1-2(0.15866)=0.68268\approx68.27\%`],figure(130),`教科書の丸め値では68.28％。\n\n${options.tryIt('table')}`,[127,128,129,130,131],
     '−1から＋1の中央は、左右の尾を二回引きます。この表なら約68.27％。教科書の丸め値で68.28％になるのは矛盾ではありません。やってみようで右、左、真ん中を切り替えてみよう。',
     'For the central interval from negative one to positive one, remove both tails. Our table gives about 68.27 percent. The textbook’s rounding gives 68.28 percent. Explore the different shaded regions.');
-  practice('⑤','左右の幅が違う区間','Zは標準正規分布に従う。',String.raw`$\Pr(-0.50<Z<1.50)$ は？ 左右の尾を別々に求める。`,[128],
+  practice('⑥','左右の幅が違う区間','Zは標準正規分布に従う。',String.raw`$\Pr(-0.50<Z<1.50)$ は？ 左右の尾を別々に求める。`,[128],
     '中央の区間でも、左右が対称とは限りません。今回は境界の距離が違います。同じ尾を2回引く方法が使えるかを考え、必要な二つの表の値を探してください。図を描くと引く場所が分かります。',
     'A central interval need not be symmetric. The two boundaries are different distances from zero. Decide whether subtracting the same tail twice would work, then find the two separate table values. Sketching the interval will show which areas to remove.',4);
-  solution('⑤','異なる二つの尾を引く','標準正規分布、区間−0.50〜1.50。',String.raw`\Pr(a<Z<b)=F(b)-F(a)`,
+  solution('⑥','異なる二つの尾を引く','標準正規分布、区間−0.50〜1.50。',String.raw`\Pr(a<Z<b)=F(b)-F(a)`,
     [String.raw`F(-0.50)=0.30854`,String.raw`F(1.50)=1-0.06681=0.93319`,String.raw`0.93319-0.30854=0.62465`,String.raw`=62.465\%`],
     options.normal('practice-asymmetric-interval',-.5,1.5,{title:'色の面積：−0.50から1.50まで',labels:[{x:-.5,text:'−0.50'},{x:1.5,text:'1.50'}]}),
     '約62.47％。同じ尾を2回引かない。',[128],
     '教科書p.122の累積の差とp.124〜125の左右対称・補集合を組み合わせます。左の尾は0.30854、右の尾は0.06681で異なる値です。1から両方を引くと0.62465。式では左側の累積を差し引く形でも同じです。約62.47％になります。',
     'Combine the interval difference on textbook page 122 with symmetry and complements on pages 124–125. The left tail is 0.30854 and the right tail is 0.06681, so they cannot be doubled as if equal. Subtracting both from one gives 0.62465, or about 62.47 percent. The displayed cumulative difference is equivalent.');
-  add('チャレンジ⑥　70点以上は、何％？',sourceBody(132)+'\n\n<div class="book-note">ヒント：平均と標準偏差の手がかりは、与えられた式の中。<br>1つ目は平均、2つ目は分散。標準偏差は分散の平方根。<br><span lang="en">Hint: the first parameter is the mean; the second is the variance. Take its square root for the SD.</span></div>','challenge',[132],
+  add('チャレンジ⑦　70点以上は、何％？',sourceBody(132)+'\n\n<div class="book-note">ヒント：平均と標準偏差の手がかりは、与えられた式の中。<br>1つ目は平均、2つ目は分散。標準偏差は分散の平方根。<br><span lang="en">Hint: the first parameter is the mean; the second is the variance. Take its square root for the SD.</span></div>','challenge',[132],
     '最後は元の単位の点数から始めます。分散から標準偏差を確認し、境界の点数を標準化し、求める面積を描いて表を読もう。この練習では途中式も必ず残し、ALに一人で取り組む準備をします。',
     'Finish by starting in the original score units. Identify the standard deviation from the variance, standardize the boundary, sketch the region, and read the table. Keep the intermediate steps as preparation for independent AL work.');
   mapping.at(-1).practiceFocus='z-scores-and-table';
-  solution('⑥','元の点数から、上側確率へ','平均50点、分散100点²、境界70点。',zFormula,
+  solution('⑦','元の点数から、上側確率へ','平均50点、分散100点²、境界70点。',zFormula,
     [String.raw`\sigma=\sqrt{100}=10,\quad z=\frac{70-50}{10}=2`,String.raw`\Pr(X\ge70)=\Pr(Z\ge2)`,String.raw`=0.02275=2.275\%`],
     figure(137),'表の2.0行・0.00列。70点以上は約2.28％。',[133],
     'まず与えられた分散100の平方根を取って標準偏差10。標準化の公式の文字を確認してから70、50、10を入れ、z=2です。表の2.0行・0.00列で0.02275を読むので2.275％。元の点数で欲しかった右側の面積と一致しているか確かめよう。',
@@ -254,7 +268,7 @@ export function createWeek5CompactStory(options){
   add('ここからは、ALに自分で取り組もう。',`標準偏差を確認。zに直す。表を読み、面積を選ぶ。\n\n[ALワークシートを開く](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=assets%2Fworksheet-previews%2Fw05%2Findex.html&title=AL&week=W05&source=weeks%2F05-continuous-distributions-i%2F05_AL用ワークシート.xlsx)\n\n${options.tableLink}\n\n各セルの答えは示しません。`,'statement',[143,144],
     '欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。',
     'Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks.');
-  if(slides.length!==54)throw Error(`Expected 54 focused slides, got ${slides.length}`);
+  if(slides.length!==56)throw Error(`Expected 56 focused slides, got ${slides.length}`);
   slides.forEach((slide,i)=>{
     const keys=mapping[i].termKeys;
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
@@ -273,6 +287,8 @@ section.precision img{height:160px}section.precision .katex-display{font-size:54
 section.calculation .katex-display{font-size:43px;margin:32px 0}section.calculation h2{font-size:43px}section.calculation.answer{background:#edf5ef}
 section.model-visual{padding:36px 65px 45px}section.model-visual h2{font-size:41px;margin-bottom:10px}section.model-visual p{font-size:25px;margin:10px 0}section.model-visual .katex-display{font-size:34px;margin:8px 0}section.model-visual img{height:355px;width:1030px;object-fit:contain}
 section.robot-example small,section.worked small{font-size:17px;color:#687b84}section.model-visual.robot-example.has-stat-terms img{height:270px}section.robot-example p{margin:7px 0}section.robot-example .katex-display{font-size:30px;margin:6px 0}
+section.challenge:has(table){padding-top:45px}section.challenge:has(table) h2{margin-bottom:10px}section.challenge:has(table) .pause{margin-bottom:12px}section.challenge:has(table) p{font-size:27px;margin:13px 0}section.challenge:has(table) table{font-size:25px;width:850px;margin:12px auto}section.challenge:has(table) small{font-size:18px}section.challenge:has(table) .book-note a{font-size:17px;font-weight:normal}
+section.worked .book-note a{background:none;color:#176d82;padding:0;font-size:16px;font-weight:normal;border-radius:0;display:inline}
 section.visual-link{padding:34px 60px 45px}section.visual-link h2{font-size:43px;margin-bottom:8px}section.visual-link img{height:440px;width:1030px;object-fit:contain}section.visual-link p{font-size:25px;margin:8px 0}
 section.worked{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto 1fr auto;gap:14px 26px;padding:45px 55px 55px;text-align:left;align-content:center;align-items:center}section.worked h2{grid-column:1/-1;font-size:43px;margin:0 0 8px}section.worked .worked-copy{min-width:0}section.worked .worked-copy .katex-display{font-size:27px;text-align:left;margin:26px 0}section.worked .worked-visual{min-width:0}section.worked img{width:100%;height:320px;object-fit:contain}section.worked>p{grid-column:1/-1;font-size:22px;margin:0}section.worked .worked-visual p{margin:0}
 section.worked a,section.visual-link a,section.model-visual a{display:inline-block;background:#176d82;color:white;text-decoration:none;border-radius:7px;padding:8px 19px;font-size:23px;font-weight:700}section.model-visual a{font-size:21px;padding:7px 17px}
