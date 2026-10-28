@@ -33,7 +33,7 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal(slideCount,57);
+assert.equal(slideCount,54);
 const bodyFor=title=>{
   const item=sourceMap.slides.find(s=>s.title===title);
   assert(item,`Missing slide: ${title}`);
@@ -41,7 +41,7 @@ const bodyFor=title=>{
 };
 const challenges=sourceMap.slides.filter(s=>s.layout==='challenge');
 assert.equal(challenges.length,6);
-assert.deepEqual(challenges.map(s=>s.slide),[36,44,47,50,53,55]);
+assert.deepEqual(challenges.map(s=>s.slide),[33,41,44,47,50,52]);
 for(const item of challenges){
   assert.equal(item.practiceFocus,'z-scores-and-table');
   assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
@@ -54,8 +54,8 @@ for(const item of sourceMap.slides.filter(s=>s.practiceAnswer)){
 }
 const formulas=sourceMap.slides.filter(s=>s.layout.includes('hero-math'));
 assert.equal(formulas.length,4);
-for(const item of sourceMap.slides.slice(20,27)){
-  assert(slideBodies[item.slide-1].includes('ロボット'),'Slides 21–27 retain the concrete robot example');
+for(const item of sourceMap.slides.slice(20,24)){
+  assert(slideBodies[item.slide-1].includes('ロボット'),'Slides 21–24 retain the concrete robot example');
   assert(slideBodies[item.slide-1].includes('実測データではありません'),'Classroom assumptions remain explicit');
   assert(slideBodies[item.slide-1].includes('!['),'Each example has its own explanatory chart');
 }
@@ -103,7 +103,7 @@ for(const [title,image] of [['ラーメン店の行列','ramen-queue-history-sup
 assert(bodyFor('標準偏差が小さいと、狭い山').includes('story-normal-narrow'));
 assert(bodyFor('標準偏差が大きいと、広い山').includes('story-normal-wide'));
 const pageFor=title=>sourceMap.slides.find(s=>s.title===title).slide;
-assert(pageFor('分散')<pageFor('正規分布：中心と、ばらつき'),'Tsumura definitions precede the normal-distribution section');
+assert(!sourceMap.slides.some(s=>['分散','期待値：たくさんのロボットの平均身長','ロボット工場：中心と、ばらつきを知りたい'].includes(s.title)),'Remove the redundant moments section');
 assert(pageFor('正規分布の密度')<pageFor('標準化の公式'));
 assert.equal(sourceMap.slides.at(-1).title,'ここからは、ALに自分で取り組もう。');
 assert(sourceMap.slides.at(-1).sourceBeats.includes(143));

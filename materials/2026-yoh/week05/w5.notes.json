@@ -202,38 +202,12 @@
     },
     {
       "page": 25,
-      "title": "ロボット工場：中心と、ばらつきを知りたい",
-      "ja": "工場の担当者なら、合格する割合だけでなく、中心はどこか、どれくらいばらつくかも知りたいよね。ここでは中心160cm、その周りに小さな違いがある、と仮定しています。次の2枚は教科書p.129の期待値と分散の定義をこの身長に結び付けます。新しい積分計算の課題にはしません。",
-      "en": "A factory manager needs more than a pass percentage: where is the centre, and how much do heights vary around it? Our assumed model centres at 160 cm with manufacturing variation around that value. The next two slides connect the textbook definitions of expected value and variance to this height scenario. They are conceptual illustrations, not new hand-integration exercises."
-    },
-    {
-      "page": 26,
-      "title": "期待値：たくさんのロボットの平均身長",
-      "ja": "期待値のXをロボットの身長として読もう。身長に起こりやすさを掛けて全体を足すと、長い目で見た平均になります。このモデルは中心160の左右対称な正規分布なので期待値は160cm。積分を暗算した結果ではなく、与えたモデルの性質です。全員が160cmとは言っていません。",
-      "en": "Read X as robot height. Weight each height by how often it occurs and add across the distribution to obtain the long-run average. Our symmetric normal model has expected height 160 cm. We use the given model property rather than pretending to calculate the integral mentally. Individual robots still vary; expected height does not mean every robot is 160 cm tall.",
-      "formulaRef": {
-        "pages": "129",
-        "label": "教科書 p.129 · 期待値と分散"
-      }
-    },
-    {
-      "page": 27,
-      "title": "分散",
-      "ja": "同じロボットの身長で分散を読もう。xから中心160を引き、その差を二乗して、起こりやすさで重み付けして足します。ここでは標準偏差5cmをモデルの条件として与えているので、分散は5の二乗で25平方cmです。分散25と標準偏差5を混同しないでね。図の155と165は中心から標準偏差1個ぶん離れた位置です。",
-      "en": "Variance describes the spread of robot heights around 160 cm. Subtract the mean, square the difference, then weight it by the density and accumulate. The model gives standard deviation 5 cm, so variance is 25 square centimetres. Distinguish variance 25 from standard deviation 5. The highlighted 155 and 165 boundaries lie one standard deviation on each side of the centre.",
-      "formulaRef": {
-        "pages": "129",
-        "label": "教科書 p.129 · 期待値と分散"
-      }
-    },
-    {
-      "page": 28,
       "title": "教科書 · 第2章 第2節",
       "ja": "教科書122〜123ページ、正規分布に進みます。面積で確率を考えるルールは、そのままです。今度は山の形が決まっています。",
       "en": "Turn to pages 122–123 for the normal distribution. Probability still means area. We are now using a particular family of bell-shaped densities."
     },
     {
-      "page": 29,
+      "page": 26,
       "title": "正規分布：中心と、ばらつき",
       "ja": "左右対称の釣鐘型です。Nの最初の数が平均μ、二つ目が分散σ²。この書き方で二つ目を標準偏差と間違えないようにしよう。",
       "en": "This bell is symmetric. In N(μ,σ²), the first parameter is the mean and the second is the variance. Do not read the second parameter as the standard deviation.",
@@ -243,19 +217,19 @@
       }
     },
     {
-      "page": 30,
+      "page": 27,
       "title": "標準偏差が小さいと、狭い山",
       "ja": "標準偏差が小さいと、平均付近にぎゅっと集まります。全体の面積は1なので、狭くなると山は高くなります。",
       "en": "A smaller standard deviation concentrates probability close to the mean. Since total area stays 1, the narrower bell is taller."
     },
     {
-      "page": 31,
+      "page": 28,
       "title": "標準偏差が大きいと、広い山",
       "ja": "標準偏差が大きいと、広く散らばるので山は低くなります。直前と軸の目盛りは同じ。高さだけでなく、幅も見比べてください。",
       "en": "A larger standard deviation spreads probability out, making the bell lower. Both charts use the same scales, so compare width as well as height."
     },
     {
-      "page": 32,
+      "page": 29,
       "title": "分散と標準偏差を、取り違えない",
       "ja": "標準化では、分母は分散の平方根です。ここは新しい公式を増やす話ではなく、σ²という記号をσに戻す平方根の計算です。分散36と与えられたら標準偏差は6。36で割ってはいけません。次の問題では、どちらが与えられたかを最初に確認しよう。",
       "en": "Standardization divides by the square root of variance. This is simply reading σ² and taking its square root to recover σ, not an extra distribution formula. A variance of thirty-six means standard deviation six. Do not divide by thirty-six. Always identify which quantity the question supplies.",
@@ -266,7 +240,7 @@
       }
     },
     {
-      "page": 33,
+      "page": 30,
       "title": "正規分布の密度",
       "ja": "教科書p.122にある密度です。今日はこの式に数を入れて積分することはしません。平均と分散が変わると曲線が変わること、そして毎回積分する代わりに標準化して一つの表を使うことへつなげます。",
       "en": "This density appears on textbook page 122. We will not evaluate its integral by hand. It explains why mean and variance determine the curve, and motivates standardizing so a single table can replace repeated integration.",
@@ -276,7 +250,7 @@
       }
     },
     {
-      "page": 34,
+      "page": 31,
       "title": "標準化の公式",
       "ja": "毎回あの密度を積分する代わりに、中心を0、標準偏差を1にそろえます。平均との差を標準偏差で割ると「中心から何個ぶん？」という位置になります。もとが正規なら、Zは標準正規分布です。",
       "en": "Instead of integrating each normal density afresh, put its centre at zero and its standard deviation at one. The formula measures distance from the mean in standard deviation units. Normal X gives standard normal Z.",
@@ -287,7 +261,7 @@
       }
     },
     {
-      "page": 35,
+      "page": 32,
       "title": "60点は、標準偏差1個ぶん上",
       "ja": "授業用に平均50、標準偏差10の正規モデルを考えます。60点を標準化するとz=1。これは100％ではなく、標準偏差一つぶん上という位置です。平均や標準偏差を変えて、同じ60点を比べてみよう。",
       "en": "For a hypothetical normal score model with mean fifty and standard deviation ten, a score of sixty gives z = 1. That describes location, not 100 percent probability. Explore how the same score changes meaning under different parameters.",
@@ -298,13 +272,13 @@
       }
     },
     {
-      "page": 36,
+      "page": 33,
       "title": "チャレンジ①　ロボットの身長をzに直す",
       "ja": "最初は表を使いません。分散と標準偏差を区別し、二つの身長を標準化してください。平均より上か下かも、符号と対応させて考えよう。この問題は練習用で、ALのセルを埋める答えではありません。",
       "en": "No table is needed yet. Distinguish variance from standard deviation and standardize the two heights. Connect the sign of z with being above or below the mean. These practice values are separate from the AL homework."
     },
     {
-      "page": 37,
+      "page": 34,
       "title": "答え合わせ① · 標準偏差を出してから、標準化",
       "ja": "分散49の平方根を取って標準偏差7。146から160を引いて7で割ると−2、167なら1です。図で平均より左と右を確認しよう。zの値そのものを百分率にしないことが重要です。",
       "en": "Take the square root of forty-nine to get standard deviation seven. Substituting the first height gives negative two; the second gives positive one. Match these positions to the chart. A z-score describes location, not a probability percentage.",
@@ -315,13 +289,13 @@
       }
     },
     {
-      "page": 38,
+      "page": 35,
       "title": "教科書 · 第2章 第2節",
       "ja": "教科書124〜125ページの表につなげます。表を使う前に、表の数字がどの面積なのかを必ず確認しよう。",
       "en": "Turn to pages 124–125 for the normal table. Before reading any number, identify which area the table reports."
     },
     {
-      "page": 39,
+      "page": 36,
       "title": "この表は、右側の面積",
       "ja": "使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。",
       "en": "Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first.",
@@ -331,25 +305,25 @@
       }
     },
     {
-      "page": 40,
+      "page": 37,
       "title": "まず、1.9の行",
       "ja": "z=1.96を探します。まず1.9の行。小数第1位までの部分で、行を決めてください。",
       "en": "Locate z = 1.96. First use 1.9 to choose the row. Keep your finger on that row."
     },
     {
-      "page": 41,
+      "page": 38,
       "title": "次に、0.06の列",
       "ja": "次に0.06の列。1.9足す0.06で1.96になります。行を押さえたまま、列との交点を見ます。",
       "en": "Next find column 0.06. Adding 1.9 and 0.06 gives 1.96. Follow the row to its intersection with that column."
     },
     {
-      "page": 42,
+      "page": 39,
       "title": "交点は、0.02500",
       "ja": "交点は0.02500。これはzの値ではなく、右側にある面積の大きさです。",
       "en": "The intersection reads 0.02500. That number is the right-tail probability, rather than another z-score."
     },
     {
-      "page": 43,
+      "page": 40,
       "title": "1.96より右は、2.5％",
       "ja": "行1.9と列0.06の交点は0.02500。表の数字は右の尾の面積で、100を掛けると2.5％です。どこの確率か、図を指さして説明してみよう。",
       "en": "Row 1.9 and column 0.06 meet at 0.02500. That is the right-tail area, or 2.5 percent. Point to the region your answer describes.",
@@ -359,7 +333,7 @@
       }
     },
     {
-      "page": 44,
+      "page": 41,
       "title": "チャレンジ②　行と列を、自分で探す",
       "ja": "教科書の1.96と同じ手順を、別の値で試そう。どの行と列を使ったかも残してください。表が上側確率を示すことと、百分率への換算を忘れずに。まだ次の答え合わせを開かず、自分で表を探します。",
       "en": "Repeat the textbook lookup procedure with a different z. Record the row and column as well as the probability. Confirm that this is an upper-tail table and convert the decimal to a percentage before revealing the next slide.",
@@ -369,7 +343,7 @@
       }
     },
     {
-      "page": 45,
+      "page": 42,
       "title": "答え合わせ② · 1.2の行、0.08の列",
       "ja": "1.2の行を見つけ、0.08の列との交点を読みます。0.10027を百分率にすると10.027％。図の右の小さな面積が答えです。1.28をそのまま確率として読んだり、0.10027％と書いたりしないようにしよう。",
       "en": "Use row 1.2 and column 0.08. Their intersection is 0.10027, which is 10.027 percent. The answer is the small right-tail area on the chart. Do not interpret 1.28 as a probability or label the decimal probability as a percentage without multiplying by one hundred.",
@@ -379,7 +353,7 @@
       }
     },
     {
-      "page": 46,
+      "page": 43,
       "title": "−1.96より左も、2.5％",
       "ja": "マイナス1.96より左なら、左右対称を使います。右の1.96より先と同じ面積なので2.5％。マイナスの位置でも、確率がマイナスにはなりません。",
       "en": "Use symmetry for the region below negative 1.96. It matches the right tail above positive 1.96, so its probability is also 2.5 percent.",
@@ -389,7 +363,7 @@
       }
     },
     {
-      "page": 47,
+      "page": 44,
       "title": "チャレンジ③　マイナスのzなら、どちら側？",
       "ja": "負のzが出たときは、確率まで負になるわけではありません。左右対称を利用し、表のどこを読めばよいか考えてください。まず欲しい左側の面積を図に塗ってから、表を使おう。",
       "en": "A negative z does not produce negative probability. Use symmetry to decide which positive-z table entry is relevant. Shade the requested left-hand region first, then look up the corresponding entry.",
@@ -399,7 +373,7 @@
       }
     },
     {
-      "page": 48,
+      "page": 45,
       "title": "答え合わせ③ · 左右対称を使う",
       "ja": "教科書p.124の左右対称と同じ方法です。−0.84より左は、＋0.84より右と同じ。表の0.8行、0.04列で0.20045を読み、約20.05％になります。求める面積は平均0の左です。",
       "en": "Apply the symmetry used on textbook page 124. The region below negative 0.84 matches the region above positive 0.84. Row 0.8 and column 0.04 give 0.20045, about 20.05 percent. The requested region lies left of zero.",
@@ -409,7 +383,7 @@
       }
     },
     {
-      "page": 49,
+      "page": 46,
       "title": "＋1.96より左は、97.5％",
       "ja": "今度はプラス1.96より左の全部。全体1から、小さい右の尾を引きます。答えが大きい確率になっていることを、図の色の広さでも確認しよう。",
       "en": "For everything below positive 1.96, subtract the small right tail from 1. The large shaded region confirms why the answer is 97.5 percent.",
@@ -419,7 +393,7 @@
       }
     },
     {
-      "page": 50,
+      "page": 47,
       "title": "チャレンジ④　表の値が、そのまま答えになる？",
       "ja": "今度は正の境界より左を求めます。表から読める部分と、問題が求める部分は同じでしょうか？ 全体の面積が1であることを使って考えよう。答えは図の面積の広さとも照らし合わせます。",
       "en": "This time the requested region lies below a positive boundary. Compare that region with the area reported by the table. Use total area one, and check whether your numerical answer matches the size of the region you shaded.",
@@ -429,7 +403,7 @@
       }
     },
     {
-      "page": 51,
+      "page": 48,
       "title": "答え合わせ④ · 全体1から、右の尾を引く",
       "ja": "表の1.3行と0.05列で、まず右側0.08851を読みます。しかし欲しいのは左側なので1から引きます。0.91149、約91.15％。小さい尾の8.851％と、求める大きい面積を取り違えないようにしよう。",
       "en": "First read the right-tail probability 0.08851 at row 1.3 and column 0.05. The question asks for the left side, so subtract from one. The result is 0.91149, about 91.15 percent. Distinguish the small omitted tail from the large requested area.",
@@ -439,7 +413,7 @@
       }
     },
     {
-      "page": 52,
+      "page": 49,
       "title": "真ん中は、両方の尾を引く",
       "ja": "−1から＋1の中央は、左右の尾を二回引きます。この表なら約68.27％。教科書の丸め値で68.28％になるのは矛盾ではありません。やってみようで右、左、真ん中を切り替えてみよう。",
       "en": "For the central interval from negative one to positive one, remove both tails. Our table gives about 68.27 percent. The textbook’s rounding gives 68.28 percent. Explore the different shaded regions.",
@@ -450,7 +424,7 @@
       }
     },
     {
-      "page": 53,
+      "page": 50,
       "title": "チャレンジ⑤　左右の幅が違う区間",
       "ja": "中央の区間でも、左右が対称とは限りません。今回は境界の距離が違います。同じ尾を2回引く方法が使えるかを考え、必要な二つの表の値を探してください。図を描くと引く場所が分かります。",
       "en": "A central interval need not be symmetric. The two boundaries are different distances from zero. Decide whether subtracting the same tail twice would work, then find the two separate table values. Sketching the interval will show which areas to remove.",
@@ -461,7 +435,7 @@
       }
     },
     {
-      "page": 54,
+      "page": 51,
       "title": "答え合わせ⑤ · 異なる二つの尾を引く",
       "ja": "教科書p.122の累積の差とp.124〜125の左右対称・補集合を組み合わせます。左の尾は0.30854、右の尾は0.06681で異なる値です。1から両方を引くと0.62465。式では左側の累積を差し引く形でも同じです。約62.47％になります。",
       "en": "Combine the interval difference on textbook page 122 with symmetry and complements on pages 124–125. The left tail is 0.30854 and the right tail is 0.06681, so they cannot be doubled as if equal. Subtracting both from one gives 0.62465, or about 62.47 percent. The displayed cumulative difference is equivalent.",
@@ -472,7 +446,7 @@
       }
     },
     {
-      "page": 55,
+      "page": 52,
       "title": "チャレンジ⑥　70点以上は、何％？",
       "ja": "最後は元の単位の点数から始めます。分散から標準偏差を確認し、境界の点数を標準化し、求める面積を描いて表を読もう。この練習では途中式も必ず残し、ALに一人で取り組む準備をします。",
       "en": "Finish by starting in the original score units. Identify the standard deviation from the variance, standardize the boundary, sketch the region, and read the table. Keep the intermediate steps as preparation for independent AL work.",
@@ -483,7 +457,7 @@
       }
     },
     {
-      "page": 56,
+      "page": 53,
       "title": "答え合わせ⑥ · 元の点数から、上側確率へ",
       "ja": "まず与えられた分散100の平方根を取って標準偏差10。標準化の公式の文字を確認してから70、50、10を入れ、z=2です。表の2.0行・0.00列で0.02275を読むので2.275％。元の点数で欲しかった右側の面積と一致しているか確かめよう。",
       "en": "Start from the givens: variance one hundred means standard deviation ten. Check the symbolic standardization rule, then insert seventy, fifty and ten to get z=2. Row 2.0 and column 0.00 give 0.02275, or 2.275 percent. Confirm that this is the right-hand region originally requested.",
@@ -494,7 +468,7 @@
       }
     },
     {
-      "page": 57,
+      "page": 54,
       "title": "ここからは、ALに自分で取り組もう。",
       "ja": "欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。",
       "en": "Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks."

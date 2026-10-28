@@ -161,26 +161,11 @@ export function createWeek5CompactStory(options){
   add('累積分布の図：同じ50％を「高さ」にする',`${robotChart('robot-cumulative-function',{pdf:x=>probability.normalCdf((x-160)/5),cdf:true,mean:null,yMax:1,title:'160cm以下の割合を、高さで読む',point:{x:160,y:.5}})}\n\n${math(String.raw`F(160)=0.50`)}\n\n横160cmから上へ進むと、縦0.50＝50％。\n\n<small>${robotAssumption}</small>`,'model-visual robot-example',[49],
     'ロボットは同じ、問いも160cm以下で同じ。変わったのは縦軸です。今は累積確率なので、横160から曲線まで上がり、左に読むと0.50。直前の密度の面積が、この図の高さになりました。横の身長を大きくすれば、含めるロボットは増えるので曲線は下がりません。',
     'The robots and the question are unchanged: what fraction are no taller than 160 cm? The vertical axis now measures cumulative probability. Move up from 160 to the curve, then left to read 0.50. The previous density area becomes the height on this graph. Increasing the height threshold includes more robots, so the cumulative curve cannot decrease.');
-  add('ロボット工場：中心と、ばらつきを知りたい',`${robotChart('robot-moments-question')}\n\n設計の中心は160cm。実際の身長は、その周りに散らばる。\n\n**中心を表すのが期待値。散らばりを表すのが分散。**\n\n<small>${robotAssumption}</small>`,'model-visual robot-example',[62],
-    '工場の担当者なら、合格する割合だけでなく、中心はどこか、どれくらいばらつくかも知りたいよね。ここでは中心160cm、その周りに小さな違いがある、と仮定しています。次の2枚は教科書p.129の期待値と分散の定義をこの身長に結び付けます。新しい積分計算の課題にはしません。',
-    'A factory manager needs more than a pass percentage: where is the centre, and how much do heights vary around it? Our assumed model centres at 160 cm with manufacturing variation around that value. The next two slides connect the textbook definitions of expected value and variance to this height scenario. They are conceptual illustrations, not new hand-integration exercises.');
-  paired('期待値：たくさんのロボットの平均身長',[
-    String.raw`E(X)=\int_{-\infty}^{\infty}x f(x)\,dx`,
-    String.raw`E(X)=160\ \mathrm{cm}`,
-  ],robotChart('robot-expectation-example'),`このモデルの中心は160cm。全員が160cmという意味ではない。\n\n<small>${robotAssumption}</small>`,[65],
-    '期待値のXをロボットの身長として読もう。身長に起こりやすさを掛けて全体を足すと、長い目で見た平均になります。このモデルは中心160の左右対称な正規分布なので期待値は160cm。積分を暗算した結果ではなく、与えたモデルの性質です。全員が160cmとは言っていません。',
-    'Read X as robot height. Weight each height by how often it occurs and add across the distribution to obtain the long-run average. Our symmetric normal model has expected height 160 cm. We use the given model property rather than pretending to calculate the integral mentally. Individual robots still vary; expected height does not mean every robot is 160 cm tall.');
-  paired('分散',[
-    String.raw`\operatorname{Var}(X)=\int_{-\infty}^{\infty}(x-\mu)^2f(x)\,dx`,
-    String.raw`\mu=160,\quad\sigma=5\ \mathrm{cm}`,
-    String.raw`\operatorname{Var}(X)=5^2=25\ \mathrm{cm}^2`,
-  ],robotChart('robot-variance-example',{lo:155,hi:165,labels:[{x:155,text:'μ − σ'},{x:165,text:'μ + σ'}]}),`ロボットの身長が160cmから、どれくらい散らばるか。\n\n<small>${robotAssumption}</small>`,[75],
-    '同じロボットの身長で分散を読もう。xから中心160を引き、その差を二乗して、起こりやすさで重み付けして足します。ここでは標準偏差5cmをモデルの条件として与えているので、分散は5の二乗で25平方cmです。分散25と標準偏差5を混同しないでね。図の155と165は中心から標準偏差1個ぶん離れた位置です。',
-    'Variance describes the spread of robot heights around 160 cm. Subtract the mean, square the difference, then weight it by the density and accumulate. The model gives standard deviation 5 cm, so variance is 25 square centimetres. Distinguish variance 25 from standard deviation 5. The highlighted 155 and 165 boundaries lie one standard deviation on each side of the centre.');
   keep(85);
   add('正規分布：中心と、ばらつき',`${math(String.raw`X\sim N(\mu,\sigma^2)\qquad E(X)=\mu,\quad\operatorname{Var}(X)=\sigma^2`)}\n\n${figure(86)}`,'model-visual',[86,87,88,89],
     '左右対称の釣鐘型です。Nの最初の数が平均μ、二つ目が分散σ²。この書き方で二つ目を標準偏差と間違えないようにしよう。',
     'This bell is symmetric. In N(μ,σ²), the first parameter is the mean and the second is the variance. Do not read the second parameter as the standard deviation.');
+  mapping.at(-1).termKeys=['normal','expectation','variance'];
   keep(90);
   keep(91);
   add('分散と標準偏差を、取り違えない',`分散は、標準偏差を2乗したもの。\n\n${math(String.raw`\sigma^2=36\quad\Rightarrow\quad \sigma=\sqrt{36}=6`)}\n\n**標準化で割るのは、36ではなく6。**`,'explain',[95],
@@ -269,7 +254,7 @@ export function createWeek5CompactStory(options){
   add('ここからは、ALに自分で取り組もう。',`標準偏差を確認。zに直す。表を読み、面積を選ぶ。\n\n[ALワークシートを開く](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=assets%2Fworksheet-previews%2Fw05%2Findex.html&title=AL&week=W05&source=weeks%2F05-continuous-distributions-i%2F05_AL用ワークシート.xlsx)\n\n${options.tableLink}\n\n各セルの答えは示しません。`,'statement',[143,144],
     '欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。',
     'Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks.');
-  if(slides.length!==57)throw Error(`Expected 57 focused slides, got ${slides.length}`);
+  if(slides.length!==54)throw Error(`Expected 54 focused slides, got ${slides.length}`);
   slides.forEach((slide,i)=>{
     const keys=mapping[i].termKeys;
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));

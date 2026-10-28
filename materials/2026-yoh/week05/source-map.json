@@ -1,12 +1,12 @@
 {
   "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
-  "pacing": "57 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 11–13 for expectation/variance definitions, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with six interleaved z-score/table challenges, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
+  "pacing": "54 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with six interleaved z-score/table challenges, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
   "decisions": [
     {
       "retain": "Separate race media and stopwatch beats; density then shaded area; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
     },
     {
-      "combine": "Brief density/CDF/moments definitions without hand integration; worked z-score and table solutions alongside their charts"
+      "combine": "Brief density/CDF background without hand integration; expectation and variance within the normal-distribution section; worked z-score and table solutions alongside their charts"
     },
     {
       "defer": "Chi-square / goodness-of-fit / Pearson / Koala, outside official Week5 scope"
@@ -20,11 +20,6 @@
       "tsumura": "4–10",
       "textbook": "121–122",
       "role": "brief density, area and CDF background"
-    },
-    {
-      "tsumura": "11–13",
-      "textbook": "129",
-      "role": "definitions only; no integration exercises"
     },
     {
       "tsumura": "15–18",
@@ -563,81 +558,6 @@
     },
     {
       "slide": 25,
-      "title": "ロボット工場：中心と、ばらつきを知りたい",
-      "layout": "model-visual robot-example",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        62
-      ],
-      "termKeys": [
-        "expectation",
-        "variance"
-      ],
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        },
-        {
-          "ja": "分散",
-          "en": "Variance"
-        }
-      ]
-    },
-    {
-      "slide": 26,
-      "title": "期待値：たくさんのロボットの平均身長",
-      "layout": "worked",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        65
-      ],
-      "termKeys": [
-        "expectation"
-      ],
-      "formulaRef": {
-        "pages": "129",
-        "label": "教科書 p.129 · 期待値と分散"
-      },
-      "terms": [
-        {
-          "ja": "期待値",
-          "en": "Expected value"
-        }
-      ]
-    },
-    {
-      "slide": 27,
-      "title": "分散",
-      "layout": "worked",
-      "official": "11–13",
-      "textbook": "129",
-      "sourceBeats": [
-        75
-      ],
-      "termKeys": [
-        "variance",
-        "sd"
-      ],
-      "formulaRef": {
-        "pages": "129",
-        "label": "教科書 p.129 · 期待値と分散"
-      },
-      "terms": [
-        {
-          "ja": "分散",
-          "en": "Variance"
-        },
-        {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
-        }
-      ]
-    },
-    {
-      "slide": 28,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "14–18",
@@ -668,7 +588,7 @@
       ]
     },
     {
-      "slide": 29,
+      "slide": 26,
       "title": "正規分布：中心と、ばらつき",
       "layout": "model-visual",
       "official": "14–18",
@@ -683,8 +603,8 @@
       ],
       "termKeys": [
         "normal",
-        "mean",
-        "sd"
+        "expectation",
+        "variance"
       ],
       "formulaRef": {
         "pages": "122–123,129",
@@ -696,17 +616,17 @@
           "en": "Normal distribution"
         },
         {
-          "ja": "平均",
-          "en": "Mean"
+          "ja": "期待値",
+          "en": "Expected value"
         },
         {
-          "ja": "標準偏差",
-          "en": "Standard deviation"
+          "ja": "分散",
+          "en": "Variance"
         }
       ]
     },
     {
-      "slide": 30,
+      "slide": 27,
       "title": "標準偏差が小さいと、狭い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -732,7 +652,7 @@
       ]
     },
     {
-      "slide": 31,
+      "slide": 28,
       "title": "標準偏差が大きいと、広い山",
       "layout": "single-visual",
       "official": "14–18",
@@ -758,7 +678,7 @@
       ]
     },
     {
-      "slide": 32,
+      "slide": 29,
       "title": "分散と標準偏差を、取り違えない",
       "layout": "explain",
       "official": "14–18",
@@ -789,7 +709,7 @@
       ]
     },
     {
-      "slide": 33,
+      "slide": 30,
       "title": "正規分布の密度",
       "layout": "hero-math long",
       "official": "14–18",
@@ -819,7 +739,7 @@
       ]
     },
     {
-      "slide": 34,
+      "slide": 31,
       "title": "標準化の公式",
       "layout": "hero-math long",
       "official": "14–18",
@@ -850,7 +770,7 @@
       ]
     },
     {
-      "slide": 35,
+      "slide": 32,
       "title": "60点は、標準偏差1個ぶん上",
       "layout": "worked",
       "official": "14–18",
@@ -891,7 +811,7 @@
       ]
     },
     {
-      "slide": 36,
+      "slide": 33,
       "title": "チャレンジ①　ロボットの身長をzに直す",
       "layout": "challenge",
       "official": "14–18",
@@ -918,7 +838,7 @@
       ]
     },
     {
-      "slide": 37,
+      "slide": 34,
       "title": "答え合わせ① · 標準偏差を出してから、標準化",
       "layout": "worked practice-answer",
       "official": "14–18",
@@ -950,7 +870,7 @@
       ]
     },
     {
-      "slide": 38,
+      "slide": 35,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "19–26",
@@ -976,7 +896,7 @@
       ]
     },
     {
-      "slide": 39,
+      "slide": 36,
       "title": "この表は、右側の面積",
       "layout": "model-visual",
       "official": "19–26",
@@ -1008,7 +928,7 @@
       ]
     },
     {
-      "slide": 40,
+      "slide": 37,
       "title": "まず、1.9の行",
       "layout": "lookup stage-1",
       "official": "19–26",
@@ -1034,7 +954,7 @@
       ]
     },
     {
-      "slide": 41,
+      "slide": 38,
       "title": "次に、0.06の列",
       "layout": "lookup stage-2",
       "official": "19–26",
@@ -1060,7 +980,7 @@
       ]
     },
     {
-      "slide": 42,
+      "slide": 39,
       "title": "交点は、0.02500",
       "layout": "lookup stage-3",
       "official": "19–26",
@@ -1086,7 +1006,7 @@
       ]
     },
     {
-      "slide": 43,
+      "slide": 40,
       "title": "1.96より右は、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1117,7 +1037,7 @@
       ]
     },
     {
-      "slide": 44,
+      "slide": 41,
       "title": "チャレンジ②　行と列を、自分で探す",
       "layout": "challenge",
       "official": "19–26",
@@ -1148,7 +1068,7 @@
       ]
     },
     {
-      "slide": 45,
+      "slide": 42,
       "title": "答え合わせ② · 1.2の行、0.08の列",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1179,7 +1099,7 @@
       ]
     },
     {
-      "slide": 46,
+      "slide": 43,
       "title": "−1.96より左も、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1211,7 +1131,7 @@
       ]
     },
     {
-      "slide": 47,
+      "slide": 44,
       "title": "チャレンジ③　マイナスのzなら、どちら側？",
       "layout": "challenge",
       "official": "19–26",
@@ -1242,7 +1162,7 @@
       ]
     },
     {
-      "slide": 48,
+      "slide": 45,
       "title": "答え合わせ③ · 左右対称を使う",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1273,7 +1193,7 @@
       ]
     },
     {
-      "slide": 49,
+      "slide": 46,
       "title": "＋1.96より左は、97.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1307,7 +1227,7 @@
       ]
     },
     {
-      "slide": 50,
+      "slide": 47,
       "title": "チャレンジ④　表の値が、そのまま答えになる？",
       "layout": "challenge",
       "official": "19–26",
@@ -1338,7 +1258,7 @@
       ]
     },
     {
-      "slide": 51,
+      "slide": 48,
       "title": "答え合わせ④ · 全体1から、右の尾を引く",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1369,7 +1289,7 @@
       ]
     },
     {
-      "slide": 52,
+      "slide": 49,
       "title": "真ん中は、両方の尾を引く",
       "layout": "worked",
       "official": "19–26",
@@ -1404,7 +1324,7 @@
       ]
     },
     {
-      "slide": 53,
+      "slide": 50,
       "title": "チャレンジ⑤　左右の幅が違う区間",
       "layout": "challenge",
       "official": "19–26",
@@ -1436,7 +1356,7 @@
       ]
     },
     {
-      "slide": 54,
+      "slide": 51,
       "title": "答え合わせ⑤ · 異なる二つの尾を引く",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1468,7 +1388,7 @@
       ]
     },
     {
-      "slide": 55,
+      "slide": 52,
       "title": "チャレンジ⑥　70点以上は、何％？",
       "layout": "challenge",
       "official": "19–26",
@@ -1500,7 +1420,7 @@
       ]
     },
     {
-      "slide": 56,
+      "slide": 53,
       "title": "答え合わせ⑥ · 元の点数から、上側確率へ",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1532,7 +1452,7 @@
       ]
     },
     {
-      "slide": 57,
+      "slide": 54,
       "title": "ここからは、ALに自分で取り組もう。",
       "layout": "statement",
       "official": "19–26",
