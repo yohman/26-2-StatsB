@@ -33,7 +33,7 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal(slideCount,57);
+assert.equal(slideCount,61);
 const bodyFor=title=>{
   const item=sourceMap.slides.find(s=>s.title===title);
   assert(item,`Missing slide: ${title}`);
@@ -41,7 +41,7 @@ const bodyFor=title=>{
 };
 const challenges=sourceMap.slides.filter(s=>s.layout==='challenge');
 assert.equal(challenges.length,7);
-assert.deepEqual(challenges.map(s=>s.slide),[34,36,44,47,50,53,55]);
+assert.deepEqual(challenges.map(s=>s.slide),[38,40,48,51,54,57,59]);
 for(const item of challenges){
   assert.equal(item.practiceFocus,'z-scores-and-table');
   assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
@@ -121,6 +121,18 @@ assert(bodyFor('標準偏差が小さいと、狭い山').includes('story-normal
 assert(bodyFor('標準偏差が大きいと、広い山').includes('story-normal-wide'));
 const pageFor=title=>sourceMap.slides.find(s=>s.title===title).slide;
 assert(!sourceMap.slides.some(s=>['分散','期待値：たくさんのロボットの平均身長','ロボット工場：中心と、ばらつきを知りたい'].includes(s.title)),'Remove the redundant moments section');
+for(const title of ['期待値：値に重みを付けて、合計する','ロボットの配達件数：期待値を計算','分散：平均との差を2乗して、合計する','同じロボット：分散を計算']){
+  assert(pageFor(title)<pageFor('正規分布：中心と、ばらつき'));
+  assert.equal(sourceMap.slides.find(s=>s.title===title).formulaRef.pages,'129');
+}
+for(const title of ['期待値：値に重みを付けて、合計する','分散：平均との差を2乗して、合計する']){
+  assert(bodyFor(title).includes('\\sum_x'));
+  assert(bodyFor(title).includes('\\int_{-\\infty}^{\\infty}'));
+}
+assert(bodyFor('ロボットの配達件数：期待値を計算').includes('=0+0.50+0.50=1'));
+assert(bodyFor('同じロボット：分散を計算').includes('=0.25+0+0.25=0.50'));
+assert.equal(0*.25+1*.5+2*.25,1);
+assert.equal((0-1)**2*.25+(1-1)**2*.5+(2-1)**2*.25,.5);
 assert(pageFor('正規分布の密度')<pageFor('標準化の公式'));
 assert.equal(sourceMap.slides.at(-1).title,'ここからは、ALに自分で取り組もう。');
 assert(sourceMap.slides.at(-1).sourceBeats.includes(143));
