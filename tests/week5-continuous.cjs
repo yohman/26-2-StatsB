@@ -47,6 +47,9 @@ for(const item of challenges){
   assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
 }
 assert(!challenges.some(s=>/ラーメン|積分|一様/.test(s.title)));
+const finalHint=bodyFor('チャレンジ⑥　70点以上は、何％？').replace(/<rt>[^<]*<\/rt>/g,'').replace(/<[^>]*>/g,'');
+assert(finalHint.includes('1つ目は平均、2つ目は分散。標準偏差は分散の平方根。'));
+assert(!finalHint.includes('2.275'),'The hint must not reveal the answer');
 for(const item of sourceMap.slides.filter(s=>s.practiceAnswer)){
   const body=slideBodies[item.slide-1];
   for(const label of ['① 与えられた条件','② 公式','③ 代入','④ 答え'])assert(body.includes(label));

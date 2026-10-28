@@ -242,7 +242,7 @@ export function createWeek5CompactStory(options){
     '約62.47％。同じ尾を2回引かない。',[128],
     '教科書p.122の累積の差とp.124〜125の左右対称・補集合を組み合わせます。左の尾は0.30854、右の尾は0.06681で異なる値です。1から両方を引くと0.62465。式では左側の累積を差し引く形でも同じです。約62.47％になります。',
     'Combine the interval difference on textbook page 122 with symmetry and complements on pages 124–125. The left tail is 0.30854 and the right tail is 0.06681, so they cannot be doubled as if equal. Subtracting both from one gives 0.62465, or about 62.47 percent. The displayed cumulative difference is equivalent.');
-  add('チャレンジ⑥　70点以上は、何％？',sourceBody(132),'challenge',[132],
+  add('チャレンジ⑥　70点以上は、何％？',sourceBody(132)+'\n\n<div class="book-note">ヒント：平均と標準偏差の手がかりは、与えられた式の中。<br>1つ目は平均、2つ目は分散。標準偏差は分散の平方根。<br><span lang="en">Hint: the first parameter is the mean; the second is the variance. Take its square root for the SD.</span></div>','challenge',[132],
     '最後は元の単位の点数から始めます。分散から標準偏差を確認し、境界の点数を標準化し、求める面積を描いて表を読もう。この練習では途中式も必ず残し、ALに一人で取り組む準備をします。',
     'Finish by starting in the original score units. Identify the standard deviation from the variance, standardize the boundary, sketch the region, and read the table. Keep the intermediate steps as preparation for independent AL work.');
   mapping.at(-1).practiceFocus='z-scores-and-table';
