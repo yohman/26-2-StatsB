@@ -344,10 +344,46 @@ export function createWeek5CompactStory(options){
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
     slides[i]=keys.length?annotateJapaneseTerms(slide).replace(/<!-- _class: (.*?) -->/,'<!-- _class: $1 has-stat-terms -->')+'\n\n'+terminology(keys):slide;
   });
+  const revealGroups=[
+    {answer:'答え合わせ② · Yohの177cmを、全国の成人男性と比べる',id:'personal-height',label:'Yohの身長',en:'Yoh’s height',config:{mean:168.4,sd:5.2,observations:[{x:177,name:'Yoh 177cm'}],title:'日本全国の男性20歳以上 · 2024年',schematic:true,distanceTo:177}},
+    {answer:'答え合わせ⑧ (1) · 70点以上の割合',id:'final-score',label:'70点以上の割合',en:'The proportion scoring at least 70',config:{mean:55,sd:10,unit:'点',quantity:'得点',observations:[{x:70,name:'70点'}],title:'クラスの得点',distanceTo:70,shadeFrom:70,areaLabel:'70点以上：約6.68％'}},
+    {answer:'答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す',id:'final-cutoff',label:'上位5％の境界',en:'The top-five-percent cutoff',config:{mean:55,sd:10,unit:'点',quantity:'得点',observations:[{x:71.5,name:'境界 71.5点'}],title:'S評価の境界',distanceTo:71.5,shadeFrom:71.5,areaLabel:'右の面積：約5％',boundaryNote:'整数の得点：S評価は72点以上'}},
+  ];
+  const stageNames=['平均の位置','標準偏差と元の目盛り','注目する値と平均との差','zの目盛り','対応するzスコア'];
+  for(const group of revealGroups){
+    const index=mapping.findIndex(item=>item.title===group.answer),original=mapping[index],note=narration[index],c=group.config,unit=c.unit||'cm',value=c.observations[0].x,distance=Number((value-c.mean).toFixed(2)),z=((value-c.mean)/c.sd).toFixed(2);
+    const ja=[
+      `まず曲線の中心だけ見よう。平均は${c.mean}${unit}。この図の横の位置は、ここから先も変わりません。まだ注目する値やzの答えは示しません。`,
+      `元の単位の目盛りと、標準偏差${c.sd}${unit}を加えます。青い括弧は1個分。平均から右へも左へも、同じ間隔で読んでください。`,
+      `${value}${unit}の位置を橙色で加えました。平均との差は${distance}${unit}。下の橙の括弧で距離をたどり、青い1個分の幅と比べよう。`,
+      '下にzの軸を加えました。同じ横の位置が、上下で対応します。元の平均はz=0、標準偏差1個分の位置はz=+1。橙の位置の数値はまだ自分で考えよう。',
+      `橙の位置にz=+${z}を加えます。元の値${value}${unit}と、下のzのラベルは同じ縦線上。次のページで、与えられた値、公式、代入、結論をまとめて確認します。`,
+    ];
+    const en=[
+      `Start with the centre of the bell: the mean is ${c.mean} ${unit}. The curve and horizontal positions will stay fixed across the build. The observation and its z-score are not shown yet.`,
+      `Add the original-value scale and standard deviation ${c.sd} ${unit}. The blue bracket spans one SD. Read equal steps on either side of the mean before adding the observation.`,
+      `Add the orange observation at ${value} ${unit}. Its distance from the mean is ${distance} ${unit}. Compare the orange distance bracket with the blue one-SD bracket, without jumping to the z label.`,
+      'Add the lower z-axis. A position on the original scale aligns vertically with the same position on this new scale. The original mean maps to zero and one SD above it maps to plus one. Work out the orange value before its label appears.',
+      `Reveal z = +${z} at the orange position. The original value ${value} ${unit} and its z label align on the same vertical line. The following page gathers the givens, symbolic formula, substitution and conclusion.`,
+    ];
+    const newSlides=[],newMapping=[],newNotes=[];
+    for(let stage=1;stage<=5;stage++){
+      const title=`${group.label} · ${stageNames[stage-1]} (${stage}/5)`;
+      const graphic=options.fig(`reveal-${group.id}-${stage}`,{...c,heightZ:true,revealStage:stage});
+      const keys=[['mean'],['sd'],['sd'],['standardization'],['zScore']][stage-1];
+      newSlides.push(`<!-- _class: chart-build has-stat-terms -->\n\n## ${title}\n\n${graphic}\n\n<span class="build-progress">${stage} / 5</span>\n\n${terminology(keys)}`);
+      newMapping.push({slide:0,title,layout:'chart-build',sourceBeats:original.sourceBeats,termKeys:keys,terms:keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]})),practiceReveal:true,revealFor:group.answer,revealStage:stage,...(original.sources?{sources:original.sources}:{})});
+      newNotes.push({page:0,title,ja:`${group.label}。${ja[stage-1]}`,en:`${group.en}. ${en[stage-1]}`,...(note.sources?{sources:note.sources}:{})});
+    }
+    slides.splice(index,0,...newSlides);mapping.splice(index,0,...newMapping);narration.splice(index,0,...newNotes);
+  }
+  mapping.forEach((item,i)=>{item.slide=i+1;if(item.exploration)item.exploration.slide=i+1;narration[i].page=i+1;});
+  if(slides.length!==75)throw Error(`Expected 75 slides including chart reveals, got ${slides.length}`);
   return {slides,mapping,notes:{version:1,deck:'materials/2026-yoh/week05/w5.pdf',slides:narration}};
 }
 
 export const compactStyle=storyStyle.replace('</style>',`
+section.chart-build.has-stat-terms{padding:20px 60px 110px;display:flex;align-items:center;justify-content:center}section.chart-build h2{display:none}section.chart-build p{margin:0}section.chart-build img{width:1100px;height:560px;max-width:none;max-height:none;object-fit:contain}section.chart-build .build-progress{position:absolute;top:16px;right:32px;font-size:16px;color:#819098}
 section.has-stat-terms a.explore-slide-link{position:absolute;bottom:48px;left:32px;font-size:20px;line-height:1.4;padding:8px 14px;color:#fff;background:#176d82;border-radius:6px;text-decoration:none;font-weight:700}
 section.has-stat-terms a.lookup-slide-link{position:absolute;bottom:52px;right:32px;font-size:15px;font-weight:600;color:#176d82;background:none;padding:0;border-radius:0;text-decoration:underline;line-height:1.25}
 section:has(a.lookup-slide-link) .formula-ref{top:28px}

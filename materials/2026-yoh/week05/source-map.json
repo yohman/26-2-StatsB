@@ -1,6 +1,6 @@
 {
   "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
-  "pacing": "60 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with 8 z-score/table challenges including a closing past-exam problem, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
+  "pacing": "75 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with 8 z-score/table challenges including a closing past-exam problem, protected worked answers and no homework cell answers. Five-step chart-only builds precede the personal-height and both final exam answers, with stable scales before the full worked solution. Bilingual narration follows the revised pages.",
   "decisions": [
     {
       "retain": "Separate race media and stopwatch beats; density then shaded area; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
@@ -950,6 +950,126 @@
     },
     {
       "slide": 37,
+      "title": "Yohの身長 · 平均の位置 (1/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "mean"
+      ],
+      "terms": [
+        {
+          "ja": "平均",
+          "en": "Mean"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
+      "revealStage": 1,
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "slide": 38,
+      "title": "Yohの身長 · 標準偏差と元の目盛り (2/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "sd"
+      ],
+      "terms": [
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
+      "revealStage": 2,
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "slide": 39,
+      "title": "Yohの身長 · 注目する値と平均との差 (3/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "sd"
+      ],
+      "terms": [
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
+      "revealStage": 3,
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "slide": 40,
+      "title": "Yohの身長 · zの目盛り (4/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "standardization"
+      ],
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
+      "revealStage": 4,
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "slide": 41,
+      "title": "Yohの身長 · 対応するzスコア (5/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "zScore"
+      ],
+      "terms": [
+        {
+          "ja": "標準得点",
+          "en": "Z-score"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
+      "revealStage": 5,
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "slide": 42,
       "title": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
       "layout": "worked practice-answer graph-led",
       "official": "14–18",
@@ -985,7 +1105,7 @@
       ]
     },
     {
-      "slide": 38,
+      "slide": 43,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "19–26",
@@ -1011,7 +1131,7 @@
       ]
     },
     {
-      "slide": 39,
+      "slide": 44,
       "title": "この表は、右側の面積",
       "layout": "model-visual",
       "official": "19–26",
@@ -1044,7 +1164,7 @@
       ]
     },
     {
-      "slide": 40,
+      "slide": 45,
       "title": "まず、1.9の行",
       "layout": "lookup stage-1",
       "official": "19–26",
@@ -1071,7 +1191,7 @@
       ]
     },
     {
-      "slide": 41,
+      "slide": 46,
       "title": "次に、0.06の列",
       "layout": "lookup stage-2",
       "official": "19–26",
@@ -1098,7 +1218,7 @@
       ]
     },
     {
-      "slide": 42,
+      "slide": 47,
       "title": "交点は、0.02500",
       "layout": "lookup stage-3",
       "official": "19–26",
@@ -1125,7 +1245,7 @@
       ]
     },
     {
-      "slide": 43,
+      "slide": 48,
       "title": "1.96より右は、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1145,7 +1265,7 @@
         "label": "教科書 p.124 · 上側確率と表の読み方"
       },
       "exploration": {
-        "slide": 43,
+        "slide": 48,
         "id": "table",
         "order": 3,
         "label": "正規分布表と面積"
@@ -1163,7 +1283,7 @@
       ]
     },
     {
-      "slide": 44,
+      "slide": 49,
       "title": "チャレンジ③　行と列を、自分で探す",
       "layout": "challenge",
       "official": "19–26",
@@ -1195,7 +1315,7 @@
       ]
     },
     {
-      "slide": 45,
+      "slide": 50,
       "title": "答え合わせ③ · 1.2の行、0.08の列",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1227,7 +1347,7 @@
       ]
     },
     {
-      "slide": 46,
+      "slide": 51,
       "title": "−1.96より左も、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1260,7 +1380,7 @@
       ]
     },
     {
-      "slide": 47,
+      "slide": 52,
       "title": "チャレンジ④　マイナスのzなら、どちら側？",
       "layout": "challenge",
       "official": "19–26",
@@ -1292,7 +1412,7 @@
       ]
     },
     {
-      "slide": 48,
+      "slide": 53,
       "title": "答え合わせ④ · 左右対称を使う",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1324,7 +1444,7 @@
       ]
     },
     {
-      "slide": 49,
+      "slide": 54,
       "title": "＋1.96より左は、97.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1359,7 +1479,7 @@
       ]
     },
     {
-      "slide": 50,
+      "slide": 55,
       "title": "チャレンジ⑤　表の値が、そのまま答えになる？",
       "layout": "challenge",
       "official": "19–26",
@@ -1391,7 +1511,7 @@
       ]
     },
     {
-      "slide": 51,
+      "slide": 56,
       "title": "答え合わせ⑤ · 全体1から、右の尾を引く",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1423,7 +1543,7 @@
       ]
     },
     {
-      "slide": 52,
+      "slide": 57,
       "title": "真ん中は、両方の尾を引く",
       "layout": "worked",
       "official": "19–26",
@@ -1459,7 +1579,7 @@
       ]
     },
     {
-      "slide": 53,
+      "slide": 58,
       "title": "チャレンジ⑥　左右の幅が違う区間",
       "layout": "challenge",
       "official": "19–26",
@@ -1492,7 +1612,7 @@
       ]
     },
     {
-      "slide": 54,
+      "slide": 59,
       "title": "答え合わせ⑥ · 異なる二つの尾を引く",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1525,7 +1645,7 @@
       ]
     },
     {
-      "slide": 55,
+      "slide": 60,
       "title": "チャレンジ⑦　70点以上は、何％？",
       "layout": "challenge",
       "official": "19–26",
@@ -1558,7 +1678,7 @@
       ]
     },
     {
-      "slide": 56,
+      "slide": 61,
       "title": "答え合わせ⑦ · 元の点数から、上側確率へ",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1591,7 +1711,7 @@
       ]
     },
     {
-      "slide": 57,
+      "slide": 62,
       "title": "チャレンジ⑧　期末試験形式：S評価は何点から？",
       "layout": "challenge",
       "official": "19–26",
@@ -1629,7 +1749,107 @@
       ]
     },
     {
-      "slide": 58,
+      "slide": 63,
+      "title": "70点以上の割合 · 平均の位置 (1/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "mean"
+      ],
+      "terms": [
+        {
+          "ja": "平均",
+          "en": "Mean"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (1) · 70点以上の割合",
+      "revealStage": 1
+    },
+    {
+      "slide": 64,
+      "title": "70点以上の割合 · 標準偏差と元の目盛り (2/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "sd"
+      ],
+      "terms": [
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (1) · 70点以上の割合",
+      "revealStage": 2
+    },
+    {
+      "slide": 65,
+      "title": "70点以上の割合 · 注目する値と平均との差 (3/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "sd"
+      ],
+      "terms": [
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (1) · 70点以上の割合",
+      "revealStage": 3
+    },
+    {
+      "slide": 66,
+      "title": "70点以上の割合 · zの目盛り (4/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "standardization"
+      ],
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (1) · 70点以上の割合",
+      "revealStage": 4
+    },
+    {
+      "slide": 67,
+      "title": "70点以上の割合 · 対応するzスコア (5/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "zScore"
+      ],
+      "terms": [
+        {
+          "ja": "標準得点",
+          "en": "Z-score"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (1) · 70点以上の割合",
+      "revealStage": 5
+    },
+    {
+      "slide": 68,
       "title": "答え合わせ⑧ (1) · 70点以上の割合",
       "layout": "worked practice-answer graph-led",
       "official": "19–26",
@@ -1667,7 +1887,107 @@
       ]
     },
     {
-      "slide": 59,
+      "slide": 69,
+      "title": "上位5％の境界 · 平均の位置 (1/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "mean"
+      ],
+      "terms": [
+        {
+          "ja": "平均",
+          "en": "Mean"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
+      "revealStage": 1
+    },
+    {
+      "slide": 70,
+      "title": "上位5％の境界 · 標準偏差と元の目盛り (2/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "sd"
+      ],
+      "terms": [
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
+      "revealStage": 2
+    },
+    {
+      "slide": 71,
+      "title": "上位5％の境界 · 注目する値と平均との差 (3/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "sd"
+      ],
+      "terms": [
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
+      "revealStage": 3
+    },
+    {
+      "slide": 72,
+      "title": "上位5％の境界 · zの目盛り (4/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "standardization"
+      ],
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
+      "revealStage": 4
+    },
+    {
+      "slide": 73,
+      "title": "上位5％の境界 · 対応するzスコア (5/5)",
+      "layout": "chart-build",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "zScore"
+      ],
+      "terms": [
+        {
+          "ja": "標準得点",
+          "en": "Z-score"
+        }
+      ],
+      "practiceReveal": true,
+      "revealFor": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
+      "revealStage": 5
+    },
+    {
+      "slide": 74,
       "title": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
       "layout": "worked practice-answer graph-led",
       "official": "19–26",
@@ -1705,7 +2025,7 @@
       ]
     },
     {
-      "slide": 60,
+      "slide": 75,
       "title": "ここからは、ALに自分で取り組もう。",
       "layout": "statement",
       "official": "19–26",

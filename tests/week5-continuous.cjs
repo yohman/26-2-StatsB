@@ -33,9 +33,22 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal(slideCount,60);
+assert.equal(slideCount,75);
+const reveals=sourceMap.slides.filter(s=>s.practiceReveal);
+assert.equal(reveals.length,15);
+for(const answer of [...new Set(reveals.map(s=>s.revealFor))]){
+  const group=reveals.filter(s=>s.revealFor===answer),full=sourceMap.slides.find(s=>s.title===answer);
+  assert.deepEqual(group.map(s=>s.revealStage),[1,2,3,4,5]);
+  assert.equal(group.at(-1).slide+1,full.slide,'The unchanged worked answer follows the final chart reveal');
+  for(let i=1;i<group.length;i++)assert.equal(group[i].slide,group[i-1].slide+1);
+  const svgs=group.map(item=>fs.readFileSync(path.join(root,'materials/2026-yoh/week05',slideBodies[item.slide-1].match(/\]\((images\/reveal-[^)]+)\)/)[1]),'utf8'));
+  assert(svgs.every(svg=>svg.match(/viewBox="[^"]+"/)[0]===svgs[0].match(/viewBox="[^"]+"/)[0]),'Every reveal keeps the same dimensions');
+  const curve=svg=>svg.match(/<path d="([^"]+)" fill="none" stroke="#176d82" stroke-width="5"/)[1];
+  assert(svgs.every(svg=>curve(svg)===curve(svgs[0])),'The bell never moves or rescales during the reveal');
+  for(const [i,svg] of svgs.entries())for(const layer of svg.matchAll(/data-build-min="(\d+)" visibility="(visible|hidden)"/g))assert.equal(layer[2],Number(layer[1])<=i+1?'visible':'hidden');
+}
 const explorationStops=sourceMap.slides.filter(s=>s.exploration);
-assert.deepEqual(explorationStops.map(s=>[s.slide,s.exploration.id,s.exploration.order]),[[4,'stopwatch',1],[33,'normal',2],[43,'table',3]]);
+assert.deepEqual(explorationStops.map(s=>[s.slide,s.exploration.id,s.exploration.order]),[[4,'stopwatch',1],[33,'normal',2],[48,'table',3]]);
 const siteOrder=fs.readFileSync(path.join(root,'assets/stats-site.js'),'utf8').match(/\$\{\['stopwatch','normal','table'\]\.map/);
 assert(siteOrder,'Exploration tabs must follow their first appearance in the lecture');
 for(const stop of explorationStops){
@@ -52,10 +65,10 @@ const bodyFor=title=>{
 };
 const challenges=sourceMap.slides.filter(s=>s.layout==='challenge');
 assert.equal(challenges.length,8);
-assert.deepEqual(challenges.map(s=>s.slide),[34,36,44,47,50,53,55,57]);
+assert.deepEqual(challenges.map(s=>s.slide),[34,36,49,52,55,58,60,62]);
 for(const item of challenges){
   assert.equal(item.practiceFocus,'z-scores-and-table');
-  assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
+  assert(sourceMap.slides[item.slide].practiceAnswer||sourceMap.slides[item.slide].practiceReveal,'Every challenge is followed by its protected answer or first visual reveal');
 }
 assert(!challenges.some(s=>/ラーメン|積分|一様/.test(s.title)));
 const finalHint=bodyFor('チャレンジ⑦　70点以上は、何％？').replace(/<rt>[^<]*<\/rt>/g,'').replace(/<[^>]*>/g,'');
@@ -125,7 +138,7 @@ assert(bodyFor('答え合わせ⑦ · 元の点数から、上側確率へ').inc
 const exam=bodyFor('チャレンジ⑧　期末試験形式：S評価は何点から？');
 for(const value of ['N(55,10^2)','70点以上','上位5％','1.65','8分'])assert(exam.includes(value));
 assert(!/6\.681|71\.5|72点/.test(exam),'The exam question must not reveal either answer');
-assert.equal(sourceMap.slides[56].examSource.question,'問4(1)(2)');
+assert.equal(sourceMap.slides.find(s=>s.title==='チャレンジ⑧　期末試験形式：S評価は何点から？').examSource.question,'問4(1)(2)');
 assert(bodyFor('答え合わせ⑧ (1) · 70点以上の割合').includes('0.06681=6.681'));
 assert(bodyFor('答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す').includes('72点以上'));
 for(const item of sourceMap.slides.filter(s=>s.title.startsWith('答え合わせ⑧'))){
@@ -176,6 +189,13 @@ console.log('Week 5: density/CDF/moments/normal-table mathematics, fixed model s
   assert.equal(pdf.numPages,slideCount);
   for(let i=1;i<=pdf.numPages;i++){
     const page=await pdf.getPage(i),text=(await page.getTextContent()).items.map(x=>x.str).join('');
+    const reveal=sourceMap.slides[i-1];
+    if(reveal.practiceReveal&&reveal.revealFor.includes('Yoh')){
+      if(reveal.revealStage<3)assert(!text.includes('177'),'Do not reveal Yoh’s height before the orange observation');
+      if(reveal.revealStage<5)assert(!text.includes('1.65'),'Do not reveal the z result early');
+      if(reveal.revealStage>=3)assert(text.includes('177'));
+      if(reveal.revealStage===5)assert(text.includes('1.65'));
+    }
     if(isChallengeText(text))challenges.push(i);
     assert.ok(!text.includes('$F('));assert.ok(!text.includes('**'));
     const annotations=await page.getAnnotations();

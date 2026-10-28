@@ -311,6 +311,56 @@
     },
     {
       "page": 37,
+      "title": "Yohの身長 · 平均の位置 (1/5)",
+      "ja": "Yohの身長。まず曲線の中心だけ見よう。平均は168.4cm。この図の横の位置は、ここから先も変わりません。まだ注目する値やzの答えは示しません。",
+      "en": "Yoh’s height. Start with the centre of the bell: the mean is 168.4 cm. The curve and horizontal positions will stay fixed across the build. The observation and its z-score are not shown yet.",
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "page": 38,
+      "title": "Yohの身長 · 標準偏差と元の目盛り (2/5)",
+      "ja": "Yohの身長。元の単位の目盛りと、標準偏差5.2cmを加えます。青い括弧は1個分。平均から右へも左へも、同じ間隔で読んでください。",
+      "en": "Yoh’s height. Add the original-value scale and standard deviation 5.2 cm. The blue bracket spans one SD. Read equal steps on either side of the mean before adding the observation.",
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "page": 39,
+      "title": "Yohの身長 · 注目する値と平均との差 (3/5)",
+      "ja": "Yohの身長。177cmの位置を橙色で加えました。平均との差は8.6cm。下の橙の括弧で距離をたどり、青い1個分の幅と比べよう。",
+      "en": "Yoh’s height. Add the orange observation at 177 cm. Its distance from the mean is 8.6 cm. Compare the orange distance bracket with the blue one-SD bracket, without jumping to the z label.",
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "page": 40,
+      "title": "Yohの身長 · zの目盛り (4/5)",
+      "ja": "Yohの身長。下にzの軸を加えました。同じ横の位置が、上下で対応します。元の平均はz=0、標準偏差1個分の位置はz=+1。橙の位置の数値はまだ自分で考えよう。",
+      "en": "Yoh’s height. Add the lower z-axis. A position on the original scale aligns vertically with the same position on this new scale. The original mean maps to zero and one SD above it maps to plus one. Work out the orange value before its label appears.",
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "page": 41,
+      "title": "Yohの身長 · 対応するzスコア (5/5)",
+      "ja": "Yohの身長。橙の位置にz=+1.65を加えます。元の値177cmと、下のzのラベルは同じ縦線上。次のページで、与えられた値、公式、代入、結論をまとめて確認します。",
+      "en": "Yoh’s height. Reveal z = +1.65 at the orange position. The original value 177 cm and its z label align on the same vertical line. The following page gathers the givens, symbolic formula, substitution and conclusion.",
+      "sources": [
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
+      ]
+    },
+    {
+      "page": 42,
       "title": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
       "ja": "Yohの身長177cmを、日本全国の男性20歳以上という基準と比べます。2024年の全国補正値は平均168.4cm、標準偏差5.2cm。177から168.4を引くと8.6cm、それを5.2で割ると1.653846…なので約+1.65です。基準の平均より標準偏差約1.65個分上という位置で、1.65％という確率ではありません。高齢者を含む成人全体との比較で、20代だけの比較ではありません。曲線は平均と標準偏差を使った位置の説明用の模式図で、実測ヒストグラムではありません。年齢の混合した実際の身長分布が完全な正規分布とは限らないため、この図から正確な百分位を読みません。表：https://www.mhlw.go.jp/content/001742496.pdf#page=2 方法：https://www.mhlw.go.jp/content/001675210.pdf 図の上段の目盛は身長cm、下段はz。同じ縦線をたどると対応が読めます。平均の位置はz=0、点線1区間は標準偏差1個分。下の括弧で1σが何cmか確認し、注目する身長の色付きの線をたどろう。",
       "en": "Compare Yoh's 177 cm with men aged 20 and over nationwide. The 2024 nationally adjusted reference mean is 168.4 cm and SD is 5.2 cm. Subtract to obtain 8.6 cm, then divide by 5.2: z is 1.653846…, approximately +1.65. This is location in reference SD units, not 1.65 percent. The comparison includes older adults rather than only people in their twenties. The normal-shaped curve is a schematic using the reported mean and SD, not the observed distribution. Because mixed-age adult heights need not be perfectly normal, do not infer an exact percentile from this diagram. Table: https://www.mhlw.go.jp/content/001742496.pdf#page=2 Methods: https://www.mhlw.go.jp/content/001675210.pdf Read centimetres on the upper axis and z on the lower axis at the same horizontal position. The mean aligns with z=0, and each dotted interval is one SD. The bracket states how many centimetres one SD represents. Follow the orange observation lines to read their z-scores.",
@@ -325,13 +375,13 @@
       ]
     },
     {
-      "page": 38,
+      "page": 43,
       "title": "教科書 · 第2章 第2節",
       "ja": "教科書124〜125ページの表につなげます。表を使う前に、表の数字がどの面積なのかを必ず確認しよう。",
       "en": "Turn to pages 124–125 for the normal table. Before reading any number, identify which area the table reports."
     },
     {
-      "page": 39,
+      "page": 44,
       "title": "この表は、右側の面積",
       "ja": "使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。",
       "en": "Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first.",
@@ -341,25 +391,25 @@
       }
     },
     {
-      "page": 40,
+      "page": 45,
       "title": "まず、1.9の行",
       "ja": "z=1.96を探します。まず1.9の行。小数第1位までの部分で、行を決めてください。",
       "en": "Locate z = 1.96. First use 1.9 to choose the row. Keep your finger on that row."
     },
     {
-      "page": 41,
+      "page": 46,
       "title": "次に、0.06の列",
       "ja": "次に0.06の列。1.9足す0.06で1.96になります。行を押さえたまま、列との交点を見ます。",
       "en": "Next find column 0.06. Adding 1.9 and 0.06 gives 1.96. Follow the row to its intersection with that column."
     },
     {
-      "page": 42,
+      "page": 47,
       "title": "交点は、0.02500",
       "ja": "交点は0.02500。これはzの値ではなく、右側にある面積の大きさです。",
       "en": "The intersection reads 0.02500. That number is the right-tail probability, rather than another z-score."
     },
     {
-      "page": 43,
+      "page": 48,
       "title": "1.96より右は、2.5％",
       "ja": "行1.9と列0.06の交点は0.02500。表の数字は右の尾の面積で、100を掛けると2.5％です。どこの確率か、図を指さして説明してみよう。",
       "en": "Row 1.9 and column 0.06 meet at 0.02500. That is the right-tail area, or 2.5 percent. Point to the region your answer describes.",
@@ -369,7 +419,7 @@
       }
     },
     {
-      "page": 44,
+      "page": 49,
       "title": "チャレンジ③　行と列を、自分で探す",
       "ja": "教科書の1.96と同じ手順を、別の値で試そう。どの行と列を使ったかも残してください。表が上側確率を示すことと、百分率への換算を忘れずに。まだ次の答え合わせを開かず、自分で表を探します。",
       "en": "Repeat the textbook lookup procedure with a different z. Record the row and column as well as the probability. Confirm that this is an upper-tail table and convert the decimal to a percentage before revealing the next slide.",
@@ -379,7 +429,7 @@
       }
     },
     {
-      "page": 45,
+      "page": 50,
       "title": "答え合わせ③ · 1.2の行、0.08の列",
       "ja": "1.2の行を見つけ、0.08の列との交点を読みます。0.10027を百分率にすると10.027％。図の右の小さな面積が答えです。1.28をそのまま確率として読んだり、0.10027％と書いたりしないようにしよう。",
       "en": "Use row 1.2 and column 0.08. Their intersection is 0.10027, which is 10.027 percent. The answer is the small right-tail area on the chart. Do not interpret 1.28 as a probability or label the decimal probability as a percentage without multiplying by one hundred.",
@@ -389,7 +439,7 @@
       }
     },
     {
-      "page": 46,
+      "page": 51,
       "title": "−1.96より左も、2.5％",
       "ja": "マイナス1.96より左なら、左右対称を使います。右の1.96より先と同じ面積なので2.5％。マイナスの位置でも、確率がマイナスにはなりません。",
       "en": "Use symmetry for the region below negative 1.96. It matches the right tail above positive 1.96, so its probability is also 2.5 percent.",
@@ -399,7 +449,7 @@
       }
     },
     {
-      "page": 47,
+      "page": 52,
       "title": "チャレンジ④　マイナスのzなら、どちら側？",
       "ja": "負のzが出たときは、確率まで負になるわけではありません。左右対称を利用し、表のどこを読めばよいか考えてください。まず欲しい左側の面積を図に塗ってから、表を使おう。",
       "en": "A negative z does not produce negative probability. Use symmetry to decide which positive-z table entry is relevant. Shade the requested left-hand region first, then look up the corresponding entry.",
@@ -409,7 +459,7 @@
       }
     },
     {
-      "page": 48,
+      "page": 53,
       "title": "答え合わせ④ · 左右対称を使う",
       "ja": "教科書p.124の左右対称と同じ方法です。−0.84より左は、＋0.84より右と同じ。表の0.8行、0.04列で0.20045を読み、約20.05％になります。求める面積は平均0の左です。",
       "en": "Apply the symmetry used on textbook page 124. The region below negative 0.84 matches the region above positive 0.84. Row 0.8 and column 0.04 give 0.20045, about 20.05 percent. The requested region lies left of zero.",
@@ -419,7 +469,7 @@
       }
     },
     {
-      "page": 49,
+      "page": 54,
       "title": "＋1.96より左は、97.5％",
       "ja": "今度はプラス1.96より左の全部。全体1から、小さい右の尾を引きます。答えが大きい確率になっていることを、図の色の広さでも確認しよう。",
       "en": "For everything below positive 1.96, subtract the small right tail from 1. The large shaded region confirms why the answer is 97.5 percent.",
@@ -429,7 +479,7 @@
       }
     },
     {
-      "page": 50,
+      "page": 55,
       "title": "チャレンジ⑤　表の値が、そのまま答えになる？",
       "ja": "今度は正の境界より左を求めます。表から読める部分と、問題が求める部分は同じでしょうか？ 全体の面積が1であることを使って考えよう。答えは図の面積の広さとも照らし合わせます。",
       "en": "This time the requested region lies below a positive boundary. Compare that region with the area reported by the table. Use total area one, and check whether your numerical answer matches the size of the region you shaded.",
@@ -439,7 +489,7 @@
       }
     },
     {
-      "page": 51,
+      "page": 56,
       "title": "答え合わせ⑤ · 全体1から、右の尾を引く",
       "ja": "表の1.3行と0.05列で、まず右側0.08851を読みます。しかし欲しいのは左側なので1から引きます。0.91149、約91.15％。小さい尾の8.851％と、求める大きい面積を取り違えないようにしよう。",
       "en": "First read the right-tail probability 0.08851 at row 1.3 and column 0.05. The question asks for the left side, so subtract from one. The result is 0.91149, about 91.15 percent. Distinguish the small omitted tail from the large requested area.",
@@ -449,7 +499,7 @@
       }
     },
     {
-      "page": 52,
+      "page": 57,
       "title": "真ん中は、両方の尾を引く",
       "ja": "−1から＋1の中央は、左右の尾を二回引きます。この表なら約68.27％。教科書の丸め値で68.28％になるのは矛盾ではありません。やってみようで右、左、真ん中を切り替えてみよう。",
       "en": "For the central interval from negative one to positive one, remove both tails. Our table gives about 68.27 percent. The textbook’s rounding gives 68.28 percent. Explore the different shaded regions.",
@@ -460,7 +510,7 @@
       }
     },
     {
-      "page": 53,
+      "page": 58,
       "title": "チャレンジ⑥　左右の幅が違う区間",
       "ja": "中央の区間でも、左右が対称とは限りません。今回は境界の距離が違います。同じ尾を2回引く方法が使えるかを考え、必要な二つの表の値を探してください。図を描くと引く場所が分かります。",
       "en": "A central interval need not be symmetric. The two boundaries are different distances from zero. Decide whether subtracting the same tail twice would work, then find the two separate table values. Sketching the interval will show which areas to remove.",
@@ -471,7 +521,7 @@
       }
     },
     {
-      "page": 54,
+      "page": 59,
       "title": "答え合わせ⑥ · 異なる二つの尾を引く",
       "ja": "教科書p.122の累積の差とp.124〜125の左右対称・補集合を組み合わせます。左の尾は0.30854、右の尾は0.06681で異なる値です。1から両方を引くと0.62465。式では左側の累積を差し引く形でも同じです。約62.47％になります。",
       "en": "Combine the interval difference on textbook page 122 with symmetry and complements on pages 124–125. The left tail is 0.30854 and the right tail is 0.06681, so they cannot be doubled as if equal. Subtracting both from one gives 0.62465, or about 62.47 percent. The displayed cumulative difference is equivalent.",
@@ -482,7 +532,7 @@
       }
     },
     {
-      "page": 55,
+      "page": 60,
       "title": "チャレンジ⑦　70点以上は、何％？",
       "ja": "最後は元の単位の点数から始めます。分散から標準偏差を確認し、境界の点数を標準化し、求める面積を描いて表を読もう。この練習では途中式も必ず残し、ALに一人で取り組む準備をします。",
       "en": "Finish by starting in the original score units. Identify the standard deviation from the variance, standardize the boundary, sketch the region, and read the table. Keep the intermediate steps as preparation for independent AL work.",
@@ -493,7 +543,7 @@
       }
     },
     {
-      "page": 56,
+      "page": 61,
       "title": "答え合わせ⑦ · 元の点数から、上側確率へ",
       "ja": "まず与えられた分散100の平方根を取って標準偏差10。標準化の公式の文字を確認してから70、50、10を入れ、z=2です。表の2.0行・0.00列で0.02275を読むので2.275％。元の点数で欲しかった右側の面積と一致しているか確かめよう。",
       "en": "Start from the givens: variance one hundred means standard deviation ten. Check the symbolic standardization rule, then insert seventy, fifty and ten to get z=2. Row 2.0 and column 0.00 give 0.02275, or 2.275 percent. Confirm that this is the right-hand region originally requested.",
@@ -504,7 +554,7 @@
       }
     },
     {
-      "page": 57,
+      "page": 62,
       "title": "チャレンジ⑧　期末試験形式：S評価は何点から？",
       "ja": "ここまでの道具だけで、期末試験形式の問題に挑戦しよう。前半は点数から割合へ、後半は割合から点数へ逆向きに考えます。平均と標準偏差を確認し、途中式と求める領域の図を残してください。後半で与えたzを、同じ標準化の式に入れるとどうなるかな。答えはまだ開かず、まず一人で考えよう。",
       "en": "Use today’s tools in a final-exam style problem. Part one goes from a score to a proportion. Part two reverses that direction, from a proportion to a score. Identify the mean and SD, and show your working and a sketch. For the second part, insert the supplied z into the same standardization equation and think about how to solve for the score before revealing the answer.",
@@ -522,7 +572,72 @@
       ]
     },
     {
-      "page": 58,
+      "page": 63,
+      "title": "70点以上の割合 · 平均の位置 (1/5)",
+      "ja": "70点以上の割合。まず曲線の中心だけ見よう。平均は55点。この図の横の位置は、ここから先も変わりません。まだ注目する値やzの答えは示しません。",
+      "en": "The proportion scoring at least 70. Start with the centre of the bell: the mean is 55 点. The curve and horizontal positions will stay fixed across the build. The observation and its z-score are not shown yet.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 64,
+      "title": "70点以上の割合 · 標準偏差と元の目盛り (2/5)",
+      "ja": "70点以上の割合。元の単位の目盛りと、標準偏差10点を加えます。青い括弧は1個分。平均から右へも左へも、同じ間隔で読んでください。",
+      "en": "The proportion scoring at least 70. Add the original-value scale and standard deviation 10 点. The blue bracket spans one SD. Read equal steps on either side of the mean before adding the observation.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 65,
+      "title": "70点以上の割合 · 注目する値と平均との差 (3/5)",
+      "ja": "70点以上の割合。70点の位置を橙色で加えました。平均との差は15点。下の橙の括弧で距離をたどり、青い1個分の幅と比べよう。",
+      "en": "The proportion scoring at least 70. Add the orange observation at 70 点. Its distance from the mean is 15 点. Compare the orange distance bracket with the blue one-SD bracket, without jumping to the z label.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 66,
+      "title": "70点以上の割合 · zの目盛り (4/5)",
+      "ja": "70点以上の割合。下にzの軸を加えました。同じ横の位置が、上下で対応します。元の平均はz=0、標準偏差1個分の位置はz=+1。橙の位置の数値はまだ自分で考えよう。",
+      "en": "The proportion scoring at least 70. Add the lower z-axis. A position on the original scale aligns vertically with the same position on this new scale. The original mean maps to zero and one SD above it maps to plus one. Work out the orange value before its label appears.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 67,
+      "title": "70点以上の割合 · 対応するzスコア (5/5)",
+      "ja": "70点以上の割合。橙の位置にz=+1.50を加えます。元の値70点と、下のzのラベルは同じ縦線上。次のページで、与えられた値、公式、代入、結論をまとめて確認します。",
+      "en": "The proportion scoring at least 70. Reveal z = +1.50 at the orange position. The original value 70 点 and its z label align on the same vertical line. The following page gathers the givens, symbolic formula, substitution and conclusion.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 68,
       "title": "答え合わせ⑧ (1) · 70点以上の割合",
       "ja": "まず平均55点と標準偏差10点を確認。標準化の式に70、55、10を入れると1.50です。表の1.5行、0.00列で0.06681を読み、100倍すると6.681％。小数第2位までで約6.68％です。図の色は70点に対応するzより右。問題の指定どおり、整数の点数を正規分布で近似し、連続補正は行っていません。 図の上段は元の得点、下段はz。同じ縦線で対応を読みます。55点はz=0、点線の間隔は10点＝標準偏差1個分。青い括弧は1σ、橙の括弧は平均から境界までの点数差です。",
       "en": "Identify mean 55 and SD 10, then substitute 70 into the symbolic standardization equation to obtain 1.50. Row 1.5 and column 0.00 give 0.06681. Multiply by one hundred to get 6.681 percent, rounded to 6.68 percent. The shaded right tail starts at the z corresponding to 70 points. As instructed, this uses a normal approximation for integer scores without a continuity correction. Read original scores above and z below on aligned axes. The mean 55 maps to zero, and each dotted interval is ten points, or one SD. The blue bracket marks one SD; the orange bracket shows the score distance from the mean to the cutoff.",
@@ -540,7 +655,72 @@
       ]
     },
     {
-      "page": 59,
+      "page": 69,
+      "title": "上位5％の境界 · 平均の位置 (1/5)",
+      "ja": "上位5％の境界。まず曲線の中心だけ見よう。平均は55点。この図の横の位置は、ここから先も変わりません。まだ注目する値やzの答えは示しません。",
+      "en": "The top-five-percent cutoff. Start with the centre of the bell: the mean is 55 点. The curve and horizontal positions will stay fixed across the build. The observation and its z-score are not shown yet.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 70,
+      "title": "上位5％の境界 · 標準偏差と元の目盛り (2/5)",
+      "ja": "上位5％の境界。元の単位の目盛りと、標準偏差10点を加えます。青い括弧は1個分。平均から右へも左へも、同じ間隔で読んでください。",
+      "en": "The top-five-percent cutoff. Add the original-value scale and standard deviation 10 点. The blue bracket spans one SD. Read equal steps on either side of the mean before adding the observation.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 71,
+      "title": "上位5％の境界 · 注目する値と平均との差 (3/5)",
+      "ja": "上位5％の境界。71.5点の位置を橙色で加えました。平均との差は16.5点。下の橙の括弧で距離をたどり、青い1個分の幅と比べよう。",
+      "en": "The top-five-percent cutoff. Add the orange observation at 71.5 点. Its distance from the mean is 16.5 点. Compare the orange distance bracket with the blue one-SD bracket, without jumping to the z label.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 72,
+      "title": "上位5％の境界 · zの目盛り (4/5)",
+      "ja": "上位5％の境界。下にzの軸を加えました。同じ横の位置が、上下で対応します。元の平均はz=0、標準偏差1個分の位置はz=+1。橙の位置の数値はまだ自分で考えよう。",
+      "en": "The top-five-percent cutoff. Add the lower z-axis. A position on the original scale aligns vertically with the same position on this new scale. The original mean maps to zero and one SD above it maps to plus one. Work out the orange value before its label appears.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 73,
+      "title": "上位5％の境界 · 対応するzスコア (5/5)",
+      "ja": "上位5％の境界。橙の位置にz=+1.65を加えます。元の値71.5点と、下のzのラベルは同じ縦線上。次のページで、与えられた値、公式、代入、結論をまとめて確認します。",
+      "en": "The top-five-percent cutoff. Reveal z = +1.65 at the orange position. The original value 71.5 点 and its z label align on the same vertical line. The following page gathers the givens, symbolic formula, substitution and conclusion.",
+      "sources": [
+        {
+          "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+          "question": "問4(1)(2)",
+          "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+        }
+      ]
+    },
+    {
+      "page": 74,
       "title": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
       "ja": "今回は割合が先に与えられています。上側5％のzは指定どおり1.65。この数を標準化の式の左に置き、右には未知の点数xを残します。両辺を10倍し、55を足すと71.5点。整数の得点では72点以上が条件を満たします。図の色は連続モデルの71.5点より右です。1.65は指定された近似値で、整数の72点以上が厳密に5％という意味ではありません。 図の上段は元の得点、下段はz。同じ縦線で対応を読みます。55点はz=0、点線の間隔は10点＝標準偏差1個分。青い括弧は1σ、橙の括弧は平均から境界までの点数差です。",
       "en": "Here the proportion is given first. Use the supplied approximate z of 1.65 for the upper five percent. Put it on the left of the same standardization equation and leave the score x unknown on the right. Multiply both sides by ten and add 55 to obtain 71.5 points. Since scores are integers, the S grade begins at 72. The shading starts at the continuous-model boundary 71.5. Neither the supplied rounded z nor an integer score cutoff implies an exact five percent share. Read original scores above and z below on aligned axes. The mean 55 maps to zero, and each dotted interval is ten points, or one SD. The blue bracket marks one SD; the orange bracket shows the score distance from the mean to the cutoff.",
@@ -558,7 +738,7 @@
       ]
     },
     {
-      "page": 60,
+      "page": 75,
       "title": "ここからは、ALに自分で取り組もう。",
       "ja": "欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。",
       "en": "Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks."
