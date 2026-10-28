@@ -65,9 +65,14 @@ export function createWeek5CompactStory(options){
   const paired=(title,tex,graphic,after,ids,ja,en)=>add(title,`<div class="worked-copy">\n\n${tex.map(math).join('\n\n')}\n\n</div>\n\n<div class="worked-visual">\n\n${graphic}\n\n</div>\n\n${after||''}`,'worked',ids,ja,en);
 
   const zFormula=String.raw`z=\frac{x-\mu}{\sigma}`;
-  const prioritizeGraphic=()=>{
+  const prioritizeGraphic=(kind='height')=>{
     mapping.at(-1).layout+=' graph-led';
     slides[slides.length-1]=slides.at(-1).replace('worked practice-answer','worked practice-answer graph-led');
+    if(kind==='scores'){
+      narration.at(-1).ja+=' 図の上段は元の得点、下段はz。同じ縦線で対応を読みます。55点はz=0、点線の間隔は10点＝標準偏差1個分。青い括弧は1σ、橙の括弧は平均から境界までの点数差です。';
+      narration.at(-1).en+=' Read original scores above and z below on aligned axes. The mean 55 maps to zero, and each dotted interval is ten points, or one SD. The blue bracket marks one SD; the orange bracket shows the score distance from the mean to the cutoff.';
+      return;
+    }
     narration.at(-1).ja+=' 図の上段の目盛は身長cm、下段はz。同じ縦線をたどると対応が読めます。平均の位置はz=0、点線1区間は標準偏差1個分。下の括弧で1σが何cmか確認し、注目する身長の色付きの線をたどろう。';
     narration.at(-1).en+=' Read centimetres on the upper axis and z on the lower axis at the same horizontal position. The mean aligns with z=0, and each dotted interval is one SD. The bracket states how many centimetres one SD represents. Follow the orange observation lines to read their z-scores.';
   };
@@ -294,20 +299,22 @@ export function createWeek5CompactStory(options){
     'Use today’s tools in a final-exam style problem. Part one goes from a score to a proportion. Part two reverses that direction, from a proportion to a score. Identify the mean and SD, and show your working and a sketch. For the second part, insert the supplied z into the same standardization equation and think about how to solve for the score before revealing the answer.',8);
   slides[slides.length-1]+='\n\n<p class="book-note final-exam-note">(2) 上側5％のz値は1.65とする。<br>正規分布モデルで計算し、割合は小数第2位まで。<br>点数の境界は整数で答える。</p>';
   markExam();
-  solution('⑧ (1)','70点以上の割合','平均55点、標準偏差10点、境界70点。',zFormula,
+  solution('⑧ (1)','70点以上の割合','平均55点。<br>標準偏差10点、境界70点。',zFormula,
     [String.raw`z=\frac{70-55}{10}=1.50`,String.raw`\Pr(X\ge70)\approx\Pr(Z\ge1.50)`,String.raw`=0.06681=6.681\%`],
-    options.normal('practice-final-score-tail',1.5,4,{title:'70点以上に対応する右の面積',ticks:[-3,-2,-1,0,1,1.5,2,3],labels:[{x:1.5,text:'70点：z=1.50'}]}),
+    options.fig('practice-final-score-tail',{heightZ:true,mean:55,sd:10,unit:'点',quantity:'得点',observations:[{x:70,name:'70点'}],distanceTo:70,shadeFrom:70,areaLabel:'70点以上：約6.68％',title:'得点とzスコアを、同じ位置で読む'}),
     '表の1.5行・0.00列。70点以上は約6.68％。',[133],
     'まず平均55点と標準偏差10点を確認。標準化の式に70、55、10を入れると1.50です。表の1.5行、0.00列で0.06681を読み、100倍すると6.681％。小数第2位までで約6.68％です。図の色は70点に対応するzより右。問題の指定どおり、整数の点数を正規分布で近似し、連続補正は行っていません。',
     'Identify mean 55 and SD 10, then substitute 70 into the symbolic standardization equation to obtain 1.50. Row 1.5 and column 0.00 give 0.06681. Multiply by one hundred to get 6.681 percent, rounded to 6.68 percent. The shaded right tail starts at the z corresponding to 70 points. As instructed, this uses a normal approximation for integer scores without a continuity correction.');
   markExam();
-  solution('⑧ (2)','上位5％の境界を、点数に戻す','平均55点、標準偏差10点、指定のz＝1.65。',zFormula,
+  prioritizeGraphic('scores');
+  solution('⑧ (2)','上位5％の境界を、点数に戻す','平均55点。<br>標準偏差10点、指定のz＝1.65。',zFormula,
     [String.raw`1.65=\frac{x-55}{10}`,String.raw`x-55=1.65\times10=16.5`,String.raw`x=55+16.5=71.5`],
-    options.normal('practice-final-grade-cutoff',1.65,4,{title:'上位約5％の境界：71.5点',ticks:[-3,-2,-1,0,1,1.65,2,3],labels:[{x:1.65,text:'71.5点：z=1.65'}]}),
+    options.fig('practice-final-grade-cutoff',{heightZ:true,mean:55,sd:10,unit:'点',quantity:'得点',observations:[{x:71.5,name:'境界 71.5点'}],distanceTo:71.5,shadeFrom:71.5,areaLabel:'右の面積：約5％',boundaryNote:'整数の得点：S評価は72点以上',title:'z＝1.65を、元の得点に戻す'}),
     '境界は71.5点。得点は整数なので、S評価は72点以上。',[133],
     '今回は割合が先に与えられています。上側5％のzは指定どおり1.65。この数を標準化の式の左に置き、右には未知の点数xを残します。両辺を10倍し、55を足すと71.5点。整数の得点では72点以上が条件を満たします。図の色は連続モデルの71.5点より右です。1.65は指定された近似値で、整数の72点以上が厳密に5％という意味ではありません。',
     'Here the proportion is given first. Use the supplied approximate z of 1.65 for the upper five percent. Put it on the left of the same standardization equation and leave the score x unknown on the right. Multiply both sides by ten and add 55 to obtain 71.5 points. Since scores are integers, the S grade begins at 72. The shading starts at the continuous-model boundary 71.5. Neither the supplied rounded z nor an integer score cutoff implies an exact five percent share.');
   markExam();
+  prioritizeGraphic('scores');
   slides.push(alSlide);mapping.push({...alMapping,slide:slides.length});narration.push({...alNote,page:slides.length});
   if(slides.length!==60)throw Error(`Expected 60 focused slides, got ${slides.length}`);
   const explorationStops=[

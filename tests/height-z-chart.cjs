@@ -15,7 +15,16 @@ const assert=require('node:assert/strict');
   assert(distance,'Mean-to-height bracket uses the actual 8.6 cm distance');
   assert(Math.abs(Number(distance[1])-(90+3.5/7*972))<1e-8);
   assert(Math.abs(Number(distance[2])-x)<1e-8);
-  for(const svg of [robot,adult])for(const line of svg.matchAll(/<line[^>]*y1="([^"]+)"[^>]*y2="([^"]+)"/g)){
+  const scores=[70,71.5].map(value=>heightZChart({mean:55,sd:10,unit:'点',quantity:'得点',observations:[{x:value,name:`${value}点`}],shadeFrom:value,distanceTo:value,boundaryNote:value===71.5?'S評価は72点以上':''}));
+  for(const [i,svg] of scores.entries()){
+    const value=[70,71.5][i],z=(value-55)/10;
+    for(const label of ['25','35','45','55','65','75','85','平均 μ = 55点','1σ = 10点',`平均との差 = ${value-55}点`,`data-shade-from="${value}"`])assert(svg.includes(label));
+    assert(!svg.includes('cm'),'Score charts use points, not height units');
+    const point=Number(svg.match(/<circle cx="([^"]+)"/)[1]);
+    assert(Math.abs(point-(90+(z+3.5)/7*972))<1e-8,'Score and z share exactly the same horizontal position');
+  }
+  assert(scores[1].includes('S評価は72点以上'));
+  for(const svg of [robot,adult,...scores])for(const line of svg.matchAll(/<line[^>]*y1="([^"]+)"[^>]*y2="([^"]+)"/g)){
     const y1=Number(line[1]),y2=Number(line[2]);
     assert(!(Math.min(y1,y2)<410&&Math.max(y1,y2)>354),'Guide lines leave the cm-label band clear');
   }

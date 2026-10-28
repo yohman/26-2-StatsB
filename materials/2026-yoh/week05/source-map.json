@@ -1631,7 +1631,7 @@
     {
       "slide": 58,
       "title": "答え合わせ⑧ (1) · 70点以上の割合",
-      "layout": "worked practice-answer",
+      "layout": "worked practice-answer graph-led",
       "official": "19–26",
       "textbook": "124–125",
       "yoh75": "51–61",
@@ -1669,7 +1669,7 @@
     {
       "slide": 59,
       "title": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
-      "layout": "worked practice-answer",
+      "layout": "worked practice-answer graph-led",
       "official": "19–26",
       "textbook": "124–125",
       "yoh75": "51–61",

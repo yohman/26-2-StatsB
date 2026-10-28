@@ -524,8 +524,8 @@
     {
       "page": 58,
       "title": "答え合わせ⑧ (1) · 70点以上の割合",
-      "ja": "まず平均55点と標準偏差10点を確認。標準化の式に70、55、10を入れると1.50です。表の1.5行、0.00列で0.06681を読み、100倍すると6.681％。小数第2位までで約6.68％です。図の色は70点に対応するzより右。問題の指定どおり、整数の点数を正規分布で近似し、連続補正は行っていません。",
-      "en": "Identify mean 55 and SD 10, then substitute 70 into the symbolic standardization equation to obtain 1.50. Row 1.5 and column 0.00 give 0.06681. Multiply by one hundred to get 6.681 percent, rounded to 6.68 percent. The shaded right tail starts at the z corresponding to 70 points. As instructed, this uses a normal approximation for integer scores without a continuity correction.",
+      "ja": "まず平均55点と標準偏差10点を確認。標準化の式に70、55、10を入れると1.50です。表の1.5行、0.00列で0.06681を読み、100倍すると6.681％。小数第2位までで約6.68％です。図の色は70点に対応するzより右。問題の指定どおり、整数の点数を正規分布で近似し、連続補正は行っていません。 図の上段は元の得点、下段はz。同じ縦線で対応を読みます。55点はz=0、点線の間隔は10点＝標準偏差1個分。青い括弧は1σ、橙の括弧は平均から境界までの点数差です。",
+      "en": "Identify mean 55 and SD 10, then substitute 70 into the symbolic standardization equation to obtain 1.50. Row 1.5 and column 0.00 give 0.06681. Multiply by one hundred to get 6.681 percent, rounded to 6.68 percent. The shaded right tail starts at the z corresponding to 70 points. As instructed, this uses a normal approximation for integer scores without a continuity correction. Read original scores above and z below on aligned axes. The mean 55 maps to zero, and each dotted interval is ten points, or one SD. The blue bracket marks one SD; the orange bracket shows the score distance from the mean to the cutoff.",
       "formulaRef": {
         "pages": "123–125",
         "relation": "application",
@@ -542,8 +542,8 @@
     {
       "page": 59,
       "title": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
-      "ja": "今回は割合が先に与えられています。上側5％のzは指定どおり1.65。この数を標準化の式の左に置き、右には未知の点数xを残します。両辺を10倍し、55を足すと71.5点。整数の得点では72点以上が条件を満たします。図の色は連続モデルの71.5点より右です。1.65は指定された近似値で、整数の72点以上が厳密に5％という意味ではありません。",
-      "en": "Here the proportion is given first. Use the supplied approximate z of 1.65 for the upper five percent. Put it on the left of the same standardization equation and leave the score x unknown on the right. Multiply both sides by ten and add 55 to obtain 71.5 points. Since scores are integers, the S grade begins at 72. The shading starts at the continuous-model boundary 71.5. Neither the supplied rounded z nor an integer score cutoff implies an exact five percent share.",
+      "ja": "今回は割合が先に与えられています。上側5％のzは指定どおり1.65。この数を標準化の式の左に置き、右には未知の点数xを残します。両辺を10倍し、55を足すと71.5点。整数の得点では72点以上が条件を満たします。図の色は連続モデルの71.5点より右です。1.65は指定された近似値で、整数の72点以上が厳密に5％という意味ではありません。 図の上段は元の得点、下段はz。同じ縦線で対応を読みます。55点はz=0、点線の間隔は10点＝標準偏差1個分。青い括弧は1σ、橙の括弧は平均から境界までの点数差です。",
+      "en": "Here the proportion is given first. Use the supplied approximate z of 1.65 for the upper five percent. Put it on the left of the same standardization equation and leave the score x unknown on the right. Multiply both sides by ten and add 55 to obtain 71.5 points. Since scores are integers, the S grade begins at 72. The shading starts at the continuous-model boundary 71.5. Neither the supplied rounded z nor an integer score cutoff implies an exact five percent share. Read original scores above and z below on aligned axes. The mean 55 maps to zero, and each dotted interval is ten points, or one SD. The blue bracket marks one SD; the orange bracket shows the score distance from the mean to the cutoff.",
       "formulaRef": {
         "pages": "123–125",
         "relation": "application",

@@ -128,6 +128,12 @@ assert(!/6\.681|71\.5|72点/.test(exam),'The exam question must not reveal eithe
 assert.equal(sourceMap.slides[56].examSource.question,'問4(1)(2)');
 assert(bodyFor('答え合わせ⑧ (1) · 70点以上の割合').includes('0.06681=6.681'));
 assert(bodyFor('答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す').includes('72点以上'));
+for(const item of sourceMap.slides.filter(s=>s.title.startsWith('答え合わせ⑧'))){
+  assert(item.layout.includes('graph-led'),'Challenge 8 answers prioritize the dual-axis graphic');
+  const svg=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/images/',item.title.includes('(1)')?'practice-final-score-tail.svg':'practice-final-grade-cutoff.svg'),'utf8');
+  assert(svg.includes('得点とzの対応'));
+  assert(svg.includes('1σ = 10点'));
+}
 near(M.upper(1.5),.06681,5e-6);
 near(55+1.65*10,71.5);
 near(M.upper(1.28),.10027,5e-6);
