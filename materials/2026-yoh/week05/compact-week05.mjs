@@ -65,6 +65,12 @@ export function createWeek5CompactStory(options){
   const paired=(title,tex,graphic,after,ids,ja,en)=>add(title,`<div class="worked-copy">\n\n${tex.map(math).join('\n\n')}\n\n</div>\n\n<div class="worked-visual">\n\n${graphic}\n\n</div>\n\n${after||''}`,'worked',ids,ja,en);
 
   const zFormula=String.raw`z=\frac{x-\mu}{\sigma}`;
+  const prioritizeGraphic=()=>{
+    mapping.at(-1).layout+=' graph-led';
+    slides[slides.length-1]=slides.at(-1).replace('worked practice-answer','worked practice-answer graph-led');
+    narration.at(-1).ja+=' 図の上段の目盛は身長cm、下段はz。同じ縦線をたどると対応が読めます。平均の位置はz=0、点線1区間は標準偏差1個分。下の括弧で1σが何cmか確認し、注目する身長の色付きの線をたどろう。';
+    narration.at(-1).en+=' Read centimetres on the upper axis and z on the lower axis at the same horizontal position. The mean aligns with z=0, and each dotted interval is one SD. The bracket states how many centimetres one SD represents. Follow the orange observation lines to read their z-scores.';
+  };
   const practice=(no,title,given,question,ids,ja,en,minutes=3)=>{
     add(`チャレンジ${no}　${title}`,`<div class="pause">自分で解く　${minutes}分</div>\n\n${given}\n\n**${question}**`,'challenge',ids,ja,en);
     mapping.at(-1).practiceFocus='z-scores-and-table';
@@ -192,10 +198,11 @@ export function createWeek5CompactStory(options){
     'No table is needed yet. Distinguish variance from standard deviation and standardize the two heights. Connect the sign of z with being above or below the mean. These practice values are separate from the AL homework.');
   solution('①','標準偏差を出してから、標準化','平均160cm、分散49cm²、身長146cm・167cm。',zFormula,
     [String.raw`\sigma=\sqrt{49}=7`,String.raw`z_1=\frac{146-160}{7}=-2`,String.raw`z_2=\frac{167-160}{7}=1`],
-    options.fig('practice-z-heights',{min:132,max:188,pdf:x=>Math.exp(-.5*((x-160)/7)**2)/(7*Math.sqrt(2*Math.PI)),lo:0,hi:0,mean:160,yMax:.08,ticks:[132,146,160,167,174,188],labels:[{x:146,text:'146cm: z = −2'},{x:167,text:'167cm: z = 1'}],title:'平均から標準偏差何個分、離れている？',xlabel:'身長（cm）'}),
+    options.fig('practice-z-heights',{heightZ:true,mean:160,sd:7,observations:[{x:146,name:'146cm'},{x:167,name:'167cm'}],title:'ロボットの身長：cmとzは、同じ位置'}),
     '146cmは平均より2個分下。167cmは1個分上。zは確率ではなく位置。',[95],
     '分散49の平方根を取って標準偏差7。146から160を引いて7で割ると−2、167なら1です。図で平均より左と右を確認しよう。zの値そのものを百分率にしないことが重要です。',
     'Take the square root of forty-nine to get standard deviation seven. Substituting the first height gives negative two; the second gives positive one. Match these positions to the chart. A z-score describes location, not a probability percentage.');
+  prioritizeGraphic();
   const heightSource='https://www.mhlw.go.jp/content/001742496.pdf#page=2';
   const heightMethod='https://www.mhlw.go.jp/content/001675210.pdf';
   practice('②','自分の身長を、zに直そう',`自分の身長を測るか、分かる値を使う（cm）。\n\n比較対象：日本全国の成人（20歳以上）。平均・標準偏差は全国補正値。\n\n| 区分 / Group | 測定人数 / n | 平均 / Mean | 標準偏差 / SD |\n| :--- | ---: | ---: | ---: |\n| 男性 / Men | 6,041人 | 168.4cm | 5.2cm |\n| 女性 / Women | 7,171人 | 154.9cm | 5.1cm |`,
@@ -206,11 +213,12 @@ export function createWeek5CompactStory(options){
   mapping.at(-1).sources=[heightSource,heightMethod];narration.at(-1).sources=[heightSource,heightMethod];
   solution('②','Yohの177cmを、全国の成人男性と比べる','身長177cm。日本全国の男性20歳以上：平均168.4cm、標準偏差5.2cm（2024年・全国補正値）。',zFormula,
     [String.raw`z=\frac{177-168.4}{5.2}`,String.raw`=\frac{8.6}{5.2}=1.653846\ldots\approx+1.65`],
-    options.fig('practice-personal-height',{min:145,max:190,pdf:x=>probability.normalPdf(x,168.4,5.2),lo:0,hi:0,mean:168.4,ticks:[150,160,168.4,180,190],labels:[{x:177,text:'Yoh 177cm: z ≈ +1.65'}],title:'日本全国の男性20歳以上 · 2024年',xlabel:'身長（cm）· 曲線は模式図。実測分布ではない'}),
+    options.fig('practice-personal-height',{heightZ:true,mean:168.4,sd:5.2,observations:[{x:177,name:'Yoh 177cm'}],title:'日本全国の男性20歳以上 · 2024年',schematic:true}),
     `成人男性の平均より、標準偏差約1.65個分上。1.65％ではない。<br><small class="book-note"><a href="${heightSource}">厚生労働省・2024年調査 第14表 p.102（20歳以上・全国補正値）</a></small>`,[95],
     `Yohの身長177cmを、日本全国の男性20歳以上という基準と比べます。2024年の全国補正値は平均168.4cm、標準偏差5.2cm。177から168.4を引くと8.6cm、それを5.2で割ると1.653846…なので約+1.65です。基準の平均より標準偏差約1.65個分上という位置で、1.65％という確率ではありません。高齢者を含む成人全体との比較で、20代だけの比較ではありません。曲線は平均と標準偏差を使った位置の説明用の模式図で、実測ヒストグラムではありません。年齢の混合した実際の身長分布が完全な正規分布とは限らないため、この図から正確な百分位を読みません。表：${heightSource} 方法：${heightMethod}`,
     `Compare Yoh's 177 cm with men aged 20 and over nationwide. The 2024 nationally adjusted reference mean is 168.4 cm and SD is 5.2 cm. Subtract to obtain 8.6 cm, then divide by 5.2: z is 1.653846…, approximately +1.65. This is location in reference SD units, not 1.65 percent. The comparison includes older adults rather than only people in their twenties. The normal-shaped curve is a schematic using the reported mean and SD, not the observed distribution. Because mixed-age adult heights need not be perfectly normal, do not infer an exact percentile from this diagram. Table: ${heightSource} Methods: ${heightMethod}`);
   mapping.at(-1).sources=[heightSource,heightMethod];narration.at(-1).sources=[heightSource,heightMethod];
+  prioritizeGraphic();
   keep(109);
   add('この表は、右側の面積',`${math(String.raw`\Pr(Z>z)`)}\n\n${figure(111)}\n\n${options.tableLink}`,'model-visual',[110,111,112],
     '使うのは上側確率の表です。zより右の色の面積を読みます。別の種類の表では意味が違うので、表の小さな図や説明を先に確認しよう。','Our table reports upper-tail probability: the shaded area to the right of z. Other tables use different conventions, so check the table’s diagram first.');
@@ -302,5 +310,6 @@ section.visual-link{padding:34px 60px 45px}section.visual-link h2{font-size:43px
 section.worked{display:grid;grid-template-columns:1.1fr 1fr;grid-template-rows:auto 1fr auto;gap:14px 26px;padding:45px 55px 55px;text-align:left;align-content:center;align-items:center}section.worked h2{grid-column:1/-1;font-size:43px;margin:0 0 8px}section.worked .worked-copy{min-width:0}section.worked .worked-copy .katex-display{font-size:27px;text-align:left;margin:26px 0}section.worked .worked-visual{min-width:0}section.worked img{width:100%;height:320px;object-fit:contain}section.worked>p{grid-column:1/-1;font-size:22px;margin:0}section.worked .worked-visual p{margin:0}
 section.worked a,section.visual-link a,section.model-visual a{display:inline-block;background:#176d82;color:white;text-decoration:none;border-radius:7px;padding:8px 19px;font-size:23px;font-weight:700}section.model-visual a{font-size:21px;padding:7px 17px}
 section .formula-ref{position:absolute;top:13px;right:32px;max-width:1170px;font-size:17px;color:#176d82;font-weight:500;line-height:1.25}section.practice-answer{padding-top:65px}section.practice-answer .given{font-size:21px;line-height:1.6;margin:0 0 12px}section.practice-answer .step-label{font-size:18px;color:#176d82;margin:6px 0}section.practice-answer .worked-copy .katex-display{font-size:22px;margin:12px 0}section.practice-answer .worked-copy{align-self:center}section .book-note{font-size:19px;color:#176d82}section.queue-model .book-note{color:#176d82}section.practice-answer .katex-display>.katex{text-align:left}
+section.worked.practice-answer.graph-led.has-stat-terms{grid-template-columns:minmax(0,.82fr) minmax(0,1.75fr);padding:48px 45px 108px;gap:10px 20px}section.graph-led h2{font-size:35px}section.graph-led .given{font-size:18px;line-height:1.6}section.graph-led .worked-copy .katex-display{font-size:20px;margin:10px 0}section.graph-led .worked-visual img{height:395px;max-height:none}section.graph-led>p{font-size:21px}section.graph-led .step-label{font-size:17px}
 ${terminologyStyle}
 </style>`);

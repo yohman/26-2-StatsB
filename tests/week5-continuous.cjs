@@ -59,7 +59,8 @@ assert(yoh.includes('\\frac{177-168.4}{5.2}'));
 assert(yoh.includes('1.653846'));
 near((177-168.4)/5.2,1.653846153846,1e-10);
 const heightChart=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/images/practice-personal-height.svg'),'utf8');
-for(const label of ['男性20歳以上','2024','168.4','177cm: z ≈ +1.65','実測分布ではない'])assert(heightChart.includes(label));
+for(const label of ['男性20歳以上','2024','168.4','Yoh 177cm','はz=1.65','1σ = 5.2cm','実測分布ではない'])assert(heightChart.includes(label));
+for(const title of ['答え合わせ① · 標準偏差を出してから、標準化','答え合わせ② · Yohの177cmを、全国の成人男性と比べる'])assert(sourceMap.slides.find(s=>s.title===title).layout.includes('graph-led'));
 for(const item of sourceMap.slides.filter(s=>s.practiceAnswer)){
   const body=slideBodies[item.slide-1];
   for(const label of ['① 与えられた条件','② 公式','③ 代入','④ 答え'])assert(body.includes(label));

@@ -876,7 +876,7 @@
     {
       "slide": 35,
       "title": "答え合わせ① · 標準偏差を出してから、標準化",
-      "layout": "worked practice-answer",
+      "layout": "worked practice-answer graph-led",
       "official": "14–18",
       "textbook": "122–123",
       "yoh75": "34–43",
@@ -939,7 +939,7 @@
     {
       "slide": 37,
       "title": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
-      "layout": "worked practice-answer",
+      "layout": "worked practice-answer graph-led",
       "official": "14–18",
       "textbook": "122–123",
       "yoh75": "34–43",

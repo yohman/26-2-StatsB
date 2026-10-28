@@ -291,8 +291,8 @@
     {
       "page": 35,
       "title": "答え合わせ① · 標準偏差を出してから、標準化",
-      "ja": "分散49の平方根を取って標準偏差7。146から160を引いて7で割ると−2、167なら1です。図で平均より左と右を確認しよう。zの値そのものを百分率にしないことが重要です。",
-      "en": "Take the square root of forty-nine to get standard deviation seven. Substituting the first height gives negative two; the second gives positive one. Match these positions to the chart. A z-score describes location, not a probability percentage.",
+      "ja": "分散49の平方根を取って標準偏差7。146から160を引いて7で割ると−2、167なら1です。図で平均より左と右を確認しよう。zの値そのものを百分率にしないことが重要です。 図の上段の目盛は身長cm、下段はz。同じ縦線をたどると対応が読めます。平均の位置はz=0、点線1区間は標準偏差1個分。下の括弧で1σが何cmか確認し、注目する身長の色付きの線をたどろう。",
+      "en": "Take the square root of forty-nine to get standard deviation seven. Substituting the first height gives negative two; the second gives positive one. Match these positions to the chart. A z-score describes location, not a probability percentage. Read centimetres on the upper axis and z on the lower axis at the same horizontal position. The mean aligns with z=0, and each dotted interval is one SD. The bracket states how many centimetres one SD represents. Follow the orange observation lines to read their z-scores.",
       "formulaRef": {
         "pages": "123",
         "relation": "application",
@@ -312,8 +312,8 @@
     {
       "page": 37,
       "title": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
-      "ja": "Yohの身長177cmを、日本全国の男性20歳以上という基準と比べます。2024年の全国補正値は平均168.4cm、標準偏差5.2cm。177から168.4を引くと8.6cm、それを5.2で割ると1.653846…なので約+1.65です。基準の平均より標準偏差約1.65個分上という位置で、1.65％という確率ではありません。高齢者を含む成人全体との比較で、20代だけの比較ではありません。曲線は平均と標準偏差を使った位置の説明用の模式図で、実測ヒストグラムではありません。年齢の混合した実際の身長分布が完全な正規分布とは限らないため、この図から正確な百分位を読みません。表：https://www.mhlw.go.jp/content/001742496.pdf#page=2 方法：https://www.mhlw.go.jp/content/001675210.pdf",
-      "en": "Compare Yoh's 177 cm with men aged 20 and over nationwide. The 2024 nationally adjusted reference mean is 168.4 cm and SD is 5.2 cm. Subtract to obtain 8.6 cm, then divide by 5.2: z is 1.653846…, approximately +1.65. This is location in reference SD units, not 1.65 percent. The comparison includes older adults rather than only people in their twenties. The normal-shaped curve is a schematic using the reported mean and SD, not the observed distribution. Because mixed-age adult heights need not be perfectly normal, do not infer an exact percentile from this diagram. Table: https://www.mhlw.go.jp/content/001742496.pdf#page=2 Methods: https://www.mhlw.go.jp/content/001675210.pdf",
+      "ja": "Yohの身長177cmを、日本全国の男性20歳以上という基準と比べます。2024年の全国補正値は平均168.4cm、標準偏差5.2cm。177から168.4を引くと8.6cm、それを5.2で割ると1.653846…なので約+1.65です。基準の平均より標準偏差約1.65個分上という位置で、1.65％という確率ではありません。高齢者を含む成人全体との比較で、20代だけの比較ではありません。曲線は平均と標準偏差を使った位置の説明用の模式図で、実測ヒストグラムではありません。年齢の混合した実際の身長分布が完全な正規分布とは限らないため、この図から正確な百分位を読みません。表：https://www.mhlw.go.jp/content/001742496.pdf#page=2 方法：https://www.mhlw.go.jp/content/001675210.pdf 図の上段の目盛は身長cm、下段はz。同じ縦線をたどると対応が読めます。平均の位置はz=0、点線1区間は標準偏差1個分。下の括弧で1σが何cmか確認し、注目する身長の色付きの線をたどろう。",
+      "en": "Compare Yoh's 177 cm with men aged 20 and over nationwide. The 2024 nationally adjusted reference mean is 168.4 cm and SD is 5.2 cm. Subtract to obtain 8.6 cm, then divide by 5.2: z is 1.653846…, approximately +1.65. This is location in reference SD units, not 1.65 percent. The comparison includes older adults rather than only people in their twenties. The normal-shaped curve is a schematic using the reported mean and SD, not the observed distribution. Because mixed-age adult heights need not be perfectly normal, do not infer an exact percentile from this diagram. Table: https://www.mhlw.go.jp/content/001742496.pdf#page=2 Methods: https://www.mhlw.go.jp/content/001675210.pdf Read centimetres on the upper axis and z on the lower axis at the same horizontal position. The mean aligns with z=0, and each dotted interval is one SD. The bracket states how many centimetres one SD represents. Follow the orange observation lines to read their z-scores.",
       "formulaRef": {
         "pages": "123",
         "relation": "application",
