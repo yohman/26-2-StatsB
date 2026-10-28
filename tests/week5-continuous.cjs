@@ -34,6 +34,17 @@ const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
 assert.equal(slideCount,60);
+const explorationStops=sourceMap.slides.filter(s=>s.exploration);
+assert.deepEqual(explorationStops.map(s=>[s.slide,s.exploration.id,s.exploration.order]),[[4,'stopwatch',1],[33,'normal',2],[43,'table',3]]);
+const siteOrder=fs.readFileSync(path.join(root,'assets/stats-site.js'),'utf8').match(/\$\{\['stopwatch','normal','table'\]\.map/);
+assert(siteOrder,'Exploration tabs must follow their first appearance in the lecture');
+for(const stop of explorationStops){
+  const body=slideBodies[stop.slide-1];
+  assert(body.includes(`activity=w5-${stop.exploration.id}`));
+  assert(body.includes(String(stop.exploration.order).padStart(2,'0')+' やってみよう！'));
+  assert(body.includes('target="_blank"'));
+  assert.equal(slideBodies.findIndex(s=>s.includes(`activity=w5-${stop.exploration.id}`))+1,stop.slide,'Tab ordering follows the first link in the lecture');
+}
 const bodyFor=title=>{
   const item=sourceMap.slides.find(s=>s.title===title);
   assert(item,`Missing slide: ${title}`);
@@ -162,6 +173,8 @@ console.log('Week 5: density/CDF/moments/normal-table mathematics, fixed model s
     if(isChallengeText(text))challenges.push(i);
     assert.ok(!text.includes('$F('));assert.ok(!text.includes('**'));
     const annotations=await page.getAnnotations();
+    const stop=sourceMap.slides[i-1].exploration;
+    if(stop)assert(annotations.some(a=>a.url?.includes(`activity=w5-${stop.id}`)),`Exploration link must be clickable on page ${i}`);
     if(sourceMap.slides[i-1].tableLookup)assert(annotations.some(a=>a.url?.includes('normal-upper-tail-table.html')),`Table link must be clickable on page ${i}`);
     for(const a of annotations)if(a.url)destinations.push(a.url);
   }

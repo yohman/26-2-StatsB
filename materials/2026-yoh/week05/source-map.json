@@ -73,6 +73,12 @@
       "sourceBeats": [],
       "termKeys": [],
       "sources": [],
+      "exploration": {
+        "slide": 4,
+        "id": "stopwatch",
+        "order": 1,
+        "label": "1秒で止めよう"
+      },
       "terms": []
     },
     {
@@ -835,6 +841,12 @@
         "relation": "application",
         "label": "教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18"
       },
+      "exploration": {
+        "slide": 33,
+        "id": "normal",
+        "order": 2,
+        "label": "標準偏差とzスコア"
+      },
       "terms": [
         {
           "ja": "標準化",
@@ -1131,6 +1143,12 @@
       "formulaRef": {
         "pages": "124",
         "label": "教科書 p.124 · 上側確率と表の読み方"
+      },
+      "exploration": {
+        "slide": 43,
+        "id": "table",
+        "order": 3,
+        "label": "正規分布表と面積"
       },
       "tableLookup": true,
       "terms": [

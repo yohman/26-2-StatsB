@@ -310,7 +310,22 @@ export function createWeek5CompactStory(options){
   markExam();
   slides.push(alSlide);mapping.push({...alMapping,slide:slides.length});narration.push({...alNote,page:slides.length});
   if(slides.length!==60)throw Error(`Expected 60 focused slides, got ${slides.length}`);
+  const explorationStops=[
+    {slide:4,id:'stopwatch',order:1,label:'1秒で止めよう'},
+    {slide:33,id:'normal',order:2,label:'標準偏差とzスコア'},
+    {slide:43,id:'table',order:3,label:'正規分布表と面積'},
+  ];
   slides.forEach((slide,i)=>{
+    // The three exploration tabs follow their first invitation in the lecture.
+    slide=slide.replace(options.tryIt('normal'),'').replace(options.tryIt('table'),'');
+    const stop=explorationStops.find(item=>item.slide===i+1);
+    if(stop){
+      mapping[i].exploration=stop;
+      const url=`https://yohman.github.io/26-2-StatsB/agenda.html?p&activity=w5-${stop.id}#week-05`;
+      if(stop.id==='stopwatch'){
+        slide=slide.replace(/<a href="([^"]*activity=w5-stopwatch#week-05)">やってみよう！<\/a>/,'<a href="$1" target="_blank" rel="noopener noreferrer">01 やってみよう！</a>');
+      }else slide+='\n\n<a class="explore-slide-link" href="'+url+'" target="_blank" rel="noopener noreferrer">'+String(stop.order).padStart(2,'0')+' やってみよう！ · '+(stop.id==='normal'?'標準化':'分布表')+'</a>';
+    }
     if(i>=38&&i<59){
       const tableUrl=options.tableLink.match(/\]\(([^)]+)\)/)[1];
       if(slide.includes('normal-upper-tail-table.html')){
@@ -326,6 +341,7 @@ export function createWeek5CompactStory(options){
 }
 
 export const compactStyle=storyStyle.replace('</style>',`
+section.has-stat-terms a.explore-slide-link{position:absolute;bottom:48px;left:32px;font-size:20px;line-height:1.4;padding:8px 14px;color:#fff;background:#176d82;border-radius:6px;text-decoration:none;font-weight:700}
 section.has-stat-terms a.lookup-slide-link{position:absolute;bottom:52px;right:32px;font-size:15px;font-weight:600;color:#176d82;background:none;padding:0;border-radius:0;text-decoration:underline;line-height:1.25}
 section:has(a.lookup-slide-link) .formula-ref{top:28px}
 section.challenge .final-exam-note{font-size:20px;line-height:1.5;margin:18px 0}
