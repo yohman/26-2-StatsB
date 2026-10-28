@@ -176,6 +176,14 @@ export function createWeek5CompactStory(options){
     '教科書p.122にある密度です。今日はこの式に数を入れて積分することはしません。平均と分散が変わると曲線が変わること、そして毎回積分する代わりに標準化して一つの表を使うことへつなげます。',
     'This density appears on textbook page 122. We will not evaluate its integral by hand. It explains why mean and variance determine the curve, and motivates standardizing so a single table can replace repeated integration.');
   keep(95,'毎回あの密度を積分する代わりに、中心を0、標準偏差を1にそろえます。平均との差を標準偏差で割ると「中心から何個ぶん？」という位置になります。もとが正規なら、Zは標準正規分布です。','Instead of integrating each normal density afresh, put its centre at zero and its standard deviation at one. The formula measures distance from the mean in standard deviation units. Normal X gives standard normal Z.');
+  paired('標準化すると、分布の平均は0',[
+    String.raw`x=\mu\quad\Rightarrow\quad z=\frac{\mu-\mu}{\sigma}=0`,
+    String.raw`E(Z)=0\qquad\operatorname{Var}(Z)=1`,
+  ],options.normal('standardized-mean-zero',0,0,{title:'標準化後：平均0、標準偏差1',labels:[{x:1,text:'z = +1'}]}),
+    '元の平均の位置が、z＝0になる。\n\n**平均が0。個々のzは、プラスにもマイナスにもなる。**',[95],
+    'ここは大事。標準化したZの分布の平均は0、標準偏差は1です。元の平均μを引くので、平均との差が0の位置、つまり元の平均がz=0になります。すべての値が0になるのではありません。平均より上の値は正、下は負です。元の変数が正規分布なら、標準化後は平均0、分散1の標準正規分布になります。標準偏差が正で有限である場合に標準化でき、正規分布以外でも平均0・分散1にそろえられますが、形まで正規になるとは限りません。',
+    'The standardized variable Z has mean zero and standard deviation one. Subtracting the original mean moves its location to z=0, as the substitution shows. Individual scores can still be positive or negative; zero is the distribution mean, not every observation. If X is normal, Z is standard normal. More generally, a variable with finite positive variance can be standardized to mean zero and variance one without becoming normally distributed.');
+  mapping.at(-1).termKeys=['standardization','mean','sd'];
   paired('60点は、標準偏差1個ぶん上',[String.raw`z=\frac{x-\mu}{\sigma}`,String.raw`z=\frac{60-50}{10}=1`],figure(106),`仮定：平均50点、標準偏差10点の正規分布。\n\n${options.tryIt('normal')}`,[98,99,100,101,102,103,104,105,106,107,108],
     '授業用に平均50、標準偏差10の正規モデルを考えます。60点を標準化するとz=1。これは100％ではなく、標準偏差一つぶん上という位置です。平均や標準偏差を変えて、同じ60点を比べてみよう。',
     'For a hypothetical normal score model with mean fifty and standard deviation ten, a score of sixty gives z = 1. That describes location, not 100 percent probability. Explore how the same score changes meaning under different parameters.');
@@ -268,7 +276,7 @@ export function createWeek5CompactStory(options){
   add('ここからは、ALに自分で取り組もう。',`標準偏差を確認。zに直す。表を読み、面積を選ぶ。\n\n[ALワークシートを開く](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=assets%2Fworksheet-previews%2Fw05%2Findex.html&title=AL&week=W05&source=weeks%2F05-continuous-distributions-i%2F05_AL用ワークシート.xlsx)\n\n${options.tableLink}\n\n各セルの答えは示しません。`,'statement',[143,144],
     '欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。',
     'Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks.');
-  if(slides.length!==56)throw Error(`Expected 56 focused slides, got ${slides.length}`);
+  if(slides.length!==57)throw Error(`Expected 57 focused slides, got ${slides.length}`);
   slides.forEach((slide,i)=>{
     const keys=mapping[i].termKeys;
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));

@@ -1,6 +1,6 @@
 {
   "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
-  "pacing": "56 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with seven interleaved z-score/table challenges, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
+  "pacing": "57 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with seven interleaved z-score/table challenges, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
   "decisions": [
     {
       "retain": "Separate race media and stopwatch beats; density then shaded area; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
@@ -771,6 +771,42 @@
     },
     {
       "slide": 32,
+      "title": "標準化すると、分布の平均は0",
+      "layout": "worked",
+      "official": "14–18",
+      "textbook": "122–123",
+      "yoh75": "34–43",
+      "yoh109": "34–44",
+      "sourceBeats": [
+        95
+      ],
+      "termKeys": [
+        "standardization",
+        "mean",
+        "sd"
+      ],
+      "formulaRef": {
+        "pages": "123",
+        "relation": "application",
+        "label": "教科書 p.123 · 標準化の考え方をXに適用 ／ 津村18"
+      },
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "平均",
+          "en": "Mean"
+        },
+        {
+          "ja": "標準偏差",
+          "en": "Standard deviation"
+        }
+      ]
+    },
+    {
+      "slide": 33,
       "title": "60点は、標準偏差1個ぶん上",
       "layout": "worked",
       "official": "14–18",
@@ -811,7 +847,7 @@
       ]
     },
     {
-      "slide": 33,
+      "slide": 34,
       "title": "チャレンジ①　ロボットの身長をzに直す",
       "layout": "challenge",
       "official": "14–18",
@@ -838,7 +874,7 @@
       ]
     },
     {
-      "slide": 34,
+      "slide": 35,
       "title": "答え合わせ① · 標準偏差を出してから、標準化",
       "layout": "worked practice-answer",
       "official": "14–18",
@@ -870,7 +906,7 @@
       ]
     },
     {
-      "slide": 35,
+      "slide": 36,
       "title": "チャレンジ②　自分の身長を、zに直そう",
       "layout": "challenge",
       "official": "14–18",
@@ -900,7 +936,7 @@
       ]
     },
     {
-      "slide": 36,
+      "slide": 37,
       "title": "答え合わせ② · Yohの177cmを、同じ基準で比べる",
       "layout": "worked practice-answer",
       "official": "14–18",
@@ -935,7 +971,7 @@
       ]
     },
     {
-      "slide": 37,
+      "slide": 38,
       "title": "教科書 · 第2章 第2節",
       "layout": "book-divider",
       "official": "19–26",
@@ -961,7 +997,7 @@
       ]
     },
     {
-      "slide": 38,
+      "slide": 39,
       "title": "この表は、右側の面積",
       "layout": "model-visual",
       "official": "19–26",
@@ -993,7 +1029,7 @@
       ]
     },
     {
-      "slide": 39,
+      "slide": 40,
       "title": "まず、1.9の行",
       "layout": "lookup stage-1",
       "official": "19–26",
@@ -1019,7 +1055,7 @@
       ]
     },
     {
-      "slide": 40,
+      "slide": 41,
       "title": "次に、0.06の列",
       "layout": "lookup stage-2",
       "official": "19–26",
@@ -1045,7 +1081,7 @@
       ]
     },
     {
-      "slide": 41,
+      "slide": 42,
       "title": "交点は、0.02500",
       "layout": "lookup stage-3",
       "official": "19–26",
@@ -1071,7 +1107,7 @@
       ]
     },
     {
-      "slide": 42,
+      "slide": 43,
       "title": "1.96より右は、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1102,7 +1138,7 @@
       ]
     },
     {
-      "slide": 43,
+      "slide": 44,
       "title": "チャレンジ③　行と列を、自分で探す",
       "layout": "challenge",
       "official": "19–26",
@@ -1133,7 +1169,7 @@
       ]
     },
     {
-      "slide": 44,
+      "slide": 45,
       "title": "答え合わせ③ · 1.2の行、0.08の列",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1164,7 +1200,7 @@
       ]
     },
     {
-      "slide": 45,
+      "slide": 46,
       "title": "−1.96より左も、2.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1196,7 +1232,7 @@
       ]
     },
     {
-      "slide": 46,
+      "slide": 47,
       "title": "チャレンジ④　マイナスのzなら、どちら側？",
       "layout": "challenge",
       "official": "19–26",
@@ -1227,7 +1263,7 @@
       ]
     },
     {
-      "slide": 47,
+      "slide": 48,
       "title": "答え合わせ④ · 左右対称を使う",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1258,7 +1294,7 @@
       ]
     },
     {
-      "slide": 48,
+      "slide": 49,
       "title": "＋1.96より左は、97.5％",
       "layout": "worked",
       "official": "19–26",
@@ -1292,7 +1328,7 @@
       ]
     },
     {
-      "slide": 49,
+      "slide": 50,
       "title": "チャレンジ⑤　表の値が、そのまま答えになる？",
       "layout": "challenge",
       "official": "19–26",
@@ -1323,7 +1359,7 @@
       ]
     },
     {
-      "slide": 50,
+      "slide": 51,
       "title": "答え合わせ⑤ · 全体1から、右の尾を引く",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1354,7 +1390,7 @@
       ]
     },
     {
-      "slide": 51,
+      "slide": 52,
       "title": "真ん中は、両方の尾を引く",
       "layout": "worked",
       "official": "19–26",
@@ -1389,7 +1425,7 @@
       ]
     },
     {
-      "slide": 52,
+      "slide": 53,
       "title": "チャレンジ⑥　左右の幅が違う区間",
       "layout": "challenge",
       "official": "19–26",
@@ -1421,7 +1457,7 @@
       ]
     },
     {
-      "slide": 53,
+      "slide": 54,
       "title": "答え合わせ⑥ · 異なる二つの尾を引く",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1453,7 +1489,7 @@
       ]
     },
     {
-      "slide": 54,
+      "slide": 55,
       "title": "チャレンジ⑦　70点以上は、何％？",
       "layout": "challenge",
       "official": "19–26",
@@ -1485,7 +1521,7 @@
       ]
     },
     {
-      "slide": 55,
+      "slide": 56,
       "title": "答え合わせ⑦ · 元の点数から、上側確率へ",
       "layout": "worked practice-answer",
       "official": "19–26",
@@ -1517,7 +1553,7 @@
       ]
     },
     {
-      "slide": 56,
+      "slide": 57,
       "title": "ここからは、ALに自分で取り組もう。",
       "layout": "statement",
       "official": "19–26",

@@ -33,7 +33,7 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal(slideCount,56);
+assert.equal(slideCount,57);
 const bodyFor=title=>{
   const item=sourceMap.slides.find(s=>s.title===title);
   assert(item,`Missing slide: ${title}`);
@@ -41,7 +41,7 @@ const bodyFor=title=>{
 };
 const challenges=sourceMap.slides.filter(s=>s.layout==='challenge');
 assert.equal(challenges.length,7);
-assert.deepEqual(challenges.map(s=>s.slide),[33,35,43,46,49,52,54]);
+assert.deepEqual(challenges.map(s=>s.slide),[34,36,44,47,50,53,55]);
 for(const item of challenges){
   assert.equal(item.practiceFocus,'z-scores-and-table');
   assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
@@ -89,6 +89,10 @@ const zSource=sourceMap.slides.find(s=>s.title==='標準化の公式').formulaRe
 assert.equal(zSource.pages,'123');
 assert.equal(zSource.relation,'application','Do not present the individual-value application as a verbatim sample-mean formula');
 assert(bodyFor('標準化の公式').includes('津村18'));
+const centered=bodyFor('標準化すると、分布の平均は0');
+assert(centered.includes('E(Z)=0'));
+assert(centered.includes('\\frac{\\mu-\\mu}{\\sigma}=0'));
+assert(centered.includes('standardized-mean-zero'));
 assert(!/Q\(|cx\^2|8000|rectangle-midpoint|\\operatorname\{erf\}|\\bar X/.test(deck),'No extra notation, density-fitting or sample-mean detour');
 assert(!deck.includes('\\frac1{20}'));
 assert(!deck.includes('\\frac1{12}'));
