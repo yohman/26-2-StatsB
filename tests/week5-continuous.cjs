@@ -75,6 +75,10 @@ for(const item of sourceMap.slides.slice(20,24)){
 }
 for(const item of sourceMap.slides){
   const body=slideBodies[item.slide-1];
+  if(item.tableLookup){
+    assert(body.includes('normal-upper-tail-table.html'));
+    assert(body.includes('target="_blank"'));
+  }
   if(/\$/.test(body)){
     assert(item.formulaRef?.pages,`Missing textbook page on ${item.title}`);
     assert(body.includes('class="formula-ref"'));
@@ -157,7 +161,9 @@ console.log('Week 5: density/CDF/moments/normal-table mathematics, fixed model s
     const page=await pdf.getPage(i),text=(await page.getTextContent()).items.map(x=>x.str).join('');
     if(isChallengeText(text))challenges.push(i);
     assert.ok(!text.includes('$F('));assert.ok(!text.includes('**'));
-    for(const a of await page.getAnnotations())if(a.url)destinations.push(a.url);
+    const annotations=await page.getAnnotations();
+    if(sourceMap.slides[i-1].tableLookup)assert(annotations.some(a=>a.url?.includes('normal-upper-tail-table.html')),`Table link must be clickable on page ${i}`);
+    for(const a of annotations)if(a.url)destinations.push(a.url);
   }
   assert.deepEqual(challenges,sourceMap.slides.filter(s=>s.layout==='challenge').map(s=>s.slide));
   for(const key of ['normal','table'])assert.ok(destinations.some(d=>d.includes(`activity=w5-${key}`)));

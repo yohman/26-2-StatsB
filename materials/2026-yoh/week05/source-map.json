@@ -1019,6 +1019,7 @@
         "pages": "124",
         "label": "教科書 p.124 · 上側確率と表の読み方"
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準正規分布表",
@@ -1045,6 +1046,7 @@
         "normalTable",
         "upperTail"
       ],
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準正規分布表",
@@ -1071,6 +1073,7 @@
         "normalTable",
         "upperTail"
       ],
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準正規分布表",
@@ -1097,6 +1100,7 @@
         "normalTable",
         "upperTail"
       ],
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準正規分布表",
@@ -1128,6 +1132,7 @@
         "pages": "124",
         "label": "教科書 p.124 · 上側確率と表の読み方"
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準正規分布表",
@@ -1159,6 +1164,7 @@
         "label": "教科書 p.124 · 上側確率と表の読み方"
       },
       "practiceFocus": "z-scores-and-table",
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準正規分布表",
@@ -1190,6 +1196,7 @@
         "label": "教科書 p.124 · 上側確率と表の読み方"
       },
       "practiceAnswer": true,
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準正規分布表",
@@ -1222,6 +1229,7 @@
         "pages": "124–125",
         "label": "教科書 p.124–125 · 左右対称・全体から引く"
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "下側確率",
@@ -1253,6 +1261,7 @@
         "label": "教科書 p.124–125 · 左右対称・全体から引く"
       },
       "practiceFocus": "z-scores-and-table",
+      "tableLookup": true,
       "terms": [
         {
           "ja": "下側確率",
@@ -1284,6 +1293,7 @@
         "label": "教科書 p.124–125 · 左右対称・全体から引く"
       },
       "practiceAnswer": true,
+      "tableLookup": true,
       "terms": [
         {
           "ja": "下側確率",
@@ -1318,6 +1328,7 @@
         "pages": "124–125",
         "label": "教科書 p.124–125 · 左右対称・全体から引く"
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "下側確率",
@@ -1349,6 +1360,7 @@
         "label": "教科書 p.124–125 · 左右対称・全体から引く"
       },
       "practiceFocus": "z-scores-and-table",
+      "tableLookup": true,
       "terms": [
         {
           "ja": "下側確率",
@@ -1380,6 +1392,7 @@
         "label": "教科書 p.124–125 · 左右対称・全体から引く"
       },
       "practiceAnswer": true,
+      "tableLookup": true,
       "terms": [
         {
           "ja": "下側確率",
@@ -1415,6 +1428,7 @@
         "relation": "application",
         "label": "教科書 p.122・125 · 区間の差と両側の尾"
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "中央の区間確率",
@@ -1447,6 +1461,7 @@
         "label": "教科書 p.122・125 · 区間の差と両側の尾"
       },
       "practiceFocus": "z-scores-and-table",
+      "tableLookup": true,
       "terms": [
         {
           "ja": "中央の区間確率",
@@ -1479,6 +1494,7 @@
         "label": "教科書 p.122・125 · 区間の差と両側の尾"
       },
       "practiceAnswer": true,
+      "tableLookup": true,
       "terms": [
         {
           "ja": "中央の区間確率",
@@ -1511,6 +1527,7 @@
         "label": "教科書 p.123–125 · 標準化と表の例への適用"
       },
       "practiceFocus": "z-scores-and-table",
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準化",
@@ -1543,6 +1560,7 @@
         "label": "教科書 p.123–125 · 標準化と表の例への適用"
       },
       "practiceAnswer": true,
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準化",
@@ -1580,6 +1598,7 @@
         "question": "問4(1)(2)",
         "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準化",
@@ -1617,6 +1636,7 @@
         "question": "問4(1)(2)",
         "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準化",
@@ -1654,6 +1674,7 @@
         "question": "問4(1)(2)",
         "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
       },
+      "tableLookup": true,
       "terms": [
         {
           "ja": "標準化",

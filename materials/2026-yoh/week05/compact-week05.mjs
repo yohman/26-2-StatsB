@@ -311,14 +311,23 @@ export function createWeek5CompactStory(options){
   slides.push(alSlide);mapping.push({...alMapping,slide:slides.length});narration.push({...alNote,page:slides.length});
   if(slides.length!==60)throw Error(`Expected 60 focused slides, got ${slides.length}`);
   slides.forEach((slide,i)=>{
+    if(i>=38&&i<59){
+      const tableUrl=options.tableLink.match(/\]\(([^)]+)\)/)[1];
+      if(slide.includes('normal-upper-tail-table.html')){
+        slide=slide.replace(options.tableLink,'<a href="'+tableUrl+'" target="_blank" rel="noopener noreferrer">標準正規分布表を開く ↗</a>');
+      }else slide+='\n\n<a class="lookup-slide-link" href="'+tableUrl+'" target="_blank" rel="noopener noreferrer">正規分布表を開く / Open table ↗</a>';
+      mapping[i].tableLookup=true;
+    }
     const keys=mapping[i].termKeys;
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
-    if(keys.length)slides[i]=annotateJapaneseTerms(slide).replace(/<!-- _class: (.*?) -->/,'<!-- _class: $1 has-stat-terms -->')+'\n\n'+terminology(keys);
+    slides[i]=keys.length?annotateJapaneseTerms(slide).replace(/<!-- _class: (.*?) -->/,'<!-- _class: $1 has-stat-terms -->')+'\n\n'+terminology(keys):slide;
   });
   return {slides,mapping,notes:{version:1,deck:'materials/2026-yoh/week05/w5.pdf',slides:narration}};
 }
 
 export const compactStyle=storyStyle.replace('</style>',`
+section.has-stat-terms a.lookup-slide-link{position:absolute;bottom:52px;right:32px;font-size:15px;font-weight:600;color:#176d82;background:none;padding:0;border-radius:0;text-decoration:underline;line-height:1.25}
+section:has(a.lookup-slide-link) .formula-ref{top:28px}
 section.challenge .final-exam-note{font-size:20px;line-height:1.5;margin:18px 0}
 section.robot-height-answer .worked-copy .katex-display{font-size:23px;margin:18px 0}section.robot-height-answer .given{font-size:22px;margin:0 0 12px}section.robot-height-answer .lookup-note{font-size:20px;line-height:1.6;margin:8px 0}section.robot-height-answer .worked-visual img{height:290px}
 section.queue-story img{object-position:center center}section.race-media.queue-history,section.race-media.queue-bowl{background:#fff}section.race-media.queue-history img,section.race-media.queue-portrait img,section.race-media.queue-bowl img{object-fit:contain}section.queue-model p{margin:5px 0}section.queue-model small{font-size:19px;color:#687b84}section.model-visual.queue-model.has-stat-terms img{height:260px}section.queue-model>p:last-of-type{position:absolute;bottom:120px;left:65px;right:65px}

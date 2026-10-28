@@ -18,7 +18,7 @@ prepare_en: Review the difference between continuous and discrete variables.
 - 確率密度と面積、期待値と分散を短く確認 (brief review of density, area, expected value, and variance)
 - 重点：分散と標準偏差を区別し、zに標準化する (focus: distinguish variance from standard deviation and calculate z-scores)
 - 標準正規分布表で、上側・下側・区間の確率を読む (use the standard normal table for upper tails, lower tails, and intervals)
-- 途中の6つのチャレンジで練習してから、ALに自分で取り組む (six interleaved practice challenges before independent AL work)
+- 8つのチャレンジで練習し、最後は期末試験形式の問題。その後ALに自分で取り組む (eight practice challenges, ending with an exam-style problem, before independent AL work)
 
 ## Textbook
 

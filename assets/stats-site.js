@@ -553,8 +553,8 @@ function lectureSection(week) {
       <button type="button" role="tab" id="week-5-lecture-slides-tab" aria-controls="week-5-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-5-lecture-explore-tab" aria-controls="week-5-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
     </div><div id="week-5-lecture-slides" role="tabpanel" aria-labelledby="week-5-lecture-slides-tab">${content}</div><div id="week-5-lecture-explore" role="tabpanel" aria-labelledby="week-5-lecture-explore-tab" hidden>
-      <div class="simulation-tablist" role="tablist" aria-label="Week 5 explorations">${[['stopwatch','Stop at 1 second','1秒で止めよう'],['area','Area & integrals','面積と積分'],['cdf','PDF & CDF','PDFとCDF'],['moments','Expectation & variance','期待値と分散'],['normal','Standardization','標準化'],['table','Normal table','正規分布表']].map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-5-${id}-tab" aria-controls="week-5-${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${String(i+1).padStart(2,'0')} <span>${bilingual(en,ja)}</span></button>`).join('')}</div>
-      ${['stopwatch','area','cdf','moments','normal','table'].map((id,i)=>`<div id="week-5-${id}" role="tabpanel" aria-labelledby="week-5-${id}-tab"${i?' hidden':''}><section class="w5-lab" ${id==='stopwatch'?'data-week5-stopwatch':`data-week5-lab="${id}"`}></section></div>`).join('')}</div>`
+      <div class="simulation-tablist" role="tablist" aria-label="Week 5 explorations">${[['stopwatch','Stop at 1 second','1秒で止めよう'],['normal','SD & z-scores','標準偏差とzスコア'],['table','Normal table & areas','正規分布表と面積']].map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-5-${id}-tab" aria-controls="week-5-${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${String(i+1).padStart(2,'0')} <span>${bilingual(en,ja)}</span></button>`).join('')}</div>
+      ${['stopwatch','normal','table'].map((id,i)=>`<div id="week-5-${id}" role="tabpanel" aria-labelledby="week-5-${id}-tab"${i?' hidden':''}><section class="w5-lab" ${id==='stopwatch'?'data-week5-stopwatch':`data-week5-lab="${id}"`}></section></div>`).join('')}</div>`
     : week.week === 6 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 6 lecture">
       <button type="button" role="tab" id="week-6-lecture-slides-tab" aria-controls="week-6-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-6-lecture-explore-tab" aria-controls="week-6-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
@@ -749,10 +749,10 @@ function renderAgenda(weeks) {
     'al-continuous': ['week-2-lecture-al-tab','week-2-al-continuous-tab'],
     coin: ['week-1-lecture-simulations-tab','week-1-coin-tab'],
     normal: ['week-5-lecture-explore-tab','week-5-normal-tab'],
-    'w5-area': ['week-5-lecture-explore-tab','week-5-area-tab'],
+    'w5-area': ['week-5-lecture-explore-tab','week-5-stopwatch-tab'],
     'w5-stopwatch': ['week-5-lecture-explore-tab','week-5-stopwatch-tab'],
-    'w5-cdf': ['week-5-lecture-explore-tab','week-5-cdf-tab'],
-    'w5-moments': ['week-5-lecture-explore-tab','week-5-moments-tab'],
+    'w5-cdf': ['week-5-lecture-explore-tab','week-5-table-tab'],
+    'w5-moments': ['week-5-lecture-explore-tab','week-5-normal-tab'],
     'w5-normal': ['week-5-lecture-explore-tab','week-5-normal-tab'],
     'w5-table': ['week-5-lecture-explore-tab','week-5-table-tab'],
     t: ['week-6-lecture-explore-tab','week-6-t-tab'],
