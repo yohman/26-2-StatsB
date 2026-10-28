@@ -173,7 +173,7 @@ assert(!deck.includes('Yohの2025'));
 assert(!/[\x00-\x08\x0b\x0c\x0e-\x1f]/.test(deck));
 assert(sourceMap.decisions.some(d=>/Chi-square/.test(d.defer||'')));
 const week=fs.readFileSync(path.join(root,'content/weeks/05-normal.md'),'utf8');
-assert.match(week,/week05\/w5.pdf\) \{primary\}/);assert.match(week,/前半v6.pdf\) \{supplementary\}/);
+assert.match(week,/week05\/w5.pdf\) \{primary\}/);assert.match(week,/前半v7.pdf\) \{supplementary\}/);
 assert.match(week,/date: 2026-10-28/);
 assert(!week.includes('{yoh}'),'The three archived Yoh decks are not listed in Week 5');
 const viewer=fs.readFileSync(path.join(root,'viewer.html'),'utf8');
