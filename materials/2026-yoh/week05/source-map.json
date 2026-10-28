@@ -1,6 +1,6 @@
 {
   "official": "materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v6.pdf",
-  "pacing": "57 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with seven interleaved z-score/table challenges, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
+  "pacing": "60 slides. Open with the Paris 2024 race, finish photograph, official OMEGA scan and classroom stopwatch. Follow Tsumura 4–10 for brief density/CDF background, 15–18 for normal distributions and standardization, and 20–26 for table reading. Use ramen only as a hypothetical shape-and-area illustration, without deriving a coefficient or doing curved-area arithmetic. Concentrate on AL preparation with 8 z-score/table challenges including a closing past-exam problem, protected worked answers and no homework cell answers. Bilingual narration follows the revised pages.",
   "decisions": [
     {
       "retain": "Separate race media and stopwatch beats; density then shaded area; PDF then CDF; narrow then wide normal; row then column then intersection; separate challenges and answers"
@@ -1556,6 +1556,117 @@
     },
     {
       "slide": 57,
+      "title": "チャレンジ⑧　期末試験形式：S評価は何点から？",
+      "layout": "challenge",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "standardization",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "123–125",
+        "relation": "application",
+        "label": "教科書 p.123–125 · 標準化と表の例への適用"
+      },
+      "practiceFocus": "z-scores-and-table",
+      "examSource": {
+        "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+        "question": "問4(1)(2)",
+        "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+      },
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 58,
+      "title": "答え合わせ⑧ (1) · 70点以上の割合",
+      "layout": "worked practice-answer",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "standardization",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "123–125",
+        "relation": "application",
+        "label": "教科書 p.123–125 · 標準化と表の例への適用"
+      },
+      "practiceAnswer": true,
+      "examSource": {
+        "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+        "question": "問4(1)(2)",
+        "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+      },
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 59,
+      "title": "答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す",
+      "layout": "worked practice-answer",
+      "official": "19–26",
+      "textbook": "124–125",
+      "yoh75": "51–61",
+      "yoh109": "52–62",
+      "sourceBeats": [
+        133
+      ],
+      "termKeys": [
+        "standardization",
+        "upperTail"
+      ],
+      "formulaRef": {
+        "pages": "123–125",
+        "relation": "application",
+        "label": "教科書 p.123–125 · 標準化と表の例への適用"
+      },
+      "practiceAnswer": true,
+      "examSource": {
+        "file": "other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf",
+        "question": "問4(1)(2)",
+        "adaptation": "Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction."
+      },
+      "terms": [
+        {
+          "ja": "標準化",
+          "en": "Standardization"
+        },
+        {
+          "ja": "上側確率",
+          "en": "Upper-tail probability"
+        }
+      ]
+    },
+    {
+      "slide": 60,
       "title": "ここからは、ALに自分で取り組もう。",
       "layout": "statement",
       "official": "19–26",

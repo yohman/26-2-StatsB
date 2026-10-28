@@ -285,7 +285,31 @@ export function createWeek5CompactStory(options){
   add('ここからは、ALに自分で取り組もう。',`標準偏差を確認。zに直す。表を読み、面積を選ぶ。\n\n[ALワークシートを開く](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=assets%2Fworksheet-previews%2Fw05%2Findex.html&title=AL&week=W05&source=weeks%2F05-continuous-distributions-i%2F05_AL用ワークシート.xlsx)\n\n${options.tableLink}\n\n各セルの答えは示しません。`,'statement',[143,144],
     '欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。',
     'Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks.');
-  if(slides.length!==57)throw Error(`Expected 57 focused slides, got ${slides.length}`);
+  // Insert the exam-style closing challenge immediately before independent AL work.
+  const alSlide=slides.pop(),alMapping=mapping.pop(),alNote=narration.pop();
+  const examSource={file:'other material/2025 yoh/14 Final Exam/2025 Stats B Final/2025_統計学_期末試験_工学部_v04_260113改訂 Questions.pdf',question:'問4(1)(2)',adaptation:'Retains the score parameters and question structure; uses the continuous normal approximation without continuity correction.'};
+  const markExam=()=>{mapping.at(-1).examSource=examSource;narration.at(-1).sources=[examSource];};
+  practice('⑧','期末試験形式：S評価は何点から？',String.raw`あるクラスの試験得点は $X\sim N(55,10^2)$ に従うとする。得点は整数。`,String.raw`(1) 70点以上の学生は何％？<br>(2) 上位5％をS評価とすると、何点以上？`,[133],
+    'ここまでの道具だけで、期末試験形式の問題に挑戦しよう。前半は点数から割合へ、後半は割合から点数へ逆向きに考えます。平均と標準偏差を確認し、途中式と求める領域の図を残してください。後半で与えたzを、同じ標準化の式に入れるとどうなるかな。答えはまだ開かず、まず一人で考えよう。',
+    'Use today’s tools in a final-exam style problem. Part one goes from a score to a proportion. Part two reverses that direction, from a proportion to a score. Identify the mean and SD, and show your working and a sketch. For the second part, insert the supplied z into the same standardization equation and think about how to solve for the score before revealing the answer.',8);
+  slides[slides.length-1]+='\n\n<p class="book-note final-exam-note">(2) 上側5％のz値は1.65とする。<br>正規分布モデルで計算し、割合は小数第2位まで。<br>点数の境界は整数で答える。</p>';
+  markExam();
+  solution('⑧ (1)','70点以上の割合','平均55点、標準偏差10点、境界70点。',zFormula,
+    [String.raw`z=\frac{70-55}{10}=1.50`,String.raw`\Pr(X\ge70)\approx\Pr(Z\ge1.50)`,String.raw`=0.06681=6.681\%`],
+    options.normal('practice-final-score-tail',1.5,4,{title:'70点以上に対応する右の面積',ticks:[-3,-2,-1,0,1,1.5,2,3],labels:[{x:1.5,text:'70点：z=1.50'}]}),
+    '表の1.5行・0.00列。70点以上は約6.68％。',[133],
+    'まず平均55点と標準偏差10点を確認。標準化の式に70、55、10を入れると1.50です。表の1.5行、0.00列で0.06681を読み、100倍すると6.681％。小数第2位までで約6.68％です。図の色は70点に対応するzより右。問題の指定どおり、整数の点数を正規分布で近似し、連続補正は行っていません。',
+    'Identify mean 55 and SD 10, then substitute 70 into the symbolic standardization equation to obtain 1.50. Row 1.5 and column 0.00 give 0.06681. Multiply by one hundred to get 6.681 percent, rounded to 6.68 percent. The shaded right tail starts at the z corresponding to 70 points. As instructed, this uses a normal approximation for integer scores without a continuity correction.');
+  markExam();
+  solution('⑧ (2)','上位5％の境界を、点数に戻す','平均55点、標準偏差10点、指定のz＝1.65。',zFormula,
+    [String.raw`1.65=\frac{x-55}{10}`,String.raw`x-55=1.65\times10=16.5`,String.raw`x=55+16.5=71.5`],
+    options.normal('practice-final-grade-cutoff',1.65,4,{title:'上位約5％の境界：71.5点',ticks:[-3,-2,-1,0,1,1.65,2,3],labels:[{x:1.65,text:'71.5点：z=1.65'}]}),
+    '境界は71.5点。得点は整数なので、S評価は72点以上。',[133],
+    '今回は割合が先に与えられています。上側5％のzは指定どおり1.65。この数を標準化の式の左に置き、右には未知の点数xを残します。両辺を10倍し、55を足すと71.5点。整数の得点では72点以上が条件を満たします。図の色は連続モデルの71.5点より右です。1.65は指定された近似値で、整数の72点以上が厳密に5％という意味ではありません。',
+    'Here the proportion is given first. Use the supplied approximate z of 1.65 for the upper five percent. Put it on the left of the same standardization equation and leave the score x unknown on the right. Multiply both sides by ten and add 55 to obtain 71.5 points. Since scores are integers, the S grade begins at 72. The shading starts at the continuous-model boundary 71.5. Neither the supplied rounded z nor an integer score cutoff implies an exact five percent share.');
+  markExam();
+  slides.push(alSlide);mapping.push({...alMapping,slide:slides.length});narration.push({...alNote,page:slides.length});
+  if(slides.length!==60)throw Error(`Expected 60 focused slides, got ${slides.length}`);
   slides.forEach((slide,i)=>{
     const keys=mapping[i].termKeys;
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
@@ -295,6 +319,7 @@ export function createWeek5CompactStory(options){
 }
 
 export const compactStyle=storyStyle.replace('</style>',`
+section.challenge .final-exam-note{font-size:20px;line-height:1.5;margin:18px 0}
 section.robot-height-answer .worked-copy .katex-display{font-size:23px;margin:18px 0}section.robot-height-answer .given{font-size:22px;margin:0 0 12px}section.robot-height-answer .lookup-note{font-size:20px;line-height:1.6;margin:8px 0}section.robot-height-answer .worked-visual img{height:290px}
 section.queue-story img{object-position:center center}section.race-media.queue-history,section.race-media.queue-bowl{background:#fff}section.race-media.queue-history img,section.race-media.queue-portrait img,section.race-media.queue-bowl img{object-fit:contain}section.queue-model p{margin:5px 0}section.queue-model small{font-size:19px;color:#687b84}section.model-visual.queue-model.has-stat-terms img{height:260px}section.queue-model>p:last-of-type{position:absolute;bottom:120px;left:65px;right:65px}
 section.race-media{padding:0;background:#000;display:block}section.race-media h2,section.race-media footer,section.race-media::after{display:none}section.race-media .media-link{position:absolute;inset:0;display:block}section.race-media img{position:absolute;inset:0;width:1280px;height:720px;max-width:none;max-height:none;object-fit:cover}section.race-finish img{object-position:center 64%}section.race-scan img{object-position:center 43%}section.race-media .media-action{position:absolute;bottom:38px;left:45px;padding:12px 20px;background:#000c;color:white;border-radius:6px;font-size:25px;font-weight:700}section.race-media .media-credit{position:absolute;right:18px;bottom:10px;font-size:14px;color:white;background:#000b;padding:3px 8px}

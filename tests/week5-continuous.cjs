@@ -33,15 +33,15 @@ const sourceMap=JSON.parse(fs.readFileSync(path.join(root,'materials/2026-yoh/we
 const slideCount=sourceMap.slides.length;
 const slideBodies=deck.split(/\n\n---\n\n/);
 assert.equal(slideBodies.length,slideCount);
-assert.equal(slideCount,57);
+assert.equal(slideCount,60);
 const bodyFor=title=>{
   const item=sourceMap.slides.find(s=>s.title===title);
   assert(item,`Missing slide: ${title}`);
   return slideBodies[item.slide-1];
 };
 const challenges=sourceMap.slides.filter(s=>s.layout==='challenge');
-assert.equal(challenges.length,7);
-assert.deepEqual(challenges.map(s=>s.slide),[34,36,44,47,50,53,55]);
+assert.equal(challenges.length,8);
+assert.deepEqual(challenges.map(s=>s.slide),[34,36,44,47,50,53,55,57]);
 for(const item of challenges){
   assert.equal(item.practiceFocus,'z-scores-and-table');
   assert(sourceMap.slides[item.slide].practiceAnswer,'Every challenge is followed by its protected worked answer');
@@ -107,6 +107,14 @@ assert(bodyFor('答え合わせ④ · 左右対称を使う').includes('0.20045'
 assert(bodyFor('答え合わせ⑤ · 全体1から、右の尾を引く').includes('0.91149'));
 assert(bodyFor('答え合わせ⑥ · 異なる二つの尾を引く').includes('0.62465'));
 assert(bodyFor('答え合わせ⑦ · 元の点数から、上側確率へ').includes('2.275'));
+const exam=bodyFor('チャレンジ⑧　期末試験形式：S評価は何点から？');
+for(const value of ['N(55,10^2)','70点以上','上位5％','1.65','8分'])assert(exam.includes(value));
+assert(!/6\.681|71\.5|72点/.test(exam),'The exam question must not reveal either answer');
+assert.equal(sourceMap.slides[56].examSource.question,'問4(1)(2)');
+assert(bodyFor('答え合わせ⑧ (1) · 70点以上の割合').includes('0.06681=6.681'));
+assert(bodyFor('答え合わせ⑧ (2) · 上位5％の境界を、点数に戻す').includes('72点以上'));
+near(M.upper(1.5),.06681,5e-6);
+near(55+1.65*10,71.5);
 near(M.upper(1.28),.10027,5e-6);
 near(M.upper(.84),.20045,5e-6);
 near(1-M.upper(1.35),.91149,5e-6);
