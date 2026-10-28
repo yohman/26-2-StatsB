@@ -161,28 +161,6 @@ export function createWeek5CompactStory(options){
   add('累積分布の図：同じ50％を「高さ」にする',`${robotChart('robot-cumulative-function',{pdf:x=>probability.normalCdf((x-160)/5),cdf:true,mean:null,yMax:1,title:'160cm以下の割合を、高さで読む',point:{x:160,y:.5}})}\n\n${math(String.raw`F(160)=0.50`)}\n\n横160cmから上へ進むと、縦0.50＝50％。\n\n<small>${robotAssumption}</small>`,'model-visual robot-example',[49],
     'ロボットは同じ、問いも160cm以下で同じ。変わったのは縦軸です。今は累積確率なので、横160から曲線まで上がり、左に読むと0.50。直前の密度の面積が、この図の高さになりました。横の身長を大きくすれば、含めるロボットは増えるので曲線は下がりません。',
     'The robots and the question are unchanged: what fraction are no taller than 160 cm? The vertical axis now measures cumulative probability. Move up from 160 to the curve, then left to read 0.50. The previous density area becomes the height on this graph. Increasing the height threshold includes more robots, so the cumulative curve cannot decrease.');
-  add('期待値：値に重みを付けて、合計する',`${math(String.raw`\mu=E(X)=\sum_x x\Pr(X=x)`)}\n\n離散：値 × その値の確率を、Σで合計。\n\n${math(String.raw`\mu=E(X)=\int_{-\infty}^{\infty}x f(x)\,dx`)}\n\n連続：値 × 密度を、積分で合計。\n\n<small>期待値は、分布の平均。連続の場合、密度の高さそのものは確率ではない。</small>`,'explain moments-definition',[65],
-    '期待値は分布の平均です。離散なら各値にその確率を掛け、Σで全部足します。連続なら値が途切れずに続くので、積分で全体を足します。上の式の確率に対して下のf(x)は密度であり、高さだけを一点の確率とは読みません。小さな幅dxと合わせて寄与を足している、と読もう。次は計算の流れが見えるように、配達件数0、1、2という小さな例を使います。',
-    'Expected value is the distribution mean. For discrete outcomes, multiply each possible value by its probability and sum with sigma. For a continuous variable, integrate across its values. The density f(x) is not a point probability; combined with the small width dx it supplies the probability weight for a contribution. Both formulas describe a weighted average when it exists. Next use a small delivery-count example so the arithmetic is visible.');
-  const deliveryGraphic='![width:1030px](images/robot-delivery-probabilities.svg)';
-  paired('ロボットの配達件数：期待値を計算',[
-    String.raw`\mu=E(X)=\sum_x x\Pr(X=x)`,
-    String.raw`=0\times0.25+1\times0.50+2\times0.25`,
-    String.raw`=0+0.50+0.50=1\ \text{件}`,
-  ],deliveryGraphic,'仮定：1日の配達は0件が25％、1件が50％、2件が25％。\n\n期待値1件＝長い目で見た1日当たりの平均。毎日1件とは限らない。',[65],
-    'ロボットが1日に配達する件数Xを考えよう。これは授業用の確率分布で、0件が25％、1件が50％、2件が25％と仮定します。それぞれの値と確率を掛けて足すと、0、0.5、0.5の合計で1件。ここは平均を先に与えたのではなく、分布から計算しました。期待値1件でも、実際の日には0件や2件も起こります。長く繰り返したときの1日当たりの平均という意味です。',
-    'Let X count a robot’s deliveries in one day. Assume a classroom distribution with probabilities 0.25 for zero, 0.50 for one and 0.25 for two. Multiply each count by its probability, then add: zero plus one half plus one half equals one delivery. Here the mean is calculated from the distribution rather than supplied in advance. Expected value one does not mean one delivery every day. It describes the average per day over many repetitions.');
-  add('分散：平均との差を2乗して、合計する',`${math(String.raw`\sigma^2=\operatorname{Var}(X)=\sum_x(x-\mu)^2\Pr(X=x)`)}\n\n離散：平均との差の2乗 × 確率を、Σで合計。\n\n${math(String.raw`\sigma^2=\operatorname{Var}(X)=\int_{-\infty}^{\infty}(x-\mu)^2f(x)\,dx`)}\n\n連続：同じ考え方を、積分で表す。\n\n<small>先に平均μを求める。差を2乗するので、上下のずれが打ち消し合わない。</small>`,'explain moments-definition',[75],
-    '今度は中心からのばらつきです。まず平均μを確認します。各値から平均を引き、その差を二乗し、確率で重み付けして合計します。離散の場合はΣ、連続の場合は積分で合計するので、考え方は共通です。二乗しない差は平均の上下で打ち消し合うため、ばらつきには二乗した差を使います。これは確率分布の分散の定義であり、標本から推定するときのn−1の話とは区別してください。',
-    'Variance describes spread around the mean. Find mu first, subtract it from each value, square the difference, then weight and add. The discrete formula sums probability-weighted squared deviations; the continuous formula integrates density-weighted squared deviations. Squaring prevents positive and negative deviations from cancelling. These are distribution definitions, distinct from the n-minus-one rule used when estimating population variance from a sample.');
-  paired('同じロボット：分散を計算',[
-    String.raw`\sigma^2=\sum_x(x-\mu)^2\Pr(X=x)`,
-    String.raw`=(0-1)^2\times0.25+(1-1)^2\times0.50`,
-    String.raw`\qquad +(2-1)^2\times0.25`,
-    String.raw`=0.25+0+0.25=0.50\ \text{件}^2`,
-  ],deliveryGraphic,'同じ仮定：0件25％、1件50％、2件25％。先ほど求めた平均μ＝1件。\n\n平均との差は−1、0、＋1。2乗すると1、0、1。',[75],
-    'さっき求めた平均は1件でした。0件の日は平均との差が−1、1件なら0、2件なら＋1です。二乗すると1、0、1。それぞれに確率0.25、0.50、0.25を掛けて足すと0.50平方件です。これが分布から計算した分散。配達が0.5件の日という意味ではありません。この例を連続する身長に移すなら、同じ重み付きの合計を積分で表します。次の正規分布ではμとσ²が中心とばらつきを指定します。',
-    'Use the mean of one delivery found on the preceding slide. Deviations for zero, one and two deliveries are negative one, zero and positive one. Squaring gives one, zero and one. Weighting by 0.25, 0.50 and 0.25 gives variance 0.50 squared deliveries. This is spread, not a possible count of half a delivery. For continuous heights the same weighted accumulation becomes an integral. The following normal-distribution section uses mu and sigma-squared to specify centre and spread.');
   keep(85);
   add('正規分布：中心と、ばらつき',`${math(String.raw`X\sim N(\mu,\sigma^2)\qquad E(X)=\mu,\quad\operatorname{Var}(X)=\sigma^2`)}\n\n${figure(86)}`,'model-visual',[86,87,88,89],
     '左右対称の釣鐘型です。Nの最初の数が平均μ、二つ目が分散σ²。この書き方で二つ目を標準偏差と間違えないようにしよう。',
@@ -299,7 +277,7 @@ export function createWeek5CompactStory(options){
   add('ここからは、ALに自分で取り組もう。',`標準偏差を確認。zに直す。表を読み、面積を選ぶ。\n\n[ALワークシートを開く](https://yohman.github.io/26-2-StatsB/viewer.html?p&file=assets%2Fworksheet-previews%2Fw05%2Findex.html&title=AL&week=W05&source=weeks%2F05-continuous-distributions-i%2F05_AL用ワークシート.xlsx)\n\n${options.tableLink}\n\n各セルの答えは示しません。`,'statement',[143,144],
     '欲しい確率がどの面積なのかを、最初に描いてください。ここからはALに自分で取り組みます。各セルの答えは示しません。何が与えられ、何を求めるのかを整理しよう。',
     'Begin by sketching the probability region you need. Now work independently on the AL worksheet. Individual cell answers are not supplied. Identify the givens and what each question asks.');
-  if(slides.length!==61)throw Error(`Expected 61 focused slides, got ${slides.length}`);
+  if(slides.length!==57)throw Error(`Expected 57 focused slides, got ${slides.length}`);
   slides.forEach((slide,i)=>{
     const keys=mapping[i].termKeys;
     mapping[i].terms=keys.map(key=>({ja:glossary[key][0],en:glossary[key][1]}));
@@ -314,7 +292,6 @@ section.queue-story img{object-position:center center}section.race-media.queue-h
 section.race-media{padding:0;background:#000;display:block}section.race-media h2,section.race-media footer,section.race-media::after{display:none}section.race-media .media-link{position:absolute;inset:0;display:block}section.race-media img{position:absolute;inset:0;width:1280px;height:720px;max-width:none;max-height:none;object-fit:cover}section.race-finish img{object-position:center 64%}section.race-scan img{object-position:center 43%}section.race-media .media-action{position:absolute;bottom:38px;left:45px;padding:12px 20px;background:#000c;color:white;border-radius:6px;font-size:25px;font-weight:700}section.race-media .media-credit{position:absolute;right:18px;bottom:10px;font-size:14px;color:white;background:#000b;padding:3px 8px}
 section.watch-bridge{background:#ede5da;padding:0;display:block}section.watch-bridge h2{display:none}section.watch-bridge .watch-photo{position:absolute;left:95px;top:50px;width:535px;height:585px;object-fit:contain;max-height:none}section.watch-bridge .watch-invitation{position:absolute;left:710px;top:150px;width:510px}section.watch-bridge h3{font-size:49px;line-height:1.5;margin:0 0 20px}section.watch-bridge .watch-invitation p{font-size:35px;margin:0 0 32px}section.watch-bridge a{display:inline-block;background:#a51c30;color:white;text-decoration:none;font-size:30px;padding:14px 25px;border-radius:7px;font-weight:700}section.watch-bridge small{display:block;font-size:16px;color:#756d61;margin-top:30px;line-height:1.6}
 section.explain{font-size:30px}section.explain h2{font-size:43px}section.explain .katex-display{font-size:43px}section.explain p{margin:24px 0}
-section.explain.moments-definition .katex-display{font-size:34px;margin:18px 0}section.explain.moments-definition p{font-size:27px;margin:16px 0}section.moments-definition small{font-size:20px;color:#53676e}
 section.precision img{height:160px}section.precision .katex-display{font-size:54px}section.precision p{font-size:30px;margin:16px 0}
 section.calculation .katex-display{font-size:43px;margin:32px 0}section.calculation h2{font-size:43px}section.calculation.answer{background:#edf5ef}
 section.model-visual{padding:36px 65px 45px}section.model-visual h2{font-size:41px;margin-bottom:10px}section.model-visual p{font-size:25px;margin:10px 0}section.model-visual .katex-display{font-size:34px;margin:8px 0}section.model-visual img{height:355px;width:1030px;object-fit:contain}
