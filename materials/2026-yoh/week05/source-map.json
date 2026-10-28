@@ -922,7 +922,8 @@
       ],
       "practiceFocus": "z-scores-and-table",
       "sources": [
-        "https://www.mhlw.go.jp/content/001435374.pdf#page=2"
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
       ],
       "terms": [
         {
@@ -937,7 +938,7 @@
     },
     {
       "slide": 37,
-      "title": "答え合わせ② · Yohの177cmを、同じ基準で比べる",
+      "title": "答え合わせ② · Yohの177cmを、全国の成人男性と比べる",
       "layout": "worked practice-answer",
       "official": "14–18",
       "textbook": "122–123",
@@ -957,7 +958,8 @@
       },
       "practiceAnswer": true,
       "sources": [
-        "https://www.mhlw.go.jp/content/001435374.pdf#page=2"
+        "https://www.mhlw.go.jp/content/001742496.pdf#page=2",
+        "https://www.mhlw.go.jp/content/001675210.pdf"
       ],
       "terms": [
         {

@@ -51,12 +51,15 @@ const finalHint=bodyFor('チャレンジ⑦　70点以上は、何％？').repla
 assert(finalHint.includes('1つ目は平均、2つ目は分散。標準偏差は分散の平方根。'));
 assert(!finalHint.includes('2.275'),'The hint must not reveal the answer');
 const personal=bodyFor('チャレンジ②　自分の身長を、zに直そう');
-for(const value of ['170.3cm','6.3cm','157.6cm','5.6cm','2023','001435374.pdf'])assert(personal.includes(value));
-assert(!personal.includes('1.06349'),'Keep the personal-height answer on its protected answer slide');
-const yoh=bodyFor('答え合わせ② · Yohの177cmを、同じ基準で比べる');
-assert(yoh.includes('\\frac{177-170.3}{6.3}'));
-assert(yoh.includes('1.06349'));
-near((177-170.3)/6.3,1.063492063492,1e-10);
+for(const value of ['168.4cm','5.2cm','154.9cm','5.1cm','6,041','7,171','2024','20歳以上','全国補正値','001742496.pdf'])assert(personal.includes(value));
+assert(!personal.includes('1.653846'),'Keep the personal-height answer on its protected answer slide');
+assert(!/20〜29|170\.3|157\.6|2023|001435374/.test(personal),'Do not retain the old young-adult reference');
+const yoh=bodyFor('答え合わせ② · Yohの177cmを、全国の成人男性と比べる');
+assert(yoh.includes('\\frac{177-168.4}{5.2}'));
+assert(yoh.includes('1.653846'));
+near((177-168.4)/5.2,1.653846153846,1e-10);
+const heightChart=fs.readFileSync(path.join(root,'materials/2026-yoh/week05/images/practice-personal-height.svg'),'utf8');
+for(const label of ['男性20歳以上','2024','168.4','177cm: z ≈ +1.65','実測分布ではない'])assert(heightChart.includes(label));
 for(const item of sourceMap.slides.filter(s=>s.practiceAnswer)){
   const body=slideBodies[item.slide-1];
   for(const label of ['① 与えられた条件','② 公式','③ 代入','④ 答え'])assert(body.includes(label));
