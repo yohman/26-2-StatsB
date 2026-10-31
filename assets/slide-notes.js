@@ -1,7 +1,8 @@
 (function(){
   'use strict';
   const decks=new Map([
-    ['materials/2026-yoh/week05/w5.pdf','materials/2026-yoh/week05/w5.notes.json']
+    ['materials/2026-yoh/week05/w5.pdf','materials/2026-yoh/week05/w5.notes.json'],
+    ['materials/2026-yoh/week06/w6.pdf','materials/2026-yoh/week06/w6.notes.json']
   ]);
   const requests=new Map();
   function loadNotes(path){

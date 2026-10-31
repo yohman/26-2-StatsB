@@ -1,4 +1,4 @@
-import {writeFileSync, mkdirSync} from 'node:fs';
+import {writeFileSync, mkdirSync, existsSync} from 'node:fs';
 import {dirname, resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {walkthrough,walkthroughStyle} from './challenge-walkthrough.mjs';
@@ -376,5 +376,6 @@ if (continuousStart < 0 || alClosing <= continuousStart) throw new Error('Missin
 const week06Slides = slides.splice(continuousStart, alClosing-continuousStart).map(slide=>slide.replaceAll('#week-03','#week-06'));
 const document = (week, body) => `---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week ${week}'\n---\n\n<style>\n${css}${week===3?`\n${walkthroughStyle}`:''}\n</style>\n\n${body.join('\n\n---\n\n')}\n`;
 writeFileSync(resolve(here,'w3.md'),document(3,slides));
-writeFileSync(resolve(week06,'w6.md'),document(6,week06Slides));
+// Week 6 now has its own reviewed curriculum. Do not overwrite it on a Week 3 rebuild.
+if(!existsSync(resolve(week06,'build-week06.mjs')))writeFileSync(resolve(week06,'w6.md'),document(6,week06Slides));
 console.log(`Week 3: ${slides.length} slides, binomial and Poisson plus AL closing. Week 6: ${week06Slides.length} continuous-distribution slides.`);

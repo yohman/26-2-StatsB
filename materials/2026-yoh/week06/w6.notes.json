@@ -1,0 +1,305 @@
+{
+  "deck": "materials/2026-yoh/week06/w6.pdf",
+  "slides": [
+    {
+      "page": 1,
+      "title": "玉は、どこに集まる？",
+      "ja": "今日はこの古い装置から。玉は毎回左右へ跳ねます。底にどんな形ができるか、まだ答えを言わずに予想してもらいましょう。",
+      "en": "Begin with the historical machine. Each collision sends a bead left or right. Ask students to predict the pile before revealing a curve."
+    },
+    {
+      "page": 2,
+      "title": "1回ごとは、左右どちらか",
+      "ja": "左右が半々なら、4回分の合計は前に学んだ二項分布です。端には同じ方向だけの経路が必要。真ん中にはたくさんの経路があります。",
+      "en": "Connect four left/right decisions to the binomial distribution. There are many more paths to the centre than to either extreme."
+    },
+    {
+      "page": 3,
+      "title": "段を増やすと、見覚えのある形",
+      "ja": "ボードは約1873年の設計です。玉を増やすことと段を増やすことを分けて試します。玉は割合を安定させ、段数は理論分布の形を変えます。装置は二項分布の正規近似を見せます。",
+      "en": "The board design dates to about 1873. More beads stabilise observed proportions; more rows improve the normal approximation. The board illustrates a special case, not the whole CLT."
+    },
+    {
+      "page": 4,
+      "title": "1733年、賭けの計算から",
+      "ja": "順番はガルトンが先ではありません。ド・モアブルの1733年の結果が先で、ラプラスらによる拡張につながります。ガルトンの装置は後の視覚的な橋です。",
+      "en": "De Moivre’s 1733 binomial approximation predates Galton’s board. Laplace and others extended the theory. The board is a later visual bridge, not the origin of the CLT."
+    },
+    {
+      "page": 5,
+      "title": "今日の問い：何人測れば、平均を信じられる？",
+      "ja": "前回の1秒ストップウォッチを思い出してもらいます。各自1回だけ記録し、名前なしで教員の画面に数値を入力します。参加したくない人には架空のデータで同じ学習ができます。",
+      "en": "Return to the one-second stopwatch. Collect one anonymous number per volunteer, entered locally by the teacher. Students can opt out and use practice values instead."
+    },
+    {
+      "page": 6,
+      "title": "まず、どの人たちについて話す？",
+      "ja": "今回の再抽出では、入力したクラスの記録全体をモデル母集団にします。日本の全大学生を調べたことにはなりません。自発的な参加には偏りもあり得ます。",
+      "en": "For resampling, treat today’s entered records as the finite model population. This is not a representative sample of all Japanese university students; voluntary participation may also be selective."
+    },
+    {
+      "page": 7,
+      "title": "標本を替えると、平均も替わる",
+      "ja": "点は個人の値です。これを平均して1点にする操作を繰り返します。千回というのは一人を千回測る意味ではなく、標本を千組作る意味です。",
+      "en": "A dot is an individual record. Turn one sample into one mean, then repeat with a new sample. A thousand repetitions means a thousand samples, each yielding one mean."
+    },
+    {
+      "page": 8,
+      "title": "標本平均Sample mean",
+      "ja": "式は一行だけ。人数nで割る、いつもの平均です。バーの付いたXは一人の値ではなく、選んだ集団の平均であると確認します。",
+      "en": "Give the formula its own slide. X-bar is the mean of the selected sample, not one individual’s observation."
+    },
+    {
+      "page": 9,
+      "title": "平均の中心は、母平均",
+      "ja": "独立で同じ分布から抽出し、有限の母分散を仮定します。中心は変わらず、平均の分散だけがn分の1になります。新しい記号が何を表すか口頭でつなげます。",
+      "en": "For independent identically distributed observations with finite variance, the centre stays at mu while the variance of the mean is sigma-squared over n."
+    },
+    {
+      "page": 10,
+      "title": "9人の平均なら、揺れは3分の1",
+      "ja": "これは平均1秒、母標準偏差0.20秒という架空の正規モデルです。9人の平均の標準偏差は3分の1。個人の記録のばらつきが消えたわけではありません。",
+      "en": "Use an explicit teaching model with mean one second and population SD 0.20 seconds. Nine-person means have one third the SD; individual variability has not disappeared."
+    },
+    {
+      "page": 11,
+      "title": "中ちゅう心しん極きょく限げん定てい理りCentral limit theorem",
+      "ja": "通学時間のように右に長いデータに切り替えましょう。nが1、4、9、25で平均の分布がどう変わるか予想してもらいます。30なら必ず大丈夫という規則ではありません。",
+      "en": "Switch to a skewed commuting-time example. Ask what happens at n=1,4,9,25. The CLT concerns the shape of suitably standardised sums or means; thirty is not a universal guarantee."
+    },
+    {
+      "page": 12,
+      "title": "元の記録と、平均の分布を並べよう",
+      "ja": "両グラフの横軸を同じにして比較します。平均を取るたびに1点が増えます。実測値は消さず、通学時間は架空の練習値として扱います。",
+      "en": "Compare original observations and repeated means on common axes. Each resample adds one mean. Label practice commuting times as fictional and preserve the distinction from actual class observations."
+    },
+    {
+      "page": 13,
+      "title": "近似と、厳密な正規分布",
+      "ja": "元が正規の場合と、中心極限定理による近似の場合を区別します。たくさん測ることで不適切な抽出の偏りまで直る、とは言えません。",
+      "en": "Separate exact normality under a normal population from an asymptotic approximation under the CLT. Increasing sample size does not cure biased sampling."
+    },
+    {
+      "page": 14,
+      "title": "大数の法則と中心極限定理",
+      "ja": "平均の位置が安定する話と、ずれの分布の形を扱う話です。ボードの玉の割合が安定することと、段数を増やすことの違いもここで回収します。",
+      "en": "The law of large numbers concerns convergence of the mean. The CLT describes its scaled fluctuations. Revisit the difference between increasing the number of beads and the number of rows."
+    },
+    {
+      "page": 15,
+      "title": "チャレンジ1　学食までの移動時間",
+      "ja": "まず平均を計算して、各値との差を二乗します。二種類の分散を区別できるか確かめましょう。答えは次に進むまで見せません。",
+      "en": "Ask students to compute the mean, squared deviations and both variance conventions. Keep the worked solution hidden until the class is ready."
+    },
+    {
+      "page": 16,
+      "title": "答え合わせ1　分母の違いを分ける",
+      "ja": "オレンジの横線が平均からの距離です。二乗和は同じ8。標本を記述する分散と、母分散を推定する不偏分散では分母が違います。",
+      "en": "The distances from ten produce the same squared-deviation sum of eight. Dividing by n describes the sample; dividing by n−1 gives the unbiased estimator of population variance."
+    },
+    {
+      "page": 17,
+      "title": "チャレンジ2　25人の平均が、1.08秒を超える？",
+      "ja": "平均の式で分母がどう変わるかを確かめます。これは実測のクラスの分布と主張しているのではなく、正規母集団を仮定した手計算用のモデルです。",
+      "en": "This checks the distinction between an individual and a sample mean. The numbers describe a hypothetical normal population, not a fitted claim about our class."
+    },
+    {
+      "page": 18,
+      "title": "答え合わせ2　平均を標準化する",
+      "ja": "平均の標準偏差0.04秒を分母に入れます。図のオレンジが求める右側の確率。0.20秒で割ると一人の確率になってしまいます。",
+      "en": "Divide by the mean’s SD of 0.04 seconds. The orange tail is the required probability. Dividing by the individual SD of 0.20 would answer a different question."
+    },
+    {
+      "page": 19,
+      "title": "1908年、ギネスの醸造所で",
+      "ja": "ここで工場の話に切り替えます。ギネスで働いたゴセットは、小さな標本で母平均の不確かさを扱う方法を考えました。ビールを飲ませる活動ではありません。",
+      "en": "Introduce the practical problem at Guinness: costly experiments can leave only a small sample for judging a mean. This is a quality-control story, not a drinking activity."
+    },
+    {
+      "page": 20,
+      "title": "“Student”は、学生のこと？",
+      "ja": "Studentは彼のペンネームです。実名を出さずに公表した仕事が分布名に残りました。tの文字自体がStudentの略だと説明しないようにします。",
+      "en": "Student was Gosset’s pen name, used for his 1908 paper. His pseudonym gave the distribution its familiar name; the letter t is not an abbreviation of Student."
+    },
+    {
+      "page": 21,
+      "title": "母標準偏差を、本当に知っている？",
+      "ja": "前回はロボットの母標準偏差5cmを与えていました。今日のクラスにはそんな既知の値はありません。推定したsを使う分、分母も不確かです。",
+      "en": "Last week the robot population SD was given. Today our class records provide only an estimate s. This makes the denominator uncertain as well as the sample mean."
+    },
+    {
+      "page": 22,
+      "title": "母分散が既知なら、Z",
+      "ja": "一人のXを標準化する式から、標本平均を標準化する式へ。分母がσではなくσ/√nであるところを指さします。独立な正規母集団の標本を考えます。",
+      "en": "Standardising a mean uses sigma divided by square-root n, not the individual SD. Under independent sampling from a normal population, the result is standard normal."
+    },
+    {
+      "page": 23,
+      "title": "母分散が未知なら、T",
+      "ja": "sは次に示す不偏分散の平方根です。正規母集団と独立性のもとでこの分布になります。小標本だから何にでも自動的にtを使えるわけではありません。",
+      "en": "Here s is the square root of the unbiased sample variance. Exact t behaviour requires independent observations from a normal population; small sample size alone is not enough."
+    },
+    {
+      "page": 24,
+      "title": "自じ由ゆう度どDegrees of freedom",
+      "ja": "四人に立ってもらって、最後の一人だけ好きな数字を言えるか考えます。平均を10と決めると合計40という条件がつくので、最後は12に決まります。",
+      "en": "Invite four volunteers to represent numbers. Once their mean is fixed at ten, the total must be forty. The last number is constrained, leaving three freely chosen values."
+    },
+    {
+      "page": 25,
+      "title": "平均を求めたぶん、自由度が1つ減る",
+      "ja": "n−1を呪文にしないで、今の四人の合計条件に戻します。ここでは平均を一つ推定したために、独立に動かせる偏差が一つ減ります。",
+      "en": "Tie n−1 to the one constraint introduced by estimating the sample mean. In general, k independent constraints leave n−k degrees of freedom."
+    },
+    {
+      "page": 26,
+      "title": "標ひょう本ほん不ふ偏へん分ぶん散さんUnbiased sample variance",
+      "ja": "教科書の母分散の推定記号と同じ量を、ここではs²と書きます。標本分散のS²はnで割る量。二つを混同しないようにします。",
+      "en": "We write the textbook’s unbiased variance estimator as s-squared. Distinguish it from S-squared, which divides by n to describe the observed sample."
+    },
+    {
+      "page": 27,
+      "title": "不偏：繰り返した推定の平均が合う",
+      "ja": "母分散をずっと小さく見積もらないようにする補正です。今取った一回の値が真実になる魔法ではありません。平方根を取ったsまで不偏と呼ばないようにします。",
+      "en": "Unbiased means that the estimator averages to the population variance over repeated samples. It does not make one estimate exact, and its square root is not generally unbiased."
+    },
+    {
+      "page": 28,
+      "title": "t分布Student’s t-distribution",
+      "ja": "大きいtが正規より起こりやすいという、厚い裾を見ます。標準化しても分母を推定した揺れが残るからです。自由度が増えると標準正規分布に近づきます。",
+      "en": "Highlight the heavier tails caused by estimating spread. The curve is symmetric, and increasing degrees of freedom brings it towards the standard normal curve."
+    },
+    {
+      "page": 29,
+      "title": "チャレンジ3　私たちは、1秒より遅い？",
+      "ja": "実測値ではなく、手計算用の架空の要約値です。まず分母だけ計算してもらいます。0.08秒を何個分の標準誤差として表すかがポイントです。",
+      "en": "These are fictional summaries chosen for manageable arithmetic. Ask students to calculate the denominator before interpreting the difference in standard-error units."
+    },
+    {
+      "page": 30,
+      "title": "答え合わせ3　0.08秒は、揺れの2個分",
+      "ja": "今回の標本平均が、比較する平均から推定標準誤差2個分離れています。この図の横軸は秒ではありません。確率を知るためには表と分布が必要です。",
+      "en": "The observed mean is two estimated standard errors from the reference mean. The horizontal coordinate is not seconds and the value is not a percentage."
+    },
+    {
+      "page": 31,
+      "title": "自分たちの記録なら、どうなる？",
+      "ja": "匿名の記録を使って、式に値が入る過程を見せます。学習や端末の違いがあれば理想的な標本の条件から外れます。実測から正規性を断言しないことも学びです。",
+      "en": "Use the local calculator to insert student records step by step. Discuss practice effects, device differences and outliers rather than claiming the records satisfy the exact t assumptions."
+    },
+    {
+      "page": 32,
+      "title": "表の読み方が、前回と逆になる",
+      "ja": "この違いを一度止めて強調します。前回は位置から面積を読みました。今回は面積を先に指定して、その境界の位置を読みます。",
+      "en": "Pause on the reversal: last week a coordinate gave a tail area; the t table takes a tail area and degrees of freedom and returns a boundary coordinate."
+    },
+    {
+      "page": 33,
+      "title": "行20、列0.025",
+      "ja": "まず自由度20を探す。次に上側確率0.025の列。交点の2.0860は横軸の値です。公式資料にある「求めたい上側確率」という表現と混同せず、境界値と言いましょう。",
+      "en": "Read the df=20 row and upper-tail 0.025 column. The intersection 2.0860 is a t coordinate, not the requested probability."
+    },
+    {
+      "page": 34,
+      "title": "右の面積が2.5%になる境界",
+      "ja": "右端の色が2.5％で、境界が2.0860です。標本数n=21なら自由度20になることも確認します。図の色だけから小数4桁を計算したわけではありません。",
+      "en": "The shaded right tail is 2.5 percent and its boundary is 2.0860. A sample size of 21 gives df=20. The precision comes from the table, not visual measurement of the plot."
+    },
+    {
+      "page": 35,
+      "title": "チャレンジ4　中央90%を残すには？",
+      "ja": "まず中央と両端の面積を描くように促します。90％という数をそのまま表頭で探してはいけません。左右対称から片側の面積を考えます。",
+      "en": "Ask students to sketch the centre and two tails before consulting the table. They must find a one-tail area rather than look for a 0.90 column."
+    },
+    {
+      "page": 36,
+      "title": "答え合わせ4　中央90%、左右に5%ずつ",
+      "ja": "両端の合計10％を左右に半分ずつ。自由度10、上側確率0.05の交点が1.8125です。マイナス側の境界は対称性から付きます。",
+      "en": "The two tails total ten percent, hence five percent each. Read df ten and upper-tail 0.05 to obtain 1.8125, then use symmetry for the negative boundary."
+    },
+    {
+      "page": 37,
+      "title": "チャレンジ5　さっきのt=2は、表のどこ？",
+      "ja": "表にぴったり2がなくても、間を読む練習です。右へ進むほど残る面積が小さくなることを、曲線で思い出します。",
+      "en": "This asks students to bracket a probability when the exact t value is not tabulated. Moving the boundary right makes the remaining right-tail area smaller."
+    },
+    {
+      "page": 38,
+      "title": "答え合わせ5　表にない値も、範囲で読める",
+      "ja": "正確なp値を無理に作りません。上側がこの範囲なら、左右対称を使って両側は二倍の範囲です。検定の正式な判断は後の回で扱います。",
+      "en": "Do not invent an exact p-value. Symmetry doubles the bracket for the two tails. Formal hypothesis-testing decisions can wait for the later inference session."
+    },
+    {
+      "page": 39,
+      "title": "品質の話に戻ろう",
+      "ja": "ギネスで平均を気にしたのと同じように、工場ではばらつきも大事です。プラスとマイナスを足してゼロにするのでなく、ずれを二乗して集めます。",
+      "en": "Return to quality: two production runs can share a mean but have very different spread. Squaring deviations prevents positive and negative discrepancies from cancelling."
+    },
+    {
+      "page": 40,
+      "title": "カイ二乗分布Chi-square distribution",
+      "ja": "カイはギリシャ文字χです。独立な標準正規値を二乗して足すのが出発点。独立性が必要で、どんなデータを二乗しても同じ分布になるわけではありません。",
+      "en": "Chi is the Greek letter chi. Start with the sum of squares of independent standard normals. Arbitrary squared data do not automatically have this distribution."
+    },
+    {
+      "page": 41,
+      "title": "ロボット3体の、標準化されたずれ",
+      "ja": "これまでのロボットの標準化を三体に繰り返すだけです。平均との差を標準偏差5で割ります。三つの値が一組になっているのが新しいところです。",
+      "en": "Standardise each robot using the known population mean and SD. The new step is to treat the three standardised values as a set and combine their squared deviations."
+    },
+    {
+      "page": 42,
+      "title": "チャレンジ6　ずれを、ひとつの値に",
+      "ja": "二乗の順番を丁寧に。マイナス1の二乗はプラス1です。平均を標本から推定していないため、ここで自由度を自動的にn−1にしないように促します。",
+      "en": "Square before adding. Do not automatically subtract one from the degrees of freedom: here the population mean is known and the three standard normals are independent."
+    },
+    {
+      "page": 43,
+      "title": "答え合わせ6　小さすぎても、大きすぎても足す",
+      "ja": "図の横軸は5cmでも5％でもありません。標準化した二乗和です。Uがゼロになるには全ての二乗がゼロである必要があります。",
+      "en": "Five is a dimensionless squared sum, not centimetres or percent. A zero sum requires all three standardised deviations to be zero."
+    },
+    {
+      "page": 44,
+      "title": "自由度が増えると、形も変わる",
+      "ja": "曲線は左へは伸びません。自由度を増やすと中心も右へ移ります。tのように同じゼロを中心に幅だけが変わる図とは違います。",
+      "en": "Chi-square is nonnegative. As degrees of freedom increase, the centre moves right and relative skewness decreases; unlike t, it is not centred at zero."
+    },
+    {
+      "page": 45,
+      "title": "中心と広がりも、自由度で決まる",
+      "ja": "教科書の期待値と分散の記述を確認します。シミュレーションの千組の平均がこの値に近づく様子を見て、個々のUと分布全体の平均を分けます。",
+      "en": "The textbook gives mean nu and variance twice nu. Compare these theoretical quantities with the average of many simulated squared sums, not with one observed U."
+    },
+    {
+      "page": 46,
+      "title": "標本平均を引くと、自由度はn−1",
+      "ja": "ここは公式の暗記を増やすためでなく、二つの自由度を区別するためです。母平均を使う全体と、標本平均を引いた残差を比較します。導出はこの回では追いません。",
+      "en": "Use the textbook decomposition to distinguish n independent standardised values from residual variation after fitting a mean. Explain the pieces without a proof detour."
+    },
+    {
+      "page": 47,
+      "title": "今日の3つの道具",
+      "ja": "一人の値、平均の統計量、ずれの二乗和を区別できれば今日の芯はつかめています。全ての分布を同じ目的で使うわけではありません。",
+      "en": "Ask students to distinguish an individual measurement, a standardised sample mean, and a squared sum. These distributions answer different questions."
+    },
+    {
+      "page": 48,
+      "title": "AL：ここからは、自分で表を読む",
+      "ja": "ワークシートの課題文を自分で読む時間です。表を読み替える準備をしたので、セルごとの解答は示しません。困ったら分布、自由度、片側の面積を整理するよう促します。",
+      "en": "Students now tackle the worksheet independently. Do not reveal cell answers. Encourage them to identify the distribution, degrees of freedom, and which area or boundary is requested."
+    },
+    {
+      "page": 49,
+      "title": "余裕があれば：1人の記録か、平均か",
+      "ja": "早く終わった人向けです。式を使う前に細くなる程度を予想してもらいます。正しい比較は分散が四分の一、標準偏差が二分の一、元の分布は同じです。",
+      "en": "Optional extension: compare n=4 and n=16. The mean’s variance becomes one quarter, its SD one half, and the population of individual observations remains unchanged."
+    },
+    {
+      "page": 50,
+      "title": "歴史の続き、もっと読みたい人へ",
+      "ja": "歴史は人物を無条件に称えるためではありません。装置や論文が生まれた問いを知り、現在の教室で使う仮定と区別するためです。必要に応じて一次資料へのリンクを紹介します。",
+      "en": "Historical context is not uncritical celebration. Use the linked original paper and museum record to distinguish the practical questions, the mathematics, and the problematic social history of eugenics."
+    }
+  ]
+}

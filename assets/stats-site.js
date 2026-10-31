@@ -559,16 +559,8 @@ function lectureSection(week) {
       <button type="button" role="tab" id="week-6-lecture-slides-tab" aria-controls="week-6-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-6-lecture-explore-tab" aria-controls="week-6-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
     </div><div id="week-6-lecture-slides" role="tabpanel" aria-labelledby="week-6-lecture-slides-tab">${content}</div><div id="week-6-lecture-explore" role="tabpanel" aria-labelledby="week-6-lecture-explore-tab" hidden>
-      <div class="simulation-tablist" role="tablist" aria-label="Choose a distribution">
-        <button type="button" role="tab" id="week-6-normal-tab" aria-controls="week-6-normal" aria-selected="true" tabindex="0">01 <span>${bilingual('Normal distribution','正規分布')}</span></button>
-        <button type="button" role="tab" id="week-6-t-tab" aria-controls="week-6-t" aria-selected="false" tabindex="-1">02 <span>${bilingual('t distribution','t分布')}</span></button>
-        <button type="button" role="tab" id="week-6-chi-tab" aria-controls="week-6-chi" aria-selected="false" tabindex="-1">03 <span>${bilingual('Chi-square','カイ二乗分布')}</span></button>
-        <button type="button" role="tab" id="week-6-examples-tab" aria-controls="week-6-examples" aria-selected="false" tabindex="-1">04 <span>${bilingual('Variation & pairs','ばらつき・組合せ')}</span></button>
-      </div>
-      <div id="week-6-normal" role="tabpanel" aria-labelledby="week-6-normal-tab">${distributionSimulationMarkup('normal')}</div>
-      <div id="week-6-t" role="tabpanel" aria-labelledby="week-6-t-tab" hidden>${distributionSimulationMarkup('t')}</div>
-      <div id="week-6-chi" role="tabpanel" aria-labelledby="week-6-chi-tab" hidden>${distributionSimulationMarkup('chi')}</div>
-      <div id="week-6-examples" role="tabpanel" aria-labelledby="week-6-examples-tab" hidden><section class="example-lab" data-example-lab data-example-scenarios="delivery,pairs"></section></div>
+      <div class="simulation-tablist" role="tablist" aria-label="Week 6 explorations">${[['board','Galton board','ガルトンのボード'],['sampling','Our data & sample means','私たちの記録と平均'],['t','Student & t table','Studentとt分布表'],['chi','Robot variation','ロボットのばらつき']].map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-6-${id}-tab" aria-controls="week-6-${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${String(i+1).padStart(2,'0')} <span>${bilingual(en,ja)}</span></button>`).join('')}</div>
+      ${['board','sampling','t','chi'].map((id,i)=>`<div id="week-6-${id}" role="tabpanel" aria-labelledby="week-6-${id}-tab"${i?' hidden':''}><iframe title="Week 6 ${id} exploration" src="materials/2026-yoh/week06/explore.html?mode=${id}" loading="lazy" style="width:100%;height:1250px;border:0;border-radius:8px"></iframe></div>`).join('')}
     </div>` : [2,3].includes(week.week) ? week23LectureMarkup(week, content) : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
@@ -729,9 +721,13 @@ function renderAgenda(weeks) {
   const exerciseRoutes = {
     lottery: ['week-2-lecture-explore-tab','week-2-examples-tab'],
     dice: ['week-2-lecture-explore-tab','week-2-examples-tab'],
-    delivery: ['week-6-lecture-explore-tab','week-6-examples-tab'],
-    'class-pairs': ['week-6-lecture-explore-tab','week-6-examples-tab'],
-    'normal-w2': ['week-6-lecture-explore-tab','week-6-normal-tab'],
+    delivery: ['week-6-lecture-explore-tab','week-6-sampling-tab'],
+    'class-pairs': ['week-6-lecture-explore-tab','week-6-sampling-tab'],
+    'normal-w2': ['week-6-lecture-explore-tab','week-6-sampling-tab'],
+    'w6-board': ['week-6-lecture-explore-tab','week-6-board-tab'],
+    'w6-sampling': ['week-6-lecture-explore-tab','week-6-sampling-tab'],
+    'w6-t': ['week-6-lecture-explore-tab','week-6-t-tab'],
+    'w6-chi': ['week-6-lecture-explore-tab','week-6-chi-tab'],
     't-w2': ['week-6-lecture-explore-tab','week-6-t-tab'],
     'chi-w2': ['week-6-lecture-explore-tab','week-6-chi-tab'],
     roulette: ['week-2-lecture-explore-tab','week-2-roulette-tab'],

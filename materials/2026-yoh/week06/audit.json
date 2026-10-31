@@ -1,0 +1,161 @@
+{
+  "summary": [
+    "Samples and the distribution of sample means",
+    "Central limit theorem and exact normal-population case",
+    "Known-sigma Z versus estimated-sigma T",
+    "Degrees of freedom, sample variance and unbiased variance",
+    "Upper-tail t tables, quantiles and central intervals",
+    "Chi-square as squared independent standard normals and its decomposition"
+  ],
+  "priorDeck": {
+    "slides": 13,
+    "gaps": [
+      "Population/sample review",
+      "Sample mean distribution and standard error",
+      "CLT versus law of large numbers",
+      "Exact normal sampling versus asymptotic normality",
+      "Degrees of freedom worked demonstration",
+      "n versus n-1 and unbiasedness",
+      "t shape across degrees of freedom",
+      "t table inputs and outputs",
+      "Official df20 / 0.025 and df10 central90 examples",
+      "Chi-square definition, nonnegativity and degrees of freedom"
+    ]
+  },
+  "coverage": [
+    {
+      "official": "4–5",
+      "topic": "Inference process, sample, mean, squared deviations, sample variance",
+      "revised": "6–9,15–16"
+    },
+    {
+      "official": "6–7",
+      "topic": "CLT, LLN, exact normal samples and variance of mean",
+      "revised": "10–14,17–18"
+    },
+    {
+      "official": "9",
+      "topic": "Known population variance Z versus estimated variance T",
+      "revised": "21–23,29–31"
+    },
+    {
+      "official": "10–11",
+      "topic": "Degrees of freedom and unbiased variance",
+      "revised": "24–27"
+    },
+    {
+      "official": "12–13",
+      "topic": "t symmetry, heavier tails and convergence to normal",
+      "revised": "28 and t exploration",
+      "intentionalOmission": "Gamma density is outside textbook scope. Moment qualifications are recorded below rather than adding non-textbook memorisation."
+    },
+    {
+      "official": "15–19",
+      "topic": "t table versus normal table; df20 upper0.025 boundary2.0860",
+      "revised": "32–34"
+    },
+    {
+      "official": "20–21",
+      "topic": "df10 central90% gives one-tail0.05 and boundary1.8125",
+      "revised": "35–36"
+    },
+    {
+      "official": "23",
+      "topic": "Independent standard normals squared; shape; df; mean and variance; decomposition",
+      "revised": "39–46"
+    },
+    {
+      "official": "24",
+      "topic": "Summary",
+      "revised": "47–48"
+    }
+  ],
+  "corrections": [
+    "A t-table cell is a coordinate, not an upper-tail probability.",
+    "A t distribution has expectation zero only for df>1. Variance is df/(df-2) for df>2, infinite for 1<df<=2, and undefined for df<=1.",
+    "The supplied t-density expression is not copied: the textbook teaches the statistic and table, not the gamma-density calculation.",
+    "A chi-square sum about known mu has df=n; residual variation about an estimated mean has df=n-1.",
+    "Galton board: more beads improve empirical proportions; more rows change the binomial law and its normal approximation."
+  ],
+  "pacing100Minutes": [
+    {
+      "minutes": "0–10",
+      "slides": "1–4",
+      "activity": "Historical board mystery; predict and drop beads"
+    },
+    {
+      "minutes": "10–20",
+      "slides": "5–9",
+      "activity": "Anonymous one-second records; identify class model population"
+    },
+    {
+      "minutes": "20–38",
+      "slides": "10–18",
+      "activity": "Resampling, CLT and two four-minute challenges with visual answers"
+    },
+    {
+      "minutes": "38–60",
+      "slides": "19–31",
+      "activity": "Guinness, Student, df volunteer activity, t challenge and live calculator"
+    },
+    {
+      "minutes": "60–80",
+      "slides": "32–38",
+      "activity": "t-table reversal, central90 and probability-bracketing challenges"
+    },
+    {
+      "minutes": "80–94",
+      "slides": "39–46",
+      "activity": "Robot squared deviations, chi-square challenge and simulation"
+    },
+    {
+      "minutes": "94–100",
+      "slides": "47–48",
+      "activity": "Summary and independent AL start"
+    }
+  ],
+  "optional": [
+    "Slides49–50: extra sample-size comparison and historical reading",
+    "If discussion runs long, make Challenge5 probability bracketing optional, saving roughly six minutes",
+    "Skip repeated t simulations after the live-data calculation; keep the t-table tasks"
+  ],
+  "dataPolicy": "Student values are anonymous numeric inputs, processed in browser memory only. No upload, persistence or public collection. Default values are labeled fictional. The class finite population does not represent all university students.",
+  "sources": [
+    {
+      "url": "https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/",
+      "use": "1733 normal approximation and historical context"
+    },
+    {
+      "url": "https://www.maths.dur.ac.uk/users/clare.wallace/Prob1/09-limits.html",
+      "use": "de Moivre special case, later Laplace extension"
+    },
+    {
+      "url": "https://collections.ucl.ac.uk/Details/science/60000062",
+      "use": "1873 Galton-design quincunx museum record"
+    },
+    {
+      "url": "https://academic.oup.com/biomet/article-abstract/6/1/1/225634",
+      "use": "Student 1908 original publication"
+    },
+    {
+      "url": "https://personal.morris.umn.edu/~jongmink/Stat2611/s1.pdf",
+      "use": "Zabell 2008 history, Guinness and pseudonymous publication; avoid notebook-name myth"
+    },
+    {
+      "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm",
+      "use": "Independent critical-value check; NIST columns use cumulative probabilities, converted to upper tail here"
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:William_Sealy_Gosset.jpg",
+      "use": "1908 portrait, public domain"
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Abraham_de_moivre.jpg",
+      "use": "Portrait, public domain"
+    },
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Quincunx_(Galton_Box)_-_Galton_1889_diagram.png",
+      "use": "Historical 1889 illustration, public domain"
+    }
+  ]
+}
