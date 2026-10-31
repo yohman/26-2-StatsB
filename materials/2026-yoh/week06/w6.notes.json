@@ -22,8 +22,8 @@
     {
       "page": 4,
       "title": "1733年、賭けの計算から",
-      "ja": "順番はガルトンが先ではありません。ド・モアブルの1733年の結果が先で、ラプラスらによる拡張につながります。ガルトンの装置は後の視覚的な橋です。",
-      "en": "De Moivre’s 1733 binomial approximation predates Galton’s board. Laplace and others extended the theory. The board is a later visual bridge, not the origin of the CLT."
+      "ja": "ド・モアブルは1733年に、二項分布を正規分布で近似する結果を示しました。ラプラスらが後に一般化します。順番はガルトンが先ではありません。装置は後の視覚的な橋です。肖像：Wikimedia Commons / Public domain https://commons.wikimedia.org/wiki/File:Abraham_de_moivre.jpg 。歴史：MacTutor https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/ 。",
+      "en": "De Moivre’s 1733 binomial approximation predates Galton’s board. Laplace and others extended the theory. The board is a later visual bridge, not the origin of the CLT. Portrait: Wikimedia Commons, public domain, https://commons.wikimedia.org/wiki/File:Abraham_de_moivre.jpg . Historical source: MacTutor, https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/ ."
     },
     {
       "page": 5,
@@ -148,8 +148,8 @@
     {
       "page": 25,
       "title": "“Student”は、学生のこと？",
-      "ja": "Studentは彼のペンネームです。実名を出さずに公表した仕事が分布名に残りました。tの文字自体がStudentの略だと説明しないようにします。",
-      "en": "Student was Gosset’s pen name, used for his 1908 paper. His pseudonym gave the distribution its familiar name; the letter t is not an abbreviation of Student."
+      "ja": "ゴセットはギネスの醸造技術者でした。Studentは彼のペンネームです。1908年の論文「The Probable Error of a Mean」に使った署名が、分布名に残りました。tの文字自体がStudentの略だと説明しないようにします。肖像：Wikimedia Commons / Public domain https://commons.wikimedia.org/wiki/File:William_Sealy_Gosset.jpg 。論文：Biometrika 6(1), 1–25 https://academic.oup.com/biomet/article-abstract/6/1/1/225634 。",
+      "en": "Gosset worked as a brewer at Guinness. Student was the pen name he used for his 1908 paper, The Probable Error of a Mean. His pseudonym gave the distribution its familiar name; the letter t is not an abbreviation of Student. Portrait: Wikimedia Commons, public domain, https://commons.wikimedia.org/wiki/File:William_Sealy_Gosset.jpg . Paper: Biometrika 6(1), 1–25, https://academic.oup.com/biomet/article-abstract/6/1/1/225634 ."
     },
     {
       "page": 26,

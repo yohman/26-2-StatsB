@@ -7,6 +7,17 @@ assert(slides[0].includes('_class: galton-video'));
 assert(slides[0].includes('![bg cover](images/galton-opening.jpg)'));
 assert(slides[0].includes('https://www.youtube.com/watch?v=UCmPmkHqHXk'));
 assert(fs.existsSync(base+'images/galton-opening.jpg'));
+for(const page of [4,25]){
+ const slide=slides[page-1];
+ assert(slide.includes('_class: photo-story'));
+ assert(slide.includes('class="full-frame-image"'));
+ assert(slide.includes('class="photo-caption"'));
+ assert(!slide.includes('class="portrait"'));
+ assert(!slide.includes('class="small"'));
+}
+assert(deck.includes('object-position:50% 10%'));
+assert(deck.includes('object-position:50% 25%'));
+assert(deck.includes('object-fit:cover'));
 const notes=JSON.parse(read(base+'w6.notes.json')).slides;
 assert.equal(notes.length,slides.length);
 for(const [i,note] of notes.entries()){assert.equal(note.page,i+1);assert(note.ja.length>30&&note.en.length>50);assert(!/津村|Tsumura|Yoh.?2025/.test(note.ja+note.en));}
