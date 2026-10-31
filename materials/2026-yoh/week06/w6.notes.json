@@ -4,8 +4,8 @@
     {
       "page": 1,
       "title": "玉は、どこに集まる？",
-      "ja": "今日はこの古い装置から。玉は毎回左右へ跳ねます。底にどんな形ができるか、まだ答えを言わずに予想してもらいましょう。",
-      "en": "Begin with the historical machine. Each collision sends a bead left or right. Ask students to predict the pile before revealing a curve."
+      "ja": "今日は玉が落ちる装置から。画像をクリックしてD!NGの「The Galton Board」を開き、冒頭の実演を見ます。玉は毎回左右へ跳ねるのに、なぜ中央に集まるのでしょう。動画を止めて予想を聞き、次の4段の図とシミュレーションで確かめます。画像・動画：D!NG（Michael Stevens） https://www.youtube.com/watch?v=UCmPmkHqHXk 。この装置は二項分布の正規近似を示す例で、中心極限定理の全てを説明するものではありません。",
+      "en": "Open with the falling-bead demonstration. Click the image to open D!NG’s The Galton Board and show the opening demonstration. Pause and ask why the centre fills up when each collision sends a bead left or right. Continue with the four-row diagram and our simulation to test predictions. Image and video: D!NG (Michael Stevens), https://www.youtube.com/watch?v=UCmPmkHqHXk . The board illustrates the normal approximation to a binomial, a special case rather than the full CLT."
     },
     {
       "page": 2,

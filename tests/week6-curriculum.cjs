@@ -3,6 +3,10 @@ const read=p=>fs.readFileSync(p,'utf8'),base='materials/2026-yoh/week06/';
 const deck=read(base+'w6.md'),plain=deck.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 const slides=deck.split(/\n---\n/).filter(s=>/^## /m.test(s));
 assert.equal(slides.length,50);
+assert(slides[0].includes('_class: galton-video'));
+assert(slides[0].includes('![bg cover](images/galton-opening.jpg)'));
+assert(slides[0].includes('https://www.youtube.com/watch?v=UCmPmkHqHXk'));
+assert(fs.existsSync(base+'images/galton-opening.jpg'));
 const notes=JSON.parse(read(base+'w6.notes.json')).slides;
 assert.equal(notes.length,slides.length);
 for(const [i,note] of notes.entries()){assert.equal(note.page,i+1);assert(note.ja.length>30&&note.en.length>50);assert(!/津村|Tsumura|Yoh.?2025/.test(note.ja+note.en));}
