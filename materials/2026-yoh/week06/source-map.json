@@ -45,307 +45,398 @@
     },
     {
       "page": 7,
+      "title": "標本平均Sample mean",
+      "layout": "topic",
+      "textbook": "",
+      "official": ""
+    },
+    {
+      "page": 8,
       "title": "標本を替えると、平均も替わる",
       "layout": "visual",
       "textbook": "122–123",
       "official": "5–7"
     },
     {
-      "page": 8,
+      "page": 9,
       "title": "標本平均Sample mean",
       "layout": "hero-math",
       "textbook": "122",
       "official": "5"
     },
     {
-      "page": 9,
+      "page": 10,
       "title": "平均の中心は、母平均",
       "layout": "hero-math",
       "textbook": "122–123",
       "official": "6–7"
     },
     {
-      "page": 10,
+      "page": 11,
+      "title": "平均の標準偏差",
+      "layout": "hero-math",
+      "textbook": "123",
+      "official": "6–7"
+    },
+    {
+      "page": 12,
       "title": "9人の平均なら、揺れは3分の1",
       "layout": "visual",
       "textbook": "123",
       "official": "6–7"
     },
     {
-      "page": 11,
-      "title": "中ちゅう心しん極きょく限げん定てい理りCentral limit theorem",
+      "page": 13,
+      "title": "中心極限定理Central limit theorem",
+      "layout": "topic",
+      "textbook": "",
+      "official": ""
+    },
+    {
+      "page": 14,
+      "title": "中心極限定理Central limit theorem",
       "layout": "plain",
       "textbook": "122",
       "official": "6"
     },
     {
-      "page": 12,
+      "page": 15,
       "title": "元の記録と、平均の分布を並べよう",
       "layout": "try",
       "textbook": "122–123",
       "official": "6"
     },
     {
-      "page": 13,
+      "page": 16,
+      "title": "正規母集団からの標本平均",
+      "layout": "hero-math",
+      "textbook": "122–123",
+      "official": "7"
+    },
+    {
+      "page": 17,
       "title": "近似と、厳密な正規分布",
       "layout": "plain",
       "textbook": "122–123",
       "official": "7"
     },
     {
-      "page": 14,
+      "page": 18,
       "title": "大数の法則と中心極限定理",
       "layout": "plain",
       "textbook": "122–123",
       "official": "6"
     },
     {
-      "page": 15,
+      "page": 19,
       "title": "チャレンジ1　学食までの移動時間",
       "layout": "challenge",
       "textbook": "122・126",
       "official": "5・11"
     },
     {
-      "page": 16,
+      "page": 20,
       "title": "答え合わせ1　分母の違いを分ける",
       "layout": "worked",
       "textbook": "122・126",
       "official": "5・11"
     },
     {
-      "page": 17,
+      "page": 21,
       "title": "チャレンジ2　25人の平均が、1.08秒を超える？",
       "layout": "challenge",
       "textbook": "123–124",
       "official": "6–7・9"
     },
     {
-      "page": 18,
+      "page": 22,
       "title": "答え合わせ2　平均を標準化する",
       "layout": "worked",
       "textbook": "123–124",
       "official": "6–7・9"
     },
     {
-      "page": 19,
+      "page": 23,
+      "title": "t分布Student’s t-distribution",
+      "layout": "topic",
+      "textbook": "",
+      "official": ""
+    },
+    {
+      "page": 24,
       "title": "1908年、ギネスの醸造所で",
       "layout": "opening",
       "textbook": "",
       "official": "9–12"
     },
     {
-      "page": 20,
+      "page": 25,
       "title": "“Student”は、学生のこと？",
       "layout": "history",
       "textbook": "",
       "official": "12"
     },
     {
-      "page": 21,
+      "page": 26,
       "title": "母標準偏差を、本当に知っている？",
       "layout": "plain",
       "textbook": "125",
       "official": "9"
     },
     {
-      "page": 22,
+      "page": 27,
       "title": "母分散が既知なら、Z",
       "layout": "hero-math",
       "textbook": "123・125",
       "official": "9"
     },
     {
-      "page": 23,
+      "page": 28,
       "title": "母分散が未知なら、T",
       "layout": "hero-math",
       "textbook": "125–126",
       "official": "9"
     },
     {
-      "page": 24,
-      "title": "自じ由ゆう度どDegrees of freedom",
+      "page": 29,
+      "title": "自由度Degrees of freedom",
+      "layout": "topic",
+      "textbook": "",
+      "official": ""
+    },
+    {
+      "page": 30,
+      "title": "自由度Degrees of freedom",
       "layout": "plain",
       "textbook": "125–126",
       "official": "10"
     },
     {
-      "page": 25,
+      "page": 31,
       "title": "平均を求めたぶん、自由度が1つ減る",
       "layout": "plain",
       "textbook": "125–126",
       "official": "10"
     },
     {
-      "page": 26,
-      "title": "標ひょう本ほん不ふ偏へん分ぶん散さんUnbiased sample variance",
+      "page": 32,
+      "title": "標本不偏分散Unbiased sample variance",
+      "layout": "topic",
+      "textbook": "",
+      "official": ""
+    },
+    {
+      "page": 33,
+      "title": "標本不偏分散Unbiased sample variance",
       "layout": "hero-math",
       "textbook": "126",
       "official": "11"
     },
     {
-      "page": 27,
+      "page": 34,
+      "title": "不偏分散の期待値",
+      "layout": "hero-math",
+      "textbook": "126（注）",
+      "official": "11"
+    },
+    {
+      "page": 35,
       "title": "不偏：繰り返した推定の平均が合う",
       "layout": "plain",
       "textbook": "126（注）",
       "official": "11"
     },
     {
-      "page": 28,
+      "page": 36,
       "title": "t分布Student’s t-distribution",
       "layout": "visual",
       "textbook": "126",
       "official": "12–13"
     },
     {
-      "page": 29,
+      "page": 37,
       "title": "チャレンジ3　私たちは、1秒より遅い？",
       "layout": "challenge",
       "textbook": "125–126",
       "official": "9–11"
     },
     {
-      "page": 30,
+      "page": 38,
       "title": "答え合わせ3　0.08秒は、揺れの2個分",
       "layout": "worked",
       "textbook": "125–126",
       "official": "9–11"
     },
     {
-      "page": 31,
+      "page": 39,
       "title": "自分たちの記録なら、どうなる？",
       "layout": "try",
       "textbook": "125–126",
       "official": "9–13"
     },
     {
-      "page": 32,
+      "page": 40,
+      "title": "t分布表Student’s t table",
+      "layout": "topic",
+      "textbook": "",
+      "official": ""
+    },
+    {
+      "page": 41,
       "title": "表の読み方が、前回と逆になる",
       "layout": "plain",
       "textbook": "124・126–127・203",
       "official": "15–16"
     },
     {
-      "page": 33,
+      "page": 42,
       "title": "行20、列0.025",
       "layout": "plain",
       "textbook": "127・203",
       "official": "17–19"
     },
     {
-      "page": 34,
+      "page": 43,
       "title": "右の面積が2.5%になる境界",
       "layout": "visual",
       "textbook": "127・203",
       "official": "17–19"
     },
     {
-      "page": 35,
+      "page": 44,
       "title": "チャレンジ4　中央90%を残すには？",
       "layout": "challenge",
       "textbook": "127・203",
       "official": "20–21"
     },
     {
-      "page": 36,
+      "page": 45,
       "title": "答え合わせ4　中央90%、左右に5%ずつ",
       "layout": "worked",
       "textbook": "127・203",
       "official": "20–21"
     },
     {
-      "page": 37,
+      "page": 46,
       "title": "チャレンジ5　さっきのt=2は、表のどこ？",
       "layout": "challenge",
       "textbook": "127・203",
       "official": "15–21"
     },
     {
-      "page": 38,
+      "page": 47,
       "title": "答え合わせ5　表にない値も、範囲で読める",
       "layout": "worked",
       "textbook": "127・203",
       "official": "15–21"
     },
     {
-      "page": 39,
+      "page": 48,
+      "title": "カイ二乗分布Chi-square distribution",
+      "layout": "topic",
+      "textbook": "",
+      "official": ""
+    },
+    {
+      "page": 49,
       "title": "品質の話に戻ろう",
       "layout": "opening",
       "textbook": "",
       "official": "23"
     },
     {
-      "page": 40,
+      "page": 50,
       "title": "カイ二乗分布Chi-square distribution",
       "layout": "hero-math",
       "textbook": "127–128",
       "official": "23"
     },
     {
-      "page": 41,
+      "page": 51,
+      "title": "独立なずれを、二乗して足す",
+      "layout": "plain",
+      "textbook": "127–128",
+      "official": "23"
+    },
+    {
+      "page": 52,
       "title": "ロボット3体の、標準化されたずれ",
       "layout": "plain",
       "textbook": "123・128",
       "official": "23"
     },
     {
-      "page": 42,
+      "page": 53,
       "title": "チャレンジ6　ずれを、ひとつの値に",
       "layout": "challenge",
       "textbook": "127–128",
       "official": "23"
     },
     {
-      "page": 43,
+      "page": 54,
       "title": "答え合わせ6　小さすぎても、大きすぎても足す",
       "layout": "worked",
       "textbook": "127–128",
       "official": "23"
     },
     {
-      "page": 44,
+      "page": 55,
       "title": "自由度が増えると、形も変わる",
       "layout": "visual",
       "textbook": "128",
       "official": "23"
     },
     {
-      "page": 45,
+      "page": 56,
+      "title": "カイ二乗分布の期待値と分散",
+      "layout": "hero-math",
+      "textbook": "128",
+      "official": "23"
+    },
+    {
+      "page": 57,
       "title": "中心と広がりも、自由度で決まる",
       "layout": "plain",
       "textbook": "128",
       "official": "23"
     },
     {
-      "page": 46,
+      "page": 58,
       "title": "標本平均を引くと、自由度はn−1",
       "layout": "decomposition",
       "textbook": "128",
       "official": "23"
     },
     {
-      "page": 47,
+      "page": 59,
+      "title": "全体のずれを、二つに分ける",
+      "layout": "plain",
+      "textbook": "128",
+      "official": "23"
+    },
+    {
+      "page": 60,
       "title": "今日の3つの道具",
       "layout": "plain",
       "textbook": "122–128",
       "official": "24"
     },
     {
-      "page": 48,
+      "page": 61,
       "title": "AL：ここからは、自分で表を読む",
       "layout": "try",
       "textbook": "123–127・202–203",
       "official": "15–21"
     },
     {
-      "page": 49,
+      "page": 62,
       "title": "余裕があれば：1人の記録か、平均か",
       "layout": "optional",
       "textbook": "122–123",
       "official": "6–7"
     },
     {
-      "page": 50,
+      "page": 63,
       "title": "歴史の続き、もっと読みたい人へ",
       "layout": "optional",
       "textbook": "",

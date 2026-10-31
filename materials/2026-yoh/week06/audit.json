@@ -26,48 +26,48 @@
     {
       "official": "4–5",
       "topic": "Inference process, sample, mean, squared deviations, sample variance",
-      "revised": "6–9,15–16"
+      "revised": "6–10,19–20"
     },
     {
       "official": "6–7",
       "topic": "CLT, LLN, exact normal samples and variance of mean",
-      "revised": "10–14,17–18"
+      "revised": "12–18,21–22"
     },
     {
       "official": "9",
       "topic": "Known population variance Z versus estimated variance T",
-      "revised": "21–23,29–31"
+      "revised": "26–28,37–39"
     },
     {
       "official": "10–11",
       "topic": "Degrees of freedom and unbiased variance",
-      "revised": "24–27"
+      "revised": "30–35"
     },
     {
       "official": "12–13",
       "topic": "t symmetry, heavier tails and convergence to normal",
-      "revised": "28 and t exploration",
+      "revised": "36 and t exploration",
       "intentionalOmission": "Gamma density is outside textbook scope. Moment qualifications are recorded below rather than adding non-textbook memorisation."
     },
     {
       "official": "15–19",
       "topic": "t table versus normal table; df20 upper0.025 boundary2.0860",
-      "revised": "32–34"
+      "revised": "41–43"
     },
     {
       "official": "20–21",
       "topic": "df10 central90% gives one-tail0.05 and boundary1.8125",
-      "revised": "35–36"
+      "revised": "44–45"
     },
     {
       "official": "23",
       "topic": "Independent standard normals squared; shape; df; mean and variance; decomposition",
-      "revised": "39–46"
+      "revised": "49–58"
     },
     {
       "official": "24",
       "topic": "Summary",
-      "revised": "47–48"
+      "revised": "60–61"
     }
   ],
   "corrections": [
@@ -85,37 +85,37 @@
     },
     {
       "minutes": "10–20",
-      "slides": "5–9",
+      "slides": "5–10",
       "activity": "Anonymous one-second records; identify class model population"
     },
     {
       "minutes": "20–38",
-      "slides": "10–18",
+      "slides": "11–22",
       "activity": "Resampling, CLT and two four-minute challenges with visual answers"
     },
     {
       "minutes": "38–60",
-      "slides": "19–31",
+      "slides": "23–39",
       "activity": "Guinness, Student, df volunteer activity, t challenge and live calculator"
     },
     {
       "minutes": "60–80",
-      "slides": "32–38",
+      "slides": "40–47",
       "activity": "t-table reversal, central90 and probability-bracketing challenges"
     },
     {
       "minutes": "80–94",
-      "slides": "39–46",
+      "slides": "48–59",
       "activity": "Robot squared deviations, chi-square challenge and simulation"
     },
     {
       "minutes": "94–100",
-      "slides": "47–48",
+      "slides": "60–61",
       "activity": "Summary and independent AL start"
     }
   ],
   "optional": [
-    "Slides49–50: extra sample-size comparison and historical reading",
+    "Slides62–63: extra sample-size comparison and historical reading",
     "If discussion runs long, make Challenge5 probability bracketing optional, saving roughly six minutes",
     "Skip repeated t simulations after the live-data calculation; keep the t-table tasks"
   ],
@@ -157,5 +157,18 @@
       "url": "https://commons.wikimedia.org/wiki/File:Quincunx_(Galton_Box)_-_Galton_1889_diagram.png",
       "use": "Historical 1889 illustration, public domain"
     }
-  ]
+  ],
+  "presentation": {
+    "sequence": "Topic title, isolated formula, explanation or example, practice",
+    "topicPages": [
+      7,
+      13,
+      23,
+      29,
+      32,
+      40,
+      48
+    ],
+    "slides": 63
+  }
 }

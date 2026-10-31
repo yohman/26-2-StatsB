@@ -12,11 +12,11 @@ const go=(id,label='やってみよう！')=>`[${label}](${course}agenda.html?p&
 const small=s=>`<p class="small">${s}</p>`;
 const term=(ja,en)=>`${ja}<span class="en">${en}</span>`;
 function ruby(spec){return spec.split(' ').map(s=>{const [a,b]=s.split(':');return b?`<ruby>${a}<rt>${b}</rt></ruby>`:a;}).join('');}
-const terms={sample:term(ruby('標:ひょう 本:ほん'),'Sample'),pop:term(ruby('母:ぼ 集:しゅう 団:だん'),'Population'),clt:term(ruby('中:ちゅう 心:しん 極:きょく 限:げん 定:てい 理:り'),'Central limit theorem'),df:term(ruby('自:じ 由:ゆう 度:ど'),'Degrees of freedom'),unbiased:term(ruby('標:ひょう 本:ほん 不:ふ 偏:へん 分:ぶん 散:さん'),'Unbiased sample variance'),t:term('t分布','Student’s t-distribution'),chi:term('カイ二乗分布','Chi-square distribution')};
+const terms={sample:term(ruby('標:ひょう 本:ほん'),'Sample'),pop:term(ruby('母:ぼ 集:しゅう 団:だん'),'Population'),clt:term(ruby('中:ちゅう 心:しん 極:きょく 限:げん 定:てい 理:り'),'Central limit theorem'),df:term(ruby('自:じ 由:ゆう 度:ど'),'Degrees of freedom'),unbiased:term(ruby('標:ひょう 本:ほん 不:ふ 偏:へん 分:ぶん 散:さん'),'Unbiased sample variance'),t:term(ruby('t 分:ぶん 布:ぷ'),'Student’s t-distribution'),chi:term('カイ二乗分布','Chi-square distribution')};
 function add(title,body='',layout='plain',book='',official='',ja='',en=''){
  if(title==='標本平均')title=term(title,'Sample mean');
  const page=slides.length+1;slides.push(`<!-- _class: ${layout} -->\n\n## ${title}\n\n${body}${book?`\n\n<aside class="formula-ref">教科書 p.${book}</aside>`:''}`);
- notes.push({page,title:title.replace(/<[^>]*>/g,''),ja,en});mapping.push({page,title:notes.at(-1).title,layout,textbook:book,official});
+ notes.push({page,title:title.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,''),ja,en});mapping.push({page,title:notes.at(-1).title,layout,textbook:book,official});
 }
 const fig=(name,config)=>{writeFileSync(resolve(here,`images/${name}.svg`),P.chart({lo:0,hi:0,...config}));return `![width:1060px](images/${name}.svg)`;};
 const normal=(name,mu,sd,extra={})=>fig(name,{min:mu-4*sd,max:mu+4*sd,pdf:x=>M.normal(x,mu,sd),mean:mu,xlabel:'値',title:`平均 ${mu}、標準偏差 ${Number(sd.toFixed(3))}`,...extra});
@@ -85,18 +85,64 @@ for(let i=0;i<slides.length;i++){
  const renumber=s=>s.replace(/(チャレンジ|答え合わせ)\d+/g,`$1${challengeNumber}`);
  slides[i]=renumber(slides[i]);notes[i]={...notes[i],page:i+1,title:renumber(notes[i].title)};mapping[i]={...mapping[i],page:i+1,title:renumber(mapping[i].title)};
 }
+// Give a new concept a quiet title beat, then introduce its formula and meaning.
+// Keys refer to the stable 50-slide source sequence above, never published pages.
+const topicIntros=new Map([
+ [7,[term(ruby('標:ひょう 本:ほん 平:へい 均:きん'),'Sample mean'),'同じ記録でも、誰を選ぶかで平均は変わります。ここからは一人の値ではなく、選んだ標本の平均を主役にします。','Introduce the sample mean as the new object of interest. Ask how the average changes when a different set of students is selected.']],
+ [11,[terms.clt,'さっきの平均の形に、名前をつけます。中心極限定理。まずこの名前を伝え、次にどの平均がどう近づくのかを説明します。','Name the central limit theorem after students have seen repeated means. Then explain the conditions and what distribution is being approximated.']],
+ [19,[terms.t,'ここからはt分布です。どうして新しい分布が必要になったのか、少ない実験で品質を知りたかった醸造所の話から始めます。','Introduce Student’s t-distribution, then ask why another distribution was needed. Begin with the brewer’s problem of learning from few experiments.']],
+ [24,[terms.df,'次のキーワードは自由度です。まず四人の数を使って、自由に選べる数がいくつ残るかを実際に考えます。','Name degrees of freedom before the four-volunteer demonstration. Ask how many numbers remain free once their mean is fixed.']],
+ [26,[terms.unbiased,'次は標本不偏分散。さっきの自由度の話を、分散の分母につなげます。まず言葉を確認して、次に公式を見ます。','Introduce unbiased sample variance. Connect the lost degree of freedom to the denominator before explaining the estimator.']],
+ [32,[term(ruby('t 分:ぶん 布:ぷ 表:ひょう'),'Student’s t table'),'次はt分布表です。計算したtと、表で読む境界を混同しないように、何を入れて何が出る表かを確認します。','Introduce the t table as a new task. Distinguish the observed statistic from a tabulated boundary, then identify the table inputs and output.']],
+ [39,[term(ruby('カイ 二:に 乗:じょう 分:ぶん 布:ぷ'),'Chi-square distribution'),'最後の新しい分布はカイ二乗分布です。平均だけでなく、ずれの大きさも大切だったという品質の話に戻ります。','Introduce the chi-square distribution. Return to the quality-control story to motivate measuring the size of deviations as well as the mean.']]
+]);
+const formulaIntros=new Map([
+ [10,['平均の標準偏差',String.raw`\operatorname{SD}(\bar X)=\frac{\sigma}{\sqrt n}`,'123','6–7','平均の揺れの大きさを一行で見ます。人数の平方根で割るので、九人なら三分の一になります。次の図で確かめます。','Give the standard deviation of a sample mean its own slide. Dividing by the square root of nine gives one third the individual SD. The next slide visualises this.']],
+ [13,['正規母集団からの標本平均',null,'122–123','7','母集団が正規分布の場合の式です。中心は母平均のまま、分散は人数で割ります。次に、近似の場合との違いを整理します。','Show the exact normal sampling distribution on its own. Its mean stays at mu and its variance is sigma-squared over n. Next distinguish this from a CLT approximation.']],
+ [27,['不偏分散の期待値',null,'126（注）','11','不偏という言葉を式で見ると、繰り返し求めたs²の期待値が母分散になる、という意味です。次に一回の推定値との違いを説明します。','Show unbiasedness as an expectation identity. Over repeated samples, the estimator averages to the population variance. Next distinguish that from one estimate.']],
+ [45,['カイ二乗分布の期待値と分散',null,'128','23','期待値は自由度、分散は自由度の二倍です。ここでは式だけに注目し、次に三体のロボットの場合に戻って意味を確かめます。','Give the chi-square mean and variance their own formula slide. Then return to the three-robot example to interpret the quantities.']]
+]);
+const originals=slides.splice(0),originalNotes=notes.splice(0),originalMapping=mapping.splice(0);
+const originalPageToNew=new Map();
+const originalPageStart=new Map(),originalPageEnd=new Map();
+const formulaBlock=s=>s.match(/\$\$\n[\s\S]*?\n\$\$/)?.[0];
+for(let i=0;i<originals.length;i++){
+ const oldPage=i+1,entry=topicIntros.get(oldPage);
+ originalPageStart.set(oldPage,slides.length+1);
+ if(entry)add(entry[0],'','topic','','',entry[1],entry[2]);
+ let slide=originals[i];
+ const formula=formulaIntros.get(oldPage);
+ if(formula){
+  const [title,expression,book,official,ja,en]=formula;
+  add(title,expression?math(expression):formulaBlock(slide),'hero-math',book,official,ja,en);
+  if(!expression)slide=slide.replace(formulaBlock(slide),'');
+ }
+ if(oldPage===40)slide=slide.replace(/\n\n<p class="small">[\s\S]*?<\/p>/,'');
+ if(oldPage===46){
+  slide=slide.replace('<!-- _class: decomposition -->','<!-- _class: hero-math decomposition -->');
+  slide=slide.replace(/\n\n全体のずれ[\s\S]*?(?=\n\n<aside)/,'');
+ }
+ const page=slides.length+1;
+ originalPageToNew.set(oldPage,page);
+ slides.push(slide);notes.push({...originalNotes[i],page});mapping.push({...originalMapping[i],page});
+ if(oldPage===40)add('独立なずれを、二乗して足す',`<p class="big">標準正規分布の値を、二乗。<br>それを、独立にν個足す。</p>\n\n平方和なので、U ≥ 0。\n\n${small('次のロボット例では、既知の母平均と母標準偏差で標準化する。')}`,'plain','127–128','23','式の足し算を、言葉で言い直します。負のずれも二乗すると正になるので、合計は負にはなりません。独立な標準正規値という条件を確かめます。','Translate the formula into words. Squaring makes negative deviations positive, so the sum cannot be negative. Keep the assumptions of independence and standard normality explicit.');
+ if(oldPage===46)add('全体のずれを、二つに分ける',`<p class="big">全体のずれ<br>＝ 標本内のずれ ＋ 平均のずれ。</p>\n\n自由度も n ＝ (n−1) ＋ 1。`,'plain','128','23','前の式の三つの部分を、全体、標本内、平均のずれとして読み直します。標本平均を求めると自由度を一つ使う話を、ここで回収します。','Read the preceding identity as total variation, within-sample variation, and variation of the mean. Revisit the one degree of freedom used to estimate the mean.');
+ originalPageEnd.set(oldPage,slides.length);
+}
+const remapPageReferences=value=>value.replace(/\b(\d+)(?:–(\d+))?\b/g,(_,a,b)=>b?`${originalPageToNew.get(+a)}–${originalPageToNew.get(+b)}`:String(originalPageToNew.get(+a)));
 const style=`<style>
 section{background:#fbfaf6;color:#253c48;font-family:'Hiragino Sans','Noto Sans JP',sans-serif;font-size:30px;padding:54px 70px;line-height:1.55;justify-content:center}h2{font-size:43px;line-height:1.45;margin:0 0 28px;color:#194a60}p{margin:12px 0}strong{color:#176d82}.big{font-size:47px;line-height:1.65;font-weight:650}.small{font-size:18px;color:#6c7f85;line-height:1.5}.en{display:block;font:22px/1.4 Arial,sans-serif;color:#7b8d92;margin-top:7px}section::after{font-size:16px;color:#7c8c91}.formula-ref{position:absolute;bottom:40px;left:70px;font-size:18px;color:#2b88b0}section.hero-math h2{font-size:27px;color:#738a93}section.hero-math .katex-display{font-size:1.7em}section.hero-math p{font-size:23px}section.hero-math .small{font-size:19px}.history{background:#f2efe6}.history img{object-fit:contain;display:block;margin:auto}.portrait{display:grid;grid-template-columns:360px 1fr;gap:60px;align-items:center}.portrait img{max-height:450px;max-width:340px}.portrait .big{font-size:40px}.opening{background:#173c50;color:white}.opening h2{color:white}.opening .big{font-size:54px}.visual img{display:block;max-height:385px;max-width:100%;margin:auto;object-fit:contain}.visual .katex-display{font-size:1em;margin:15px 0}.visual p{margin:10px 0}.visual h2{margin-bottom:15px}.challenge{background:#fff8e8;border-top:9px solid #be8530}.challenge h2{color:#825519}.time{font-size:21px;color:#825519;font-weight:700}.try{background:#edf5ef;border-top:7px solid #388065}.optional{background:#f2f5f6}section a{color:#237da7}section a[href*="activity="]{display:inline-block;background:#176d82;color:white;text-decoration:none;padding:12px 25px;border-radius:7px;font-size:25px}table{width:100%;border-collapse:collapse;font-size:25px}th,td{padding:12px;border-bottom:1px solid #cbd9de}th{background:#dfedf4}section.worked{display:grid;grid-template-columns:1fr 1.1fr;grid-template-rows:auto 1fr auto;gap:10px 35px;padding-top:38px;padding-bottom:75px}.worked h2{grid-column:1/-1;font-size:36px;margin:0}.work-copy{grid-column:1;font-size:23px;align-self:center}.work-copy .small{font-size:17px;color:#176d82;margin:9px 0}.work-copy .katex-display{font-size:.85em;margin:12px 0}.work-chart{grid-column:2;align-self:center}.work-chart img{width:100%;height:auto;max-height:330px;object-fit:contain}.conclusion{grid-column:1/-1;font-size:28px;font-weight:700;color:#176d82;border-top:1px solid #b9d1d7;padding-top:12px}.decomposition .katex-display{font-size:1.04em}.decomposition p{font-size:28px}
 ${terminologyStyle}
+section.topic{text-align:center}section.topic h2{font-size:96px;line-height:1.65;margin:0;color:#194a60;font-weight:650}section.topic h2 .en{font-size:32px;font-weight:400;margin-top:22px}section.topic h2 ruby rt{font-size:.2em}section.topic footer,section.topic::after{display:none}section.hero-math .katex-display{font-size:2.5em}section.hero-math.decomposition .katex-display{font-size:1.1em}
 </style>`;
 const annotated=slides.map(s=>annotateJapaneseTerms(s.replaceAll('\\mathrm{秒}','\\text{秒}')));
 annotated[0]+='\n\n<style>section.visual p:has(img){display:flex;justify-content:center}section.galton-video{padding:0}section.galton-video h2,section.galton-video footer,section.galton-video::after{display:none}section.galton-video .galton-video-link{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:flex-end;box-sizing:border-box;padding:32px 40px;color:white;text-decoration:none;font-size:23px;font-weight:600;text-shadow:0 1px 6px #000;background:linear-gradient(transparent 80%,#0006)}</style>';
 // The normal-table examples retain a direct, new-tab resource link in the PDF.
-for(const index of [16,17])annotated[index]+= `\n\n<aside class="table-resource"><a target="_blank" rel="noopener" href="${course}viewer.html?p&file=materials%2F2026-yoh%2Fweek06%2Fstandard-normal-table.pdf&title=Standard%20normal%20table&week=W06">標準正規分布表を開く ↗</a></aside>`;
+for(const oldPage of [17,18])annotated[originalPageToNew.get(oldPage)-1]+= `\n\n<aside class="table-resource"><a target="_blank" rel="noopener" href="${course}viewer.html?p&file=materials%2F2026-yoh%2Fweek06%2Fstandard-normal-table.pdf&title=Standard%20normal%20table&week=W06">標準正規分布表を開く ↗</a></aside>`;
 writeFileSync(resolve(here,'w6.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 6'\n---\n\n${style}\n<style>.table-resource{position:absolute;bottom:40px;right:70px;font-size:18px}section.visual{padding-top:35px;padding-bottom:75px}section.visual img{height:300px!important;width:auto!important;max-height:300px;max-width:100%}section.visual .katex-display{font-size:.95em;margin:12px 0}section.visual p{margin:8px 0}</style>\n\n${annotated.join('\n\n---\n\n')}\n`);
 writeFileSync(resolve(here,'w6.notes.json'),JSON.stringify({deck:'materials/2026-yoh/week06/w6.pdf',slides:notes},null,2)+'\n');
 writeFileSync(resolve(here,'source-map.json'),JSON.stringify({official:'materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pptx',slides:mapping,decisions:['Follow sample/CLT, t/df/unbiased variance, t table, chi-square order.','Move formal hypothesis-testing decisions and gamma density outside this textbook-focused session.','Correct official table wording: 2.0860 is a coordinate, not a probability.','Use E(T)=0 only when df>1; variance finite only for df>2. These optional technical qualifications are in the audit, not an added memorisation task.','Keep AL homework cell answers private.']},null,2)+'\n');
-writeFileSync(resolve(here,'audit.json'),JSON.stringify({
+const audit={
  summary:['Samples and the distribution of sample means','Central limit theorem and exact normal-population case','Known-sigma Z versus estimated-sigma T','Degrees of freedom, sample variance and unbiased variance','Upper-tail t tables, quantiles and central intervals','Chi-square as squared independent standard normals and its decomposition'],
  priorDeck:{slides:13,gaps:['Population/sample review','Sample mean distribution and standard error','CLT versus law of large numbers','Exact normal sampling versus asymptotic normality','Degrees of freedom worked demonstration','n versus n-1 and unbiasedness','t shape across degrees of freedom','t table inputs and outputs','Official df20 / 0.025 and df10 central90 examples','Chi-square definition, nonnegativity and degrees of freedom']},
  coverage:[
@@ -111,8 +157,12 @@ writeFileSync(resolve(here,'audit.json'),JSON.stringify({
  {official:'24',topic:'Summary',revised:'47–48'}],
  corrections:['A t-table cell is a coordinate, not an upper-tail probability.','A t distribution has expectation zero only for df>1. Variance is df/(df-2) for df>2, infinite for 1<df<=2, and undefined for df<=1.','The supplied t-density expression is not copied: the textbook teaches the statistic and table, not the gamma-density calculation.','A chi-square sum about known mu has df=n; residual variation about an estimated mean has df=n-1.','Galton board: more beads improve empirical proportions; more rows change the binomial law and its normal approximation.'],
  pacing100Minutes:[{minutes:'0–10',slides:'1–4',activity:'Historical board mystery; predict and drop beads'},{minutes:'10–20',slides:'5–9',activity:'Anonymous one-second records; identify class model population'},{minutes:'20–38',slides:'10–18',activity:'Resampling, CLT and two four-minute challenges with visual answers'},{minutes:'38–60',slides:'19–31',activity:'Guinness, Student, df volunteer activity, t challenge and live calculator'},{minutes:'60–80',slides:'32–38',activity:'t-table reversal, central90 and probability-bracketing challenges'},{minutes:'80–94',slides:'39–46',activity:'Robot squared deviations, chi-square challenge and simulation'},{minutes:'94–100',slides:'47–48',activity:'Summary and independent AL start'}],
- optional:['Slides49–50: extra sample-size comparison and historical reading','If discussion runs long, make Challenge5 probability bracketing optional, saving roughly six minutes','Skip repeated t simulations after the live-data calculation; keep the t-table tasks'],
+ optional:[`Slides${originalPageToNew.get(49)}–${originalPageToNew.get(50)}: extra sample-size comparison and historical reading`,'If discussion runs long, make Challenge5 probability bracketing optional, saving roughly six minutes','Skip repeated t simulations after the live-data calculation; keep the t-table tasks'],
  dataPolicy:'Student values are anonymous numeric inputs, processed in browser memory only. No upload, persistence or public collection. Default values are labeled fictional. The class finite population does not represent all university students.',
  sources:[{url:'https://mathshistory.st-andrews.ac.uk/Biographies/De_Moivre/',use:'1733 normal approximation and historical context'},{url:'https://www.maths.dur.ac.uk/users/clare.wallace/Prob1/09-limits.html',use:'de Moivre special case, later Laplace extension'},{url:'https://collections.ucl.ac.uk/Details/science/60000062',use:'1873 Galton-design quincunx museum record'},{url:'https://academic.oup.com/biomet/article-abstract/6/1/1/225634',use:'Student 1908 original publication'},{url:'https://personal.morris.umn.edu/~jongmink/Stat2611/s1.pdf',use:'Zabell 2008 history, Guinness and pseudonymous publication; avoid notebook-name myth'},{url:'https://www.itl.nist.gov/div898/handbook/eda/section3/eda3672.htm',use:'Independent critical-value check; NIST columns use cumulative probabilities, converted to upper tail here'},{url:'https://commons.wikimedia.org/wiki/File:William_Sealy_Gosset.jpg',use:'1908 portrait, public domain'},{url:'https://commons.wikimedia.org/wiki/File:Abraham_de_moivre.jpg',use:'Portrait, public domain'},{url:'https://commons.wikimedia.org/wiki/File:Quincunx_(Galton_Box)_-_Galton_1889_diagram.png',use:'Historical 1889 illustration, public domain'}]
-},null,2)+'\n');
+};
+audit.coverage=audit.coverage.map(row=>({...row,revised:remapPageReferences(row.revised)}));
+audit.pacing100Minutes=audit.pacing100Minutes.map(row=>({...row,slides:`${originalPageStart.get(Number(row.slides.split('–')[0]))}–${originalPageEnd.get(Number(row.slides.split('–')[1]))}`}));
+audit.presentation={sequence:'Topic title, isolated formula, explanation or example, practice',topicPages:mapping.filter(s=>s.layout==='topic').map(s=>s.page),slides:slides.length};
+writeFileSync(resolve(here,'audit.json'),JSON.stringify(audit,null,2)+'\n');
 console.log(`${slides.length} slides; challenge pages ${mapping.filter(s=>s.layout==='challenge').map(s=>s.page).join(', ')}.`);

@@ -5,7 +5,7 @@ const read=file=>fs.readFileSync(file,'utf8');
 const deck=week=>read(`materials/2026-yoh/week${week}/w${Number(week)}.md`).split(/\n---\n/).filter(s=>/^## /m.test(s));
 const w3=deck('03'),w6=deck('06');
 assert.equal(w3.length,38);
-assert.equal(w6.length,50);
+assert.equal(w6.length,63);
 assert(w3.at(-1).includes('AL：式に入れる前に、4つ書く'));
 assert(w6[0].includes('玉は、どこに集まる？'));
 assert(!w3.some(s=>/## なぜt分布|## なぜカイ二乗|## 正規分布：/.test(s)));
@@ -23,4 +23,4 @@ for(const id of ['board','sampling','t','chi'])assert(six.includes(`id="week-6-$
 assert(!six.includes('data-example-scenarios="delivery,pairs"'));
 assert(six.includes('materials/2026-yoh/week06/w6.pdf'));
 assert(!read('content/weeks/03-poisson.md').includes('standard-normal-table'));
-console.log('Week 3/6 split: Week 3 unchanged; independent 50-slide Week 6 curriculum and ordered explorations.');
+console.log('Week 3/6 split: Week 3 unchanged; independent 63-slide Week 6 curriculum and ordered explorations.');
