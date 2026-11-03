@@ -4,7 +4,7 @@ date: 2026-11-04
 publish_at: 2026-01-01T00:00:00+09:00
 title_ja: 確率分布：連続確率分布（後半）
 title_en: Probability Distributions: Continuous Probability Distributions (Part 2)
-formula: s² = Σ(Xᵢ−X̄)² / (n−1)
+formula: σ̂ₓ² = Σ(Xᵢ−X̄)² / (n−1)
 image: assets/images/week-06-chi-square.png
 prepare_en: Review the difference between sample variance and unbiased sample variance.
 ---
@@ -29,7 +29,8 @@ prepare_en: Review the difference between sample variance and unbiased sample va
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pdf) {supplementary}
 - [標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week06/standard-normal-table.pdf) {resource}
-- [t分布表とクラスの記録 / t table and class records](materials/2026-yoh/week06/explore.html?mode=t) {resource}
+- [t分布表 / Student's t table](materials/2026-yoh/week06/t-table.pdf) {resource}
+- [バスケットボールとt分布表 / Basketball and the t table](materials/2026-yoh/week06/explore.html?mode=t) {resource}
 - [AL用ワークシート](weeks/06-continuous-distributions-ii/06_AL用ワークシート.xlsx) {worksheet}
 - [Yoh lecture: sampling distribution of the mean and central limit theorem](other material/2025 yoh/07 確率分布_2_連続確率分布/w8.pdf) {yoh}
 - [Yoh lecture: normal and chi-square distributions](other material/2025 yoh/07 確率分布_2_連続確率分布/w9-6.pdf) {yoh}

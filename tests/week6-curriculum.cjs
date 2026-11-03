@@ -2,78 +2,48 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),M=require('../a
 const read=p=>fs.readFileSync(p,'utf8'),base='materials/2026-yoh/week06/';
 const deck=read(base+'w6.md'),plain=deck.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 const slides=deck.split(/\n---\n/).filter(s=>/^## /m.test(s));
-assert.equal(slides.length,62);
-assert(slides[8].includes(String.raw`Z=\frac{\bar X-E(\bar X)}{\sqrt{Var(\bar X)}}`));
-assert(slides[9].includes(String.raw`Z=\frac{\bar X-\mu_x}{\sqrt{\frac{\sigma_x^2}{n}}}`));
-assert(slides[9].includes(String.raw`\frac{\text{標本平均}-\text{母平均}}{\sqrt{\frac{\text{母分散}}{\text{標本数}}}}`));
-for(const slide of slides.slice(8,10)){
- assert(slide.includes('教科書 p.123（上段の式'));
- assert(!slide.includes(String.raw`\operatorname{SD}`));
- assert(!slide.includes(String.raw`E(\bar X)=\mu`));
+const map=JSON.parse(read(base+'source-map.json')),notes=JSON.parse(read(base+'w6.notes.json')).slides,audit=JSON.parse(read(base+'audit.json'));
+assert.equal(slides.length,63);assert.equal(map.slides.length,slides.length);assert.equal(notes.length,slides.length);
+assert.deepEqual([...new Set(map.slides.filter(s=>['clt','t','chi'].includes(s.part)).map(s=>s.part))],['clt','t','chi']);
+const byId=id=>{const s=map.slides.find(s=>s.id===id);assert(s,id);return slides[s.page-1];};
+for(const id of ['clt-title','t-title','chi-title','df-title','uv-title','t-table-title']){
+ const s=byId(id);assert(s.includes('_class: topic'));assert(s.includes('class="en"'));assert(!s.includes('$$'));assert(!s.includes('class="big"'));
 }
-assert(slides[10].includes(String.raw`\sqrt{\frac{0.20^2}{9}}`));
-assert(slides[0].includes('_class: galton-video'));
-assert(slides[0].includes('![bg cover](images/galton-opening.jpg)'));
-assert(slides[0].includes('https://www.youtube.com/watch?v=zeJD6dqJ5lo'));
-assert(fs.existsSync(base+'images/galton-opening.jpg'));
-for(const page of [24]){
- const slide=slides[page-1];
- assert(slide.includes('_class: photo-story'));
- assert(slide.includes('class="full-frame-image"'));
- assert(slide.includes('class="photo-caption"'));
- assert(!slide.includes('class="portrait"'));
- assert(!slide.includes('class="small"'));
+for(const id of ['gosset','curry-photo','pearson']){const s=byId(id);assert(s.includes('_class: photo-story'));assert(s.includes('class="photo-image"'));assert(s.includes('class="photo-caption"'));}
+assert(byId('video').includes('https://www.youtube.com/watch?v=zeJD6dqJ5lo'));
+assert(!/Moivre|1733|1秒|ロボット|Gamma/.test(plain));
+for(const s of ['Curry','Karl Pearson','60:40','11人と9人','15人と5人','1413.20','353.3','27.4','2.0860','1.8125'])assert(plain.includes(s),s);
+assert(byId('curry-mean-answer').includes(String.raw`\frac{143}{5}=28.6`));
+for(const [key,entry] of Object.entries(map.formulaRegistry)){
+ assert(entry.page);assert(entry.tex);assert(map.slides.some(s=>s.formula===key),key);
 }
-assert(!/Moivre|1733|UCmPmkHqHXk/.test(deck));
-assert(deck.includes('object-position:50% 25%'));
-assert(deck.includes('object-fit:cover'));
-const notes=JSON.parse(read(base+'w6.notes.json')).slides;
-assert.equal(notes.length,slides.length);
-assert(!/Moivre|1733|UCmPmkHqHXk/.test(JSON.stringify(notes)));
-for(const [i,note] of notes.entries()){assert.equal(note.page,i+1);assert(note.ja.length>30&&note.en.length>50);assert(!/津村|Tsumura|Yoh.?2025/.test(note.ja+note.en));}
-const guards=require('../assets/slide-challenge-guard.js');
-let count=0;
-for(const [i,slide] of slides.entries()){
- const text=slide.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
- if(/_class: challenge -->/.test(slide)){count++;assert(text.includes(`チャレンジ${count}`));assert(guards.isChallengeText(text.slice(text.indexOf('チャレンジ'))));assert(/_class: worked -->/.test(slides[i+1]));}
- if(/_class: worked -->/.test(slide)){for(const step of ['①','②','③','④'])assert(slide.includes(step));assert(slide.includes('images/'));}
+for(const s of map.slides){
+ const slide=slides[s.page-1];
+ if(s.formula){assert(map.formulaRegistry[s.formula]);assert(slide.includes(map.formulaRegistry[s.formula].tex)||s.id==='one-sample');assert(s.textbook);}
+ if(s.layout.startsWith('hero-math')){assert.equal((slide.match(/\$\$/g)||[]).length,2);assert(s.textbook);}
+ if(s.layout==='worked'){for(const step of ['①','②','③','④'])assert(slide.includes(step));assert(slide.includes('images/'));}
 }
-assert.equal(count,6);
-for(const s of ['中心極限定理','自由度','標本不偏分散','母集団','カイ二乗分布','Student','2.0860','1.8125'])assert(plain.includes(s),s);
-assert(plain.includes('厳密に正規分布'));assert(plain.includes('平方根s自体は一般に不偏ではない'));
-assert(Math.abs(M.summary([8,10,12]).s2-4)<1e-12);
-assert.equal(M.summary([8,10,12]).ss,8);assert.equal(M.summary([8,10,12]).df,2);
-assert.equal(M.chiStatistic([-1,0,2]),5);
-assert(Math.abs(M.tStatistic([.8,.9,1,1.1,1.2],1))<1e-12);
-assert(Number.isNaN(M.tStatistic([1,1,1],1)));
-assert.equal(M.table[20][2],2.086);assert.equal(M.table[10][1],1.8125);
-assert(Math.abs((1.08-1)/(.2/Math.sqrt(25))-2)<1e-12);
-for(const n of [4,12,20])assert(Math.abs(M.binomial(n).reduce((a,b)=>a+b,0)-1)<1e-12);
-function integrate(f,a,b){const n=20000,h=(b-a)/n;let s=0;for(let i=0;i<n;i++)s+=f(a+(i+.5)*h)*h;return s;}
-assert(Math.abs(integrate(x=>M.tPdf(x,20),2.086,40)-.025)<2e-5);
-assert(Math.abs(integrate(x=>M.tPdf(x,10),-1.8125,1.8125)-.9)<2e-5);
-assert(Math.abs(integrate(x=>M.chiPdf(x,3),0,80)-1)<1e-4);
-const map=JSON.parse(read(base+'source-map.json'));assert.equal(map.slides.length,slides.length);
-const topics=map.slides.filter(s=>s.layout==='topic');
-assert.equal(topics.length,7);
-for(const topic of topics){
- const slide=slides[topic.page-1],body=slide.slice(slide.indexOf('\n## '));
- assert(!body.includes('$$'),'Topic introductions contain no formula');
- assert(!body.includes('<aside'),'Topic introductions contain no reference clutter');
- assert(body.includes('class="en"'),'Topic titles have secondary English');
- assert(!body.includes('<p'),'Topic introductions contain only the title');
+assert(byId('t-formula').includes(String.raw`\widehat{\sigma_x^2}`));
+assert(!byId('t-formula').includes(String.raw`s/\sqrt`));
+assert(byId('uv-formula').includes(String.raw`\frac{1}{n-1}\sum(X_i-\bar X)^2`));
+assert(byId('chi-decomposition').includes(String.raw`n(\bar X-\mu_x)^2`));
+for(const id of ['clt-challenge','clt-answer']){assert(byId(id).includes('standard-normal-table.pdf'));assert(byId(id).includes('target="_blank"'));}
+for(const id of ['table-comparison','table-20','table-tail','table-challenge','table-answer']){assert(byId(id).includes('t-table.pdf'));assert(byId(id).includes('target="_blank"'));}
+const guards=require('../assets/slide-challenge-guard.js');let count=0;
+for(const [i,s] of map.slides.entries()){
+ assert.equal(s.page,i+1);assert.equal(notes[i].page,i+1);assert(notes[i].ja.length>30&&notes[i].en.length>50,s.id);assert(!/津村|Tsumura|Yoh.?2025/.test(notes[i].ja+notes[i].en));
+ if(s.layout==='challenge'){count++;const text=slides[i].replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');assert(text.includes(`チャレンジ${count}`));assert(guards.isChallengeText(text.slice(text.indexOf('チャレンジ'))));assert.equal(map.slides[i+1].layout,'worked');}
 }
-for(const term of ['t分布','標本不偏分散','中心極限定理','自由度','カイ二乗分布'])assert(topics.some(t=>t.title.includes(term)),term);
-for(const entry of map.slides.filter(s=>s.layout==='hero-math')){
- const slide=slides[entry.page-1];
- assert.equal((slide.match(/\$\$/g)||[]).length,2,'Each formula slide has one display block');
- assert(!slide.includes('<p'),'Formula slides keep explanations on subsequent slides');
-}
-for(const page of [17,18].map(p=>map.slides.find(s=>s.title.startsWith(p===17?'チャレンジ2':'答え合わせ2'))?.page))assert(slides[page-1].includes('standard-normal-table.pdf'));
-for(const s of map.slides)if(/\$/.test(slides[s.page-1]))assert(s.textbook,`Formula page ${s.page} has a textbook reference`);
+assert.equal(count,5);assert.equal(audit.sections.length,3);
+for(const c of audit.coverage)for(const id of c.ids)byId(id);
+assert(audit.coverage.some(c=>c.official==='20–21'));assert(audit.coverage.some(c=>c.official==='23'));
 for(const mode of ['board','sampling','t','chi'])assert(deck.includes(`activity=w6-${mode}`));
-const lab=read('assets/week6-lab.js');
-assert(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest/.test(lab),'Student inputs remain local and unpersisted');
-assert(lab.includes('s=0なのでtを計算できません'));
-assert(fs.existsSync(base+'standard-normal-table.pdf'));
-console.log('Week 6: 62 slides, new opening video, no de Moivre slide, seven topic introductions, six guarded challenges and aligned bilingual notes verified.');
+assert(byId('al').includes('各セルの解答は示しません'));
+const curry=M.summary([9,49,46,11,28]);assert.equal(curry.mean,28.6);assert(Math.abs(curry.ss-1413.2)<1e-9);assert(Math.abs(curry.s2-353.3)<1e-9);assert(Math.abs(M.tStatistic([9,49,46,11,28],27.4)-.142756)<1e-5);
+const heights=[160,165,170],mu=M.mean(heights);assert.equal(mu,165);assert.equal(heights.reduce((s,x)=>s+(x-160)**2,0)/25,5);assert.equal(heights.reduce((s,x)=>s+(x-mu)**2,0)/25,2);assert.equal(3*(mu-160)**2/25,3);
+assert.equal(M.table[20][2],2.086);assert.equal(M.table[10][1],1.8125);
+function integral(fn,a,b){const n=20000,h=(b-a)/n;let s=0;for(let i=0;i<n;i++)s+=fn(a+(i+.5)*h)*h;return s;}
+assert(Math.abs(integral(x=>M.tPdf(x,20),2.086,40)-.025)<2e-5);assert(Math.abs(integral(x=>M.tPdf(x,10),-1.8125,1.8125)-.9)<2e-5);
+const lab=read('assets/week6-story-lab.js');assert(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest/.test(lab));assert(lab.includes('9, 49, 46, 11, 28'));assert(lab.includes('160, 165, 170'));assert(lab.includes('推定分散が0なのでtを計算できません'));assert(lab.includes('draw20'));assert(lab.includes('交点は確率ではなく'));
+assert(fs.existsSync(base+'t-table.pdf'));assert(fs.existsSync(base+'standard-normal-table.pdf'));
+console.log('Week6 rebuilt: 63 slides, three ordered chapters, textbook formula registry, restored original stories, five guarded challenges, visual answers and aligned explorations.');
