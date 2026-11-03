@@ -12,6 +12,13 @@ const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
 const bin=x=>Math.min(25,Math.floor((x-1)/.2+1e-9));
 function die(value,x,y){return `<g data-die="${value}" transform="translate(${x},${y})"><rect width="25" height="25" rx="4" fill="#fff" stroke="#666" stroke-width="1.1"/>${pips[value].map(([a,b])=>`<circle cx="${5.5+7*a}" cy="${5.5+7*b}" r="2.1" fill="#222"/>`).join('')}</g>`;}
 
+export function diceZSetup(here){
+ const sample=long[2],sum=sample.reduce((s,x)=>s+x,0),mean=avg(sample);
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420" role="img" aria-label="前に使った25回の標本C。合計106、平均4.24。公平なサイコロの母平均3.5、母分散約2.9167。"><g font-family="Arial,Hiragino Sans,sans-serif" fill="#222"><rect x="25" y="10" width="330" height="390" rx="5" fill="#fafafa" stroke="#84549b" stroke-width="3"/><text x="45" y="50" fill="#84549b" font-size="29" font-weight="bold">C</text><text x="332" y="50" text-anchor="end" fill="#84549b" font-size="29" font-weight="bold">平均 ${mean.toFixed(2)}</text><g transform="translate(55,85) scale(1.5)">${sample.map((v,i)=>die(v,(i%5)*37,Math.floor(i/5)*37)).join('')}</g><text x="430" y="65" font-size="24" fill="#84549b">先ほどの25回の出目 / Sample C</text><text x="430" y="130" font-size="38">合計 ${sum} ÷ 25回 ＝ ${mean.toFixed(2)}</text><text x="430" y="205" font-size="25">公平なサイコロの既知の値</text><text x="430" y="245" font-size="29">母平均 μₓ ＝ 3.5</text><text x="430" y="290" font-size="29">母分散 σₓ² ≈ 2.9167</text><text x="430" y="350" font-size="21" fill="#555">この母平均・母分散は、出目1〜6のモデルの値。</text><text x="430" y="382" font-size="21" fill="#555">今回の25個から推定した値ではない。</text></g></svg>`;
+ writeFileSync(resolve(here,'images/dice-z-sample-c.svg'),svg);
+ return '![width:1060px](images/dice-z-sample-c.svg)';
+}
+
 export function diceSamples(here,n,stage){
  const samples=n===4?short:long,means=samples.map(avg);
  const cards=samples.map((sample,k)=>{
