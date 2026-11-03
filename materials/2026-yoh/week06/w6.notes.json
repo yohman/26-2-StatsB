@@ -135,306 +135,318 @@
     },
     {
       "page": 23,
-      "title": "サイコロの標本平均は、Z ≈ 2.17",
-      "ja": "差は4.24引く3.5で0.74。分母は母分散2.9167を二十五で割ってから平方根を取り、約0.3416です。0.74を0.3416で割ると約2.17。これは一個の出目のzではなく、二十五回の平均のzです。グラフは平均の分布の正規近似で、サイコロの平均が厳密に正規分布になるわけではありません。ここでは確率の表はまだ読まず、zの計算と意味を確認します。次の得点の問題を自分で解いてもらいます。",
-      "en": "The difference is 4.24 minus 3.5, or 0.74. Divide population variance 2.9167 by twenty-five, then take the square root to obtain about 0.3416. Dividing 0.74 by that spread gives about 2.17. This standardises the mean of twenty-five rolls, not an individual die outcome. The graphic is a normal approximation to the sampling distribution, not an exact normal law. Establish the calculation and interpretation before students tackle the score challenge."
+      "title": "サイコロの標本平均を、Zにする",
+      "ja": "まず四つの条件だけを読みます。標本Cの平均は4.24、母平均は3.5、母分散は約2.9167、標本の大きさは25。まだ計算は見せず、標本から得た値と既知の母数を区別しましょう。",
+      "en": "Read only the four inputs: sample C has mean 4.24, the known population mean is 3.5, population variance is approximately 2.9167 and sample size is twenty-five. Separate the observed mean from the known model parameters before revealing the calculation."
     },
     {
       "page": 24,
+      "title": "サイコロの標本平均を、Zにする",
+      "ja": "条件はそのまま残して、文字の公式を加えます。分子は標本平均と母平均の差。分母は母分散を標本数で割ってから平方根です。どの数字がどこに入るか、計算を出す前に確認しましょう。",
+      "en": "Keep the inputs in place and reveal the symbolic formula. Identify the difference of sample and population means in the numerator and the square root of population variance divided by sample size in the denominator. Ask where each input belongs before substituting."
+    },
+    {
+      "page": 25,
+      "title": "サイコロの標本平均を、Zにする",
+      "ja": "数字を入れます。差は0.74、分母は約0.3416、割るとZは約2.17です。ここで初めて図と結論を示します。これは一個の出目ではなく二十五回の平均のZです。図は正規近似で、サイコロの平均が厳密な正規分布になるわけではありません。",
+      "en": "Now reveal the substitution: the difference is 0.74, the denominator is approximately 0.3416 and Z is approximately 2.17. Reveal the graphic and interpretation together. This standardises a twenty-five-roll mean, not one die outcome. The plotted sampling distribution is a normal approximation, not an exact normal law."
+    },
+    {
+      "page": 26,
       "title": "チャレンジ1　4人の平均得点は、どのくらい珍しい？",
       "ja": "手計算用の架空の得点モデルです。元の教材と同じ50、10、4、60を使います。まず母分散は100であることを整理してから、教科書の分母に入れてもらいます。",
       "en": "Use the original teaching example’s manageable values fifty, ten, four and sixty in an explicit fictional normal model. Students square the SD before substituting into the textbook denominator."
     },
     {
-      "page": 25,
+      "page": 27,
       "title": "答え合わせ1　4人の平均を、Zにする",
       "ja": "母標準偏差10を二乗して100。100を4で割って平方根を取ると5。差10を5で割りZは2。色の付いた右側の面積を、上側表の2.00から読みます。",
       "en": "Variance is one hundred, so the denominator is the square root of one hundred over four, or five. The difference of ten gives Z=2. Read the shaded upper tail from the normal table."
     },
     {
-      "page": 26,
+      "page": 28,
       "title": "同じ60点でも、zは違う",
       "ja": "架空の正規母集団は平均50点、標準偏差10点です。一人が60点なら差10点を10で割りzは1。独立に選んだ四人の平均が60点なら、平均の標準偏差は√(100÷4)で5点なのでzは2です。青い広い山が個人、橙の狭い山が平均。同じ10点の差も、平均では二つ分の標準偏差になります。平均との差を、その対象の揺れで割るという考え方は同じです。",
       "en": "Assume independent scores from a fictional normal population with mean fifty and SD ten. An individual score of sixty gives z=1. A four-person mean of sixty has SD sqrt(100/4)=5, giving z=2. Blue shows individual scores and orange shows means, on the same score and density scales. The ten-point difference spans two SDs for the mean. The underlying idea remains difference from the centre divided by the relevant spread."
     },
     {
-      "page": 27,
+      "page": 29,
       "title": "中心極限定理で、何ができた？",
       "ja": "最初のサイコロに戻って、平均の分布を考えられるようになったことを確認します。次の問題は母分散が分からないときです。そこからtへつなげます。",
       "en": "Return to the die: the CLT provides a probability model for repeated averages. The next obstacle is unknown population variance, motivating Student’s t."
     },
     {
-      "page": 28,
+      "page": 30,
       "title": "t 分  布  Student’s t-distribution ",
       "ja": "次はt分布です。中心極限定理の話と区切ります。少ないデータから平均を考えるとき、母分散をどうするのかという問いを持って進みましょう。",
       "en": "Mark the t section clearly. Ask how to handle a sample mean when population variance must be estimated from the same limited data."
     },
     {
-      "page": 29,
+      "page": 31,
       "title": "“Student”は、誰？",
       "ja": "ギネスの醸造技術者ゴセットは、少ない実験で平均を扱う問題に取り組みました。Studentは学生ではなくペンネームです。肖像：Wikimedia Commons / Public domain。論文：1908年「The Probable Error of a Mean」https://academic.oup.com/biomet/article-abstract/6/1/1/225634 。",
       "en": "Gosset worked at Guinness and studied inference from limited experiments. Student was his pen name. Portrait: Wikimedia Commons, public domain. Paper: The Probable Error of a Mean (1908), https://academic.oup.com/biomet/article-abstract/6/1/1/225634 ."
     },
     {
-      "page": 30,
+      "page": 32,
       "title": "5試合だけで、Curryを語れる？",
       "ja": "ここからバスケットボールの話です。五試合だけ見て、その選手の平均的な力をどこまで語れるでしょう。画像は保存済みの選手画像で、現在の所属や記録を説明する目的ではありません。画像出典：https://www.nba.com/stats/player/201939 。",
       "en": "How much can five games tell us about a player’s usual scoring? This saved player image is historical teaching material, not evidence of current statistics. Image source: https://www.nba.com/stats/player/201939 ."
     },
     {
-      "page": 31,
+      "page": 33,
       "title": "この5試合を、標本にする",
       "ja": "五つの得点は保存した元の記録です。最新の五試合とは言いません。まず試合ごとに大きく変わることを見ます。27.4は計算の比較基準として固定し、既知の真の母平均だと断言しません。",
       "en": "The saved scores are not the latest five games. First notice variability. Treat 27.4 as a fixed illustrative benchmark rather than a verified true population mean."
     },
     {
-      "page": 32,
+      "page": 34,
       "title": "母分散は、分かっている？",
       "ja": "前の例では母標準偏差10を与えました。しかし全ての可能な試合の分散は知りません。未知の母分散を、同じ五試合から推定するところが新しい点です。",
       "en": "Unlike the previous given population SD, we do not know the variance of all possible game scores. The new issue is estimating it using the same five-game sample."
     },
     {
-      "page": 33,
+      "page": 35,
       "title": "未知の母分散を、推定値に替える",
       "ja": "教科書125ページ下段の形をそのまま見せます。分母に帽子付きのシグマ二乗が入ります。母分散そのものではなく、標本からの推定値です。",
       "en": "Show the textbook’s nested-square-root form. The hatted variance in the denominator is an estimate from the sample rather than a known population parameter."
     },
     {
-      "page": 34,
+      "page": 36,
       "title": "tを使うときの条件",
       "ja": "正規母集団から独立に抽出したとき、この統計量は厳密にt分布です。三十未満なら自動的にtという規則ではありません。実際のNBA得点には対戦相手などの違いがあるので、厳密な検定結論までは出しません。",
       "en": "Exact t behaviour requires independent observations from a normal population with variance estimated from the sample. There is no automatic under-thirty rule. NBA scores depend on opponents and minutes, so practise the calculation without a rigorous test conclusion."
     },
     {
-      "page": 35,
+      "page": 37,
       "title": " 自  由  度  Degrees of freedom ",
       "ja": "自由度は、自由に決められる数がいくつ残るかです。記号だけ覚えずに、教科書の四個のデータを使って最後の値が固定される様子を確かめます。",
       "en": "Introduce degrees of freedom through freely chosen values. Use the textbook’s four-number example rather than memorising n-minus-one without context."
     },
     {
-      "page": 36,
+      "page": 38,
       "title": "平均が3なら、xは自由？",
       "ja": "教科書と同じ2、x、5、1です。平均3という条件で合計12。最後の値は4に決まります。独立な条件が一つ付くと、自由に決められる値は一つ減ります。",
       "en": "Use the textbook’s exact numbers 2, x, 5 and 1. Fixing the mean at three fixes the total at twelve and forces x to four. One independent constraint removes one free value."
     },
     {
-      "page": 37,
+      "page": 39,
       "title": " 標  本  不  偏  分  散  Unbiased sample variance ",
       "ja": "まず標本不偏分散という用語だけを示します。次の一行の公式で、さっきの自由度が分母に現れます。そのあとCurryの五試合で実際に計算します。",
       "en": "Introduce unbiased sample variance by name. Connect its denominator to degrees of freedom, then compute it using Curry’s five games."
     },
     {
-      "page": 38,
+      "page": 40,
       "title": "標本不偏分散",
       "ja": "教科書126ページと同じ帽子付きの記号です。平均との差を二乗して足し、nではなくn−1で割ります。母分散を推定するための量として使います。",
       "en": "Retain the textbook’s hatted variance notation. Sum squared deviations from the sample mean and divide by n-minus-one to obtain the variance estimate used in t."
     },
     {
-      "page": 39,
+      "page": 41,
       "title": "nで割るか、n−1で割るか",
       "ja": "同じ偏差二乗和でも分母が違うと別の量です。標本自体を記述する分散と、母分散の不偏推定量を区別します。不偏という言葉は繰り返しの平均についての性質です。",
       "en": "The same squared-deviation sum gives different quantities with different denominators. Distinguish describing the sample from estimating population variance without bias. Unbiasedness is a repeated-sampling expectation property."
     },
     {
-      "page": 40,
+      "page": 42,
       "title": "チャレンジ2　Curryの5試合を計算する",
       "ja": "元の五試合で手を動かす時間です。まず平均、次に偏差二乗和、最後に四で割ります。一つの長い式にせず、表を作ってから集計しても構いません。",
       "en": "Calculate using the original five games. Work through mean, squared-deviation sum and division by four. A deviation table is encouraged and calculators are allowed."
     },
     {
-      "page": 41,
+      "page": 43,
       "title": "答え合わせ2　まず、平均28.6点",
       "ja": "元資料の合計142という表記は誤りなので、実際の和143で計算します。143を五で割ると28.6です。青の横線は五試合の平均で、母平均そのものとは区別します。",
       "en": "The historical sum of 142 was a typo: the values sum to 143. Divide by five to obtain 28.6. The blue line is the sample mean, not a known population mean."
     },
     {
-      "page": 42,
+      "page": 44,
       "title": "平均28.6との差を、二乗する",
       "ja": "マイナスの偏差も二乗すると正です。一試合ずつ表で確認し、合計1413.2を作ります。右のグラフで平均との差が大きい試合ほど大きく寄与することを確かめます。",
       "en": "Check squared deviations game by game. Negative deviations contribute positively after squaring. The total is 1413.2. Use the score plot to identify the largest contributions."
     },
     {
-      "page": 43,
+      "page": 45,
       "title": "答え合わせ2　1413.2を、自由度4で割る",
       "ja": "母分散の推定に使う量では五でなく四で割ります。353.3の単位は点二乗です。この同じ値を次のtの分母に入れます。",
       "en": "Divide by four rather than five to estimate population variance. The result is 353.3 squared points. Carry that exact estimate into the t denominator next."
     },
     {
-      "page": 44,
+      "page": 46,
       "title": "チャレンジ3　比較基準27.4点から、どれだけ離れた？",
       "ja": "同じデータを使い続けます。まず分母を計算し、差1.2を割ります。検定結論でなく、平均との差を平均の揺れ何個分で表すかに集中します。",
       "en": "Keep the same data. Calculate the denominator before dividing the difference of 1.2 by it. Focus on standardised distance and degrees of freedom, not a formal test decision."
     },
     {
-      "page": 45,
+      "page": 47,
       "title": "答え合わせ3　差1.2点は、tで約0.143",
       "ja": "分母は約8.406。差1.2を割ると約0.143です。横軸は点ではなく標準化した値です。小さい値だから真の母平均が証明されたとは言えません。",
       "en": "The denominator is about 8.406 and the standardised distance about 0.143. The axis is not points or percent. A small value does not prove the benchmark is the true population mean."
     },
     {
-      "page": 46,
+      "page": 48,
       "title": "自由度が増えると、標準正規に近づく",
       "ja": "中心は同じゼロですが、自由度が小さいと裾が厚くなります。自由度が大きいほど標準正規に近づきます。密度のガンマ関数は、この回の計算課題にはしません。",
       "en": "Compare tails at a common zero centre. Smaller degrees of freedom give heavier tails and larger ones approach the standard normal. The gamma density is not a calculation requirement today."
     },
     {
-      "page": 47,
+      "page": 49,
       "title": "t 分  布  表  Student’s t table ",
       "ja": "次は表を読む作業です。tそのものの計算と、決めた面積に対応する境界を探す作業を分けます。何を入力し、何が返るのかを整理しましょう。",
       "en": "Introduce table reading as a distinct task. Separate calculating observed t from finding a boundary corresponding to a chosen area."
     },
     {
-      "page": 48,
+      "page": 50,
       "title": "表に入れるもの、出てくるもの",
       "ja": "前回の表は位置から面積。今日のt表は面積と自由度から位置を探します。この違いを確認してから具体的なセルを探します。",
       "en": "The normal table maps a coordinate to an area. The t table maps area and degrees of freedom to a coordinate. Make this reversal explicit before locating a cell."
     },
     {
-      "page": 49,
+      "page": 51,
       "title": "自由度20、上側確率0.025",
       "ja": "教科書の例と同じです。自由度20の行と上側0.025の列。交点2.0860は確率でなく、右側の面積が2.5％になる境界です。",
       "en": "Follow the textbook’s exact df-twenty, upper-tail-0.025 example. The value 2.0860 is a boundary coordinate, not a probability."
     },
     {
-      "page": 50,
+      "page": 52,
       "title": "2.0860の右側が、2.5%",
       "ja": "横軸の境界が2.0860、右側の面積が2.5％です。図の外にも裾が続くことと、表は丸めた数値であることを補足します。",
       "en": "Translate the table value back to a curve. The boundary is 2.0860 and the right-tail area is 2.5 percent. Tails continue beyond the frame and tabulated values are rounded."
     },
     {
-      "page": 51,
+      "page": 53,
       "title": "チャレンジ4　中央90%を残す境界は？",
       "ja": "教科書の例を自力で解いてもらいます。中央九十パーセントを表の列で直接探さず、左右に残る面積から考えます。",
       "en": "Use the textbook’s central-ninety-percent example as independent practice. Convert the central area into a one-tail probability before consulting the table."
     },
     {
-      "page": 52,
+      "page": 54,
       "title": "答え合わせ4　左右5%ずつ、境界は±1.8125",
       "ja": "両側に残る十パーセントを二つに分けます。自由度十の行と上側0.05の列で1.8125。左右対称なので左はマイナスです。",
       "en": "Split the remaining ten percent into two five-percent tails. Read df ten and upper-tail 0.05 to obtain 1.8125. Symmetry supplies the negative boundary."
     },
     {
-      "page": 53,
+      "page": 55,
       "title": "自分の選手なら、どうなる？",
       "ja": "元の選手選び活動は時間があれば行います。値を替えたら平均と分散とtがどう変わるかを見ます。実際の試合が無作為な正規標本とは限らないという注意は残します。",
       "en": "Restore choose-your-player as an optional extension. Enter five scores and a benchmark and trace the resulting mean, variance and t, without claiming actual games are independent normal samples."
     },
     {
-      "page": 54,
+      "page": 56,
       "title": "t分布で、何が変わった？",
       "ja": "推定した分散を使うこと、自由度があること、表が境界を返すこと。この三点を確認してからカイ二乗へ移ります。",
       "en": "Close the t section by checking that variance is estimated, degrees of freedom matter and the table returns a boundary. Then proceed to chi-square."
     },
     {
-      "page": 55,
+      "page": 57,
       "title": "カイ 二  乗  分  布  Chi-square distribution ",
       "ja": "最後はカイ二乗分布です。平均の話から、ずれを集める話へ移ります。まず二十人の抽出で比率が変わる、身近な問いから始めましょう。",
       "en": "Introduce the final topic as a distribution for combining squared deviations. Begin with changing proportions in repeated samples of twenty students."
     },
     {
-      "page": 56,
+      "page": 58,
       "title": "Karl Pearson",
       "ja": "ピアソンの1900年論文は、観測したずれを無作為抽出で説明できるかという問題を扱いました。原論文：https://doi.org/10.1080/14786440009463897 。肖像は元の教材の画像です。彼の優生学への関与は批判的に説明し、その思想を支持しません。",
       "en": "Pearson’s 1900 paper asks whether observed deviations could reasonably arise through random sampling. Original: https://doi.org/10.1080/14786440009463897 . Portrait reused from the supplied material. Discuss his eugenics critically, not as endorsement."
     },
     {
-      "page": 57,
+      "page": 59,
       "title": "ある大学で、集計上の比率が60:40",
       "ja": "元の六対四の学生抽出の物語です。実際の大学の現在の比率とはせず、仮想の二つの集計区分として扱います。教室の学生本人を性別で分けてデータを集める活動にはしません。",
       "en": "Restore the sixty-forty student-sampling story as a hypothetical split. Do not present it as current university statistics or collect real students’ gender identities. Use fictional records or cards."
     },
     {
-      "page": 58,
+      "page": 60,
       "title": "基準となる人数は、12人と8人",
       "ja": "二十人に六割と四割を掛けるだけです。十二人と八人は比較の基準で、無作為抽出の結果が毎回必ずこの通りになるわけではありません。",
       "en": "Multiply twenty by sixty and forty percent. Twelve and eight are expected reference counts, not guaranteed counts in each random sample."
     },
     {
-      "page": 59,
+      "page": 61,
       "title": "今回の20人は、11人と9人",
       "ja": "今回は11人と9人です。前の標本と同じ比率になるとは限りません。十二人と八人から、どちらの区分もずれることに注目させます。",
       "en": "This sample contains 11 and 9 students. Keep expected counts fixed at twelve and eight and ask how the observed counts differ. Samples need not have identical proportions."
     },
     {
-      "page": 60,
+      "page": 62,
       "title": "今回の20人は、15人と5人",
       "ja": "今回は15人と5人です。前の標本と同じ比率になるとは限りません。十二人と八人から、どちらの区分もずれることに注目させます。",
       "en": "This sample contains 15 and 5 students. Keep expected counts fixed at twelve and eight and ask how the observed counts differ. Samples need not have identical proportions."
     },
     {
-      "page": 61,
+      "page": 63,
       "title": "「ずれが大きい」を、どう考える？",
       "ja": "人数の話は検定が役に立つ理由を知る導入です。カテゴリの度数を比較する統計量と、独立な標準正規変数の平方和を同一視しません。今日は適合度検定の公式や棄却結論までは追加しません。",
       "en": "The count story motivates discrepancy distributions. Distinguish the categorical goodness-of-fit statistic from an exact sum of independent squared standard normals. Do not add its test formula or rejection decisions to today’s core."
     },
     {
-      "page": 62,
+      "page": 64,
       "title": "カイ二乗分布の記号",
       "ja": "カイはギリシャ文字χです。教科書ではUが自由度νのカイ二乗分布に従うとき、このように書きます。確率そのものではなく、分布の名前を示しています。",
       "en": "Chi is the Greek letter chi. This textbook notation says U follows a chi-square distribution with nu degrees of freedom. It names a distribution rather than giving a probability."
     },
     {
-      "page": 63,
+      "page": 65,
       "title": "独立な標準正規の値を、二乗して足す",
       "ja": "どんなデータでも二乗すれば同じ分布になるわけではありません。独立で標準正規という条件が要点です。カテゴリの個数の問題の自由度とは、何を数えているかが違います。",
       "en": "Arbitrarily squaring any data does not produce this distribution. Independent standard normal components are essential. Their number differs from counting category constraints in the motivating example."
     },
     {
-      "page": 64,
+      "page": 66,
       "title": "自由度で、形が変わる",
       "ja": "教科書と同じ十から五十までを比べます。tと違ってゼロ中心の左右対称ではありません。自由度が増えると中心も右に動き、相対的な歪みは弱くなります。",
       "en": "Compare the textbook’s degrees of freedom ten through fifty. Unlike t, curves are not symmetric about zero. The centre moves right as degrees of freedom increase and relative skewness decreases."
     },
     {
-      "page": 65,
+      "page": 67,
       "title": "今度は、学生3人の身長で考える",
       "ja": "ここからはカテゴリの人数ではなく、連続値の身長です。分かりやすい架空の正規母集団を明示します。人数の例から、教科書の厳密な平方和へ橋をかけます。",
       "en": "Switch from categorical counts to continuous heights under an explicitly fictional independent normal model. This bridges the motivating count story to the textbook’s exact squared-sum construction."
     },
     {
-      "page": 66,
+      "page": 68,
       "title": "母平均からの偏差二乗和を、母分散で割る",
       "ja": "教科書128ページの左辺です。母平均からの差を二乗し、全部足し、既知の母分散で割ります。身長の例では五の二乗、二十五が母分散です。",
       "en": "Use the left-hand side of the textbook’s page-128 identity. Sum squared deviations from the known population mean and divide by population variance, twenty-five in the height model."
     },
     {
-      "page": 67,
+      "page": 69,
       "title": "チャレンジ5　3人のずれを、ひとつにする",
       "ja": "母分散二十五を確認します。偏差はゼロ、五、十で、二乗してから足します。既知の母平均なので、自由度を反射的にn−1にしないよう促します。",
       "en": "Confirm variance twenty-five, then square deviations zero, five and ten. Because the population mean is known, do not automatically subtract one from the number of independent components."
     },
     {
-      "page": 68,
+      "page": 70,
       "title": "答え合わせ5　U₀=5、自由度3",
       "ja": "標準化したずれのゼロ、一、二を二乗して足したのと同じ結果です。新しい公式を増やすのでなく、教科書の平方和の式へ直接数値を入れて確認します。",
       "en": "This also equals the sum of squared standardised deviations zero, one and two. Keep the calculation in the printed squared-sum form rather than introducing another formula to memorise."
     },
     {
-      "page": 69,
+      "page": 71,
       "title": "平方和の分解",
       "ja": "左辺は母平均からのずれ全体。右辺は標本内のずれと標本平均のずれです。教科書128ページの式をそのまま見せ、証明を新しい課題にはしません。",
       "en": "Show the exact page-128 identity. Identify total variation on the left and within-sample plus mean variation on the right. A proof is not an added calculation requirement."
     },
     {
-      "page": 70,
+      "page": 72,
       "title": "同じ3人なら、5 = 2 + 3",
       "ja": "標本平均は百六十五。標本内の偏差二乗和五十を二十五で割ると二。平均の差五の二乗に三を掛けて二十五で割ると三。全体の五が二と三に分かれ、自由度も三、二、一を区別します。",
       "en": "The sample mean is 165. Within-sample squared deviations sum to fifty, giving two after division by twenty-five. The mean component is three times five squared over twenty-five, giving three. Thus five splits into two plus three."
     },
     {
-      "page": 71,
+      "page": 73,
       "title": "平均と分散も、自由度で決まる",
       "ja": "教科書の文章と同じ内容を読みます。一回のUが五だったことと、分布全体の平均が三であることは違います。シミュレーションで何組も作って確かめます。",
       "en": "Use the textbook’s verbal mean and variance statements. One observed value of five differs from the distribution’s mean of three. Repeated simulation illustrates the distinction without adding another display formula."
     },
     {
-      "page": 72,
+      "page": 74,
       "title": "今日の3つを、つなげる",
       "ja": "サイコロ、Curry、二十人の抽出と身長を思い出してもらいます。三つを同じ目的で使うのではなく、それぞれ何を確率変数として見ているかを言えるようにしましょう。",
       "en": "Recall the die, Curry, and sampled students. Ask what quantity is random in each section. These distributions serve different roles rather than being interchangeable choices."
     },
     {
-      "page": 73,
+      "page": 75,
       "title": "AL：ここからは、自分で表を読む",
       "ja": "ここからは課題を自分で読む時間です。セルの答えや手順を配らず、今日確認した分布、自由度、表の入力と出力を使って解いてもらいます。",
       "en": "Students now work independently on the worksheet. Do not disclose cell answers. Apply the distribution, degrees of freedom and table-input distinctions developed in the lecture."
