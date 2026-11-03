@@ -1,18 +1,18 @@
 {
   "rebuilt": true,
-  "slides": 91,
+  "slides": 93,
   "sections": [
     {
       "topic": "clt",
-      "pages": "3–32"
+      "pages": "3–34"
     },
     {
       "topic": "t",
-      "pages": "33–73"
+      "pages": "35–75"
     },
     {
       "topic": "chi",
-      "pages": "74–89"
+      "pages": "76–91"
     }
   ],
   "coverage": [
@@ -59,12 +59,12 @@
         "t-answer"
       ],
       "pages": [
-        20,
-        37,
-        38,
+        22,
         39,
-        62,
-        63
+        40,
+        41,
+        64,
+        65
       ]
     },
     {
@@ -77,11 +77,11 @@
         "curry-variance-answer"
       ],
       "pages": [
-        44,
-        50,
-        55,
+        46,
+        52,
         57,
-        58
+        59,
+        60
       ]
     },
     {
@@ -90,7 +90,7 @@
         "t-shape"
       ],
       "pages": [
-        64
+        66
       ]
     },
     {
@@ -100,8 +100,8 @@
         "t-central-example-3"
       ],
       "pages": [
-        67,
-        70
+        69,
+        72
       ]
     },
     {
@@ -111,8 +111,8 @@
         "table-answer"
       ],
       "pages": [
-        71,
-        72
+        73,
+        74
       ]
     },
     {
@@ -129,15 +129,15 @@
         "chi-moments"
       ],
       "pages": [
-        79,
-        78,
-        80,
         81,
-        85,
-        86,
+        80,
+        82,
+        83,
         87,
         88,
-        89
+        89,
+        90,
+        91
       ]
     },
     {
@@ -146,7 +146,7 @@
         "summary"
       ],
       "pages": [
-        90
+        92
       ]
     }
   ],
@@ -219,22 +219,22 @@
   "pacing100Minutes": [
     {
       "minutes": "0–28",
-      "pages": "1–32",
+      "pages": "1–34",
       "activity": "Video, dice means, CLT and Z challenge"
     },
     {
       "minutes": "28–73",
-      "pages": "33–73",
+      "pages": "35–75",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
       "minutes": "73–97",
-      "pages": "74–89",
+      "pages": "76–91",
       "activity": "Pearson,20-student story, squared sum and decomposition"
     },
     {
       "minutes": "97–100",
-      "pages": "90–91",
+      "pages": "92–93",
       "activity": "Summary and independent AL"
     }
   ],

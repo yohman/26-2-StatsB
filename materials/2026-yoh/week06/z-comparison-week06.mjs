@@ -1,6 +1,14 @@
 import {writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 
+export function zPurposeGraphic(here){
+ const X=x=>100+(x-20)/60*900,base=205;
+ const curve=Array.from({length:301},(_,i)=>{const x=20+i/5,y=base-140*Math.exp(-.5*((x-50)/10)**2);return `${i?'L':'M'}${X(x).toFixed(2)},${y.toFixed(2)}`;}).join(' ');
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 420" role="img" aria-label="平均50点、標準偏差10点。60点は平均より標準偏差1個分上なのでZはプラス1。平均のZは0。"><g font-family="Arial,Hiragino Sans,sans-serif" fill="#294c5c"><text x="${X(50)}" y="26" text-anchor="middle" font-size="24">母平均50点</text><path d="${curve}" stroke="#176d82" stroke-width="4" fill="none"/><path d="M100 ${base}H1000" stroke="#8b9b9f"/><path d="M${X(50)} 42V${base} M${X(60)} 70V${base}" stroke="#a0a8aa" stroke-dasharray="5 5"/>${[30,40,50,60,70].map(v=>`<text x="${X(v)}" y="239" text-anchor="middle" font-size="24" fill="${v===60?'#b96930':'#294c5c'}">${v}点</text>`).join('')}<circle cx="${X(60)}" cy="${base}" r="7" fill="#b96930"/><path d="M${X(50)} 264v14 M${X(50)} 271H${X(60)} M${X(60)} 264v14" fill="none" stroke="#b96930" stroke-width="3"/><text x="${(X(50)+X(60))/2}" y="307" text-anchor="middle" font-size="24" fill="#b96930">10点 ＝ 標準偏差1個分</text><path d="M100 350H1000" stroke="#176d82" stroke-width="2"/>${[-2,-1,0,1,2].map(z=>`<path d="M${X(50+10*z)} 344v12" stroke="#176d82"/><text x="${X(50+10*z)}" y="389" text-anchor="middle" font-size="${z===1?32:25}" fill="${z===1?'#b96930':'#176d82'}">${z>0?'+':''}${z}</text>`).join('')}<text x="45" y="389" font-size="25">Z</text><text x="${X(50)}" y="417" font-size="18" text-anchor="middle">平均なら0</text><text x="${X(60)}" y="417" font-size="18" text-anchor="middle" fill="#b96930">平均より1個分、上</text></g></svg>`;
+ writeFileSync(resolve(here,'images/z-purpose.svg'),svg);
+ return '![width:1080px](images/z-purpose.svg)';
+}
+
 export function zDistanceComparison(here,stage){
  const X=x=>245+(x-25)/50*650;
  const bracket=(a,b,y,label,color)=>`<path d="M${X(a)} ${y-6}v12 M${X(a)} ${y}H${X(b)} M${X(b)} ${y-6}v12" stroke="${color}" stroke-width="3" fill="none"/><text x="${(X(a)+X(b))/2}" y="${y+25}" fill="${color}" font-size="21" text-anchor="middle">${label}</text>`;

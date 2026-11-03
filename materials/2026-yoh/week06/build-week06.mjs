@@ -6,7 +6,7 @@ import P from '../../../assets/week5-math.js';
 import {annotateJapaneseTerms,terminologyStyle} from '../week05/terms-week05.mjs';
 import {teach} from './lesson-week06.mjs';
 import {style} from './style-week06.mjs';
-import {zDistanceComparison} from './z-comparison-week06.mjs';
+import {zDistanceComparison,zPurposeGraphic} from './z-comparison-week06.mjs';
 const here=dirname(fileURLToPath(import.meta.url));mkdirSync(resolve(here,'images'),{recursive:true});
 const course='https://yohman.github.io/26-2-StatsB/',slides=[],notes=[],mapping=[];
 const old='other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md',cltOld='other material/2025 yoh/07 確率分布_2_連続確率分布/w8.pdf';
@@ -69,7 +69,7 @@ const tcurve=(name,df,extra={})=>fig(name,{min:-4,max:4,pdf:x=>M.tPdf(x,df),xlab
 function challenge(id,title,body,book,official,ja,en,minutes=4){challengeNumber++;add(id,`チャレンジ${challengeNumber}　${title}`,`<p class="time">自分で解く　${minutes}分（最後の1分は隣と確認）</p>\n\n${body}`,{layout:'challenge',book,official,ja,en});}
 function worked(id,title,{given,key,sub,result,graphic,book,official,ja,en,link=''}){add(id,`答え合わせ${challengeNumber}　${title}`,`<div class="work-copy">\n\n${small('① 与えられた条件')}\n\n${given}\n\n${small('② 公式（文字のまま）')}\n\n${math(F[key].tex)}\n\n${small('③ 数値を代入')}\n\n${math(sub)}\n\n</div><div class="work-chart">\n\n${graphic}\n\n</div><p class="conclusion">④ ${result}</p>${link}`,{layout:'worked',book:book||F[key].page,official,formula:key,ja,en});}
 const zComparison=stage=>zDistanceComparison(here,stage);
-teach({add,section,topic,formula,photo,fig,bars,dice,tcurve,challenge,worked,math,big,small,go,tryLink,normalLink,tLink,names,term,ruby,M,F,curryChart,curryRawChart,zComparison,old,cltOld,here});
+teach({add,section,topic,formula,photo,fig,bars,dice,tcurve,challenge,worked,math,big,small,go,tryLink,normalLink,tLink,names,term,ruby,M,F,curryChart,curryRawChart,zComparison,zPurposeGraphic,old,cltOld,here});
 writeFileSync(resolve(here,'w6.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 6'\n---\n\n<style>${style}\n${terminologyStyle}</style>\n\n${slides.map(annotateJapaneseTerms).join('\n\n---\n\n')}\n`);
 writeFileSync(resolve(here,'w6.notes.json'),JSON.stringify({deck:'materials/2026-yoh/week06/w6.pdf',slides:notes},null,2)+'\n');
 const official='materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pdf';
