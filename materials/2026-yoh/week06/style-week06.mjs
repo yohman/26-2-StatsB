@@ -1,4 +1,6 @@
 export const style=`
+section.curry-bias img{display:block;height:310px;width:auto;margin:auto}section.curry-bias .big{font-size:39px;margin-top:15px}section.curry-bias .small{font-size:20px}section.df-curry .katex-display{font-size:.8em}section.t-matrix table{font-size:25px}section.df-choice h2{font-size:38px}
+
 section.z-purpose .big{font-size:45px;margin:0 0 8px}section.z-purpose img{display:block;height:350px;width:auto;margin:0 auto}section.z-purpose .small{margin:8px 0}section.z-purpose-table img{display:block;height:290px;width:auto;margin:10px auto}section.z-purpose-table .z-purpose-flow{display:grid;grid-template-columns:1fr 50px 1fr 50px 1.3fr;align-items:center;gap:8px;text-align:center;font-size:38px;color:#176d82}section.z-purpose-table .z-purpose-flow .en{font-size:17px;margin-top:2px}section.z-purpose-table .z-purpose-lookup{font-size:23px;text-align:center;color:#b96930;margin:6px 0}section.z-purpose-table .small{font-size:17px;text-align:center}
 
 section .explore-link{position:absolute;right:80px;bottom:25px}section .explore-link a[href*="activity="]{font-size:17px;padding:6px 11px;background:#176d82;color:white;text-decoration:none;border-radius:3px}
