@@ -168,7 +168,8 @@
     "registry": {
       "individualZ": {
         "tex": "Z=\\frac{X-E(X)}{\\sqrt{\\operatorname{Var}(X)}}=\\frac{X-\\mu}{\\sigma}",
-        "page": "123（標準化を1個の値Xに適用・前回の復習）"
+        "page": "123（標準化を1個の値Xに適用・前回の復習）",
+        "highlightTex": "Z=\\frac{X-E(X)}{\\sqrt{\\operatorname{Var}(X)}}=\\frac{\\textcolor{#B65C16}{X}-\\mu}{\\textcolor{#13768C}{\\sigma}}"
       },
       "mean": {
         "tex": "\\bar{x}=\\frac{1}{n}(x_1+x_2+\\cdots+x_n)",
@@ -176,7 +177,8 @@
       },
       "z": {
         "tex": "Z=\\frac{\\bar X-E(\\bar X)}{\\sqrt{Var(\\bar X)}}=\\frac{\\bar X-\\mu_x}{\\sqrt{\\frac{\\sigma_x^2}{n}}}",
-        "page": "123（上段）"
+        "page": "123（上段）",
+        "highlightTex": "Z=\\frac{\\bar X-E(\\bar X)}{\\sqrt{Var(\\bar X)}}=\\frac{\\textcolor{#FFB45B}{\\bar X}-\\mu_x}{\\textcolor{#72D6EA}{\\sqrt{\\frac{\\sigma_x^2}{n}}}}"
       },
       "zWords": {
         "tex": "Z=\\frac{\\bar X-\\mu_x}{\\sqrt{\\frac{\\sigma_x^2}{n}}}=\\frac{\\text{標本平均}-\\text{母平均}}{\\sqrt{\\frac{\\text{母分散}}{\\text{標本数}}}}",

@@ -41,7 +41,16 @@ function add(id,title,body,{layout='plain',book='',official='',source='',formula
 }
 const section=p=>part=p;
 const topic=(id,title,ja,en)=>add(id,title,'',{layout:'topic',ja,en});
-const formula=(id,title,key,official,ja,en)=>add(id,title,math(F[key].tex),{layout:`hero-math${key==='decomposition'?' long':''}`,book:F[key].page,official,formula:key,ja,en});
+const zTransitions={
+ 'individual-z-review':{key:'individualZ',tex:String.raw`Z=\frac{X-E(X)}{\sqrt{\operatorname{Var}(X)}}=\frac{\textcolor{#B65C16}{X}-\mu}{\textcolor{#13768C}{\sigma}}`,labels:['1人の値 X','Individual observation','個人の標準偏差 σ','SD of individual values']},
+ 'z-formula':{key:'z',tex:String.raw`Z=\frac{\bar X-E(\bar X)}{\sqrt{Var(\bar X)}}=\frac{\textcolor{#FFB45B}{\bar X}-\mu_x}{\textcolor{#72D6EA}{\sqrt{\frac{\sigma_x^2}{n}}}}`,labels:['標本平均 X̄','Sample mean','標本平均の標準偏差','SD of sample means']}
+};
+for(const entry of Object.values(zTransitions))F[entry.key].highlightTex=entry.tex;
+const formula=(id,title,key,official,ja,en)=>{
+ const transition=zTransitions[id],labels=transition?.labels;
+ const caption=labels?`<div class="formula-caption"><span class="z-orange">${labels[0]}<span class="en">${labels[1]}</span></span><span class="z-blue">${labels[2]}<span class="en">${labels[3]}</span></span></div>`:'';
+ add(id,title,math(transition?.tex||F[key].tex)+caption,{layout:`hero-math${key==='decomposition'?' long':''}${transition?' z-transition':''}`,book:F[key].page,official,formula:key,ja,en});
+};
 const photo=(id,title,path,caption,position,ja,en,source,extra='')=>add(id,title,`<div class="photo-image" style="background-image:url('${path}');background-position:${position};${extra}"></div><div class="photo-caption">${caption}</div>`,{layout:'photo-story',ja,en,source});
 function fig(name,config){writeFileSync(resolve(here,`images/${name}.svg`),P.chart({lo:0,hi:0,...config}));return `![width:1060px](images/${name}.svg)`;}
 function bars(name,values,labels,{mean=null,max=null,title='',ylabel='点',comparison=null}={}){

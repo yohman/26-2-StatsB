@@ -19,7 +19,7 @@ for(const [key,entry] of Object.entries(map.formulaRegistry)){
 }
 for(const s of map.slides){
  const slide=slides[s.page-1];
- if(s.formula){assert(map.formulaRegistry[s.formula]);assert(slide.includes(map.formulaRegistry[s.formula].tex)||s.id==='one-sample');assert(s.textbook);}
+ if(s.formula){const entry=map.formulaRegistry[s.formula];assert(entry);assert(slide.includes(entry.tex)||(entry.highlightTex&&slide.includes(entry.highlightTex))||s.id==='one-sample');assert(s.textbook);}
  if(s.layout.startsWith('hero-math')){assert.equal((slide.match(/\$\$/g)||[]).length,2);assert(s.textbook);}
  if(s.layout==='worked'){for(const step of ['①','②','③','④'])assert(slide.includes(step));assert(slide.includes('images/'));}
 }
