@@ -19,6 +19,7 @@ const normalLink=()=>`<aside class="resource">${resource('standard-normal-table.
 const tLink=()=>`<aside class="resource">${resource('t-table.pdf','t分布表')}</aside>`;
 // The registry transcribes the printed textbook, not simplified substitute notation.
 const F={
+ individualZ:{tex:String.raw`Z=\frac{X-E(X)}{\sqrt{\operatorname{Var}(X)}}=\frac{X-\mu}{\sigma}`,page:'123（標準化を1個の値Xに適用・前回の復習）'},
  mean:{tex:String.raw`\bar{x}=\frac{1}{n}(x_1+x_2+\cdots+x_n)`,page:'122（脚注2）'},
  z:{tex:String.raw`Z=\frac{\bar X-E(\bar X)}{\sqrt{Var(\bar X)}}=\frac{\bar X-\mu_x}{\sqrt{\frac{\sigma_x^2}{n}}}`,page:'123（上段）'},
  zWords:{tex:String.raw`Z=\frac{\bar X-\mu_x}{\sqrt{\frac{\sigma_x^2}{n}}}=\frac{\text{標本平均}-\text{母平均}}{\sqrt{\frac{\text{母分散}}{\text{標本数}}}}`,page:'123（上段）'},
@@ -55,7 +56,13 @@ const curry=[9,49,46,11,28],curryChart=bars('curry-scores',curry,['1試合目','
 const tcurve=(name,df,extra={})=>fig(name,{min:-4,max:4,pdf:x=>M.tPdf(x,df),xlabel:'t',title:`t分布：自由度${df}`,yMax:.48,...extra});
 function challenge(id,title,body,book,official,ja,en,minutes=4){challengeNumber++;add(id,`チャレンジ${challengeNumber}　${title}`,`<p class="time">自分で解く　${minutes}分</p>\n\n${body}`,{layout:'challenge',book,official,ja,en});}
 function worked(id,title,{given,key,sub,result,graphic,book,official,ja,en,link=''}){add(id,`答え合わせ${challengeNumber}　${title}`,`<div class="work-copy">\n\n${small('① 与えられた条件')}\n\n${given}\n\n${small('② 公式（文字のまま）')}\n\n${math(F[key].tex)}\n\n${small('③ 数値を代入')}\n\n${math(sub)}\n\n</div><div class="work-chart">\n\n${graphic}\n\n</div><p class="conclusion">④ ${result}</p>${link}`,{layout:'worked',book:book||F[key].page,official,formula:key,ja,en});}
-teach({add,section,topic,formula,photo,fig,bars,dice,tcurve,challenge,worked,math,big,small,go,normalLink,tLink,names,term,ruby,M,F,curryChart,old,cltOld});
+const zComparison=()=>{
+ const L=80,R=1000,base=310,top=55,X=x=>L+(x-15)/70*(R-L),Y=y=>base-y/.085*(base-top);
+ const curve=sd=>Array.from({length:351},(_,i)=>{const x=15+i*.2;return `${i?'L':'M'}${X(x).toFixed(2)},${Y(M.normal(x,50,sd)).toFixed(2)}`;}).join(' ');
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 420" role="img" aria-label="母平均50点。1人の得点の標準偏差10点に対し4人の平均の標準偏差5点。同じ60点はz1とz2。"><g font-family="Arial,Hiragino Sans,sans-serif" font-size="23" fill="#222"><path d="M${L} ${base}H${R}" stroke="#777"/><path d="${curve(10)}" fill="none" stroke="#176d82" stroke-width="4"/><path d="${curve(5)}" fill="none" stroke="#c77b44" stroke-width="4"/><path d="M${X(50)} ${top}V${base} M${X(60)} ${top}V${base}" stroke="#999" stroke-dasharray="7 6"/>${[20,30,40,50,60,70,80].map(v=>`<text x="${X(v)}" y="345" text-anchor="middle">${v}</text>`).join('')}<text x="${L}" y="28" fill="#176d82">青：1人の得点（標準偏差10点）</text><text x="${R}" y="28" text-anchor="end" fill="#b36832">橙：4人の平均（標準偏差5点）</text><text x="${X(50)}" y="382" text-anchor="middle">中心は同じ50点</text><text x="${R}" y="410" text-anchor="end">横軸：得点／平均得点（点）</text><text x="${X(60)+12}" y="75">同じ60点</text></g></svg>`;
+ writeFileSync(resolve(here,'images/z-individual-vs-mean.svg'),svg);return '![width:1060px](images/z-individual-vs-mean.svg)';
+};
+teach({add,section,topic,formula,photo,fig,bars,dice,tcurve,challenge,worked,math,big,small,go,normalLink,tLink,names,term,ruby,M,F,curryChart,zComparison,old,cltOld});
 writeFileSync(resolve(here,'w6.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 6'\n---\n\n<style>${style}\n${terminologyStyle}</style>\n\n${slides.map(annotateJapaneseTerms).join('\n\n---\n\n')}\n`);
 writeFileSync(resolve(here,'w6.notes.json'),JSON.stringify({deck:'materials/2026-yoh/week06/w6.pdf',slides:notes},null,2)+'\n');
 const official='materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pdf';

@@ -1,18 +1,18 @@
 {
   "rebuilt": true,
-  "slides": 63,
+  "slides": 65,
   "sections": [
     {
       "topic": "clt",
-      "pages": "3–17"
+      "pages": "3–19"
     },
     {
       "topic": "t",
-      "pages": "18–44"
+      "pages": "20–46"
     },
     {
       "topic": "chi",
-      "pages": "45–61"
+      "pages": "47–63"
     }
   ],
   "coverage": [
@@ -59,12 +59,12 @@
         "t-answer"
       ],
       "pages": [
-        13,
-        22,
-        23,
+        14,
         24,
-        34,
-        35
+        25,
+        26,
+        36,
+        37
       ]
     },
     {
@@ -77,11 +77,11 @@
         "curry-variance-answer"
       ],
       "pages": [
-        26,
         28,
         30,
         32,
-        33
+        34,
+        35
       ]
     },
     {
@@ -90,7 +90,7 @@
         "t-shape"
       ],
       "pages": [
-        36
+        38
       ]
     },
     {
@@ -101,9 +101,9 @@
         "table-tail"
       ],
       "pages": [
-        38,
-        39,
-        40
+        40,
+        41,
+        42
       ]
     },
     {
@@ -113,8 +113,8 @@
         "table-answer"
       ],
       "pages": [
-        41,
-        42
+        43,
+        44
       ]
     },
     {
@@ -131,15 +131,15 @@
         "chi-moments"
       ],
       "pages": [
-        53,
-        52,
+        55,
         54,
         56,
-        57,
         58,
         59,
         60,
-        61
+        61,
+        62,
+        63
       ]
     },
     {
@@ -148,7 +148,7 @@
         "summary"
       ],
       "pages": [
-        62
+        64
       ]
     }
   ],
@@ -166,6 +166,10 @@
     "source": "Private chapter2 section2 scans, printed pp122–128",
     "method": "Visual comparison of p123 Z, p125 T, p126 hatted variance, p128 decomposition",
     "registry": {
+      "individualZ": {
+        "tex": "Z=\\frac{X-E(X)}{\\sqrt{\\operatorname{Var}(X)}}=\\frac{X-\\mu}{\\sigma}",
+        "page": "123（標準化を1個の値Xに適用・前回の復習）"
+      },
       "mean": {
         "tex": "\\bar{x}=\\frac{1}{n}(x_1+x_2+\\cdots+x_n)",
         "page": "122（脚注2）"
@@ -215,22 +219,22 @@
   "pacing100Minutes": [
     {
       "minutes": "0–25",
-      "pages": "1–17",
+      "pages": "1–19",
       "activity": "Video, dice means, CLT and Z challenge"
     },
     {
       "minutes": "25–70",
-      "pages": "18–44",
+      "pages": "20–46",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
       "minutes": "70–95",
-      "pages": "45–61",
+      "pages": "47–63",
       "activity": "Pearson,20-student story, squared sum and decomposition"
     },
     {
       "minutes": "95–100",
-      "pages": "62–63",
+      "pages": "64–65",
       "activity": "Summary and independent AL"
     }
   ],
