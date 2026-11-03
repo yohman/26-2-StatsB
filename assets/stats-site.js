@@ -559,8 +559,8 @@ function lectureSection(week) {
       <button type="button" role="tab" id="week-6-lecture-slides-tab" aria-controls="week-6-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-6-lecture-explore-tab" aria-controls="week-6-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
     </div><div id="week-6-lecture-slides" role="tabpanel" aria-labelledby="week-6-lecture-slides-tab">${content}</div><div id="week-6-lecture-explore" role="tabpanel" aria-labelledby="week-6-lecture-explore-tab" hidden>
-      <div class="simulation-tablist" role="tablist" aria-label="Week 6 explorations">${[['board','Galton board','ガルトンのボード'],['sampling','Dice & sample means','サイコロと標本平均'],['t','Basketball & t table','バスケとt分布表'],['chi','Student sampling & chi-square','学生の抽出とカイ二乗']].map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-6-${id}-tab" aria-controls="week-6-${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${String(i+1).padStart(2,'0')} <span>${bilingual(en,ja)}</span></button>`).join('')}</div>
-      ${['board','sampling','t','chi'].map((id,i)=>`<div id="week-6-${id}" role="tabpanel" aria-labelledby="week-6-${id}-tab"${i?' hidden':''}><iframe title="Week 6 ${id} exploration" src="materials/2026-yoh/week06/explore.html?mode=${id}" loading="lazy" style="width:100%;height:1250px;border:0;border-radius:8px"></iframe></div>`).join('')}
+      <div class="simulation-tablist" role="tablist" aria-label="Week 6 explorations">${[['sampling','Samples & averages','標本と平均'],['board','Galton board','ガルトンのボード'],['z','Individual vs mean Z','1人と平均のZ'],['variance','Unbiased variance','不偏分散'],['t','Basketball & t','バスケとt'],['table','t table & intervals','t表と中央の範囲'],['chi','Heights & chi-square','身長とカイ二乗']].map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-6-${id}-tab" aria-controls="week-6-${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${String(i+1).padStart(2,'0')} <span>${bilingual(en,ja)}</span></button>`).join('')}</div>
+      ${['sampling','board','z','variance','t','table','chi'].map((id,i)=>`<div id="week-6-${id}" role="tabpanel" aria-labelledby="week-6-${id}-tab"${i?' hidden':''}><iframe title="Week 6 ${id} exploration" src="materials/2026-yoh/week06/explore.html?mode=${id}" loading="lazy" style="width:100%;height:1250px;border:0;border-radius:8px"></iframe></div>`).join('')}
     </div>` : [2,3].includes(week.week) ? week23LectureMarkup(week, content) : week.week === 1 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 1 lecture">
       <button type="button" role="tab" id="week-1-lecture-slides-tab" aria-controls="week-1-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture', '講義')}</button>
       <button type="button" role="tab" id="week-1-lecture-simulations-tab" aria-controls="week-1-lecture-simulations" aria-selected="false" tabindex="-1">${bilingual('Simulations', 'シミュレーション')}</button>
@@ -726,6 +726,9 @@ function renderAgenda(weeks) {
     'normal-w2': ['week-6-lecture-explore-tab','week-6-sampling-tab'],
     'w6-board': ['week-6-lecture-explore-tab','week-6-board-tab'],
     'w6-sampling': ['week-6-lecture-explore-tab','week-6-sampling-tab'],
+    'w6-z': ['week-6-lecture-explore-tab','week-6-z-tab'],
+    'w6-variance': ['week-6-lecture-explore-tab','week-6-variance-tab'],
+    'w6-table': ['week-6-lecture-explore-tab','week-6-table-tab'],
     'w6-t': ['week-6-lecture-explore-tab','week-6-t-tab'],
     'w6-chi': ['week-6-lecture-explore-tab','week-6-chi-tab'],
     't-w2': ['week-6-lecture-explore-tab','week-6-t-tab'],
@@ -792,6 +795,7 @@ function setupMenu() {
 }
 
 async function loadAgenda() {
+  window.addEventListener('message',event=>{if(event.origin!==location.origin||event.data?.type!=='statsb-week6-height'||!Number.isFinite(event.data.height))return;document.querySelectorAll('#week-6-lecture-explore iframe').forEach(frame=>{if(frame.contentWindow===event.source)frame.style.height=Math.max(600,Math.min(10000,event.data.height))+'px';});});
   const root = document.querySelector('[data-agenda]');
   if (!root) return;
   try {

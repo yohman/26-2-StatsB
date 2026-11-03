@@ -14,7 +14,8 @@
     const reset=()=>{n=Number(host.querySelector('#rows').value);counts=Array(n+1).fill(0);total=0;paint();draw();};
     host.querySelector('#rows').onchange=reset;host.querySelector('#reset').onclick=reset;host.querySelector('#one').onclick=()=>run(1);host.querySelector('#many').onclick=()=>run(100);reset();
   }
-  const stories=window.StatsBWeek6Stories;
-  ({board,sampling:()=>stories.sampling(host),t:()=>stories.t(host),chi:()=>stories.chi(host)}[mode]||board)();
+  const stories={...window.StatsBWeek6Stories,...window.StatsBWeek6Extras};
+  if(mode==='board')board();else (stories[mode]||stories.sampling)(host);
+  if(window.parent!==window)new ResizeObserver(()=>window.parent.postMessage({type:'statsb-week6-height',height:Math.ceil(host.scrollHeight+56)},location.origin)).observe(host);
   if(window.MathJax?.startup?.promise)window.MathJax.startup.promise.then(typeset);else window.addEventListener('load',typeset,{once:true});
 })();

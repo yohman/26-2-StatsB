@@ -19,7 +19,7 @@ assert(three.includes('week-3-costco-tab'));
 assert(!three.includes('week-3-curves'));
 assert(!three.includes('data-distribution-simulation'));
 assert(!three.includes('data-example-scenarios="delivery,pairs"'));
-for(const id of ['board','sampling','t','chi'])assert(six.includes(`id="week-6-${id}-tab"`));
+for(const id of ['sampling','board','z','variance','t','table','chi'])assert(six.includes(`id="week-6-${id}-tab"`));
 assert(!six.includes('data-example-scenarios="delivery,pairs"'));
 assert(six.includes('materials/2026-yoh/week06/w6.pdf'));
 assert(!read('content/weeks/03-poisson.md').includes('standard-normal-table'));

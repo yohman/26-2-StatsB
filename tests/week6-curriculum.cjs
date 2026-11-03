@@ -37,13 +37,13 @@ for(const [i,s] of map.slides.entries()){
 assert.equal(count,5);assert.equal(audit.sections.length,3);
 for(const c of audit.coverage)for(const id of c.ids)byId(id);
 assert(audit.coverage.some(c=>c.official==='20–21'));assert(audit.coverage.some(c=>c.official==='23'));
-for(const mode of ['board','sampling','t','chi'])assert(deck.includes(`activity=w6-${mode}`));
+for(const mode of ['sampling','board','z','variance','t','table','chi'])assert(deck.includes(`activity=w6-${mode}`));
 assert(byId('al').includes('各セルの解答は示しません'));
 const curry=M.summary([9,49,46,11,28]);assert.equal(curry.mean,28.6);assert(Math.abs(curry.ss-1413.2)<1e-9);assert(Math.abs(curry.s2-353.3)<1e-9);assert(Math.abs(M.tStatistic([9,49,46,11,28],27.4)-.142756)<1e-5);
 const heights=[160,165,170],mu=M.mean(heights);assert.equal(mu,165);assert.equal(heights.reduce((s,x)=>s+(x-160)**2,0)/25,5);assert.equal(heights.reduce((s,x)=>s+(x-mu)**2,0)/25,2);assert.equal(3*(mu-160)**2/25,3);
 assert.equal(M.table[20][2],2.086);assert.equal(M.table[10][1],1.8125);
 function integral(fn,a,b){const n=20000,h=(b-a)/n;let s=0;for(let i=0;i<n;i++)s+=fn(a+(i+.5)*h)*h;return s;}
 assert(Math.abs(integral(x=>M.tPdf(x,20),2.086,40)-.025)<2e-5);assert(Math.abs(integral(x=>M.tPdf(x,10),-1.8125,1.8125)-.9)<2e-5);
-const lab=read('assets/week6-story-lab.js');assert(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest/.test(lab));assert(lab.includes('9, 49, 46, 11, 28'));assert(lab.includes('160, 165, 170'));assert(lab.includes('推定分散が0なのでtを計算できません'));assert(lab.includes('draw20'));assert(lab.includes('交点は確率ではなく'));
+const lab=read('assets/week6-story-lab.js')+read('assets/week6-lecture-lab.js');assert(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest/.test(lab));assert(lab.includes('9, 49, 46, 11, 28'));assert(lab.includes('160, 165, 170'));assert(lab.includes('推定分散が0なのでtを計算できません'));assert(lab.includes('draw20'));assert(lab.includes('交点は確率ではなく'));
 assert(fs.existsSync(base+'t-table.pdf'));assert(fs.existsSync(base+'standard-normal-table.pdf'));
 console.log('Week6 rebuilt: 91 slides, three ordered chapters, textbook formula registry, restored original stories, five guarded challenges, visual answers and aligned explorations.');

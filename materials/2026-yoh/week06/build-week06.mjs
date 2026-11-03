@@ -15,6 +15,7 @@ const term=(ja,en)=>`${ja}<span class="en">${en}</span>`;
 const names={clt:term(ruby('中:ちゅう 心:しん 極:きょく 限:げん 定:てい 理:り'),'Central limit theorem'),t:term(ruby('t 分:ぶん 布:ぷ'),'Student’s t-distribution'),chi:term(ruby('カイ 二:に 乗:じょう 分:ぶん 布:ぷ'),'Chi-square distribution'),df:term(ruby('自:じ 由:ゆう 度:ど'),'Degrees of freedom'),uv:term(ruby('標:ひょう 本:ほん 不:ふ 偏:へん 分:ぶん 散:さん'),'Unbiased sample variance')};
 const math=s=>`\n\n$$\n${s}\n$$\n\n`,big=s=>`<p class="big">${s}</p>`,small=s=>`<p class="small">${s}</p>`;
 const go=(mode,label='やってみよう！')=>`[${label}](${course}agenda.html?p&activity=w6-${mode}#week-06)`;
+const tryLink=(mode,label)=>`<aside class="explore-link"><a href="${course}agenda.html?p&activity=w6-${mode}#week-06">やってみよう！ ${label} ↗</a></aside>`;
 const resource=(file,label)=>`<a target="_blank" rel="noopener" href="${course}viewer.html?p&file=materials%2F2026-yoh%2Fweek06%2F${file}&week=W06&title=${encodeURIComponent(label)}">${label} ↗</a>`;
 const normalLink=()=>`<aside class="resource">${resource('standard-normal-table.pdf','標準正規分布表')}</aside>`;
 const tLink=()=>`<aside class="resource">${resource('t-table.pdf','t分布表')}</aside>`;
@@ -68,7 +69,7 @@ const tcurve=(name,df,extra={})=>fig(name,{min:-4,max:4,pdf:x=>M.tPdf(x,df),xlab
 function challenge(id,title,body,book,official,ja,en,minutes=4){challengeNumber++;add(id,`チャレンジ${challengeNumber}　${title}`,`<p class="time">自分で解く　${minutes}分（最後の1分は隣と確認）</p>\n\n${body}`,{layout:'challenge',book,official,ja,en});}
 function worked(id,title,{given,key,sub,result,graphic,book,official,ja,en,link=''}){add(id,`答え合わせ${challengeNumber}　${title}`,`<div class="work-copy">\n\n${small('① 与えられた条件')}\n\n${given}\n\n${small('② 公式（文字のまま）')}\n\n${math(F[key].tex)}\n\n${small('③ 数値を代入')}\n\n${math(sub)}\n\n</div><div class="work-chart">\n\n${graphic}\n\n</div><p class="conclusion">④ ${result}</p>${link}`,{layout:'worked',book:book||F[key].page,official,formula:key,ja,en});}
 const zComparison=stage=>zDistanceComparison(here,stage);
-teach({add,section,topic,formula,photo,fig,bars,dice,tcurve,challenge,worked,math,big,small,go,normalLink,tLink,names,term,ruby,M,F,curryChart,curryRawChart,zComparison,old,cltOld,here});
+teach({add,section,topic,formula,photo,fig,bars,dice,tcurve,challenge,worked,math,big,small,go,tryLink,normalLink,tLink,names,term,ruby,M,F,curryChart,curryRawChart,zComparison,old,cltOld,here});
 writeFileSync(resolve(here,'w6.md'),`---\nmarp: true\ntheme: default\nsize: 16:9\npaginate: true\nmath: katex\nfooter: '統計学B · Week 6'\n---\n\n<style>${style}\n${terminologyStyle}</style>\n\n${slides.map(annotateJapaneseTerms).join('\n\n---\n\n')}\n`);
 writeFileSync(resolve(here,'w6.notes.json'),JSON.stringify({deck:'materials/2026-yoh/week06/w6.pdf',slides:notes},null,2)+'\n');
 const official='materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pdf';

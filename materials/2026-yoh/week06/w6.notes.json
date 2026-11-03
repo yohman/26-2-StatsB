@@ -388,7 +388,7 @@
     {
       "page": 65,
       "title": "2分だけ、選手の数字を変えてみる",
-      "ja": "元の選手選び活動は時間があれば行います。値を替えたら平均と分散とtがどう変わるかを見ます。実際の試合が無作為な正規標本とは限らないという注意は残します。",
+      "ja": "元の選手選び活動は時間があれば行います。Curryの値を一つ替えたら平均と分散とtがどう変わるかを見ます。実際の試合が無作為な正規標本とは限らないという注意は残します。",
       "en": "Restore choose-your-player as an optional extension. Enter five scores and a benchmark and trace the resulting mean, variance and t, without claiming actual games are independent normal samples."
     },
     {
