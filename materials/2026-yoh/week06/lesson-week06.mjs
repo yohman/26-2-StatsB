@@ -1,3 +1,4 @@
+import {normalLookupExample} from './challenge-preparation-week06.mjs';
 import {teachT} from './lesson-t-week06.mjs';
 import {teachChi} from './lesson-chi-week06.mjs';
 import {addDiceSequence,diceZSetup} from './dice-samples-week06.mjs';
@@ -27,6 +28,7 @@ for(let stage=1;stage<=3;stage++){
  const hide=step=>stage<step?' stage-hidden':'';
  add(stage===3?'dice-z-worked':`dice-z-step-${stage}`,'サイコロの標本平均を、Zにする',`<div class="work-copy">\n\n${small('① 与えられた条件')}\n\n平均4.24、μₓ=3.5、σₓ²≈2.9167、n=25。\n\n<div class="reveal-step${hide(2)}">\n\n${small('② 公式（文字のまま）')}\n\n${math(a.F.z.tex)}\n\n</div><div class="reveal-step${hide(3)}">\n\n${small('③ 数値を代入')}\n\n${math(String.raw`z=\frac{4.24-3.5}{\sqrt{2.9167/25}}\approx\frac{0.74}{0.3416}\approx2.17`)}\n\n</div></div><div class="work-chart${hide(3)}">\n\n${diceZGraphic}\n\n</div><p class="conclusion${hide(3)}">④ 平均3.5より、標本平均の標準偏差 約2.17個分、上。</p>`,{layout:stage===3?'worked':'worked reveal-z',book:'123（標本平均の標準化に代入）',formula:stage>=2?'z':'',official:'9',ja:diceZNotes[stage-1][0],en:diceZNotes[stage-1][1]});
 }
+normalLookupExample(a);
 challenge('clt-challenge','4人の平均得点は、どのくらい珍しい？','架空の得点モデル：母平均50点、母標準偏差10点。<br>独立な正規母集団から4人を抽出し、平均が60点だった。\n\n(1) Zを求めよ。 (2) 平均が60点を超える確率は？\n\n'+small('右側の表を使う。小数は表の丸め。')+normalLink(),'123–124','9','手計算用の架空の得点モデルです。元の教材と同じ50、10、4、60を使います。まず母分散は100であることを整理してから、教科書の分母に入れてもらいます。','Use the original teaching example’s manageable values fifty, ten, four and sixty in an explicit fictional normal model. Students square the SD before substituting into the textbook denominator.');
 worked('clt-answer','4人の平均を、Zにする',{given:'μₓ=50、σₓ²=100、n=4、平均60。',key:'z',sub:String.raw`z=\frac{60-50}{\sqrt{100/4}}=\frac{10}{5}=2`,result:'上側表：Pr(Z > 2.00)=0.02275。約2.275%。',graphic:fig('score-mean-tail',{min:30,max:70,pdf:x=>M.normal(x,50,5),mean:50,lo:60,hi:70,labels:[{x:60,text:'平均60点 ／ z=2'}],title:'4人の平均の分布',xlabel:'4人の平均得点'}),book:'123–124・202（式に代入・上側表）',official:'9',link:normalLink(),ja:'母標準偏差10を二乗して100。100を4で割って平方根を取ると5。差10を5で割りZは2。色の付いた右側の面積を、上側表の2.00から読みます。',en:'Variance is one hundred, so the denominator is the square root of one hundred over four, or five. The difference of ten gives Z=2. Read the shaded upper tail from the normal table.'});
 const compareTitles=['同じ60点。平均との差は、どちらも10点','同じ10点は、標準偏差の何個分？','1人なら z=1、4人の平均なら z=2'];
