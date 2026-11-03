@@ -2,12 +2,12 @@ const assert=require('node:assert/strict'),fs=require('node:fs'),M=require('../a
 const read=p=>fs.readFileSync(p,'utf8'),base='materials/2026-yoh/week06/';
 const deck=read(base+'w6.md'),plain=deck.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 const slides=deck.split(/\n---\n/).filter(s=>/^## /m.test(s));
-assert.equal(slides.length,63);
+assert.equal(slides.length,62);
 assert(slides[0].includes('_class: galton-video'));
 assert(slides[0].includes('![bg cover](images/galton-opening.jpg)'));
-assert(slides[0].includes('https://www.youtube.com/watch?v=UCmPmkHqHXk'));
+assert(slides[0].includes('https://www.youtube.com/watch?v=zeJD6dqJ5lo'));
 assert(fs.existsSync(base+'images/galton-opening.jpg'));
-for(const page of [4,25]){
+for(const page of [24]){
  const slide=slides[page-1];
  assert(slide.includes('_class: photo-story'));
  assert(slide.includes('class="full-frame-image"'));
@@ -15,11 +15,12 @@ for(const page of [4,25]){
  assert(!slide.includes('class="portrait"'));
  assert(!slide.includes('class="small"'));
 }
-assert(deck.includes('object-position:50% 10%'));
+assert(!/Moivre|1733|UCmPmkHqHXk/.test(deck));
 assert(deck.includes('object-position:50% 25%'));
 assert(deck.includes('object-fit:cover'));
 const notes=JSON.parse(read(base+'w6.notes.json')).slides;
 assert.equal(notes.length,slides.length);
+assert(!/Moivre|1733|UCmPmkHqHXk/.test(JSON.stringify(notes)));
 for(const [i,note] of notes.entries()){assert.equal(note.page,i+1);assert(note.ja.length>30&&note.en.length>50);assert(!/津村|Tsumura|Yoh.?2025/.test(note.ja+note.en));}
 const guards=require('../assets/slide-challenge-guard.js');
 let count=0;
@@ -29,7 +30,7 @@ for(const [i,slide] of slides.entries()){
  if(/_class: worked -->/.test(slide)){for(const step of ['①','②','③','④'])assert(slide.includes(step));assert(slide.includes('images/'));}
 }
 assert.equal(count,6);
-for(const s of ['中心極限定理','自由度','標本不偏分散','母集団','カイ二乗分布','Student','1733','2.0860','1.8125'])assert(plain.includes(s),s);
+for(const s of ['中心極限定理','自由度','標本不偏分散','母集団','カイ二乗分布','Student','2.0860','1.8125'])assert(plain.includes(s),s);
 assert(plain.includes('厳密に正規分布'));assert(plain.includes('平方根s自体は一般に不偏ではない'));
 assert(Math.abs(M.summary([8,10,12]).s2-4)<1e-12);
 assert.equal(M.summary([8,10,12]).ss,8);assert.equal(M.summary([8,10,12]).df,2);
@@ -66,4 +67,4 @@ const lab=read('assets/week6-lab.js');
 assert(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest/.test(lab),'Student inputs remain local and unpersisted');
 assert(lab.includes('s=0なのでtを計算できません'));
 assert(fs.existsSync(base+'standard-normal-table.pdf'));
-console.log('Week 6: 63 slides, seven uncluttered topic introductions, isolated formulas, six guarded challenges and aligned bilingual notes verified.');
+console.log('Week 6: 62 slides, new opening video, no de Moivre slide, seven topic introductions, six guarded challenges and aligned bilingual notes verified.');
