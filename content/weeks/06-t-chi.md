@@ -32,8 +32,4 @@ prepare_en: Review the difference between sample variance and unbiased sample va
 - [t分布表 / Student's t table](materials/2026-yoh/week06/t-table.pdf) {resource}
 - [バスケットボールとtの計算 / Basketball and the t statistic](materials/2026-yoh/week06/explore.html?mode=t) {resource}
 - [AL用ワークシート](weeks/06-continuous-distributions-ii/06_AL用ワークシート.xlsx) {worksheet}
-- [Yoh lecture: sampling distribution of the mean and central limit theorem](other material/2025 yoh/07 確率分布_2_連続確率分布/w8.pdf) {yoh}
-- [Yoh lecture: normal and chi-square distributions](other material/2025 yoh/07 確率分布_2_連続確率分布/w9-6.pdf) {yoh}
-- [Yoh lecture: estimators, t distribution, and unbiased variance](other material/2025 yoh/07 確率分布_2_連続確率分布/w10.pdf) {yoh}
-- [Yoh chi-square and t-distribution lecture](other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.pdf) {yoh}
 - [Yoh t-distribution table](other material/2025 yoh/08 Chi and T Distributions/images/w10/t分布表.pdf) {worksheet}
