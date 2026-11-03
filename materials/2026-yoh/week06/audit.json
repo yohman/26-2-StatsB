@@ -1,18 +1,18 @@
 {
   "rebuilt": true,
-  "slides": 75,
+  "slides": 77,
   "sections": [
     {
       "topic": "clt",
-      "pages": "3–29"
+      "pages": "3–31"
     },
     {
       "topic": "t",
-      "pages": "30–56"
+      "pages": "32–58"
     },
     {
       "topic": "chi",
-      "pages": "57–73"
+      "pages": "59–75"
     }
   ],
   "coverage": [
@@ -60,11 +60,11 @@
       ],
       "pages": [
         20,
-        34,
-        35,
         36,
-        46,
-        47
+        37,
+        38,
+        48,
+        49
       ]
     },
     {
@@ -77,11 +77,11 @@
         "curry-variance-answer"
       ],
       "pages": [
-        38,
         40,
         42,
         44,
-        45
+        46,
+        47
       ]
     },
     {
@@ -90,7 +90,7 @@
         "t-shape"
       ],
       "pages": [
-        48
+        50
       ]
     },
     {
@@ -101,9 +101,9 @@
         "table-tail"
       ],
       "pages": [
-        50,
-        51,
-        52
+        52,
+        53,
+        54
       ]
     },
     {
@@ -113,8 +113,8 @@
         "table-answer"
       ],
       "pages": [
-        53,
-        54
+        55,
+        56
       ]
     },
     {
@@ -131,15 +131,15 @@
         "chi-moments"
       ],
       "pages": [
-        65,
-        64,
+        67,
         66,
         68,
-        69,
         70,
         71,
         72,
-        73
+        73,
+        74,
+        75
       ]
     },
     {
@@ -148,7 +148,7 @@
         "summary"
       ],
       "pages": [
-        74
+        76
       ]
     }
   ],
@@ -221,22 +221,22 @@
   "pacing100Minutes": [
     {
       "minutes": "0–25",
-      "pages": "1–29",
+      "pages": "1–31",
       "activity": "Video, dice means, CLT and Z challenge"
     },
     {
       "minutes": "25–70",
-      "pages": "30–56",
+      "pages": "32–58",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
       "minutes": "70–95",
-      "pages": "57–73",
+      "pages": "59–75",
       "activity": "Pearson,20-student story, squared sum and decomposition"
     },
     {
       "minutes": "95–100",
-      "pages": "74–75",
+      "pages": "76–77",
       "activity": "Summary and independent AL"
     }
   ],
