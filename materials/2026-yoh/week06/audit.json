@@ -1,18 +1,18 @@
 {
   "rebuilt": true,
-  "slides": 65,
+  "slides": 71,
   "sections": [
     {
       "topic": "clt",
-      "pages": "3–19"
+      "pages": "3–25"
     },
     {
       "topic": "t",
-      "pages": "20–46"
+      "pages": "26–52"
     },
     {
       "topic": "chi",
-      "pages": "47–63"
+      "pages": "53–69"
     }
   ],
   "coverage": [
@@ -41,11 +41,11 @@
       ],
       "pages": [
         7,
-        8,
-        9,
-        10,
-        11,
-        12
+        14,
+        15,
+        16,
+        17,
+        18
       ]
     },
     {
@@ -59,12 +59,12 @@
         "t-answer"
       ],
       "pages": [
-        14,
-        24,
-        25,
-        26,
-        36,
-        37
+        20,
+        30,
+        31,
+        32,
+        42,
+        43
       ]
     },
     {
@@ -77,11 +77,11 @@
         "curry-variance-answer"
       ],
       "pages": [
-        28,
-        30,
-        32,
         34,
-        35
+        36,
+        38,
+        40,
+        41
       ]
     },
     {
@@ -90,7 +90,7 @@
         "t-shape"
       ],
       "pages": [
-        38
+        44
       ]
     },
     {
@@ -101,9 +101,9 @@
         "table-tail"
       ],
       "pages": [
-        40,
-        41,
-        42
+        46,
+        47,
+        48
       ]
     },
     {
@@ -113,8 +113,8 @@
         "table-answer"
       ],
       "pages": [
-        43,
-        44
+        49,
+        50
       ]
     },
     {
@@ -131,15 +131,15 @@
         "chi-moments"
       ],
       "pages": [
-        55,
-        54,
-        56,
-        58,
-        59,
-        60,
         61,
+        60,
         62,
-        63
+        64,
+        65,
+        66,
+        67,
+        68,
+        69
       ]
     },
     {
@@ -148,7 +148,7 @@
         "summary"
       ],
       "pages": [
-        64
+        70
       ]
     }
   ],
@@ -219,22 +219,22 @@
   "pacing100Minutes": [
     {
       "minutes": "0–25",
-      "pages": "1–19",
+      "pages": "1–25",
       "activity": "Video, dice means, CLT and Z challenge"
     },
     {
       "minutes": "25–70",
-      "pages": "20–46",
+      "pages": "26–52",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
       "minutes": "70–95",
-      "pages": "47–63",
+      "pages": "53–69",
       "activity": "Pearson,20-student story, squared sum and decomposition"
     },
     {
       "minutes": "95–100",
-      "pages": "64–65",
+      "pages": "70–71",
       "activity": "Summary and independent AL"
     }
   ],
