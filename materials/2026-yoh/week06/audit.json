@@ -170,5 +170,14 @@
       47
     ],
     "slides": 62
+  },
+  "formulaVerification": {
+    "pages": [
+      9,
+      10,
+      11
+    ],
+    "source": "Textbook printed p.123, upper standardisation equation; visually checked against private chapter scan",
+    "decision": "Slides9–10 reproduce successive parts of the printed Z equation, retaining mu_x, sigma_x squared and the nested square-root denominator. Slide11 is a clearly hypothetical numerical substitution into that denominator. Removed the separately stated expectation/variance identities and SD notation from these slides because they were equivalent rewrites rather than exact printed formulas."
   }
 }

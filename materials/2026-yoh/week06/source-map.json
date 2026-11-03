@@ -59,23 +59,23 @@
     },
     {
       "page": 9,
-      "title": "平均の中心は、母平均",
+      "title": "標本平均の標準化Standardising the sample mean",
       "layout": "hero-math",
-      "textbook": "122–123",
+      "textbook": "123（上段の式・前半）",
       "official": "6–7"
     },
     {
       "page": 10,
-      "title": "平均の標準偏差",
+      "title": "教科書の記号と、日本語で読むと",
       "layout": "hero-math",
-      "textbook": "123",
+      "textbook": "123（上段の式・後半）",
       "official": "6–7"
     },
     {
       "page": 11,
       "title": "9人の平均なら、揺れは3分の1",
       "layout": "visual",
-      "textbook": "123",
+      "textbook": "123（上段の式の分母に代入）",
       "official": "6–7"
     },
     {

@@ -51,21 +51,21 @@
     },
     {
       "page": 9,
-      "title": "平均の中心は、母平均",
-      "ja": "独立で同じ分布から抽出し、有限の母分散を仮定します。中心は変わらず、平均の分散だけがn分の1になります。新しい記号が何を表すか口頭でつなげます。",
-      "en": "For independent identically distributed observations with finite variance, the centre stays at mu while the variance of the mean is sigma-squared over n."
+      "title": "標本平均の標準化Standardising the sample mean",
+      "ja": "教科書123ページ上段の式の前半です。標本平均から、その期待値を引く。分母は標本平均の分散の平方根です。ここでは一人の記録ではなく、選んだ集団の平均を標準化しています。",
+      "en": "Read the first part of the equation at the top of textbook page 123. Subtract the expected sample mean, then divide by the square root of its variance. The object being standardised is a sample mean, not one individual record."
     },
     {
       "page": 10,
-      "title": "平均の標準偏差",
-      "ja": "平均の揺れの大きさを一行で見ます。人数の平方根で割るので、九人なら三分の一になります。次の図で確かめます。",
-      "en": "Give the standard deviation of a sample mean its own slide. Dividing by the square root of nine gives one third the individual SD. The next slide visualises this."
+      "title": "教科書の記号と、日本語で読むと",
+      "ja": "同じ式の後半を、教科書と同じ記号で読みます。μの添字xは元のデータの母平均、σの添字xの二乗は母分散です。標本数nで割った母分散の平方根が分母です。次に架空の9人の例で、この分母に数値を入れます。",
+      "en": "Continue with the latter part of the same printed equation. Mu-sub-x is the population mean of the original measurements and sigma-sub-x squared is their population variance. The denominator is the square root of population variance divided by sample size. The next slide inserts values for a fictional nine-person example."
     },
     {
       "page": 11,
       "title": "9人の平均なら、揺れは3分の1",
-      "ja": "これは平均1秒、母標準偏差0.20秒という架空の正規モデルです。9人の平均の標準偏差は3分の1。個人の記録のばらつきが消えたわけではありません。",
-      "en": "Use an explicit teaching model with mean one second and population SD 0.20 seconds. Nine-person means have one third the SD; individual variability has not disappeared."
+      "ja": "これは平均1秒、母標準偏差0.20秒という架空の正規モデルです。母分散は0.20の二乗です。教科書の分母の形のまま、人数9で割って平方根を取ると約0.0667秒になります。個人の記録のばらつきが消えたわけではありません。",
+      "en": "Use a fictional normal population with mean one second and population SD 0.20 seconds. Insert variance 0.20 squared and sample size nine directly into the textbook denominator. Its square root is about 0.0667 seconds. Individual variability has not disappeared."
     },
     {
       "page": 12,

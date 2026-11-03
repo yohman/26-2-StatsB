@@ -3,6 +3,15 @@ const read=p=>fs.readFileSync(p,'utf8'),base='materials/2026-yoh/week06/';
 const deck=read(base+'w6.md'),plain=deck.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 const slides=deck.split(/\n---\n/).filter(s=>/^## /m.test(s));
 assert.equal(slides.length,62);
+assert(slides[8].includes(String.raw`Z=\frac{\bar X-E(\bar X)}{\sqrt{Var(\bar X)}}`));
+assert(slides[9].includes(String.raw`Z=\frac{\bar X-\mu_x}{\sqrt{\frac{\sigma_x^2}{n}}}`));
+assert(slides[9].includes(String.raw`\frac{\text{標本平均}-\text{母平均}}{\sqrt{\frac{\text{母分散}}{\text{標本数}}}}`));
+for(const slide of slides.slice(8,10)){
+ assert(slide.includes('教科書 p.123（上段の式'));
+ assert(!slide.includes(String.raw`\operatorname{SD}`));
+ assert(!slide.includes(String.raw`E(\bar X)=\mu`));
+}
+assert(slides[10].includes(String.raw`\sqrt{\frac{0.20^2}{9}}`));
 assert(slides[0].includes('_class: galton-video'));
 assert(slides[0].includes('![bg cover](images/galton-opening.jpg)'));
 assert(slides[0].includes('https://www.youtube.com/watch?v=zeJD6dqJ5lo'));
