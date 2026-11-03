@@ -168,7 +168,7 @@ function slideThumbnail(deck, week) {
   if (week.week === 3 && deck.label === "Yoh's Week 3 lecture") return 'assets/slide-previews/yoh-w03.png?v=20261007-week-split-1';
   if (week.week === 4 && deck.label === "Yoh's Week 4 lecture") return 'assets/slide-previews/yoh-w04.png?v=20261021-integrated-story';
   if (week.week === 5 && deck.preview?.endsWith('/week05/w5.pdf')) return 'assets/slide-previews/yoh-w05.png?v=20261026-race-opening';
-  if (week.week === 6 && deck.label === "Yoh's Week 6 lecture") return 'assets/slide-previews/yoh-w06.png?v=20261014';
+  if (week.week === 6 && deck.label === "Yoh's Week 6 lecture") return 'assets/slide-previews/yoh-w06.png?v=opening-ee2925a';
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
 }
