@@ -1,6 +1,6 @@
 {
   "rebuilt": true,
-  "slides": 84,
+  "slides": 88,
   "sections": [
     {
       "topic": "clt",
@@ -8,11 +8,11 @@
     },
     {
       "topic": "t",
-      "pages": "32–65"
+      "pages": "32–69"
     },
     {
       "topic": "chi",
-      "pages": "66–82"
+      "pages": "70–86"
     }
   ],
   "coverage": [
@@ -63,8 +63,8 @@
         36,
         37,
         38,
-        55,
-        56
+        59,
+        60
       ]
     },
     {
@@ -79,9 +79,9 @@
       "pages": [
         43,
         49,
-        51,
-        53,
-        54
+        55,
+        57,
+        58
       ]
     },
     {
@@ -90,7 +90,7 @@
         "t-shape"
       ],
       "pages": [
-        57
+        61
       ]
     },
     {
@@ -101,9 +101,9 @@
         "table-tail"
       ],
       "pages": [
-        59,
-        60,
-        61
+        63,
+        64,
+        65
       ]
     },
     {
@@ -113,8 +113,8 @@
         "table-answer"
       ],
       "pages": [
-        62,
-        63
+        66,
+        67
       ]
     },
     {
@@ -131,15 +131,15 @@
         "chi-moments"
       ],
       "pages": [
-        74,
-        73,
-        75,
-        77,
         78,
+        77,
         79,
-        80,
         81,
-        82
+        82,
+        83,
+        84,
+        85,
+        86
       ]
     },
     {
@@ -148,7 +148,7 @@
         "summary"
       ],
       "pages": [
-        83
+        87
       ]
     }
   ],
@@ -226,17 +226,17 @@
     },
     {
       "minutes": "25–70",
-      "pages": "32–65",
+      "pages": "32–69",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
       "minutes": "70–95",
-      "pages": "66–82",
+      "pages": "70–86",
       "activity": "Pearson,20-student story, squared sum and decomposition"
     },
     {
       "minutes": "95–100",
-      "pages": "83–84",
+      "pages": "87–88",
       "activity": "Summary and independent AL"
     }
   ],

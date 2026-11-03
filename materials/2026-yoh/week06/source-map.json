@@ -647,6 +647,54 @@
     },
     {
       "page": 51,
+      "id": "variance-example-given",
+      "title": "例題：3試合の得点から、ばらつきを推定",
+      "part": "t",
+      "layout": "visual",
+      "variation": "",
+      "textbook": "122（脚注2）・126",
+      "official": "",
+      "source": "",
+      "formula": ""
+    },
+    {
+      "page": 52,
+      "id": "variance-example-mean",
+      "title": "① まず、3試合の標本平均",
+      "part": "t",
+      "layout": "visual",
+      "variation": "",
+      "textbook": "122（脚注2に代入）",
+      "official": "",
+      "source": "",
+      "formula": "mean"
+    },
+    {
+      "page": 53,
+      "id": "variance-example-deviations",
+      "title": "② 平均からのずれを、二乗して足す",
+      "part": "t",
+      "layout": "visual-table",
+      "variation": "",
+      "textbook": "126（偏差二乗和の例）",
+      "official": "",
+      "source": "",
+      "formula": ""
+    },
+    {
+      "page": 54,
+      "id": "variance-example-answer",
+      "title": "③ 二乗和32を、自由度2で割る",
+      "part": "t",
+      "layout": "worked",
+      "variation": "",
+      "textbook": "126（標本不偏分散に代入）",
+      "official": "",
+      "source": "",
+      "formula": "uv"
+    },
+    {
+      "page": 55,
       "id": "variance-challenge",
       "title": "チャレンジ2　Curryの5試合を計算する",
       "part": "t",
@@ -658,7 +706,7 @@
       "formula": ""
     },
     {
-      "page": 52,
+      "page": 56,
       "id": "curry-mean-answer",
       "title": "答え合わせ2　まず、平均28.6点",
       "part": "t",
@@ -670,7 +718,7 @@
       "formula": "mean"
     },
     {
-      "page": 53,
+      "page": 57,
       "id": "curry-deviations",
       "title": "平均28.6との差を、二乗する",
       "part": "t",
@@ -682,7 +730,7 @@
       "formula": ""
     },
     {
-      "page": 54,
+      "page": 58,
       "id": "curry-variance-answer",
       "title": "答え合わせ2　1413.2を、自由度4で割る",
       "part": "t",
@@ -694,7 +742,7 @@
       "formula": "uv"
     },
     {
-      "page": 55,
+      "page": 59,
       "id": "t-challenge",
       "title": "チャレンジ3　比較基準27.4点から、どれだけ離れた？",
       "part": "t",
@@ -706,7 +754,7 @@
       "formula": ""
     },
     {
-      "page": 56,
+      "page": 60,
       "id": "t-answer",
       "title": "答え合わせ3　差1.2点は、tで約0.143",
       "part": "t",
@@ -718,7 +766,7 @@
       "formula": "t"
     },
     {
-      "page": 57,
+      "page": 61,
       "id": "t-shape",
       "title": "自由度が増えると、標準正規に近づく",
       "part": "t",
@@ -730,7 +778,7 @@
       "formula": ""
     },
     {
-      "page": 58,
+      "page": 62,
       "id": "t-table-title",
       "title": "t 分  布  表  Student’s t table ",
       "part": "t",
@@ -742,7 +790,7 @@
       "formula": ""
     },
     {
-      "page": 59,
+      "page": 63,
       "id": "table-comparison",
       "title": "表に入れるもの、出てくるもの",
       "part": "t",
@@ -754,7 +802,7 @@
       "formula": ""
     },
     {
-      "page": 60,
+      "page": 64,
       "id": "table-20",
       "title": "自由度20、上側確率0.025",
       "part": "t",
@@ -766,7 +814,7 @@
       "formula": ""
     },
     {
-      "page": 61,
+      "page": 65,
       "id": "table-tail",
       "title": "2.0860の右側が、2.5%",
       "part": "t",
@@ -778,7 +826,7 @@
       "formula": ""
     },
     {
-      "page": 62,
+      "page": 66,
       "id": "table-challenge",
       "title": "チャレンジ4　中央90%を残す境界は？",
       "part": "t",
@@ -790,7 +838,7 @@
       "formula": ""
     },
     {
-      "page": 63,
+      "page": 67,
       "id": "table-answer",
       "title": "答え合わせ4　左右5%ずつ、境界は±1.8125",
       "part": "t",
@@ -802,7 +850,7 @@
       "formula": "central"
     },
     {
-      "page": 64,
+      "page": 68,
       "id": "basketball-explore",
       "title": "自分の選手なら、どうなる？",
       "part": "t",
@@ -814,7 +862,7 @@
       "formula": ""
     },
     {
-      "page": 65,
+      "page": 69,
       "id": "t-summary",
       "title": "t分布で、何が変わった？",
       "part": "t",
@@ -826,7 +874,7 @@
       "formula": ""
     },
     {
-      "page": 66,
+      "page": 70,
       "id": "chi-title",
       "title": "カイ 二  乗  分  布  Chi-square distribution ",
       "part": "chi",
@@ -838,7 +886,7 @@
       "formula": ""
     },
     {
-      "page": 67,
+      "page": 71,
       "id": "pearson",
       "title": "Karl Pearson",
       "part": "chi",
@@ -850,7 +898,7 @@
       "formula": ""
     },
     {
-      "page": 68,
+      "page": 72,
       "id": "student-population",
       "title": "ある大学で、集計上の比率が60:40",
       "part": "chi",
@@ -862,7 +910,7 @@
       "formula": ""
     },
     {
-      "page": 69,
+      "page": 73,
       "id": "expected-counts",
       "title": "基準となる人数は、12人と8人",
       "part": "chi",
@@ -874,7 +922,7 @@
       "formula": ""
     },
     {
-      "page": 70,
+      "page": 74,
       "id": "students-11",
       "title": "今回の20人は、11人と9人",
       "part": "chi",
@@ -886,7 +934,7 @@
       "formula": ""
     },
     {
-      "page": 71,
+      "page": 75,
       "id": "students-15",
       "title": "今回の20人は、15人と5人",
       "part": "chi",
@@ -898,7 +946,7 @@
       "formula": ""
     },
     {
-      "page": 72,
+      "page": 76,
       "id": "counts-to-squares",
       "title": "「ずれが大きい」を、どう考える？",
       "part": "chi",
@@ -910,7 +958,7 @@
       "formula": ""
     },
     {
-      "page": 73,
+      "page": 77,
       "id": "chi-notation",
       "title": "カイ二乗分布の記号",
       "part": "chi",
@@ -922,7 +970,7 @@
       "formula": "chi"
     },
     {
-      "page": 74,
+      "page": 78,
       "id": "chi-definition",
       "title": "独立な標準正規の値を、二乗して足す",
       "part": "chi",
@@ -934,7 +982,7 @@
       "formula": ""
     },
     {
-      "page": 75,
+      "page": 79,
       "id": "chi-shape",
       "title": "自由度で、形が変わる",
       "part": "chi",
@@ -946,7 +994,7 @@
       "formula": ""
     },
     {
-      "page": 76,
+      "page": 80,
       "id": "student-heights",
       "title": "今度は、学生3人の身長で考える",
       "part": "chi",
@@ -958,7 +1006,7 @@
       "formula": ""
     },
     {
-      "page": 77,
+      "page": 81,
       "id": "u-formula",
       "title": "母平均からの偏差二乗和を、母分散で割る",
       "part": "chi",
@@ -970,7 +1018,7 @@
       "formula": "u"
     },
     {
-      "page": 78,
+      "page": 82,
       "id": "chi-challenge",
       "title": "チャレンジ5　3人のずれを、ひとつにする",
       "part": "chi",
@@ -982,7 +1030,7 @@
       "formula": ""
     },
     {
-      "page": 79,
+      "page": 83,
       "id": "chi-answer",
       "title": "答え合わせ5　U₀=5、自由度3",
       "part": "chi",
@@ -994,7 +1042,7 @@
       "formula": "u"
     },
     {
-      "page": 80,
+      "page": 84,
       "id": "chi-decomposition",
       "title": "平方和の分解",
       "part": "chi",
@@ -1006,7 +1054,7 @@
       "formula": "decomposition"
     },
     {
-      "page": 81,
+      "page": 85,
       "id": "chi-decomposition-example",
       "title": "同じ3人なら、5 = 2 + 3",
       "part": "chi",
@@ -1018,7 +1066,7 @@
       "formula": ""
     },
     {
-      "page": 82,
+      "page": 86,
       "id": "chi-moments",
       "title": "平均と分散も、自由度で決まる",
       "part": "chi",
@@ -1030,7 +1078,7 @@
       "formula": ""
     },
     {
-      "page": 83,
+      "page": 87,
       "id": "summary",
       "title": "今日の3つを、つなげる",
       "part": "closing",
@@ -1042,7 +1090,7 @@
       "formula": ""
     },
     {
-      "page": 84,
+      "page": 88,
       "id": "al",
       "title": "AL：ここからは、自分で表を読む",
       "part": "closing",
