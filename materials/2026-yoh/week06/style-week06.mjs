@@ -1,4 +1,6 @@
 export const style=`
+section.df-choice{justify-content:flex-start}section.df-choice h2{height:75px;flex-shrink:0}
+section.df-choice{padding:35px 65px 80px}section.df-choice h2{font-size:41px;margin-bottom:30px}section.df-choice img{display:block;width:1100px;height:260px;object-fit:contain;margin:auto}section.df-choice .katex-display{font-size:1.2em;margin:20px 0}section.df-choice .big{font-size:39px;text-align:center}section.df-choice .small{text-align:center;font-size:23px}section.df-curry .big{font-size:43px}section.df-curry .katex-display{font-size:1.05em;margin:35px 0}
 section.t-matrix{padding:30px 55px 75px}section.t-matrix h2{font-size:40px;margin-bottom:17px}section.t-matrix table{font-size:23px;width:100%;margin:8px 0 16px}section.t-matrix th,section.t-matrix td{padding:11px 12px;line-height:1.65}section.t-matrix td:last-child{font-weight:600}section.t-matrix .small{font-size:17px;margin:8px 0}
 section.z-distance{padding:25px 55px 65px;justify-content:flex-start}section.z-distance h2{font-size:37px;margin:0 0 8px;line-height:1.6}section.z-distance img{display:block;height:430px;width:auto;margin:auto}section.z-distance .z-compare-equation{height:100px;text-align:center;font-size:26px}section.z-distance .katex-display{font-size:.92em;margin:8px 0}section.z-distance .small{font-size:20px;margin-top:22px}
 section .stage-hidden{visibility:hidden}
