@@ -300,11 +300,11 @@
     {
       "page": 22,
       "id": "dice-z-given",
-      "title": "サイコロの標本Cを、もう一度",
+      "title": "母分散2.9167は、どこから？",
       "part": "clt",
-      "layout": "visual",
+      "layout": "dice-variance",
       "variation": "",
-      "textbook": "122–123（標本平均・標準化の例）",
+      "textbook": "129（離散確率分布の平均値と分散に代入）",
       "official": "",
       "source": "",
       "formula": ""

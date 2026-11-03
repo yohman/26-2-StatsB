@@ -129,9 +129,9 @@
     },
     {
       "page": 22,
-      "title": "サイコロの標本Cを、もう一度",
-      "ja": "先ほどの説明用の二十五回の出目Cをそのまま使います。合計は106、二十五で割ると平均4.24です。公平なサイコロの母平均は3.5、母分散は約2.9167。この母分散は今回の標本から計算する不偏分散ではなく、既知のモデルの値として与えます。まず何が与えられたかを整理してから式に入れましょう。",
-      "en": "Reuse the same twenty-five-roll teaching sample C from the earlier grid. Its total is 106 and its mean is 4.24. A fair die has model mean 3.5 and model variance approximately 2.9167. These are known population parameters, not an unbiased variance estimated from this sample. Identify the inputs before substitution."
+      "title": "母分散2.9167は、どこから？",
+      "ja": "標本Cの二十五回の平均は4.24でしたが、母分散はそこから求めません。公平なサイコロという母集団モデルの六つの出目を使います。まず一から六の平均は3.5。各出目から3.5を引き、二乗すると6.25、2.25、0.25、0.25、2.25、6.25です。合計17.5を六で割ると約2.9167。六つの出目の確率が全て六分の一なので六で割ります。この既知の母分散を、次のZの分母に入れます。",
+      "en": "Sample C has mean 4.24 over twenty-five rolls, but we do not estimate population variance from those rolls. Use the six equally likely outcomes of the fair-die population model. Their mean is 3.5. Subtract 3.5 from each face and square, obtaining 6.25, 2.25, 0.25, 0.25, 2.25 and 6.25. Their sum is 17.5. Divide by six because all six outcomes have probability one-sixth: population variance is approximately 2.9167. Insert this known variance into the Z denominator next."
     },
     {
       "page": 23,
