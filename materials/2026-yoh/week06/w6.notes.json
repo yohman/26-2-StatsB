@@ -141,21 +141,21 @@
     },
     {
       "page": 24,
-      "title": "同じ60点。平均との差は、どちらも10点",
-      "ja": "まず同じ横軸で二つの分布を比べます。上は一人の得点、下は独立な四人の平均です。どちらも中心は50点、観測した値は60点。灰色の幅は同じ10点です。違うのは山の広がりで、平均の分布は狭くなっています。",
-      "en": "Compare the two distributions on identical score and density scales. The upper curve is one person’s score; the lower is an average of four independent scores. Both are centred on fifty and observed at sixty. The grey brackets show the same ten-point difference, while the distribution of averages is narrower."
+      "title": "同じ60点。平均との差は、すべて10点",
+      "ja": "同じ横軸と縦軸で三つの分布を比べます。一人の得点、独立な四人の平均、独立な二十五人の平均です。全て中心は50点で、今回の値は60点。差は同じ10点です。人数が増えるほど平均の分布は狭く高くなります。母集団の分布自体を変えたわけではありません。",
+      "en": "Compare three distributions on identical score and density scales: one individual score, the mean of four independent scores, and the mean of twenty-five. All are centred on fifty and the observed value is sixty, ten points above the centre. Larger samples produce narrower, taller distributions of means; the population model has not changed."
     },
     {
       "page": 25,
       "title": "同じ10点は、標準偏差の何個分？",
-      "ja": "Zは差の点数そのものではなく、標準偏差何個分かを数えます。一人の得点なら標準偏差10点なので、50から60までで一個分。四人の平均なら母分散100を四で割った平方根が5点なので、50から55と55から60の二個分です。同じ差を違う大きさの物差しで測っています。",
-      "en": "Z counts units of the relevant standard deviation, not raw score points. Individual scores have SD ten, so fifty to sixty spans one unit. Four-person averages have SD sqrt(100/4)=5, so fifty to fifty-five and fifty-five to sixty are two units. The same difference is measured using different-sized units."
+      "ja": "Zは標準偏差何個分かを数えます。一人なら標準偏差10点で、差10点は一個分。四人の平均なら平方根100割る4で5点なので二個分。二十五人の平均なら平方根100割る25で2点なので五個分。図の小さな幅を数えて、同じ10点を違う大きさの物差しで測っていると確認します。",
+      "en": "Z counts units of the relevant standard deviation. For one person the SD is ten, so the ten-point difference spans one unit. For a mean of four the SD is sqrt(100/4)=5, spanning two units. For a mean of twenty-five the SD is sqrt(100/25)=2, spanning five units. Count the brackets to see the same difference measured in progressively smaller units."
     },
     {
       "page": 26,
-      "title": "1人なら z=1、4人の平均なら z=2",
-      "ja": "上は10点を10点で割るのでZは1、下は10点を5点で割るのでZは2。四人の平均は一人の値ほど揺れないため、平均60点は一人の60点より中心から遠い位置になります。同じ母集団モデルで、母平均や母分散を変えたわけではありません。",
-      "en": "The upper calculation divides ten by ten and gives Z=1. The lower divides ten by five and gives Z=2. An average of four independent scores fluctuates less than one individual score, so sixty is farther from the centre in standard-deviation units for the average. The population mean and variance have not changed."
+      "title": "同じ60点でも、Zは1・2・5",
+      "ja": "差10点を10点、5点、2点で割るので、Zは順に1、2、5です。二十五人の平均は一人の得点より揺れにくいので、平均60点は標準偏差五個分も上になります。平均や母分散は同じままで、標本平均の標準偏差が小さくなったことが違いです。Zは確率そのものではないことも思い出しましょう。",
+      "en": "Divide the ten-point difference by ten, five and two to obtain Z=1, 2 and 5. A mean of twenty-five varies less than a single score, making sixty five standard-deviation units above its mean. The population mean and variance remain the same; only the spread of the sample mean changes. Remind students that Z itself is not a probability."
     },
     {
       "page": 27,

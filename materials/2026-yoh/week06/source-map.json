@@ -324,7 +324,7 @@
     {
       "page": 24,
       "id": "z-distance-step-1",
-      "title": "同じ60点。平均との差は、どちらも10点",
+      "title": "同じ60点。平均との差は、すべて10点",
       "part": "clt",
       "layout": "z-distance",
       "variation": "",
@@ -348,7 +348,7 @@
     {
       "page": 26,
       "id": "individual-vs-mean",
-      "title": "1人なら z=1、4人の平均なら z=2",
+      "title": "同じ60点でも、Zは1・2・5",
       "part": "clt",
       "layout": "z-distance",
       "variation": "",
