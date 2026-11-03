@@ -299,90 +299,6 @@
     },
     {
       "page": 22,
-      "id": "dice-z-given",
-      "title": "母分散2.9167は、どこから？",
-      "part": "clt",
-      "layout": "dice-variance",
-      "variation": "",
-      "textbook": "129（離散確率分布の平均値と分散に代入）",
-      "official": "",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 23,
-      "id": "dice-z-step-1",
-      "title": "サイコロの標本平均を、Zにする",
-      "part": "clt",
-      "layout": "worked reveal-z",
-      "variation": "",
-      "textbook": "123（標本平均の標準化に代入）",
-      "official": "9",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 24,
-      "id": "dice-z-step-2",
-      "title": "サイコロの標本平均を、Zにする",
-      "part": "clt",
-      "layout": "worked reveal-z",
-      "variation": "",
-      "textbook": "123（標本平均の標準化に代入）",
-      "official": "9",
-      "source": "",
-      "formula": "z"
-    },
-    {
-      "page": 25,
-      "id": "dice-z-worked",
-      "title": "サイコロの標本平均を、Zにする",
-      "part": "clt",
-      "layout": "worked",
-      "variation": "",
-      "textbook": "123（標本平均の標準化に代入）",
-      "official": "9",
-      "source": "",
-      "formula": "z"
-    },
-    {
-      "page": 26,
-      "id": "dice-z-table-example",
-      "title": "例題の続き：Zから、右側の確率へ",
-      "part": "clt",
-      "layout": "worked",
-      "variation": "",
-      "textbook": "123・202（標準化・上側表）",
-      "official": "",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 27,
-      "id": "clt-challenge",
-      "title": "チャレンジ1　4人の平均得点は、どのくらい珍しい？",
-      "part": "clt",
-      "layout": "challenge",
-      "variation": "",
-      "textbook": "123–124",
-      "official": "9",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 28,
-      "id": "clt-answer",
-      "title": "答え合わせ1　4人の平均を、Zにする",
-      "part": "clt",
-      "layout": "worked",
-      "variation": "",
-      "textbook": "123–124・202（式に代入・上側表）",
-      "official": "9",
-      "source": "",
-      "formula": "z"
-    },
-    {
-      "page": 29,
       "id": "z-distance-step-1",
       "title": "同じ60点。平均との差は、どちらも10点",
       "part": "clt",
@@ -394,7 +310,7 @@
       "formula": ""
     },
     {
-      "page": 30,
+      "page": 23,
       "id": "z-distance-step-2",
       "title": "同じ10点は、標準偏差の何個分？",
       "part": "clt",
@@ -406,7 +322,7 @@
       "formula": ""
     },
     {
-      "page": 31,
+      "page": 24,
       "id": "individual-vs-mean",
       "title": "1人なら z=1、4人の平均なら z=2",
       "part": "clt",
@@ -418,9 +334,93 @@
       "formula": ""
     },
     {
+      "page": 25,
+      "id": "dice-z-given",
+      "title": "母分散2.9167は、どこから？",
+      "part": "clt",
+      "layout": "dice-variance",
+      "variation": "",
+      "textbook": "129（離散確率分布の平均値と分散に代入）",
+      "official": "",
+      "source": "",
+      "formula": ""
+    },
+    {
+      "page": 26,
+      "id": "dice-z-step-1",
+      "title": "サイコロの標本平均を、Zにする",
+      "part": "clt",
+      "layout": "worked reveal-z",
+      "variation": "",
+      "textbook": "123（標本平均の標準化に代入）",
+      "official": "9",
+      "source": "",
+      "formula": ""
+    },
+    {
+      "page": 27,
+      "id": "dice-z-step-2",
+      "title": "サイコロの標本平均を、Zにする",
+      "part": "clt",
+      "layout": "worked reveal-z",
+      "variation": "",
+      "textbook": "123（標本平均の標準化に代入）",
+      "official": "9",
+      "source": "",
+      "formula": "z"
+    },
+    {
+      "page": 28,
+      "id": "dice-z-worked",
+      "title": "サイコロの標本平均を、Zにする",
+      "part": "clt",
+      "layout": "worked",
+      "variation": "",
+      "textbook": "123（標本平均の標準化に代入）",
+      "official": "9",
+      "source": "",
+      "formula": "z"
+    },
+    {
+      "page": 29,
+      "id": "dice-z-table-example",
+      "title": "例題の続き：Zから、右側の確率へ",
+      "part": "clt",
+      "layout": "worked",
+      "variation": "",
+      "textbook": "123・202（標準化・上側表）",
+      "official": "",
+      "source": "",
+      "formula": ""
+    },
+    {
+      "page": 30,
+      "id": "clt-challenge",
+      "title": "チャレンジ1　4人の平均得点は、どのくらい珍しい？",
+      "part": "clt",
+      "layout": "challenge",
+      "variation": "",
+      "textbook": "123–124",
+      "official": "9",
+      "source": "",
+      "formula": ""
+    },
+    {
+      "page": 31,
+      "id": "clt-answer",
+      "title": "答え合わせ1　4人の平均を、Zにする",
+      "part": "clt",
+      "layout": "worked",
+      "variation": "",
+      "textbook": "123–124・202（式に代入・上側表）",
+      "official": "9",
+      "source": "",
+      "formula": "z"
+    },
+    {
       "page": 32,
       "id": "clt-summary",
-      "title": "中心極限定理で、何ができた？",
+      "title": "Zの計算では、母分散を知っていた",
       "part": "clt",
       "layout": "plain",
       "variation": "",
@@ -576,7 +576,7 @@
     {
       "page": 45,
       "id": "df-curry",
-      "title": "5試合のずれは、自由度4",
+      "title": "3試合のずれは、自由度2",
       "part": "t",
       "layout": "df-curry",
       "variation": "",
@@ -647,18 +647,6 @@
     },
     {
       "page": 51,
-      "id": "variance-conventions",
-      "title": "nで割るか、n−1で割るか",
-      "part": "t",
-      "layout": "plain",
-      "variation": "plum",
-      "textbook": "126",
-      "official": "5・11",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 52,
       "id": "variance-example-given",
       "title": "例題：3試合の得点から、ばらつきを推定",
       "part": "t",
@@ -670,7 +658,7 @@
       "formula": ""
     },
     {
-      "page": 53,
+      "page": 52,
       "id": "variance-example-mean",
       "title": "① まず、3試合の標本平均",
       "part": "t",
@@ -682,7 +670,7 @@
       "formula": "mean"
     },
     {
-      "page": 54,
+      "page": 53,
       "id": "variance-example-deviations",
       "title": "② 平均からのずれを、二乗して足す",
       "part": "t",
@@ -694,7 +682,7 @@
       "formula": ""
     },
     {
-      "page": 55,
+      "page": 54,
       "id": "variance-example-answer",
       "title": "③ 二乗和32を、自由度2で割る",
       "part": "t",
@@ -706,7 +694,7 @@
       "formula": "uv"
     },
     {
-      "page": 56,
+      "page": 55,
       "id": "variance-challenge",
       "title": "チャレンジ2　Curryの5試合を計算する",
       "part": "t",
@@ -718,7 +706,7 @@
       "formula": ""
     },
     {
-      "page": 57,
+      "page": 56,
       "id": "curry-mean-answer",
       "title": "答え合わせ2　まず、平均28.6点",
       "part": "t",
@@ -730,7 +718,7 @@
       "formula": "mean"
     },
     {
-      "page": 58,
+      "page": 57,
       "id": "curry-deviations",
       "title": "平均28.6との差を、二乗する",
       "part": "t",
@@ -742,7 +730,7 @@
       "formula": ""
     },
     {
-      "page": 59,
+      "page": 58,
       "id": "curry-variance-answer",
       "title": "答え合わせ2　1413.2を、自由度4で割る",
       "part": "t",
@@ -754,7 +742,7 @@
       "formula": "uv"
     },
     {
-      "page": 60,
+      "page": 59,
       "id": "t-guided-example-1",
       "title": "例題：3試合の平均を、tにする",
       "part": "t",
@@ -766,7 +754,7 @@
       "formula": ""
     },
     {
-      "page": 61,
+      "page": 60,
       "id": "t-guided-example-2",
       "title": "例題：3試合の平均を、tにする",
       "part": "t",
@@ -778,7 +766,7 @@
       "formula": "t"
     },
     {
-      "page": 62,
+      "page": 61,
       "id": "t-guided-example-3",
       "title": "例題：3試合の平均を、tにする",
       "part": "t",
@@ -790,7 +778,7 @@
       "formula": "t"
     },
     {
-      "page": 63,
+      "page": 62,
       "id": "t-challenge",
       "title": "チャレンジ3　比較基準27.4点から、どれだけ離れた？",
       "part": "t",
@@ -802,7 +790,7 @@
       "formula": ""
     },
     {
-      "page": 64,
+      "page": 63,
       "id": "t-answer",
       "title": "答え合わせ3　差1.2点は、tで約0.143",
       "part": "t",
@@ -814,7 +802,7 @@
       "formula": "t"
     },
     {
-      "page": 65,
+      "page": 64,
       "id": "t-shape",
       "title": "自由度が増えると、標準正規に近づく",
       "part": "t",
@@ -823,6 +811,18 @@
       "textbook": "126（図10）",
       "official": "12–13",
       "source": "",
+      "formula": ""
+    },
+    {
+      "page": 65,
+      "id": "basketball-explore",
+      "title": "2分だけ、選手の数字を変えてみる",
+      "part": "t",
+      "layout": "try",
+      "variation": "",
+      "textbook": "125–127",
+      "official": "9–21",
+      "source": "other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md",
       "formula": ""
     },
     {
@@ -851,30 +851,6 @@
     },
     {
       "page": 68,
-      "id": "table-20",
-      "title": "自由度20、上側確率0.025",
-      "part": "t",
-      "layout": "plain",
-      "variation": "",
-      "textbook": "127（例①）・203",
-      "official": "17–19",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 69,
-      "id": "table-tail",
-      "title": "2.0860の右側が、2.5%",
-      "part": "t",
-      "layout": "visual",
-      "variation": "",
-      "textbook": "127（例①）",
-      "official": "17–19",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 70,
       "id": "t-central-example-1",
       "title": "例題：中央95%を残す境界",
       "part": "t",
@@ -886,7 +862,7 @@
       "formula": ""
     },
     {
-      "page": 71,
+      "page": 69,
       "id": "t-central-example-2",
       "title": "例題：中央95%を残す境界",
       "part": "t",
@@ -898,7 +874,7 @@
       "formula": ""
     },
     {
-      "page": 72,
+      "page": 70,
       "id": "t-central-example-3",
       "title": "例題：中央95%を残す境界",
       "part": "t",
@@ -910,7 +886,7 @@
       "formula": ""
     },
     {
-      "page": 73,
+      "page": 71,
       "id": "table-challenge",
       "title": "チャレンジ4　中央90%を残す境界は？",
       "part": "t",
@@ -922,7 +898,7 @@
       "formula": ""
     },
     {
-      "page": 74,
+      "page": 72,
       "id": "table-answer",
       "title": "答え合わせ4　左右5%ずつ、境界は±1.8125",
       "part": "t",
@@ -934,21 +910,9 @@
       "formula": "central"
     },
     {
-      "page": 75,
-      "id": "basketball-explore",
-      "title": "自分の選手なら、どうなる？",
-      "part": "t",
-      "layout": "try",
-      "variation": "",
-      "textbook": "125–127",
-      "official": "9–21",
-      "source": "other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md",
-      "formula": ""
-    },
-    {
-      "page": 76,
+      "page": 73,
       "id": "t-summary",
-      "title": "t分布で、何が変わった？",
+      "title": "平均の位置から、ずれの全体へ",
       "part": "t",
       "layout": "plain",
       "variation": "",
@@ -958,7 +922,7 @@
       "formula": ""
     },
     {
-      "page": 77,
+      "page": 74,
       "id": "chi-title",
       "title": "カイ 二  乗  分  布  Chi-square distribution ",
       "part": "chi",
@@ -970,7 +934,7 @@
       "formula": ""
     },
     {
-      "page": 78,
+      "page": 75,
       "id": "pearson",
       "title": "Karl Pearson",
       "part": "chi",
@@ -982,11 +946,11 @@
       "formula": ""
     },
     {
-      "page": 79,
+      "page": 76,
       "id": "student-population",
-      "title": "ある大学で、集計上の比率が60:40",
+      "title": "20人を選んでも、12人と8人とは限らない",
       "part": "chi",
-      "layout": "plain",
+      "layout": "visual",
       "variation": "sunshine",
       "textbook": "",
       "official": "",
@@ -994,55 +958,19 @@
       "formula": ""
     },
     {
-      "page": 80,
-      "id": "expected-counts",
-      "title": "基準となる人数は、12人と8人",
-      "part": "chi",
-      "layout": "visual",
-      "variation": "",
-      "textbook": "",
-      "official": "",
-      "source": "other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md",
-      "formula": ""
-    },
-    {
-      "page": 81,
-      "id": "students-11",
-      "title": "今回の20人は、11人と9人",
-      "part": "chi",
-      "layout": "visual",
-      "variation": "",
-      "textbook": "",
-      "official": "",
-      "source": "other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md",
-      "formula": ""
-    },
-    {
-      "page": 82,
-      "id": "students-15",
-      "title": "今回の20人は、15人と5人",
-      "part": "chi",
-      "layout": "visual",
-      "variation": "",
-      "textbook": "",
-      "official": "",
-      "source": "other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md",
-      "formula": ""
-    },
-    {
-      "page": 83,
+      "page": 77,
       "id": "counts-to-squares",
-      "title": "「ずれが大きい」を、どう考える？",
+      "title": "今度は、2人の身長のずれを見よう",
       "part": "chi",
-      "layout": "plain",
-      "variation": "inverse punch",
-      "textbook": "127–128（分布の定義）",
+      "layout": "visual",
+      "variation": "paper",
+      "textbook": "127–128（分布の定義・平方和）",
       "official": "23",
-      "source": "other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md",
+      "source": "",
       "formula": ""
     },
     {
-      "page": 84,
+      "page": 78,
       "id": "chi-notation",
       "title": "カイ二乗分布の記号",
       "part": "chi",
@@ -1054,7 +982,7 @@
       "formula": "chi"
     },
     {
-      "page": 85,
+      "page": 79,
       "id": "chi-definition",
       "title": "独立な標準正規の値を、二乗して足す",
       "part": "chi",
@@ -1066,7 +994,7 @@
       "formula": ""
     },
     {
-      "page": 86,
+      "page": 80,
       "id": "chi-shape",
       "title": "自由度で、形が変わる",
       "part": "chi",
@@ -1078,19 +1006,7 @@
       "formula": ""
     },
     {
-      "page": 87,
-      "id": "student-heights",
-      "title": "今度は、学生3人の身長で考える",
-      "part": "chi",
-      "layout": "plain",
-      "variation": "",
-      "textbook": "128（式に入れる仮想例）",
-      "official": "23",
-      "source": "",
-      "formula": ""
-    },
-    {
-      "page": 88,
+      "page": 81,
       "id": "u-formula",
       "title": "母平均からの偏差二乗和を、母分散で割る",
       "part": "chi",
@@ -1102,7 +1018,7 @@
       "formula": "u"
     },
     {
-      "page": 89,
+      "page": 82,
       "id": "chi-guided-example-1",
       "title": "例題：2人の身長のずれを、ひとつに",
       "part": "chi",
@@ -1114,7 +1030,7 @@
       "formula": ""
     },
     {
-      "page": 90,
+      "page": 83,
       "id": "chi-guided-example-2",
       "title": "例題：2人の身長のずれを、ひとつに",
       "part": "chi",
@@ -1126,7 +1042,7 @@
       "formula": "u"
     },
     {
-      "page": 91,
+      "page": 84,
       "id": "chi-guided-example-3",
       "title": "例題：2人の身長のずれを、ひとつに",
       "part": "chi",
@@ -1138,7 +1054,7 @@
       "formula": "u"
     },
     {
-      "page": 92,
+      "page": 85,
       "id": "chi-challenge",
       "title": "チャレンジ5　3人のずれを、ひとつにする",
       "part": "chi",
@@ -1150,7 +1066,7 @@
       "formula": ""
     },
     {
-      "page": 93,
+      "page": 86,
       "id": "chi-answer",
       "title": "答え合わせ5　U₀=5、自由度3",
       "part": "chi",
@@ -1162,7 +1078,7 @@
       "formula": "u"
     },
     {
-      "page": 94,
+      "page": 87,
       "id": "chi-decomposition",
       "title": "平方和の分解",
       "part": "chi",
@@ -1174,11 +1090,11 @@
       "formula": "decomposition"
     },
     {
-      "page": 95,
+      "page": 88,
       "id": "chi-decomposition-example",
       "title": "同じ3人なら、5 = 2 + 3",
       "part": "chi",
-      "layout": "visual",
+      "layout": "decomposition-visual",
       "variation": "",
       "textbook": "128（平方和の分解に代入）",
       "official": "23",
@@ -1186,11 +1102,11 @@
       "formula": ""
     },
     {
-      "page": 96,
+      "page": 89,
       "id": "chi-moments",
-      "title": "平均と分散も、自由度で決まる",
+      "title": "カイ二乗：平均はν、分散は2ν",
       "part": "chi",
-      "layout": "plain",
+      "layout": "visual",
       "variation": "mint",
       "textbook": "128（冒頭）",
       "official": "23",
@@ -1198,7 +1114,7 @@
       "formula": ""
     },
     {
-      "page": 97,
+      "page": 90,
       "id": "summary",
       "title": "今日の3つを、つなげる",
       "part": "closing",
@@ -1210,7 +1126,7 @@
       "formula": ""
     },
     {
-      "page": 98,
+      "page": 91,
       "id": "al",
       "title": "AL：ここからは、自分で表を読む",
       "part": "closing",
@@ -1230,6 +1146,9 @@
     "Saved Curry values are historical examples, not current NBA claims.",
     "Correct historical Curry sum142 to143.",
     "No n30 rule or formal rejection decision for real NBA scores.",
-    "No AL homework cell answers."
+    "No AL homework cell answers.",
+    "Flow review: condensed repeated t lookups and categorical detour; retained all five guided challenges.",
+    "Data graphics accompany early reveals; Curry results remain behind Challenge2 confirmation.",
+    "Score comparison precedes a fresh mean65 Z exercise."
   ]
 }

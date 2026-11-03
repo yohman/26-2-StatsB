@@ -1,6 +1,6 @@
 {
   "rebuilt": true,
-  "slides": 98,
+  "slides": 91,
   "sections": [
     {
       "topic": "clt",
@@ -8,11 +8,11 @@
     },
     {
       "topic": "t",
-      "pages": "33–76"
+      "pages": "33–73"
     },
     {
       "topic": "chi",
-      "pages": "77–96"
+      "pages": "74–89"
     }
   ],
   "coverage": [
@@ -63,8 +63,8 @@
         37,
         38,
         39,
-        63,
-        64
+        62,
+        63
       ]
     },
     {
@@ -79,9 +79,9 @@
       "pages": [
         44,
         50,
-        56,
-        58,
-        59
+        55,
+        57,
+        58
       ]
     },
     {
@@ -90,20 +90,18 @@
         "t-shape"
       ],
       "pages": [
-        65
+        64
       ]
     },
     {
       "official": "15–19",
       "ids": [
         "table-comparison",
-        "table-20",
-        "table-tail"
+        "t-central-example-3"
       ],
       "pages": [
         67,
-        68,
-        69
+        70
       ]
     },
     {
@@ -113,8 +111,8 @@
         "table-answer"
       ],
       "pages": [
-        73,
-        74
+        71,
+        72
       ]
     },
     {
@@ -131,15 +129,15 @@
         "chi-moments"
       ],
       "pages": [
+        79,
+        78,
+        80,
+        81,
         85,
-        84,
         86,
+        87,
         88,
-        92,
-        93,
-        94,
-        95,
-        96
+        89
       ]
     },
     {
@@ -148,7 +146,7 @@
         "summary"
       ],
       "pages": [
-        97
+        90
       ]
     }
   ],
@@ -163,7 +161,7 @@
     }
   ],
   "textbookVerification": {
-    "source": "Private chapter2 section2 scans, printed pp122–128",
+    "source": "Private chapter2 section2 scans, printed pp122–129",
     "method": "Visual comparison of p123 Z, p125 T, p126 hatted variance, p128 decomposition",
     "registry": {
       "individualZ": {
@@ -220,28 +218,29 @@
   ],
   "pacing100Minutes": [
     {
-      "minutes": "0–25",
+      "minutes": "0–28",
       "pages": "1–32",
       "activity": "Video, dice means, CLT and Z challenge"
     },
     {
-      "minutes": "25–70",
-      "pages": "33–76",
+      "minutes": "28–73",
+      "pages": "33–73",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
-      "minutes": "70–95",
-      "pages": "77–96",
+      "minutes": "73–97",
+      "pages": "74–89",
       "activity": "Pearson,20-student story, squared sum and decomposition"
     },
     {
-      "minutes": "95–100",
-      "pages": "97–98",
+      "minutes": "97–100",
+      "pages": "90–91",
       "activity": "Summary and independent AL"
     }
   ],
   "optional": [
-    "Choose-your-own player.",
+    "Research another player’s scores after class.",
+    "Anonymous height data instead of dice.",
     "Repeated board runs.",
     "Proof of the decomposition; identify pieces without proving."
   ],
