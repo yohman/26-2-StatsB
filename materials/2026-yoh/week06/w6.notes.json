@@ -94,8 +94,8 @@
     {
       "page": 16,
       "title": "変わったのは、平均の分布",
-      "ja": "元の分布自体が正規分布になるわけではありません。何組もの標本平均の分布を見ています。独立性や有限の分散などの条件があるので、どんなデータにも無条件に使えるとは言いません。",
-      "en": "The original distribution does not become normal. The claim concerns repeated sample means under conditions including independence and finite variance, not every possible dataset without qualification."
+      "ja": "ここまでサイコロで見てきた、標本を大きくすると標本平均の分布が正規分布に近づくという現象。これが中心極限定理の示すことです。元の分布自体が正規分布になるわけではありません。何組もの標本平均の分布を見ています。独立性や有限の分散などの条件があるので、どんなデータにも無条件に使えるとは言いません。",
+      "en": "This is what the central limit theorem describes: as sample size increases, the distribution of sample means approaches a normal shape. The original distribution does not become normal. The claim concerns repeated sample means under conditions including independence and finite variance, not every possible dataset without qualification."
     },
     {
       "page": 17,
