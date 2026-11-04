@@ -34,8 +34,8 @@
     {
       "page": 6,
       "title": "4回から、平均を1つ",
-      "ja": "今回の四回は1、2、5、6でした。平均は3.5です。サイコロに3.5の目があるわけではなく、平均だから3.5になれることを指摘します。次はこの操作を繰り返した理論の形です。",
-      "en": "Four observations produce a mean of 3.5 although a die has no face labelled 3.5. Distinguish an individual observation from a sample mean before showing the distribution of repeated averages."
+      "ja": "今回の四回は1、2、5、6でした。サイコロの面を指しながら出目を足し、四で割ります。平均は3.5ですが、サイコロに3.5の目があるわけではありません。個々の出目と、それらから作った平均を区別しましょう。",
+      "en": "Point to the four actual die faces: one, two, five and six. Add them and divide by four to obtain 3.5. A die has no face labelled 3.5: distinguish the observed outcomes from their calculated mean."
     },
     {
       "page": 7,

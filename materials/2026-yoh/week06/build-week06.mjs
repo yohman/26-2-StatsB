@@ -6,6 +6,7 @@ import P from '../../../assets/week5-math.js';
 import {annotateJapaneseTerms,terminologyStyle} from '../week05/terms-week05.mjs';
 import {teach} from './lesson-week06.mjs';
 import {style} from './style-week06.mjs';
+import {die as dieFaceSvg} from './dice-samples-week06.mjs';
 import {zDistanceComparison,zPurposeGraphic} from './z-comparison-week06.mjs';
 const here=dirname(fileURLToPath(import.meta.url));mkdirSync(resolve(here,'images'),{recursive:true});
 const course='https://yohman.github.io/26-2-StatsB/',slides=[],notes=[],mapping=[];
@@ -62,7 +63,7 @@ function bars(name,values,labels,{mean=null,max=null,title='',ylabel='点',compa
 }
 function dice(name,n){let p=[1];for(let j=0;j<n;j++){const next=Array(p.length+6).fill(0);p.forEach((v,k)=>{for(let d=1;d<=6;d++)next[k+d]+=v/6;});p=next;}const bins=Array(26).fill(0);p.forEach((v,sum)=>{if(v)bins[Math.min(25,Math.floor((sum/n-1)/.2+1e-9))]+=v;});
  const L=70,base=305,bw=940/26,Y=v=>base-v/.3*250;
- writeFileSync(resolve(here,`images/${name}.svg`),`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 380"><g font-family="Arial,Hiragino Sans,sans-serif" font-size="23" fill="#294c5c"><text x="70" y="27">1標本は${n}回の出目。平均を1つ作る。</text>${[0,.1,.2,.3].map(v=>`<path d="M70 ${Y(v)}H1010" stroke="#dbe4e6"/><text x="58" y="${Y(v)+7}" text-anchor="end">${Math.round(v*100)}%</text>`).join('')}${bins.map((v,i)=>`<rect x="${L+i*bw+1}" y="${Y(v)}" width="${bw-2}" height="${base-Y(v)}" fill="#176d82"/>`).join('')}${[1,2,3,4,5,6].map(v=>`<text x="${L+(v-1)/.2*bw}" y="340" text-anchor="middle">${v}</text>`).join('')}<path d="M${L+12.5*bw} 45V${base}" stroke="#bd743f" stroke-dasharray="7 5"/><text x="${L+12.5*bw}" y="370" text-anchor="middle">3.5</text><text x="1010" y="370" text-anchor="end">標本平均</text></g></svg>`);return `![width:1060px](images/${name}.svg)`;}
+ writeFileSync(resolve(here,`images/${name}.svg`),`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1050 380"><g font-family="Arial,Hiragino Sans,sans-serif" font-size="23" fill="#294c5c"><text x="70" y="27">1標本は${n}回の出目。平均を1つ作る。</text>${[0,.1,.2,.3].map(v=>`<path d="M70 ${Y(v)}H1010" stroke="#dbe4e6"/><text x="58" y="${Y(v)+7}" text-anchor="end">${Math.round(v*100)}%</text>`).join('')}${bins.map((v,i)=>`<rect x="${L+i*bw+1}" y="${Y(v)}" width="${bw-2}" height="${base-Y(v)}" fill="#176d82"/>`).join('')}${[1,2,3,4,5,6].map(v=>n===1?dieFaceSvg(v,L+(v-1)/.2*bw+bw/2-12,325):`<text x="${L+(v-1)/.2*bw}" y="340" text-anchor="middle">${v}</text>`).join('')}<path d="M${L+12.5*bw} 45V${base}" stroke="#bd743f" stroke-dasharray="7 5"/><text x="${L+12.5*bw}" y="370" text-anchor="middle">3.5</text><text x="1010" y="370" text-anchor="end">標本平均</text></g></svg>`);return `![width:1060px](images/${name}.svg)`;}
 const curry=[9,49,46,11,28],curryChart=bars('curry-scores',curry,['1試合目','2試合目','3試合目','4試合目','5試合目'],{max:60,mean:28.6,meanLabelLeft:true,title:'保存した5試合の得点。最新の成績ではない。'});
 const curryRawChart=bars('curry-raw',curry,['1試合目','2試合目','3試合目','4試合目','5試合目'],{max:60,title:'保存した5試合：実際の得点。最新の成績ではない。'});
 const tcurve=(name,df,extra={})=>fig(name,{min:-4,max:4,pdf:x=>M.tPdf(x,df),xlabel:'t',title:`t分布：自由度${df}`,yMax:.48,...extra});

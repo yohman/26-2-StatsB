@@ -10,7 +10,17 @@ const colors=['#b75c29','#1b7588','#84549b','#436e37','#b34465','#5a61a5'];
 const pips={1:[[1,1]],2:[[0,0],[2,2]],3:[[0,0],[1,1],[2,2]],4:[[0,0],[2,0],[0,2],[2,2]],5:[[0,0],[2,0],[1,1],[0,2],[2,2]],6:[[0,0],[2,0],[0,1],[2,1],[0,2],[2,2]]};
 const avg=a=>a.reduce((s,x)=>s+x,0)/a.length;
 const bin=x=>Math.min(25,Math.floor((x-1)/.2+1e-9));
-function die(value,x,y){return `<g data-die="${value}" transform="translate(${x},${y})"><rect width="25" height="25" rx="4" fill="#fff" stroke="#666" stroke-width="1.1"/>${pips[value].map(([a,b])=>`<circle cx="${5.5+7*a}" cy="${5.5+7*b}" r="2.1" fill="#222"/>`).join('')}</g>`;}
+export function die(value,x,y){return `<g data-die="${value}" transform="translate(${x},${y})"><rect width="25" height="25" rx="4" fill="#fff" stroke="#666" stroke-width="1.1"/>${pips[value].map(([a,b])=>`<circle cx="${5.5+7*a}" cy="${5.5+7*b}" r="2.1" fill="#222"/>`).join('')}</g>`;}
+
+export function dieImage(here,value,size=36){
+ const name=`die-face-${value}.svg`;writeFileSync(resolve(here,`images/${name}`),`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" role="img" aria-label="${value}の目">${die(value,2,2)}</svg>`);
+ return `<img class="die-face" src="images/${name}" alt="${value}の目" style="width:${size}px;height:${size}px;display:inline-block;vertical-align:middle;margin:0"/>`;
+}
+export function diceIntro(here,values,population=false){
+ const W=1100,gap=W/values.length,size=population?100:125;
+ const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 230" role="img" aria-label="${population?'公平なサイコロの6つの面':'今回の4回の出目'}：${values.join('、')}"><g font-family="Arial,Hiragino Sans,sans-serif" fill="#294c5c" text-anchor="middle">${values.map((v,i)=>`<g transform="translate(${gap*(i+.5)-size/2},30) scale(${size/25})">${die(v,0,0)}</g><text x="${gap*(i+.5)}" y="205" font-size="25">${population?'確率 1/6':`${i+1}回目`}</text>`).join('')}</g></svg>`;
+ const name=population?'dice-population-faces':'dice-four-rolls';writeFileSync(resolve(here,`images/${name}.svg`),svg);return `![width:1100px](images/${name}.svg)`;
+}
 
 export function diceZSetup(here){
  const sample=long[2],sum=sample.reduce((s,x)=>s+x,0),mean=avg(sample);
