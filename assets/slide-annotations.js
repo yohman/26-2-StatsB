@@ -5,23 +5,39 @@
     surface.append(layer);
     const controls=document.createElement('div');controls.className='slide-ink-tools';
     controls.setAttribute('role','group');controls.setAttribute('aria-label','Slide annotations / スライド書き込み');
-    const button=(label,action)=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',action);controls.append(b);return b;};
-    let mode='view',page=1,active=null,pointer=null,ready=false;
+    const button=(glyph,label,action,parent=controls)=>{
+      const b=document.createElement('button');b.type='button';b.innerHTML=glyph;
+      b.title=label;b.setAttribute('aria-label',label);b.addEventListener('click',action);parent.append(b);return b;
+    };
+    let mode='view',page=1,active=null,pointer=null,ready=false,penColor='#e04b35',penWidth=3;
     const key=`statsb-slide-ink:${file}`;
     let pages={};try{pages=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch{}
     const save=()=>{try{localStorage.setItem(key,JSON.stringify(pages));}catch{status.textContent='このタブ内のみ保存 / Saved in this tab only';}};
     const setMode=value=>{finish();mode=value;viewport.dataset.slideDrawing=String(value!=='view');layer.style.pointerEvents=value==='view'?'none':'auto';layer.style.cursor=value==='erase'?'cell':'crosshair';pen.setAttribute('aria-pressed',String(value==='pen'));eraser.setAttribute('aria-pressed',String(value==='erase'));status.textContent=value==='view'?'閲覧 / View':value==='erase'?'消しゴム / Eraser':'ペン / Pen';};
-    const pen=button('ペン / Pen',()=>setMode(mode==='pen'?'view':'pen'));
-    pen.setAttribute('aria-pressed','false');
-    const colorLabel=document.createElement('label');colorLabel.textContent='色 / Color ';
-    const color=document.createElement('input');color.type='color';color.value='#e04b35';color.setAttribute('aria-label','Pen color / ペンの色');colorLabel.append(color);controls.append(colorLabel);
-    const widthLabel=document.createElement('label');widthLabel.textContent='太さ / Width ';
-    const width=document.createElement('select');width.setAttribute('aria-label','Pen width / ペンの太さ');
-    [2,3,5,8].forEach(v=>{const o=new Option(String(v),String(v));o.selected=v===3;width.append(o);});widthLabel.append(width);controls.append(widthLabel);
-    const eraser=button('消しゴム / Eraser',()=>setMode(mode==='erase'?'view':'erase'));eraser.setAttribute('aria-pressed','false');
-    const undo=button('戻す / Undo',()=>{finish();(pages[page]||[]).pop();save();redraw();});
-    const clear=button('このページを消す / Clear page',()=>{finish();if((pages[page]||[]).length&&confirm('このスライドの書き込みを消しますか？ / Clear annotations on this slide?')){delete pages[page];save();redraw();}});
-    const status=document.createElement('span');status.className='slide-ink-status';status.textContent='閲覧 / View';controls.append(status);
+    const toggle=button('✎ <span aria-hidden="true">⌄</span>','Drawing tools / 書き込みツール',()=>{
+      controls.hidden=!controls.hidden;toggle.setAttribute('aria-expanded',String(!controls.hidden));
+      if(controls.hidden)setMode('view');
+    },toolbar);
+    toggle.className='slide-ink-toggle';toggle.setAttribute('aria-expanded','false');
+    controls.id='slide-ink-tools';toggle.setAttribute('aria-controls',controls.id);controls.hidden=true;
+    const pen=button('✎','Pen / ペン',()=>setMode(mode==='pen'?'view':'pen'));pen.setAttribute('aria-pressed','false');
+    const group=label=>{const g=document.createElement('div');g.className='slide-ink-presets';g.setAttribute('role','group');g.setAttribute('aria-label',label);controls.append(g);return g;};
+    const colors=group('Pen colors / ペンの色');
+    for(const [value,label] of [['#e04b35','Red / 赤'],['#176dba','Blue / 青'],['#21816a','Green / 緑'],['#f2ae30','Yellow / 黄'],['#182f38','Black / 黒'],['#ffffff','White / 白']]){
+      const b=button('<span aria-hidden="true"></span>',label,()=>{
+        penColor=value;for(const child of colors.children)child.setAttribute('aria-pressed',String(child===b));setMode('pen');
+      },colors);b.className='slide-ink-color';b.style.setProperty('--ink-color',value);b.setAttribute('aria-pressed',String(value===penColor));
+    }
+    const widths=group('Pen widths / ペンの太さ');
+    for(const value of [2,3,5,8]){
+      const b=button(`<svg viewBox="0 0 24 16" aria-hidden="true"><path d="M3 8H21" stroke="currentColor" stroke-width="${value}" stroke-linecap="round"/></svg>`,`Width ${value} / 太さ ${value}`,()=>{
+        penWidth=value;for(const child of widths.children)child.setAttribute('aria-pressed',String(child===b));setMode('pen');
+      },widths);b.className='slide-ink-width';b.setAttribute('aria-pressed',String(value===penWidth));
+    }
+    const eraser=button('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 14 9-10 8 7-9 10H9zM9 9l8 7M12 21h9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>','Eraser / 消しゴム',()=>setMode(mode==='erase'?'view':'erase'));eraser.setAttribute('aria-pressed','false');
+    const undo=button('↶','Undo / 戻す',()=>{finish();(pages[page]||[]).pop();save();redraw();});
+    const clear=button('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>','Clear page / このページを消す',()=>{finish();if((pages[page]||[]).length&&confirm('このスライドの書き込みを消しますか？ / Clear annotations on this slide?')){delete pages[page];save();redraw();}});
+    const status=document.createElement('span');status.className='slide-ink-status';status.setAttribute('role','status');status.textContent='閲覧 / View';controls.append(status);
     toolbar.after(controls);
     const redraw=()=>{
       if(!ready)return;
@@ -33,7 +49,7 @@
     };
     const point=e=>{const r=layer.getBoundingClientRect();return [Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))];};
     function finish(){if(!active)return;active=null;pointer=null;save();}
-    layer.addEventListener('pointerdown',e=>{if(mode==='view'||!ready||!e.isPrimary||e.button!==0)return;e.preventDefault();e.stopPropagation();pointer=e.pointerId;layer.setPointerCapture(pointer);active={color:color.value,width:mode==='erase'?24:Number(width.value),erase:mode==='erase',points:[point(e)]};(pages[page]||= []).push(active);redraw();});
+    layer.addEventListener('pointerdown',e=>{if(mode==='view'||!ready||!e.isPrimary||e.button!==0)return;e.preventDefault();e.stopPropagation();pointer=e.pointerId;layer.setPointerCapture(pointer);active={color:penColor,width:mode==='erase'?24:penWidth,erase:mode==='erase',points:[point(e)]};(pages[page]||= []).push(active);redraw();});
     layer.addEventListener('pointermove',e=>{if(!active||e.pointerId!==pointer)return;e.preventDefault();for(const p of e.getCoalescedEvents?.()||[e])active.points.push(point(p));redraw();});
     for(const type of ['pointerup','pointercancel','lostpointercapture'])layer.addEventListener(type,finish);
     layer.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();});
