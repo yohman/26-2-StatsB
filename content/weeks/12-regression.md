@@ -27,4 +27,3 @@ Excel でデータ分析ツールを使えるか確認してください。
 - [Tsumura 2026 lecture slides: Part 1 (PowerPoint)](materials/2026-tsumura/26_12_回帰分析とその他の代表的な分析手法_前半v3.pptx) {primary}
 - [Tsumura 2026 lecture slides: Part 1 (PDF)](materials/2026-tsumura/26_12_回帰分析とその他の代表的な分析手法_前半v3.pdf) {primary}
 - [AL用ワークシート](weeks/12-regression-analysis/12_AL用ワークシート.xlsx) {worksheet}
-- [Yoh supplement — Part 1: correlation, causation, and Excel regression](other material/2025 yoh/02 回帰分析/02_回帰分析とその他の代表的な分析手法.pdf) {yoh}

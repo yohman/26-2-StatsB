@@ -29,7 +29,6 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 - [AIへの怒り / Anger about AI](materials/2026-yoh/week04/news-genz-ai-anger.pdf) {news-example}
 - [クマの出現 / Bear sightings](materials/2026-yoh/week04/news-poisson-bears.pdf) {news-example}
 - [ネット上の不審な通信 / Unsolicited internet traffic](materials/2026-yoh/week04/news-poisson-cyber.pdf) {news-example}
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pptx) {supplementary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pdf) {supplementary}
+- [Tsumura 2026 lecture slides — student edition (PDF)](materials/2026-tsumura/26_04_[AL]確率分布_離散確率分布v2.pdf) {supplementary}
 - [AL用ワークシート](weeks/04-al-discrete-distributions/04_AL用ワークシート.xlsx) {worksheet}
-- [ポアソン分布表 / Poisson distribution table](other material/2025 yoh/06_[AL]確率分布_1_離散確率分布 ポアソン/ポアソン分布表.pdf) {resource}
+- [ポアソン分布表 / Poisson distribution table](materials/resources/poisson-table.pdf) {resource}

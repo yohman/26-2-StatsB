@@ -30,5 +30,3 @@ prepare_en: Review why we use unbiased sample variance before class.
 - [AL用ワークシート](weeks/09-confidence-intervals-ii/09_AL用ワークシート.xlsx) {worksheet}
 - [統計表](weeks/09-confidence-intervals-ii/09_統計表.xlsx) {homework}
 - [Yoh supplement: confidence intervals for the mean and variance](materials/2026-yoh-supplements/09_信頼区間_W09.pdf) {yoh}
-- [Yoh lecture: confidence interval for the mean](other material/2025 yoh/09 母集団の信頼区間/w9 Confidence Interval.pdf) {yoh}
-- [Yoh lecture: confidence interval for variance](other material/2025 yoh/10 母分散の信頼区間 /w10 Confidence Interval variance.pdf) {yoh}

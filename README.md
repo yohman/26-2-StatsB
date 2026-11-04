@@ -1,5 +1,5 @@
-# 26-2-StatsB
+# Statistics B
 
-The weekly agenda reads directly from the Markdown files in `content/weeks/`.
+Published course site: https://yohman.github.io/26-2-StatsB/
 
-For local preview, open this folder with VS Code Live Server (rather than double-clicking `index.html`), then refresh after editing a weekly Markdown file. No build command is needed.
+Only reviewed public course files are tracked. See [PUBLICATION.md](PUBLICATION.md) for the allowlist, student-material checks and private-source policy.

@@ -28,7 +28,4 @@ prepare_en: Review the meanings of parameter, statistic, and estimator.
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_08_母平均の区間推定・母分散の区間推定(前半)v2.pptx) {primary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_08_母平均の区間推定・母分散の区間推定(前半)v2.pdf) {primary}
 - [AL用ワークシート](weeks/08-confidence-intervals-i/08_AL用ワークシート.xlsx) {worksheet}
-- [データファイル](weeks/08-confidence-intervals-i/data_ascii.txt) {homework}
-- [Matlab script](weeks/08-confidence-intervals-i/test.m) {homework}
 - [Yoh supplement: parameters, estimators, and point estimation](materials/2026-yoh-supplements/09_推定量と点推定_W08.pdf) {yoh}
-- [Yoh lecture: sampling distributions and unbiased variance](other material/2025 yoh/07 確率分布_2_連続確率分布/w10.pdf) {yoh}

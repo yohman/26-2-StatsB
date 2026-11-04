@@ -16,3 +16,12 @@
 - Add book-style hiragana furigana above key Japanese terms using semantic ruby text. Keep readings above their kanji, leave okurigana unannotated, and keep the English equivalent below.
 - Keep formulas prominent and story/photo slides uncluttered. Use a shared terminology component and glossary so repeated English labels remain consistent.
 - Commit and push completed course updates after each task, excluding unrelated personal files and Finder metadata.
+
+# Publication boundary
+
+- Only publish exact files approved in `publication-manifest.json`; keep its list and `.gitignore` exceptions aligned.
+- Never stage admin, other material, archive, textbook, authoring-source or answer-key files, even when a file was historically tracked.
+- Keep reviewed blank student worksheets downloadable. Preserve the student-only AL PDFs; do not overwrite them with answer-bearing instructor originals.
+- Run `python3 scripts/check-publication.py` against the staged tree before every commit. Changed protected student materials require a fresh answer-content review before changing their approved hash.
+- Do not upload authoring sources, audit reports, tests or local private backups. Preserve them locally.
+- A normal commit does not remove private files from old history. Obtain approval for any destructive history rewrite, and report the remaining exposure accurately.

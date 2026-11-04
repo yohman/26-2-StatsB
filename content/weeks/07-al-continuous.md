@@ -25,9 +25,5 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 
 ## Materials
 
-- [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pptx) {primary}
-- [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pdf) {primary}
+- [Tsumura 2026 lecture slides — student edition (PDF)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pdf) {primary}
 - [AL用ワークシート](weeks/07-al-continuous-distributions/07_AL用ワークシート.xlsx) {worksheet}
-- [Yoh continuous-distributions activity worksheet](other material/2025 yoh/07 確率分布_2_連続確率分布/07_AL用ワークシート.pdf) {worksheet}
-- [Yoh lecture: normal distribution and standardization](other material/2025 yoh/07 確率分布_2_連続確率分布/w7.pdf) {yoh}
-- [Yoh lecture: normal and chi-square distribution tables](other material/2025 yoh/07 確率分布_2_連続確率分布/w9-6.pdf) {yoh}
