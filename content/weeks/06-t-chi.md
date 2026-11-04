@@ -17,7 +17,7 @@ prepare_en: Review the difference between sample variance and unbiased sample va
 
 - 標本・標本平均と中心極限定理 (samples, sample means, and the central limit theorem)
 - t分布、自由度、標本不偏分散、t分布表 (t distribution, degrees of freedom, unbiased sample variance, and t table)
-- カイ二乗分布 (chi-square distribution)
+- カイ二乗分布の概要：用途・一般式・形 (Chi-square: purpose, general formula and shape; introduction only)
 
 ## Textbook
 

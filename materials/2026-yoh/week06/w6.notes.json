@@ -424,107 +424,35 @@
     {
       "page": 71,
       "title": "カイ 二  乗  分  布  Chi-square distribution ",
-      "ja": "最後はカイ二乗分布です。平均の話から、ずれを集める話へ移ります。まず二十人の抽出で比率が変わる、身近な問いから始めましょう。",
-      "en": "Introduce the final topic as a distribution for combining squared deviations. Begin with changing proportions in repeated samples of twenty students."
+      "ja": "最後はカイ二乗分布です。今日は名前と用途、教科書の一般式だけを紹介します。ここでは計算演習は行いません。",
+      "en": "Introduce chi-square briefly: its purpose, textbook notation and general formula. There is no calculation exercise in this section."
     },
     {
       "page": 72,
-      "title": "Karl Pearson",
-      "ja": "ピアソンの1900年論文は、観測したずれを無作為抽出で説明できるかという問題を扱いました。原論文：https://doi.org/10.1080/14786440009463897 。肖像は元の教材の画像です。彼の優生学への関与は批判的に説明し、その思想を支持しません。",
-      "en": "Pearson’s 1900 paper asks whether observed deviations could reasonably arise through random sampling. Original: https://doi.org/10.1080/14786440009463897 . Portrait reused from the supplied material. Discuss his eugenics critically, not as endorsement."
+      "title": "平均ではなく、ばらつきを見るとき",
+      "ja": "t分布は平均の差を扱いました。カイ二乗分布は、正規母集団の分散やばらつきを扱うときに登場します。身長なら平均身長ではなく、身長の散らばりを見る場面です。独立な標準正規の値の平方和に関する分布、と教科書の定義を紹介するだけにします。",
+      "en": "After t for a mean, introduce chi-square as a distribution used when considering variance or spread in a normal population. For heights, the focus is their spread rather than their mean. Limit the definition to a sum of squares of independent standard normal values."
     },
     {
       "page": 73,
-      "title": "20人を選んでも、12人と8人とは限らない",
-      "ja": "Pearsonの物語を二十人の抽出で考えます。仮想の比率六対四なら基準は十二と八ですが、一回の標本は十五と五にもなります。この人数の比較はずれを考える導入です。今日の教科書の計算では、独立な正規分布からの身長に切り替えます。度数の検定公式はここで追加しません。",
-      "en": "Use the twenty-student story to motivate discrepancy: a hypothetical sixty-forty split gives reference counts twelve and eight, while a sample may have fifteen and five. This count comparison is motivation. The textbook calculation next uses independent normal heights; do not introduce a categorical testing formula."
+      "title": "教科書の一般式：ずれを二乗して集める",
+      "ja": "教科書128ページの式の左辺です。母平均からの差を二乗して足し、母分散で割った量です。正規母集団から独立に取り出すという条件があります。今日は式の読み方だけ確認し、数値の代入や平方和の分解までは扱いません。",
+      "en": "Show the left-hand side of the textbook page-128 formula: squared deviations from the population mean, summed and divided by population variance. The observations must be independent draws from a normal population. Recognise the formula without numerical substitution or decomposition."
     },
     {
       "page": 74,
-      "title": "今度は、2人の身長のずれを見よう",
-      "ja": "ここからは人数の度数ではなく、正規母集団から独立に抽出した二人の架空の身長です。百五十五と百六十五は、既知の母平均百六十からマイナス五とプラス五。母標準偏差五で割るとマイナス一とプラス一です。そのまま足すとゼロですが、二人とも中心から離れています。だから二乗して大きさを集める、という次の定義につなぎます。",
-      "en": "Now switch from categorical counts to two fictional heights sampled independently from a normal population. The known mean is 160 and SD five; heights 155 and 165 correspond to standardised deviations minus one and plus one. Adding them directly cancels to zero despite both being away from the centre. This motivates combining squared magnitudes in the next definition."
+      "title": "0以上。自由度によって、形が変わる",
+      "ja": "カイはギリシャ文字χ、ニューは自由度を示すνです。Uがその分布に従うという記号です。二乗した値を足すため値はゼロ以上で、自由度に応じて形が変わります。平均は自由度、分散はその二倍。図で特徴を確認したら紹介を終え、計算課題は追加しません。",
+      "en": "Chi is the Greek letter chi and nu denotes degrees of freedom. This notation says U follows that distribution. A sum of squares is nonnegative, and its shape changes with degrees of freedom. The mean equals nu and the variance twice nu. End with these textbook features, without an additional calculation task."
     },
     {
       "page": 75,
-      "title": "カイ二乗分布の記号",
-      "ja": "カイはギリシャ文字χです。教科書ではUが自由度νのカイ二乗分布に従うとき、このように書きます。確率そのものではなく、分布の名前を示しています。",
-      "en": "Chi is the Greek letter chi. This textbook notation says U follows a chi-square distribution with nu degrees of freedom. It names a distribution rather than giving a probability."
+      "title": "今日の3つを、つなげる",
+      "ja": "サイコロの平均、Curryの得点、そして最後に紹介したばらつきの分布を振り返ります。三つを同じ目的で使うのではなく、それぞれ何を確率変数として見ているかを言えるようにしましょう。",
+      "en": "Recall die sample means, Curry scores and the brief introduction to a distribution for spread. Ask what quantity is random in each section. These distributions serve different roles rather than being interchangeable choices."
     },
     {
       "page": 76,
-      "title": "独立な標準正規の値を、二乗して足す",
-      "ja": "どんなデータでも二乗すれば同じ分布になるわけではありません。独立で標準正規という条件が要点です。カテゴリの個数の問題の自由度とは、何を数えているかが違います。",
-      "en": "Arbitrarily squaring any data does not produce this distribution. Independent standard normal components are essential. Their number differs from counting category constraints in the motivating example."
-    },
-    {
-      "page": 77,
-      "title": "自由度で、形が変わる",
-      "ja": "教科書と同じ十から五十までを比べます。tと違ってゼロ中心の左右対称ではありません。自由度が増えると中心も右に動き、相対的な歪みは弱くなります。",
-      "en": "Compare the textbook’s degrees of freedom ten through fifty. Unlike t, curves are not symmetric about zero. The centre moves right as degrees of freedom increase and relative skewness decreases."
-    },
-    {
-      "page": 78,
-      "title": "母平均からの偏差二乗和を、母分散で割る",
-      "ja": "教科書128ページの左辺です。母平均からの差を二乗し、全部足し、既知の母分散で割ります。身長の例では五の二乗、二十五が母分散です。",
-      "en": "Use the left-hand side of the textbook’s page-128 identity. Sum squared deviations from the known population mean and divide by population variance, twenty-five in the height model."
-    },
-    {
-      "page": 79,
-      "title": "例題：2人の身長のずれを、ひとつに",
-      "ja": "別の架空の二人を使います。身長百五十五と百六十五、母平均百六十、母標準偏差五。母分散は二十五です。母平均はこの二人から推定したのでなく、モデルの既知の値として与えられています。まずここをtの例と区別しましょう。",
-      "en": "Use two different fictional heights, 155 and 165, from an independent normal model with known mean 160 and SD five, hence variance twenty-five. The population mean is supplied, not estimated from these two observations. Establish this distinction from the previous t example."
-    },
-    {
-      "page": 80,
-      "title": "例題：2人の身長のずれを、ひとつに",
-      "ja": "教科書の平方和の式を先に確認します。各身長から既知の母平均を引き、二乗して足してから、既知の母分散で割ります。標本平均を引く式と混ぜないよう、母平均の記号を指して確認します。",
-      "en": "Read the textbook squared-sum formula first. Subtract the known population mean from each height, square and sum, then divide by known population variance. Point to the population-mean symbol to avoid substituting a sample mean."
-    },
-    {
-      "page": 81,
-      "title": "例題：2人の身長のずれを、ひとつに",
-      "ja": "ずれはマイナス五と五。二乗は二十五と二十五で、合計五十。母分散二十五で割るとUは二です。独立な値は二個で、母平均を推定していないので自由度も二。次の課題は三人なので、人数と式の意味を確認して自分で計算します。",
-      "en": "The deviations are minus five and five. Their squares total fifty; dividing by variance twenty-five gives U equal to two. There are two independent components and no estimated mean removes a degree of freedom, so df is two. The following challenge uses three people and different heights."
-    },
-    {
-      "page": 82,
-      "title": "チャレンジ5　3人のずれを、ひとつにする",
-      "ja": "母分散二十五を確認します。偏差はゼロ、五、十で、二乗してから足します。既知の母平均なので、自由度を反射的にn−1にしないよう促します。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
-      "en": "Confirm variance twenty-five, then square deviations zero, five and ten. Because the population mean is known, do not automatically subtract one from the number of independent components. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
-    },
-    {
-      "page": 83,
-      "title": "答え合わせ5　U₀=5、自由度3",
-      "ja": "標準化したずれのゼロ、一、二を二乗して足したのと同じ結果です。新しい公式を増やすのでなく、教科書の平方和の式へ直接数値を入れて確認します。",
-      "en": "This also equals the sum of squared standardised deviations zero, one and two. Keep the calculation in the printed squared-sum form rather than introducing another formula to memorise."
-    },
-    {
-      "page": 84,
-      "title": "平方和の分解",
-      "ja": "左辺は母平均からのずれ全体。右辺は標本内のずれと標本平均のずれです。教科書128ページの式をそのまま見せ、証明を新しい課題にはしません。",
-      "en": "Show the exact page-128 identity. Identify total variation on the left and within-sample plus mean variation on the right. A proof is not an added calculation requirement."
-    },
-    {
-      "page": 85,
-      "title": "同じ3人なら、5 = 2 + 3",
-      "ja": "標本平均は百六十五です。青は標本内の二乗和五十を二十五で割った二。茶色は標本平均の母平均からの差五を二乗し、三倍して二十五で割った三です。この二つで全体の五になります。自由度も三が二と一に分かれることを対応させます。証明を覚える課題ではなく、教科書の式のどの部分が何を表すかを図で確認します。",
-      "en": "The sample mean is 165. Blue is the within-sample squared sum fifty divided by twenty-five, giving two. Brown is three times the squared mean difference five divided by twenty-five, giving three. Together they give the total five. Match the degrees of freedom three to two plus one. Identify the components visually without adding a proof requirement."
-    },
-    {
-      "page": 86,
-      "title": "カイ二乗：平均はν、分散は2ν",
-      "ja": "今回のUは五でしたが、分布全体の平均は自由度と同じ三、分散は六です。図で平均の線と今回の点を分けて読みます。探索で千組を生成すると、一回ごとのUが変わることと、その平均が三に近づくことを確かめられます。",
-      "en": "The observed U was five, while the distribution mean equals df three and variance is six. Distinguish the mean line from the observed coordinate on the curve. In the exploration, a thousand samples illustrate changing individual U values and an empirical mean approaching three."
-    },
-    {
-      "page": 87,
-      "title": "今日の3つを、つなげる",
-      "ja": "サイコロ、Curry、二十人の抽出と身長を思い出してもらいます。三つを同じ目的で使うのではなく、それぞれ何を確率変数として見ているかを言えるようにしましょう。",
-      "en": "Recall the die, Curry, and sampled students. Ask what quantity is random in each section. These distributions serve different roles rather than being interchangeable choices."
-    },
-    {
-      "page": 88,
       "title": "AL：ここからは、自分で表を読む",
       "ja": "ここからは課題を自分で読む時間です。セルの答えや手順を配らず、今日確認した分布、自由度、表の入力と出力を使って解いてもらいます。",
       "en": "Students now work independently on the worksheet. Do not disclose cell answers. Apply the distribution, degrees of freedom and table-input distinctions developed in the lecture."

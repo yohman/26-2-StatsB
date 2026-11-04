@@ -1,6 +1,6 @@
 {
   "rebuilt": true,
-  "slides": 88,
+  "slides": 76,
   "sections": [
     {
       "topic": "clt",
@@ -12,7 +12,7 @@
     },
     {
       "topic": "chi",
-      "pages": "71–86"
+      "pages": "71–74"
     }
   ],
   "coverage": [
@@ -118,26 +118,14 @@
     {
       "official": "23",
       "ids": [
-        "chi-definition",
-        "chi-notation",
-        "chi-shape",
+        "chi-purpose",
         "u-formula",
-        "chi-challenge",
-        "chi-answer",
-        "chi-decomposition",
-        "chi-decomposition-example",
-        "chi-moments"
+        "chi-shape"
       ],
       "pages": [
-        76,
-        75,
-        77,
-        78,
-        82,
-        83,
-        84,
-        85,
-        86
+        72,
+        73,
+        74
       ]
     },
     {
@@ -146,7 +134,7 @@
         "summary"
       ],
       "pages": [
-        87
+        75
       ]
     }
   ],
@@ -157,7 +145,7 @@
     },
     {
       "file": "other material/2025 yoh/08 Chi and T Distributions/w8 Chi Squared.md",
-      "used": "Curry9/49/46/11/28; benchmark27.4; Gosset; Pearson;60:40 and20-student samples"
+      "used": "Curry9/49/46/11/28; benchmark27.4; Gosset"
     }
   ],
   "textbookVerification": {
@@ -198,10 +186,6 @@
         "tex": "U_0=\\frac{\\sum_{i=1}^{n}(x_i-\\mu_x)^2}{\\sigma_x^2}",
         "page": "128（平方和の分解・左辺）"
       },
-      "decomposition": {
-        "tex": "U_0=\\frac{\\sum_{i=1}^{n}(x_i-\\mu_x)^2}{\\sigma_x^2}=\\frac{\\sum_{i=1}^{n}(x_i-\\bar X)^2}{\\sigma_x^2}+\\frac{n(\\bar X-\\mu_x)^2}{\\sigma_x^2}",
-        "page": "128（平方和の分解）"
-      },
       "chi": {
         "tex": "U\\sim\\chi^2(\\nu)",
         "page": "128（冒頭）"
@@ -211,9 +195,6 @@
   "corrections": [
     "Historical Curry sum142 corrected to143.",
     "No n30 cutoff or automatic rejection conclusion.",
-    "Student60:40 is fictional; no real students classified.",
-    "Known-mean squared sum df=n; residual term df=n-1.",
-    "Categorical motivation distinguished from exact normal squared sum.",
     "t-table cells are boundary coordinates, not probabilities."
   ],
   "pacing100Minutes": [
@@ -223,26 +204,25 @@
       "activity": "Video, dice means, CLT and Z challenge"
     },
     {
-      "minutes": "28–73",
+      "minutes": "28–90",
       "pages": "35–70",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
-      "minutes": "73–97",
-      "pages": "71–86",
-      "activity": "Pearson,20-student story, squared sum and decomposition"
+      "minutes": "90–97",
+      "pages": "71–74",
+      "activity": "Brief chi-square purpose, formula and shape"
     },
     {
       "minutes": "97–100",
-      "pages": "87–88",
+      "pages": "75–76",
       "activity": "Summary and independent AL"
     }
   ],
   "optional": [
     "Research another player’s scores after class.",
     "Anonymous height data instead of dice.",
-    "Repeated board runs.",
-    "Proof of the decomposition; identify pieces without proving."
+    "Repeated board runs."
   ],
   "dataPolicy": "Fictional or anonymous numeric input in browser memory only. No upload, persistence or real students classified by gender."
 }
