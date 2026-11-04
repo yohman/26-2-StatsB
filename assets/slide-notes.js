@@ -4,6 +4,7 @@
     ['materials/2026-yoh/week05/w5.pdf','materials/2026-yoh/week05/w5.notes.json'],
     ['materials/2026-yoh/week06/w6.pdf','materials/2026-yoh/week06/w6.notes.json']
   ]);
+  for(let week=7;week<=13;week++){const folder=String(week).padStart(2,'0');decks.set(`materials/2026-yoh/week${folder}/w${week}.pdf`,`materials/2026-yoh/week${folder}/w${week}.notes.json`);}
   const requests=new Map();
   function loadNotes(path){
     if(!requests.has(path)){

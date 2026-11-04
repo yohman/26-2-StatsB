@@ -1,0 +1,216 @@
+{
+  "week": 12,
+  "title": "よく出る選手は、よく得点する？",
+  "slides": [
+    {
+      "page": 1,
+      "title": "",
+      "ja": "回帰という言葉を、十九世紀の身長研究から紹介します。親子の身長の関係を調べるという、データの二つの列を見る物語です。ここから今日の身近な二つの列、出場時間と得点へ移ります。",
+      "en": "Use this slide to explain opening. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 2,
+      "title": "出場時間が長いと、得点も多い？",
+      "ja": "出場時間が長いと、得点も多い？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain nba question. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 3,
+      "title": "点で見ると、関係が見えてくる",
+      "ja": "点で見ると、関係が見えてくるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain scatter first. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 4,
+      "title": "関係がある、から、原因だとは言えない",
+      "ja": "関係がある、から、原因だとは言えないを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain correlation not cause. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 5,
+      "title": "回かい帰き分ぶん析せきRegression analysis",
+      "ja": "回帰分析です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
+      "en": "Use this slide to explain regression title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 6,
+      "title": "xとyに、名前を付ける",
+      "ja": "xとyに、名前を付けるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain variables. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 7,
+      "title": "二つの変数を、直線で関係づける",
+      "ja": "二つの変数を、直線で関係づけるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain regression formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 8,
+      "title": "a、b、uは、何を表す？",
+      "ja": "a、b、uは、何を表す？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain terms. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 9,
+      "title": "点の間に、直線を引く",
+      "ja": "点の間に、直線を引くを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain line. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 10,
+      "title": "最さい小しょう二に乗じょう法ほうLeast squares",
+      "ja": "最小二乗法です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
+      "en": "Use this slide to explain least squares title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 11,
+      "title": "点から直線まで、縦に測る",
+      "ja": "点から直線まで、縦に測るを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain residuals. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 12,
+      "title": "残差を二乗して、合計を小さくする",
+      "ja": "残差を二乗して、合計を小さくするを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain least squares meaning. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 13,
+      "title": "やってみよう！Move the line, inspect the residuals",
+      "ja": "直線を動かし、残差の二乗和を見る。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
+      "en": "Use this slide to explain line explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 14,
+      "title": "この架空データから得た直線",
+      "ja": "この架空データから得た直線を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain our fit. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 15,
+      "title": "25分なら、約17.71点と予測",
+      "ja": "25分なら、約17.71点と予測を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain prediction example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 16,
+      "title": "0分でも、0.57点？",
+      "ja": "0分でも、0.57点？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain intercept warning. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 17,
+      "title": "チャレンジ1　別の練習用の回帰式を読む",
+      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
+      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
+    },
+    {
+      "page": 18,
+      "title": "式に入れ、係数を単位で説明する",
+      "ja": "式に入れ、係数を単位で説明するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain prediction answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 19,
+      "title": "Excelで分析するRun a regression in Excel",
+      "ja": "Excelで分析するです。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
+      "en": "Use this slide to explain excel title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 20,
+      "title": "データ分析ツールを使えるようにする",
+      "ja": "データ分析ツールを使えるようにするを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain excel prepare. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 21,
+      "title": "Y範囲とX範囲を、取り違えない",
+      "ja": "Y範囲とX範囲を、取り違えないを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain excel range. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 22,
+      "title": "まず、6個の観測を使ったと確認する",
+      "ja": "まず、6個の観測を使ったと確認するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain excel output. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 23,
+      "title": "R²は、直線の当てはまりの目安",
+      "ja": "R²は、直線の当てはまりの目安を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain r2. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 24,
+      "title": "係数・標準誤差・t値・p値を見る",
+      "ja": "係数・標準誤差・t値・p値を見るを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain coefficient output. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 25,
+      "title": "帰無仮説は、傾きが0",
+      "ja": "帰無仮説は、傾きが0を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain coefficient test. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 26,
+      "title": "有意でも、原因だとは証明しない",
+      "ja": "有意でも、原因だとは証明しないを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain significance not cause. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 27,
+      "title": "やってみよう！Read the regression output",
+      "ja": "点を変えると、Excel形式の出力も動く。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
+      "en": "Use this slide to explain output explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 28,
+      "title": "チャレンジ2　有意でない係数を、どう説明する？",
+      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
+      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
+    },
+    {
+      "page": 29,
+      "title": "「証拠が十分でない」と説明する",
+      "ja": "「証拠が十分でない」と説明するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain output answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 30,
+      "title": "自分たちの二つの数値なら？",
+      "ja": "自分たちの二つの数値なら？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain student pairs. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 31,
+      "title": "やってみよう！Class scatterplot",
+      "ja": "匿名のペアデータを、点と直線にする。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
+      "en": "Use this slide to explain pairs explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 32,
+      "title": "結果は、4つを一緒に説明する",
+      "ja": "結果は、4つを一緒に説明するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain report. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 33,
+      "title": "ALのExcelファイルは、自分で分析する",
+      "ja": "ALのExcelファイルは、自分で分析するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain al. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 34,
+      "title": "時間があれば：外れ値を1点足す",
+      "ja": "時間があれば：外れ値を1点足すを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain optional. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 35,
+      "title": "直線を引いた後が、大事。",
+      "ja": "直線を引いた後が、大事。を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain exit. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    }
+  ]
+}

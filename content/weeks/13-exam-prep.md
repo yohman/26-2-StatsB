@@ -21,10 +21,12 @@ prepare_en: Review Week 12 regression and bring questions for final-exam prepara
 
 ## Textbook
 
-- 第1章 第7節「回帰分析とその他の代表的な分析手法」p.71 (Chapter 1, Section 7: Regression Analysis and Other Representative Methods, p.71)
+- 第3章 第5節「分析結果の誤った解釈」p.189–196 (Chapter 3, Section 5: Misinterpretations of Analysis Results, pp.189–196)
 - 復習：第2章 第1〜4節 p.102、117、131、138 (Review: Chapter 2, Sections 1–4, pp.102, 117, 131, 138)
 
 ## Materials
 
-- [Tsumura 2026 lecture slides: Part 2 (PowerPoint)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pptx) {primary}
-- [Tsumura 2026 lecture slides: Part 2 (PDF)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pdf) {primary}
+- [Yoh's Week 13 lecture](materials/2026-yoh/week13/w13.pdf) {primary}
+
+- [Tsumura 2026 lecture slides: Part 2 (PowerPoint)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pptx) {supplementary}
+- [Tsumura 2026 lecture slides: Part 2 (PDF)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pdf) {supplementary}

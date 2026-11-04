@@ -21,9 +21,11 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 
 ## Textbook
 
-- 第2章 第2節「確率分布」p.117 (Chapter 2, Section 2: Probability Distributions, p.117)
+- 第2章 第2節「確率分布」p.122–128・正規分布表 p.202・t分布表 p.203 (Sample means, variance, and distributions, pp.122–128; tables pp.202–203)
 
 ## Materials
 
-- [Tsumura 2026 lecture slides — student edition (PDF)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pdf) {primary}
+- [Yoh's Week 7 lecture](materials/2026-yoh/week07/w7.pdf) {primary}
+
+- [Tsumura 2026 lecture slides — student edition (PDF)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pdf) {supplementary}
 - [AL用ワークシート](weeks/07-al-continuous-distributions/07_AL用ワークシート.xlsx) {worksheet}

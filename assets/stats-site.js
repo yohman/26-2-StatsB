@@ -1,3 +1,4 @@
+const futureExplorations = {"7": [{"mode": "spread", "ja": "5つの値を変え、中心と散らばりを見る", "en": "Five values, two summaries", "page": 15}, {"mode": "tails", "ja": "境界を動かして、面積と表をつなぐ", "en": "Read the right-tail table", "page": 28}], "8": [{"mode": "sampling", "ja": "魚を選ぶたび、平均が動く", "en": "A sample is not the whole shoal", "page": 10}, {"mode": "estimators", "ja": "偏り・安定性・標本数を比べる", "en": "Bias, efficiency and sample size", "page": 20}, {"mode": "class-data", "ja": "自分たちの数値で、推定値を出す", "en": "Anonymous class values", "page": 35}], "9": [{"mode": "coverage", "ja": "100本の区間を作って、真の平均を見る", "en": "What 95% coverage means", "page": 14}, {"mode": "mean-ci", "ja": "5試合の数字を変え、区間を作る", "en": "Basketball confidence intervals", "page": 18}, {"mode": "variance-ci", "ja": "二つのχ²値から、分散の区間を作る", "en": "Variance intervals and asymmetric tails", "page": 31}], "10": [{"mode": "choose", "ja": "条件カードから、使う分布を選ぶ", "en": "Choose Z, t or chi-square", "page": 12}, {"mode": "mean-ci", "ja": "自分の数字で、条件から区間まで", "en": "Work through a mean interval", "page": 20}, {"mode": "variance-ci", "ja": "上下の境界を、色で確認する", "en": "Divide by the correct chi-square boundary", "page": 27}], "11": [{"mode": "tea", "ja": "8杯から4杯を選び、偶然を体験する", "en": "The lady tasting tea", "page": 4}, {"mode": "test", "ja": "データと仮説を変えて、Tとpを見る", "en": "A test from question to conclusion", "page": 23}, {"mode": "proportions", "ja": "人数と支持人数から、差を検定する", "en": "Two groups, one null hypothesis", "page": 32}], "12": [{"mode": "line", "ja": "直線を動かし、残差の二乗和を見る", "en": "Move the line, inspect the residuals", "page": 13}, {"mode": "output", "ja": "点を変えると、Excel形式の出力も動く", "en": "Read the regression output", "page": 27}, {"mode": "pairs", "ja": "匿名のペアデータを、点と直線にする", "en": "Class scatterplot", "page": 31}], "13": [{"mode": "interpret", "ja": "結論を選び、どこが言い過ぎか確かめる", "en": "Interpretation check", "page": 18}, {"mode": "review", "ja": "数値を変え、どの道具が必要かを選ぶ", "en": "Mixed review with fresh numbers", "page": 40}]};
 const weekFiles = [
   '00-orientation.md', '01-inference.md', '02-binomial.md', '03-poisson.md',
   '04-al-discrete.md', '05-normal.md', '06-t-chi.md', '07-al-continuous.md',
@@ -169,6 +170,7 @@ function slideThumbnail(deck, week) {
   if (week.week === 4 && deck.label === "Yoh's Week 4 lecture") return 'assets/slide-previews/yoh-w04.png?v=20261021-integrated-story';
   if (week.week === 5 && deck.preview?.endsWith('/week05/w5.pdf')) return 'assets/slide-previews/yoh-w05.png?v=20261026-race-opening';
   if (week.week === 6 && deck.label === "Yoh's Week 6 lecture") return 'assets/slide-previews/yoh-w06.png?v=opening-ee2925a';
+  if (week.week >= 7 && week.week <= 13 && deck.preview?.includes(`/week${String(week.week).padStart(2,'0')}/w${week.week}.pdf`)) return `assets/slide-previews/yoh-w${String(week.week).padStart(2,'0')}.png?v=future-first-pass`;
   if (week.week === 13 && /final-exam review slides/i.test(deck.label)) return 'assets/slide-previews/yoh-w13.png';
   return '';
 }
@@ -493,6 +495,15 @@ function week4LectureMarkup(content) {
   return content;
 }
 
+function futureLectureMarkup(week,content) {
+  const items=futureExplorations[week.week],prefix=`week-${week.week}`;
+  return `<div class="lecture-tablist" role="tablist" aria-label="Week ${week.week} lecture"><button type="button" role="tab" id="${prefix}-lecture-slides-tab" aria-controls="${prefix}-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button><button type="button" role="tab" id="${prefix}-lecture-explore-tab" aria-controls="${prefix}-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button></div><div id="${prefix}-lecture-slides" role="tabpanel" aria-labelledby="${prefix}-lecture-slides-tab">${content}</div><div id="${prefix}-lecture-explore" role="tabpanel" aria-labelledby="${prefix}-lecture-explore-tab" hidden><div class="simulation-tablist" role="tablist" aria-label="Week ${week.week} explorations">${items.map((v,i)=>`<button type="button" role="tab" id="${prefix}-${v.mode}-tab" aria-controls="${prefix}-${v.mode}" aria-selected="${i===0}" tabindex="${i===0?0:-1}">${String(i+1).padStart(2,'0')} <span>${bilingual(v.en,v.ja)}</span></button>`).join('')}</div>${items.map((v,i)=>`<div id="${prefix}-${v.mode}" role="tabpanel" aria-labelledby="${prefix}-${v.mode}-tab"${i?' hidden':''}><iframe class="future-explore-frame" title="${escapeHtml(v.ja)}" src="materials/2026-yoh/shared/explore.html?week=${week.week}&mode=${v.mode}&v=first-pass" loading="lazy" style="width:100%;height:1400px;border:0"></iframe></div>`).join('')}</div>`;
+}
+window.addEventListener('message',event=>{
+  if(event.origin!==location.origin||event.data?.type!=='statsb-future-lab-height')return;
+  for(const frame of document.querySelectorAll('.future-explore-frame'))if(frame.contentWindow===event.source){const height=Number(event.data.height);if(Number.isFinite(height))frame.style.height=`${Math.max(650,Math.min(3400,height))}px`;break;}
+});
+
 function lectureSection(week) {
   const decks = lectureDecks(week.materials, week);
   const plan = weekFlow[week.week];
@@ -510,7 +521,7 @@ function lectureSection(week) {
   const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
   const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${newsExamples.length?'':extra}</div>` : ''}${choices}${newsExamples.length?`<div class="news-example-supplement">${extra}</div>`:''}</div>`;
-  const lectureBody = week.week === 4 ? week4LectureMarkup(content) : week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">
+  const lectureBody = futureExplorations[week.week] ? futureLectureMarkup(week, content) : week.week === 4 ? week4LectureMarkup(content) : week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">
       <button type="button" role="tab" id="week-5-lecture-slides-tab" aria-controls="week-5-lecture-slides" aria-selected="true" tabindex="0">${bilingual('Lecture','講義')}</button>
       <button type="button" role="tab" id="week-5-lecture-explore-tab" aria-controls="week-5-lecture-explore" aria-selected="false" tabindex="-1">${bilingual('Explore','やってみる')}</button>
     </div><div id="week-5-lecture-slides" role="tabpanel" aria-labelledby="week-5-lecture-slides-tab">${content}</div><div id="week-5-lecture-explore" role="tabpanel" aria-labelledby="week-5-lecture-explore-tab" hidden>
@@ -660,7 +671,7 @@ function renderAgenda(weeks) {
   const {expandAll, previewAll} = agendaPreviewMode(location);
   const today = todayInTokyo();
   const currentWeek = weeks.filter(week => week.date <= today).at(-1)?.week ?? weeks[0]?.week;
-  root.innerHTML = `${weekShortcuts(weeks, previewAll, today)}${previewAll ? `<div class="preview-notice">${expandAll ? bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示') : bilingual('LOCAL PREVIEW · ALL WEEKS AVAILABLE', 'ローカルプレビュー · 全週を閲覧できます')}</div>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today, currentWeek, expandAll)).join('')}</div>`;
+  root.innerHTML = `${weekShortcuts(weeks, previewAll, today)}${previewAll ? `<div class="preview-notice">${expandAll ? bilingual('INSTRUCTOR PREVIEW · ALL WEEKS OPEN', '教員プレビュー · 全週を表示') : bilingual('LOCAL PREVIEW · ALL WEEKS AVAILABLE', 'ローカルプレビュー · 全週を閲覧できます')}</div>` : ''}${previewAll ? `<p class="preview-notice"><a href="materials/2026-yoh/remaining-weeks.html?p">${bilingual('Weeks 7–13 · preparation overview','第7〜13週 · 授業準備の一覧')} ↗</a></p>` : ''}<div class="week-stack">${weeks.map((week, index) => weekCard(week, weeks[index + 1]?.date, previewAll, today, currentWeek, expandAll)).join('')}</div>`;
   const syncWeekShortcut = () => {
     const requested = location.hash ? document.getElementById(location.hash.slice(1)) : null;
     if (requested?.tagName === 'DETAILS') requested.open = true;
@@ -718,6 +729,7 @@ function renderAgenda(weeks) {
     t: ['week-6-lecture-explore-tab','week-6-t-tab'],
     chi: ['week-6-lecture-explore-tab','week-6-chi-tab']
   };
+  for (const [w,items] of Object.entries(futureExplorations)) for(const v of items) exerciseRoutes[`w${w}-${v.mode}`]=[`week-${w}-lecture-explore-tab`,`week-${w}-${v.mode}-tab`];
   for (const id of exerciseRoutes[activity] || []) document.getElementById(id)?.click();
   document.dispatchEvent(new Event('statsb:agenda-rendered'));
   const requested = location.hash ? document.getElementById(location.hash.slice(1)) : null;

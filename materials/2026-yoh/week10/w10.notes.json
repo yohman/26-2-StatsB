@@ -1,0 +1,192 @@
+{
+  "week": 10,
+  "title": "何を推定するかで、式を選ぶ",
+  "slides": [
+    {
+      "page": 1,
+      "title": "",
+      "ja": "を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain opening. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 2,
+      "title": "同じ平均50kgの、二つの売場",
+      "ja": "同じ平均50kgの、二つの売場を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain shop question. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 3,
+      "title": "今日は、式を「選んで」使う",
+      "ja": "今日は、式を「選んで」使うを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain today. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 4,
+      "title": "区く間かん推すい定ていInterval estimation",
+      "ja": "区間推定です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
+      "en": "Use this slide to explain choose title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 5,
+      "title": "求める量を先に選ぶ",
+      "ja": "求める量を先に選ぶを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain method matrix. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 6,
+      "title": "標本不偏分散を、先に準備",
+      "ja": "標本不偏分散を、先に準備を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain variance review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 7,
+      "title": "母分散が既知の、母平均の区間",
+      "ja": "母分散が既知の、母平均の区間を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain known mean formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 8,
+      "title": "ロボット電池の平均寿命を知りたい",
+      "ja": "ロボット電池の平均寿命を知りたいを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain known given. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 9,
+      "title": "既知のσを、そのまま使う",
+      "ja": "既知のσを、そのまま使うを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain known example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 10,
+      "title": "チャレンジ1　充電時間の、母平均",
+      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
+      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
+    },
+    {
+      "page": 11,
+      "title": "標本が大きくなると、平均は安定する",
+      "ja": "標本が大きくなると、平均は安定するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain known answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 12,
+      "title": "やってみよう！Choose Z, t or chi-square",
+      "ja": "条件カードから、使う分布を選ぶ。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
+      "en": "Use this slide to explain choice explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 13,
+      "title": "母平均の区間推定Population mean: variance unknown",
+      "ja": "母平均の区間推定です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
+      "en": "Use this slide to explain unknown title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 14,
+      "title": "母分散が未知なら、不偏分散とt",
+      "ja": "母分散が未知なら、不偏分散とtを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain unknown formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 15,
+      "title": "5回の練習得点で、平均を推定する",
+      "ja": "5回の練習得点で、平均を推定するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain unknown given. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 16,
+      "title": "平均20点。不偏分散2.5点²",
+      "ja": "平均20点。不偏分散2.5点²を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain unknown example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 17,
+      "title": "表を開いて、境界を指さす",
+      "ja": "表を開いて、境界を指さすを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain lookup pause. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 18,
+      "title": "チャレンジ2　別の5回で、同じ手順",
+      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
+      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
+    },
+    {
+      "page": 19,
+      "title": "平均との差を、先に整理する",
+      "ja": "平均との差を、先に整理するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain unknown answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 20,
+      "title": "やってみよう！Work through a mean interval",
+      "ja": "自分の数字で、条件から区間まで。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
+      "en": "Use this slide to explain mean explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 21,
+      "title": "母分散の区間推定Population variance",
+      "ja": "母分散の区間推定です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
+      "en": "Use this slide to explain variance title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 22,
+      "title": "揃っているかを、知りたい",
+      "ja": "揃っているかを、知りたいを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain variance recall. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 23,
+      "title": "母分散の95％信頼区間",
+      "ja": "母分散の95％信頼区間を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain variance formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 24,
+      "title": "まず、二つの表の値を区別する",
+      "ja": "まず、二つの表の値を区別するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain variance example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 25,
+      "title": "チャレンジ3　反応時間の、母分散",
+      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
+      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
+    },
+    {
+      "page": 26,
+      "title": "大きい境界で割ると、下限",
+      "ja": "大きい境界で割ると、下限を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain variance answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 27,
+      "title": "やってみよう！Divide by the correct chi-square boundary",
+      "ja": "上下の境界を、色で確認する。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
+      "en": "Use this slide to explain variance explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 28,
+      "title": "同じデータから、何を報告する？",
+      "ja": "同じデータから、何を報告する？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain student plan. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 29,
+      "title": "ここから、ALの4つの課題へ",
+      "ja": "ここから、ALの4つの課題へを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain al start. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 30,
+      "title": "残り時間は、ALに使う",
+      "ja": "残り時間は、ALに使うを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain al time. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 31,
+      "title": "今日の確認",
+      "ja": "今日の確認を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
+      "en": "Use this slide to explain exit. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    }
+  ]
+}
