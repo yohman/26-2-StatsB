@@ -10,6 +10,11 @@ const escapeHtml = value => String(value || '').replace(/[&<>"']/g, character =>
   '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
 }[character]));
 const encodeHref = href => encodeURI(href);
+// The textbook guide is a reviewed local resource, not arbitrary embedded HTML.
+const textbookReferenceMarkup = value => {
+  const match = String(value).match(/^\[([^\]]+)\]\((materials\/2026-yoh\/textbook-guide\.html\?p#week-\d{2})\)$/);
+  return match ? `<a href="${escapeHtml(match[2])}" target="_blank" rel="noopener">${escapeHtml(match[1])} ↗</a>` : escapeHtml(value);
+};
 const inlineMathMarkup = (source, fallback = source) => `<span data-inline-math="${escapeHtml(source)}">${escapeHtml(fallback)}</span>`;
 const extension = href => (href.split('?')[0].split('.').pop() || 'file').toUpperCase();
 const bilingual = (english, japanese) => `<span class="lang-en">${english}</span><span class="lang-ja" lang="ja">${japanese}</span>`;
@@ -518,7 +523,7 @@ function lectureSection(week) {
   const choices = newsExamples.length ? `<section class="news-example-choices"><p class="more-slides-heading">${bilingual('Optional scenarios · If time remains', '任意のシナリオ · 時間が余ったら')}</p><p class="optional-news-note">${bilingual('The AI-friend story is included in the main lecture. Choose one extra scenario only if time allows.','AIの友だちの話は本編に含まれています。残り時間があれば、追加シナリオを1つ選びましょう。')}</p><div class="news-exercise-tabs" role="tablist" aria-label="Optional news exercise distribution">${newsGroups.map(([id,en,ja],i)=>`<button type="button" role="tab" id="week-${week.week}-news-${id}-tab" aria-controls="week-${week.week}-news-${id}" aria-selected="${!i}" tabindex="${i?-1:0}">${bilingual(en,ja)}</button>`).join('')}</div>${newsGroups.map(([id,,,items],i)=>`<div id="week-${week.week}-news-${id}" role="tabpanel" aria-labelledby="week-${week.week}-news-${id}-tab"${i?' hidden':''}><div class="news-example-grid">${items.map(deck=>slideCard(deck,week)).join('')}</div></div>`).join('')}</section>` : '';
   const extra = more.length ? `<div class="more-slides"><p class="more-slides-heading">${bilingual('Supplementary slides', '補助スライド')}</p><div class="more-slides-list">${more.map(deck => slideCard(deck, week)).join('')}</div></div>` : '';
   const description = plan ? bilingual(escapeHtml(plan.overview[0]), escapeHtml(plan.overview[1])) : bilingual(escapeHtml(week.title_en), escapeHtml(week.title_ja));
-  const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(escapeHtml(item.en), escapeHtml(item.ja))}</li>`).join('')}</ul></div>` : '';
+  const textbook = week.textbook.length ? `<div class="lecture-textbook"><p class="lecture-textbook-label">${bilingual('TEXTBOOK', '教科書')}</p><ul>${week.textbook.map(item => `<li>${bilingual(textbookReferenceMarkup(item.en), textbookReferenceMarkup(item.ja))}</li>`).join('')}</ul></div>` : '';
   const heading = week.week === 14 ? bilingual('Final examination', '期末試験') : bilingual('This week’s lecture', '今週の講義');
   const content = `<div class="lecture-layout${decks.length ? '' : ' lecture-layout--no-slides'}"><div class="lecture-copy"><p class="lecture-summary">${description}</p>${textbook}</div>${decks.length ? `<div class="lecture-slides">${slideList}${newsExamples.length?'':extra}</div>` : ''}${choices}${newsExamples.length?`<div class="news-example-supplement">${extra}</div>`:''}</div>`;
   const lectureBody = futureExplorations[week.week] ? futureLectureMarkup(week, content) : week.week === 4 ? week4LectureMarkup(content) : week.week === 5 ? `<div class="lecture-tablist" role="tablist" aria-label="Week 5 lecture">

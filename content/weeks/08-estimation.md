@@ -21,7 +21,7 @@ prepare_en: Review the meanings of parameter, statistic, and estimator.
 
 ## Textbook
 
-- 第2章 第3節 §1〜5：p.131〜132 (母数・推定量・点推定)
+- 第2章 第3節 §1〜5：p.131〜132 (Chapter 2, Section 3.1–5, pp.131–132)
 - 母数・推定量・推定値：p.131
 - 不偏推定量・不偏性：p.131〜132
 - 有効性・一致性：p.132 脚注1
@@ -29,7 +29,7 @@ prepare_en: Review the meanings of parameter, statistic, and estimator.
 - 点推定と区間推定：p.132 §3
 - 母平均の点推定：p.132 §4
 - 母分散の点推定・不偏分散：p.132 §5
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-08)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-08)
 
 ## Materials
 

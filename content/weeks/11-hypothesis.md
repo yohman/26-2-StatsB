@@ -29,7 +29,7 @@ prepare_en: Review the different purposes of confidence intervals and hypothesis
 - t検定統計量の式と代入：p.145
 - 母比率の差：設定から検定：p.145〜148
 - 母比率の差のZ・全体の標本比率p：p.147
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-11)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-11)
 
 ## Materials
 

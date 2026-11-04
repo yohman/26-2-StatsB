@@ -29,7 +29,7 @@ prepare_en: Review Week 12 regression and bring questions for final-exam prepara
 - 自由度修正済みR²が負：p.192〜193
 - 分析手法の選択の誤り：p.193〜195
 - OLSの仮定：p.194
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-13)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-13)
 
 ## Materials
 

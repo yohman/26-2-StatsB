@@ -28,7 +28,7 @@ Excel でデータ分析ツールを使えるか確認してください。
 - OLS・仮定・残差に関する再掲：p.193〜194
 - 相関と因果・疑似相関：p.191〜192・195
 - 検定の手順の復習：p.138〜142
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-12)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-12)
 
 ## Materials
 

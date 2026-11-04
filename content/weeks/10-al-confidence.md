@@ -20,13 +20,13 @@ prepare_en: Practise identifying which of the population variance, sample size, 
 
 ## Textbook
 
-- 第2章 第3節 §6〜7：p.133〜137 (AL：区間推定の使い分け)
+- 第2章 第3節 §6〜7：p.133〜137 (Chapter 2, Section 3.6–7, pp.133–137)
 - 母平均t区間・不偏分散の準備：p.132〜135
 - 母分散既知の場合のZ：p.134 脚注1
 - 母分散χ²区間：p.135〜136
 - 章末問題（解答は授業資料に含めない）：p.137
 - 正規分布表・t分布表：p.202〜203
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-10)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-10)
 
 ## Materials
 

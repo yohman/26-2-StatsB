@@ -20,13 +20,13 @@ prepare_en: Review the terms probability, population, and sample before class.
 
 ## Textbook
 
-- 第2章 第1節：p.102〜115 (推測統計学・確率の基礎)
+- 第2章 第1節：p.102〜115 (Chapter 2, Section 1, pp.102–115)
 - 母集団・標本・推測の流れ：p.102〜105
 - 事象・積事象・和事象：p.106〜109
 - 確率・加法則：p.109〜111
 - 余事象：Pr(Aᶜ)＝1−Pr(A)：p.112
 - 条件付き確率・独立：p.113〜115
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-01)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-01)
 
 ## Materials
 

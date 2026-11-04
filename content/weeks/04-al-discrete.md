@@ -20,12 +20,12 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 
 ## Textbook
 
-- 第2章 第2節 §4：p.118〜120 (AL：離散確率分布)
+- 第2章 第2節 §4：p.118〜120 (Chapter 2, Section 2.4, pp.118–120)
 - 二項確率・組合せ・モーメント：p.118〜120
 - 少なくとも1回：余事象の考え方：p.112
 - ポアソン近似・期待値・分散：p.120
 - ポアソン確率表：p.204
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-04)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-04)
 
 ## Materials
 

@@ -22,14 +22,14 @@ prepare_en: Review the difference between continuous and discrete variables.
 
 ## Textbook
 
-- 第2章 第2節 §5〜6：p.121〜125・129 (連続確率分布・正規分布・表)
+- 第2章 第2節 §5〜6：p.121〜125・129 (Chapter 2, Section 2.5–6, pp.121–125 and 129)
 - 分布関数F(x)、密度f(x)、全体の面積1：p.121
 - 区間の確率を面積で求める・正規分布の密度：p.121〜122
 - 標準化、標準正規分布の平均0・分散1：p.123
 - 正規分布表：右側・左側・中央：p.124〜125
 - 確率分布の期待値と分散：p.129
 - 標準正規分布表：p.202
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-05)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-05)
 
 ## Materials
 

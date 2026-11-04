@@ -21,13 +21,13 @@ prepare_en: Review random variables, expected value, and discrete versus continu
 
 ## Textbook
 
-- 第2章 第2節 §4：p.118〜120 (二項分布・ポアソン分布)
+- 第2章 第2節 §4：p.118〜120 (Chapter 2, Section 2.4, pp.118–120)
 - 二項分布の公式：p.118
 - 組合せと代入の説明：p.119〜120
 - 二項分布の期待値・分散：p.120
 - ポアソンの条件、E(X)＝Var(X)＝nπ：p.120
 - ポアソン確率表：p.204
-- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-03)
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html?p#week-03)
 
 ## Materials
 
