@@ -21,7 +21,14 @@ prepare_en: Review the difference between sample variance and unbiased sample va
 
 ## Textbook
 
-- 第2章 第2節「標本平均・t分布・カイ二乗分布」p.122–128。t分布表 p.203（標準正規分布表 p.202）。(Sample means, t and chi-square distributions, pp.122–128; t table p.203, normal table p.202.)
+- 第2章 第2節 §5：p.122〜128 (中心極限定理・t分布・χ²分布)
+- 標本平均・中心極限定理：p.122〜123
+- 標本平均のZ：分母√(σ²/n)：p.123
+- T：母分散を不偏分散で置き換える：p.125
+- 標本不偏分散・自由度n−1：p.126
+- t分布表の読み方：p.126〜127・203
+- χ²分布の意味・一般式：p.127〜128
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-06)
 
 ## Materials
 

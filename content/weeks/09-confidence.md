@@ -21,7 +21,15 @@ prepare_en: Review why we use unbiased sample variance before class.
 
 ## Textbook
 
-- 第2章 第3節「母平均の区間推定・母分散の区間推定」p.131 (Chapter 2, Section 3: Interval Estimation of Population Mean and Variance, p.131)
+- 第2章 第3節 §6〜7：p.133〜136 (母平均・母分散の区間推定)
+- 信頼係数・信頼区間・長期的な95%の意味：p.133
+- 母平均の区間：一般のtα(n−1)の式：p.133
+- 日本語の式・tを使う計算手順：p.134〜135
+- 母分散が既知なら標準正規分布：p.134 脚注1
+- χ²による母分散の区間：考え方：p.135
+- 母分散の95%区間：上下限の式：p.136
+- t境界の数値：p.203
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-09)
 
 ## Materials
 

@@ -21,8 +21,15 @@ prepare_en: Review the different purposes of confidence intervals and hypothesis
 
 ## Textbook
 
-- 第2章 第4節「統計的仮説検定」p.138 (Chapter 2, Section 4: Statistical Hypothesis Testing, p.138)
-- 第3章 第3節「分析事例③ 2群の検定」p.170 (Chapter 3, Section 3: Case Study 3, Two-Group Tests, p.170)
+- 第2章 第4節（目標スライド）：p.138〜150 (統計的仮説検定)
+- 検定の7手順全体：p.138〜142
+- 方法・H₀/H₁・片側/両側：p.139〜141
+- 有意水準・データ・臨界域：p.141〜142
+- 1群のt検定の例：p.143〜145
+- t検定統計量の式と代入：p.145
+- 母比率の差：設定から検定：p.145〜148
+- 母比率の差のZ・全体の標本比率p：p.147
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-11)
 
 ## Materials
 

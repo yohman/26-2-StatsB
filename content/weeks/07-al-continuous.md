@@ -21,7 +21,12 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 
 ## Textbook
 
-- 第2章 第2節「確率分布」p.122–128・正規分布表 p.202・t分布表 p.203 (Sample means, variance, and distributions, pp.122–128; tables pp.202–203)
+- 第2章 第2節 §5：p.123〜127 (AL：不偏分散・Z・表の面積)
+- Zと正規分布表：p.123〜125・202
+- 不偏分散・自由度：p.126
+- 標本分散から不偏分散への換算：p.134 脚注2
+- tの復習・表：p.125〜127・203
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-07)
 
 ## Materials
 

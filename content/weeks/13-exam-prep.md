@@ -21,8 +21,15 @@ prepare_en: Review Week 12 regression and bring questions for final-exam prepara
 
 ## Textbook
 
-- 第3章 第5節「分析結果の誤った解釈」p.189–196 (Chapter 3, Section 5: Misinterpretations of Analysis Results, pp.189–196)
-- 復習：第2章 第1〜4節 p.102、117、131、138 (Review: Chapter 2, Sections 1–4, pp.102, 117, 131, 138)
+- 第3章 第5節：p.189〜196 (分析結果の誤った解釈・復習)
+- 分散と標準偏差の単位：p.189〜190
+- 変動係数CV＝σ/μ：p.190
+- 推定係数が有意でない：p.190〜191
+- 説明変数・目的変数の向き：p.191〜192
+- 自由度修正済みR²が負：p.192〜193
+- 分析手法の選択の誤り：p.193〜195
+- OLSの仮定：p.194
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-13)
 
 ## Materials
 

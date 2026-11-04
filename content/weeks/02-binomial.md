@@ -21,7 +21,13 @@ prepare_en: Review the notation used for random variables and probabilities.
 
 ## Textbook
 
-- 第2章 第2節 1〜3「確率変数・期待値・確率分布」p.117–118 (Chapter 2, Section 2, subsections 1–3: Random Variables, Expected Value, Probability Distributions, pp.117–118)
+- 第2章 第2節 §1〜4：p.117〜120 (確率変数・期待値・離散分布)
+- 確率変数・期待値の意味：p.117
+- 確率分布・二項分布の公式：p.118
+- 組合せ nCx＝n!/[x!(n−x)!]：p.119
+- E(X)＝nπ、Var(X)＝nπ(1−π)：p.120
+- 一般の期待値・分散の総和の公式：p.129
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-02)
 
 ## Materials
 

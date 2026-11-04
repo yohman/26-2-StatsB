@@ -4,216 +4,252 @@
   "slides": [
     {
       "page": 1,
+      "textbook": "",
       "title": "",
       "ja": "本当に記録されたシーズン平均三十・一点から始めます。これは七十九試合という過去の記録の要約です。ここから先の五試合は計算のための架空データ。実際のシーズン平均と、仮想の母平均の推測を混ぜないように話します。",
       "en": "Use this slide to explain opening. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 2,
+      "textbook": "",
       "title": "シーズンの記録と、推定する平均は別",
       "ja": "シーズンの記録と、推定する平均は別を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain record vs inference. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 3,
+      "textbook": "",
       "title": "この5試合だけを見たら？",
       "ja": "この5試合だけを見たら？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain scores. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 4,
+      "textbook": "",
       "title": "点推定なら、30点。",
       "ja": "点推定なら、30点。を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain point estimate. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 5,
+      "textbook": "133",
       "title": "信しん頼らい区く間かんConfidence interval",
       "ja": "信頼区間です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain ci title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 6,
+      "textbook": "132〜134",
       "title": "まず、使う数字をそろえる",
       "ja": "まず、使う数字をそろえるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain given. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 7,
+      "textbook": "127・133・203",
       "title": "中央95％は、まず「tの範囲」",
       "ja": "ここは前回の授業と直結します。中央九十五パーセントはtの座標上の面積です。得点の範囲でも、すでに出来上がった信頼区間でもありません。次にこの境界値を得点の幅へ変換します。",
       "en": "Use this slide to explain central. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 8,
+      "textbook": "133〜134",
       "title": "tの範囲を、得点の幅に変える",
       "ja": "tの範囲を、得点の幅に変えるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain two axes. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 9,
+      "textbook": "133（一般式にα＝0.025を適用）",
       "title": "母平均の95％信頼区間",
       "ja": "母平均の95％信頼区間を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain ci formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 10,
+      "textbook": "203",
       "title": "自由度4、右側0.025の列",
       "ja": "自由度4、右側0.025の列を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain table read. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 11,
+      "textbook": "133（一般式にα＝0.025を適用）",
       "title": "30点の周りに、約5.55点の幅",
       "ja": "30点の周りに、約5.55点の幅を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain ci example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 12,
+      "textbook": "133",
       "title": "これは、95％の試合の得点範囲？",
       "ja": "これは、95％の試合の得点範囲？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain not scores. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 13,
+      "textbook": "133",
       "title": "同じ手順を、何度も繰り返す",
       "ja": "同じ手順を、何度も繰り返すを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain repeat meaning. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 14,
+      "textbook": "133",
       "title": "やってみよう！What 95% coverage means",
       "ja": "100本の区間を作って、真の平均を見る。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain coverage explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 15,
+      "textbook": "127・133・203",
       "title": "中央90％にすると、幅はどうなる？",
       "ja": "中央90％にすると、幅はどうなる？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain 90 vs 95. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 16,
+      "textbook": "133〜134",
       "title": "高い信頼係数ほど、広い区間",
       "ja": "高い信頼係数ほど、広い区間を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain width. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 17,
+      "textbook": "123・133",
       "title": "標本を増やすと、どうなる？",
       "ja": "標本を増やすと、どうなる？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain n width. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 18,
+      "textbook": "133〜135・203",
       "title": "やってみよう！Basketball confidence intervals",
       "ja": "5試合の数字を変え、区間を作る。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain curry explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 19,
+      "textbook": "133（一般式にα＝0.025を適用）",
       "title": "チャレンジ1　別の5試合の、母平均を推定",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
       "page": 20,
+      "textbook": "133（一般式にα＝0.025を適用）",
       "title": "ばらつきが小さいと、区間は狭くなる",
       "ja": "ばらつきが小さいと、区間は狭くなるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain mean ci answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 21,
+      "textbook": "125・134 脚注1",
       "title": "母分散が既知なら、Zを使う",
       "ja": "母分散が既知なら、Zを使うを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain known or unknown. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 22,
+      "textbook": "134 脚注1・202（既知分散の95%区間へ適用）",
       "title": "母分散が既知の95％信頼区間",
       "ja": "母分散が既知の95％信頼区間を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain known ci. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 23,
+      "textbook": "135〜136",
       "title": "母分散の区間推定Confidence interval for population variance",
       "ja": "母分散の区間推定です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain variance ci title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 24,
+      "textbook": "",
       "title": "",
       "ja": "同じ平均五十キロでも、ほぼ同じ大きさの群れと大小の混じった群れでは扱いが違います。平均の区間を求めた次は、散らばりそのものの区間を知りたくなる、と話を切り替えます。",
       "en": "Use this slide to explain fish story. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 25,
+      "textbook": "135〜136",
       "title": "散らばりにも、不確かさがある",
       "ja": "散らばりにも、不確かさがあるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance question. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 26,
+      "textbook": "128・135",
       "title": "カイ二乗分布は、左右対称ではない",
       "ja": "カイ二乗分布は、左右対称ではないを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain chi shape. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 27,
+      "textbook": "135〜136（χ²境界の読み方）",
       "title": "右側の面積で、二つの境界を探す",
       "ja": "右側の面積で、二つの境界を探すを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain chi table. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 28,
+      "textbook": "136（母分散の95%信頼区間）",
       "title": "母分散の95％信頼区間",
       "ja": "母分散の95％信頼区間を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance ci formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 29,
+      "textbook": "136",
       "title": "大きい数で割ると、下限になる",
       "ja": "大きい数で割ると、下限になるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain divide order. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 30,
+      "textbook": "136（母分散の95%信頼区間）",
       "title": "5試合では、散らばりの推定も幅広い",
       "ja": "5試合では、散らばりの推定も幅広いを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance ci example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 31,
+      "textbook": "135〜136",
       "title": "やってみよう！Variance intervals and asymmetric tails",
       "ja": "二つのχ²値から、分散の区間を作る。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain variance ci explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 32,
+      "textbook": "136（母分散の95%信頼区間）",
       "title": "チャレンジ2　反応時間のばらつきを推定",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
       "page": 33,
+      "textbook": "136（母分散の95%信頼区間）",
       "title": "分母の順番と、単位を確認",
       "ja": "分母の順番と、単位を確認を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance ci answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 34,
+      "textbook": "133〜136",
       "title": "今日の二つの区間",
       "ja": "今日の二つの区間を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain summary. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 35,
+      "textbook": "",
       "title": "ALは、問題文から方法を選ぶ",
       "ja": "ALは、問題文から方法を選ぶを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 36,
+      "textbook": "",
       "title": "「95％」を、一言で言える？",
       "ja": "「95％」を、一言で言える？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain exit. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."

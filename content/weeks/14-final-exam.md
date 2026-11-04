@@ -19,7 +19,8 @@ prepare_en: Check the latest UNIPA notice for the examination scope and permitte
 
 ## Textbook
 
-- 復習の参照箇所：第2章 第1〜4節 p.102、117、131、138。試験範囲はUNIPAの最新案内を確認してください。 (Review reference: Chapter 2, Sections 1–4, pp.102, 117, 131, 138. Check UNIPA for the current exam scope.)
+- 復習：第2章 第1〜4節・第3章 第5節。試験範囲・形式・持ち込みはUNIPAの最新案内を確認。
+- [内容・公式ごとのページ対応表 / Textbook page guide](materials/2026-yoh/textbook-guide.html#week-14)
 
 ## Materials
 

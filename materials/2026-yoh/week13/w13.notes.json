@@ -4,258 +4,301 @@
   "slides": [
     {
       "page": 1,
+      "textbook": "",
       "title": "「長く出たから、得点が増えた」",
       "ja": "学生にこの一文だけを見せます。回帰の係数が正でも、この言い方でよいか。計算する力から、結果を正しく伝える力へ切り替える回です。",
       "en": "Use this slide to explain opening. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 2,
+      "textbook": "",
       "title": "二つの数値の、関係は見える",
       "ja": "二つの数値の、関係は見えるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain opening chart. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 3,
+      "textbook": "",
       "title": "分析結果の解釈Interpreting statistical results",
       "ja": "分析結果の解釈です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain interpretation title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 4,
+      "textbook": "",
       "title": "今日は、7つの落とし穴を点検する",
       "ja": "今日は、7つの落とし穴を点検するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain route. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 5,
+      "textbook": "189",
       "title": "分散と標準偏差は、単位が違う",
       "ja": "分散と標準偏差は、単位が違うを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain units. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 6,
+      "textbook": "190",
       "title": "変へん動どう係けい数すうCoefficient of variation",
       "ja": "変動係数です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain cv title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 7,
+      "textbook": "190（変動係数）",
       "title": "平均に対する、標準偏差の割合",
       "ja": "平均に対する、標準偏差の割合を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain cv formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 8,
+      "textbook": "190（変動係数）",
       "title": "同じ10kgのばらつきでも、相対的には違う",
       "ja": "同じ10kgのばらつきでも、相対的には違うを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain cv example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 9,
+      "textbook": "190〜191",
       "title": "pが大きい → 関係がない？",
       "ja": "pが大きい → 関係がない？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain not significant. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 10,
+      "textbook": "190〜191・149〜150",
       "title": "p値だけで、効果の大きさは分からない",
       "ja": "p値だけで、効果の大きさは分からないを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain p and effect. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 11,
+      "textbook": "191〜192",
       "title": "xが1増えると、yがbだけ変わる",
       "ja": "xが1増えると、yがbだけ変わるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain direction. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 12,
+      "textbook": "191〜192",
       "title": "逆向きに読んでいない？",
       "ja": "逆向きに読んでいない？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain reversed. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 13,
+      "textbook": "192〜193",
       "title": "調整済みR²が、マイナスだったら？",
       "ja": "調整済みR²が、マイナスだったら？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain adjusted r2. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 14,
+      "textbook": "193〜195",
       "title": "勝ち1・負け0に、そのまま直線？",
       "ja": "勝ち1・負け0に、そのまま直線？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain binary. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 15,
+      "textbook": "195",
       "title": "疑ぎ似じ相そう関かんSpurious correlation",
       "ja": "疑似相関です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain spurious title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 16,
+      "textbook": "195",
       "title": "アイスが売れると、熱中症が増える？",
       "ja": "アイスが売れると、熱中症が増える？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain icecream. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 17,
+      "textbook": "195",
       "title": "暑さが、両方に関係しているかも",
       "ja": "暑さが、両方に関係しているかもを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain third variable. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 18,
+      "textbook": "189〜196",
       "title": "やってみよう！Interpretation check",
       "ja": "結論を選び、どこが言い過ぎか確かめる。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain interpret explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 19,
+      "textbook": "",
       "title": "NBAなら、何が隠れている？",
       "ja": "NBAなら、何が隠れている？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain nba confounding. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 20,
+      "textbook": "196",
       "title": "全ぜん数すう調ちょう査さCensus",
       "ja": "全数調査です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain census title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 21,
+      "textbook": "196",
       "title": "この教室の全員を測れたら？",
       "ja": "この教室の全員を測れたら？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain census. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 22,
+      "textbook": "194（OLSの仮定）",
       "title": "任意の確認：直線のモデルにも条件がある",
       "ja": "任意の確認：直線のモデルにも条件があるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain optional assumptions. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 23,
+      "textbook": "",
       "title": "総合復習New in-class review problems",
       "ja": "総合復習です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain review title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 24,
+      "textbook": "",
       "title": "ここからは、新しい練習問題",
       "ja": "ここからは、新しい練習問題を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain review policy. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 25,
+      "textbook": "118（二項分布の公式）",
       "title": "数える問題：二項分布",
       "ja": "数える問題：二項分布を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain binomial review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 26,
+      "textbook": "118（二項分布の公式）",
       "title": "まず、一つだけ例を確認",
       "ja": "まず、一つだけ例を確認を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain binomial example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 27,
+      "textbook": "118（二項分布の公式）",
       "title": "チャレンジ1　6本のシュートで、確率と平均",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
       "page": 28,
+      "textbook": "118〜120",
       "title": "確率と、期待する個数を分ける",
       "ja": "確率と、期待する個数を分けるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain binomial answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 29,
+      "textbook": "120・204",
       "title": "まれな回数は、ポアソン表で確認",
       "ja": "まれな回数は、ポアソン表で確認を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain poisson review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 30,
+      "textbook": "123（標準化）",
       "title": "連続量：Zに直し、上側確率表へ",
       "ja": "連続量：Zに直し、上側確率表へを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain normal review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 31,
+      "textbook": "123〜125・202",
       "title": "先に、右側の例を確認",
       "ja": "先に、右側の例を確認を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain normal example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 32,
+      "textbook": "123〜125・202",
       "title": "チャレンジ2　170cm以上と、左右の範囲",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
       "page": 33,
+      "textbook": "123〜125・202",
       "title": "2個分上の尾と、中央の面積",
       "ja": "2個分上の尾と、中央の面積を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain normal answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 34,
+      "textbook": "133〜135・203",
       "title": "平均の推定と、1人の範囲は違う",
       "ja": "平均の推定と、1人の範囲は違うを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain ci review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 35,
+      "textbook": "138〜145・148〜150",
       "title": "検定は、先にH₀とH₁を書く",
       "ja": "検定は、先にH₀とH₁を書くを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain test review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 36,
+      "textbook": "191〜192（回帰式をx・yで表記）",
       "title": "関係を見る問題：回帰式を読む",
       "ja": "関係を見る問題：回帰式を読むを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain regression review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 37,
+      "textbook": "191〜192（回帰式をx・yで表記）",
       "title": "係数を、単位付きで説明する",
       "ja": "係数を、単位付きで説明するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain regression example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 38,
+      "textbook": "190〜192",
       "title": "チャレンジ3　出力から、言えることを選ぶ",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
       "page": 39,
+      "textbook": "190〜192",
       "title": "正しいのはB。予測は20点",
       "ja": "正しいのはB。予測は20点を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain interpret answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 40,
+      "textbook": "118〜129・131〜150・189〜196",
       "title": "やってみよう！Mixed review with fresh numbers",
       "ja": "数値を変え、どの道具が必要かを選ぶ。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain review explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 41,
+      "textbook": "",
       "title": "時間が余れば、もう一問",
       "ja": "時間が余れば、もう一問を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain optional quiz. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 42,
+      "textbook": "",
       "title": "期末試験について",
       "ja": "期末試験についてを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain exam guidance. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
       "page": 43,
+      "textbook": "",
       "title": "最後に、これだけは忘れない。",
       "ja": "最後に、これだけは忘れない。を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain exit. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
