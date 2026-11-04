@@ -96,7 +96,7 @@
       given=String.raw`x\in\{${values.join(',')}\},\quad\sum_x\Pr(X=x)=1`;
       rule=String.raw`E(X)=\sum_x x\Pr(X=x)`;
       worked=String.raw`E(X)=${values.map((x,i)=>String.raw`${x<0?'('+x+')':x}\times${probs[i]}`).join('+')}\approx${fmt(mean)}`;
-      answer=type==='lottery'?String.raw`E(\mathrm{profit})=75-100=-25\ \text{yen}`:type==='delivery'?String.raw`\mathrm{Var}(X)=\tfrac12(2-10)^2+\tfrac12(18-10)^2=64`:type==='al-discrete'?String.raw`E(X)=\frac53\approx1.6667`:`E(X)=${fmt(mean)}`;
+      answer=type==='lottery'?String.raw`E(\mathrm{profit})=75-100=-25\ \text{yen}`:type==='delivery'?String.raw`\mathrm{Var}(X)=\tfrac12(2-10)^2+\tfrac12(18-10)^2=64`:`E(X)=${fmt(mean)}`;
       meaning=type==='delivery'?t('Same mean, different reliability: A has variance 0; B has variance 64 min². Watch the measured average, but remember an average does not reveal spread.', '平均は同じでも安定性は違う。Aの分散は0、Bは64分²。平均だけではばらつきは分かりません。'):t('Multiply each value by its probability, then add. The formula is exact for the model; the observed average is a random check. Put the ticket back between AL draws. An expectation need not be a possible single result.', '各値×その確率を足します。公式はモデルの正確な答え、実測平均はランダムな確認。ALでは引いたカードを毎回戻します。期待値は1回で出る値とは限りません。');
     } else if(type==='continuous'||type==='al-continuous') {
       if(type==='continuous') {
@@ -107,17 +107,9 @@
         answer=String.raw`\Pr(-${band}\le Z\le${band})\approx${fmt(100*probability)}\%`;
         meaning=t('Read an area from the normal table. The slider changes the interval and therefore its area. At zero width the probability is zero; density height is not probability.', '正規分布表で面積を読みます。スライダーで区間が変わると面積も変わります。幅0なら確率0。密度の高さは確率ではありません。');
       } else {
-        const slices=s.slices||4, width=Math.sqrt(2)/slices;
-        if(s.variant) {
-          const b=s.limit??Math.sqrt(2),c=2/(b*b);
-          return {question:t(`Change the maximum delivery time to b = ${fmt(b)} hours. Use the normalized triangular density f(x) = 2x/b² on 0 ≤ x ≤ b. Find total probability and the mean.`, `配達時間の上限をb=${fmt(b)}時間に変更。0≤x≤bで、面積が1になる密度f(x)=2x/b²を使う。確率の合計と平均は？`),given:String.raw`b=${fmt(b)},\quad f(x)=\frac{2x}{b^2}\approx${fmt(c)}x`,rule:String.raw`\int_0^b f(x)\,dx=1,\quad E(X)=\int_0^b xf(x)\,dx`,worked:String.raw`\int_0^{${fmt(b)}}\frac{2x}{${fmt(b)}^2}\,dx=1`,answer:String.raw`E(X)=\frac{2b}{3}=\frac{2\times${fmt(b)}}3\approx${fmt(2*b/3)}\ \text{hours}`,meaning:t('Changing the endpoint alone would break total probability = 1. We also adjust the slope to 2/b², keeping triangle area equal to 1. The worksheet below still uses b = √2 and f(x) = x.', '上限だけ変えると確率の合計が1になりません。傾きも2/b²に調整すると三角形の面積は常に1。下の課題はb=√2、f(x)=xのままです。')};
-        }
-        question=t('Robot delivery time has density f(x)=x for 0 ≤ x ≤ √2 hours (zero outside). Find total probability and expected delivery time.', 'ロボットの配達時間の密度はf(x)=x、0≤x≤√2時間（範囲外は0）。確率の合計と平均配達時間を求めよう。');
-        given=String.raw`f(x)=x,\quad0\le x\le\sqrt2,\quad\Delta x=\frac{\sqrt2}{${slices}}\approx${fmt(width)}`;
-        rule=String.raw`\Pr(a\le X\le b)=\int_a^b f(x)\,dx,\quad E(X)=\int x f(x)\,dx`;
-        worked=String.raw`\int_0^{\sqrt2}x\,dx=\left[\frac{x^2}{2}\right]_0^{\sqrt2}=1`;
-        answer=String.raw`E(X)=\int_0^{\sqrt2}x^2\,dx=\left[\frac{x^3}{3}\right]_0^{\sqrt2}=\frac{2\sqrt2}{3}\approx0.9428\ \text{hours}`;
-        meaning=t('Left: probability is area (width × density). Right: weight each small probability by its delivery time. The extra x makes x·f(x)=x²; integrating x² gives x³/3. Rectangles visualize the sum; the integral gives the exact answer.', '左：確率は面積（幅×密度）。右：小さな確率にその配達時間を掛けます。xをもう1つ掛けてx·f(x)=x²。x²の積分はx³/3。長方形で足し算を体感し、積分で正確な答えを得ます。');
+        question=t('Complete the AL worksheet independently.','ALワークシートに自分で取り組もう。');
+        given=rule=worked=answer='';
+        meaning=t('Assignment answers are private.','課題の答えは公開しません。');
       }
     } else if(type==='disease') {
       const N=s.population,e=s.error/100,p=1/N,pos=p*(1-e)+(1-p)*e,post=p*(1-e)/pos;
@@ -169,7 +161,7 @@
       const n=type==='bernoulli'?1:value('[data-w2-n]',10);
       return [type,{n,p:value('[data-w2-p]',50)/100,lambda:value('[data-w2-lambda]',2),k:Math.min(type==='poisson'?20:n,value('[data-exam-k]',type==='bernoulli'?1:2))}];
     }
-    if(root.matches('[data-al-expectation]'))return [root.dataset.alExpectation==='discrete'?'al-discrete':'al-continuous',{slices:value('[data-al-slices]',4)}];
+    if(root.matches('[data-al-expectation]'))return null;
     if(root.matches('[data-example-lab]'))return [root.classList.contains('is-pairs')?'pairs':root.querySelector('[data-example][aria-pressed="true"]')?.dataset.example||'lottery',{}];
     if(root.matches('[data-roulette]'))return ['roulette',{stake:Math.max(1,Math.min(100000,Math.round(value('[data-stake]',100))))}];
     const nba=root.dataset.week3Story==='nba',rate=value('[data-story-rate]',5),minutes=value('[data-story-minutes]',10);
