@@ -13,7 +13,7 @@
     const key=`statsb-slide-ink:${file}`;
     let pages={};try{pages=JSON.parse(localStorage.getItem(key)||'{}')||{};}catch{}
     const save=()=>{try{localStorage.setItem(key,JSON.stringify(pages));}catch{status.textContent='このタブ内のみ保存 / Saved in this tab only';}};
-    const setMode=value=>{finish();mode=value;viewport.dataset.slideDrawing=String(value!=='view');layer.style.pointerEvents=value==='view'?'none':'auto';layer.style.cursor=value==='erase'?'cell':'crosshair';pen.setAttribute('aria-pressed',String(value==='pen'));eraser.setAttribute('aria-pressed',String(value==='erase'));status.textContent=value==='view'?'閲覧 / View':value==='erase'?'消しゴム / Eraser':'ペン / Pen';};
+    const setMode=value=>{disarmClear();finish();mode=value;viewport.dataset.slideDrawing=String(value!=='view');layer.style.pointerEvents=value==='view'?'none':'auto';layer.style.cursor=value==='erase'?'cell':'crosshair';pen.setAttribute('aria-pressed',String(value==='pen'));eraser.setAttribute('aria-pressed',String(value==='erase'));status.textContent=value==='view'?'閲覧 / View':value==='erase'?'消しゴム / Eraser':'ペン / Pen';};
     const toggle=button('✎ <span aria-hidden="true">⌄</span>','Drawing tools / 書き込みツール',()=>{
       controls.hidden=!controls.hidden;toggle.setAttribute('aria-expanded',String(!controls.hidden));
       if(controls.hidden)setMode('view');
@@ -35,8 +35,26 @@
       },widths);b.className='slide-ink-width';b.setAttribute('aria-pressed',String(value===penWidth));
     }
     const eraser=button('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 14 9-10 8 7-9 10H9zM9 9l8 7M12 21h9" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>','Eraser / 消しゴム',()=>setMode(mode==='erase'?'view':'erase'));eraser.setAttribute('aria-pressed','false');
-    const undo=button('↶','Undo / 戻す',()=>{finish();(pages[page]||[]).pop();save();redraw();});
-    const clear=button('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>','Clear page / このページを消す',()=>{finish();if((pages[page]||[]).length&&confirm('このスライドの書き込みを消しますか？ / Clear annotations on this slide?')){delete pages[page];save();redraw();}});
+    const undo=button('↶','Undo / 戻す',()=>{disarmClear();finish();(pages[page]||[]).pop();save();redraw();});
+    let clearArmedPage=null,clearDeadline=0,clearTimer;
+    const clearGlyph='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    const clearLabel='Clear page / このページを消す';
+    function disarmClear(){
+      clearTimeout(clearTimer);clearArmedPage=null;clearDeadline=0;
+      clear.removeAttribute('data-confirm');clear.innerHTML=clearGlyph;
+      clear.title=clearLabel;clear.setAttribute('aria-label',clearLabel);clearHint.hidden=true;
+    }
+    const clear=button(clearGlyph,clearLabel,()=>{
+      finish();if(!(pages[page]||[]).length)return;
+      if(clearArmedPage===page&&Date.now()<clearDeadline){
+        disarmClear();delete pages[page];save();redraw();status.textContent='Cleared / 書き込みを消しました';return;
+      }
+      disarmClear();clearArmedPage=page;clearDeadline=Date.now()+4000;
+      clear.dataset.confirm='true';clear.innerHTML='✓';
+      clear.title='Click again to clear / もう一度クリックして消す';clear.setAttribute('aria-label',clear.title);
+      clearHint.hidden=false;status.textContent=clear.title;clearTimer=setTimeout(disarmClear,4000);
+    });
+    const clearHint=document.createElement('span');clearHint.className='slide-ink-clear-hint';clearHint.textContent='Click again / もう一度';clearHint.hidden=true;controls.append(clearHint);
     const status=document.createElement('span');status.className='slide-ink-status';status.setAttribute('role','status');status.textContent='閲覧 / View';controls.append(status);
     toolbar.after(controls);
     const redraw=()=>{
@@ -49,12 +67,12 @@
     };
     const point=e=>{const r=layer.getBoundingClientRect();return [Math.max(0,Math.min(1,(e.clientX-r.left)/r.width)),Math.max(0,Math.min(1,(e.clientY-r.top)/r.height))];};
     function finish(){if(!active)return;active=null;pointer=null;save();}
-    layer.addEventListener('pointerdown',e=>{if(mode==='view'||!ready||!e.isPrimary||e.button!==0)return;e.preventDefault();e.stopPropagation();pointer=e.pointerId;layer.setPointerCapture(pointer);active={color:penColor,width:mode==='erase'?24:penWidth,erase:mode==='erase',points:[point(e)]};(pages[page]||= []).push(active);redraw();});
+    layer.addEventListener('pointerdown',e=>{if(mode==='view'||!ready||!e.isPrimary||e.button!==0)return;disarmClear();e.preventDefault();e.stopPropagation();pointer=e.pointerId;layer.setPointerCapture(pointer);active={color:penColor,width:mode==='erase'?24:penWidth,erase:mode==='erase',points:[point(e)]};(pages[page]||= []).push(active);redraw();});
     layer.addEventListener('pointermove',e=>{if(!active||e.pointerId!==pointer)return;e.preventDefault();for(const p of e.getCoalescedEvents?.()||[e])active.points.push(point(p));redraw();});
     for(const type of ['pointerup','pointercancel','lostpointercapture'])layer.addEventListener(type,finish);
     layer.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();});
-    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mode!=='view'){setMode('view');e.preventDefault();}});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){disarmClear();if(mode!=='view'){setMode('view');e.preventDefault();}}});
     new ResizeObserver(redraw).observe(surface);
-    return {show(n){finish();page=n;ready=true;redraw();},loading(){finish();ready=false;layer.style.visibility='hidden';},rendered(n){layer.style.visibility='';this.show(n);}};
+    return {show(n){if(n!==page)disarmClear();finish();page=n;ready=true;redraw();},loading(){finish();ready=false;layer.style.visibility='hidden';},rendered(n){layer.style.visibility='';this.show(n);}};
   };
 })();
