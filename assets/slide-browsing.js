@@ -38,7 +38,7 @@
   window.bindSlideSwipe = (surface, previous, next) => {
     let start = null, ignoreClickUntil = 0;
     surface.addEventListener('touchstart', event => {
-      start = event.touches.length === 1 && surface.dataset?.slideZoomed !== 'true' ? {
+      start = event.touches.length === 1 && surface.dataset?.slideDrawing !== 'true' && surface.dataset?.slideZoomed !== 'true' ? {
         x: event.touches[0].clientX, y: event.touches[0].clientY, time: Date.now()
       } : null;
     }, { passive: true });

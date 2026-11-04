@@ -63,7 +63,7 @@
         pinch = {distance:Math.max(1,distance(event.touches)), scale, centre:centre(event.touches)};
         drag = null;
         suppressClickUntil = Date.now() + 600;
-      } else if (event.touches.length === 1) {
+      } else if (event.touches.length === 1 && viewport.dataset.slideDrawing !== 'true') {
         drag = {x:event.touches[0].clientX, y:event.touches[0].clientY};
       }
     }, {passive:false});

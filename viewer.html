@@ -8,7 +8,7 @@
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="icon" href="favicon.svg?v=course-family-20261026" type="image/svg+xml">
   <link rel="stylesheet" href="assets/stats-styles.css?v=20261021-page-jump">
-  <link rel="stylesheet" href="assets/viewer-context.css?v=20261026-slide-zoom">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20261104-annotations">
   <link rel="stylesheet" href="assets/slide-challenge-guard.css?v=20261014-1">
 </head>
 <body class="viewer-page">
@@ -24,8 +24,9 @@
   </main>
   <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
   <script src="assets/slide-challenge-guard.js?v=20261014-1"></script>
-  <script src="assets/slide-browsing.js?v=20261026-zoom-pan"></script>
-  <script src="assets/slide-zoom.js?v=20261026-1"></script>
+  <script src="assets/slide-browsing.js?v=20261104-ink"></script>
+  <script src="assets/slide-zoom.js?v=20261104-ink"></script>
+  <script src="assets/slide-annotations.js?v=20261104-1"></script>
   <script src="assets/slide-notes.js?v=20261031-week6"></script>
   <script>
     const parameters = new URLSearchParams(location.search);
@@ -107,6 +108,7 @@
       canvasWrap.append(pageSurface);
       viewer.append(toolbar, canvasWrap);
       content.replaceChildren(viewer);
+      const ink=window.bindSlideAnnotations({surface:pageSurface,viewport:canvasWrap,toolbar,file:path});
       const narration=window.bindSlideNotes?.({file:path,after:viewer});
       try {
         if (!window.pdfjsLib) throw new Error('PDF renderer unavailable');
@@ -184,6 +186,7 @@
           activePage = requestedPage;
           renderQueue = renderQueue.catch(() => {}).then(async () => {
             linkLayer.replaceChildren();
+            ink.loading();
             const page = await pdf.getPage(requestedPage);
             const baseViewport = page.getViewport({ scale: 1 });
             const availableWidth = Math.max(280, Math.min(1400, canvasWrap.getBoundingClientRect().width - 32));
@@ -204,6 +207,7 @@
             context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
             await page.render({ canvasContext: context, viewport }).promise;
             await renderLinks(page, viewport);
+            ink.rendered(requestedPage);
             narration?.show(requestedPage);
             syncPageInput();
             previous.disabled = requestedPage === 1;
