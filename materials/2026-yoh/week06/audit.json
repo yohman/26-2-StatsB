@@ -1,6 +1,6 @@
 {
   "rebuilt": true,
-  "slides": 91,
+  "slides": 87,
   "sections": [
     {
       "topic": "clt",
@@ -8,11 +8,11 @@
     },
     {
       "topic": "t",
-      "pages": "35–73"
+      "pages": "35–69"
     },
     {
       "topic": "chi",
-      "pages": "74–89"
+      "pages": "70–85"
     }
   ],
   "coverage": [
@@ -63,8 +63,8 @@
         39,
         40,
         41,
-        62,
-        63
+        58,
+        59
       ]
     },
     {
@@ -77,11 +77,11 @@
         "curry-variance-answer"
       ],
       "pages": [
-        46,
-        52,
-        55,
-        57,
-        58
+        43,
+        48,
+        51,
+        53,
+        54
       ]
     },
     {
@@ -90,7 +90,7 @@
         "t-shape"
       ],
       "pages": [
-        64
+        60
       ]
     },
     {
@@ -100,8 +100,8 @@
         "t-central-example-3"
       ],
       "pages": [
-        67,
-        70
+        63,
+        66
       ]
     },
     {
@@ -111,8 +111,8 @@
         "table-answer"
       ],
       "pages": [
-        71,
-        72
+        67,
+        68
       ]
     },
     {
@@ -129,15 +129,15 @@
         "chi-moments"
       ],
       "pages": [
-        79,
-        78,
-        80,
+        75,
+        74,
+        76,
+        77,
         81,
-        85,
-        86,
-        87,
-        88,
-        89
+        82,
+        83,
+        84,
+        85
       ]
     },
     {
@@ -146,7 +146,7 @@
         "summary"
       ],
       "pages": [
-        90
+        86
       ]
     }
   ],
@@ -224,17 +224,17 @@
     },
     {
       "minutes": "28–73",
-      "pages": "35–73",
+      "pages": "35–69",
       "activity": "Student, Curry, df, variance and t-table challenges"
     },
     {
       "minutes": "73–97",
-      "pages": "74–89",
+      "pages": "70–85",
       "activity": "Pearson,20-student story, squared sum and decomposition"
     },
     {
       "minutes": "97–100",
-      "pages": "90–91",
+      "pages": "86–87",
       "activity": "Summary and independent AL"
     }
   ],

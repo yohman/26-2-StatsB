@@ -3,10 +3,10 @@ const read=p=>fs.readFileSync(p,'utf8'),base='materials/2026-yoh/week06/';
 const deck=read(base+'w6.md'),plain=deck.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 const slides=deck.split(/\n---\n/).filter(s=>/^## /m.test(s));
 const map=JSON.parse(read(base+'source-map.json')),notes=JSON.parse(read(base+'w6.notes.json')).slides,audit=JSON.parse(read(base+'audit.json'));
-assert.equal(slides.length,91);assert.equal(map.slides.length,slides.length);assert.equal(notes.length,slides.length);
+assert.equal(slides.length,87);assert.equal(map.slides.length,slides.length);assert.equal(notes.length,slides.length);
 assert.deepEqual([...new Set(map.slides.filter(s=>['clt','t','chi'].includes(s.part)).map(s=>s.part))],['clt','t','chi']);
 const byId=id=>{const s=map.slides.find(s=>s.id===id);assert(s,id);return slides[s.page-1];};
-for(const id of ['clt-title','t-title','chi-title','df-title','uv-title','t-table-title']){
+for(const id of ['clt-title','t-title','chi-title','uv-title','t-table-title']){
  const s=byId(id);assert(s.includes('_class: topic'));assert(s.includes('class="en"'));assert(!s.includes('$$'));assert(!s.includes('class="big"'));
 }
 for(const id of ['gosset','curry-photo','pearson']){const s=byId(id);assert(s.includes('_class: photo-story'));assert(s.includes('class="photo-image"'));assert(s.includes('class="photo-caption"'));}
@@ -46,7 +46,7 @@ function integral(fn,a,b){const n=20000,h=(b-a)/n;let s=0;for(let i=0;i<n;i++)s+
 assert(Math.abs(integral(x=>M.tPdf(x,20),2.086,40)-.025)<2e-5);assert(Math.abs(integral(x=>M.tPdf(x,10),-1.8125,1.8125)-.9)<2e-5);
 const lab=read('assets/week6-story-lab.js')+read('assets/week6-lecture-lab.js');assert(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest/.test(lab));assert(lab.includes('9, 49, 46, 11, 28'));assert(lab.includes('160, 165, 170'));assert(lab.includes('推定分散が0なのでtを計算できません'));assert(lab.includes('draw20'));assert(lab.includes('交点は確率ではなく'));
 assert(fs.existsSync(base+'t-table.pdf'));assert(fs.existsSync(base+'standard-normal-table.pdf'));
-console.log('Week6 rebuilt: 91 slides, three ordered chapters, textbook formula registry, restored original stories, five guarded challenges, visual answers and aligned explorations.');
+console.log('Week6 rebuilt: 87 slides, three ordered chapters, textbook formula registry, restored original stories, five guarded challenges, visual answers and aligned explorations.');
 
 const tSlides=map.slides.filter(s=>s.part==='t').map(s=>slides[s.page-1]).join('\n').replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 assert(!/8人の身長|ラーメン|電池|10、14、18|自由度20のt|自由度10のt/.test(tSlides));
@@ -55,3 +55,6 @@ assert(byId('t-guided-example-3').includes('0.143'));
 assert(byId('t-answer').includes('-0.167'));
 assert.equal(M.table[4][2],2.7764);assert.equal(M.table[4][1],2.1318);
 assert(Math.abs(M.tStatistic([9,49,46,11,28],30)+.1665486893)<1e-8);
+
+for(const id of ['df-title','df-choice-step-1','df-choice-step-2','df-curry'])assert(!map.slides.some(s=>s.id===id));
+assert(byId('df-example').includes('5-1=4'));

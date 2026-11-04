@@ -1,4 +1,6 @@
 export const style=`
+section.df-rule h2{font-size:48px}section.df-rule h2 .en{font-size:22px}section.df-rule .big{font-size:43px;margin:20px 0}section.df-rule .katex-display{font-size:1.9em;margin:20px 0}section.df-rule .small{font-size:21px}
+
 section.dice-intro img{display:block;width:1100px;height:250px;object-fit:contain;margin:20px auto}section.dice-intro .katex-display{font-size:1.65em;margin:25px 0}section.dice-intro p{text-align:center}.inline-dice{display:inline-flex;align-items:center;gap:7px;vertical-align:middle}section.dice-variance .variance-steps img.die-face{width:29px;height:29px;display:inline-block}
 
 section.curry-bias img{display:block;height:310px;width:auto;margin:auto}section.curry-bias .big{font-size:39px;margin-top:15px}section.curry-bias .small{font-size:20px}section.df-curry .katex-display{font-size:.8em}section.t-matrix table{font-size:25px}section.df-choice h2{font-size:38px}
