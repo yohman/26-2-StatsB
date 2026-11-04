@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>t分布表 · Student’s t table</title>
+  <link rel="icon" href="../../../favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="t-table.css?v=1">
+  <script defer src="t-table-data.js?v=1"></script>
+  <script defer src="t-table.js?v=1"></script>
+</head>
+<body>
+<main>
+  <nav><a href="../../../agenda.html?p#week-06">← Week 6</a><a href="t-table.pdf" target="_blank" rel="noopener">配布表PDF ↗</a></nav>
+  <h1>t<ruby>分<rt>ぶん</rt></ruby><ruby>布<rt>ぷ</rt></ruby><ruby>表<rt>ひょう</rt></ruby><span>Student’s t table · upper-tail critical values</span></h1>
+  <p class="intro"><b>行は自由度 ν（ニュー）、列は右側の面積 α（アルファ）。</b><br>交点は、右側にαを残す境界 t<sub>α</sub>(ν)。確率そのものではありません。</p>
+  <div class="controls">
+    <label>自由度 ν<select id="df"></select></label>
+    <label>上側確率 α<select id="alpha"></select></label>
+    <button id="jump">交点へ移動</button>
+    <button id="ninety-five" class="secondary">中央95%の例</button>
+    <button id="ninety" class="secondary">中央90%の例</button>
+  </div>
+  <section class="readout" aria-label="選択した表の読み方">
+    <div><span>行 / Degrees of freedom</span><strong id="row-value">4</strong></div>
+    <div><span>列 / Upper-tail area</span><strong id="alpha-value">0.025</strong></div>
+    <div class="answer"><span>交点 / Critical value</span><strong id="critical-value">2.7764</strong></div>
+    <p id="meaning" aria-live="polite"></p>
+  </section>
+  <p class="instructions" id="table-help">セルを指すと行と列をハイライト。クリックで選択を固定。<br>キーボード：Tabで表へ、矢印キーで移動、Enterで固定。見出しは縦・横にスクロールしても残ります。</p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label="スクロールできるt分布表" aria-describedby="table-help">
+    <table id="critical-table"><caption>上側確率αに対応する正のt境界（小数第4位）</caption></table>
+  </div>
+  <p id="pinned" class="pinned"></p>
+  <p class="note">中央95%なら、残り5%を左右に分ける → α＝0.025。Curryの5試合なら自由度は5−1＝4。<br>自由度が大きいほど、同じαの境界は標準正規の値へ近づきます。∞行はその極限です。</p>
+  <p class="note">数値：授業配布の<a href="t-table.pdf" target="_blank" rel="noopener">t分布表PDF</a>。行1〜30、40、60、120、200、∞を収録。列の下段「両側2α」は左右の裾の合計で、中央の面積ではありません。</p>
+  <noscript><p>JavaScriptを有効にするか、<a href="t-table.pdf">PDFの表を開いてください</a>。</p></noscript>
+</main>
+</body>
+</html>

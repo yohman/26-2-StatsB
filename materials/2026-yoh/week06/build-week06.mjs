@@ -19,7 +19,7 @@ const go=(mode,label='やってみよう！')=>`[${label}](${course}agenda.html?
 const tryLink=(mode,label)=>`<aside class="explore-link"><a href="${course}agenda.html?p&activity=w6-${mode}#week-06">やってみよう！ ${label} ↗</a></aside>`;
 const resource=(file,label)=>`<a target="_blank" rel="noopener" href="${course}viewer.html?p&file=materials%2F2026-yoh%2Fweek06%2F${file}&week=W06&title=${encodeURIComponent(label)}">${label} ↗</a>`;
 const normalLink=()=>`<aside class="resource">${resource('standard-normal-table.pdf','標準正規分布表')}</aside>`;
-const tLink=()=>`<aside class="resource">${resource('t-table.pdf','t分布表')}</aside>`;
+const tLink=()=>`<aside class="resource">${resource('t-table.html','t分布表')}</aside>`;
 // The registry transcribes the printed textbook, not simplified substitute notation.
 const F={
  individualZ:{tex:String.raw`Z=\frac{X-E(X)}{\sqrt{\operatorname{Var}(X)}}=\frac{X-\mu}{\sigma}`,page:'123（標準化を1個の値Xに適用・前回の復習）'},

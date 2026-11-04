@@ -28,7 +28,7 @@ assert(!byId('t-formula').includes(String.raw`s/\sqrt`));
 assert(byId('uv-formula').includes(String.raw`\frac{1}{n-1}\sum(X_i-\bar X)^2`));
 assert(byId('chi-decomposition').includes(String.raw`n(\bar X-\mu_x)^2`));
 for(const id of ['clt-challenge','clt-answer']){assert(byId(id).includes('standard-normal-table.pdf'));assert(byId(id).includes('target="_blank"'));}
-for(const id of ['table-comparison','t-central-example-3','table-challenge','table-answer']){assert(byId(id).includes('t-table.pdf'));assert(byId(id).includes('target="_blank"'));}
+for(const id of ['table-comparison','t-central-example-3','table-challenge','table-answer']){assert(byId(id).includes('t-table.html'));assert(byId(id).includes('target="_blank"'));}
 const guards=require('../assets/slide-challenge-guard.js');let count=0;
 for(const [i,s] of map.slides.entries()){
  assert.equal(s.page,i+1);assert.equal(notes[i].page,i+1);assert(notes[i].ja.length>30&&notes[i].en.length>50,s.id);assert(!/津村|Tsumura|Yoh.?2025/.test(notes[i].ja+notes[i].en));
