@@ -52,7 +52,7 @@ const tSlides=map.slides.filter(s=>s.part==='t').map(s=>slides[s.page-1]).join('
 assert(!/8人の身長|ラーメン|電池|10、14、18|自由度20のt|自由度10のt/.test(tSlides));
 for(const text of ['9、49、46、11、28','28.6','1413.20','353.3','2.7764','2.1318'])assert(tSlides.includes(text));
 assert(byId('t-guided-example-3').includes('0.143'));
-assert(byId('t-answer').includes('-0.167'));
+assert(byId('t-answer').includes('1.3'));
 assert.equal(M.table[4][2],2.7764);assert.equal(M.table[4][1],2.1318);
 assert(Math.abs(M.tStatistic([9,49,46,11,28],30)+.1665486893)<1e-8);
 
@@ -64,3 +64,10 @@ for(const id of ['clt-challenge','variance-challenge','t-challenge','table-chall
  const reference=slide.slice(slide.indexOf('<div class="challenge-formulas">'));
  assert(!/353\.3|28\.6|65|165|170|0\.90|2\.1318/.test(reference),id);
 }
+
+const practice=M.summary([24,28,30,32,36]);
+assert.equal(practice.mean,30);assert.equal(practice.ss,80);assert.equal(practice.s2,20);assert.equal(practice.se,2);
+assert(Math.abs(M.tStatistic([24,28,30,32,36],27.4)-1.3)<1e-12);
+const fullT=map.slides.find(s=>s.id==='t-guided-example-3');
+assert.equal(fullT.page,map.slides.find(s=>s.id==='curry-variance-answer').page+1);
+assert.equal(map.slides.find(s=>s.id==='t-challenge').page,fullT.page+1);

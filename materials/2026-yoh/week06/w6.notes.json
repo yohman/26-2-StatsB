@@ -327,33 +327,33 @@
     },
     {
       "page": 55,
-      "title": "同じCurryの5試合を、tにする",
-      "ja": "ここまで計算したCurryの五試合をそのまま使います。平均28.6、不偏分散353.3、標本数五。比較基準は最初に置いた27.4です。ここで別の三試合には切り替えません。母分散が未知なので、同じ五試合から推定した分散を使います。",
-      "en": "Carry forward the same Curry sample: five games, mean 28.6 and unbiased variance 353.3. Use the original benchmark 27.4. No new dataset is introduced. Population variance is unknown, so the denominator uses the estimate from these same observations."
+      "title": "答え合わせ2　最後に、同じCurryの5試合でtを求める",
+      "ja": "直前に求めた不偏分散353.3を、そのままtの式へ入れて例題を最後まで完成させます。平均28.6から基準27.4を引いた差は1.2。分母は353.3を五で割って平方根なので約8.406。tは約0.143、自由度は四です。次は別の架空の五試合で、同じ手順を最初から自分で行ってもらいます。",
+      "en": "Finish the worked example immediately after calculating unbiased variance. Carry 353.3 into the t formula. The difference between 28.6 and benchmark 27.4 is 1.2; the denominator sqrt(353.3/5) is about 8.406, giving t about 0.143 with four degrees of freedom. Students next repeat the whole procedure using a clearly labelled fictional five-game sample."
     },
     {
       "page": 56,
-      "title": "同じCurryの5試合を、tにする",
-      "ja": "文字のtの式を先に読みます。分子は平均28.6と基準27.4との差。分母は推定分散353.3を標本数五で割ってから平方根です。分散を自由度四で求めた作業と、ここで標本数五で割る作業は別です。",
-      "en": "Read the symbolic t formula. The numerator compares mean 28.6 with benchmark 27.4. Divide estimated variance 353.3 by sample size five and then take the square root. Distinguish this denominator step from dividing the squared-deviation sum by four to estimate variance."
+      "title": "チャレンジ3　新しい5試合で、tまで計算しよう",
+      "ja": "新しい五試合ですが、Curryという場面と比較基準27.4はそのままです。24、28、30、32、36は計算しやすく作った架空の練習用得点です。平均から不偏分散、最後にtまで自分で計算してもらいます。答えはまだ表示しません。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
+      "en": "The scenario and benchmark 27.4 remain the same, but students receive a new fictional five-game sample: twenty-four, twenty-eight, thirty, thirty-two and thirty-six. These values are chosen for simple arithmetic. Students calculate the mean, unbiased variance, t statistic and degrees of freedom before revealing the answers. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
     },
     {
       "page": 57,
-      "title": "同じCurryの5試合を、tにする",
-      "ja": "分母は約8.406点、差は1.2点なので、tは約0.143。自由度は五引く一で四です。次の問題も五試合と分散は同じままで、比較基準だけ30点へ変えます。どの値が変わり、どの値が変わらないかを考えてもらいましょう。",
-      "en": "The denominator is approximately 8.406 points and the difference is 1.2 points, giving t approximately 0.143 with four degrees of freedom. The next challenge keeps the same observations and variance and changes only the benchmark to thirty. Ask students to identify what changes and what stays fixed."
+      "title": "答え合わせ3　① 新しい5試合の平均は30点",
+      "ja": "五つを足すと150で、五で割ると平均30点です。前の28.6は今回の標本には使いません。青い線を新しい中心として、ここからのずれを計算します。",
+      "en": "The five scores sum to 150, giving a sample mean of thirty. Do not reuse the previous sample mean 28.6. The blue line marks the new centre for calculating deviations in this practice sample."
     },
     {
       "page": 58,
-      "title": "チャレンジ3　同じ5試合で、比較基準だけ30点なら？",
-      "ja": "五試合と分散は変えず、例題で27.4だった比較基準だけ30に変えます。差がマイナス1.4になることと、自由度は四のままであることを考えてもらいます。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
-      "en": "Keep the same five scores and variance estimate. Change only the benchmark from 27.4 to thirty. Students identify the negative difference of 1.4 and retain four degrees of freedom. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
+      "title": "答え合わせ3　② ずれの二乗和80を、4で割る",
+      "ja": "平均30からのずれはマイナス六、マイナス二、ゼロ、二、六です。二乗すると36、4、0、4、36で、合計80。n引く一の四で割るので不偏分散は20点二乗です。この値を次のtの分母へそのまま運びます。",
+      "en": "Deviations from thirty are minus six, minus two, zero, two and six. Their squares total eighty. Divide by five minus one, or four, to obtain unbiased variance twenty squared points. Carry this estimate directly into the next t calculation."
     },
     {
       "page": 59,
-      "title": "答え合わせ3　同じ5試合。基準30点なら、tは約−0.167",
-      "ja": "五試合と不偏分散は例題と同じです。分母も約8.406で変わりません。変えたのは比較基準だけで、28.6引く30はマイナス1.4。割ると約マイナス0.167です。試合数を変えていないので自由度も四のままです。",
-      "en": "The five scores, variance estimate and denominator of approximately 8.406 are unchanged. Only the benchmark changes: 28.6 minus thirty is minus 1.4, giving t approximately minus 0.167. The sample size has not changed, so degrees of freedom remain four."
+      "title": "答え合わせ3　③ 分母は2。tは1.3",
+      "ja": "推定分散20を五で割ると四、平方根は二です。平均30と比較基準27.4の差2.6を二で割るとtは1.3。今回は点数も分散も新しい標本から求めましたが、五試合なので自由度は四のままです。",
+      "en": "Estimated variance twenty divided by five is four, whose square root is two. Divide the difference 30 minus 27.4, or 2.6, by two to obtain t=1.3. The mean and variance come from the new sample; five games still give four degrees of freedom."
     },
     {
       "page": 60,
