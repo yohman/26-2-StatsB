@@ -3,7 +3,7 @@ const read=p=>fs.readFileSync(p,'utf8'),base='materials/2026-yoh/week06/';
 const deck=read(base+'w6.md'),plain=deck.replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 const slides=deck.split(/\n---\n/).filter(s=>/^## /m.test(s));
 const map=JSON.parse(read(base+'source-map.json')),notes=JSON.parse(read(base+'w6.notes.json')).slides,audit=JSON.parse(read(base+'audit.json'));
-assert.equal(slides.length,87);assert.equal(map.slides.length,slides.length);assert.equal(notes.length,slides.length);
+assert.equal(slides.length,88);assert.equal(map.slides.length,slides.length);assert.equal(notes.length,slides.length);
 assert.deepEqual([...new Set(map.slides.filter(s=>['clt','t','chi'].includes(s.part)).map(s=>s.part))],['clt','t','chi']);
 const byId=id=>{const s=map.slides.find(s=>s.id===id);assert(s,id);return slides[s.page-1];};
 for(const id of ['clt-title','t-title','chi-title','uv-title','t-table-title']){
@@ -46,7 +46,7 @@ function integral(fn,a,b){const n=20000,h=(b-a)/n;let s=0;for(let i=0;i<n;i++)s+
 assert(Math.abs(integral(x=>M.tPdf(x,20),2.086,40)-.025)<2e-5);assert(Math.abs(integral(x=>M.tPdf(x,10),-1.8125,1.8125)-.9)<2e-5);
 const lab=read('assets/week6-story-lab.js')+read('assets/week6-lecture-lab.js');assert(!/localStorage|sessionStorage|fetch\(|XMLHttpRequest/.test(lab));assert(lab.includes('9, 49, 46, 11, 28'));assert(lab.includes('160, 165, 170'));assert(lab.includes('推定分散が0なのでtを計算できません'));assert(lab.includes('draw20'));assert(lab.includes('交点は確率ではなく'));
 assert(fs.existsSync(base+'t-table.pdf'));assert(fs.existsSync(base+'standard-normal-table.pdf'));
-console.log('Week6 rebuilt: 87 slides, three ordered chapters, textbook formula registry, restored original stories, five guarded challenges, visual answers and aligned explorations.');
+console.log('Week6 rebuilt: 88 slides, three ordered chapters, textbook formula registry, restored original stories, five guarded challenges, visual answers and aligned explorations.');
 
 const tSlides=map.slides.filter(s=>s.part==='t').map(s=>slides[s.page-1]).join('\n').replace(/<rt>.*?<\/rt>/g,'').replace(/<[^>]*>/g,'');
 assert(!/8人の身長|ラーメン|電池|10、14、18|自由度20のt|自由度10のt/.test(tSlides));
@@ -71,3 +71,8 @@ assert(Math.abs(M.tStatistic([24,28,30,32,36],27.4)-1.3)<1e-12);
 const fullT=map.slides.find(s=>s.id==='t-guided-example-3');
 assert.equal(fullT.page,map.slides.find(s=>s.id==='curry-variance-answer').page+1);
 assert.equal(map.slides.find(s=>s.id==='t-challenge').page,fullT.page+1);
+
+assert(integral(x=>M.tPdf(x,4),-1.96,1.96)<.89);
+assert(Math.abs(integral(x=>M.tPdf(x,4),-2.7764,2.7764)-.95)<1e-5);
+assert(M.table[4][2]>M.table[20][2]&&M.table[20][2]>1.96);
+assert(byId('t-normal-95-boundaries').includes('1.96'));

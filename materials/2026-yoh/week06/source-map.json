@@ -804,41 +804,53 @@
     {
       "page": 64,
       "id": "t-central-example-1",
-      "title": "Curryの自由度4で、中央95%を読む",
+      "title": "Zと同じ±1.96では、tの中央は95%に届かない",
       "part": "t",
-      "layout": "worked example-build",
+      "layout": "t-95-compare",
       "variation": "",
-      "textbook": "127・203（中央区間を自由度4に適用）",
+      "textbook": "125–127・202–203（標準正規とtの比較）",
       "official": "",
       "source": "",
       "formula": ""
     },
     {
       "page": 65,
-      "id": "t-central-example-2",
-      "title": "Curryの自由度4で、中央95%を読む",
+      "id": "t-normal-95-boundaries",
+      "title": "同じ中央95%なら、tの境界を外へ広げる",
       "part": "t",
-      "layout": "worked example-build",
+      "layout": "t-95-compare",
       "variation": "",
-      "textbook": "127・203（中央区間を自由度4に適用）",
+      "textbook": "126–127・202–203（中央95%の境界）",
       "official": "",
       "source": "",
       "formula": ""
     },
     {
       "page": 66,
-      "id": "t-central-example-3",
-      "title": "Curryの自由度4で、中央95%を読む",
+      "id": "t-central-example-2",
+      "title": "95%から、上側0.025の列を選ぶ",
       "part": "t",
-      "layout": "worked",
+      "layout": "t-95-tail",
       "variation": "",
-      "textbook": "127・203（中央区間を自由度4に適用）",
+      "textbook": "127・203（中央の確率から上側確率へ）",
       "official": "",
       "source": "",
       "formula": ""
     },
     {
       "page": 67,
+      "id": "t-central-example-3",
+      "title": "自由度4の行 × 上側0.025の列",
+      "part": "t",
+      "layout": "t-95-lookup",
+      "variation": "",
+      "textbook": "127・203（t表の行と列）",
+      "official": "",
+      "source": "",
+      "formula": ""
+    },
+    {
+      "page": 68,
       "id": "table-challenge",
       "title": "チャレンジ4　中央90%を残す境界は？",
       "part": "t",
@@ -850,7 +862,7 @@
       "formula": ""
     },
     {
-      "page": 68,
+      "page": 69,
       "id": "table-answer",
       "title": "答え合わせ4　自由度4のまま、中央90%は±2.1318",
       "part": "t",
@@ -862,7 +874,7 @@
       "formula": "central"
     },
     {
-      "page": 69,
+      "page": 70,
       "id": "t-summary",
       "title": "平均の位置から、ずれの全体へ",
       "part": "t",
@@ -874,7 +886,7 @@
       "formula": ""
     },
     {
-      "page": 70,
+      "page": 71,
       "id": "chi-title",
       "title": "カイ 二  乗  分  布  Chi-square distribution ",
       "part": "chi",
@@ -886,7 +898,7 @@
       "formula": ""
     },
     {
-      "page": 71,
+      "page": 72,
       "id": "pearson",
       "title": "Karl Pearson",
       "part": "chi",
@@ -898,7 +910,7 @@
       "formula": ""
     },
     {
-      "page": 72,
+      "page": 73,
       "id": "student-population",
       "title": "20人を選んでも、12人と8人とは限らない",
       "part": "chi",
@@ -910,7 +922,7 @@
       "formula": ""
     },
     {
-      "page": 73,
+      "page": 74,
       "id": "counts-to-squares",
       "title": "今度は、2人の身長のずれを見よう",
       "part": "chi",
@@ -922,7 +934,7 @@
       "formula": ""
     },
     {
-      "page": 74,
+      "page": 75,
       "id": "chi-notation",
       "title": "カイ二乗分布の記号",
       "part": "chi",
@@ -934,7 +946,7 @@
       "formula": "chi"
     },
     {
-      "page": 75,
+      "page": 76,
       "id": "chi-definition",
       "title": "独立な標準正規の値を、二乗して足す",
       "part": "chi",
@@ -946,7 +958,7 @@
       "formula": ""
     },
     {
-      "page": 76,
+      "page": 77,
       "id": "chi-shape",
       "title": "自由度で、形が変わる",
       "part": "chi",
@@ -958,7 +970,7 @@
       "formula": ""
     },
     {
-      "page": 77,
+      "page": 78,
       "id": "u-formula",
       "title": "母平均からの偏差二乗和を、母分散で割る",
       "part": "chi",
@@ -970,7 +982,7 @@
       "formula": "u"
     },
     {
-      "page": 78,
+      "page": 79,
       "id": "chi-guided-example-1",
       "title": "例題：2人の身長のずれを、ひとつに",
       "part": "chi",
@@ -982,7 +994,7 @@
       "formula": ""
     },
     {
-      "page": 79,
+      "page": 80,
       "id": "chi-guided-example-2",
       "title": "例題：2人の身長のずれを、ひとつに",
       "part": "chi",
@@ -994,7 +1006,7 @@
       "formula": "u"
     },
     {
-      "page": 80,
+      "page": 81,
       "id": "chi-guided-example-3",
       "title": "例題：2人の身長のずれを、ひとつに",
       "part": "chi",
@@ -1006,7 +1018,7 @@
       "formula": "u"
     },
     {
-      "page": 81,
+      "page": 82,
       "id": "chi-challenge",
       "title": "チャレンジ5　3人のずれを、ひとつにする",
       "part": "chi",
@@ -1018,7 +1030,7 @@
       "formula": ""
     },
     {
-      "page": 82,
+      "page": 83,
       "id": "chi-answer",
       "title": "答え合わせ5　U₀=5、自由度3",
       "part": "chi",
@@ -1030,7 +1042,7 @@
       "formula": "u"
     },
     {
-      "page": 83,
+      "page": 84,
       "id": "chi-decomposition",
       "title": "平方和の分解",
       "part": "chi",
@@ -1042,7 +1054,7 @@
       "formula": "decomposition"
     },
     {
-      "page": 84,
+      "page": 85,
       "id": "chi-decomposition-example",
       "title": "同じ3人なら、5 = 2 + 3",
       "part": "chi",
@@ -1054,7 +1066,7 @@
       "formula": ""
     },
     {
-      "page": 85,
+      "page": 86,
       "id": "chi-moments",
       "title": "カイ二乗：平均はν、分散は2ν",
       "part": "chi",
@@ -1066,7 +1078,7 @@
       "formula": ""
     },
     {
-      "page": 86,
+      "page": 87,
       "id": "summary",
       "title": "今日の3つを、つなげる",
       "part": "closing",
@@ -1078,7 +1090,7 @@
       "formula": ""
     },
     {
-      "page": 87,
+      "page": 88,
       "id": "al",
       "title": "AL：ここからは、自分で表を読む",
       "part": "closing",
