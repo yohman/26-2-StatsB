@@ -67,7 +67,18 @@ function dice(name,n){let p=[1];for(let j=0;j<n;j++){const next=Array(p.length+6
 const curry=[9,49,46,11,28],curryChart=bars('curry-scores',curry,['1試合目','2試合目','3試合目','4試合目','5試合目'],{max:60,mean:28.6,meanLabelLeft:true,title:'保存した5試合の得点。最新の成績ではない。'});
 const curryRawChart=bars('curry-raw',curry,['1試合目','2試合目','3試合目','4試合目','5試合目'],{max:60,title:'保存した5試合：実際の得点。最新の成績ではない。'});
 const tcurve=(name,df,extra={})=>fig(name,{min:-4,max:4,pdf:x=>M.tPdf(x,df),xlabel:'t',title:`t分布：自由度${df}`,yMax:.48,...extra});
-function challenge(id,title,body,book,official,ja,en,minutes=4){challengeNumber++;add(id,`チャレンジ${challengeNumber}　${title}`,`<p class="time">自分で解く　${minutes}分（最後の1分は隣と確認）</p>\n\n${body}`,{layout:'challenge',book,official,ja,en});}
+const challengeReferences={
+ 'clt-challenge':[F.z.tex],
+ 'variance-challenge':[F.mean.tex,F.uv.tex],
+ 't-challenge':[F.t.tex,String.raw`\nu=n-1`],
+ 'table-challenge':[String.raw`\alpha=\frac{1-\text{中央の確率}}{2}`,String.raw`\Pr(-t_\alpha(\nu)<T<t_\alpha(\nu))=1-2\alpha`],
+ 'chi-challenge':[F.u.tex,String.raw`\nu=n\quad(\text{母平均・母分散が既知})`]
+};
+function challenge(id,title,body,book,official,ja,en,minutes=4){
+ const refs=challengeReferences[id];if(!refs)throw Error(`Missing challenge formula reference: ${id}`);
+ const reference=`<div class="challenge-formulas"><p>参考公式（文字のみ）<span class="en">Formula reference · substitute the given values yourself</span></p><div class="challenge-formula-list">${refs.map(tex=>`<div>\n\n${math(tex)}\n\n</div>`).join('')}</div></div>`;
+ challengeNumber++;add(id,`チャレンジ${challengeNumber}　${title}`,`<p class="time">自分で解く　${minutes}分（最後の1分は隣と確認）</p>\n\n${body}\n\n${reference}`,{layout:'challenge',book,official,ja:ja+' 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。',en:en+' The reference formulas remain symbolic. Students must identify and substitute the given values themselves.'});
+}
 function worked(id,title,{given,key,sub,result,graphic,book,official,ja,en,link=''}){add(id,`答え合わせ${challengeNumber}　${title}`,`<div class="work-copy">\n\n${small('① 与えられた条件')}\n\n${given}\n\n${small('② 公式（文字のまま）')}\n\n${math(F[key].tex)}\n\n${small('③ 数値を代入')}\n\n${math(sub)}\n\n</div><div class="work-chart">\n\n${graphic}\n\n</div><p class="conclusion">④ ${result}</p>${link}`,{layout:'worked',book:book||F[key].page,official,formula:key,ja,en});}
 const zComparison=stage=>zDistanceComparison(here,stage);
 teach({add,section,topic,formula,photo,fig,bars,dice,tcurve,challenge,worked,math,big,small,go,tryLink,normalLink,tLink,names,term,ruby,M,F,curryChart,curryRawChart,zComparison,zPurposeGraphic,old,cltOld,here});

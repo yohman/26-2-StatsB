@@ -190,8 +190,8 @@
     {
       "page": 32,
       "title": "チャレンジ1　4人の平均得点は、どのくらい珍しい？",
-      "ja": "例題から数値を変え、四人の平均を65点にした問題です。まず母分散は100であることを整理してから、教科書の分母に入れてもらいます。",
-      "en": "This independent exercise changes the observed four-person mean to sixty-five in the fictional normal exam-score model. Students square the SD before substituting into the textbook denominator."
+      "ja": "例題から数値を変え、四人の平均を65点にした問題です。まず母分散は100であることを整理してから、教科書の分母に入れてもらいます。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
+      "en": "This independent exercise changes the observed four-person mean to sixty-five in the fictional normal exam-score model. Students square the SD before substituting into the textbook denominator. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
     },
     {
       "page": 33,
@@ -304,8 +304,8 @@
     {
       "page": 51,
       "title": "チャレンジ2　Curryの5試合を計算する",
-      "ja": "元の五試合で手を動かす時間です。まず平均、次に偏差二乗和、最後に四で割ります。一つの長い式にせず、表を作ってから集計しても構いません。",
-      "en": "Calculate using the original five games. Work through mean, squared-deviation sum and division by four. A deviation table is encouraged and calculators are allowed."
+      "ja": "元の五試合で手を動かす時間です。まず平均、次に偏差二乗和、最後に四で割ります。一つの長い式にせず、表を作ってから集計しても構いません。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
+      "en": "Calculate using the original five games. Work through mean, squared-deviation sum and division by four. A deviation table is encouraged and calculators are allowed. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
     },
     {
       "page": 52,
@@ -346,8 +346,8 @@
     {
       "page": 58,
       "title": "チャレンジ3　同じ5試合で、比較基準だけ30点なら？",
-      "ja": "五試合と分散は変えず、例題で27.4だった比較基準だけ30に変えます。差がマイナス1.4になることと、自由度は四のままであることを考えてもらいます。",
-      "en": "Keep the same five scores and variance estimate. Change only the benchmark from 27.4 to thirty. Students identify the negative difference of 1.4 and retain four degrees of freedom."
+      "ja": "五試合と分散は変えず、例題で27.4だった比較基準だけ30に変えます。差がマイナス1.4になることと、自由度は四のままであることを考えてもらいます。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
+      "en": "Keep the same five scores and variance estimate. Change only the benchmark from 27.4 to thirty. Students identify the negative difference of 1.4 and retain four degrees of freedom. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
     },
     {
       "page": 59,
@@ -400,8 +400,8 @@
     {
       "page": 67,
       "title": "チャレンジ4　中央90%を残す境界は？",
-      "ja": "例題と同じCurryの自由度四を使い、中央の面積だけ九十五から九十パーセントへ変えます。中央九十を表の列で直接探さず、左右に残る面積から考えます。",
-      "en": "Keep Curry’s four degrees of freedom and change only the central area from ninety-five to ninety percent. Convert that area into a one-tail probability before reading the table."
+      "ja": "例題と同じCurryの自由度四を使い、中央の面積だけ九十五から九十パーセントへ変えます。中央九十を表の列で直接探さず、左右に残る面積から考えます。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
+      "en": "Keep Curry’s four degrees of freedom and change only the central area from ninety-five to ninety percent. Convert that area into a one-tail probability before reading the table. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
     },
     {
       "page": 68,
@@ -484,8 +484,8 @@
     {
       "page": 81,
       "title": "チャレンジ5　3人のずれを、ひとつにする",
-      "ja": "母分散二十五を確認します。偏差はゼロ、五、十で、二乗してから足します。既知の母平均なので、自由度を反射的にn−1にしないよう促します。",
-      "en": "Confirm variance twenty-five, then square deviations zero, five and ten. Because the population mean is known, do not automatically subtract one from the number of independent components."
+      "ja": "母分散二十五を確認します。偏差はゼロ、五、十で、二乗してから足します。既知の母平均なので、自由度を反射的にn−1にしないよう促します。 参考公式は文字のままです。与えられた値を自分で対応させ、代入して計算してもらいます。",
+      "en": "Confirm variance twenty-five, then square deviations zero, five and ten. Because the population mean is known, do not automatically subtract one from the number of independent components. The reference formulas remain symbolic. Students must identify and substitute the given values themselves."
     },
     {
       "page": 82,

@@ -58,3 +58,9 @@ assert(Math.abs(M.tStatistic([9,49,46,11,28],30)+.1665486893)<1e-8);
 
 for(const id of ['df-title','df-choice-step-1','df-choice-step-2','df-curry'])assert(!map.slides.some(s=>s.id===id));
 assert(byId('df-example').includes('5-1=4'));
+
+for(const id of ['clt-challenge','variance-challenge','t-challenge','table-challenge','chi-challenge']){
+ const slide=byId(id);assert(slide.includes('challenge-formulas'));assert(slide.includes('Formula reference'));
+ const reference=slide.slice(slide.indexOf('<div class="challenge-formulas">'));
+ assert(!/353\.3|28\.6|65|165|170|0\.90|2\.1318/.test(reference),id);
+}
