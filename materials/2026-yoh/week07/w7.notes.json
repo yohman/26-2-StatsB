@@ -362,19 +362,26 @@
     {
       "page": 52,
       "textbook": "",
+      "title": "やってみよう！Our class, our stopwatch data",
+      "ja": "私たちの「1秒」で、統計を。。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
+      "en": "Use this slide to explain live class explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+    },
+    {
+      "page": 53,
+      "textbook": "",
       "title": "ここからは、あなたの番",
       "ja": "ここでは課題の数値を代入しません。学生自身で問題文を読み、何を求める欄かを確かめてもらいます。授業内の練習とは別の課題であることを伝え、空欄の答えを見せずに作業へ移ります。",
       "en": "Use this slide to explain al intro. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 53,
+      "page": 54,
       "textbook": "",
       "title": "ALは、自分で完成させる",
       "ja": "ALは、自分で完成させるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al work. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 54,
+      "page": 55,
       "textbook": "",
       "title": "最後に、一言で説明できる？",
       "ja": "最後に、一言で説明できる？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
