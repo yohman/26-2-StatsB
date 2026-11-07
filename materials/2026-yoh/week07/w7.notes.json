@@ -229,19 +229,47 @@
     {
       "page": 33,
       "textbook": "",
+      "title": "160 ms",
+      "ja": "ここで一度、計算からゲームの場面に切り替えます。画面が緑になったら押す反応速度ゲームを想像してください、と話します。百六十ミリ秒という数字だけで速いと言えるか、まず予想を聞きます。次の問題で、中心・ばらつき・比較する集団をそろえます。",
+      "en": "Imagine an arcade game: tap as soon as the screen turns green. Your screen says 160 milliseconds. Ask whether that sounds fast before showing any distribution. Smaller times mean faster responses. All numbers in this challenge are fictional classroom data."
+    },
+    {
+      "page": 34,
+      "textbook": "123〜126・202",
+      "title": "チャレンジ3　反応速度ゲーム：160msは速い？",
+      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
+      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
+    },
+    {
+      "page": 35,
+      "textbook": "126（不偏分散）",
+      "title": "① 練習会の中心と、ばらつき",
+      "ja": "平均は二百ミリ秒。そこからの差はマイナス四十、マイナス二十、ゼロ、二十、四十です。二乗すると図の五本の棒になり、合計四千。五人なので四で割り、不偏分散は千ミリ秒の二乗になります。これは練習会の五人から出した値で、次の別大会モデルの母標準偏差二十とは区別します。",
+      "en": "The five practice times average 200 ms. Deviations are −40, −20, 0, 20 and 40; the chart shows their squares. Add them to get 4,000, then divide by n−1 = 4 to get an unbiased variance of 1,000 ms². This estimate from the practice group is separate from the supplied population SD for the other tournament."
+    },
+    {
+      "page": 36,
+      "textbook": "123〜125・202",
+      "title": "② 速い人は、左側にいる",
+      "ja": "別大会で与えられた母標準偏差二十を使います。練習会の不偏分散から二十を作るのではありません。百六十は平均より四十短いのでZはマイナス二。短いほど速いから求めるのは左側です。対称性でプラス二の右側を表から読み、二・二八パーセント。五人の最速記録の確率ではなく、無作為に選ぶ一人についての割合です。ここで、ALも中心・分散・面積の向きを自分で判断する、とつなぎます。",
+      "en": "Use the supplied SD of 20 ms for the separate tournament model. A time of 160 ms is two SDs below its mean, so Z = −2. Faster means smaller, so shade the left tail. Symmetry lets the right-tail table give Q(2) = 0.0228. This is the probability for one random entrant, not the chance that the fastest of five reaches 160 ms. Bridge directly to the independent AL."
+    },
+    {
+      "page": 37,
+      "textbook": "",
       "title": "ここからは、あなたの番",
       "ja": "ここでは課題の数値を代入しません。学生自身で問題文を読み、何を求める欄かを確かめてもらいます。授業内の練習とは別の課題であることを伝え、空欄の答えを見せずに作業へ移ります。",
       "en": "Use this slide to explain al intro. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 34,
+      "page": 38,
       "textbook": "",
       "title": "ALは、自分で完成させる",
       "ja": "ALは、自分で完成させるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al work. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 35,
+      "page": 39,
       "textbook": "",
       "title": "最後に、一言で説明できる？",
       "ja": "最後に、一言で説明できる？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",

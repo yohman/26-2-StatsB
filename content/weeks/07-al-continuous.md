@@ -15,6 +15,8 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 
 ## In class
 
+- 反応速度ゲームの授業内チャレンジ：平均・不偏分散・左側の確率を計算し、ALへつなぐ (Reaction-time challenge: mean, unbiased variance, and a lower-tail probability)
+
 - 標本不偏分散を計算する (calculating unbiased sample variance)
 - 標準正規分布表とt分布を確認する (reviewing the standard-normal table and t distribution)
 - 標準正規分布表の読み方を練習する (practising standard-normal table reading)
