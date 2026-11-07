@@ -47,229 +47,334 @@
     {
       "page": 7,
       "textbook": "122（標本平均）",
+      "title": "記録を縦に並べる",
+      "ja": "まず、記録を上から順に確認しよう。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 8,
+      "textbook": "122（標本平均）",
       "title": "中心は、160cm",
       "ja": "中心は、160cmを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain mean example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 8,
+      "page": 9,
       "textbook": "126",
       "title": "中心から、どれだけ離れた？",
       "ja": "中心から、どれだけ離れた？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain deviations. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 9,
+      "page": 10,
       "textbook": "126",
       "title": "符号を消して、大きさを集める",
       "ja": "符号を消して、大きさを集めるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain squared. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 10,
+      "page": 11,
       "textbook": "126（標本不偏分散）",
       "title": "母分散を推定するときは、n−1で割る",
       "ja": "母分散を推定するときは、n−1で割るを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 11,
+      "page": 12,
+      "textbook": "122（標本平均）",
+      "title": "① 記録から、平均を求める",
+      "ja": "値を足し、個数で割って平均を求める。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 13,
+      "textbook": "126（標本不偏分散）",
+      "title": "② 平均との差を、一行ずつ",
+      "ja": "各記録から、平均を引く。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 14,
+      "textbook": "126（標本不偏分散）",
+      "title": "③ 二乗して、列の下で合計する",
+      "ja": "偏差を二乗し、同じ列の下で合計する。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 15,
       "textbook": "126（標本不偏分散）",
       "title": "偏差二乗和40を、4で割る",
       "ja": "偏差二乗和40を、4で割るを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 12,
+      "page": 16,
       "textbook": "126・132・134 脚注2",
       "title": "nで割る？　n−1で割る？",
       "ja": "nで割る？　n−1で割る？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance contrast. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 13,
+      "page": 17,
       "textbook": "126（標本不偏分散）",
       "title": "チャレンジ1　別の5体で、計算してみる",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 14,
+      "page": 18,
+      "textbook": "122（標本平均）",
+      "title": "① 記録から、平均を求める",
+      "ja": "値を足し、個数で割って平均を求める。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 19,
+      "textbook": "126（標本不偏分散）",
+      "title": "② 平均との差を、一行ずつ",
+      "ja": "各記録から、平均を引く。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 20,
+      "textbook": "126（標本不偏分散）",
+      "title": "③ 二乗して、列の下で合計する",
+      "ja": "偏差を二乗し、同じ列の下で合計する。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 21,
       "textbook": "126（標本不偏分散）",
       "title": "同じ平均でも、散らばりは大きい",
       "ja": "同じ平均でも、散らばりは大きいを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain variance answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 15,
+      "page": 22,
       "textbook": "126・132",
       "title": "やってみよう！Five values, two summaries",
       "ja": "5つの値を変え、中心と散らばりを見る。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain variance explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 16,
+      "page": 23,
       "textbook": "123",
       "title": "標準化Standardization",
       "ja": "標準化です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain z title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 17,
+      "page": 24,
       "textbook": "",
       "title": "170cmは、高い？",
       "ja": "170cmは、高い？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain height given. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 18,
+      "page": 25,
       "textbook": "123（標準化）",
       "title": "単位を「標準偏差何個分」に変える",
       "ja": "単位を「標準偏差何個分」に変えるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain z formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 19,
+      "page": 26,
+      "textbook": "123（標準化）",
+      "title": "① 比較する値と、基準を確認",
+      "ja": "まず比較する値、母平均、母標準偏差だけを確認します。どの数を式のどこに入れるか学生に尋ねてから、次のスライドへ進みます。",
+      "en": "Identify the observed value, population mean and population standard deviation. Ask where each belongs in the symbolic formula before revealing the calculation."
+    },
+    {
+      "page": 27,
       "textbook": "123（標準化）",
       "title": "170cmは、平均より2個分上",
       "ja": "170cmは、平均より2個分上を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain z example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 20,
+      "page": 28,
       "textbook": "124〜125・202",
       "title": "上側確率Upper-tail probability",
       "ja": "上側確率です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain table title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 21,
+      "page": 29,
       "textbook": "124・202",
       "title": "表が教えるのは、右側の面積",
       "ja": "表が教えるのは、右側の面積を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain right tail. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 22,
+      "page": 30,
       "textbook": "124・202",
       "title": "行2.0 ＋ 列0.00 → 0.0228",
       "ja": "二点ゼロの行とゼロゼロの列を指でたどります。高さではなく右側の面積です。百分率に直すと二・二八パーセント。ちょうど二になる確率ではありません。",
       "en": "Use this slide to explain read table. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 23,
+      "page": 31,
       "textbook": "124・202",
       "title": "左側が欲しいなら、1から引く",
       "ja": "左側が欲しいなら、1から引くを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain left tail. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 24,
+      "page": 32,
       "textbook": "124〜125・202",
       "title": "マイナスのZは、対称な位置で考える",
       "ja": "マイナスのZは、対称な位置で考えるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain negative tail. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 25,
+      "page": 33,
       "textbook": "125・202",
       "title": "真ん中の範囲は、両端の面積を引く",
       "ja": "真ん中の範囲は、両端の面積を引くを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain between. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 26,
+      "page": 34,
       "textbook": "123〜125・202",
       "title": "チャレンジ2　167.5cm以上は、何％？",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 27,
+      "page": 35,
+      "textbook": "123（標準化）",
+      "title": "① 比較する値と、基準を確認",
+      "ja": "まず比較する値、母平均、母標準偏差だけを確認します。どの数を式のどこに入れるか学生に尋ねてから、次のスライドへ進みます。",
+      "en": "Identify the observed value, population mean and population standard deviation. Ask where each belongs in the symbolic formula before revealing the calculation."
+    },
+    {
+      "page": 36,
+      "textbook": "123（標準化）",
+      "title": "② 差を、標準偏差で割る",
+      "ja": "平均からの差を計算し、標準偏差で割ります。Zの符号と大きさを解釈してから、表に進みます。求める左右の面積も確認しましょう。",
+      "en": "Subtract the mean and divide by the standard deviation. Interpret the sign and magnitude of Z, then decide which tail is required before looking up the table."
+    },
+    {
+      "page": 37,
       "textbook": "123〜125・202",
       "title": "1.5個分上。その右側は6.68％",
       "ja": "1.5個分上。その右側は6.68％を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain table answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 28,
+      "page": 38,
       "textbook": "123〜125・202",
       "title": "やってみよう！Read the right-tail table",
       "ja": "境界を動かして、面積と表をつなぐ。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain table explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 29,
+      "page": 39,
       "textbook": "123・125",
       "title": "1人の値？　何人かの平均？",
       "ja": "1人の値？　何人かの平均？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain mean or person. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 30,
+      "page": 40,
       "textbook": "123（標本平均の標準化）",
       "title": "平均のばらつきは、小さくなる",
       "ja": "平均のばらつきは、小さくなるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain mean z review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 31,
+      "page": 41,
       "textbook": "125〜126",
       "title": "母分散が分からないときは？",
       "ja": "母分散が分からないときは？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain unknown. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 32,
+      "page": 42,
       "textbook": "125（t分布）",
       "title": "t分布を使う場面の復習",
       "ja": "t分布を使う場面の復習を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain t review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 33,
+      "page": 43,
       "textbook": "",
       "title": "160 ms",
       "ja": "ここで一度、計算からゲームの場面に切り替えます。画面が緑になったら押す反応速度ゲームを想像してください、と話します。百六十ミリ秒という数字だけで速いと言えるか、まず予想を聞きます。次の問題で、中心・ばらつき・比較する集団をそろえます。",
       "en": "Imagine an arcade game: tap as soon as the screen turns green. Your screen says 160 milliseconds. Ask whether that sounds fast before showing any distribution. Smaller times mean faster responses. All numbers in this challenge are fictional classroom data."
     },
     {
-      "page": 34,
+      "page": 44,
       "textbook": "123〜126・202",
       "title": "チャレンジ3　反応速度ゲーム：160msは速い？",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 35,
+      "page": 45,
+      "textbook": "126（不偏分散）",
+      "title": "① 記録から、平均を求める",
+      "ja": "値を足し、個数で割って平均を求める。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 46,
+      "textbook": "126（不偏分散）",
+      "title": "② 平均との差を、一行ずつ",
+      "ja": "各記録から、平均を引く。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 47,
+      "textbook": "126（不偏分散）",
+      "title": "③ 二乗して、列の下で合計する",
+      "ja": "偏差を二乗し、同じ列の下で合計する。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+    },
+    {
+      "page": 48,
       "textbook": "126（不偏分散）",
       "title": "① 練習会の中心と、ばらつき",
       "ja": "平均は二百ミリ秒。そこからの差はマイナス四十、マイナス二十、ゼロ、二十、四十です。二乗すると図の五本の棒になり、合計四千。五人なので四で割り、不偏分散は千ミリ秒の二乗になります。これは練習会の五人から出した値で、次の別大会モデルの母標準偏差二十とは区別します。",
       "en": "The five practice times average 200 ms. Deviations are −40, −20, 0, 20 and 40; the chart shows their squares. Add them to get 4,000, then divide by n−1 = 4 to get an unbiased variance of 1,000 ms². This estimate from the practice group is separate from the supplied population SD for the other tournament."
     },
     {
-      "page": 36,
+      "page": 49,
+      "textbook": "123〜125・202",
+      "title": "① 比較する値と、基準を確認",
+      "ja": "まず比較する値、母平均、母標準偏差だけを確認します。どの数を式のどこに入れるか学生に尋ねてから、次のスライドへ進みます。",
+      "en": "Identify the observed value, population mean and population standard deviation. Ask where each belongs in the symbolic formula before revealing the calculation."
+    },
+    {
+      "page": 50,
+      "textbook": "123〜125・202",
+      "title": "② 差を、標準偏差で割る",
+      "ja": "平均からの差を計算し、標準偏差で割ります。Zの符号と大きさを解釈してから、表に進みます。求める左右の面積も確認しましょう。",
+      "en": "Subtract the mean and divide by the standard deviation. Interpret the sign and magnitude of Z, then decide which tail is required before looking up the table."
+    },
+    {
+      "page": 51,
       "textbook": "123〜125・202",
       "title": "② 速い人は、左側にいる",
       "ja": "別大会で与えられた母標準偏差二十を使います。練習会の不偏分散から二十を作るのではありません。百六十は平均より四十短いのでZはマイナス二。短いほど速いから求めるのは左側です。対称性でプラス二の右側を表から読み、二・二八パーセント。五人の最速記録の確率ではなく、無作為に選ぶ一人についての割合です。ここで、ALも中心・分散・面積の向きを自分で判断する、とつなぎます。",
       "en": "Use the supplied SD of 20 ms for the separate tournament model. A time of 160 ms is two SDs below its mean, so Z = −2. Faster means smaller, so shade the left tail. Symmetry lets the right-tail table give Q(2) = 0.0228. This is the probability for one random entrant, not the chance that the fastest of five reaches 160 ms. Bridge directly to the independent AL."
     },
     {
-      "page": 37,
+      "page": 52,
       "textbook": "",
       "title": "ここからは、あなたの番",
       "ja": "ここでは課題の数値を代入しません。学生自身で問題文を読み、何を求める欄かを確かめてもらいます。授業内の練習とは別の課題であることを伝え、空欄の答えを見せずに作業へ移ります。",
       "en": "Use this slide to explain al intro. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 38,
+      "page": 53,
       "textbook": "",
       "title": "ALは、自分で完成させる",
       "ja": "ALは、自分で完成させるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al work. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 39,
+      "page": 54,
       "textbook": "",
       "title": "最後に、一言で説明できる？",
       "ja": "最後に、一言で説明できる？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
