@@ -433,7 +433,7 @@
       "page": 62,
       "textbook": "123〜127・202〜203",
       "title": "時間があれば：2つの $Z$ と $T$ を比べる",
-      "ja": "最初のタブは五人の標本平均のZです。クラス全員の母平均と母分散を基準に、平均の標準偏差を分母に使います。次に一人のXなら母標準偏差で割り、母分散を未知としたTなら五人の不偏分散を使う、と比較します。実際の五人は重複なしで選んでいますが、この画面の面積は独立な正規母集団の教科書モデルに当てはめた練習です。実際の重複なし抽出の確率とは言いません。計算の後、別のボタンで表と面積を表示します。",
+      "ja": "まず五人の標本平均のZから始めます。クラス全員の母平均と母分散を基準に、平均の標準偏差を分母に使います。次に一人のXなら母標準偏差で割り、母分散を未知としたTなら五人の不偏分散を使う、と比較します。実際の五人は重複なしで選んでいますが、この画面の面積は独立な正規母集団の教科書モデルに当てはめた練習です。実際の重複なし抽出の確率とは言いません。同じ「次へ」で、対象、公式、計算、答え、表、面積を一画面ずつ確認します。最後に三つの分母と結果を比較します。",
       "en": "Start with sample-mean Z, which is selected by default. Use the class summaries as reference parameters for an independent normal textbook model. Compare its denominator with individual Z, then switch to T using the same five records’ unbiased variance. The real five were drawn without replacement; these model areas are not exact probabilities for that finite-class draw. Reveal substitution first, then the table and area in a separate step."
     },
     {
