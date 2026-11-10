@@ -314,29 +314,29 @@
       "page": 45,
       "textbook": "124・202",
       "title": "左側が欲しいなら、1から引く",
-      "ja": "左側が欲しいなら、1から引くを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain left tail. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "まず大きなPrの式を読みます。Zが二以下なので、境界二より左側の面積が欲しい、と指で示します。表は右側を教えるので、全体一から右側〇点〇二二八を引きます。式の不等号、境界、塗られた領域を対応させてから計算を読みます。",
+      "en": "Read the large probability statement first: Z at most 2. Point to the boundary at 2 and the shaded area to its left. The table supplies the right tail, so subtract .0228 from one. Connect the inequality, boundary and shaded region before reading the numerical result."
     },
     {
       "page": 46,
       "textbook": "124〜125・202",
       "title": "マイナスのZは、対称な位置で考える",
-      "ja": "マイナスのZは、対称な位置で考えるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain negative tail. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "大きな式は、マイナス一点五以上を求めています。マイナスだから左側、と決めず、不等号が以上なので境界より右側を指します。残したくない左端は、対称性でプラス一点五の右端と同じです。全体からその〇点〇六六八を引きます。",
+      "en": "The event is Z at least −1.5. The negative boundary does not mean we want the left tail: the inequality asks for everything to its right. By symmetry, the excluded left tail equals Q(1.5)=.0668. Subtract that small tail from one."
     },
     {
       "page": 47,
       "textbook": "125・202",
       "title": "真ん中の範囲は、両端の面積を引く",
-      "ja": "真ん中の範囲は、両端の面積を引くを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain between. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "大きな式は二つの境界の間を表しています。中央の塗られた領域がそのまま確率です。残さない両端は左右対称で同じ大きさなので、表の上側〇点〇六六八を二倍し、全体一から引きます。両端の境界が対称な場合に二倍できる点を確認します。",
+      "en": "The large expression names the event between the two boundaries. Its probability is the shaded central area. Since the boundaries are symmetric, the two excluded tails have equal area. Subtract twice Q(1.5) from one. Explain that doubling works here because of that symmetry."
     },
     {
       "page": 48,
       "textbook": "124〜125・202",
       "title": "左右の幅が違っても、表は使える",
-      "ja": "左右対称でない区間です。左の外側は対称性でプラス〇点五の右側から読み、右の外側は一点二の右側を読みます。全体の一から二つを引きます。左右の境界が違うので、一つの表の値を二倍する方法は使いません。",
-      "en": "For an unequal interval crossing zero, find each outside tail separately. Symmetry gives the left tail at −.50 from Q(.50)=.3085; the other tail is Q(1.20)=.1151. Subtract both from one to get .5764. Doubling one tail would be incorrect here."
+      "ja": "最初に大きな式を読み、マイナス〇点五から一点二の間を図で指します。左右の境界が違うので、一つの表の値を二倍しません。左の外側は対称性からプラス〇点五の上側〇点三〇八五、右の外側は一点二の上側〇点一一五一。全体一から別々に引くと、中央の面積〇点五七六四になります。",
+      "en": "Read the large event and point to the shaded interval from −.50 to 1.20. The endpoints are not symmetric, so do not double one table value. Symmetry gives the excluded left area from Q(.50)=.3085; the excluded right area is Q(1.20)=.1151. Subtract both from one to get the central area .5764."
     },
     {
       "page": 49,
