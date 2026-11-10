@@ -431,10 +431,10 @@
     },
     {
       "page": 62,
-      "textbook": "123〜125・202",
-      "title": "時間があれば：1人の記録を $Z$ に直す",
-      "ja": "ここは時間があれば行う拡張です。クラス全員の母標準偏差を使って、一人の時間をZに直します。五人の標本平均のZではありません。標本平均の厳密な分布や有限母集団補正は導入しません。正規分布表の近似とクラスで数えた割合が違うことも確認します。",
-      "en": "Optional extension after table practice: standardize one individual time using the revealed class population mean and SD. This is not a Z statistic for the mean of the five sampled without replacement. Compare a stated normal-model approximation with the observed class proportion, without adding finite-population sampling formulas."
+      "textbook": "123〜127・202〜203",
+      "title": "時間があれば：2つの $Z$ と $T$ を比べる",
+      "ja": "最初のタブは五人の標本平均のZです。クラス全員の母平均と母分散を基準に、平均の標準偏差を分母に使います。次に一人のXなら母標準偏差で割り、母分散を未知としたTなら五人の不偏分散を使う、と比較します。実際の五人は重複なしで選んでいますが、この画面の面積は独立な正規母集団の教科書モデルに当てはめた練習です。実際の重複なし抽出の確率とは言いません。計算の後、別のボタンで表と面積を表示します。",
+      "en": "Start with sample-mean Z, which is selected by default. Use the class summaries as reference parameters for an independent normal textbook model. Compare its denominator with individual Z, then switch to T using the same five records’ unbiased variance. The real five were drawn without replacement; these model areas are not exact probabilities for that finite-class draw. Reveal substitution first, then the table and area in a separate step."
     },
     {
       "page": 63,
