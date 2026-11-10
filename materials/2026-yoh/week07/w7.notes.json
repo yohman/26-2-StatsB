@@ -69,15 +69,15 @@
       "page": 10,
       "textbook": "122（標本平均）",
       "title": "記録を縦に並べる",
-      "ja": "まず、記録を上から順に確認しよう。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "まず、記録を上から順に確認しよう。この標本の平均を求めます。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are finding the sample mean. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 11,
       "textbook": "122（標本平均）",
       "title": "中心は、160cm",
-      "ja": "中心は、160cmを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain mean example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "値を縦に足し、標本の個数で割って標本平均を求めます。この平均を母集団の平均の推定に使うことはできますが、全員を計算した値そのものではありません。",
+      "en": "Add the sample values vertically and divide by the sample size. The sample mean can estimate a population mean, but it is not automatically the actual whole-population average."
     },
     {
       "page": 12,
@@ -96,51 +96,51 @@
     {
       "page": 14,
       "textbook": "126（標本不偏分散）",
-      "title": "母分散を推定するときは、n−1で割る",
-      "ja": "母分散を推定するときは、n−1で割るを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain variance formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "title": "5人から、母集団の分散を推定する",
+      "ja": "この式の目的は母分散の推定です。五人だけを説明する分散とは区別します。各値から標本平均を引き、二乗して足すところは共通です。母分散を推定するため、分母をnではなくnマイナス一にします。五人なら四です。",
+      "en": "This formula estimates population variance from a sample. Subtracting the sample mean, squaring and adding are common to both variance calculations. The unbiased estimate divides by n−1 rather than n. For five observations, the denominator is four."
     },
     {
       "page": 15,
       "textbook": "122（標本平均）",
       "title": "① 記録から、平均を求める",
-      "ja": "値を足し、個数で割って平均を求める。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "値を足し、個数で割って平均を求める。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 16,
       "textbook": "126（標本不偏分散）",
       "title": "② 平均との差を、一行ずつ",
-      "ja": "各記録から、平均を引く。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "各記録から、平均を引く。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 17,
       "textbook": "126（標本不偏分散）",
       "title": "③ 二乗して、列の下で合計する",
-      "ja": "偏差を二乗し、同じ列の下で合計する。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "偏差を二乗し、同じ列の下で合計する。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 18,
       "textbook": "126（標本不偏分散）",
       "title": "偏差二乗和40を、4で割る",
-      "ja": "偏差二乗和40を、4で割るを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain variance example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "標本から母分散を推定するので、偏差二乗和をnマイナス一で割ります。同じ記録そのものの散らばりを記述する標本分散ならnで割ります。分母は問題の目的で選び、両方を毎回計算する必要はありません。",
+      "en": "Here the objective is to estimate population variance, so divide the squared-deviation sum by n−1. Describing only these observed records with the textbook sample variance would use n. Choose the denominator from the question; calculating both is not always necessary."
     },
     {
       "page": 19,
-      "textbook": "132（母分散の点推定）",
-      "title": "「不偏」は、毎回ぴったりという意味？",
-      "ja": "不偏とは一回の標本で正解するという意味ではありません。同じ方法で標本を何度も取り直したとき、推定する分散が平均として母分散に一致する性質です。今回は一回の五人だけですから、その値がクラス全体と違っても計算の失敗とは限りません。",
-      "en": "Unbiased does not mean that this sample variance must equal the population variance. It describes the average of the estimates across repeated random samples. One sample can differ from the population even when the calculation and sampling procedure are correct."
+      "textbook": "126・132",
+      "title": "なぜ、n−1で割る？",
+      "ja": "五人の平均から測る散らばりをnで割ると、母分散の推定としては平均的に小さめになります。そこでnマイナス一で割り、下向きの偏りを補正します。不偏とは、同じ方法で標本を何度も取り直したときに推定した分散の平均が母分散に一致すること。一回の五人が必ず正解するという意味ではありません。自由度の長い導出には入りません。",
+      "en": "When squared deviations from the sample’s own mean are divided by n, the result tends to underestimate population variance on average. Dividing by n−1 corrects that downward bias. Unbiased means the estimates average to the population variance over repeated random samples; our particular five need not give an exact result. Keep the degrees-of-freedom derivation brief."
     },
     {
       "page": 20,
       "textbook": "126・132・134 脚注2",
-      "title": "nで割る？　n−1で割る？",
-      "ja": "nで割る？　n−1で割る？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain variance contrast. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "title": "この5人を説明？　全員を推定？",
+      "ja": "最初に目的を尋ねます。この五人の記録そのものの散らばりを記述するなら、教科書でいう標本分散で、nで割ります。五人を使ってクラス全体の母分散を推定するなら、標本不偏分散で、nマイナス一で割ります。今回の授業は後者なので四で割ります。全員の記録を公開し、固定したクラス全体の母分散を計算する場合は全員の人数Nで割ります。違いは人数の大小ではなく、何を記述または推定したいかです。",
+      "en": "Ask what the calculation is for. To describe these five records themselves, use sample variance as defined in this textbook and divide by n. To estimate the whole class’s population variance from the five, use unbiased sample variance and divide by n−1, so by 4 here. Once every record is available, calculate the actual class population variance using N. The choice depends on the purpose, not simply whether the dataset is small."
     },
     {
       "page": 21,
@@ -153,29 +153,29 @@
       "page": 22,
       "textbook": "122（標本平均）",
       "title": "① 記録から、平均を求める",
-      "ja": "値を足し、個数で割って平均を求める。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "値を足し、個数で割って平均を求める。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 23,
       "textbook": "126（標本不偏分散）",
       "title": "② 平均との差を、一行ずつ",
-      "ja": "各記録から、平均を引く。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "各記録から、平均を引く。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 24,
       "textbook": "126（標本不偏分散）",
       "title": "③ 二乗して、列の下で合計する",
-      "ja": "偏差を二乗し、同じ列の下で合計する。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "偏差を二乗し、同じ列の下で合計する。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 25,
       "textbook": "126（標本不偏分散）",
       "title": "同じ平均でも、散らばりは大きい",
-      "ja": "同じ平均でも、散らばりは大きいを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain variance answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "標本から母分散を推定するので、偏差二乗和をnマイナス一で割ります。同じ記録そのものの散らばりを記述する標本分散ならnで割ります。分母は問題の目的で選び、両方を毎回計算する必要はありません。",
+      "en": "Here the objective is to estimate population variance, so divide the squared-deviation sum by n−1. Describing only these observed records with the textbook sample variance would use n. Choose the denominator from the question; calculating both is not always necessary."
     },
     {
       "page": 26,
@@ -188,15 +188,15 @@
       "page": 27,
       "textbook": "122・126",
       "title": "今度は、私たちの5人で。",
-      "ja": "冒頭で作った同じ教室の管理画面へ戻ります。新しい教室は作りません。五人の平均、偏差、二乗和、不偏分散を順に確認した後で、クラス全体の平均を初めて公開します。別の五人を抽出すると標本平均は動きますが、固定したクラス全体の平均は変わりません。正規分布をまだ仮定していないので、ここではZの面積の拡張は飛ばします。",
-      "en": "Return to the existing class dashboard, not a new session. Reveal the five-person calculation one step at a time, then release the population mean and compare. Draw another five to show that the estimate changes while the frozen population stays fixed. Save the optional individual-Z and normal-model extension until after the table lesson."
+      "ja": "冒頭で作った同じ教室の管理画面へ戻ります。新しい教室は作りません。五人からクラス全体を推定したいので、二乗和は五マイナス一の四で割ります。全員の実際の母分散は、全員の人数Nで割る計算です。五人の平均、偏差、二乗和、不偏分散を順に確認した後で、クラス全体の平均を初めて公開します。別の五人を抽出すると標本平均は動きますが、固定したクラス全体の平均は変わりません。正規分布をまだ仮定していないので、ここではZの面積の拡張は飛ばします。",
+      "en": "Return to the existing class dashboard, not a new session. The five estimate the whole class, so divide their squared-deviation sum by four. The actual population variance from all class records uses N instead. Reveal the five-person calculation one step at a time, then release the population mean and compare. Draw another five to show that the estimate changes while the frozen population stays fixed. Save the optional individual-Z and normal-model extension until after the table lesson."
     },
     {
       "page": 28,
       "textbook": "134 脚注2",
       "title": "元の記録がなく、標本分散だけ分かるとき",
-      "ja": "次は生の値を並べず、要約だけが与えられる問題です。標本分散は偏差二乗和をnで割ったものなので、nを掛ければ分子へ戻れます。それをnマイナス一で割れば不偏分散です。ALの実際の数値は使わず、次で先ほどのロボットの値を確認します。",
-      "en": "The second AL starts from a supplied sample variance rather than raw observations. Since that variance divides the squared-deviation total by n, multiply by n to recover the total, then divide by n−1. Use a different practice example here and leave the homework cells unanswered."
+      "ja": "毎回、両方の分散を計算する必要はありません。次は標本分散が与えられ、不偏分散へ換算する問題です。標本分散は偏差二乗和をnで割ったものなので、nを掛ければ分子へ戻れます。それをnマイナス一で割れば不偏分散です。ALの実際の数値は使わず、次で先ほどのロボットの値を確認します。",
+      "en": "Students do not need to calculate both variances every time. The second AL supplies a variance calculated with n and asks for the unbiased estimate calculated with n−1. Since that variance divides the squared-deviation total by n, multiply by n to recover the total, then divide by n−1. Use a different practice example here and leave the homework cells unanswered."
     },
     {
       "page": 29,
@@ -209,8 +209,8 @@
       "page": 30,
       "textbook": "126・134 脚注2",
       "title": "同じ5体。8から、10へ。",
-      "ja": "先ほどの同じ五体なら、標本分散は八です。五を掛けると偏差二乗和四十に戻り、それを四で割ると不偏分散十になります。分散に平方根は掛けません。標準偏差が欲しいときだけ最後に平方根を取ります。",
-      "en": "The same five robots have raw sample variance 8. Multiply 8 by 5 to recover the squared-deviation sum 40. Divide 40 by 4 to obtain unbiased variance 10. Both refer to the same data; the denominator and purpose differ. A square root is needed only when a standard deviation is requested."
+      "ja": "この例で両方を示すのは目的と分母の違いを比較するためです。先ほどの同じ五体なら、標本分散は八です。五を掛けると偏差二乗和四十に戻り、それを四で割ると不偏分散十になります。分散に平方根は掛けません。標準偏差が欲しいときだけ最後に平方根を取ります。",
+      "en": "We show both variances here to compare their purposes; calculating both is not a required sequence for every problem. The same five robots have raw sample variance 8. Multiply 8 by 5 to recover the squared-deviation sum 40. Divide 40 by 4 to obtain unbiased variance 10. Both refer to the same data; the denominator and purpose differ. A square root is needed only when a standard deviation is requested."
     },
     {
       "page": 31,
@@ -447,22 +447,22 @@
       "page": 64,
       "textbook": "126（不偏分散）",
       "title": "① 記録から、平均を求める",
-      "ja": "値を足し、個数で割って平均を求める。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "値を足し、個数で割って平均を求める。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 65,
       "textbook": "126（不偏分散）",
       "title": "② 平均との差を、一行ずつ",
-      "ja": "各記録から、平均を引く。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "各記録から、平均を引く。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 66,
       "textbook": "126（不偏分散）",
       "title": "③ 二乗して、列の下で合計する",
-      "ja": "偏差を二乗し、同じ列の下で合計する。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
-      "en": "Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
+      "ja": "偏差を二乗し、同じ列の下で合計する。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
+      "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
       "page": 67,
