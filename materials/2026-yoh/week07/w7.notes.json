@@ -214,314 +214,300 @@
     },
     {
       "page": 31,
-      "textbook": "126・134 脚注2",
-      "title": "チャレンジ2　記録がなくても、不偏分散を求められる？",
-      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
-      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
-    },
-    {
-      "page": 32,
-      "textbook": "126・134 脚注2",
-      "title": "6倍して戻し、5で割る",
-      "ja": "十に六を掛けて六十へ戻し、自由度五で割ると十二です。平均の値はこの換算に必要ありません。ALでも、与えられた平均を必ず式に使うとは限りません。何が求められているかを先に読む習慣につなぎます。",
-      "en": "Multiply the supplied variance 10 by n=6 to recover a sum of squares of 60; divide by n−1=5 to obtain 12 cm². The supplied mean, if present, is not needed for this conversion. Read the requested quantity before deciding which given values to use."
-    },
-    {
-      "page": 33,
       "textbook": "123",
       "title": "標準化Standardization",
       "ja": "標準化です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain z title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 34,
+      "page": 32,
       "textbook": "123・125",
       "title": "$X$ は1人、$\\bar X$ は標本の平均",
       "ja": "標準化という操作には、何を標準化するかという区別があります。最初は一人の身長Xです。後半は無作為に選んだn人の平均、エックスバーです。標本に含まれる一人だからエックスバーになるわけではありません。平均は個人の値よりばらつきが小さいので、分母も違います。ここからまず一人のXを説明し、その後で標本平均へ戻ります。母分散が既知の場合の式で比較し、未知の場合のtは後で区別します。",
       "en": "Standardization can apply to different quantities. First we standardize one individual observation X. Later we standardize the mean X-bar of n randomly selected observations. An individual does not become X-bar just because they belong to a sample. Means vary less than individual values, so their denominator differs. This comparison uses known population variance; the later t review handles estimating it from the sample."
     },
     {
-      "page": 35,
+      "page": 33,
       "textbook": "123〜125",
       "title": "クラスの実測と、正規モデルを分ける",
       "ja": "前半は実際に集まった値から計算しました。後半は分布の形を正規分布と仮定して、範囲の割合を求めます。標準化すればどんなデータも正規分布になるわけではありません。身長のモデルで手順を理解してから、必要ならクラスの秒数に正規近似を試します。",
       "en": "The first half summarized observed records. Now a normal population model lets us calculate proportions in ranges. Standardizing arbitrary data does not make them normal. Use the fictional robot-height model for table practice; any later normal approximation to the class times must be identified as an assumption."
     },
     {
-      "page": 36,
+      "page": 34,
       "textbook": "",
       "title": "170cmは、高い？",
       "ja": "170cmは、高い？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain height given. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 37,
+      "page": 35,
       "textbook": "123（標準化）",
       "title": "単位を「標準偏差何個分」に変える",
       "ja": "単位を「標準偏差何個分」に変えるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain z formula. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 38,
+      "page": 36,
       "textbook": "123（標準化）",
       "title": "① 比較する値と、基準を確認",
       "ja": "まず比較する値、母平均、母標準偏差だけを確認します。どの数を式のどこに入れるか学生に尋ねてから、次のスライドへ進みます。",
       "en": "Identify the observed value, population mean and population standard deviation. Ask where each belongs in the symbolic formula before revealing the calculation."
     },
     {
-      "page": 39,
+      "page": 37,
       "textbook": "123（標準化）",
       "title": "170cmは、平均より2個分上",
       "ja": "170cmは、平均より2個分上を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain z example. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 40,
+      "page": 38,
       "textbook": "123〜124",
       "title": "標準正規分布：平均0、分散1",
       "ja": "ロボットの平均百六十センチはZのゼロへ移ります。五センチという一標準偏差の幅はZの一になります。正規分布を標準化した分布は平均ゼロ、分散一です。だから元の単位や母平均が違っても、同じ標準正規分布表を使えます。",
       "en": "Standardizing this normal population moves its mean of 160 cm to Z=0 and its SD of 5 cm to one Z unit. The standard normal distribution has mean zero and variance one. This common scale lets different normal populations use the same lookup table."
     },
     {
-      "page": 41,
+      "page": 39,
       "textbook": "124〜125・202",
       "title": "上側確率Upper-tail probability",
       "ja": "上側確率です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain table title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 42,
+      "page": 40,
       "textbook": "124・202",
       "title": "表が教えるのは、右側の面積",
       "ja": "表が教えるのは、右側の面積を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain right tail. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 43,
+      "page": 41,
       "textbook": "124・202",
       "title": "行2.0 ＋ 列0.00 → 0.0228",
       "ja": "二点ゼロの行とゼロゼロの列を指でたどります。高さではなく右側の面積です。百分率に直すと二・二八パーセント。ちょうど二になる確率ではありません。",
       "en": "Use this slide to explain read table. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 44,
+      "page": 42,
       "textbook": "124・202",
       "title": "$Z=1.23$ なら、行1.2＋列0.03",
       "ja": "ALの小数第二位がある値も読めるように、行一点二、列ゼロ点ゼロ三をたどります。一点二三の列を探すのではありません。交点のゼロ点一〇九三は右側の面積で、百分率では十点九三パーセントです。",
       "en": "Demonstrate a nonzero hundredths column: row 1.2 plus column .03 gives Z=1.23. Their intersection is .1093, the right-tail area, or 10.93 percent. Students need this two-part lookup, not only examples ending in .00."
     },
     {
-      "page": 45,
+      "page": 43,
       "textbook": "124・202",
       "title": "左側が欲しいなら、1から引く",
       "ja": "まず大きなPrの式を読みます。Zが二以下なので、境界二より左側の面積が欲しい、と指で示します。表は右側を教えるので、全体一から右側〇点〇二二八を引きます。式の不等号、境界、塗られた領域を対応させてから計算を読みます。",
       "en": "Read the large probability statement first: Z at most 2. Point to the boundary at 2 and the shaded area to its left. The table supplies the right tail, so subtract .0228 from one. Connect the inequality, boundary and shaded region before reading the numerical result."
     },
     {
-      "page": 46,
+      "page": 44,
       "textbook": "124〜125・202",
       "title": "マイナスのZは、対称な位置で考える",
       "ja": "大きな式は、マイナス一点五以上を求めています。マイナスだから左側、と決めず、不等号が以上なので境界より右側を指します。残したくない左端は、対称性でプラス一点五の右端と同じです。全体からその〇点〇六六八を引きます。",
       "en": "The event is Z at least −1.5. The negative boundary does not mean we want the left tail: the inequality asks for everything to its right. By symmetry, the excluded left tail equals Q(1.5)=.0668. Subtract that small tail from one."
     },
     {
-      "page": 47,
+      "page": 45,
       "textbook": "125・202",
       "title": "真ん中の範囲は、両端の面積を引く",
       "ja": "大きな式は二つの境界の間を表しています。中央の塗られた領域がそのまま確率です。残さない両端は左右対称で同じ大きさなので、表の上側〇点〇六六八を二倍し、全体一から引きます。両端の境界が対称な場合に二倍できる点を確認します。",
       "en": "The large expression names the event between the two boundaries. Its probability is the shaded central area. Since the boundaries are symmetric, the two excluded tails have equal area. Subtract twice Q(1.5) from one. Explain that doubling works here because of that symmetry."
     },
     {
-      "page": 48,
+      "page": 46,
       "textbook": "124〜125・202",
       "title": "左右の幅が違っても、表は使える",
       "ja": "最初に大きな式を読み、マイナス〇点五から一点二の間を図で指します。左右の境界が違うので、一つの表の値を二倍しません。左の外側は対称性からプラス〇点五の上側〇点三〇八五、右の外側は一点二の上側〇点一一五一。全体一から別々に引くと、中央の面積〇点五七六四になります。",
       "en": "Read the large event and point to the shaded interval from −.50 to 1.20. The endpoints are not symmetric, so do not double one table value. Symmetry gives the excluded left area from Q(.50)=.3085; the excluded right area is Q(1.20)=.1151. Subtract both from one to get the central area .5764."
     },
     {
-      "page": 49,
+      "page": 47,
       "textbook": "123〜125・202",
-      "title": "チャレンジ3　167.5cm以上は、何％？",
+      "title": "チャレンジ2　167.5cm以上は、何％？",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 50,
+      "page": 48,
       "textbook": "123（標準化）",
       "title": "① 比較する値と、基準を確認",
       "ja": "まず比較する値、母平均、母標準偏差だけを確認します。どの数を式のどこに入れるか学生に尋ねてから、次のスライドへ進みます。",
       "en": "Identify the observed value, population mean and population standard deviation. Ask where each belongs in the symbolic formula before revealing the calculation."
     },
     {
-      "page": 51,
+      "page": 49,
       "textbook": "123（標準化）",
       "title": "② 差を、標準偏差で割る",
       "ja": "平均からの差を計算し、標準偏差で割ります。Zの符号と大きさを解釈してから、表に進みます。求める左右の面積も確認しましょう。",
       "en": "Subtract the mean and divide by the standard deviation. Interpret the sign and magnitude of Z, then decide which tail is required before looking up the table."
     },
     {
-      "page": 52,
+      "page": 50,
       "textbook": "123〜125・202",
       "title": "1.5個分上。その右側は6.68％",
       "ja": "1.5個分上。その右側は6.68％を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain table answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 53,
+      "page": 51,
       "textbook": "123〜125・202",
       "title": "やってみよう！Read the right-tail table",
       "ja": "境界を動かして、面積と表をつなぐ。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain table explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 54,
+      "page": 52,
       "textbook": "123・125",
       "title": "1人の $X$ から、平均 $\\bar X$ へ",
       "ja": "1人の $X$ から、平均 $\\bar X$ へを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain mean or person. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 55,
+      "page": 53,
       "textbook": "123（標本平均の標準化）",
       "title": "今度は、標本平均 $\\bar X$ を標準化する",
       "ja": "ここから標準化する対象は一人のXではなく、n個の平均エックスバーです。母平均との差を、個人の標準偏差ではなく、標本平均の標準偏差で割ります。母分散が既知の式です。平均のばらつきは小さいので、同じ平均との差でも一人のZとは違う値になります。",
       "en": "Now the quantity being standardized is X-bar, the average of n observations, rather than one observation X. Divide its distance from the population mean by the standard deviation of the sample mean. This formula uses known population variance. A mean varies less than an individual, so the same distance can yield a different Z."
     },
     {
-      "page": 56,
+      "page": 54,
       "textbook": "122",
       "title": "5体の平均 $\\bar X$ を求める",
       "ja": "今度は一体の身長ではなく、別の五体の平均身長を標準化します。観測値は百五十八、百六十、百六十二、百六十四、百六十六。合計八百十を五で割ると平均百六十二です。ここでは正規母集団から独立に選んだ架空の標本です。この同じ五体を次のZとTの例で使い続けます。",
       "en": "We now standardize the mean of a new sample of five robots, not one robot’s height. Add 158, 160, 162, 164 and 166 to get 810, then divide by five to get X-bar=162 cm. Assume independent draws from a normal population. Keep these same five observations for both the Z and T examples."
     },
     {
-      "page": 57,
+      "page": 55,
       "textbook": "123（標本平均の標準化）",
       "title": "母分散が既知：平均162cmの $Z$",
       "ja": "五体の平均百六十二から母平均百六十を引きます。分母は個人の標準偏差五ではなく、平均の標準偏差です。既知の母分散二十五を五で割り、平方根を取ると約二点二三六一。差の二をそれで割るとZは約〇点八九です。図は一体の身長分布ではなく、同じ方法で五体ずつ取り直した標本平均の分布です。Zは確率そのものではありません。",
       "en": "Subtract the population mean 160 from the sample mean 162. Divide by the SD of the mean, not the individual SD of 5: sqrt(25/5)=sqrt(5), about 2.2361 cm. Therefore Z=2/sqrt(5), about .8944. The chart shows the sampling distribution of five-robot means, not individual heights. The statistic is a standardized position, not a probability."
     },
     {
-      "page": 58,
+      "page": 56,
       "textbook": "125〜126",
       "title": "平均 $\\bar X$ の標準化：母分散が未知なら $t$",
       "ja": "ここは前週の短い復習です。独立な正規母集団の標本で、母平均と比較した標本平均を標準化する場面です。未知の母分散の代わりに不偏分散を使うと、自由度nマイナス一のt分布を使います。単に一人の記録が標本に含まれるからt、という意味ではありません。",
       "en": "Briefly review the previous week: for independent observations from a normal population, standardizing the sample mean with an estimated variance leads to t with n−1 degrees of freedom. This is a different object from the individual Z used in the table exercises. Being one of the sampled people alone does not imply using t."
     },
     {
-      "page": 59,
+      "page": 57,
       "textbook": "125（t分布）",
       "title": "$t$ 分布を使う場面の復習",
       "ja": "$t$ 分布を使う場面の復習を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain t review. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 60,
+      "page": 58,
       "textbook": "126（標本不偏分散）",
       "title": "同じ5体から、母分散を推定する",
       "ja": "同じ五体を使いますが、今度は母分散が与えられていない設定に変えます。先ほどの既知の二十五は使いません。平均百六十二からの偏差はマイナス四、マイナス二、ゼロ、二、四。二乗して足すと四十です。五マイナス一の四で割り、不偏分散は十平方センチメートル。この十が次のTの分母に入ります。",
       "en": "Use exactly the same five heights, but now treat population variance as unknown. Do not use the supplied 25 from the previous known-variance scenario. The deviations from 162 are −4, −2, 0, 2 and 4. Their squares total 40; divide by 5−1=4 to estimate variance as 10 cm². Carry this estimated 10 into T."
     },
     {
-      "page": 61,
+      "page": 59,
       "textbook": "125〜127",
       "title": "母分散が未知：同じ平均162cmの $T$",
       "ja": "分子は先ほどと同じ百六十二マイナス百六十で二です。分母だけが、推定した不偏分散十を使う平方根十割る五へ変わります。二を平方根二で割るとTは約一点四一。自由度は四です。標準正規分布表ではなくt分布を使います。今回は推定した分散が既知だった場合の二十五より小さいのでTの数値は大きくなりました。Tが常にZより大きいという意味ではありません。",
       "en": "The numerator is unchanged: 162−160=2. Replace the known population variance by the estimated variance 10 in the denominator. The estimated SE is sqrt(10/5)=sqrt(2), so T=2/sqrt(2), about 1.4142, with four degrees of freedom. Use a t reference distribution, not the Z table. Here T is numerically larger because the estimate 10 is smaller than the earlier known variance 25; T is not always larger than Z."
     },
     {
-      "page": 62,
+      "page": 60,
       "textbook": "123〜127・202〜203",
       "title": "時間があれば：2つの $Z$ と $T$ を比べる",
       "ja": "まず五人の標本平均のZから始めます。クラス全員の母平均と母分散を基準に、平均の標準偏差を分母に使います。次に一人のXなら母標準偏差で割り、母分散を未知としたTなら五人の不偏分散を使う、と比較します。実際の五人は重複なしで選んでいますが、この画面の面積は独立な正規母集団の教科書モデルに当てはめた練習です。実際の重複なし抽出の確率とは言いません。同じ「次へ」で、対象、公式、計算、答え、表、面積を一画面ずつ確認します。最後に三つの分母と結果を比較します。",
       "en": "Start with sample-mean Z, which is selected by default. Use the class summaries as reference parameters for an independent normal textbook model. Compare its denominator with individual Z, then switch to T using the same five records’ unbiased variance. The real five were drawn without replacement; these model areas are not exact probabilities for that finite-class draw. Reveal substitution first, then the table and area in a separate step."
     },
     {
-      "page": 63,
+      "page": 61,
       "textbook": "",
       "title": "AL：ここまでの3つの手順を、自分で使う",
       "ja": "三つのシートで求められる作業を確認します。一枚目は記録、偏差、二乗を縦に並べる手順。二枚目は標本分散から二乗和へ戻す手順。三枚目は図で範囲を決めて上側表を使う手順です。月別気温は季節性のある記録で、クラスの無作為抽出と同じ標本設計とは言いません。ここでは指定された不偏分散を計算します。課題の代入や空欄の答えは見せず、独立した作業へ移ります。",
       "en": "The three sheets use the procedures practiced today: vertically aligned deviations and squares; recovering the squared-deviation sum from a raw sample variance; and using an upper-tail table for different regions. Monthly temperatures have seasonality and are not the same random-sampling design as selecting five classmates. Follow the requested calculation without claiming an independent random weather sample. Leave all homework results for students."
     },
     {
-      "page": 64,
+      "page": 62,
       "textbook": "",
       "title": "ALは、自分で完成させる",
       "ja": "ALは、自分で完成させるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al work. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 65,
+      "page": 63,
       "textbook": "",
       "title": "最後に、一言で説明できる？",
       "ja": "最後に、一言で説明できる？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain exit. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 66,
+      "page": 64,
       "textbook": "",
       "title": "時間が余ったら：反応速度ゲーム",
       "ja": "ここから後ろは時間が余ったときの追加練習です。必須のALを完了する時間を先に確保します。反応時間は短いほうが速いので、上側ばかり読んできた学生に左側を見る理由を考えてもらえる問題です。",
       "en": "The remaining slides are an optional reaction-time challenge. Prioritize time for the three independent AL worksheets. This change of context offers a useful lower-tail interpretation: smaller reaction times are faster, so the direction of the desired area matters."
     },
     {
-      "page": 67,
+      "page": 65,
       "textbook": "",
       "title": "160 ms",
       "ja": "ここで一度、計算からゲームの場面に切り替えます。画面が緑になったら押す反応速度ゲームを想像してください、と話します。百六十ミリ秒という数字だけで速いと言えるか、まず予想を聞きます。次の問題で、中心・ばらつき・比較する集団をそろえます。",
       "en": "Imagine an arcade game: tap as soon as the screen turns green. Your screen says 160 milliseconds. Ask whether that sounds fast before showing any distribution. Smaller times mean faster responses. All numbers in this challenge are fictional classroom data."
     },
     {
-      "page": 68,
+      "page": 66,
       "textbook": "123〜126・202",
-      "title": "チャレンジ4　反応速度ゲーム：160msは速い？",
+      "title": "チャレンジ3　反応速度ゲーム：160msは速い？",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 69,
+      "page": 67,
       "textbook": "126（不偏分散）",
       "title": "① 記録から、平均を求める",
       "ja": "値を足し、個数で割って平均を求める。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
       "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
-      "page": 70,
+      "page": 68,
       "textbook": "126（不偏分散）",
       "title": "② 平均との差を、一行ずつ",
       "ja": "各記録から、平均を引く。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
       "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
-      "page": 71,
+      "page": 69,
       "textbook": "126（不偏分散）",
       "title": "③ 二乗して、列の下で合計する",
       "ja": "偏差を二乗し、同じ列の下で合計する。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
       "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
-      "page": 72,
+      "page": 70,
       "textbook": "126（不偏分散）",
       "title": "① 練習会の中心と、ばらつき",
       "ja": "平均は二百ミリ秒。そこからの差はマイナス四十、マイナス二十、ゼロ、二十、四十です。二乗すると図の五本の棒になり、合計四千。五人なので四で割り、不偏分散は千ミリ秒の二乗になります。これは練習会の五人から出した値で、次の別大会モデルの母標準偏差二十とは区別します。",
       "en": "The five practice times average 200 ms. Deviations are −40, −20, 0, 20 and 40; the chart shows their squares. Add them to get 4,000, then divide by n−1 = 4 to get an unbiased variance of 1,000 ms². This estimate from the practice group is separate from the supplied population SD for the other tournament."
     },
     {
-      "page": 73,
+      "page": 71,
       "textbook": "123〜125・202",
       "title": "① 比較する値と、基準を確認",
       "ja": "まず比較する値、母平均、母標準偏差だけを確認します。どの数を式のどこに入れるか学生に尋ねてから、次のスライドへ進みます。",
       "en": "Identify the observed value, population mean and population standard deviation. Ask where each belongs in the symbolic formula before revealing the calculation."
     },
     {
-      "page": 74,
+      "page": 72,
       "textbook": "123〜125・202",
       "title": "② 差を、標準偏差で割る",
       "ja": "平均からの差を計算し、標準偏差で割ります。Zの符号と大きさを解釈してから、表に進みます。求める左右の面積も確認しましょう。",
       "en": "Subtract the mean and divide by the standard deviation. Interpret the sign and magnitude of Z, then decide which tail is required before looking up the table."
     },
     {
-      "page": 75,
+      "page": 73,
       "textbook": "123〜125・202",
       "title": "② 速い人は、左側にいる",
       "ja": "別大会で与えられた母標準偏差二十を使います。練習会の不偏分散から二十を作るのではありません。百六十は平均より四十短いのでZはマイナス二。短いほど速いから求めるのは左側です。対称性でプラス二の右側を表から読み、二・二八パーセント。五人の最速記録の確率ではなく、無作為に選ぶ一人についての割合です。ここで、ALも中心・分散・面積の向きを自分で判断する、とつなぎます。",
