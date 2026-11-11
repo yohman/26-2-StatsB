@@ -425,110 +425,152 @@
     {
       "page": 61,
       "textbook": "126（標本不偏分散）",
-      "title": "同じ5体から、母分散を推定する",
+      "title": "① 与えられた条件",
+      "ja": "同じ五体の身長をもう一度確認します。平均は百六十二センチ、標本数は五です。ここからは母分散が未知という設定に変えます。先ほど与えられた二十五は使わず、観測した五体のばらつきから推定します。",
+      "en": "Keep the same five heights and their mean of 162 cm. The sample size remains five. Change only the information available: population variance is now unknown. Do not reuse the earlier supplied 25; estimate variance from these five observed heights."
+    },
+    {
+      "page": 62,
+      "textbook": "126（標本不偏分散）",
+      "title": "② 公式：標本不偏分散",
+      "ja": "不偏分散の文字の式を見せます。各身長から標本平均を引き、二乗して足します。それを標本数マイナス一で割ります。この五体なら分母は四です。数値の代入は次の画面で確認します。",
+      "en": "Show the symbolic unbiased-variance formula. Subtract the sample mean from each height, square the deviations, and add them. Divide by n minus one. For five observations the denominator is four. Leave the numerical substitution for the next screen."
+    },
+    {
+      "page": 63,
+      "textbook": "126（標本不偏分散）",
+      "title": "③ 数値を代入して、計算する",
+      "ja": "百六十二からの差はマイナス四、マイナス二、ゼロ、二、四。二乗すると十六、四、ゼロ、四、十六です。合計四十を五マイナス一の四で割ると、不偏分散は十平方センチメートルです。",
+      "en": "The deviations from 162 are minus four, minus two, zero, two and four. Their squares are 16, 4, 0, 4 and 16, totaling 40. Divide 40 by five minus one to obtain an unbiased variance of 10 cm squared."
+    },
+    {
+      "page": 64,
+      "textbook": "126（標本不偏分散）",
+      "title": "④ 答え：同じ5体から、母分散を推定する",
       "ja": "同じ五体を使いますが、今度は母分散が与えられていない設定に変えます。先ほどの既知の二十五は使いません。平均百六十二からの偏差はマイナス四、マイナス二、ゼロ、二、四。二乗して足すと四十です。五マイナス一の四で割り、不偏分散は十平方センチメートル。この十が次のTの分母に入ります。",
       "en": "Use exactly the same five heights, but now treat population variance as unknown. Do not use the supplied 25 from the previous known-variance scenario. The deviations from 162 are −4, −2, 0, 2 and 4. Their squares total 40; divide by 5−1=4 to estimate variance as 10 cm². Carry this estimated 10 into T."
     },
     {
-      "page": 62,
+      "page": 65,
       "textbook": "125〜127",
-      "title": "母分散が未知：同じ平均162cmの $T$",
+      "title": "① 与えられた条件",
+      "ja": "直前に求めた不偏分散十を引き継ぎます。平均は百六十二、標本数五、比較する母平均は百六十です。独立な正規母集団からの標本という仮定を確認し、次のTの式へ進みます。",
+      "en": "Carry forward the estimated variance of 10. The sample mean is 162 cm, sample size is five, and the comparison population mean is 160 cm. Assume independent observations from a normal population before applying the T formula."
+    },
+    {
+      "page": 66,
+      "textbook": "125〜127",
+      "title": "② 公式：標本平均のT",
+      "ja": "分子は標本平均と母平均の差です。Zの例と違うのは分母の分散で、既知の母分散ではなく推定した不偏分散を使います。この条件では標準正規分布ではなく、自由度四のt分布を参照します。",
+      "en": "The numerator is still the difference between the sample mean and population mean. The denominator now uses estimated unbiased variance instead of known population variance. Under the stated assumptions the reference distribution is t with four degrees of freedom."
+    },
+    {
+      "page": 67,
+      "textbook": "125〜127",
+      "title": "③ 数値を代入して、計算する",
+      "ja": "不偏分散十を標本数五で割って平方根を取ると、分母は平方根二です。平均の差は百六十二マイナス百六十で二。それを平方根二で割るとTは約一点四一四二です。自由度は五マイナス一の四で、Z表には進みません。",
+      "en": "The estimated standard error is sqrt(10/5), or sqrt(2). The difference between sample mean and population mean is two. Dividing by sqrt(2) gives T approximately 1.4142. Degrees of freedom are five minus one, or four; use the t distribution rather than the Z table."
+    },
+    {
+      "page": 68,
+      "textbook": "125〜127",
+      "title": "④ 答え：母分散が未知：同じ平均162cmの $T$",
       "ja": "分子は先ほどと同じ百六十二マイナス百六十で二です。分母だけが、推定した不偏分散十を使う平方根十割る五へ変わります。二を平方根二で割るとTは約一点四一。自由度は四です。標準正規分布表ではなくt分布を使います。今回は推定した分散が既知だった場合の二十五より小さいのでTの数値は大きくなりました。Tが常にZより大きいという意味ではありません。",
       "en": "The numerator is unchanged: 162−160=2. Replace the known population variance by the estimated variance 10 in the denominator. The estimated SE is sqrt(10/5)=sqrt(2), so T=2/sqrt(2), about 1.4142, with four degrees of freedom. Use a t reference distribution, not the Z table. Here T is numerically larger because the estimate 10 is smaller than the earlier known variance 25; T is not always larger than Z."
     },
     {
-      "page": 63,
+      "page": 69,
       "textbook": "123〜127・202〜203",
       "title": "時間があれば：2つの $Z$ と $T$ を比べる",
       "ja": "まず五人の標本平均のZから始めます。クラス全員の母平均と母分散を基準に、平均の標準偏差を分母に使います。次に一人のXなら母標準偏差で割り、母分散を未知としたTなら五人の不偏分散を使う、と比較します。実際の五人は重複なしで選んでいますが、この画面の面積は独立な正規母集団の教科書モデルに当てはめた練習です。実際の重複なし抽出の確率とは言いません。同じ「次へ」で、対象、公式、計算、答え、表、面積を一画面ずつ確認します。最後に三つの分母と結果を比較します。",
       "en": "Start with sample-mean Z, which is selected by default. Use the class summaries as reference parameters for an independent normal textbook model. Compare its denominator with individual Z, then switch to T using the same five records’ unbiased variance. The real five were drawn without replacement; these model areas are not exact probabilities for that finite-class draw. Reveal substitution first, then the table and area in a separate step."
     },
     {
-      "page": 64,
+      "page": 70,
       "textbook": "",
       "title": "AL：ここまでの3つの手順を、自分で使う",
       "ja": "三つのシートで求められる作業を確認します。一枚目は記録、偏差、二乗を縦に並べる手順。二枚目は標本分散から二乗和へ戻す手順。三枚目は図で範囲を決めて上側表を使う手順です。月別気温は季節性のある記録で、クラスの無作為抽出と同じ標本設計とは言いません。ここでは指定された不偏分散を計算します。課題の代入や空欄の答えは見せず、独立した作業へ移ります。",
       "en": "The three sheets use the procedures practiced today: vertically aligned deviations and squares; recovering the squared-deviation sum from a raw sample variance; and using an upper-tail table for different regions. Monthly temperatures have seasonality and are not the same random-sampling design as selecting five classmates. Follow the requested calculation without claiming an independent random weather sample. Leave all homework results for students."
     },
     {
-      "page": 65,
+      "page": 71,
       "textbook": "",
       "title": "ALは、自分で完成させる",
       "ja": "ALは、自分で完成させるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al work. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 66,
+      "page": 72,
       "textbook": "",
       "title": "最後に、一言で説明できる？",
       "ja": "最後に、一言で説明できる？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain exit. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 67,
+      "page": 73,
       "textbook": "",
       "title": "時間が余ったら：反応速度ゲーム",
       "ja": "ここから後ろは時間が余ったときの追加練習です。必須のALを完了する時間を先に確保します。反応時間は短いほうが速いので、上側ばかり読んできた学生に左側を見る理由を考えてもらえる問題です。",
       "en": "The remaining slides are an optional reaction-time challenge. Prioritize time for the three independent AL worksheets. This change of context offers a useful lower-tail interpretation: smaller reaction times are faster, so the direction of the desired area matters."
     },
     {
-      "page": 68,
+      "page": 74,
       "textbook": "",
       "title": "160 ms",
       "ja": "ここで一度、計算からゲームの場面に切り替えます。画面が緑になったら押す反応速度ゲームを想像してください、と話します。百六十ミリ秒という数字だけで速いと言えるか、まず予想を聞きます。次の問題で、中心・ばらつき・比較する集団をそろえます。",
       "en": "Imagine an arcade game: tap as soon as the screen turns green. Your screen says 160 milliseconds. Ask whether that sounds fast before showing any distribution. Smaller times mean faster responses. All numbers in this challenge are fictional classroom data."
     },
     {
-      "page": 69,
+      "page": 75,
       "textbook": "123〜126・202",
       "title": "チャレンジ3　反応速度ゲーム：160msは速い？",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 70,
+      "page": 76,
       "textbook": "126（不偏分散）",
       "title": "① 記録から、平均を求める",
       "ja": "値を足し、個数で割って平均を求める。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
       "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
-      "page": 71,
+      "page": 77,
       "textbook": "126（不偏分散）",
       "title": "② 平均との差を、一行ずつ",
       "ja": "各記録から、平均を引く。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
       "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
-      "page": 72,
+      "page": 78,
       "textbook": "126（不偏分散）",
       "title": "③ 二乗して、列の下で合計する",
       "ja": "偏差を二乗し、同じ列の下で合計する。この標本から母分散を推定する目的なので、最後はnマイナス一で割ります。表の位置はそのままに、新しく現れた列を上から読みます。次の計算に進む前に、一行目を学生に説明してもらいましょう。",
       "en": "We are estimating population variance from these observations, so the final denominator is n−1. Keep attention on the newly revealed column. Read one row from the original value through the calculation, then ask students to predict the next step."
     },
     {
-      "page": 73,
+      "page": 79,
       "textbook": "126（不偏分散）",
       "title": "① 練習会の中心と、ばらつき",
       "ja": "平均は二百ミリ秒。そこからの差はマイナス四十、マイナス二十、ゼロ、二十、四十です。二乗すると図の五本の棒になり、合計四千。五人なので四で割り、不偏分散は千ミリ秒の二乗になります。これは練習会の五人から出した値で、次の別大会モデルの母標準偏差二十とは区別します。",
       "en": "The five practice times average 200 ms. Deviations are −40, −20, 0, 20 and 40; the chart shows their squares. Add them to get 4,000, then divide by n−1 = 4 to get an unbiased variance of 1,000 ms². This estimate from the practice group is separate from the supplied population SD for the other tournament."
     },
     {
-      "page": 74,
+      "page": 80,
       "textbook": "123〜125・202",
       "title": "① 比較する値と、基準を確認",
       "ja": "まず比較する値、母平均、母標準偏差だけを確認します。どの数を式のどこに入れるか学生に尋ねてから、次のスライドへ進みます。",
       "en": "Identify the observed value, population mean and population standard deviation. Ask where each belongs in the symbolic formula before revealing the calculation."
     },
     {
-      "page": 75,
+      "page": 81,
       "textbook": "123〜125・202",
       "title": "② 差を、標準偏差で割る",
       "ja": "平均からの差を計算し、標準偏差で割ります。Zの符号と大きさを解釈してから、表に進みます。求める左右の面積も確認しましょう。",
       "en": "Subtract the mean and divide by the standard deviation. Interpret the sign and magnitude of Z, then decide which tail is required before looking up the table."
     },
     {
-      "page": 76,
+      "page": 82,
       "textbook": "123〜125・202",
       "title": "② 速い人は、左側にいる",
       "ja": "別大会で与えられた母標準偏差二十を使います。練習会の不偏分散から二十を作るのではありません。百六十は平均より四十短いのでZはマイナス二。短いほど速いから求めるのは左側です。対称性でプラス二の右側を表から読み、二・二八パーセント。五人の最速記録の確率ではなく、無作為に選ぶ一人についての割合です。ここで、ALも中心・分散・面積の向きを自分で判断する、とつなぎます。",
