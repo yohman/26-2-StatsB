@@ -69,8 +69,8 @@
       "page": 10,
       "textbook": "131",
       "title": "計算方法と、計算した数字を分ける",
-      "ja": "計算方法と、計算した数字を分けるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain estimator value. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "まず大きい二つの言葉を指して区別します。左の推定量は、標本から平均を求めるルールで、エックスバーで表します。データを入れる前には、どの魚が選ばれるかによって変わる確率変数です。右の推定値は、そのルールに今回の五匹を入れて得た五十キロという数字です。母平均が五十と確定したわけではありません。別の標本でも計算のルールは同じですが、得られる数字は変わります。次に左のルールを公式として見せます。",
+      "en": "Point first to the two large labels. On the left, the estimator is the sample-mean rule, written X-bar. Before observing the sample it is a random variable because the selected fish can differ. Substituting this sample gives the estimate on the right: 50 kg. That does not establish a population mean of 50. Another sample uses the same rule but can produce a different number. Next show the full formula behind the rule."
     },
     {
       "page": 11,
