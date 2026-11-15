@@ -97,15 +97,15 @@
       "page": 14,
       "textbook": "122（標本平均）",
       "title": "① 条件を確認 → ② 公式 → ③ 代入",
-      "ja": "与えられた数値を確認し、文字の公式のどこに入れるかを学生に尋ねます。数値を代入して計算し、結果の意味を言葉にしてから次へ進みます。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
-      "en": "Identify the givens and symbolic formula, substitute the sample values, then check the arithmetic before interpreting the result. Follow the calculation with the next visual result slide."
+      "ja": "無作為に選んだ五匹の平均が五十キロでした。この五匹を根拠に、群れ全体の平均重量、つまり母平均を五十キロと推定します。単に標本平均を報告するだけでなく、それを未知の母平均の点推定値として使う、という一歩です。ただし、真の母平均からどれくらい外れているかは、まだ答えていません。標本の最小値四十から最大値六十の間に母平均があると保証したわけでもありません。不確かさを幅で表す方法は区間推定として次回扱います。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
+      "en": "The five randomly selected fish average 50 kg. Based on these five fish, we use 50 kg as our point estimate of the population mean weight. We have not yet answered how far this estimate could be from the true population mean. The observed range of 40 to 60 kg does not establish bounds for that mean. Quantifying uncertainty with an interval comes next week. Follow the calculation with the next visual result slide."
     },
     {
       "page": 15,
       "textbook": "122（標本平均）",
       "title": "5匹から得た推定値は、50kg",
-      "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
-      "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
+      "ja": "無作為に選んだ五匹の平均が五十キロでした。この五匹を根拠に、群れ全体の平均重量、つまり母平均を五十キロと推定します。単に標本平均を報告するだけでなく、それを未知の母平均の点推定値として使う、という一歩です。ただし、真の母平均からどれくらい外れているかは、まだ答えていません。標本の最小値四十から最大値六十の間に母平均があると保証したわけでもありません。不確かさを幅で表す方法は区間推定として次回扱います。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
+      "en": "The five randomly selected fish average 50 kg. Based on these five fish, we use 50 kg as our point estimate of the population mean weight. We have not yet answered how far this estimate could be from the true population mean. The observed range of 40 to 60 kg does not establish bounds for that mean. Quantifying uncertainty with an interval comes next week. Keep the interpretation secondary to the result and chart."
     },
     {
       "page": 16,
