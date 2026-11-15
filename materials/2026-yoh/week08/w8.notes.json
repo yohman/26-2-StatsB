@@ -69,8 +69,8 @@
       "page": 10,
       "textbook": "131〜132",
       "title": "やってみよう！A sample is not the whole shoal",
-      "ja": "魚を選ぶたび、平均が動く。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
-      "en": "Use this slide to explain sampling explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "最初に二百匹の群れを見せ、どの五匹が選ばれるか予想してもらいます。五匹だけが強調され、計測デッキへ移動する様子を追います。五つの重さがそろってから平均を計算します。もう一度では前回と別の五匹が選ばれます。母集団は同じなのに標本と推定値が変わる点を確認します。母平均は最初は隠し、学生に予想してもらってから表示します。抽出は各回の中で重複なしで、五匹を新しく選びます。",
+      "en": "Show the 200-fish population first. Ask which five will be selected, then follow the highlighted fish onto the measuring deck. Calculate their mean only after all five weights arrive. Do again selects five different fish from the previous draw. Emphasize that the population stays fixed while the sample and estimate change. Keep the population mean hidden initially, invite a prediction, then reveal it. There are no duplicate fish within a draw."
     },
     {
       "page": 11,
@@ -194,9 +194,9 @@
     {
       "page": 28,
       "textbook": "132（標本分散と不偏分散）",
-      "title": "標本分散と、不偏分散を分ける",
-      "ja": "標本分散と、不偏分散を分けるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain expected raw. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "title": "nで割ると、平均的に小さめになる",
+      "ja": "五匹の標本を同じ条件で何度も取り直す場面に戻ります。各回の偏差二乗和を五で割った標本分散を集めると、その期待値は母分散より小さくなります。今回の五十と六十二・五の大小だけでは、不偏性を確認したことにはなりません。ある一回の推定値が必ず母分散より小さいという意味でもありません。次に、母分散の不偏推定に使う分母を確認します。",
+      "en": "Return to repeated random samples of five fish. The expectation of variance calculated with denominator n is below population variance. The single numerical comparison of 50 and 62.5 does not establish unbiasedness. An individual raw sample variance can still exceed the population variance. Next introduce the denominator used for unbiased estimation."
     },
     {
       "page": 29,
@@ -214,69 +214,97 @@
     },
     {
       "page": 31,
+      "textbook": "132 §5",
+      "title": "標本不偏分散の期待値は、母分散",
+      "ja": "標本平均と同じように、不偏分散にも期待値の性質があります。左側は標本から毎回計算する不偏分散の期待値、右側は固定された母分散です。何度も標本を取り直す分布の中心が母分散に一致するという意味です。一回で得た六十二・五が、母分散そのものだと分かったわけではありません。",
+      "en": "Make the variance counterpart of unbiased sample mean explicit. On the left is the expectation of the random unbiased-variance estimator; on the right is the fixed population variance. Its sampling distribution is centered on the population value. This does not establish that the one observed estimate of 62.5 equals the true variance."
+    },
+    {
+      "page": 32,
+      "textbook": "132 §5",
+      "title": "不偏とは、繰り返したときに中心が合うこと",
+      "ja": "図の点は一回の計算値ではなく、推定量の分布の中心です。上は分母が標本数で、平均的に低めにずれます。下は分母が標本数マイナス一で、中心が母分散に合います。毎回ぴったり当たるという約束ではありません。数式の証明は進めず、この違いを一言で説明してもらいます。",
+      "en": "These dots represent centers of sampling distributions, not individual observed variances. The n-denominator estimator is biased downward; the n-minus-one estimator is centered on population variance. Neither statement promises a correct result on every draw. Ask students to explain the contrast in one sentence rather than adding a proof."
+    },
+    {
+      "page": 33,
       "textbook": "126・134",
       "title": "自由度は、計算のルールとして確認",
       "ja": "自由度は、計算のルールとして確認を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain df rule. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 32,
+      "page": 34,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "チャレンジ1　通学時間で、二つの推定値",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 33,
+      "page": 35,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "平均30分、不偏分散250分²",
       "ja": "平均30分、不偏分散250分²を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain point answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 34,
+      "page": 36,
       "textbook": "",
       "title": "このクラスなら、どう集める？",
       "ja": "このクラスなら、どう集める？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain student data. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 35,
+      "page": 37,
       "textbook": "131〜132",
       "title": "やってみよう！Anonymous class values",
       "ja": "自分たちの数値で、推定値を出す。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain class data explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 36,
+      "page": 38,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "チャレンジ2　「不偏」を、言葉で説明",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 37,
+      "page": 39,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "正しいのはB。1回と、繰り返しを分ける",
       "ja": "正しいのはB。1回と、繰り返しを分けるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain interpret answer. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 38,
+      "page": 40,
       "textbook": "132 脚注3・5（証明はWeb補論）",
       "title": "時間があれば：なぜ不偏なのか",
       "ja": "時間があれば：なぜ不偏なのかを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain optional proof. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 39,
+      "page": 41,
+      "textbook": "131〜132（推定量・一致性）",
+      "title": "ALでは、使うデータを増やして比べる",
+      "ja": "ALでは正規分布から生成された千個のデータを使います。生成元の母平均五と母分散四は、モデルの設定値です。五十個、二百個、千個について、平均、標本分散、不偏分散を比較します。千個なら必ず五と四に一致するわけでも、今回のデータで順に必ず近づくわけでもありません。魚で練習した計算方法を、Excelの範囲へ置き換えます。",
+      "en": "The AL supplies 1,000 generated observations from a normal model with mean 5 and variance 4. Those are generating-model parameters, not guaranteed exact summaries of the realized 1,000 values. Compare the three statistics using 50, 200 and 1,000 observations. More data do not guarantee monotonically closer estimates in this particular dataset. Transfer the fish calculations to spreadsheet ranges."
+    },
+    {
+      "page": 42,
+      "textbook": "132 §4〜5・134 脚注2（定義）／Excel関数はALの指定",
+      "title": "Excelでも、求める量と分母を分ける",
+      "ja": "関数名を暗記する前に、何を求める列なのかを確認します。平均はAVERAGE、分母が標本数の標本分散はVAR.P、不偏分散はVAR.Sです。VAR.Pという関数名でも、標本データに適用すれば分母が標本数の標本分散を計算します。ここでのA1からA5は五個の練習例で、課題のセル位置ではありません。ALでは見出しや空白を数えず、指定件数の数値を選びます。",
+      "en": "Choose the requested statistic first: AVERAGE for mean, VAR.P for variance with denominator n, and VAR.S for unbiased variance with denominator n minus one. Applying VAR.P to sample observations calculates their n-denominator variance; the function name does not make those observations a complete population. A1:A5 is only a five-value syntax example, not an assignment range. Select the actual 50, 200 or 1,000 numerical records in the AL."
+    },
+    {
+      "page": 43,
       "textbook": "",
       "title": "ALは、独立して取り組む",
       "ja": "ALは、独立して取り組むを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 40,
+      "page": 44,
       "textbook": "",
       "title": "今日の出口",
       "ja": "今日の出口を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
