@@ -6,8 +6,8 @@
       "page": 1,
       "textbook": "123〜127・131（復習から推定へ）",
       "title": "あの例で、何を学んだ？",
-      "ja": "ロボットの身長百六十センチ、標準偏差五センチを思い出してもらい、どこを基準にZを計算したか尋ねます。次にサイコロを四回と二十五回振った平均の分布、Curryの授業用の五試合からtを求めた例を短く振り返ります。最後に教室の一秒記録とロボット五体の平均・不偏分散の計算です。魚は過去の例として扱わず、今日これから扱う未知の群れへの橋渡しに使います。数式を解き直さず、例と学んだ意味を一つずつ結びます。",
-      "en": "Recall the robot heights with mean 160 cm and SD 5, and ask what the Z score compared. Then recall four versus twenty-five die throws and the fictional five-game Curry exercise that led to t. Finally recall the class one-second records and the five-robot mean and unbiased-variance calculations. The fish are today’s new scenario, not a claim about an earlier lecture. Connect each remembered example to its main point without recalculating the formulas."
+      "ja": "ロボットの身長百六十センチ、標準偏差五センチを思い出してもらい、どこを基準にZを計算したか尋ねます。次にサイコロを四回と二十五回振った平均の分布、Curryの授業用の五試合からtを求めた例を短く振り返ります。最後に教室の一秒記録とロボット五体の平均・不偏分散の計算です。魚は過去の例として扱わず、今日これから扱う未知の群れへの橋渡しに使います。数式を解き直さず、例と学んだ意味を一つずつ結びます。 進行目安：0〜17分は導入と5分課題、17〜30分は標本と推定量、30〜44分は偏りの活動と4分課題、44〜61分は分散復習と8分課題、61〜71分はクラスデータと5分の文章課題、71〜86分は15分のオープンブック、86〜93分は答え合わせとAL説明、93〜100分は独立したALです。学生が紙に取り組む時間は合計37分を確保します。",
+      "en": "Recall the robot heights with mean 160 cm and SD 5, and ask what the Z score compared. Then recall four versus twenty-five die throws and the fictional five-game Curry exercise that led to t. Finally recall the class one-second records and the five-robot mean and unbiased-variance calculations. The fish are today’s new scenario, not a claim about an earlier lecture. Connect each remembered example to its main point without recalculating the formulas. Pacing for 100 minutes: opening and the first 5-minute task to minute 17; sampling and estimator properties to 30; bias exploration and a 4-minute survey task to 44; variance recap and an 8-minute task to 61; class data and 5-minute written corrections to 71; open-book quiz to 86; sequential feedback and AL handover to 93; independent AL to 100. Preserve 37 minutes of written student work; shorten demonstrations if needed."
     },
     {
       "page": 2,
@@ -109,265 +109,328 @@
     },
     {
       "page": 16,
+      "textbook": "122（標本平均）・131〜132（母数・推定量・点推定）",
+      "title": "チャレンジ1　5試合から、シーズンを語れる？",
+      "ja": "魚の計算例の後で、学生自身が別の場面に移す最初の作業時間です。最初の四分は個人で三問を紙に書き、最後の一分だけ隣と比較してもらいます。母集団はシーズン全試合、母数はその平均得点という対象の区別を先に書かせます。公式を示しますが、値は入れません。計算した数字だけでなく、何を推定していて、何がまだ分からないかを一文にすることを求めます。授業用の架空の得点で、実際のNBA記録ではありません。答えへの移動前に、まだ作業中の学生がいないか確認します。",
+      "en": "After the fish model, give four minutes of individual written work and one minute of peer comparison. Students identify the season as the population and its mean score as the parameter, calculate a point estimate, and state what remains unknown. Supply the symbolic formula without substitution. These are fictional practice scores, not actual NBA data. Pause before revealing the answer."
+    },
+    {
+      "page": 17,
+      "textbook": "122・131〜132",
+      "title": "推定値は24点。シーズン平均の確定ではない。",
+      "ja": "母集団はそのシーズンの全試合、知りたい母数は全試合の平均得点です。標本平均という推定量に今回の得点を代入すると、合計百二十を五で割って二十四点。これが今回の推定値です。図の五つのバスケットボールを指して、全試合を観測したわけではないと確認します。二十四点を母平均の推定として報告できますが、母平均が二十四と確定したわけではなく、誤差の大きさもまだ分かりません。採点の観点は対象の区別、計算、解釈の三つです。",
+      "en": "The population is all games in the season and the parameter is their mean score. The sample-mean estimator gives 120/5=24 points. Point to the five observations in the graphic. This is a point estimate, not a census result or proof of a 24-point population mean. Uncertainty has not been quantified. Review the target, calculation and interpretation separately."
+    },
+    {
+      "page": 18,
       "textbook": "131〜132",
       "title": "やってみよう！A sample is not the whole shoal",
       "ja": "最初に二百匹の群れを見せ、五匹の標本から始めます。標本数を二十、五十に変えると、同じ母集団でも標本平均のばらつきが変わることを短く復習します。標本数ごとに記録は別で、横軸は共通です。これは中心極限定理の再講義ではなく、推定量の性質を考える導入です。このシミュレーションでは全二百匹の重さを知っているので、母平均を検証用の基準として表示しています。現実の推定では未知だった値に対して、方法の性質を確かめるための表示です。五匹だけが強調され、計測デッキへ移動する様子を追います。五つの重さがそろってから平均を計算します。もう一度では前回と別の五匹が選ばれます。母集団は同じなのに標本と推定値が変わる点を確認します。各回の標本平均を一件ずつヒストグラムに追加し、固定した母平均の破線と比べます。棒の高さは魚の数ではなく、その範囲に入った標本の回数です。一回ずつ確認したら百回連続ボタンで、抽出、移動、計測、平均の追加が順に繰り返される様子を見せます。停止ボタンは今の計測を完了してから止まります。リセットは五、二十、五十の全記録を消し、母集団と選択中の標本数を保ちます。少ない回数で必ず中心が一致するとは限りません。抽出は各回の中で重複なしで、五匹を新しく選びます。",
       "en": "Start with five fish from the same 200-fish population. Briefly compare sample sizes five, twenty and fifty; histories stay separate with a common horizontal scale. Treat this as a recap before discussing estimator properties, not another CLT lecture. The simulator knows all 200 weights and shows their population mean as a verification benchmark; this is deliberately known truth for evaluating the method, unlike an unknown population parameter in real estimation. Follow the highlighted fish onto the measuring deck. Calculate their mean only after all five weights arrive. Do again selects five different fish from the previous draw. Emphasize that the population stays fixed while the sample and estimate change. Add each completed sample mean to the visible histogram and compare its growing distribution with the fixed population-mean marker. Bar heights count samples, not individual fish. After inspecting individual draws, use the 100-times button to repeat selection, visible fish movement, weighing and histogram updates in sequence. Stop finishes the current draw before stopping. Reset clears all three sample-size histories while preserving the population and the selected sample size. A small number of repetitions need not be centered exactly on the population mean. There are no duplicate fish within a draw."
     },
     {
-      "page": 17,
+      "page": 19,
       "textbook": "131〜132",
       "title": "不ふ偏へん性せいUnbiasedness",
       "ja": "不偏性です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain unbiased title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 18,
+      "page": 20,
       "textbook": "131〜132",
       "title": "毎回ぴったり、ではない",
       "ja": "毎回ぴったり、ではないを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain unbiased intuition. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 19,
+      "page": 21,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "記号を、一つずつ読む",
       "ja": "右のシータは、知りたい母集団の固定値です。たとえば母平均や母分散が当たります。未知であっても、母集団を固定すれば値は決まっています。",
       "en": "Theta on the right is the fixed population parameter we want to learn, such as the population mean or variance. Unknown does not mean random."
     },
     {
-      "page": 20,
+      "page": 22,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "記号を、一つずつ読む",
       "ja": "ハットの付いたシータは、標本から母数を推定するためのルールです。選ばれる標本が変わるので、データを入れる前には確率変数として考えます。",
       "en": "Theta-hat is the estimator: a statistic used to estimate the parameter. Before observing the sample it is random because different observations can be selected."
     },
     {
-      "page": 21,
+      "page": 23,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "不偏性：繰り返したとき、中心が合う",
       "ja": "Eは期待値です。同じ条件で無作為標本を取り直したとき、推定量の分布の中心がどこになるかを表します。不偏なら、その中心が右側の母数に一致します。一回の推定値が必ず正しいという意味ではありません。",
       "en": "E means expected value across repeated random samples under the same conditions. Unbiasedness says the estimator distribution is centered on the parameter, not that each realized estimate equals it."
     },
     {
-      "page": 22,
+      "page": 24,
       "textbook": "131〜132（母数・推定量・不偏性）",
       "title": "魚の例に、置き換える",
       "ja": "一般のシータを魚の重さへ置き換えます。母数は群れ全体の平均重量ミューで、推定量は五匹から計算するエックスバーです。無作為標本を取り直すと、標本平均の期待値は母平均に一致します。今回の五匹からは五十キロが得られましたが、それは一回の推定値で、母平均が五十だと確定したわけではありません。",
       "en": "Translate theta into the population mean fish weight and theta-hat into the five-fish sample mean. Across random samples, the expected sample mean equals the population mean. The observed 50 kg is one estimate, not proof of a 50 kg population mean. Keep the unknown target separate from this realized result."
     },
     {
-      "page": 23,
+      "page": 25,
       "textbook": "132",
       "title": "標本平均は、母平均の不偏推定量",
       "ja": "標本平均の期待値を指して、標本ごとに変わる推定量と、固定された母数を区別します。これは繰り返し抽出したときの期待値の等式です。一回の推定値が必ず母数に等しいわけではありません。",
       "en": "Distinguish the expected value of the estimator across repeated samples from the fixed population parameter. Equality of expectation does not guarantee an exact estimate in a single sample."
     },
     {
-      "page": 24,
+      "page": 26,
       "textbook": "132",
       "title": "標本平均は、母平均の不偏推定量",
       "ja": "母平均を指して、標本ごとに変わる推定量と、固定された母数を区別します。これは繰り返し抽出したときの期待値の等式です。一回の推定値が必ず母数に等しいわけではありません。",
       "en": "Distinguish the expected value of the estimator across repeated samples from the fixed population parameter. Equality of expectation does not guarantee an exact estimate in a single sample."
     },
     {
-      "page": 25,
+      "page": 27,
       "textbook": "",
       "title": "数を増やすだけで、偏りは消える？",
       "ja": "最初は大きな魚を選びたくなる話で笑ってもらいます。その選び方で数だけ増やしても、正しい群れには戻れません。大標本ならすべて解決するという誤解をここで止めます。",
       "en": "Use this slide to explain sample size bias. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 26,
+      "page": 28,
       "textbook": "132 脚注1",
       "title": "有ゆう効こう性せいEfficiency",
       "ja": "有効性です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain efficiency title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 27,
+      "page": 29,
       "textbook": "132 脚注1・123",
       "title": "同じ中心なら、狭い方が安定する",
       "ja": "同じ中心なら、狭い方が安定するを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain efficiency. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 28,
+      "page": 30,
       "textbook": "132 脚注1",
       "title": "一いっ致ち性せいConsistency",
       "ja": "一致性です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain consistency title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 29,
+      "page": 31,
       "textbook": "132 脚注1・123",
       "title": "5匹ずつの平均は、まだばらつく",
       "ja": "同じ母平均五十キロ、母標準偏差十キロの仮想的な正規母集団から、毎回5匹を無作為に取り出すモデルです。曲線は魚そのものの重さではなく、何度も取り直した標本平均の分布です。横軸と縦軸を固定し、前の曲線を残して比較します。母平均のオレンジの破線は動きません。今回加えた曲線とポインターを指し、標本平均の標準偏差が4.47キロになったことを確認します。標本数が増えると母数の近くに集まりやすくなるという一致性を示します。一回ごとの平均が順番に必ず母平均へ近づく、あるいは母平均と必ず一致するという意味ではありません。曲線が高くなるのは幅が狭くなったためで、全体の面積はどれも一です。",
       "en": "Repeated independent random samples of 5 fish come from the same hypothetical normal population with mean 50 kg and SD 10 kg. Each curve describes sample means, not individual weights. Keep both axes fixed, retain previous curves, and point to the new curve. The population mean stays fixed while the sample-mean SD becomes 4.47 kg. This illustrates consistency: concentration near the parameter as sample size grows, not guaranteed monotonic improvement in each realized sample. Taller curves still have total area one."
     },
     {
-      "page": 30,
+      "page": 32,
       "textbook": "132 脚注1・123",
       "title": "20匹ずつなら、母平均の近くへ",
       "ja": "同じ母平均五十キロ、母標準偏差十キロの仮想的な正規母集団から、毎回20匹を無作為に取り出すモデルです。曲線は魚そのものの重さではなく、何度も取り直した標本平均の分布です。横軸と縦軸を固定し、前の曲線を残して比較します。母平均のオレンジの破線は動きません。今回加えた曲線とポインターを指し、標本平均の標準偏差が2.24キロになったことを確認します。標本数が増えると母数の近くに集まりやすくなるという一致性を示します。一回ごとの平均が順番に必ず母平均へ近づく、あるいは母平均と必ず一致するという意味ではありません。曲線が高くなるのは幅が狭くなったためで、全体の面積はどれも一です。",
       "en": "Repeated independent random samples of 20 fish come from the same hypothetical normal population with mean 50 kg and SD 10 kg. Each curve describes sample means, not individual weights. Keep both axes fixed, retain previous curves, and point to the new curve. The population mean stays fixed while the sample-mean SD becomes 2.24 kg. This illustrates consistency: concentration near the parameter as sample size grows, not guaranteed monotonic improvement in each realized sample. Taller curves still have total area one."
     },
     {
-      "page": 31,
+      "page": 33,
       "textbook": "132 脚注1・123",
       "title": "100匹ずつなら、さらに近くへ",
       "ja": "同じ母平均五十キロ、母標準偏差十キロの仮想的な正規母集団から、毎回100匹を無作為に取り出すモデルです。曲線は魚そのものの重さではなく、何度も取り直した標本平均の分布です。横軸と縦軸を固定し、前の曲線を残して比較します。母平均のオレンジの破線は動きません。今回加えた曲線とポインターを指し、標本平均の標準偏差が1.00キロになったことを確認します。標本数が増えると母数の近くに集まりやすくなるという一致性を示します。一回ごとの平均が順番に必ず母平均へ近づく、あるいは母平均と必ず一致するという意味ではありません。曲線が高くなるのは幅が狭くなったためで、全体の面積はどれも一です。",
       "en": "Repeated independent random samples of 100 fish come from the same hypothetical normal population with mean 50 kg and SD 10 kg. Each curve describes sample means, not individual weights. Keep both axes fixed, retain previous curves, and point to the new curve. The population mean stays fixed while the sample-mean SD becomes 1.00 kg. This illustrates consistency: concentration near the parameter as sample size grows, not guaranteed monotonic improvement in each realized sample. Taller curves still have total area one."
     },
     {
-      "page": 32,
+      "page": 34,
       "textbook": "132 脚注1",
       "title": "やってみよう！Can more fish fix a biased sample?",
       "ja": "活動一では無作為に選んだ標本から推定値が毎回変わることを見ました。ここでは同じことを繰り返すのではなく、選び方を変えます。同じ二百匹、同じ匹数で、全体から無作為に選ぶ方法と、大きい五十匹だけを対象にする方法を同時に比較します。まずどちらが群れ全体の平均を推定できそうか予想してもらいます。五匹ずつを一回、その後百回実行し、二つの分布の位置を見ます。次に二十匹、五十匹へ増やす前に、偏りが消えると思うか尋ねます。数を変えると比較記録はリセットされます。五十匹では大きい魚の側は対象の全てを測るため、毎回同じ値になります。それでも群れ全体の母平均とは違うことが最大の気付きです。母平均は検証用に既知で、現実には未知です。活動内の説明ボタンで選ばれない百五十匹を確認してから結論へ進みます。",
       "en": "Activity 1 showed that random samples yield changing estimates. Activity 2 changes the selection method, not the target. Compare equal-size samples from the same 200-fish population: random selection from all fish versus selection only from the largest 50. Ask for predictions before one draw and 100 repetitions. Then increase n to 20 and 50, resetting the record each time. With n=50, the biased method measures its entire eligible group and gives the same answer every time, yet remains above the whole-population mean. This separates precision from selection bias. Known population truth is displayed only to evaluate the method. Reveal the explanation one point at a time."
     },
     {
-      "page": 33,
+      "page": 35,
       "textbook": "131〜132（母数・推定量・不偏性）",
       "title": "50匹を全て測っても、対象が違う",
       "ja": "活動と同じ二百匹を全て量った母平均は五十・六九キロ、大きい五十匹の平均は六十三・七四キロです。右側では五十匹を全部測るため標本平均にばらつきがなくても、対象が群れ全体ではありません。無作為に五十匹を抽出した一回の平均が必ず五十・六九になるという意味ではない点も確認します。図は一回の無作為標本と比較したものではなく、全二百匹と大きい五十匹の二つの平均を示しています。精密さと偏りを混同しないようにし、選ばれなかった百五十匹を指します。より多く集めればよいのではなく、まず対象を代表する選び方が必要だとまとめます。",
       "en": "These are two known means from the activity population: all 200 fish average 50.69 kg; the largest 50 average 63.74 kg. Selecting all eligible fish on the biased side removes sampling variation but does not make that restricted group representative. This graphic compares the two population-group means, not a single random sample with a biased sample. A random sample of 50 need not average exactly 50.69. Point to the excluded 150 fish and distinguish stability from absence of selection bias. Ask students to check who cannot enter a sample before simply asking for more observations."
     },
     {
-      "page": 34,
+      "page": 36,
+      "textbook": "131〜132（母集団・推定量・不偏性）",
+      "title": "チャレンジ2　昼食代の調査、どちらを採用？",
+      "ja": "活動二で見た魚の選び方を、大学生の身近な調査へ移します。二分は個人でAかBと理由を書き、二分で隣の学生と説明を比べます。全員が回答するという条件なので、ここでは無回答の問題を加えません。人数だけでなく、どの学生が標本から除かれるかを明記させます。Bの推定値が必ず高いとか必ず外れるとは断定させません。目的の母集団を代表する選び方か、という問いに集中します。授業用の仮想調査で、宿題の答えではありません。",
+      "en": "Transfer the fish-selection lesson to a campus survey. Allow two minutes to write a choice and justification, then two minutes to compare with a partner. Full response is stipulated so that nonresponse is not a second issue. Students must identify who cannot enter B. Do not require a claim that B must always overestimate; the question is whether its selection frame represents the target population."
+    },
+    {
+      "page": 37,
+      "textbook": "131〜132",
+      "title": "人数より先に、誰を選べるか。",
+      "ja": "Aが目的に適切なのは、名簿全体から無作為抽出し、全学生が選ばれる機会を持つからです。Bでは高価格カフェを利用しない学生が入れません。六百人に増やしても、その範囲は変わりません。図の丸は人数を数えるグラフではなく、対象と選べる範囲の模式図です。Aの一回の推定値が必ず真の平均に一致するとか、Bが必ず外れると保証したわけではありません。対象、除かれる人、人数だけでは直らない理由の三つが書けているかを確認します。",
+      "en": "A is appropriate because the full roster gives all students a selection chance. B excludes noncustomers even if it grows to 600 respondents. The dots show selection frames, not actual respondent counts. This does not guarantee an exact estimate from A or an error on every realization of B. Check that students identify the target, excluded group and reason more responses do not repair the frame."
+    },
+    {
+      "page": 38,
       "textbook": "132",
       "title": "点てん推すい定ていPoint estimation",
       "ja": "点推定です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain point title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 35,
+      "page": 39,
       "textbook": "132",
       "title": "50kg、と一つだけ答える？",
       "ja": "50kg、と一つだけ答える？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain point versus interval. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 36,
+      "page": 40,
       "textbook": "",
       "title": "幅の付け方は、次回つなげる",
       "ja": "幅の付け方は、次回つなげるを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain next week preview. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 37,
+      "page": 41,
       "textbook": "132（不偏性・母分散の点推定）",
       "title": "同じ「偏り」でも、原因が違う",
       "ja": "活動二で見たのは、大きい魚だけを選び、小さい魚を対象から外した選択の偏りです。ここで扱うのは別の問題です。教科書の独立な無作為標本でも、標本平均からの偏差二乗和を標本数で割ると、母分散の推定値は平均的に小さめになります。左は選び方、右は計算方法と指して区別します。分母を標本数マイナス一にする補正が直すのは右側です。大きい魚だけを選ぶ問題を直せるわけではありません。計算自体は前回の復習なので、五匹の例で短く確認し、今回は推定方法の性質へ進みます。",
       "en": "Activity 2 demonstrated selection bias: small fish could never enter the sample. Now distinguish bias in the variance estimator. Under the textbook model of independent random observations, dividing squared deviations from the sample mean by n underestimates population variance on average. Point left for selection, right for calculation. Using n−1 corrects the right-hand issue; it cannot make a sample of only large fish representative. Treat the arithmetic as a brief recap, then focus on the estimation property."
     },
     {
-      "page": 38,
+      "page": 42,
       "textbook": "132（標本不偏分散）・134 脚注2（標本分散）",
       "title": "計算は復習。変わるのは、分母。",
       "ja": "五匹の重量は四十、四十五、五十、五十五、六十キロで、平均は五十キロです。平均からの偏差はマイナス十、マイナス五、ゼロ、五、十。その二乗を足すと百、二十五、ゼロ、二十五、百で、二百五十キロ二乗です。以前計算した方法を再確認するだけなので、長い導出はしません。同じ偏差二乗和を、上では五、下では四で割ります。上は標本分散で五十、下は母分散の不偏推定に使う標本不偏分散で六十二・五です。文字の公式から数値へ対応させたら、次の図で使う目的を確認します。自由度の導出は加えず、分母が標本数マイナス一であることだけを確認します。",
       "en": "Briefly recall the five fish weights and their mean of 50 kg. Deviations are −10, −5, 0, 5 and 10; squared deviations sum to 250 kg². Keep the same numerator and change only the denominator: n=5 gives 50 kg²; n−1=4 gives 62.5 kg². Show the symbolic formulas before substitution. This is familiar arithmetic, not a new calculation method. Do not re-derive degrees of freedom. Next distinguish what each result is used for."
     },
     {
-      "page": 39,
+      "page": 43,
       "textbook": "132（母分散の点推定）・134 脚注2",
       "title": "求める目的で、分母を選ぶ。",
       "ja": "左の五十は、この五匹に対して分母を五にして計算した標本分散です。右の六十二・五は、群れ全体の未知の母分散を不偏に推定するために使う値です。求める目的と分母を結び付けます。右が大きいから正しいと確認できたわけではなく、今回の母分散が六十二・五と確定したわけでもありません。二本の棒は同じ標本から得た二つの計算値であり、推定量の繰り返し分布を示す図ではありません。なぜ不偏と言えるかは、この一回ではなく次の繰り返しの期待値で説明します。",
       "en": "Use 50 kg² to describe this observed sample with the n-denominator definition. Use 62.5 kg² as the unbiased estimate of the unknown population variance. Link each number to its purpose. The larger value is not thereby proved correct, and population variance has not been established as 62.5. These bars compare two calculations from one sample, not sampling distributions. The reason for calling the method unbiased comes from its expected value over repeated samples, on the next slide."
     },
     {
-      "page": 40,
+      "page": 44,
       "textbook": "132 §5（母分散の点推定・不偏性）",
       "title": "新しいのは、繰り返したときの性質。",
       "ja": "今回の新しい焦点は計算ではなく、推定方法が繰り返しの中でどんな性質を持つかです。教科書の独立な無作為標本のモデルで、同じ標本数の魚を何度も選び、毎回不偏分散を計算する場面を考えます。図の点は各回の値ではなく、推定量の期待値の位置です。分母が標本数の場合は母分散より平均的に低く、標本数マイナス一の場合は期待値が母分散に一致します。式の左側は推定量の期待値、右側は固定された未知の母分散です。一回で求めた六十二・五が母分散に等しいという保証ではありません。最後に、大きい魚だけを選ぶ問題は分母では解決できないと確認します。ここから通学時間の練習で、求める対象と使う分母を自分で選んでもらいます。",
       "en": "The new emphasis is the estimation property, not the arithmetic. Under the textbook model of independent random observations, imagine repeatedly drawing samples of the same size and calculating variance each time. The plotted dots mark expected values, not individual estimates. The n-denominator estimator is low on average; the n−1 estimator has expectation equal to the fixed population variance. The equation does not guarantee that the observed 62.5 is correct. Reiterate that denominator correction cannot repair selecting only large fish. Move directly to the commute-time challenge, where students choose the requested quantity and appropriate denominator themselves."
     },
     {
-      "page": 41,
+      "page": 45,
       "textbook": "132（母平均・母分散の点推定）",
-      "title": "チャレンジ1　通学時間で、二つの推定値",
+      "title": "チャレンジ3　通学時間で、二つの推定値",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 42,
+      "page": 46,
       "textbook": "126（標本不偏分散）",
       "title": "① 条件を確認 → ② 公式 → ③ 代入",
       "ja": "与えられた数値を確認し、文字の公式のどこに入れるかを学生に尋ねます。数値を代入して計算し、結果の意味を言葉にしてから次へ進みます。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
       "en": "Identify the givens and symbolic formula, substitute the sample values, then check the arithmetic before interpreting the result. Follow the calculation with the next visual result slide."
     },
     {
-      "page": 43,
+      "page": 47,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "平均30分、不偏分散250分²",
       "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
       "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
     },
     {
-      "page": 44,
+      "page": 48,
       "textbook": "",
       "title": "このクラスなら、どう集める？",
       "ja": "このクラスなら、どう集める？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain student data. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 45,
+      "page": 49,
       "textbook": "131〜132",
       "title": "やってみよう！Anonymous class values",
       "ja": "自分たちの数値で、推定値を出す。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain class data explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 46,
-      "textbook": "132 脚注2（不偏性の定義）",
-      "title": "チャレンジ2　「不偏」を、言葉で説明",
-      "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
-      "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
-    },
-    {
-      "page": 47,
-      "textbook": "132 脚注2（不偏性の定義）",
-      "title": "① 条件を確認 → ② 公式 → ③ 代入",
-      "ja": "与えられた数値を確認し、文字の公式のどこに入れるかを学生に尋ねます。数値を代入して計算し、結果の意味を言葉にしてから次へ進みます。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
-      "en": "Identify the givens and symbolic formula, substitute the sample values, then check the arithmetic before interpreting the result. Follow the calculation with the next visual result slide."
-    },
-    {
-      "page": 48,
-      "textbook": "132 脚注2（不偏性の定義）",
-      "title": "正しいのはB。1回と、繰り返しを分ける",
-      "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
-      "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
-    },
-    {
-      "page": 49,
-      "textbook": "132 脚注3・5（証明はWeb補論）",
-      "title": "時間があれば：なぜ不偏なのか",
-      "ja": "時間があれば：なぜ不偏なのかを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain optional proof. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
-    },
-    {
       "page": 50,
+      "textbook": "132（不偏性・母分散の点推定）",
+      "title": "チャレンジ4　三つの「言いすぎ」を書き直す",
+      "ja": "AかBを選ぶだけの問題ではなく、三つの誤解を自分の言葉で修正してもらいます。三分は個人で三文を書き、二分で隣の人と交換します。相手の文に、期待値、選び方、標本数マイナス一という要点が入っているかを確認させます。公式は参考として示しますが、答えの文章はまだ見せません。口頭で分かったと言うだけでなく、主語を明確にした文として残すことが目的です。",
+      "en": "Require three written corrections rather than a multiple-choice guess. Allow three minutes individually and two minutes to swap explanations with a neighbor. Partners check for expected value rather than guaranteed single-sample accuracy, sampling frame rather than sample size, and denominator n−1 for unbiased variance. Keep the answer hidden until students have written all three sentences."
+    },
+    {
+      "page": 51,
+      "textbook": "132",
+      "title": "「いつも正しい」ではなく、条件を説明する。",
+      "ja": "文言の丸暗記ではなく、三つの主語を区別して確認します。Aは一回の推定値ではなく推定量の期待値、Bは人数ではなく誰を選べるか、Cは母分散を不偏に推定するときの分母です。図の点は期待値の位置を区別する模式図です。学生に自分の三文のうち一つを読み上げてもらい、どこを直したか説明してもらいます。理由が通っていれば模範文と同じ表現である必要はありません。",
+      "en": "Check the subject of each corrected statement: the estimator’s expectation, the eligible sampling frame, and the denominator for unbiased estimation of population variance. The figure is schematic. Invite one student to read a correction and explain the change. Accept equivalent reasoning rather than requiring the exact model wording."
+    },
+    {
+      "page": 52,
+      "textbook": "131〜132",
+      "title": "オープンブックFinal classroom quiz",
+      "ja": "ここまでの作業を一つの調査報告にまとめる最終クイズです。教科書とノートを開いて十五分、独立して取り組みます。最初の十分で対象の確認と計算、最後の五分で選択の偏りと標本数の解釈を文章にするよう勧めます。問題はALとは別の架空データで、宿題のセル値や答えではありません。証明を要求する問題ではなく、今日扱った公式の選択、計算、解釈を使う問題です。答え合わせの後でALへ移ります。",
+      "en": "Introduce a 15-minute individual open-book quiz that combines the day’s decisions. Recommend ten minutes for identifying the target and calculating, then five for written interpretations of selection bias and sample size. The synthetic dataset is separate from homework. Do not require a proof. Reveal the worked answers only after the work period, then hand over to the independent AL."
+    },
+    {
+      "page": 53,
+      "textbook": "122・131〜132・134 脚注2",
+      "title": "チャレンジ5　配達ロボットの調査報告",
+      "ja": "十五分間は問題を表示したまま、学生に対象、計算表、二つの理由文を紙に残してもらいます。最初に公式を選び、偏差と二乗を縦に並べるよう勧めますが、平均や偏差二乗和の数値は与えません。母数は未知で、問題文に与えられていないことを確認させます。第三問では軽い荷物だけという選択の問題、第四問では無作為抽出を保って標本数を増やす問題を区別します。途中で答えは見せず、必要なら教科書のページだけを案内します。終了前に空欄を残さず、推定値の単位も記すよう促します。",
+      "en": "Keep this question visible for fifteen minutes. Students submit written targets, a vertically arranged calculation table and two reasoning answers. Encourage formula selection and deviation columns but do not supply the mean or squared-deviation sum. Population parameters remain unknown. Distinguish selecting only light-parcel deliveries from increasing an otherwise random sample. Give page references rather than answers during the work period, and require units."
+    },
+    {
+      "page": 54,
+      "textbook": "122・131〜132",
+      "title": "① 対象を確認して、母平均を推定する。",
+      "ja": "第一問の母集団は学内ロボットの全配達、母数は所要時間の母平均と母分散です。第二問の最初に標本平均を計算します。五つの時間の合計五十を五で割って十分。図に並んだ五件から求めた点推定値です。母平均そのものが十分と確認できたわけではありません。推定量は標本平均の式、推定値は今回の十分という数字、と言葉を対応させます。",
+      "en": "The population is all campus-robot deliveries; the targets are the population mean and variance of delivery time. The sample mean is 50/5=10 minutes. Connect the five observations in the graphic to this point estimate. Distinguish the estimator rule from its observed estimate and the unknown population parameter."
+    },
+    {
+      "page": 55,
+      "textbook": "132・134 脚注2",
+      "title": "② 先に、偏差と二乗を縦に並べる。",
+      "ja": "計算表はALと同じように、一行を一件の配達として縦にそろえます。平均十分を引くと、マイナス四、マイナス二、ゼロ、二、四。二乗すると十六、四、ゼロ、四、十六で合計四十分二乗です。右の棒は各行が二乗和にどれだけ寄与したかを表します。平均との差が正か負かではなく、その大きさを二乗して足していると確認します。ここではまだ分母で割っていません。",
+      "en": "Arrange one delivery per row, matching the AL’s vertical calculation flow. Subtract 10 to obtain −4, −2, 0, 2 and 4; square these to get 16, 4, 0, 4 and 16. The bars show contributions to the squared-deviation sum of 40 min². No denominator has been applied yet."
+    },
+    {
+      "page": 56,
+      "textbook": "132・134 脚注2",
+      "title": "② 同じ40を、5と4で割り分ける。",
+      "ja": "偏差二乗和四十を標本数五で割ると標本分散八、四で割ると標本不偏分散十です。母平均の推定値十分と、母分散の推定値十分二乗は、たまたま同じ数字でも単位も役割も違います。母数の報告としては平均十分、分散十分二乗を使います。ただし未知の母分散が十と確定したわけではありません。分母と目的、二乗の単位が書けているかを確認します。",
+      "en": "Divide the common squared-deviation sum 40 by 5 to get raw sample variance 8, or by 4 to get unbiased sample variance 10. The population-mean estimate of 10 minutes and population-variance estimate of 10 min² happen to share a number but have different units and meanings. Neither establishes an exact population value. Check denominator choice and squared units."
+    },
+    {
+      "page": 57,
+      "textbook": "131〜132",
+      "title": "③ 分母を変えても、選び方は直らない。",
+      "ja": "第三問の問題は計算以前の選び方です。軽い荷物だけを調べると重い荷物の配達が対象から外れます。件数を増やすことも分母を標本数マイナス一にすることも、その除外を解消しません。荷物の軽さと時間の関係のデータは与えていないので、必ず短くなるという方向までは断定させません。正解は、全配達を代表できる選び方へ見直す必要があり、不偏分散の補正とは別問題だと説明することです。",
+      "en": "Question 3 concerns selection before calculation: light-parcel deliveries exclude heavy-parcel deliveries. Neither more records from that frame nor the n−1 variance correction repairs the omission. No relationship between parcel weight and time is supplied, so do not insist on a definite direction of error. Require a representative selection frame and distinguish that from denominator correction."
+    },
+    {
+      "page": 58,
+      "textbook": "123・132 脚注1（標本平均・一致性）",
+      "title": "④ 近くに集まりやすい。毎回ぴったりではない。",
+      "ja": "第四問は、選び方を無作為のまま保って五件から五十件へ増やす話です。繰り返して標本を取り直したときの標本平均は、母平均の近くに集まりやすくなります。この模式図の点は実測値でも正規曲線でもなく、その違いをイメージしたものです。一回ごとに必ず近づく、母数と必ず一致する、という約束ではありません。今回の十分や十分二乗が母数と確定しない点を再確認します。最後に、全問で対象、計算、単位、解釈をそろえたか振り返り、ALへ移ります。ALのデータと件数は問題文から自分で確認してもらいます。",
+      "en": "Question 4 keeps selection random while increasing n from 5 to 50. Across repeated samples, sample means become more concentrated near the population mean. The dots are schematic, not observed values or an asserted distributional shape. This does not guarantee monotonic improvement or exact equality in an individual draw. Neither 10 nor 10 min² has been established as a true population value. Finish the quiz by checking targets, arithmetic, units and interpretation, then move into the independent AL without supplying homework outputs."
+    },
+    {
+      "page": 59,
       "textbook": "131〜132（推定量・一致性）",
       "title": "ALでは、使うデータを増やして比べる",
       "ja": "ALでは正規分布から生成された千個のデータを使います。生成元の母平均五と母分散四は、モデルの設定値です。五十個、二百個、千個について、平均、標本分散、不偏分散を比較します。千個なら必ず五と四に一致するわけでも、今回のデータで順に必ず近づくわけでもありません。魚で練習した計算方法を、Excelの範囲へ置き換えます。",
       "en": "The AL supplies 1,000 generated observations from a normal model with mean 5 and variance 4. Those are generating-model parameters, not guaranteed exact summaries of the realized 1,000 values. Compare the three statistics using 50, 200 and 1,000 observations. More data do not guarantee monotonically closer estimates in this particular dataset. Transfer the fish calculations to spreadsheet ranges."
     },
     {
-      "page": 51,
+      "page": 60,
       "textbook": "132 §4〜5・134 脚注2（定義）／Excel関数はALの指定",
       "title": "Excelでも、求める量と分母を分ける",
       "ja": "関数名を暗記する前に、何を求める列なのかを確認します。平均はAVERAGE、分母が標本数の標本分散はVAR.P、不偏分散はVAR.Sです。VAR.Pという関数名でも、標本データに適用すれば分母が標本数の標本分散を計算します。ここでのA1からA5は五個の練習例で、課題のセル位置ではありません。ALでは見出しや空白を数えず、指定件数の数値を選びます。",
       "en": "Choose the requested statistic first: AVERAGE for mean, VAR.P for variance with denominator n, and VAR.S for unbiased variance with denominator n minus one. Applying VAR.P to sample observations calculates their n-denominator variance; the function name does not make those observations a complete population. A1:A5 is only a five-value syntax example, not an assignment range. Select the actual 50, 200 or 1,000 numerical records in the AL."
     },
     {
-      "page": 52,
+      "page": 61,
       "textbook": "",
       "title": "ALは、独立して取り組む",
       "ja": "ALは、独立して取り組むを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 53,
+      "page": 62,
       "textbook": "",
       "title": "今日の出口",
       "ja": "今日の出口を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
