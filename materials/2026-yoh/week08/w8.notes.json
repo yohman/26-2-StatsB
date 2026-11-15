@@ -69,8 +69,8 @@
       "page": 10,
       "textbook": "131〜132",
       "title": "やってみよう！A sample is not the whole shoal",
-      "ja": "最初に二百匹の群れを見せ、どの五匹が選ばれるか予想してもらいます。五匹だけが強調され、計測デッキへ移動する様子を追います。五つの重さがそろってから平均を計算します。もう一度では前回と別の五匹が選ばれます。母集団は同じなのに標本と推定値が変わる点を確認します。母平均は最初は隠し、学生に予想してもらってから表示します。抽出は各回の中で重複なしで、五匹を新しく選びます。",
-      "en": "Show the 200-fish population first. Ask which five will be selected, then follow the highlighted fish onto the measuring deck. Calculate their mean only after all five weights arrive. Do again selects five different fish from the previous draw. Emphasize that the population stays fixed while the sample and estimate change. Keep the population mean hidden initially, invite a prediction, then reveal it. There are no duplicate fish within a draw."
+      "ja": "最初に二百匹の群れを見せ、どの五匹が選ばれるか予想してもらいます。五匹だけが強調され、計測デッキへ移動する様子を追います。五つの重さがそろってから平均を計算します。もう一度では前回と別の五匹が選ばれます。母集団は同じなのに標本と推定値が変わる点を確認します。各回の標本平均を一件ずつヒストグラムに追加し、固定した母平均の破線と比べます。棒の高さは魚の数ではなく、その範囲に入った標本の回数です。少ない回数で必ず中心が一致するとは限りません。抽出は各回の中で重複なしで、五匹を新しく選びます。",
+      "en": "Show the 200-fish population first. Ask which five will be selected, then follow the highlighted fish onto the measuring deck. Calculate their mean only after all five weights arrive. Do again selects five different fish from the previous draw. Emphasize that the population stays fixed while the sample and estimate change. Add each completed sample mean to the visible histogram and compare its growing distribution with the fixed population-mean marker. Bar heights count samples, not individual fish. A small number of repetitions need not be centered exactly on the population mean. There are no duplicate fish within a draw."
     },
     {
       "page": 11,
