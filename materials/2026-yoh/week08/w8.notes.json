@@ -48,8 +48,8 @@
       "page": 7,
       "textbook": "131",
       "title": "母ぼ数すうParameter",
-      "ja": "母数です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
-      "en": "Use this slide to explain parameter title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "母数は、母集団全体の特徴を表す数値です。魚の群れなら、全体の平均重量や重量のばらつきが母数です。群れを固定すれば母数は固定値ですが、全部を量れなければその値は未知です。標本から計算する推定値とは区別します。次のスライドで母平均と母分散を並べて確認します。",
+      "en": "A parameter is a numerical characteristic of the whole population: for the shoal, its mean weight or variance. It is fixed for a fixed population, even when unknown. Distinguish this target from an estimate calculated from a sample."
     },
     {
       "page": 8,
