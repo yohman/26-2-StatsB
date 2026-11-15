@@ -256,209 +256,118 @@
     },
     {
       "page": 37,
-      "textbook": "132",
-      "title": "標本不偏分散Unbiased sample variance",
-      "ja": "標本不偏分散です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
-      "en": "Use this slide to explain variance title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "textbook": "132（不偏性・母分散の点推定）",
+      "title": "同じ「偏り」でも、原因が違う",
+      "ja": "活動二で見たのは、大きい魚だけを選び、小さい魚を対象から外した選択の偏りです。ここで扱うのは別の問題です。教科書の独立な無作為標本でも、標本平均からの偏差二乗和を標本数で割ると、母分散の推定値は平均的に小さめになります。左は選び方、右は計算方法と指して区別します。分母を標本数マイナス一にする補正が直すのは右側です。大きい魚だけを選ぶ問題を直せるわけではありません。計算自体は前回の復習なので、五匹の例で短く確認し、今回は推定方法の性質へ進みます。",
+      "en": "Activity 2 demonstrated selection bias: small fish could never enter the sample. Now distinguish bias in the variance estimator. Under the textbook model of independent random observations, dividing squared deviations from the sample mean by n underestimates population variance on average. Point left for selection, right for calculation. Using n−1 corrects the right-hand issue; it cannot make a sample of only large fish representative. Treat the arithmetic as a brief recap, then focus on the estimation property."
     },
     {
       "page": 38,
-      "textbook": "132・134",
-      "title": "群れの散らばりも、知りたい",
-      "ja": "群れの散らばりも、知りたいを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain fish deviations. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "textbook": "132（標本不偏分散）・134 脚注2（標本分散）",
+      "title": "計算は復習。変わるのは、分母。",
+      "ja": "五匹の重量は四十、四十五、五十、五十五、六十キロで、平均は五十キロです。平均からの偏差はマイナス十、マイナス五、ゼロ、五、十。その二乗を足すと百、二十五、ゼロ、二十五、百で、二百五十キロ二乗です。以前計算した方法を再確認するだけなので、長い導出はしません。同じ偏差二乗和を、上では五、下では四で割ります。上は標本分散で五十、下は母分散の不偏推定に使う標本不偏分散で六十二・五です。文字の公式から数値へ対応させたら、次の図で使う目的を確認します。自由度の導出は加えず、分母が標本数マイナス一であることだけを確認します。",
+      "en": "Briefly recall the five fish weights and their mean of 50 kg. Deviations are −10, −5, 0, 5 and 10; squared deviations sum to 250 kg². Keep the same numerator and change only the denominator: n=5 gives 50 kg²; n−1=4 gives 62.5 kg². Show the symbolic formulas before substitution. This is familiar arithmetic, not a new calculation method. Do not re-derive degrees of freedom. Next distinguish what each result is used for."
     },
     {
       "page": 39,
-      "textbook": "134 脚注2（標本分散の定義）",
-      "title": "記録した標本の散らばり",
-      "ja": "標本分散をポインターで確認します。Raw sample variance · この標本の散らばり。前の説明を残しながら、この部分だけを追加します。最後に魚の例と対応させます。",
-      "en": "Reveal one annotated component at a time while retaining earlier labels. Raw sample variance · この標本の散らばり. Finish by connecting the symbolic rule to the fish example."
+      "textbook": "132（母分散の点推定）・134 脚注2",
+      "title": "求める目的で、分母を選ぶ。",
+      "ja": "左の五十は、この五匹に対して分母を五にして計算した標本分散です。右の六十二・五は、群れ全体の未知の母分散を不偏に推定するために使う値です。求める目的と分母を結び付けます。右が大きいから正しいと確認できたわけではなく、今回の母分散が六十二・五と確定したわけでもありません。二本の棒は同じ標本から得た二つの計算値であり、推定量の繰り返し分布を示す図ではありません。なぜ不偏と言えるかは、この一回ではなく次の繰り返しの期待値で説明します。",
+      "en": "Use 50 kg² to describe this observed sample with the n-denominator definition. Use 62.5 kg² as the unbiased estimate of the unknown population variance. Link each number to its purpose. The larger value is not thereby proved correct, and population variance has not been established as 62.5. These bars compare two calculations from one sample, not sampling distributions. The reason for calling the method unbiased comes from its expected value over repeated samples, on the next slide."
     },
     {
       "page": 40,
-      "textbook": "134 脚注2（標本分散の定義）",
-      "title": "記録した標本の散らばり",
-      "ja": "分母は nをポインターで確認します。Divide by n · 今回は5。前の説明を残しながら、この部分だけを追加します。最後に魚の例と対応させます。",
-      "en": "Reveal one annotated component at a time while retaining earlier labels. Divide by n · 今回は5. Finish by connecting the symbolic rule to the fish example."
+      "textbook": "132 §5（母分散の点推定・不偏性）",
+      "title": "新しいのは、繰り返したときの性質。",
+      "ja": "今回の新しい焦点は計算ではなく、推定方法が繰り返しの中でどんな性質を持つかです。教科書の独立な無作為標本のモデルで、同じ標本数の魚を何度も選び、毎回不偏分散を計算する場面を考えます。図の点は各回の値ではなく、推定量の期待値の位置です。分母が標本数の場合は母分散より平均的に低く、標本数マイナス一の場合は期待値が母分散に一致します。式の左側は推定量の期待値、右側は固定された未知の母分散です。一回で求めた六十二・五が母分散に等しいという保証ではありません。最後に、大きい魚だけを選ぶ問題は分母では解決できないと確認します。ここから通学時間の練習で、求める対象と使う分母を自分で選んでもらいます。",
+      "en": "The new emphasis is the estimation property, not the arithmetic. Under the textbook model of independent random observations, imagine repeatedly drawing samples of the same size and calculating variance each time. The plotted dots mark expected values, not individual estimates. The n-denominator estimator is low on average; the n−1 estimator has expectation equal to the fixed population variance. The equation does not guarantee that the observed 62.5 is correct. Reiterate that denominator correction cannot repair selecting only large fish. Move directly to the commute-time challenge, where students choose the requested quantity and appropriate denominator themselves."
     },
     {
       "page": 41,
-      "textbook": "134 脚注2（標本分散の定義）",
-      "title": "記録した標本の散らばり",
-      "ja": "偏差の二乗を合計をポインターで確認します。Squared deviations · 各重量−標本平均を二乗。前の説明を残しながら、この部分だけを追加します。最後に魚の例と対応させます。",
-      "en": "Reveal one annotated component at a time while retaining earlier labels. Squared deviations · 各重量−標本平均を二乗. Finish by connecting the symbolic rule to the fish example."
-    },
-    {
-      "page": 42,
-      "textbook": "134 脚注2（標本分散の定義）",
-      "title": "① 条件を確認 → ② 公式 → ③ 代入",
-      "ja": "与えられた数値を確認し、文字の公式のどこに入れるかを学生に尋ねます。数値を代入して計算し、結果の意味を言葉にしてから次へ進みます。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
-      "en": "Identify the givens and symbolic formula, substitute the sample values, then check the arithmetic before interpreting the result. Follow the calculation with the next visual result slide."
-    },
-    {
-      "page": 43,
-      "textbook": "134 脚注2（標本分散の定義）",
-      "title": "nで割ると、50kg²",
-      "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
-      "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
-    },
-    {
-      "page": 44,
-      "textbook": "132（標本分散と不偏分散）",
-      "title": "nで割ると、平均的に小さめになる",
-      "ja": "五匹の標本を同じ条件で何度も取り直す場面に戻ります。各回の偏差二乗和を五で割った標本分散を集めると、その期待値は母分散より小さくなります。今回の五十と六十二・五の大小だけでは、不偏性を確認したことにはなりません。ある一回の推定値が必ず母分散より小さいという意味でもありません。次に、母分散の不偏推定に使う分母を確認します。",
-      "en": "Return to repeated random samples of five fish. The expectation of variance calculated with denominator n is below population variance. The single numerical comparison of 50 and 62.5 does not establish unbiasedness. An individual raw sample variance can still exceed the population variance. Next introduce the denominator used for unbiased estimation."
-    },
-    {
-      "page": 45,
-      "textbook": "132（標本不偏分散）",
-      "title": "母分散を推定するなら、n−1",
-      "ja": "標本不偏分散をポインターで確認します。Unbiased sample variance · 母分散を推定。前の説明を残しながら、この部分だけを追加します。最後に魚の例と対応させます。",
-      "en": "Reveal one annotated component at a time while retaining earlier labels. Unbiased sample variance · 母分散を推定. Finish by connecting the symbolic rule to the fish example."
-    },
-    {
-      "page": 46,
-      "textbook": "126（標本不偏分散）",
-      "title": "母分散を推定するなら、n−1",
-      "ja": "分母は n−1をポインターで確認します。Divide by n−1 · 今回は4。前の説明を残しながら、この部分だけを追加します。最後に魚の例と対応させます。",
-      "en": "Reveal one annotated component at a time while retaining earlier labels. Divide by n−1 · 今回は4. Finish by connecting the symbolic rule to the fish example."
-    },
-    {
-      "page": 47,
-      "textbook": "126（標本不偏分散）",
-      "title": "母分散を推定するなら、n−1",
-      "ja": "同じ偏差二乗和をポインターで確認します。Same squared deviations · 足す部分は変わらない。前の説明を残しながら、この部分だけを追加します。最後に魚の例と対応させます。",
-      "en": "Reveal one annotated component at a time while retaining earlier labels. Same squared deviations · 足す部分は変わらない. Finish by connecting the symbolic rule to the fish example."
-    },
-    {
-      "page": 48,
-      "textbook": "126（標本不偏分散）",
-      "title": "① 条件を確認 → ② 公式 → ③ 代入",
-      "ja": "与えられた数値を確認し、文字の公式のどこに入れるかを学生に尋ねます。数値を代入して計算し、結果の意味を言葉にしてから次へ進みます。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
-      "en": "Identify the givens and symbolic formula, substitute the sample values, then check the arithmetic before interpreting the result. Follow the calculation with the next visual result slide."
-    },
-    {
-      "page": 49,
-      "textbook": "132（標本不偏分散）",
-      "title": "n−1で割ると、62.5kg²",
-      "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
-      "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
-    },
-    {
-      "page": 50,
-      "textbook": "132",
-      "title": "標本不偏分散の期待値は、母分散",
-      "ja": "推定量の期待値を指して、標本ごとに変わる推定量と、固定された母数を区別します。これは繰り返し抽出したときの期待値の等式です。一回の推定値が必ず母数に等しいわけではありません。",
-      "en": "Distinguish the expected value of the estimator across repeated samples from the fixed population parameter. Equality of expectation does not guarantee an exact estimate in a single sample."
-    },
-    {
-      "page": 51,
-      "textbook": "132",
-      "title": "標本不偏分散の期待値は、母分散",
-      "ja": "母分散を指して、標本ごとに変わる推定量と、固定された母数を区別します。これは繰り返し抽出したときの期待値の等式です。一回の推定値が必ず母数に等しいわけではありません。",
-      "en": "Distinguish the expected value of the estimator across repeated samples from the fixed population parameter. Equality of expectation does not guarantee an exact estimate in a single sample."
-    },
-    {
-      "page": 52,
-      "textbook": "132 §5",
-      "title": "不偏とは、繰り返したときに中心が合うこと",
-      "ja": "図の点は一回の計算値ではなく、推定量の分布の中心です。上は分母が標本数で、平均的に低めにずれます。下は分母が標本数マイナス一で、中心が母分散に合います。毎回ぴったり当たるという約束ではありません。数式の証明は進めず、この違いを一言で説明してもらいます。",
-      "en": "These dots represent centers of sampling distributions, not individual observed variances. The n-denominator estimator is biased downward; the n-minus-one estimator is centered on population variance. Neither statement promises a correct result on every draw. Ask students to explain the contrast in one sentence rather than adding a proof."
-    },
-    {
-      "page": 53,
-      "textbook": "126・134",
-      "title": "自由度は、計算のルールとして確認",
-      "ja": "自由度は、計算のルールとして確認を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain df rule. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
-    },
-    {
-      "page": 54,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "チャレンジ1　通学時間で、二つの推定値",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 55,
+      "page": 42,
       "textbook": "126（標本不偏分散）",
       "title": "① 条件を確認 → ② 公式 → ③ 代入",
       "ja": "与えられた数値を確認し、文字の公式のどこに入れるかを学生に尋ねます。数値を代入して計算し、結果の意味を言葉にしてから次へ進みます。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
       "en": "Identify the givens and symbolic formula, substitute the sample values, then check the arithmetic before interpreting the result. Follow the calculation with the next visual result slide."
     },
     {
-      "page": 56,
+      "page": 43,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "平均30分、不偏分散250分²",
       "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
       "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
     },
     {
-      "page": 57,
+      "page": 44,
       "textbook": "",
       "title": "このクラスなら、どう集める？",
       "ja": "このクラスなら、どう集める？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain student data. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 58,
+      "page": 45,
       "textbook": "131〜132",
       "title": "やってみよう！Anonymous class values",
       "ja": "自分たちの数値で、推定値を出す。最初に予想を聞いてから探索を開きます。与えられた値、公式、代入、図を順に見せ、値を変えたときに何が動くかを学生に説明してもらいましょう。",
       "en": "Use this slide to explain class data explore. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 59,
+      "page": 46,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "チャレンジ2　「不偏」を、言葉で説明",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 60,
+      "page": 47,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "① 条件を確認 → ② 公式 → ③ 代入",
       "ja": "与えられた数値を確認し、文字の公式のどこに入れるかを学生に尋ねます。数値を代入して計算し、結果の意味を言葉にしてから次へ進みます。条件、公式、代入の順で確認し、次のスライドで大きな結果と図を対応させます。",
       "en": "Identify the givens and symbolic formula, substitute the sample values, then check the arithmetic before interpreting the result. Follow the calculation with the next visual result slide."
     },
     {
-      "page": 61,
+      "page": 48,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "正しいのはB。1回と、繰り返しを分ける",
       "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
       "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
     },
     {
-      "page": 62,
+      "page": 49,
       "textbook": "132 脚注3・5（証明はWeb補論）",
       "title": "時間があれば：なぜ不偏なのか",
       "ja": "時間があれば：なぜ不偏なのかを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain optional proof. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 63,
+      "page": 50,
       "textbook": "131〜132（推定量・一致性）",
       "title": "ALでは、使うデータを増やして比べる",
       "ja": "ALでは正規分布から生成された千個のデータを使います。生成元の母平均五と母分散四は、モデルの設定値です。五十個、二百個、千個について、平均、標本分散、不偏分散を比較します。千個なら必ず五と四に一致するわけでも、今回のデータで順に必ず近づくわけでもありません。魚で練習した計算方法を、Excelの範囲へ置き換えます。",
       "en": "The AL supplies 1,000 generated observations from a normal model with mean 5 and variance 4. Those are generating-model parameters, not guaranteed exact summaries of the realized 1,000 values. Compare the three statistics using 50, 200 and 1,000 observations. More data do not guarantee monotonically closer estimates in this particular dataset. Transfer the fish calculations to spreadsheet ranges."
     },
     {
-      "page": 64,
+      "page": 51,
       "textbook": "132 §4〜5・134 脚注2（定義）／Excel関数はALの指定",
       "title": "Excelでも、求める量と分母を分ける",
       "ja": "関数名を暗記する前に、何を求める列なのかを確認します。平均はAVERAGE、分母が標本数の標本分散はVAR.P、不偏分散はVAR.Sです。VAR.Pという関数名でも、標本データに適用すれば分母が標本数の標本分散を計算します。ここでのA1からA5は五個の練習例で、課題のセル位置ではありません。ALでは見出しや空白を数えず、指定件数の数値を選びます。",
       "en": "Choose the requested statistic first: AVERAGE for mean, VAR.P for variance with denominator n, and VAR.S for unbiased variance with denominator n minus one. Applying VAR.P to sample observations calculates their n-denominator variance; the function name does not make those observations a complete population. A1:A5 is only a five-value syntax example, not an assignment range. Select the actual 50, 200 or 1,000 numerical records in the AL."
     },
     {
-      "page": 65,
+      "page": 52,
       "textbook": "",
       "title": "ALは、独立して取り組む",
       "ja": "ALは、独立して取り組むを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
       "en": "Use this slide to explain al. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 66,
+      "page": 53,
       "textbook": "",
       "title": "今日の出口",
       "ja": "今日の出口を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
