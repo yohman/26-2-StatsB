@@ -11,31 +11,31 @@
     },
     {
       "page": 2,
+      "textbook": "",
+      "title": "",
+      "ja": "画面いっぱいの数百匹のマグロを、まず言葉を足さずに見せます。魚の位置、間隔、大きさ、向きは一様に整列させず、画面の端でも切れています。見える範囲の外にも群れが続いていて、全部を数えて量ることは難しい、と想像してもらいます。画像から母平均の値を読み取ろうとせず、全体を知りたいのに観測できるのは一部、という問いへ入ります。授業用の模式的な魚で、実測データではありません。",
+      "en": "Show hundreds of tuna without explanatory text. Positions, spacing, sizes and orientations are irregular; fish are clipped by the frame to suggest the shoal continues beyond what is visible. Ask whether every fish could realistically be weighed. This is a classroom illustration, not measured population data. Introduce the need to learn about a whole group from partial observation."
+    },
+    {
+      "page": 3,
+      "textbook": "",
+      "title": "",
+      "ja": "前のスライドと魚の位置、大きさ、向きは一切変えていません。同じ群れの一匹だけを明るくし、五十キロと示します。他の魚は暗く残して、測ったのが群れの一部であることを見せます。この一匹を五十キロと知ったとき、群れ全体の平均についてどこまで言えるか、学生に尋ねます。まだ五十が母平均だとは言いません。",
+      "en": "Keep every fish in exactly the same position, orientation and size as the preceding image. Highlight only one fish and label it 50 kg; dim rather than remove the rest. Ask what knowing this single weight allows us to say about the whole shoal. Do not equate the observed weight with the population mean."
+    },
+    {
+      "page": 4,
       "textbook": "131 §1",
       "title": "問題文に、母平均も母分散もない",
       "ja": "既知の母平均と母分散を与えてZを計算する問題を思い出してもらいます。今回はその二つが問題文にありません。tの練習では母分散を推定しましたが、今日は母平均も母分散も知りたい状況です。手元の標本だけで何が言えるか、まず予想してもらいます。全部の魚を量れないという具体的な場面へつなげます。",
       "en": "Recall a known-parameter Z problem, where population mean and variance were supplied. In the t exercise variance was unknown. Now ask what we can learn when both population mean and variance are unknown and only sampled fish weights are available. Invite a prediction, then move into the fish story rather than revealing a new formula immediately."
     },
     {
-      "page": 3,
-      "textbook": "",
-      "title": "",
-      "ja": "マグロの写真だけを見せて、群れの平均重量をどう知るか尋ねます。全部を量れればいい。でも全部は量れない。ここから母数と推定量という言葉に入ります。",
-      "en": "Use this slide to explain opening. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
-    },
-    {
-      "page": 4,
-      "textbook": "",
-      "title": "1匹は、50kgだった",
-      "ja": "1匹は、50kgだったを確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain first guess. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
-    },
-    {
       "page": 5,
       "textbook": "",
-      "title": "5匹なら、どうだろう？",
-      "ja": "5匹なら、どうだろう？を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain sample first. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "title": "",
+      "ja": "最初に見せた群れの配置をそのまま保ち、一匹だった強調を五匹へ増やします。先ほどの五十キロの魚も残っています。値は四十、四十五、五十、五十五、六十キロです。測れるのはこの五匹だけで、他の魚は背景として暗く残っています。見える全体と、実際に測った標本を区別し、ここから五匹の平均五十キロを母平均の推定に使う話へつなげます。絵の大きさから重さを正確に読むための図ではありません。",
+      "en": "Keep the identical shoal and highlight five fish, retaining the original 50 kg fish. Their example weights are 40, 45, 50, 55 and 60 kg. The dim fish remain visible as the unmeasured population context. Distinguish the five measured observations from the whole group and lead into the sample mean of 50 kg as an estimate. Apparent size is illustrative, not a scale for calculating weight."
     },
     {
       "page": 6,
