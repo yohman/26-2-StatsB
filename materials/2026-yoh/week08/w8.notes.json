@@ -62,354 +62,361 @@
       "page": 9,
       "textbook": "",
       "title": "",
-      "ja": "結論は一つです。順位が高いことと学力が伸びていることは同じではありません。PISA二〇二五の日本は科学、読解、数学でOECD加盟国中一位。一方、国内の別の調査では小六国語のスコアが二〇一六年五〇五・八から二〇二四年四八九・九へ低下しました。左と右は対象年齢も調査も異なるため、点数同士を引いたり二調査を一本の折れ線に接続したりしません。他国との相対的位置と、自国の過去からの変化は異なる問いだと示します。原因の証明はしていません。日本のデータも集められた標本から全体の特徴を捉える資料です。ここから既習の標準化・標本平均・不偏分散を短く復習し、未知の魚の母集団を推定する今日の内容へ進みます。公式PISA概要pp.2–3: https://www.mext.go.jp/content/20261005-mxt_kyoiku01-000052350_009.pdf。国内調査p.1: https://www.mext.go.jp/content/20250731-mxt_chousa02-000044035-05.pdf",
-      "en": "Make one conclusion: high rank and improvement over time are different claims. Japan ranked first among OECD countries in science, reading and mathematics in PISA 2025, while the separate domestic study found grade-six Japanese fell from 505.8 in 2016 to 489.9 in 2024. Explicitly distinguish the ages, assessments and scales; never subtract across the two tests or splice them into one trend. The left asks about relative international position; the right asks about change within Japan. Neither proves a cause. Link back to how a collected sample informs population characteristics, then briefly review our existing tools before the fish-estimation example. Official PISA summary pp.2–3: https://www.mext.go.jp/content/20261005-mxt_kyoiku01-000052350_009.pdf. Domestic summary p.1: https://www.mext.go.jp/content/20250731-mxt_chousa02-000044035-05.pdf"
+      "ja": "結論は一つです。順位が高いことと学力が伸びていることは同じではありません。PISA二〇二五の日本は科学、読解、数学でOECD加盟国中一位。一方、国内の別の調査では小六国語のスコアが二〇一六年五〇五・八から二〇二四年四八九・九へ低下しました。左と右は対象年齢も調査も異なるため、点数同士を引いたり二調査を一本の折れ線に接続したりしません。他国との相対的位置と、自国の過去からの変化は異なる問いだと示します。原因の証明はしていません。日本のデータも集められた標本から全体の特徴を捉える資料です。最後に、米国の学校がスマホを預ける対応を始めた事例の短い動画を見て、現場の対応でニュースを締めます。その後、既習事項と今日の推定へ進みます。公式PISA概要pp.2–3: https://www.mext.go.jp/content/20261005-mxt_kyoiku01-000052350_009.pdf。国内調査p.1: https://www.mext.go.jp/content/20250731-mxt_chousa02-000044035-05.pdf",
+      "en": "Make one conclusion: high rank and improvement over time are different claims. Japan ranked first among OECD countries in science, reading and mathematics in PISA 2025, while the separate domestic study found grade-six Japanese fell from 505.8 in 2016 to 489.9 in 2024. Explicitly distinguish the ages, assessments and scales; never subtract across the two tests or splice them into one trend. The left asks about relative international position; the right asks about change within Japan. Neither proves a cause. Link back to how a collected sample informs population characteristics, then finish the news opening with the short US school phone-policy video before the course review and fish-estimation example. Official PISA summary pp.2–3: https://www.mext.go.jp/content/20261005-mxt_kyoiku01-000052350_009.pdf. Domestic summary p.1: https://www.mext.go.jp/content/20250731-mxt_chousa02-000044035-05.pdf"
     },
     {
       "page": 10,
+      "textbook": "",
+      "title": "",
+      "ja": "学力低下の分布と日本の経年比較を見た後、冒頭のニュースを学校現場の対応で締めます。クリックしてAP記事冒頭の一分二十五秒の動画School staff and students applaud new cell phone ban policyを再生します。Doss High School、ケンタッキー州ルイビルの二〇二五年八月の事例。撮影Dylan Lovan/APです。生徒と先生の声を見せて、学校ではスマホを預ける対応も始まっている、と紹介します。映像は政策の一例で、スマホが学力低下の原因だと証明したものでも、制限の全国的な効果を測定したものでもありません。視聴後、現場の声から始まる問いに、データでどこまで答えられるかが統計の役割だと短く締め、既習の標準化・標本と今日の推定へ進みます。元記事・埋め込み動画: https://apnews.com/article/schools-cellphone-bans-social-media-parents-d6464fbfdfae83189c752fe0c40fd060",
+      "en": "Finish the opening news sequence after the NYT distributions and Japan comparison with a school response. Open the linked AP article and play the first embedded video, “School staff and students applaud new cell phone ban policy,” 85.8 seconds, AP Video by Dylan Lovan. The footage is the August 2025 Doss High School case in Louisville, Kentucky. It illustrates a policy being tried, not proof that phones caused the achievement decline or a measurement of nationwide ban effectiveness. After watching, close the news arc by asking how data can help answer questions raised by real experiences, then move into the brief course review and estimation. Article and embedded video: https://apnews.com/article/schools-cellphone-bans-social-media-parents-d6464fbfdfae83189c752fe0c40fd060"
+    },
+    {
+      "page": 11,
       "textbook": "123〜127・131（復習から推定へ）",
       "title": "あの例で、何を学んだ？",
       "ja": "三つの図を左から読みます。ロボット一体のZ、クラスの記録から計算した標本平均と不偏分散、そしてCurryの五試合の平均を比べたZとTです。この順に短く復習し、先に計算した分散を次のTの式に使うつながりを確認します。魚は今日初めて扱う未知の群れの例です。計算を長くやり直さず、各道具が何を比べるかを思い出してもらいます。 100分の進行目安：0〜12分は復習と魚の導入。12〜20分は5分のバスケットボール課題と答え合わせ。20〜38分は推定量の性質と選択の偏りの探索。38〜52分は点推定と8分の通学時間課題。52〜72分は一枚に示した20分の3問ミニ模試。72〜90分は順に答え合わせ。90〜100分はALの説明と独立した取り組みです。計算課題の作業時間は計33分です。",
       "en": "Read the three visuals from left to right: one robot and Z, class records and sample mean plus unbiased variance, then basketball sample means and Z/t. Briefly retrieve them in that order. Calculate variance before using the same highlighted quantity in T. The fish introduce today’s unknown-population scenario. Recall what each tool compares rather than repeating a full prior lecture. Pacing for 100 minutes: 0–12 review and fish setup; 12–20 the 5-minute basketball task and feedback; 20–38 estimator properties and the single bias exploration; 38–52 point estimation and the 8-minute commute task; 52–72 the single-screen 20-minute three-question mini exam; 72–90 sequential worked answers; 90–100 AL handover and independent work. The calculation tasks provide 33 minutes of working time. Avoid re-teaching earlier averages or opening the removed overlapping activities."
     },
     {
-      "page": 11,
+      "page": 12,
       "textbook": "123（1個の値の標準化）",
       "title": "標準化：1体の値を比べる",
       "ja": "ロボットの身長を思い出してもらいます。これは一体の値エックスを比べる公式です。母平均を引いて母標準偏差で割ると、平均から標準偏差何個分離れたかが分かります。ミューはmu、シグマはsigmaと読みます。百七十センチなら、百六十から十センチ高く、五センチ二個分なのでZは二です。ここでは標本平均ではなく、一体の値であることを強調して次へ進みます。",
       "en": "Recall the robot heights with population mean 160 cm and SD 5 cm. This formula standardizes one observation X: subtract the population mean, then divide by the population SD. A 170 cm robot is two SDs above the mean. Read mu and sigma aloud. Emphasize that X is one robot, not the mean of a sample. This is a short retrieval review rather than a new derivation."
     },
     {
-      "page": 12,
+      "page": 13,
       "textbook": "122（標本平均）・126・132（標本不偏分散）・134 脚注2（標本分散）",
       "title": "平均と標本不偏分散を計算する",
       "ja": "同じストップウォッチの絵からクラスの一秒記録を思い出してもらいます。五人の記録を足して五で割った値が標本平均です。母分散を不偏に推定するには、各値と標本平均の差を二乗して足し、標本数マイナス一で割ります。ここでは四で割ります。分母nの標本分散は、その標本の散らばりを記述する量であり、目的が違います。前回のロボット五体の計算も同じです。公式の再計算に長く時間をかけず、次のページで、この標本平均とオレンジの標本不偏分散をZとTの式に使うと予告します。ハットの付いた量は標準偏差ではなく分散で、平方根を取る前の量だと短く確認します。",
       "en": "Use the repeated stopwatch visual to recall the five sampled class records and the five-robot arithmetic. Sum and divide by n for the sample mean. To estimate population variance unbiasedly, sum squared deviations from that sample mean and divide by n−1: four for five observations. Contrast this purpose with describing the observed sample using denominator n. Keep the retrieval brief, then carry the sample mean and orange unbiased variance directly into the following Z/t comparison. Clarify that the hatted quantity is variance, before taking a square root."
     },
     {
-      "page": 13,
+      "page": 14,
       "textbook": "123（標本平均の標準化）・125〜126（t分布）",
       "title": "標本平均を比べる：Zとt",
       "ja": "同じバスケットボールの絵でCurryの五試合へ戻します。前の一体の値ではなく、今回は標本平均エックスバーを母平均と比べます。母分散が分かれば上のZ、母分散が分からず標本不偏分散で推定する正規母集団のモデルでは下のTを使います。分母は個々の値の標準偏差ではなく、平均のばらつきです。なぜtかというと、Curryの母分散が未知で、手元の五試合から標本不偏分散で推定しているためです。平均だけでなく分母の散らばりも推定なので、そこに追加の不確かさがあります。t分布は標準正規分布より裾が厚く、その不確かさを考慮します。標本が五つだからという理由だけではなく、母分散を推定していることが要点です。この例は独立な正規母集団からの標本という授業用モデルです。tの自由度は五マイナス一で四、と使い方だけを確認します。Tを三つ目のZとは呼びません。サイコロの平均の例とCurryの架空の五試合を短く結び、直前のページで計算したオレンジの標本不偏分散を、同じ色の分母の記号へ入れると明示します。ハットの付いた量は分散であり、nで割って平方根を取った分母全体は標本平均の推定標準誤差です。個体の標準偏差とは区別します。",
       "en": "Repeat the basketball visual to recall the fictional five-game Curry example, and connect to repeated die averages. Compare a sample mean, not one observation. Known population variance gives the upper Z formula. For an independent normal-population sample with unknown variance estimated by unbiased sample variance, use the lower T formula with n−1 degrees of freedom. The denominator measures variability of a sample mean. Explain why T is needed: Curry’s population variance is unknown, so the five games estimate both the mean and the variance in the denominator. That estimated denominator adds uncertainty, represented by the heavier tails of t compared with standard normal Z. Five observations alone are not the reason to choose t. Under the independent normal-population classroom model, df=5−1=4. T is not a third Z. Recall the distribution conditions without a lengthy derivation, point back to the preceding variance calculation. The orange hatted variance is the same quantity on both pages. Dividing it by n and taking the square root produces the estimated standard error of the sample mean, not the SD of one individual."
     },
     {
-      "page": 14,
+      "page": 15,
       "textbook": "",
       "title": "",
       "ja": "画面いっぱいの数百匹のマグロを、まず言葉を足さずに見せます。魚の位置、間隔、大きさ、向きは一様に整列させず、画面の端でも切れています。見える範囲の外にも群れが続いていて、全部を数えて量ることは難しい、と想像してもらいます。画像から母平均の値を読み取ろうとせず、全体を知りたいのに観測できるのは一部、という問いへ入ります。授業用の模式的な魚で、実測データではありません。",
       "en": "Show hundreds of tuna without explanatory text. Positions, spacing, sizes and orientations are irregular; fish are clipped by the frame to suggest the shoal continues beyond what is visible. Ask whether every fish could realistically be weighed. This is a classroom illustration, not measured population data. Introduce the need to learn about a whole group from partial observation."
     },
     {
-      "page": 15,
+      "page": 16,
       "textbook": "",
       "title": "",
       "ja": "前のスライドと魚の位置、大きさ、向きは一切変えていません。同じ群れの一匹だけを明るくし、五十キロと示します。他の魚は暗く残して、測ったのが群れの一部であることを見せます。この一匹を五十キロと知ったとき、群れ全体の平均についてどこまで言えるか、学生に尋ねます。まだ五十が母平均だとは言いません。",
       "en": "Keep every fish in exactly the same position, orientation and size as the preceding image. Highlight only one fish and label it 50 kg; dim rather than remove the rest. Ask what knowing this single weight allows us to say about the whole shoal. Do not equate the observed weight with the population mean."
     },
     {
-      "page": 16,
+      "page": 17,
       "textbook": "131 §1",
       "title": "問題文に、母平均も母分散もない",
       "ja": "既知の母平均と母分散を与えてZを計算する問題を思い出してもらいます。今回はその二つが問題文にありません。tの練習では母分散を推定しましたが、今日は母平均も母分散も知りたい状況です。手元の標本だけで何が言えるか、まず予想してもらいます。全部の魚を量れないという具体的な場面へつなげます。",
       "en": "Recall a known-parameter Z problem, where population mean and variance were supplied. In the t exercise variance was unknown. Now ask what we can learn when both population mean and variance are unknown and only sampled fish weights are available. Invite a prediction, then move into the fish story rather than revealing a new formula immediately."
     },
     {
-      "page": 17,
+      "page": 18,
       "textbook": "",
       "title": "",
       "ja": "最初に見せた群れの配置をそのまま保ち、一匹だった強調を五匹へ増やします。先ほどの五十キロの魚も残っています。値は四十、四十五、五十、五十五、六十キロです。測れるのはこの五匹だけで、他の魚は背景として暗く残っています。見える全体と、実際に測った標本を区別し、ここから五匹の平均五十キロを母平均の推定に使う話へつなげます。絵の大きさから重さを正確に読むための図ではありません。",
       "en": "Keep the identical shoal and highlight five fish, retaining the original 50 kg fish. Their example weights are 40, 45, 50, 55 and 60 kg. The dim fish remain visible as the unmeasured population context. Distinguish the five measured observations from the whole group and lead into the sample mean of 50 kg as an estimate. Apparent size is illustrative, not a scale for calculating weight."
     },
     {
-      "page": 18,
+      "page": 19,
       "textbook": "131〜132",
       "title": "推すい定ていEstimation",
       "ja": "五匹の標本平均五十キロまで計算したところで、今日の主題を明かします。五十は今回の標本の事実です。それを使って未知の群れ全体の特徴を推し量るのが推定です。今週の問いは、答えを計算できるかだけでなく、その推定方法がどんな性質を持つかです。次に母数、推定量、推定値という三つの言葉を分けます。",
       "en": "After calculating 50 kg for the five sampled fish, reveal the topic for today: estimation. Fifty is a fact about this observed sample. Using it to learn about the unknown population is an inferential step. The new question is not just how to calculate an answer but what properties make the estimation method useful. Next distinguish parameter, estimator and estimate."
     },
     {
-      "page": 19,
+      "page": 20,
       "textbook": "131",
       "title": "母数：母平均と母分散",
       "ja": "群れ全体の平均と分散は固定された母数ですが、ここでは未知です。標本から得た推定値とは区別します。 記号の読みも確認します。μはmu、ミュー。σはsigma、シグマ。σ²はsigma squared、シグマ二乗です。",
       "en": "The population mean and variance are fixed characteristics of the shoal, unknown in this example. Distinguish them from sample estimates. Read μ as mu, σ as sigma and σ² as sigma squared. Keep the spoken name separate from the parameter meaning."
     },
     {
-      "page": 20,
+      "page": 21,
       "textbook": "131",
       "title": "計算方法と、計算した数字を分ける",
       "ja": "まず大きい二つの言葉を指して区別します。左の推定量は、標本から平均を求めるルールで、エックスバーで表します。データを入れる前には、どの魚が選ばれるかによって変わる確率変数です。右の推定値は、そのルールに今回の五匹を入れて得た五十キロという数字です。母平均が五十と確定したわけではありません。別の標本でも計算のルールは同じですが、得られる数字は変わります。次に左のルールを公式として見せます。",
       "en": "Point first to the two large labels. On the left, the estimator is the sample-mean rule, written X-bar. Before observing the sample it is a random variable because the selected fish can differ. Substituting this sample gives the estimate on the right: 50 kg. That does not establish a population mean of 50. Another sample uses the same rule but can produce a different number. Next show the full formula behind the rule."
     },
     {
-      "page": 21,
+      "page": 22,
       "textbook": "122・131〜132",
       "title": "母平均の点推定：5匹の標本平均を使う",
       "ja": "無作為に選んだ五匹の平均が五十キロでした。この五匹を根拠に、群れ全体の平均重量、つまり母平均を五十キロと推定します。単に標本平均を報告するだけでなく、それを未知の母平均の点推定値として使う、という一歩です。ただし、真の母平均からどれくらい外れているかは、まだ答えていません。標本の最小値四十から最大値六十の間に母平均があると保証したわけでもありません。不確かさを幅で表す方法は区間推定として次回扱います。",
       "en": "The five randomly selected fish average 50 kg. Based on these five fish, we use 50 kg as our point estimate of the population mean weight. We have not yet answered how far this estimate could be from the true population mean. The observed range of 40 to 60 kg does not establish bounds for that mean. Quantifying uncertainty with an interval comes next week."
     },
     {
-      "page": 22,
+      "page": 23,
       "textbook": "122・131〜132（標本から母平均を推定）",
       "title": "チャレンジ1　六つの標本を、一人で比べる",
       "ja": "全員がAからFの六つすべてを個人で計算します。班分けや分担はしません。母集団は架空の選手の全二十試合で、母平均二十八点は比較用の既知の基準として初めから示します。最初の二分で六つの標本平均を計算し、次の二分で横軸二十二から三十四点、縦にAからFの六行を作り、各平均の位置に点を打ちます。二十八点のオレンジの縦線を引き、高いか低いかと差を記します。最後の一分で、同じ選手でも異なる標本から異なる推定値が出る理由を一文にまとめます。標本間に試合の重複はあります。実際のNBA記録ではなく授業用データです。六つの推定値の範囲は信頼区間ではありません。",
       "en": "Every student completes all six samples independently; do not divide the class or assign one row per person. The population is the fictional player’s complete 20-game season, and its known mean of 28 points is supplied as a benchmark from the start. Allow two minutes for six means, two minutes to draw six horizontal rows A–F against a common 22–34 point axis with 2-point ticks, and one minute for interpretation. Plot one dot per sample and an orange vertical line at 28. Label whether each estimate is above or below it and by how many points. Ask why different samples produce different estimates despite correct arithmetic. Samples can overlap; these are classroom data, not NBA records, and their range is not a confidence interval."
     },
     {
-      "page": 23,
+      "page": 24,
       "textbook": "122・131〜132",
       "title": "六つの平均を、母平均28点と比べる。",
       "ja": "六つの計算を全員で確認します。A三十二・四、B二十四・四、C二十六、D三十二、E二十六・八、F三十一・六。各自の図が、六行と共通の横軸、二十八点のオレンジの線を持つか確認します。オレンジの線から各点までが、既知の母平均との差です。AとDとFは高め、BとCとEは低め。標本が異なれば、計算が正しくても推定値は変わります。比較用の母平均は全二十試合の合計五百六十を二十で割った二十八点です。",
       "en": "Check all six means: A 32.4, B 24.4, C 26, D 32, E 26.8, F 31.6. Students check their own six-row dot chart against the same common axis and orange benchmark at 28. The horizontal distance from the benchmark is the estimation error for that sample. A, D and F are high; B, C and E are low. Correct arithmetic does not eliminate variation from sample selection. The supplied population mean is 560/20 = 28 from the complete fictional season."
     },
     {
-      "page": 24,
+      "page": 25,
       "textbook": "131〜132",
       "title": "不ふ偏へん性せいUnbiasedness",
       "ja": "不偏性です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain unbiased title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 25,
+      "page": 26,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "不偏性",
       "ja": "右のシータは、知りたい母集団の固定値です。たとえば母平均や母分散が当たります。未知であっても、母集団を固定すれば値は決まっています。 θはtheta、シータと読み、θ̂はtheta-hat、シータ・ハットと読みます。ハットは標本から推定する量を区別する印です。",
       "en": "Theta on the right is the fixed population parameter we want to learn, such as the population mean or variance. Unknown does not mean random. Pronounce θ as theta and θ̂ as theta-hat. The hat distinguishes the estimator from the population parameter."
     },
     {
-      "page": 26,
+      "page": 27,
       "textbook": "131〜132（母数・推定量・母平均の不偏性）",
       "title": "母数を、魚の母平均に置き換える",
       "ja": "一般の記号を魚の例に置き換える操作を、まず右辺だけで見せます。上のオレンジのシータから矢印を下へたどり、群れ全体の母平均ミューに置き換わったことを指します。左辺のシータハットは、このページではまだ変えません。式を代数的に解いているのではなく、一般の母数を今回知りたい母平均として具体化しています。Eは期待値、等号も元のままです。",
       "en": "Make only the right-hand substitution first. Follow the orange leader from theta in the general equation to mu-x in the fish equation. Theta is the general population parameter; here the target is the shoal’s mean weight. Leave theta-hat unchanged for now. This instantiates the notation for this example rather than algebraically solving an equation. E and the equals sign remain unchanged."
     },
     {
-      "page": 27,
+      "page": 28,
       "textbook": "131〜132（母数・推定量・母平均の不偏性）",
       "title": "推定量を、5匹の標本平均に置き換える",
       "ja": "前のページと同じ位置に一般の式と魚の式を残します。右辺の置き換えをオレンジで保持したまま、左辺のシータハットを青緑にします。その矢印を下へたどると、五匹の標本平均エックスバーになります。一般の推定量に、この例で使う標本平均を対応させました。期待値Eや等号を置き換えたのではありません。標本平均が不偏であるという教科書の性質を魚の例で表しており、この置き換えそのものが不偏性の証明ではありません。",
       "en": "Retain both equations in the same positions. Keep the orange theta-to-mu substitution, then follow the new teal leader from theta-hat to X-bar. We choose the sample mean as the estimator for this fish example. The expectation operator E and equals sign stay unchanged. This illustrates the textbook’s unbiasedness property of the sample mean; substituting names is not itself a proof of unbiasedness."
     },
     {
-      "page": 28,
+      "page": 29,
       "textbook": "131〜132（母数・推定量・母平均の不偏性）",
       "title": "魚の例：標本平均は、母平均の不偏推定量",
       "ja": "置き換え後の式だけを残します。青緑のエックスバーは五匹から計算する標本平均で、Eが付くので無作為標本を繰り返したときの期待値です。オレンジのミューは群れ全体の固定された未知の母平均です。二つの中心が一致するのが不偏性です。今回の五十キロが母平均と必ず一致する、という主張ではないと確認し、次の有効性へ進みます。",
       "en": "Keep only the completed equation. The teal X-bar is the mean of the five sampled fish; E makes the left side its expectation across repeated random samples. The orange mu-x is the fixed unknown population mean. Unbiasedness equates these, not the observed 50 kg with the true parameter. Transition from the correct center to efficiency: how tightly do estimates cluster around it?"
     },
     {
-      "page": 29,
+      "page": 30,
       "textbook": "132 脚注1",
       "title": "有ゆう効こう性せいEfficiency",
       "ja": "有効性です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain efficiency title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 30,
+      "page": 31,
       "textbook": "132 脚注1・123",
       "title": "有効性Efficiency",
       "ja": "有効性という言葉を残しながら、まず方法Aだけを見せます。同じ五匹の標本があるのに、最初の一匹だけを母平均の推定に使う方法です。無作為に選ばれた一匹なので、繰り返したときの中心は母平均五十キロですが、推定量の分散は百キロ二乗と大きいモデルです。正しい中心にあるだけで十分だろうかと問い、次の方法へ進みます。",
       "en": "Keep the term efficiency visible. Start with method A: although five observations are available, use only the first randomly selected fish to estimate the population mean. Its expectation is the population mean of 50 kg, but estimator variance is 100 kg² in this model. Ask whether the correct center alone is sufficient before adding the alternative."
     },
     {
-      "page": 31,
+      "page": 32,
       "textbook": "132 脚注1（有効性）・123（標本平均の分散）",
       "title": "有効性Efficiency",
       "ja": "前の曲線と軸を保ち、方法Bの曲線だけを加えます。同じ五匹の情報を全て使った標本平均です。二つとも不偏ですが、推定量の分散は百に対して二十です。オレンジの母平均の線は動かず、青緑の曲線だけが狭くなったことを指します。ここでは標本数を増やしたのではなく、既にある同じ標本からの推定方法を比べています。",
       "en": "Retain A and the axes, then add B: use the mean of all five observations already available. Both methods are unbiased, but estimator variance falls from 100 to 20 kg². Point to the unchanged orange mean and the narrower teal curve. This compares methods on the same available sample, not an increase in sample size."
     },
     {
-      "page": 32,
+      "page": 33,
       "textbook": "132 脚注1（有効性）・123（標本平均の分散）",
       "title": "有効性Efficiency",
       "ja": "二つの曲線を残して有効性の定義を結びます。同じ母数を不偏に推定する方法を比べるなら、分散が小さい方がより有効です。この二つでは五匹全ての平均がより有効です。無条件にどんな推定量より最良だと主張するのではなく、この比較での相対的な性質です。次の一致性では、方法を標本平均に固定し、標本数の方を変えると予告します。",
       "en": "Retain the comparison and state the definition: among unbiased methods estimating the same parameter, smaller estimator variance means greater efficiency. B is more efficient than A in this comparison; do not claim an unrestricted global optimum. Next switch to consistency: fix the sample-mean method and vary sample size."
     },
     {
-      "page": 33,
+      "page": 34,
       "textbook": "132 脚注1",
       "title": "一いっ致ち性せいConsistency",
       "ja": "一致性です。何を知りたいかを一度言葉で確認してから、具体例を見せましょう。最初は名前だけを示し、次のスライドで内容を足します。",
       "en": "Use this slide to explain consistency title. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
     },
     {
-      "page": 34,
+      "page": 35,
       "textbook": "132 脚注1・123",
       "title": "一致性Consistency",
       "ja": "同じ母平均五十キロ、母標準偏差十キロの仮想的な正規母集団から、毎回5匹を無作為に取り出すモデルです。曲線は魚そのものの重さではなく、何度も取り直した標本平均の分布です。横軸と縦軸を固定し、前の曲線を残して比較します。母平均のオレンジの破線は動きません。今回加えた曲線とポインターを指し、標本平均の標準偏差が4.47キロになったことを確認します。標本数が増えると母数の近くに集まりやすくなるという一致性を示します。一回ごとの平均が順番に必ず母平均へ近づく、あるいは母平均と必ず一致するという意味ではありません。曲線が高くなるのは幅が狭くなったためで、全体の面積はどれも一です。 一致性という見出しを三枚とも残し、方法は標本平均に固定して標本数だけを変えたことを明示します。最後に定義を読み、方法比較の有効性と区別します。",
       "en": "Repeated independent random samples of 5 fish come from the same hypothetical normal population with mean 50 kg and SD 10 kg. Each curve describes sample means, not individual weights. Keep both axes fixed, retain previous curves, and point to the new curve. The population mean stays fixed while the sample-mean SD becomes 4.47 kg. This illustrates consistency: concentration near the parameter as sample size grows, not guaranteed monotonic improvement in each realized sample. Taller curves still have total area one. Keep consistency visible on all three pages. The sample-mean method stays fixed; only n changes. End by reading the definition and contrast this with the earlier comparison of estimation methods."
     },
     {
-      "page": 35,
+      "page": 36,
       "textbook": "132 脚注1・123",
       "title": "一致性Consistency",
       "ja": "同じ母平均五十キロ、母標準偏差十キロの仮想的な正規母集団から、毎回20匹を無作為に取り出すモデルです。曲線は魚そのものの重さではなく、何度も取り直した標本平均の分布です。横軸と縦軸を固定し、前の曲線を残して比較します。母平均のオレンジの破線は動きません。今回加えた曲線とポインターを指し、標本平均の標準偏差が2.24キロになったことを確認します。標本数が増えると母数の近くに集まりやすくなるという一致性を示します。一回ごとの平均が順番に必ず母平均へ近づく、あるいは母平均と必ず一致するという意味ではありません。曲線が高くなるのは幅が狭くなったためで、全体の面積はどれも一です。 一致性という見出しを三枚とも残し、方法は標本平均に固定して標本数だけを変えたことを明示します。最後に定義を読み、方法比較の有効性と区別します。",
       "en": "Repeated independent random samples of 20 fish come from the same hypothetical normal population with mean 50 kg and SD 10 kg. Each curve describes sample means, not individual weights. Keep both axes fixed, retain previous curves, and point to the new curve. The population mean stays fixed while the sample-mean SD becomes 2.24 kg. This illustrates consistency: concentration near the parameter as sample size grows, not guaranteed monotonic improvement in each realized sample. Taller curves still have total area one. Keep consistency visible on all three pages. The sample-mean method stays fixed; only n changes. End by reading the definition and contrast this with the earlier comparison of estimation methods."
     },
     {
-      "page": 36,
+      "page": 37,
       "textbook": "132 脚注1・123",
       "title": "一致性Consistency",
       "ja": "同じ母平均五十キロ、母標準偏差十キロの仮想的な正規母集団から、毎回100匹を無作為に取り出すモデルです。曲線は魚そのものの重さではなく、何度も取り直した標本平均の分布です。横軸と縦軸を固定し、前の曲線を残して比較します。母平均のオレンジの破線は動きません。今回加えた曲線とポインターを指し、標本平均の標準偏差が1.00キロになったことを確認します。標本数が増えると母数の近くに集まりやすくなるという一致性を示します。一回ごとの平均が順番に必ず母平均へ近づく、あるいは母平均と必ず一致するという意味ではありません。曲線が高くなるのは幅が狭くなったためで、全体の面積はどれも一です。 一致性という見出しを三枚とも残し、方法は標本平均に固定して標本数だけを変えたことを明示します。最後に定義を読み、方法比較の有効性と区別します。",
       "en": "Repeated independent random samples of 100 fish come from the same hypothetical normal population with mean 50 kg and SD 10 kg. Each curve describes sample means, not individual weights. Keep both axes fixed, retain previous curves, and point to the new curve. The population mean stays fixed while the sample-mean SD becomes 1.00 kg. This illustrates consistency: concentration near the parameter as sample size grows, not guaranteed monotonic improvement in each realized sample. Taller curves still have total area one. Keep consistency visible on all three pages. The sample-mean method stays fixed; only n changes. End by reading the definition and contrast this with the earlier comparison of estimation methods."
     },
     {
-      "page": 37,
+      "page": 38,
       "textbook": "132 脚注1",
       "title": "やってみよう！Can more fish fix a biased sample?",
       "ja": "バスケットボールの課題では、同じ選手でも標本ごとに推定値が違うことを確認しました。ここでは選び方を変えます。同じ二百匹、同じ匹数で、全体から無作為に選ぶ方法と、大きい五十匹だけを対象にする方法を同時に比較します。まずどちらが群れ全体の平均を推定できそうか予想してもらいます。五匹ずつを一回、その後百回実行し、二つの分布の位置を見ます。次に二十匹、五十匹へ増やす前に、偏りが消えると思うか尋ねます。数を変えると比較記録はリセットされます。五十匹では大きい魚の側は対象の全てを測るため、毎回同じ値になります。それでも群れ全体の母平均とは違うことが最大の気付きです。母平均は検証用に既知で、現実には未知です。活動内の説明ボタンで選ばれない百五十匹を確認してから結論へ進みます。",
       "en": "The basketball task showed that different samples yield different estimates. This exploration changes the selection method, not the target. Compare equal-size samples from the same 200-fish population: random selection from all fish versus selection only from the largest 50. Ask for predictions before one draw and 100 repetitions. Then increase n to 20 and 50, resetting the record each time. With n=50, the biased method measures its entire eligible group and gives the same answer every time, yet remains above the whole-population mean. This separates precision from selection bias. Known population truth is displayed only to evaluate the method. Reveal the explanation one point at a time."
     },
     {
-      "page": 38,
+      "page": 39,
       "textbook": "131〜132（母数・推定量・不偏性）",
       "title": "50匹を全て測っても、対象が違う",
       "ja": "活動と同じ二百匹を全て量った母平均は五十・六九キロ、大きい五十匹の平均は六十三・七四キロです。右側では五十匹を全部測るため標本平均にばらつきがなくても、対象が群れ全体ではありません。無作為に五十匹を抽出した一回の平均が必ず五十・六九になるという意味ではない点も確認します。図は一回の無作為標本と比較したものではなく、全二百匹と大きい五十匹の二つの平均を示しています。精密さと偏りを混同しないようにし、選ばれなかった百五十匹を指します。より多く集めればよいのではなく、まず対象を代表する選び方が必要だとまとめます。",
       "en": "These are two known means from the activity population: all 200 fish average 50.69 kg; the largest 50 average 63.74 kg. Selecting all eligible fish on the biased side removes sampling variation but does not make that restricted group representative. This graphic compares the two population-group means, not a single random sample with a biased sample. A random sample of 50 need not average exactly 50.69. Point to the excluded 150 fish and distinguish stability from absence of selection bias. Ask students to check who cannot enter a sample before simply asking for more observations."
     },
     {
-      "page": 39,
+      "page": 40,
       "textbook": "131〜132",
       "title": "選択の偏り：昼食代の調査",
       "ja": "ここは演習ではなく、選択の偏りを説明する事例です。全学生の昼食に払ってもよい金額を知りたいので、名簿全体から無作為抽出した五十人の調査Aが目的に合います。高価格カフェ利用者三百人だけの調査Bは、それ以外の学生を除外します。六百人へ増やしても除外は直りません。図は選べる範囲を示す模式図で、Aの今回の数値が必ず正確だという意味ではありません。計算を伴わない文章課題や待ち時間は設けず、次の点推定へ進みます。",
       "en": "Present this directly as an illustration, not a timed or written challenge. The target is all students’ willingness to pay for lunch. Survey A randomly samples 50 from the full roster; B samples 300 expensive-café customers and excludes noncustomers. Increasing B to 600 does not change its eligible frame. The schematic does not guarantee an exact estimate from A. Explain the selection issue and move directly into point estimation."
     },
     {
-      "page": 40,
+      "page": 41,
       "textbook": "132",
       "title": "点推定",
       "ja": "点推定の定義を最初に読みます。未知の母数を一つの数値で推定することです。魚の群れ全体の母平均ミューは未知で、五匹から計算した標本平均五十キロをその点推定値として使います。五十が確定した母平均ではないことを確認します。続く分散と通学時間の例でも、何という母数を何という一つの数値で推定するかを毎回明示します。区間推定は幅をつける次回の内容として短く区別します。",
       "en": "Define point estimation explicitly: estimate an unknown population parameter with a single numerical value. The shoal mean mu-x is unknown; use the five-fish sample mean of 50 kg as its point estimate. This does not establish the parameter as 50. In the variance and commute examples that follow, repeatedly identify which parameter each single numerical estimate targets. Mention interval estimation only as next week’s way to add a range."
     },
     {
-      "page": 41,
+      "page": 42,
       "textbook": "132（不偏性・母分散の点推定）",
       "title": "点推定の偏り：選び方と計算方法を区別",
       "ja": "活動二で見たのは、大きい魚だけを選び、小さい魚を対象から外した選択の偏りです。ここで扱うのは別の問題です。教科書の独立な無作為標本でも、標本平均からの偏差二乗和を標本数で割ると、母分散の推定値は平均的に小さめになります。左は選び方、右は計算方法と指して区別します。分母を標本数マイナス一にする補正が直すのは右側です。大きい魚だけを選ぶ問題を直せるわけではありません。計算自体は前回の復習なので、五匹の例で短く確認し、今回は推定方法の性質へ進みます。",
       "en": "Activity 2 demonstrated selection bias: small fish could never enter the sample. Now distinguish bias in the variance estimator. Under the textbook model of independent random observations, dividing squared deviations from the sample mean by n underestimates population variance on average. Point left for selection, right for calculation. Using n−1 corrects the right-hand issue; it cannot make a sample of only large fish representative. Treat the arithmetic as a brief recap, then focus on the estimation property."
     },
     {
-      "page": 42,
+      "page": 43,
       "textbook": "132（母分散の点推定）・134 脚注2",
       "title": "求める目的で、分母を選ぶ。",
       "ja": "左の五十は、この五匹に対して分母を五にして計算した標本分散です。右の六十二・五は、群れ全体の未知の母分散を不偏に推定するために使う値です。求める目的と分母を結び付けます。右が大きいから正しいと確認できたわけではなく、今回の母分散が六十二・五と確定したわけでもありません。二本の棒は同じ標本から得た二つの計算値であり、推定量の繰り返し分布を示す図ではありません。なぜ不偏と言えるかは、この一回ではなく次の繰り返しの期待値で説明します。",
       "en": "Use 50 kg² to describe this observed sample with the n-denominator definition. Use 62.5 kg² as the unbiased estimate of the unknown population variance. Link each number to its purpose. The larger value is not thereby proved correct, and population variance has not been established as 62.5. These bars compare two calculations from one sample, not sampling distributions. The reason for calling the method unbiased comes from its expected value over repeated samples, on the next slide."
     },
     {
-      "page": 43,
+      "page": 44,
       "textbook": "132 §5（母分散の点推定・不偏性）",
       "title": "点推定に使う推定量の性質：不偏性",
       "ja": "今回の新しい焦点は計算ではなく、推定方法が繰り返しの中でどんな性質を持つかです。教科書の独立な無作為標本のモデルで、同じ標本数の魚を何度も選び、毎回不偏分散を計算する場面を考えます。図の点は各回の値ではなく、推定量の期待値の位置です。分母が標本数の場合は母分散より平均的に低く、標本数マイナス一の場合は期待値が母分散に一致します。式の左側は推定量の期待値、右側は固定された未知の母分散です。一回で求めた六十二・五が母分散に等しいという保証ではありません。最後に、大きい魚だけを選ぶ問題は分母では解決できないと確認します。ここから通学時間の練習で、求める対象と使う分母を自分で選んでもらいます。",
       "en": "The new emphasis is the estimation property, not the arithmetic. Under the textbook model of independent random observations, imagine repeatedly drawing samples of the same size and calculating variance each time. The plotted dots mark expected values, not individual estimates. The n-denominator estimator is low on average; the n−1 estimator has expectation equal to the fixed population variance. The equation does not guarantee that the observed 62.5 is correct. Reiterate that denominator correction cannot repair selecting only large fish. Move directly to the commute-time challenge, where students choose the requested quantity and appropriate denominator themselves."
     },
     {
-      "page": 44,
+      "page": 45,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "チャレンジ2　通学時間の点推定",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
     {
-      "page": 45,
+      "page": 46,
       "textbook": "122・132（標本平均・母平均の点推定）",
       "title": "通学時間の点推定：母平均",
       "ja": "答え合わせを平均から始めます。五人の合計百二十五分を五で割り、平均二十五分を母平均の推定値として報告します。ここでは分散の式を同時に出しません。次のスライドでこの二十五分を基準として偏差を求めます。",
       "en": "Reveal the mean calculation first: the five times sum to 125 minutes, so the sample mean and point estimate of the population mean is 25 minutes. Keep variance off this page. Next use 25 as the reference for the squared deviations."
     },
     {
-      "page": 46,
+      "page": 47,
       "textbook": "126（標本不偏分散）",
       "title": "通学時間の点推定：母分散",
       "ja": "前のページで求めた平均二十五分を各通学時間から引きます。偏差はマイナス十、マイナス七、マイナス一、三、十五分です。それぞれを二乗すると百、四十九、一、九、二百二十五で、合計三百八十四分二乗です。母分散を不偏に推定するので四で割り、九十六分二乗を点推定値として報告します。次の棒グラフで各偏差二乗が合計にどう寄与したかを確認します。",
       "en": "Subtract the preceding mean of 25 minutes from each observation to obtain −10, −7, −1, 3 and 15. Their squares are 100, 49, 1, 9 and 225, totaling 384 min². Divide by n−1 = 4 to obtain the unbiased population-variance point estimate of 96 min². Next connect each squared deviation to its bar."
     },
     {
-      "page": 47,
+      "page": 48,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "母平均と母分散の点推定",
       "ja": "まず大きく示した結果を指し、その単位を確認します。グラフのどこがその結果に対応するかを学生に説明してもらいます。計算を繰り返し読むのではなく、結果と図の意味を主役にします。",
       "en": "Focus on the large result, its units and the accompanying graphic. Ask what the number tells us about the sample and what it does not establish about the population. Keep the interpretation secondary to the result and chart."
     },
     {
-      "page": 48,
+      "page": 49,
       "textbook": "123〜127・132・134 脚注2・202〜203",
       "title": "チャレンジ3　期末試験形式：3問",
       "ja": "二十分間、この一枚を表示し続けます。独立した三問で、問一は正規分布の割合と上位割合からの境界、問二は実データから平均と二つの分散を計算して点推定値を報告、問三はTと自由度を計算してt表の中央九十五パーセントを読みます。全問で計算過程と単位を記します。問題ごとの参考公式と二つの表へのリンクは表示しますが、値は代入しません。信頼区間の構成や仮説検定の採否は、まだ要求しません。解答を見せる前に三問の答案を仕上げてもらいます。",
       "en": "Keep this single page visible for twenty minutes. These are three independent exam-style calculations adapted from relevant past-paper formats: normal tail probability and percentile cutoff; sample summaries and population point estimates; T, degrees of freedom and a central t-table range. Show the symbolic references and table links without numerical substitution. Require working and units. Do not require construction of confidence intervals or a hypothesis-test decision. Complete all three answers before revealing solutions."
     },
     {
-      "page": 49,
+      "page": 50,
       "textbook": "123（標準化）",
       "title": "問1①　132分をZに直す",
       "ja": "問一の最初は電池持ちの一個の値を標準化します。百三十二から母平均百二十を引き、母標準偏差八で割ると一点五です。標本平均の標準誤差ではなく、一個の電池持ちの標準偏差を使う問題です。まだ一点五を確率とは呼ばず、次の表で右側の面積を読みます。",
       "en": "Standardize one battery-life observation: (132−120)/8 = 1.50. Use the SD of individual battery life, not a sample-mean standard error. A Z value is a position, not a probability. Next read its right-tail area."
     },
     {
-      "page": 50,
+      "page": 51,
       "textbook": "124・202（右側確率）",
       "title": "問1①　右側の面積を表から読む",
       "ja": "標準正規分布の右側表で一点五の行と〇・〇〇の列を読みます。〇・〇六六八なので六・六八パーセントです。図で百三十二分以上の右側を指し、ちょうど百三十二分の一点の確率ではないことを確認します。百分率へ直す百倍と表の丸めを確認します。",
       "en": "Read row 1.5 and column 0.00 of the right-tail normal table: 0.0668, or 6.68%. Point to the right-hand area for battery life of at least 132 minutes. It is not a probability at the single exact value. Use the table-rounded value."
     },
     {
-      "page": 51,
+      "page": 52,
       "textbook": "123〜124（標準化の式をXについて解く）・202",
       "title": "問1②　上位5％の境界時間",
       "ja": "今度は確率側から時間の境界を求めます。標準化の式をエックスについて解き、母平均に一点六五個分の母標準偏差を足します。百二十に十三・二を足すので百三十三・二分です。問題で指定した一点六五は丸められた値なので上位およそ五パーセントの境界です。電池持ちは連続量として扱い、整数得点のような切り上げはしません。",
       "en": "Reverse standardization to obtain a time cutoff: X = mu + z sigma = 120 + 1.65×8 = 133.20 minutes. The supplied rounded Z value gives an approximate top-five-percent cutoff. Battery life is continuous, so do not apply an integer-score ceiling."
     },
     {
-      "page": 52,
+      "page": 53,
       "textbook": "122・132（母平均の点推定）",
       "title": "問2　母平均の点推定",
       "ja": "問二の五件の合計は五十分です。五で割って標本平均十分を求め、母平均の点推定値として報告します。図の五台が今回の観測値で、群れ全体を全数調査したものではありません。次にこの十分からの偏差を縦の表で計算します。",
       "en": "The five observed delivery times sum to 50 minutes. Divide by five to get a sample mean of 10 minutes and report it as the population-mean point estimate. The robots represent these five observations, not a census. Next calculate deviations from 10 in a vertical table."
     },
     {
-      "page": 53,
+      "page": 54,
       "textbook": "132・134 脚注2",
       "title": "問2　偏差二乗和",
       "ja": "縦の表で偏差マイナス五、マイナス二、マイナス一、二、六を確認します。二乗は二十五、四、一、四、三十六で、合計七十分二乗です。右の棒は各観測が二乗和へどれだけ寄与したかを表します。同じ七十を次のページで二つの分母で割り分けます。",
       "en": "Read down the vertical table: deviations are −5, −2, −1, 2 and 6; their squares sum to 70 min². The bars show the separate contributions. Carry this same numerator into the two denominator choices on the next page."
     },
     {
-      "page": 54,
+      "page": 55,
       "textbook": "132・134 脚注2",
       "title": "問2　標本分散と、母分散の点推定",
       "ja": "七十を五で割ると、この標本を記述する標本分散十四分二乗です。四で割ると、母分散の不偏な点推定に使う十七・五分二乗です。報告する母平均の点推定は十分、母分散の点推定は十七・五分二乗です。二本の棒は同じ標本から計算した二つの量で、標本を繰り返した分布ではありません。",
       "en": "Divide 70 by n=5 for raw sample variance 14 min², or by n−1=4 for the unbiased population-variance point estimate of 17.5 min². Report 10 minutes for the population mean and 17.5 min² for population variance. The bars compare calculations from one sample, not sampling distributions."
     },
     {
-      "page": 55,
+      "page": 56,
       "textbook": "125〜127（t分布・自由度）",
       "title": "問3①　T値と自由度",
       "ja": "問三では既に計算された標本平均と標本不偏分散が与えられています。三十二から母平均二十八を引き、二十を五で割って平方根を取った二で割ります。Tは二です。分散二十自体で割らず、分母全体が標本平均の推定標準誤差であることを確認します。自由度は五マイナス一の四です。まだ二を確率とは呼ばず、次に表で中央九十五パーセントの境界を読みます。",
       "en": "The sample summaries are supplied. T = (32−28)/sqrt(20/5) = 4/2 = 2, with df = 5−1 = 4. Divide by the estimated sample-mean standard error, not by variance 20 itself. T is a standardized location, not a probability. Next read the central 95% boundary from the t table."
     },
     {
-      "page": 56,
+      "page": 57,
       "textbook": "127・203（t分布表）",
       "title": "問3②　t表：自由度4 × 上側0.025",
       "ja": "中央九十五パーセントなら残り五パーセントを左右へ半分ずつ分けます。上側確率〇・〇二五の列と自由度四の行で二・七七六四を読みます。左右の境界はマイナスとプラスの二・七七六四です。計算したT二はこの範囲内です。これはTという標準化した量の分布の中央範囲で、未知の母平均の信頼区間ではありません。また、ここでは仮説検定の採否まで要求していません。",
       "en": "A central 95% range leaves 2.5% in each tail. Read df 4 and upper-tail alpha 0.025 to obtain 2.7764. The boundaries are −2.7764 and +2.7764; calculated T=2 is inside. This is a central range of the T distribution, not a confidence interval for the population mean. No hypothesis-test decision is required here."
     },
     {
-      "page": 57,
+      "page": 58,
       "textbook": "131〜132（推定量・一致性）",
       "title": "ALでは、使うデータを増やして比べる",
       "ja": "ALでは正規分布から生成された千個のデータを使います。生成元の母平均五と母分散四は、モデルの設定値です。五十個、二百個、千個について、平均、標本分散、不偏分散を比較します。千個なら必ず五と四に一致するわけでも、今回のデータで順に必ず近づくわけでもありません。魚で練習した計算方法を、Excelの範囲へ置き換えます。",
       "en": "The AL supplies 1,000 generated observations from a normal model with mean 5 and variance 4. Those are generating-model parameters, not guaranteed exact summaries of the realized 1,000 values. Compare the three statistics using 50, 200 and 1,000 observations. More data do not guarantee monotonically closer estimates in this particular dataset. Transfer the fish calculations to spreadsheet ranges."
     },
     {
-      "page": 58,
+      "page": 59,
       "textbook": "132 §4〜5・134 脚注2（定義）／Excel関数はALの指定",
       "title": "Excelでも、求める量と分母を分ける",
       "ja": "関数名を暗記する前に、何を求める列なのかを確認します。平均はAVERAGE、分母が標本数の標本分散はVAR.P、不偏分散はVAR.Sです。VAR.Pという関数名でも、標本データに適用すれば分母が標本数の標本分散を計算します。ここでのA1からA5は五個の練習例で、課題のセル位置ではありません。ALでは見出しや空白を数えず、指定件数の数値を選びます。",
       "en": "Choose the requested statistic first: AVERAGE for mean, VAR.P for variance with denominator n, and VAR.S for unbiased variance with denominator n minus one. Applying VAR.P to sample observations calculates their n-denominator variance; the function name does not make those observations a complete population. A1:A5 is only a five-value syntax example, not an assignment range. Select the actual 50, 200 or 1,000 numerical records in the AL."
     },
     {
-      "page": 59,
+      "page": 60,
       "textbook": "132（母平均・母分散の点推定）",
       "title": "母平均と母分散の点推定",
       "ja": "最後に母平均と母分散を何で点推定するかを式で確認します。母平均は標本平均、母分散は標本不偏分散です。ALでは五十、二百、千個の指定されたデータ範囲を自分で確認して計算します。今回の推定値を未知の母数と取り違えないよう、単位と求める量を記して独立した作業へ移ります。",
