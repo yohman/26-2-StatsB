@@ -55,8 +55,8 @@
       "page": 8,
       "textbook": "131",
       "title": "知りたいのは、群れ全体の特徴",
-      "ja": "知りたいのは、群れ全体の特徴を確認します。図のどこを見て判断するか学生に尋ね、次の具体例へつなげます。式を先に覚えさせるのではなく、何を求めたいかを確認してから進めましょう。",
-      "en": "Use this slide to explain parameter. Ask students to interpret the chart or quantity in words before moving to the next step. Keep this as one teaching point rather than adding a derivation."
+      "ja": "undefined 記号の読みも確認します。μはmu、ミュー。σはsigma、シグマ。σ²はsigma squared、シグマ二乗です。",
+      "en": "undefined Read μ as mu, σ as sigma and σ² as sigma squared. Keep the spoken name separate from the parameter meaning."
     },
     {
       "page": 9,
@@ -110,23 +110,23 @@
     {
       "page": 16,
       "textbook": "122・131〜132（標本から母平均を推定）",
-      "title": "チャレンジ1　この選手は、平均30点以上？",
-      "ja": "教室をAからFの六班に割り当て、各自は担当行の五試合だけを使います。全二十試合の記録と母平均はまだ見せません。最初の二分で各自が平均を計算して班内で照合し、次の二分で監督への一行報告を作ります。代表者が推定値を板書し、最後の一分で他班の数字と比べます。監督の問いは平均三十点以上の選手かどうかですが、点推定値と確定した事実を区別した報告を求めます。正しい計算でも異なる標本から異なる推定値が出ることを学生自身に経験してもらう課題です。六班の標本は同じ架空の二十試合からの抽出例で、班の間で試合が重なります。同じ得点が二つあることは同じ試合の重複とは限りません。実際のNBAデータではありません。",
-      "en": "Assign six groups A–F. Each student uses only their group’s five-game sample; keep the full 20-game season and population mean hidden. Allow two minutes to calculate and check within groups, two minutes to draft a one-line report to the coach, and one minute to post and compare all six estimates. The coach wants to know whether this is a 30-points-per-game player. Require students to distinguish a point estimate from a justified certainty. The point is to experience conflicting estimates despite correct arithmetic. Samples come from the same fictional 20-game season and may overlap across groups; equal scores can belong to different games. These are not actual NBA records."
+      "title": "チャレンジ1　六つの標本を、一人で比べる",
+      "ja": "全員がAからFの六つすべてを個人で計算します。班分けや分担はしません。母集団は架空の選手の全二十試合で、母平均二十八点は比較用の既知の基準として初めから示します。最初の二分で六つの標本平均を計算し、次の二分で横軸二十二から三十四点、縦にAからFの六行を作り、各平均の位置に点を打ちます。二十八点のオレンジの縦線を引き、高いか低いかと差を記します。最後の一分で、同じ選手でも異なる標本から異なる推定値が出る理由を一文にまとめます。標本間に試合の重複はあります。実際のNBA記録ではなく授業用データです。六つの推定値の範囲は信頼区間ではありません。",
+      "en": "Every student completes all six samples independently; do not divide the class or assign one row per person. The population is the fictional player’s complete 20-game season, and its known mean of 28 points is supplied as a benchmark from the start. Allow two minutes for six means, two minutes to draw six horizontal rows A–F against a common 22–34 point axis with 2-point ticks, and one minute for interpretation. Plot one dot per sample and an orange vertical line at 28. Label whether each estimate is above or below it and by how many points. Ask why different samples produce different estimates despite correct arithmetic. Samples can overlap; these are classroom data, not NBA records, and their range is not a confidence interval."
     },
     {
       "page": 17,
       "textbook": "122・131〜132",
-      "title": "全員、同じ式。それでも報告が割れた。",
-      "ja": "板書された六班の数字を確認します。Aは合計百六十二で三十二・四、Bは百二十二で二十四・四、Cは百三十で二十六、Dは百六十で三十二、Eは百三十四で二十六・八、Fは百五十八で三十一・六です。A、D、Fは三十点以上、B、C、Eは未満になり、同じ選手への報告が分かれます。全員の式が正しくても、見た試合が違えば推定値は違います。ここでは母平均の真の値はまだ伏せます。平均を推定値として報告しながら、三十点以上の選手と断言するには情報が足りない、と説明した班を評価します。次のスライドで初めて全シーズンを開示します。",
-      "en": "Check the posted estimates: A 162/5=32.4, B 122/5=24.4, C 130/5=26, D 160/5=32, E 134/5=26.8, F 158/5=31.6. A, D and F are above the coach’s threshold; B, C and E are below. Correct arithmetic has produced conflicting reports because the samples differ. Keep the true season mean hidden on this slide. A responsible report states the point estimate and acknowledges that these five games do not establish a population mean above 30. Reveal the complete season only next."
+      "title": "六つの平均を、母平均28点と比べる。",
+      "ja": "六つの計算を全員で確認します。A三十二・四、B二十四・四、C二十六、D三十二、E二十六・八、F三十一・六。各自の図が、六行と共通の横軸、二十八点のオレンジの線を持つか確認します。オレンジの線から各点までが、既知の母平均との差です。AとDとFは高め、BとCとEは低め。標本が異なれば、計算が正しくても推定値は変わります。",
+      "en": "Check all six means: A 32.4, B 24.4, C 26, D 32, E 26.8, F 31.6. Students check their own six-row dot chart against the same common axis and orange benchmark at 28. The horizontal distance from the benchmark is the estimation error for that sample. A, D and F are high; B, C and E are low. Correct arithmetic does not eliminate variation from sample selection."
     },
     {
       "page": 18,
       "textbook": "122・131〜132",
-      "title": "全20試合を開くと、平均は28点。",
-      "ja": "全二十試合の記録を開示します。合計五百六十点を二十で割った母平均は二十八点です。これは標本からの推定ではなく、この架空の有限のシーズンを全て観測した値です。A、D、Fの三十点以上という推定は、全体の記録と比べると高めでした。しかし、その三班が必ず計算を間違えたわけではありません。自班の推定値が二十八から何点ずれたかを口頭で確認します。六班の最小値と最大値は信頼区間ではありません。班の間で試合が重複するので、六班を合わせた三十個の数値は全二十試合の全数調査でもありません。通常はこのように真の値を開けないため、推定方法の性質を考える必要があります。次の魚の探索では、今見た標本による変化を百回まで広げて見せます。",
-      "en": "Open all 20 fictional season scores. Their sum 560 divided by 20 gives the population mean of 28 points: a census value for this finite season, not another sample estimate. The above-30 estimates were high relative to the full season, but that is not necessarily an arithmetic mistake. Ask how far each group’s estimate was from 28. The range of six estimates is not a confidence interval. Overlapping samples also mean the 30 displayed observations are not a census of the 20 games. Usually we cannot reveal the truth, which motivates studying estimator properties. The fish exploration next scales their six-group experience up to repeated sampling."
+      "title": "比較の基準：全20試合の母平均は28点。",
+      "ja": "問題文で与えた二十八点の基準を、全二十試合の記録から確認します。合計五百六十を二十で割った値です。今回は比較するために母平均を教えましたが、実際の推定では母平均が未知であることが多いと説明します。標本間に重複があるので、六標本の三十個を全数調査とみなすことはできません。次の魚の活動では標本を取り直し、推定値の動きを繰り返し観察します。",
+      "en": "Verify the supplied benchmark using all 20 season scores: 560 divided by 20 is 28. Here the population mean is provided to make the comparison visible; in real estimation it is often unknown. The overlapping samples do not form a census by combining all 30 displayed observations. Transition to repeated fish sampling to watch the estimates move."
     },
     {
       "page": 19,
@@ -153,22 +153,22 @@
       "page": 22,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "記号を、一つずつ読む",
-      "ja": "右のシータは、知りたい母集団の固定値です。たとえば母平均や母分散が当たります。未知であっても、母集団を固定すれば値は決まっています。",
-      "en": "Theta on the right is the fixed population parameter we want to learn, such as the population mean or variance. Unknown does not mean random."
+      "ja": "右のシータは、知りたい母集団の固定値です。たとえば母平均や母分散が当たります。未知であっても、母集団を固定すれば値は決まっています。 θはtheta、シータと読み、θ̂はtheta-hat、シータ・ハットと読みます。ハットは標本から推定する量を区別する印です。",
+      "en": "Theta on the right is the fixed population parameter we want to learn, such as the population mean or variance. Unknown does not mean random. Pronounce θ as theta and θ̂ as theta-hat. The hat distinguishes the estimator from the population parameter."
     },
     {
       "page": 23,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "記号を、一つずつ読む",
-      "ja": "ハットの付いたシータは、標本から母数を推定するためのルールです。選ばれる標本が変わるので、データを入れる前には確率変数として考えます。",
-      "en": "Theta-hat is the estimator: a statistic used to estimate the parameter. Before observing the sample it is random because different observations can be selected."
+      "ja": "ハットの付いたシータは、標本から母数を推定するためのルールです。選ばれる標本が変わるので、データを入れる前には確率変数として考えます。 θはtheta、シータと読み、θ̂はtheta-hat、シータ・ハットと読みます。ハットは標本から推定する量を区別する印です。",
+      "en": "Theta-hat is the estimator: a statistic used to estimate the parameter. Before observing the sample it is random because different observations can be selected. Pronounce θ as theta and θ̂ as theta-hat. The hat distinguishes the estimator from the population parameter."
     },
     {
       "page": 24,
       "textbook": "132 脚注2（不偏性の定義）",
       "title": "不偏性：繰り返したとき、中心が合う",
-      "ja": "Eは期待値です。同じ条件で無作為標本を取り直したとき、推定量の分布の中心がどこになるかを表します。不偏なら、その中心が右側の母数に一致します。一回の推定値が必ず正しいという意味ではありません。",
-      "en": "E means expected value across repeated random samples under the same conditions. Unbiasedness says the estimator distribution is centered on the parameter, not that each realized estimate equals it."
+      "ja": "Eは期待値です。同じ条件で無作為標本を取り直したとき、推定量の分布の中心がどこになるかを表します。不偏なら、その中心が右側の母数に一致します。一回の推定値が必ず正しいという意味ではありません。 θはtheta、シータと読み、θ̂はtheta-hat、シータ・ハットと読みます。ハットは標本から推定する量を区別する印です。",
+      "en": "E means expected value across repeated random samples under the same conditions. Unbiasedness says the estimator distribution is centered on the parameter, not that each realized estimate equals it. Pronounce θ as theta and θ̂ as theta-hat. The hat distinguishes the estimator from the population parameter."
     },
     {
       "page": 25,
