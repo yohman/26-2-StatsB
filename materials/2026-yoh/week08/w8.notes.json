@@ -257,7 +257,7 @@
     {
       "page": 37,
       "textbook": "131〜132（母集団・推定量・不偏性）",
-      "title": "チャレンジ2　昼食代の調査、どちらを採用？",
+      "title": "チャレンジ2　人数が多い調査を、信じてよい？",
       "ja": "活動二で見た魚の選び方を、大学生の身近な調査へ移します。二分は個人でAかBと理由を書き、二分で隣の学生と説明を比べます。全員が回答するという条件なので、ここでは無回答の問題を加えません。人数だけでなく、どの学生が標本から除かれるかを明記させます。Bの推定値が必ず高いとか必ず外れるとは断定させません。目的の母集団を代表する選び方か、という問いに集中します。授業用の仮想調査で、宿題の答えではありません。",
       "en": "Transfer the fish-selection lesson to a campus survey. Allow two minutes to write a choice and justification, then two minutes to compare with a partner. Full response is stipulated so that nonresponse is not a second issue. Students must identify who cannot enter B. Do not require a claim that B must always overestimate; the question is whether its selection frame represents the target population."
     },
@@ -320,7 +320,7 @@
     {
       "page": 46,
       "textbook": "132（母平均・母分散の点推定）",
-      "title": "チャレンジ3　通学時間で、二つの推定値",
+      "title": "チャレンジ3　通学時間から、母数を推定する",
       "ja": "まず各自で取り組む時間を取ります。与えられた数値に丸をつけ、何を求めるかを一行で書いてから、参考の公式に代入してもらいます。答え合わせでは計算だけでなく、グラフのどの部分を読んだかも尋ねましょう。",
       "en": "Allow the stated independent working time. Students identify the givens, write the target quantity and substitute into the symbolic formula. Ask them to interpret the accompanying graphic during the worked-answer reveal."
     },
@@ -355,7 +355,7 @@
     {
       "page": 51,
       "textbook": "132（不偏性・母分散の点推定）",
-      "title": "チャレンジ4　三つの「言いすぎ」を書き直す",
+      "title": "チャレンジ4　その説明を、正しく書き直す",
       "ja": "AかBを選ぶだけの問題ではなく、三つの誤解を自分の言葉で修正してもらいます。三分は個人で三文を書き、二分で隣の人と交換します。相手の文に、期待値、選び方、標本数マイナス一という要点が入っているかを確認させます。公式は参考として示しますが、答えの文章はまだ見せません。口頭で分かったと言うだけでなく、主語を明確にした文として残すことが目的です。",
       "en": "Require three written corrections rather than a multiple-choice guess. Allow three minutes individually and two minutes to swap explanations with a neighbor. Partners check for expected value rather than guaranteed single-sample accuracy, sampling frame rather than sample size, and denominator n−1 for unbiased variance. Keep the answer hidden until students have written all three sentences."
     },
