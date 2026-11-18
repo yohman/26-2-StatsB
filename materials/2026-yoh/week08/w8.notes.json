@@ -342,8 +342,8 @@
       "page": 49,
       "textbook": "123〜127・132・134 脚注2・202〜203",
       "title": "チャレンジ3　期末試験形式：3問",
-      "ja": "二十分間、この一枚を表示し続けます。独立した三問で、問一は正規分布の割合と上位割合からの境界、問二は実データから平均と二つの分散を計算して点推定値を報告、問三はTと自由度を計算してt表の中央九十五パーセントを読みます。全問で計算過程と単位を記します。問題ごとの参考公式と二つの表へのリンクは表示しますが、値は代入しません。信頼区間の構成や仮説検定の採否は、まだ要求しません。解答を見せる前に三問の答案を仕上げてもらいます。",
-      "en": "Keep this single page visible for twenty minutes. These are three independent exam-style calculations adapted from relevant past-paper formats: normal tail probability and percentile cutoff; sample summaries and population point estimates; T, degrees of freedom and a central t-table range. Show the symbolic references and table links without numerical substitution. Require working and units. Do not require construction of confidence intervals or a hypothesis-test decision. Complete all three answers before revealing solutions."
+      "ja": "二十分間、この一枚を表示し続けます。独立した三問で、問一は正規分布の割合と上位割合からの境界、問二は実データから平均と二つの分散を計算して点推定値を報告、問三はTと自由度を計算してt表の中央九十五パーセントを読みます。問二は①標本平均と母平均の点推定、②標本分散、③標本不偏分散と母分散の点推定の三つを別々に答えます。問三も①Tと自由度、②範囲の両端、③範囲内かの判定を番号ごとに答えます。全問で計算過程と単位を記します。問題ごとの参考公式と二つの表へのリンクは表示しますが、値は代入しません。信頼区間の構成や仮説検定の採否は、まだ要求しません。解答を見せる前に三問の答案を仕上げてもらいます。",
+      "en": "Keep this single page visible for twenty minutes. These are three independent exam-style calculations adapted from relevant past-paper formats: normal tail probability and percentile cutoff; sample summaries and population point estimates; T, degrees of freedom and a central t-table range. Require separate numbered responses: Question 2 (1) sample mean and population-mean estimate, (2) raw sample variance, (3) unbiased variance and population-variance estimate; Question 3 (1) T and degrees of freedom, (2) both central-range boundaries, (3) whether T lies inside. Show the symbolic references and table links without numerical substitution. Require working and units. Do not require construction of confidence intervals or a hypothesis-test decision. Complete all three answers before revealing solutions."
     },
     {
       "page": 50,
@@ -369,7 +369,7 @@
     {
       "page": 53,
       "textbook": "122・132（母平均の点推定）",
-      "title": "問2　母平均の点推定",
+      "title": "問2①　母平均の点推定",
       "ja": "問二の五件の合計は五十分です。五で割って標本平均十分を求め、母平均の点推定値として報告します。図の五台が今回の観測値で、群れ全体を全数調査したものではありません。次にこの十分からの偏差を縦の表で計算します。",
       "en": "The five observed delivery times sum to 50 minutes. Divide by five to get a sample mean of 10 minutes and report it as the population-mean point estimate. The robots represent these five observations, not a census. Next calculate deviations from 10 in a vertical table."
     },
@@ -383,7 +383,7 @@
     {
       "page": 55,
       "textbook": "132・134 脚注2",
-      "title": "問2　標本分散と、母分散の点推定",
+      "title": "問2②・③　標本分散と、母分散の点推定",
       "ja": "七十を五で割ると、この標本を記述する標本分散十四分二乗です。四で割ると、母分散の不偏な点推定に使う十七・五分二乗です。報告する母平均の点推定は十分、母分散の点推定は十七・五分二乗です。二本の棒は同じ標本から計算した二つの量で、標本を繰り返した分布ではありません。",
       "en": "Divide 70 by n=5 for raw sample variance 14 min², or by n−1=4 for the unbiased population-variance point estimate of 17.5 min². Report 10 minutes for the population mean and 17.5 min² for population variance. The bars compare calculations from one sample, not sampling distributions."
     },
@@ -397,7 +397,7 @@
     {
       "page": 57,
       "textbook": "127・203（t分布表）",
-      "title": "問3②　t表：自由度4 × 上側0.025",
+      "title": "問3②・③　t表：自由度4 × 上側0.025",
       "ja": "中央九十五パーセントなら残り五パーセントを左右へ半分ずつ分けます。上側確率〇・〇二五の列と自由度四の行で二・七七六四を読みます。左右の境界はマイナスとプラスの二・七七六四です。計算したT二はこの範囲内です。これはTという標準化した量の分布の中央範囲で、未知の母平均の信頼区間ではありません。また、ここでは仮説検定の採否まで要求していません。",
       "en": "A central 95% range leaves 2.5% in each tail. Read df 4 and upper-tail alpha 0.025 to obtain 2.7764. The boundaries are −2.7764 and +2.7764; calculated T=2 is inside. This is a central range of the T distribution, not a confidence interval for the population mean. No hypothesis-test decision is required here."
     },
