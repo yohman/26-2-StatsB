@@ -54,3 +54,49 @@ body.presenting .navigation:hover,body.presenting .topbar:hover,body.presenting 
 @media(max-width:650px){
   #stage.native-slide .slide-body { overflow:auto;justify-content:safe center }
 }
+/* Projection layouts for the rebuilt classroom sequences. */
+#stage .door-row,#stage .dice-row,#stage .shot-row,#stage .fish-row {
+  display:flex; justify-content:center; align-items:center; gap:2cqw; width:100%;
+}
+.door-row button {
+  width:15cqw; height:15cqw; min-height:4rem; background:#254c57;
+  color:#fff7e8; border-radius:1cqw 1cqw .3cqw .3cqw; font-size:5cqw;
+  border-bottom:.9cqw solid #163743; transition:transform .2s,background .2s;
+}
+.door-row button:hover,.door-row .picked { background:#b56135; transform:translateY(-.5cqw) }
+.door-row button:disabled { opacity:1; background:#466c72 }
+.dice-row span,.shot-row span { font-size:6cqw; color:#809294; transition:color .2s,transform .2s }
+.dice-row span.picked,.shot-row .miss { color:#b56135; transform:translateY(-.6cqw) }
+.population-grid { display:grid; grid-template-columns:repeat(10,1fr); gap:.45cqw;width:64cqw }
+.population-grid span { display:grid; place-items:center; background:#e7eeeb; border-radius:.5cqw; line-height:1.5; color:#16786f }
+.population-grid .no { color:#586d70 }
+.population-grid .picked { background:#eec191; box-shadow:inset 0 0 0 .18cqw #bb682f; animation:sample-in .25s both }
+@keyframes sample-in { from { opacity:.3; transform:scale(.84) } }
+.fish-row span { display:grid; justify-items:center; gap:.5cqw; color:#16786f; animation:sample-in .25s both; min-width:11cqw }
+.fish-row i { font-style:normal }
+.stop-face { border-radius:1cqw; background:#e9d9a8; color:#203d34; padding:1.2cqw 3cqw; letter-spacing:.06em; font:700 9cqw/1.15 ui-monospace,monospace }
+.stop-face small { font:600 2.5cqw Arial,sans-serif; margin-left:1cqw }
+#stage .calc-grid { width:min(100%,75cqw); display:grid; grid-template-columns:1fr .8fr; align-items:center; gap:3cqw }
+.calc-grid table { font-variant-numeric:tabular-nums; border-collapse:collapse }
+.calc-grid th,.calc-grid td { border-bottom:1px solid #c4d2cb; padding:.45cqw .9cqw; }
+.calc-grid th { color:#396a6e;font-size:.8em }
+.calc-grid .lesson-result { font-size:2.55cqw }
+#stage .news-figure { display:grid; max-height:29cqw; width:min(100%,85cqw);place-items:center;min-height:0 }
+.news-figure img { max-height:29cqw; max-width:100%; width:auto; object-fit:contain }
+#stage .tall-graph { height:29cqw; flex-shrink:1; min-height:0 }
+#stage.native-slide:has(.lesson-graph):has(.reveal .lesson-math) .lesson-graph { height:15cqw }
+#stage.native-slide:has(.lesson-graph) .slide-body { gap:.65cqw; padding-block:3cqw }
+#stage.native-slide:has(.lesson-graph) .lesson-result { font-size:2.45cqw }
+#stage.native-slide:has(.lesson-graph) .reveal .lesson-math { font-size:2.9cqw }
+@media(max-width:650px){
+  #stage .calc-grid { grid-template-columns:1fr;gap:2.5cqw;width:88cqw }
+  .calc-grid .lesson-result,#stage.native-slide:has(.lesson-graph) .lesson-result{font-size:4.3cqw}
+  #stage.native-slide:has(.lesson-graph) .slide-body{gap:2.3cqw}
+  #stage.native-slide:has(.lesson-graph):has(.reveal .lesson-math) .lesson-graph,#stage .tall-graph{height:29cqw}
+  #stage.native-slide:has(.lesson-graph) .reveal .lesson-math{font-size:4cqw}
+  #stage .news-figure,.news-figure img{max-height:46cqw}
+}
+#stage .ramen-photo { object-fit:contain }
+#stage .reveal .lesson-math { font-size:min(3.4cqw,3.4rem) }
+#stage .slide-body:has(> .reveal .lesson-math):not(:has(.lesson-graph)) { gap:.75cqw;padding-block:3cqw }
+#stage .sample-data { display:inline-block; margin:.2em .5em; font-size:1.4cqw }

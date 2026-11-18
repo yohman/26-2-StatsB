@@ -154,7 +154,7 @@
       renderResult(body,`A 20.0%　／　B ${(1000/mean).toFixed(1)}%`);
     });});
 
-  const conditional=slide('条件付き確率：偶数と分かったら？','Conditional probability','110–112',
+  const conditional=slide('条件付き確率：偶数と分かったら？','Conditional probability','113–115',
     '<p>公平なサイコロ。出た目が偶数だと分かった。</p><p>その目が「2」である確率は？</p>'+
     plot+controls(action('偶数だけ表示'))+
     step(1,math(tex`\Pr(2\mid\text{偶数})=\frac{1/6}{3/6}=\frac13`)),
@@ -280,21 +280,6 @@
       choices(body,i=>{selected=i?all.slice(-50):all;r();},0);
     });
 
-  const monty = slide('扉を変える？','Monty Hall','110–112',
-    '<p>最初に選んだ扉は①。司会者は景品のない扉を1枚開ける。</p>'+
-    options(['①に残る','残った扉へ変える'])+plot+result+
-    step(1,note('最初から当たり：1/3。最初が外れ：2/3。その2/3では、変更すると当たる。')),
-    'Ask for a prediction. The host knows the prize location and always opens an unchosen losing door. Click a strategy to simulate 100 independent rounds.',
-    body=>{
-      choices(body,i=>{
-        const prizes=Array.from({length:100},()=>Math.floor(Math.random()*3));
-        const wins=prizes.filter(prize=>i?prize!==0:prize===0).length;
-        bars(body,[wins,100-wins],{labels:['当たり','はずれ'],max:100,highlight:j=>j===0,label:'100回の結果'});
-        renderResult(body,`100回中 ${wins}回当たり`);
-      });
-      bars(body,[0,0],{labels:['当たり','はずれ'],max:100,label:'作戦を選択すると100回の結果を表示'});
-    },'cream');
-
   const tea = lab(11,'tea','紅茶とミルク：4杯を選ぶ','Let students select four cups first. Then compare the success count with the exact number of equally likely choices.');
   const examReview = slide('どの道具を使う？','Choose the statistical tool','118–150',
     '<p class="lesson-story">同じ確率で独立に、6本のシュート。<br>成功がちょうど4本の確率を求めたい。</p>'+
@@ -339,46 +324,11 @@
       section('単位と変動係数','1-7',relativeSpread,'8'),
       section('係数・有意性・交絡','9-17',lab(13,'interpret','その説明は、どこまで言える？','Have students defend their choice in words before revealing feedback.'),'19-22'),
       section('試験形式の復習','23-26',examReview,'27-39',lab(13,'review','新しい数値で、もう一問','Pick a topic, solve independently, then reveal the worked example.'),'42-43')),
-    1:deck('推測統計と確率',[],
-      section('モンティ・ホール','1-5','8-10',monty),
-      section('標本から母集団へ','11-22'),
-      section('事象と確率','25-36','37>38>39>40>41>42'),
-      section('確率の計算','43-58',conditional)),
-    2:deck('確率変数と期待値',[],
-      section('100円のくじ','1-5',lottery),
-      section('確率変数と期待値','6-17'),
-      section('確率分布・AL','18-30')),
-    3:deck('二項分布とポアソン分布',[10,21,36],
-      section('NBA・組合せ','1-12',formulaPage(13,'二項分布','Binomial distribution','118',binomial,'Read the three factors aloud: number of orders, success powers, and failure powers.'),'14'),
-      section('二項分布の確率','15-16',counts(false),'18-22'),
-      section('ポアソンと分布表','23-25',formulaPage(26,'ポアソン分布','Poisson distribution','120',poissonFormula,'Introduce the expression. Use the table for the actual probability calculation.'),'27-31',counts(true),'33-38')),
-    4:deck('離散確率分布の復習',[3,6,16,22,25,33,36,39],
-      section('AIの友だち：二項分布','1-15',counts(false,false,true),'16-19'),
-      section('クマの出現日：ポアソン近似','20-29',formulaPage(30,'ポアソン分布','Poisson distribution','120',poissonFormula,'Connect the mean count λ to nπ for the bear-day approximation.'),'31-32',counts(true,true)),
-      section('総合演習とAL','33-47')),
-    5:deck('確率密度と標準化',[34,36,60],
-      section('写真判定から、時間の測定へ','1-13'),
-      section('ラーメンの待ち時間・密度・面積','14-24'),
-      section('正規分布とZ','25-36','37>38>39>40>41>42'),
-      section('上側確率表と区間','43-44','45>46>47>48','49-51','52>53>54','55-57','58>59',zArea,'60-62','63>64>65>66>67>68','69>70>71>72>73>74','75')),
-    6:deck('標本平均・t・χ²',[32,51,56,68],
-      section('ガルトンボードと中心極限定理','1-7','8>10>12','9>11>13','14-16',diceMeans,'17-18'),
-      section('個体のZと標本平均のZ','19-21',formulaPage(22,'標本平均の標準化','Sample mean Z score','123',averageZ,'Compare the denominator with the individual Z score on the previous slide.'),'23-28','29>30>31','32-33'),
-      section('Curry・tと不偏分散','34-39',formulaPage(40,'標本平均の標準化','Sample mean t statistic','125',tStatistic,'Point at the hat. This is the estimated variance used to calculate standard error.'),'41-44','46-47',formulaPage(48,'標本不偏分散','Unbiased sample variance','126',varianceFormula,'Ask students to find the center first, square the deviations, and divide by n−1.'),'49-51','52>53>54>55','56','57>58>59','60'),
-      section('表と左右の境界',tShape,'62-69'),
-      section('カイ二乗分布','70-76')),
-    7:deck('クラスのデータを標準化する',[21,47,75],
-      section('1秒チャレンジと標本','1-6'),
-      section('平均・偏差・不偏分散','7-8',formulaPage(9,'標本平均','Sample mean','122',meanFormula,'Add the five recorded values and divide by the count.'),'10-14','15>16>17>18','19-21','22>23>24>25','26-30'),
-      section('標準化と上側確率','31-34',formulaPage(35,'個体の標準化','Individual Z score','123',individualZ,'The numerator is one observation minus the population mean.'),'36-47','48>49>50',zArea),
-      section('X・標本平均・T','52',formulaPage(53,'標本平均の標準化','Sample mean Z score','123',averageZ,'The random variable here is an average of five.'),'54>55>56>57>58','59',formulaPage(60,'標本平均の標準化','Student’s t statistic','125',tStatistic,'Compare the estimated variance here with the known variance used in Z.'),'61>62>63>64','65>66>67>68',standardize),
-      section('ALと追加チャレンジ','70-75','76>77>78>79>80>81>82')),
-    8:deck('点推定と標本の偏り',[23,48],
-      section('米国から日本へ：学力調査','1-10'),
-      section('前回の復習とマグロの標本','11-24'),
-      section('不偏性・有効性・一致性','25','26>27>28>29','30-34','35>36>37','38',bias,'39'),
-      section('点推定：母平均と母分散','40-42','43>44>45>46','47-48','49>50','51'),
-      section('20分クイズとAL','52-55')),
+    ...window.buildFoundationLessons({
+      M,tex,step,math,plot,result,note,action,controls,slider,options,section,deck,slide,link,
+      chart,bars,curve,bindSlider,choices,renderResult,counts,zArea,diceMeans,tShape,standardize,bias,
+      binomial,poissonFormula,individualZ,averageZ,tStatistic,varianceFormula,meanFormula,lottery,conditional
+    }),
     14:deck('期末試験',[],
       section('試験当日',
         slide('期末試験','Final examination','', '<p class="lesson-story">2027年1月13日（水）<br>10:40–12:20</p>'+note('範囲・形式・持ち込みはUNIPAの最新案内を確認。'),
