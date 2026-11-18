@@ -363,8 +363,8 @@
       "page": 52,
       "textbook": "123〜127・132・134 脚注2・202〜203",
       "title": "チャレンジ3　期末試験形式：3問",
-      "ja": "リンクからHTMLの問題ページを開き、二十分間、各自で三問に取り組んでもらいます。各問の番号ごとに計算過程・答え・単位を記します。授業終了後、問題ページ下部の答え合わせリンクから、解答を直接開けます。条件、公式、代入、答えと図を順に確認してから、スライドに戻ってALへ進みます。",
-      "en": "Open the linked HTML quiz. Allow twenty minutes for independent work, with numbered responses, calculations and units. The class has ended, so the answer link now opens the worked examples directly. Review givens, symbolic formulas, substitution, results and charts, then return to the deck for the AL handover."
+      "ja": "リンクからHTMLの問題ページを開き、二十分間、各自で三問に取り組んでもらいます。各問の番号ごとに計算過程・答え・単位を記します。問題ページ下部の答え合わせリンクを開き、合言葉curryで解答を表示します。条件、公式、代入、答えと図を順に確認してから、スライドに戻ってALへ進みます。",
+      "en": "Open the linked HTML quiz. Allow twenty minutes for independent work, with numbered responses, calculations and units. Open the answer link and enter curry to reveal the worked examples. Review givens, symbolic formulas, substitution, results and charts, then return to the deck for the AL handover."
     },
     {
       "page": 53,

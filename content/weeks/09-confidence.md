@@ -33,9 +33,11 @@ prepare_en: Review why we use unbiased sample variance before class.
 
 ## Materials
 
-- [Yoh's Week 9 lecture](materials/2026-yoh/week09/w9.pdf) {primary}
+- [期末試験形式クイズ / Exam-style quiz](materials/2026-yoh/week09/quiz.html) {quiz}
+
+- [Yoh's Week 9 lecture](materials/2026-yoh/week09/index.html) {primary}
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半)v4.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半)v4.pdf) {supplementary}
 - [AL用ワークシート](weeks/09-confidence-intervals-ii/09_AL用ワークシート.xlsx) {worksheet}
-- [統計表](weeks/09-confidence-intervals-ii/09_統計表.xlsx) {homework}
+- [統計表](weeks/09-confidence-intervals-ii/09_統計表.xlsx) {resource}
