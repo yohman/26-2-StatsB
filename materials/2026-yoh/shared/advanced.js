@@ -63,7 +63,7 @@ window.buildAdvancedLessons = function ({
         '5試合の得点から母平均を推定。母分散は未知。',
         'トマトの重さがどれほど散らばるか。母分散を推定。'
       ][i];
-      renderResult(body,['Z：母平均・母分散が既知','t：母平均・母分散が未知','χ²：正規母集団の母分散'][i]);
+      renderResult(body,['Z：母平均を推定（母分散は既知）','t：母平均を推定（母分散は未知）','χ²：正規母集団の母分散'][i]);
     },0);});
 
   const scores=[18,19,20,21,22],scoreSummary=M.summary(scores);
