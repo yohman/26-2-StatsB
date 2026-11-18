@@ -862,3 +862,10 @@
 .slide-page-input{width:4ch;min-width:44px;padding:5px 6px;border:1px solid #b9b1a7;border-radius:4px;background:#fff;color:#433c33;font:inherit;text-align:center}
 .slide-page-input:focus{outline:2px solid var(--teal,#176d82);outline-offset:2px;border-color:transparent}
 .slide-page-input:disabled{opacity:.6}
+
+.agenda-page .slide-browse-controls{justify-content:center;gap:5px;border:0;padding:6px 9px;background:#f0eee8}
+.agenda-page .slide-browse-controls button{display:inline-flex;align-items:center;justify-content:center;flex:none;width:34px;height:32px;border:0;border-radius:6px;background:#e0e6df;color:#29444a}
+.agenda-page .slide-browse-controls button:hover:not(:disabled){background:#c8ddd6;color:#183d43}
+.agenda-page .slide-browse-controls button svg{width:19px;height:19px}
+.agenda-page .slide-browse-controls [data-slide-status]{flex:1;text-align:center}
+.agenda-page .slide-browse-controls .slide-page-input{border:0;background:#fff;border-radius:5px}

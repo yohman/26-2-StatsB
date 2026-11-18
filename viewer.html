@@ -7,8 +7,8 @@
   <meta name="robots" content="noindex">
   <title>Preview · 2026–2 Statistics B</title>
   <link rel="icon" href="favicon.svg?v=course-family-20261026" type="image/svg+xml">
-  <link rel="stylesheet" href="assets/stats-styles.css?v=20261021-page-jump">
-  <link rel="stylesheet" href="assets/viewer-context.css?v=20261104-inline-clear">
+  <link rel="stylesheet" href="assets/stats-styles.css?v=20261118-compact-nav">
+  <link rel="stylesheet" href="assets/viewer-context.css?v=20261118-compact-nav">
   <link rel="stylesheet" href="assets/slide-challenge-guard.css?v=20261014-1">
 </head>
 <body class="viewer-page">
@@ -24,7 +24,7 @@
   </main>
   <script src="assets/vendor/pdfjs/pdf.min.js?v=3.11.174"></script>
   <script src="assets/slide-challenge-guard.js?v=20261014-1"></script>
-  <script src="assets/slide-browsing.js?v=20261104-ink"></script>
+  <script src="assets/slide-browsing.js?v=20261118-compact-nav"></script>
   <script src="assets/slide-zoom.js?v=20261104-ink"></script>
   <script src="assets/slide-annotations.js?v=20261104-inline-clear"></script>
   <script src="assets/slide-notes.js?v=remaining-weeks-first-pass"></script>
@@ -78,21 +78,27 @@
       viewer.className = 'pdf-viewer';
       const toolbar = document.createElement('div');
       toolbar.className = 'pdf-toolbar';
-      const previous = document.createElement('button');
-      previous.type = 'button';
-      previous.innerHTML = makeLabel('PREVIOUS', '前へ');
+      const navButton = (name, label) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `pdf-nav-button pdf-${name}`;
+        button.innerHTML = window.slideNavIcon(name);
+        button.title = label;
+        button.setAttribute('aria-label', label);
+        return button;
+      };
+      const first = navButton('first', 'First slide / 最初のスライド');
+      const previous = navButton('previous', 'Previous slide / 前のスライド');
       const pageStatus = document.createElement('p');
       pageStatus.className = 'pdf-status';
-      const next = document.createElement('button');
-      next.type = 'button';
-      next.innerHTML = makeLabel('NEXT', '次へ');
+      const next = navButton('next', 'Next slide / 次のスライド');
+      const last = navButton('last', 'Last slide / 最後のスライド');
+      first.disabled = last.disabled = true;
       const navigation = document.createElement('div');
       navigation.className = 'pdf-navigation';
-      navigation.append(previous, pageStatus, next);
-      const fullscreen = document.createElement('button');
-      fullscreen.type = 'button';
-      fullscreen.className = 'pdf-fullscreen';
-      fullscreen.innerHTML = makeLabel('FULL SCREEN', '全画面');
+      navigation.append(first, previous, pageStatus, next, last);
+      const fullscreen = navButton('expand', 'Full screen / 全画面');
+      fullscreen.classList.add('pdf-fullscreen');
       fullscreen.setAttribute('aria-pressed', 'false');
       fullscreen.disabled = true;
       toolbar.append(navigation, fullscreen);
@@ -210,8 +216,8 @@
             ink.rendered(requestedPage);
             narration?.show(requestedPage);
             syncPageInput();
-            previous.disabled = requestedPage === 1;
-            next.disabled = requestedPage === pdf.numPages;
+            first.disabled = previous.disabled = requestedPage === 1;
+            last.disabled = next.disabled = requestedPage === pdf.numPages;
           });
           return renderQueue;
         };
@@ -219,7 +225,9 @@
           onSettled:() => renderPage(activePage)});
         const syncFullscreen = () => {
           const expanded = isFullscreen();
-          fullscreen.innerHTML = expanded ? makeLabel('EXIT FULL SCREEN', '全画面を終了') : makeLabel('FULL SCREEN', '全画面');
+          fullscreen.innerHTML = window.slideNavIcon(expanded ? 'collapse' : 'expand');
+          fullscreen.title = expanded ? 'Exit full screen / 全画面を終了' : 'Full screen / 全画面';
+          fullscreen.setAttribute('aria-label', fullscreen.title);
           fullscreen.setAttribute('aria-pressed', String(expanded));
           renderPage(activePage);
         };
@@ -261,6 +269,8 @@
           () => ({page:activePage,total:pdf.numPages,busy:navigating}), navigateTo);
         const showPreviousPage = () => activePage > 1 && navigateTo(activePage - 1);
         const showNextPage = () => activePage < pdf.numPages && navigateTo(activePage + 1);
+        first.addEventListener('click', () => navigateTo(1));
+        last.addEventListener('click', () => navigateTo(pdf.numPages));
         previous.addEventListener('click', showPreviousPage);
         next.addEventListener('click', showNextPage);
         window.bindSlideSwipe(canvasWrap, showPreviousPage, showNextPage);
@@ -279,7 +289,10 @@
             exitFallbackFullscreen();
             return;
           }
-          if (event.key === 'ArrowLeft') {
+          if (event.key === 'Home' || event.key === 'End') {
+            event.preventDefault();
+            navigateTo(event.key === 'Home' ? 1 : pdf.numPages);
+          } else if (event.key === 'ArrowLeft') {
             event.preventDefault();
             showPreviousPage();
           } else if (event.key === 'ArrowRight') {
@@ -304,6 +317,6 @@
     else if (/\.pdf$/i.test(file)) renderPdfPreview(file);
     else showFileNote();
   </script>
-  <script src="assets/stats-site.js?v=verified-textbook-pages"></script>
+  <script src="assets/stats-site.js?v=20261118-compact-nav"></script>
 </body>
 </html>

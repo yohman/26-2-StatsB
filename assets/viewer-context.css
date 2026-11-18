@@ -21,3 +21,17 @@
 @media(max-width:600px){.slide-ink-tools{gap:4px;padding:6px 8px}.slide-ink-presets{padding:0 4px}.slide-ink-tools button{width:30px;height:30px}}
 
 .slide-ink-tools button[data-confirm="true"]{background:#ad3829;color:#fff;border-color:#ad3829}.slide-ink-clear-hint{color:#ad3829;font-size:11px;line-height:1.2}.slide-ink-clear-hint[hidden]{display:none}
+
+/* Compact slide navigation: glyphs, soft fills and accessible focus rings. */
+.pdf-toolbar{gap:8px;padding:8px 10px;flex-wrap:wrap;border-bottom:0}
+.pdf-navigation{gap:4px}
+.pdf-toolbar button{border:0;border-radius:7px;background:#e1e8e3;color:#29444a}
+.pdf-toolbar button:hover:not(:disabled){background:#c8ddd6;color:#183d43}
+.pdf-toolbar button:disabled{opacity:.35;color:#617176}
+.pdf-toolbar button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.pdf-toolbar .pdf-nav-button{display:inline-flex;align-items:center;justify-content:center;flex:none;width:36px;height:34px;min-width:36px;padding:7px;letter-spacing:0}
+.pdf-nav-button svg{display:block;width:20px;height:20px}
+.pdf-navigation .pdf-status{min-width:82px;margin:0 3px}
+.pdf-navigation .slide-page-input{border:0;background:#fff;border-radius:5px}
+.pdf-toolbar .pdf-zoom-reset{height:34px;min-width:54px;padding:6px 8px}
+@media(max-width:480px){.pdf-toolbar{gap:5px;padding:6px}.pdf-toolbar .pdf-nav-button{width:32px;min-width:32px;height:32px}.pdf-navigation{gap:2px}.pdf-navigation .pdf-status{min-width:72px;margin:0 2px}}

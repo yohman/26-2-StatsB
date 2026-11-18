@@ -1,4 +1,12 @@
 (() => {
+  const navPaths = {
+    first:'M5 5v14M17 6l-6 6 6 6', previous:'M15 6l-6 6 6 6',
+    next:'M9 6l6 6-6 6', last:'M19 5v14M7 6l6 6-6 6',
+    expand:'M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5',
+    collapse:'M3 8h5V3M21 8h-5V3M8 21v-5H3M16 21v-5h5'
+  };
+  window.slideNavIcon = name => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${navPaths[name] || navPaths.next}"/></svg>`;
+
   // Shared by the full viewer and the agenda's inline slide previews.
   window.bindSlidePageInput = (status, getState, jump) => {
     const input = document.createElement('input');
@@ -84,8 +92,10 @@
     const cover = card.querySelector('.slide-cover');
     const canvas = card.querySelector('[data-slide-canvas]');
     const image = cover.querySelector('img');
+    const first = card.querySelector('[data-slide-first]');
     const previous = card.querySelector('[data-slide-previous]');
     const next = card.querySelector('[data-slide-next]');
+    const last = card.querySelector('[data-slide-last]');
     const status = card.querySelector('[data-slide-status]');
     const links = [cover, card.querySelector('.slide-preview-button')].filter(Boolean);
     let pageNumber = 1, total = 0, busy = false;
@@ -93,7 +103,9 @@
       () => ({page:pageNumber, total, busy}), target => showPage(target-pageNumber));
     const sync = () => {
       previous.disabled = busy || pageNumber === 1;
+      if(first)first.disabled = previous.disabled;
       next.disabled = busy || (total > 0 && pageNumber === total);
+      if(last)last.disabled = next.disabled;
       syncPageInput();
       cover.setAttribute('aria-busy', String(busy));
       links.forEach(link => {
@@ -139,6 +151,8 @@
         if(cancelled&&originFocus?.isConnected)originFocus.focus({preventScroll:true});
       }
     }
+    first?.addEventListener('click', () => showPage(1 - pageNumber));
+    last?.addEventListener('click', () => showPage(Infinity));
     previous.addEventListener('click', () => showPage(-1));
     next.addEventListener('click', () => showPage(1));
     window.bindSlideSwipe(cover, () => showPage(-1), () => showPage(1));
