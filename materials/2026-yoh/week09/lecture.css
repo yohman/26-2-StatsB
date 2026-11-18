@@ -29,3 +29,20 @@
   .navigation #steps,.navigation #reveal { font-size:.68rem }
 }
 @media print{.navigation{display:none}}
+
+/* The slide scrolls independently of the presenter controls. */
+#stage .slide-body {
+  overflow:auto;
+  overscroll-behavior:contain;
+  justify-content:safe center;
+  align-items:safe center;
+}
+#stage .slide-body > :not(.photo-link):not(.full-photo) { flex-shrink:0 }
+#stage .slide-body:focus-visible { outline:2px solid #d68542;outline-offset:-2px }
+#stage > :is(.book,.source) { pointer-events:none }
+@media (max-width:360px) {
+  .navigation { grid-template-columns:repeat(2,1.8rem) 3.85rem 1.65rem 5rem repeat(2,1.8rem) }
+}
+@media print {
+  #stage .slide-body { overflow:visible }
+}

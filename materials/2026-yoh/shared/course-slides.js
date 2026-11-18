@@ -4,7 +4,10 @@
   const $ = selector => document.querySelector(selector);
   const params = new URLSearchParams(location.search);
   const week = Number(params.get('week'));
-  const lesson = window.CourseLessons[week];
+  const review = window.CourseLessons[week];
+  const plan = window.fullLecturePlans[week];
+  const reviewMode = params.get('view') === 'review';
+  const lesson = review && !reviewMode ? window.completeLecture(week,review) : review;
   const stage = $('#stage');
   if (!lesson) {
     stage.textContent = '授業予定から週を選んでください。';
@@ -23,7 +26,7 @@
   const slides = [];
   const originalPages = new Map();
   const notesUrl = '../week' + weekNumber + '/w' + week + '.notes.json';
-  const notes = fetch(notesUrl).then(response => response.ok ? response.json() : null)
+  const notes = (plan && week >= 5 && !reviewMode ? fetch(notesUrl) : Promise.resolve(null)).then(response => response?.ok ? response.json() : null)
     .then(data => new Map((data?.slides || []).map(note => [note.page, note])))
     .catch(() => new Map());
   let pdf;
@@ -206,6 +209,8 @@
       const body = document.createElement('div');
       body.className = 'slide-body' + (slide.lab ? ' lab-body' : '');
       body.innerHTML = slide.html;
+      body.tabIndex = 0;
+      body.setAttribute('aria-label','スライド内容');
       stage.append(body);
       if (slide.lab) stage.classList.add('lab-slide');
       if (slide.book) {
@@ -265,6 +270,19 @@
     else if (index > 0) go(index - 1);
   }
 
+  if (plan) {
+    const switchView = document.createElement('a');
+    const destination = new URL(location.href);
+    destination.searchParams.delete('page');
+    destination.hash = '';
+    if (reviewMode) destination.searchParams.delete('view');
+    else destination.searchParams.set('view','review');
+    switchView.href = destination.href;
+    switchView.className = 'lecture-view-link';
+    switchView.textContent = reviewMode ? '本編を見る / Full lecture' : '操作・復習だけを見る / Interactive review';
+    $('#toc-links').append(switchView);
+  }
+
   let lastSection;
   slides.forEach((slide,i) => {
     if (slide.section === lastSection && !slide.title && !slide.challenge) return;
@@ -320,6 +338,9 @@
     if (event.key === 'Escape') document.body.classList.remove('presenting');
     if (toc.open || guard.open || event.target.closest('input,select,textarea') ||
        (event.key === ' ' && event.target.closest('button,a,summary'))) return;
+    const slideBody = event.target.closest('.slide-body');
+    if (slideBody && ['PageUp','PageDown','Home','End'].includes(event.key) &&
+        slideBody.scrollHeight > slideBody.clientHeight) return;
     if (['ArrowRight',' ','PageDown'].includes(event.key)) { event.preventDefault(); next(); }
     if (['ArrowLeft','PageUp'].includes(event.key)) { event.preventDefault(); previous(); }
     if (event.key === 'Home') go(0);
