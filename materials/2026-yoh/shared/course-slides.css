@@ -246,3 +246,26 @@ body.presenting .navigation:hover,body.presenting .topbar:hover,body.presenting 
 }
 
 #stage .sample-comparison .lesson-controls button { min-height:2rem;font-size:clamp(.9rem,1.7cqw,1.25rem);padding:.25em .55em }
+
+/* Keep the content viewport definite even when a slide is entirely photographic. */
+#stage.source-slide > :is(.source-host,.scene-exercise) {
+  position:absolute;
+  inset:0;
+  margin:0;
+  max-height:none;
+}
+#stage.source-slide:has(.scene-switcher) > :is(.source-host,.scene-exercise) { bottom:2.25rem }
+#stage .source-scene:is(.photo,.race-media,.video,.video-opening) { padding:0 }
+#stage .source-scene:is(.photo,.race-media,.video,.video-opening) > .source {
+  position:absolute;
+  inset:auto auto 1.2cqw 1.4cqw;
+  margin:0;
+  color:white;
+  background:#102029d9;
+  padding:.15em .5em;
+  z-index:1;
+}
+#stage .source-scene .photo-text { z-index:1 }
+@media(max-width:650px){
+  #stage.source-slide:has(.scene-switcher) > :is(.source-host,.scene-exercise) { bottom:3.5rem }
+}
