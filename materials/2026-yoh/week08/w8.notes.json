@@ -278,23 +278,23 @@
     {
       "page": 40,
       "textbook": "132",
-      "title": "点推定",
-      "ja": "点推定の定義を最初に読みます。未知の母数を一つの数値で推定することです。魚の群れ全体の母平均ミューは未知で、五匹から計算した標本平均五十キロをその点推定値として使います。五十が確定した母平均ではないことを確認します。続く分散と通学時間の例でも、何という母数を何という一つの数値で推定するかを毎回明示します。区間推定は幅をつける次回の内容として短く区別します。",
-      "en": "Define point estimation explicitly: estimate an unknown population parameter with a single numerical value. The shoal mean mu-x is unknown; use the five-fish sample mean of 50 kg as its point estimate. This does not establish the parameter as 50. In the variance and commute examples that follow, repeatedly identify which parameter each single numerical estimate targets. Mention interval estimation only as next week’s way to add a range."
+      "title": "点推定：未知の母数に、一つの数値を答える",
+      "ja": "点推定の計算に入る前に、何を知りたいかを二つに絞ります。知りたいのは五匹そのものではなく群れ全体の母平均と母分散で、どちらも未知です。母平均は重さの中心、母分散は散らばり。全数を測れないので、無作為に選んだ五匹から一つずつ数値を答えるのが点推定です。ここでは数値の答えをまだ見せず、次に五匹の実測値へ進みます。",
+      "en": "Establish the targets before calculating: the whole shoal’s unknown population mean and variance. Mean concerns center; variance concerns spread. We cannot measure every fish, so use five randomly selected observations to produce one numerical estimate for each parameter. Do not reveal the estimates yet; proceed to the observed data."
     },
     {
       "page": 41,
-      "textbook": "132（不偏性・母分散の点推定）",
-      "title": "点推定の偏り：選び方と計算方法を区別",
-      "ja": "活動二で見たのは、大きい魚だけを選び、小さい魚を対象から外した選択の偏りです。ここで扱うのは別の問題です。教科書の独立な無作為標本でも、標本平均からの偏差二乗和を標本数で割ると、母分散の推定値は平均的に小さめになります。左は選び方、右は計算方法と指して区別します。分母を標本数マイナス一にする補正が直すのは右側です。大きい魚だけを選ぶ問題を直せるわけではありません。計算自体は前回の復習なので、五匹の例で短く確認し、今回は推定方法の性質へ進みます。",
-      "en": "Activity 2 demonstrated selection bias: small fish could never enter the sample. Now distinguish bias in the variance estimator. Under the textbook model of independent random observations, dividing squared deviations from the sample mean by n underestimates population variance on average. Point left for selection, right for calculation. Using n−1 corrects the right-hand issue; it cannot make a sample of only large fish representative. Treat the arithmetic as a brief recap, then focus on the estimation property."
+      "textbook": "122・132",
+      "title": "まず、測れた5匹から平均を計算する",
+      "ja": "五匹の四十、四十五、五十、五十五、六十キロを見せ、縦ではなくここでは重さの合計を五で割る一つの計算に集中します。標本平均は五十キロ。ここまでの計算だけで確定したのはこの五匹の平均です。まだ群れ全体の平均を測ったわけではありません。次にこの数字を母平均の推定に使うという行為を見せます。",
+      "en": "Calculate the sample mean of 40, 45, 50, 55 and 60 kg: 50 kg. This calculation establishes the observed five-fish average. It does not measure the whole shoal. The next slide shows the separate inferential step of using this observed mean to estimate the unknown population mean."
     },
     {
       "page": 42,
       "textbook": "122（標本平均）・132（点推定）",
-      "title": "この5匹の標本平均は、50kg",
-      "ja": "同じ五匹の四十、四十五、五十、五十五、六十キロを使います。合計二百五十キロを五で割り、標本平均五十キロです。この五十は重さの平均で単位はキロです。後で出る標本分散の五十キロ二乗とは役割も単位も違います。この標本平均から各魚が何キロ離れているかを次の縦の表で計算します。",
-      "en": "Use the same five randomly selected fish: 40, 45, 50, 55 and 60 kg. Their sum is 250 kg and sample mean is 50 kg. This 50 is a mean measured in kilograms; distinguish it from the later raw variance of 50 kg squared. Next compute each deviation from this mean."
+      "title": "50kgを、群れ全体の母平均の点推定値にする",
+      "ja": "前のページの五十キロを右に残し、左に未知の母平均を置きます。五匹の平均を求める計算と、その五十を群れ全体の平均の推定に採用することは別の段階です。群れ全体の平均を五十キロと推定する、と読んでください。未知の母数に一つの数値を答えるので点推定です。次は同じ五匹で散らばりを扱います。",
+      "en": "Retain 50 kg from the calculation and place it beside the unknown population mean. Separate computing the sample mean from using it as the population-mean estimate. Say: we estimate the whole shoal’s mean as 50 kg. A single numerical answer for an unknown parameter is a point estimate. Now use the same fish to address spread."
     },
     {
       "page": 43,
@@ -320,16 +320,16 @@
     {
       "page": 46,
       "textbook": "132 §3・5（点推定・母分散の点推定）",
-      "title": "だから、これは母分散の「点推定」",
-      "ja": "左は知りたい群れ全体の母分散シグマ二乗で、未知の固定された母数です。右はこの五匹から計算した六十二・五キロ二乗。未知の母数に対して一つの数値を答えとして出すので点推定と呼びます。点は小数点の意味ではなく、一つの値という意味です。計算ルールは推定量、今回の数値は推定値です。六十二・五が正解と保証されたわけではありません。ではなぜこの計算方法を不偏と呼ぶのか、次のページで繰り返したときの期待値を見ます。",
-      "en": "The unknown fixed population variance is on the left; the single observed estimate 62.5 kg² is on the right. Reporting one number to estimate an unknown parameter is point estimation. Point refers to a single numerical value, not a decimal point. The calculation rule is the estimator; 62.5 is the estimate from this sample. This does not guarantee truth. Next explain why the rule is called unbiased using its expectation over repeated samples."
+      "title": "この5匹から、二つの母数を点推定した",
+      "ja": "二つの結果を初めて一緒に見せます。母平均の点推定値は五十キロ、母分散の点推定値は六十二・五キロ二乗です。標本分散の五十キロ二乗はここで母分散の不偏推定には採用していません。点推定とは未知の母数それぞれに一つの数値を答えることです。点は小数点の意味ではありません。どちらも確定した母集団の値ではないと確認してから、なぜ母分散の推定に不偏分散を使うのか、繰り返しの性質へ移ります。",
+      "en": "Summarize the two estimates together: 50 kg for population mean and 62.5 kg² for population variance. The raw variance of 50 kg² is not the unbiased population-variance estimate selected here. Point estimation means reporting one number for each unknown parameter; point does not mean decimal point. Both remain estimates. Next explain the repeated-sampling property behind using unbiased variance."
     },
     {
       "page": 47,
       "textbook": "132 §5（母分散の点推定・不偏性）",
-      "title": "点推定に使う推定量の性質：不偏性",
-      "ja": "今回の新しい焦点は計算ではなく、推定方法が繰り返しの中でどんな性質を持つかです。教科書の独立な無作為標本のモデルで、同じ標本数の魚を何度も選び、毎回不偏分散を計算する場面を考えます。図の点は各回の値ではなく、推定量の期待値の位置です。分母が標本数の場合は母分散より平均的に低く、標本数マイナス一の場合は期待値が母分散に一致します。式の左側は推定量の期待値、右側は固定された未知の母分散です。一回で求めた六十二・五が母分散に等しいという保証ではありません。最後に、大きい魚だけを選ぶ問題は分母では解決できないと確認します。ここから通学時間の練習で、求める対象と使う分母を自分で選んでもらいます。",
-      "en": "The new emphasis is the estimation property, not the arithmetic. Under the textbook model of independent random observations, imagine repeatedly drawing samples of the same size and calculating variance each time. The plotted dots mark expected values, not individual estimates. The n-denominator estimator is low on average; the n−1 estimator has expectation equal to the fixed population variance. The equation does not guarantee that the observed 62.5 is correct. Reiterate that denominator correction cannot repair selecting only large fish. Move directly to the commute-time challenge, where students choose the requested quantity and appropriate denominator themselves."
+      "title": "不偏：繰り返したときの中心が、母分散に合う",
+      "ja": "母分散の点推定に不偏分散を使う理由を、一回と繰り返しに分けます。今回の答えは六十二・五キロ二乗ですが、別の五匹なら別の値になります。図の一つ一つの点は一回ごとの推定値を表す説明用の配置です。教科書の独立な無作為標本の条件で、この計算を繰り返したときの期待値が母分散に一致するので不偏と呼びます。式の左辺は推定量の期待値、右辺は母数です。少数回の実測平均が必ず真値になる意味でもありません。選択の偏りを直す話とは区別し、通学時間の計算へ進みます。",
+      "en": "Separate this sample from repeated sampling. Our observed variance estimate is 62.5 kg²; another random sample gives another value. Each dot schematically represents one repeated estimate, not actual measured data. Under the textbook independent-random-sample model, the expectation of this estimator equals population variance, hence unbiased. Identify expectation on the left and the population parameter on the right. Neither an individual estimate nor a finite batch average is guaranteed to equal truth. This property does not fix biased selection. Proceed to the commute exercise."
     },
     {
       "page": 48,
@@ -363,8 +363,8 @@
       "page": 52,
       "textbook": "123〜127・132・134 脚注2・202〜203",
       "title": "チャレンジ3　期末試験形式：3問",
-      "ja": "リンクからHTMLの問題ページを開き、二十分間、各自で三問に取り組んでもらいます。各問の番号ごとに計算過程・答え・単位を記します。問題ページ下部の答え合わせリンクから、合言葉statsを入力して解答を開きます。条件、公式、代入、答えと図を順に確認してから、スライドに戻ってALへ進みます。",
-      "en": "Open the linked HTML quiz. Allow twenty minutes for independent work, with numbered responses, calculations and units. Afterwards follow the answer link and enter stats to unlock the worked examples. Review givens, symbolic formulas, substitution, results and charts, then return to the deck for the AL handover."
+      "ja": "リンクからHTMLの問題ページを開き、二十分間、各自で三問に取り組んでもらいます。各問の番号ごとに計算過程・答え・単位を記します。授業終了後、問題ページ下部の答え合わせリンクから、解答を直接開けます。条件、公式、代入、答えと図を順に確認してから、スライドに戻ってALへ進みます。",
+      "en": "Open the linked HTML quiz. Allow twenty minutes for independent work, with numbered responses, calculations and units. The class has ended, so the answer link now opens the worked examples directly. Review givens, symbolic formulas, substitution, results and charts, then return to the deck for the AL handover."
     },
     {
       "page": 53,
