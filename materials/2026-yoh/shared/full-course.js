@@ -1,8 +1,9 @@
-// Preserve the lecture's original order. [p, demo] inserts an HTML slide
-// after original page p, using the index in the corresponding interactive review.
+// Preserve the lecture's original order. [page, demo] makes the corresponding
+// interactive review exercise available on that original lecture scene.
 window.fullLecturePlans = {
   1: {
     total:58, sections:[[1,'モンティ・ホール'],[11,'推測統計・無作為抽出'],[25,'事象と確率'],[43,'確率の公理と加法'],[49,'条件付き確率と独立']],
+    reveals:['2>3>4','12>13>14>15>16>17>18>19>20>21','27>28>29>30','38>39>40>41>42'],
     demos:[[5,1],[5,2],[21,3],[36,5],[55,9],[58,10],[58,12]]
   },
   2: {
@@ -27,8 +28,8 @@ window.fullLecturePlans = {
   },
   6: {
     total:76, sections:[[1,'ガルトンボードと中心極限定理'],[19,'標本平均の標準化'],[34,'Curry・不偏分散・t'],[62,'t分布表'],[70,'χ²とAL']],
-    challenges:[32,51,56,68], reveals:['52>53>54>55','57>58>59'],
-    demos:[[1,2],[16,3],[63,14],[74,17]]
+    challenges:[32,51,56,68], reveals:['8>9>10>11>12>13','52>53>54>55','57>58>59'],
+    demos:[[1,2],[13,3],[63,14],[74,17]]
   },
   7: {
     total:82, sections:[[1,'1秒チャレンジ'],[7,'標本平均と不偏分散'],[31,'正規分布表'],[52,'3つの標準化'],[70,'AL'],[73,'任意：反応速度ゲーム']],
@@ -73,10 +74,11 @@ window.completeLecture = (week, review) => {
     const end = (plan.sections[i+1]?.[0] || plan.total + 1) - 1;
     const items = [];
     for (let page = first; page <= end; page++) {
-      const sequence = sequences.get(page);
-      items.push(sequence || String(page));
-      if (sequence) page = Number(sequence.split('>').at(-1));
-      items.push(...(insertions.get(page) || []));
+      const pages = (sequences.get(page) || String(page)).split('>').map(Number);
+      const exercises = pages.flatMap(original => insertions.get(original) || []);
+      const worked = Boolean(plan.challenges?.includes(page - 1));
+      items.push({pages,exercises,worked});
+      page = pages.at(-1);
     }
     return {title, items};
   });

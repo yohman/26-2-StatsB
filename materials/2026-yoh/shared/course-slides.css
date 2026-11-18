@@ -1,10 +1,4 @@
 .topbar #agenda { font-size: 24px }
-#stage .artwork { position:absolute; inset:0; display:grid; place-items:center }
-.artwork figure { position:relative; max-width:100%; max-height:100% }
-.artwork canvas { display:block; width:100%; height:100% }
-.artwork a { position:absolute }
-.artwork a:hover,.artwork a:focus-visible { outline:2px solid #c87532; background:#efae4430 }
-#stage.art-slide { background:#faf9f5 }
 #stage .slide-body { gap:1.15cqw }
 .lesson-math { font-size:4.4cqw; max-width:100%; line-height:1.15 }
 .lesson-math mjx-container[display=true] { margin:.3em 0!important }
@@ -111,3 +105,144 @@ body.presenting .navigation:hover,body.presenting .topbar:hover,body.presenting 
   #stage.native-slide { min-height:min(72dvh,620px,100%) }
   #stage.lab-slide { min-height:min(78dvh,680px,100%) }
 }
+
+/* The lecture itself scrolls inside the slide area. Its controls keep their own space. */
+#stage .source-host {
+  padding:0;
+  display:block;
+  text-align:center;
+  background:#fbfaf6;
+}
+#stage .source-scene {
+  position:relative;
+  box-sizing:border-box;
+  isolation:isolate;
+  min-height:100%;
+  width:100%;
+  padding:3.4cqw 5cqw 4.7cqw;
+  display:flex;
+  flex-direction:column;
+  justify-content:safe center;
+  align-items:stretch;
+  font:400 2.35cqw/1.4 "Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
+  color:#213d48;
+  overflow-wrap:anywhere;
+}
+#stage .source-scene > :is(h1,h2,h3,p,div,ol,ul,table,aside,details) { min-width:0 }
+#stage .source-scene :is(h1,h2,h3):empty { display:none }
+#stage .source-scene > h1 { font-size:5.4cqw }
+#stage .source-scene h2 { font-size:4.1cqw }
+.source-scene h3 { font-size:2.8cqw }
+.source-scene p { margin:.32em 0 }
+.source-scene :is(ol,ul) { align-self:center; max-width:100%; text-align:left; margin:.3em 0 }
+.source-scene table { margin-inline:auto }
+.source-scene :is(th,td) { vertical-align:middle }
+.source-scene .source-equation { display:block; font-size:1.13em; max-width:100%; overflow:auto }
+.source-equation mjx-container[display] { margin:.34em 0 !important }
+.source-scene .source-inline-math { white-space:nowrap }
+.source-scene img { max-width:100%; object-fit:contain; vertical-align:middle }
+.source-scene > p:only-of-type > img:only-child { max-height:43cqw }
+.source-scene footer { display:none }
+.source-scene .en { opacity:.78 }
+.source-scene.with-backdrop,.source-scene.photo { background:#141c20 }
+.source-scene .scene-backdrop { position:absolute; z-index:-1;inset:0;width:100%;height:100%;object-fit:cover }
+.source-scene .scene-backdrop.contain { object-fit:contain }
+#stage .source-scene.with-backdrop:has(a):not(:has(.lottery-opening-note)) a { position:relative }
+.source-scene .inspect-figure { padding:0;max-width:100%;background:transparent;vertical-align:middle;color:inherit;cursor:zoom-in }
+.source-scene .inspect-figure:hover,.source-scene .inspect-figure:focus-visible { outline:2px solid #bd763d;outline-offset:2px }
+.source-scene .trace-table .trace { background:#e2ddd0; box-shadow:inset 0 0 0 1px #b46a35 }
+.source-scene .source-reveal { visibility:hidden; opacity:0; transform:translateY(.4cqw); transition:opacity .2s,transform .2s }
+.source-scene .source-reveal.shown { visibility:visible; opacity:1; transform:none }
+.source-scene details { width:auto;align-self:center;font-size:.74em;max-width:100%;margin:.5em 0 }
+.source-scene summary { padding:.35em .65em; width:max-content; max-width:100%; background:#b69b6c25;border-radius:.2rem }
+#stage .scene-switcher {
+  display:flex;align-items:center;justify-content:center;gap:.45rem;flex-wrap:wrap;
+  position:absolute;bottom:0;left:0;right:0;z-index:4;padding:.35rem;
+  background:#172d37e8;color:white;
+  max-height:23%;overflow:auto;
+}
+#stage .scene-switcher button {
+  font-size:clamp(.74rem,1.35cqw,1.03rem);line-height:1.25;background:#304c55;color:white;
+  padding:.26em .7em;min-height:1.55rem;overflow-wrap:anywhere;
+}
+#stage .scene-switcher button[aria-pressed=true] { background:#f5e7cf;color:#243d44 }
+#stage.source-slide:has(.scene-switcher) :is(.source-host,.scene-exercise) { bottom:2.25rem }
+#stage .scene-exercise { background:#fbfaf6; }
+#figure-dialog { width:min(1100px,94vw);text-align:center }
+#figure-dialog header { justify-content:flex-end }
+#figure-image { display:block;margin:auto;max-width:100%;max-height:67dvh;object-fit:contain }
+@media(max-width:650px) {
+  #stage .slide-body.source-host { padding:0 }
+  #stage .source-scene { padding:6cqw 5cqw 10cqw; font-size:3.5cqw }
+  #stage .source-scene h2 { font-size:5.2cqw }
+  #stage .source-scene :is(.book,.source,.formula-ref,.book-reference) { font-size:max(10px,1.5cqw) }
+  #stage .source-scene .source-equation { font-size:1em }
+  #stage .source-scene > :is(.split,.worksheet-answer,.worked-layout,.worked-grid,.work-grid) { grid-template-columns:1fr }
+  #stage.source-slide:has(.scene-switcher) :is(.source-host,.scene-exercise) { bottom:3.5rem }
+}
+
+/* Preserve diagrams and two-column worked layouts without fixed print coordinates. */
+#stage .source-scene > :is(.book,.book-reference,.source,.formula-ref):not(.full-photo *) {
+  position:static; inset:auto; margin:.55em auto 0; font-size:clamp(10px,1.3cqw,17px);
+  text-align:center; max-width:100%; pointer-events:auto;
+}
+#stage .source-scene:where(.vstep,.point-clear) :is(.symbolic,.substitution,.meaning,.point-word) {
+  position:static;inset:auto;transform:none;
+}
+#stage .source-scene .chart { height:auto; }
+#stage .source-scene .deviation-grid {
+  display:grid;grid-template-columns:1fr 1fr;gap:2.2cqw;align-items:center;margin:1.2cqw 0;
+}
+#stage .source-scene .deviation-grid th { font-size:clamp(10px,1.45cqw,18px) }
+#stage .source-scene .deviation-grid td { padding:.35cqw .65cqw;font-size:clamp(13px,2cqw,26px) }
+#stage .source-scene .deviation-grid .total { font-size:4.8cqw;font-weight:700;color:#21796f }
+#stage .source-scene .deviation-grid .total small { margin-left:.25em;font-size:.5em }
+#stage .source-scene .deviation-grid .chart img { max-height:19cqw }
+#stage .source-scene.vstep-denominator .chart img { max-height:17cqw }
+#stage .source-scene.vstep > h2 { font-size:3.65cqw;color:#254551 }
+#stage .source-scene.point-clear .estimate-row {
+  display:grid;grid-template-columns:1fr auto 1fr;gap:1.8cqw;align-items:center;margin:.5cqw 0;
+}
+#stage .source-scene .estimate-row .number { font-size:5.8cqw;line-height:1.1;color:#1b6f63;font-weight:700 }
+#stage .source-scene .estimate-row .number small { font-size:.45em;margin-left:.2em }
+#stage .source-scene .estimate-row .arrow { color:#b66c31;font-size:4.5cqw }
+#stage .source-scene .point-word { font-size:2.8cqw;color:#154e46 }
+#stage .source-scene .small-note { font-size:.75em }
+#stage .source-scene.worksheet-answer {
+  display:grid;grid-template-columns:1fr 1fr;align-content:safe center;
+}
+#stage .source-scene.worksheet-answer > :is(h2,.worksheet-context,.worksheet-symbols,.worksheet-output,.book,.source) { grid-column:1 / -1 }
+#stage .source-scene.worked:has(> .work-copy):has(> .work-chart) {
+  display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:.7cqw 2.2cqw;
+  align-content:safe center;
+}
+#stage .source-scene.worked:has(> .work-copy) > :is(h2,.result,.source,.book) { grid-column:1 / -1 }
+#stage .source-scene.with-backdrop { color:#fff;text-shadow:0 .11em .35em #071821 }
+#stage .source-scene.with-backdrop :is(h1,h2,h3) { color:inherit }
+#stage .source-scene.with-backdrop .scene-backdrop.cover { object-fit:contain;background:#181d1d }
+#stage .source-scene.with-backdrop.video-opening .scene-backdrop,
+#stage .source-scene.with-backdrop.video .scene-backdrop { object-fit:cover }
+#stage .scene-switcher button:last-child:not([aria-pressed]) { background:#bf763e;color:#121d1f }
+@media(max-width:650px) {
+  #stage .source-scene:is(.worksheet-answer,.worked:has(> .work-copy):has(> .work-chart)) { grid-template-columns:minmax(0,1fr) }
+  #stage .source-scene .deviation-grid { gap:2.7cqw }
+  #stage .source-scene .deviation-grid .chart img { max-height:22cqw }
+  #stage .source-scene.vstep > h2 { font-size:4.5cqw }
+}
+
+#stage .source-scene .sample-comparison { width:100%;margin:auto }
+.sample-comparison svg { display:block;width:100%;max-height:26cqw;font:18px system-ui,sans-serif;color:#294851;fill:currentColor }
+.sample-comparison .lesson-controls { margin:.5em 0 }
+.sample-comparison .lesson-controls button { min-width:2em; }
+.sample-dot[visibility=visible] { animation:sample-in .26s ease-out }
+.dice-sample-grids { display:grid;grid-template-columns:repeat(3,1fr);gap:1.1cqw;width:min(57cqw,100%);min-height:11cqw }
+.dice-sample { padding:.25em .4em .45em;border-bottom:2px solid #c7d7ce;color:#195e55; }
+.dice-sample b { font-size:clamp(.7rem,1.45cqw,1.25rem);font-variant-numeric:tabular-nums }
+.die-grid { display:grid;grid-template-columns:repeat(5,1fr);align-content:start;min-height:6cqw;color:#234b52;font:1.65cqw/1.1 system-ui }
+@media(max-width:650px){
+  .sample-comparison svg { max-height:42cqw }
+  .dice-sample-grids { width:85cqw;min-height:0 }
+  .die-grid { font-size:3cqw }
+}
+
+#stage .sample-comparison .lesson-controls button { min-height:2rem;font-size:clamp(.9rem,1.7cqw,1.25rem);padding:.25em .55em }

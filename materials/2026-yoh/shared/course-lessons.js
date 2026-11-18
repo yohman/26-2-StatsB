@@ -194,30 +194,44 @@
       renderResult(body,`z = (${height} − 160) / 5 = ${z.toFixed(2)}　／　右側 ${(100*(1-M.normalCdf(z))).toFixed(2)}%`);
     });});
 
-  const diceMeans=slide('1組のサイコロ、1つの標本平均','Central limit theorem','122–123',
-    options(['4回で1組','25回で1組'])+plot+controls(action('100組 ▶')+'<button data-reset aria-label="リセット">↺</button>')+
-    '<p data-dice class="secondary"></p>'+
-    step(1,note('平均の中心は3.5のまま。1組を大きくすると、標本平均が3.5付近に集まる。')),
-    'Predict first. Each group contributes one mean. With four rolls the only possible means are quarter steps; the apparent gaps are possible-value gaps. With 25 rolls more mean values are possible. Compare the spreads on the same scale.',
+  const diceMeans=slide('1組のサイコロ、1つの標本平均','Sampling distribution of the mean','122–123',
+    options(['4回で1組','25回で1組'])+
+    '<div class="dice-sample-grids" aria-label="直近3組の出目"></div>'+plot+
+    controls(action('1組を振る')+'<button data-run>100組 ▶</button><button data-reset aria-label="リセット">↺</button>')+
+    '<p data-dice class="secondary" aria-live="polite"></p>'+
+    step(1,note('どちらも中心は3.5。1組の試行を増やすと、標本平均のばらつきが小さくなる。')),
+    'Add one group, then show how its mean lands in the histogram. Compare four rolls with 25 on the same axes. Each group contributes one mean. The columns count equal-width ranges, while four dice can produce exact means only at quarter steps.',
     body=>{
       const counts=Array(21).fill(0);
       let n=4,timer=null,trials=0;
-      const draw=()=>bars(body,counts,{max:100,labels:counts.map((_,i)=>1+i/4),label:'標本平均のヒストグラム、横軸1〜6、刻み0.25'});
-      const run=body.querySelector('[data-action]');
-      const stop=()=>{clearInterval(timer);timer=null;run.disabled=false;};
-      const reset=()=>{stop();counts.fill(0);trials=0;draw();body.querySelector('[data-dice]').textContent='1組 → 平均1個 → 棒を1つ足す';};
+      const latest=[];
+      const single=body.querySelector('[data-action]');
+      const run=body.querySelector('[data-run]');
+      const status=body.querySelector('[data-dice]');
+      const grid=body.querySelector('.dice-sample-grids');
+      const draw=()=>{
+        bars(body,counts,{max:Math.max(30,...counts),labels:counts.map((_,i)=>1+i/4),
+          label:'標本平均のヒストグラム、横軸1〜6、刻み0.25'});
+        grid.innerHTML=latest.map(({dice,mean})=>`<div class="dice-sample"><b>平均 ${mean.toFixed(2)}</b><div class="die-grid" aria-label="出目 ${dice.join('、')}">${dice.map(face=>`<span>${'⚀⚁⚂⚃⚄⚅'[face-1]}</span>`).join('')}</div></div>`).join('');
+        status.textContent=trials ? `${trials}組　·　直近の平均：${latest[0].mean.toFixed(2)}` : '1組 → 平均1個 → 棒を1つ足す';
+      };
+      const stop=()=>{clearInterval(timer);timer=null;run.disabled=single.disabled=false;};
+      const reset=()=>{stop();counts.fill(0);trials=0;latest.length=0;draw();};
+      const sample=()=>{
+        const dice=Array.from({length:n},()=>1+Math.floor(Math.random()*6));
+        const mean=M.mean(dice);
+        counts[Math.round((mean-1)*4)]++;
+        trials++;
+        latest.unshift({dice,mean});
+        latest.length=Math.min(3,latest.length);
+        draw();
+      };
       choices(body,i=>{n=i?25:4;reset();},0);
+      single.onclick=sample;
       run.onclick=()=>{
-        reset();run.disabled=true;
-        timer=setInterval(()=>{
-          const dice=Array.from({length:n},()=>1+Math.floor(Math.random()*6));
-          const mean=M.mean(dice);
-          counts[Math.round((mean-1)*4)]++;
-          trials++;
-          body.querySelector('[data-dice]').textContent=`最後の組 ${dice.map(x=>'⚀⚁⚂⚃⚄⚅'[x-1]).join(' ')}　平均 ${mean.toFixed(2)}　(${trials}/100)`;
-          draw();
-          if(trials===100) stop();
-        },36);
+        const target=trials+100;
+        run.disabled=single.disabled=true;
+        timer=setInterval(()=>{sample();if(trials===target) stop();},40);
       };
       body.querySelector('[data-reset]').onclick=reset;
       return stop;
