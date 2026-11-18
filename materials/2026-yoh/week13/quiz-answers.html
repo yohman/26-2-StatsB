@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Week 13 · 答え合わせ</title>
+<link rel="stylesheet" href="../week08/quiz.css">
+</head>
+<body>
+<main class="gate">
+<a href="quiz.html?p">← 問題</a>
+<h1>答え合わせ</h1>
+<form id="unlock-form">
+<label for="unlock-word">合言葉を入力</label>
+<div class="unlock-row"><input type="password" id="unlock-word" required autocomplete="off"><button type="submit">開く →</button></div>
+<p id="unlock-error" aria-live="polite"></p>
+</form>
+</main>
+<script>
+document.querySelector('#unlock-form').addEventListener('submit', event => {
+  event.preventDefault();
+  if (document.querySelector('#unlock-word').value.trim().toLowerCase() !== 'stats') {
+    document.querySelector('#unlock-error').textContent = '合言葉を確認してください。';
+    return;
+  }
+  location.href = '../shared/course-slides.html?week=13&p#exam-answer';
+});
+</script>
+</body>
+</html>

@@ -5,3 +5,27 @@
 .denominator mjx-container,.parts button mjx-container{pointer-events:none}
 
 .presenting #stage-wrap{position:fixed;inset:0;padding:0;background:#101e28;z-index:20}.presenting #stage{width:min(100%,calc(100dvh * 16/9));max-height:100dvh}.presenting .topbar,.presenting .navigation{position:fixed;left:0;right:0;z-index:21;opacity:0;transition:opacity .2s;background:#142833da}.presenting .topbar{top:0}.presenting .navigation{bottom:0}.presenting .topbar:hover,.presenting .topbar:focus-within,.presenting .navigation:hover,.presenting .navigation:focus-within{opacity:1}
+
+/* Every slot keeps its track even when the reveal button is hidden. */
+.navigation {
+  display:grid;
+  grid-template-columns:repeat(2,2.45rem) 5.5rem 2.8rem 7.6rem repeat(2,2.45rem);
+  justify-content:center;
+  align-items:center;
+  gap:.45rem;
+}
+.navigation #first { grid-column:1 }
+.navigation #prev { grid-column:2 }
+.navigation label { grid-column:3;text-align:center }
+.navigation #steps { grid-column:4;text-align:center;min-width:0 }
+.navigation #reveal { grid-column:5;padding-inline:.2rem }
+.navigation #next { grid-column:6 }
+.navigation #last { grid-column:7 }
+.navigation > :is(button,label,span) { grid-row:1 }
+.navigation > button { height:2.25rem;min-width:0;line-height:1;padding-inline:0 }
+@media(max-width:460px){
+  .navigation { grid-template-columns:repeat(2,1.95rem) 4.2rem 1.7rem 5.4rem repeat(2,1.95rem);gap:.2rem }
+  .navigation input { width:2rem }
+  .navigation #steps,.navigation #reveal { font-size:.68rem }
+}
+@media print{.navigation{display:none}}

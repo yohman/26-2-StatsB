@@ -336,5 +336,7 @@
     figure.style.width = Math.min(stage.clientWidth,stage.clientHeight * width / height) + 'px';
   }).observe(stage);
   index = Math.min(slides.length - 1, Math.max(0, parseInt(params.get('page'),10) - 1 || 0));
+  const requestedSlide = slides.findIndex(slide => slide.anchor && '#'+slide.anchor === location.hash);
+  if (!params.has('page') && requestedSlide >= 0) index = requestedSlide;
   render();
 })();

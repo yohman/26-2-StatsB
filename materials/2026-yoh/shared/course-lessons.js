@@ -7,7 +7,6 @@
   const math = line => `<div class="lesson-math">\\[${line}\\]</div>`;
   const plot = '<div class="lesson-graph"></div>';
   const result = '<p class="lesson-result" aria-live="polite"></p>';
-  const key = '<span style="color:#16786f">●</span>';
   const note = text => `<p class="secondary">${text}</p>`;
   const action = caption => `<button data-action>${caption}</button>`;
   const controls = html => `<div class="lesson-controls">${html}</div>`;
@@ -40,11 +39,6 @@
       html: `<h2>${ruby(title)}</h2><p class="english">${english}</p>${html}`};
   }
   const link = (href,label) => `<a href="${href}" target="_blank" rel="noopener">${label} ↗</a>`;
-  const lab = (week,mode,title,notes) => ({
-    title,notes,lab:true,
-    html:`<iframe class="lesson-lab" title="${title}" src="explore.html?week=${week}&mode=${mode}"></iframe>`
-  });
-
   function chart(body,svg,label) {
     body.querySelector('.lesson-graph').innerHTML =
       `<svg viewBox="0 0 900 218" role="img" aria-label="${label}">${svg}</svg>`;
@@ -94,17 +88,6 @@
     buttons.forEach((button,i)=>button.onclick=()=>select(i));
     if (initial!==null) select(initial);
   }
-
-  const intervalChoice=slide('どの分布を使う？','Choose Z, t or chi-square','133–136',
-    '<p class="lesson-story">電池16台、標本平均120分。<br>母分散は未知。求めるのは<strong>母平均</strong>の区間。</p>'+
-    options(['Z','t','χ²'])+result+
-    step(1,math(tex`120\pm t_{0.025}(15)\sqrt{\widehat{\sigma_x^2}/16}`)),
-    'Ask students to select the target first, then decide whether population variance is given. Reveal the interval expression only after they have chosen.',
-    body=>{choices(body,i=>renderResult(body,[
-      'Z：母分散が既知なら使える。今回は未知。',
-      't：母分散の代わりに標本不偏分散を使う。',
-      'χ²：正規母集団の母分散の区間に使う。'
-    ][i]));},'cream');
 
   const intervalWidth=slide('標本を増やすと、幅は？','Sample size and margin of error','134 脚注1',
     note('架空の電池：標本平均120分・母標準偏差10分（既知）・信頼係数95%')+
@@ -280,7 +263,6 @@
       choices(body,i=>{selected=i?all.slice(-50):all;r();},0);
     });
 
-  const tea = lab(11,'tea','紅茶とミルク：4杯を選ぶ','Let students select four cups first. Then compare the success count with the exact number of equally likely choices.');
   const examReview = slide('どの道具を使う？','Choose the statistical tool','118–150',
     '<p class="lesson-story">同じ確率で独立に、6本のシュート。<br>成功がちょうど4本の確率を求めたい。</p>'+
     options(['二項分布','t分布','回帰分析'])+result+
@@ -289,11 +271,6 @@
     body=>{choices(body,i=>renderResult(body,['二項分布：独立で成功確率が同じ6回の成功数。','t分布：例えば、母分散が未知のときの標本平均の推測。','回帰分析：説明変数と目的変数の関係を調べる。'][i]));});
 
 
-  // These replace formula-only pages while preserving their textbook notation.
-  const formulaPage = (page,title,en,book,expression,notes) => ({
-    sourcePage:page,title,book,notes,theme:'dark',
-    html:math(expression)+`<p class="english">${ruby(title)} · ${en}</p>`
-  });
   const meanFormula = tex`\bar X=\frac{1}{n}\sum_{i=1}^{n}X_i`;
   const varianceFormula = tex`\widehat{\sigma_x^2}=\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar X)^2`;
   const individualZ = tex`Z=\frac{X-\mu_x}{\sigma_x}`;
@@ -304,26 +281,11 @@
   const regressionModel = tex`y_i=a+bx_i+u_i`;
 
   window.CourseLessons = {
-    10:deck('どの区間を作る？',[10,18,25],
-      section('魚の平均と、ばらつき','1-6',intervalChoice),
-      section('母平均：母分散が既知',formulaPage(7,'既知分散の区間推定','Known-variance 95% interval','134 脚注1',tex`\bar X\pm1.96\sqrt{\sigma_x^2/n}`,'Point to the specified population variance and the standard error. Then apply the rule to the batteries.'),'8-11',intervalWidth),
-      section('母平均：母分散が未知','13',formulaPage(14,'母平均の区間推定','Unknown-variance 95% interval','133',tex`\bar X\pm t_{0.025}(n-1)\sqrt{\widehat{\sigma_x^2}/n}`,'Locate the degrees of freedom and the estimated variance. Ask students which t-table column they need.'),'15-19',lab(10,'mean-ci','t区間：標本を入れ替える','Edit the five practice values and compare the point estimate, standard error and width.')),
-      section('母分散：χ²','21-22',formulaPage(23,'母分散の信頼区間','Population variance · 95% interval','136',tex`\left[\frac{\sum(X_i-\bar X)^2}{\chi^2_{0.025}(n-1)},\quad\frac{\sum(X_i-\bar X)^2}{\chi^2_{0.975}(n-1)}\right]`,'Point at the two upper-tail critical values. The larger denominator gives the lower bound.'),'24-26',lab(10,'variance-ci','χ²：二つの境界','Use both upper-tail table columns, then match the larger denominator to the lower endpoint.')),
-      section('AL：条件から分布を選ぶ','28-31')),
-    11:deck('仮説検定',[24,33],
-      section('紅茶から考える偶然','1-3',tea),
-      section('仮説・有意水準・棄却域','5-14',formulaPage(15,'母平均の検定統計量','One-sample t statistic','145',tex`T=\frac{\bar X-\mu_0}{\sqrt{\widehat{\sigma_x^2}/n}}`,'Highlight the null mean in the numerator; then use the drink example.')),
-      section('母平均の検定とp値','16-22',testing,'24-26'),
-      section('母比率の差','27-31',lab(11,'proportions','二つの母比率を比べる','Change only the support counts and compare the estimated difference with its uncertainty.'),'33-38')),
-    12:deck('回帰分析',[17,28],
-      section('NBAの散布図：xとy','1-6',formulaPage(7,'回帰モデル','Simple linear regression model','191–192',regressionModel,'Point at y, x, and the error term. Ask students to identify the units from the basketball example.'),'8'),
-      section('直線と残差','9-12',regression,'14-18'),
-      section('Excelの出力を読む','19-26',lab(12,'output','点を変えてExcel形式の出力を見る','Move one observation. Read slope and its unit first, then compare R² and the slope p-value.'),'28-29'),
-      section('自分のデータ・AL','30',lab(12,'pairs','ペアデータから散布図へ','Use anonymous pairs and keep x and y matched.'),'32-35')),
-    13:deck('解釈と総合復習',[27,32,38],
-      section('単位と変動係数','1-7',relativeSpread,'8'),
-      section('係数・有意性・交絡','9-17',lab(13,'interpret','その説明は、どこまで言える？','Have students defend their choice in words before revealing feedback.'),'19-22'),
-      section('試験形式の復習','23-26',examReview,'27-39',lab(13,'review','新しい数値で、もう一問','Pick a topic, solve independently, then reveal the worked example.'),'42-43')),
+    ...window.buildAdvancedLessons({
+      M,tex,step,math,plot,result,note,action,controls,slider,options,section,deck,slide,link,
+      chart,bars,curve,bindSlider,choices,renderResult,intervalWidth,testing,regression,
+      relativeSpread,varianceFormula,individualZ,binomial,regressionModel
+    }),
     ...window.buildFoundationLessons({
       M,tex,step,math,plot,result,note,action,controls,slider,options,section,deck,slide,link,
       chart,bars,curve,bindSlider,choices,renderResult,counts,zArea,diceMeans,tShape,standardize,bias,
