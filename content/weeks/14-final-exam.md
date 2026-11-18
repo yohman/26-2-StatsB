@@ -24,4 +24,6 @@ prepare_en: Check the latest UNIPA notice for the examination scope and permitte
 
 ## Materials
 
+- [期末試験の確認 / Final exam review](materials/2026-yoh/shared/course-slides.html?week=14) {primary}
+
 Additional final-exam materials will be announced through UNIPA.

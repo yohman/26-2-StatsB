@@ -335,3 +335,9 @@
 !/materials/2026-yoh/week09/images/nyt-graduate-jobs.jpg
 !/materials/2026-yoh/week09/images/us-graduate-duration.jpg
 !/materials/2026-yoh/week09/images/japan-jobs-chart.png
+
+# Published HTML course presentation runtime.
+!/materials/2026-yoh/shared/course-lessons.js
+!/materials/2026-yoh/shared/course-slides.css
+!/materials/2026-yoh/shared/course-slides.html
+!/materials/2026-yoh/shared/course-slides.js

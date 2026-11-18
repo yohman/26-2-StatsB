@@ -1,0 +1,56 @@
+.topbar #agenda { font-size: 24px }
+#stage .artwork { position:absolute; inset:0; display:grid; place-items:center }
+.artwork figure { position:relative; max-width:100%; max-height:100% }
+.artwork canvas { display:block; width:100%; height:100% }
+.artwork a { position:absolute }
+.artwork a:hover,.artwork a:focus-visible { outline:2px solid #c87532; background:#efae4430 }
+#stage.art-slide { background:#faf9f5 }
+#stage .slide-body { gap:1.15cqw }
+.lesson-math { font-size:4.4cqw; max-width:100%; line-height:1.15 }
+.lesson-math mjx-container[display=true] { margin:.3em 0!important }
+.lesson-result { font-size:3cqw; font-weight:bold; color:#176b62; line-height:1.3 }
+.lesson-graph { width:100%; height:20cqw }
+.lesson-graph svg { width:100%; height:100%; font-family:Arial,'Hiragino Sans',sans-serif; font-size:20px; fill:#244852 }
+.lesson-controls { display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:1.3cqw; font-size:1.65cqw }
+.lesson-controls label { display:flex; align-items:center; gap:1cqw }
+.lesson-controls input { width:19cqw; accent-color:#16786f }
+.lesson-controls output { font-variant-numeric:tabular-nums; min-width:2.2em }
+.lesson-controls button.selected { background:#16786f;color:white }
+.lesson-story { font-size:3.8cqw; line-height:1.4 }
+.lesson-result[aria-live] { min-height:1.4em }
+.lesson-lab { width:100%; height:100%; border:0; background:#faf9f5 }
+.slide-body.lab-body { padding:0 }
+#answer-check form { display:flex; justify-content:flex-end; gap:10px; margin-top:25px }
+#answer-check form button { width:auto; background:#dae9e5; padding:.6em 1em }
+#toc-links button[aria-current=true]{background:#dcebe6}
+#toc-links h3 a { font:inherit }
+body.presenting #stage-wrap { position:fixed;inset:0;padding:0;background:#142833;z-index:20 }
+body.presenting #stage { width:min(100%,calc(100dvh * 16/9)); max-height:100dvh }
+body.presenting .navigation,body.presenting .topbar { position:fixed;left:0;right:0;z-index:21;background:#142833d9;opacity:0 }
+body.presenting .navigation { bottom:0 }
+body.presenting .topbar { top:0 }
+body.presenting .navigation:hover,body.presenting .topbar:hover,body.presenting .navigation:focus-within,body.presenting .topbar:focus-within { opacity:1 }
+@media(max-width:650px){
+  #stage.native-slide { aspect-ratio:auto; min-height:min(72dvh,620px) }
+  #stage .slide-body:not(.lab-body) { padding:6vw 5vw; font-size:4.2cqw; gap:3cqw }
+  #stage h2 { font-size:5.8cqw }
+  #stage .english,#stage .secondary { font-size:3.5cqw }
+  .lesson-math { font-size:5cqw }
+  .lesson-result { font-size:4.3cqw }
+  .lesson-controls { font-size:4cqw }
+  .lesson-graph { height:34cqw }
+  #stage .book { font-size:2.7cqw }
+  #stage.lab-slide { min-height:min(78dvh,680px) }
+}
+
+@media(min-width:651px){
+  #stage.native-slide:has(.lesson-graph):has(.lesson-math) .lesson-graph { height:17cqw }
+  #stage.native-slide:has(.lesson-graph):has(.lesson-math) .lesson-math { font-size:3.6cqw }
+}
+@media(min-width:651px){
+  #stage.native-slide:has(.lesson-graph):has(.lesson-math) .slide-body { padding-block:2.75cqw;gap:.65cqw }
+  #stage.native-slide:has(.lesson-graph):has(.lesson-math) .lesson-math { font-size:3.1cqw }
+}
+@media(max-width:650px){
+  #stage.native-slide .slide-body { overflow:auto;justify-content:safe center }
+}

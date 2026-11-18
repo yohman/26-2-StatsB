@@ -31,7 +31,7 @@ prepare_en: Review the notation used for random variables and probabilities.
 
 ## Materials
 
-- [Yoh's Week 2 lecture](materials/2026-yoh/week02/w2.pdf) {primary}
+- [Yoh's Week 2 lecture](materials/2026-yoh/shared/course-slides.html?week=2) {primary}
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_02_確率分布_離散確率分布_前半v2.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_02_確率分布_離散確率分布_前半v2.pdf) {supplementary}
 - [AL用ワークシート](weeks/02-discrete-distributions-i/02_AL用ワークシート.xlsx) {worksheet}

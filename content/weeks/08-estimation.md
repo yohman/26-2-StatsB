@@ -33,7 +33,7 @@ prepare_en: Review the meanings of parameter, statistic, and estimator.
 
 ## Materials
 
-- [Yoh's Week 8 lecture](materials/2026-yoh/week08/w8.pdf) {primary}
+- [Yoh's Week 8 lecture](materials/2026-yoh/shared/course-slides.html?week=8) {primary}
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_08_母平均の区間推定・母分散の区間推定(前半)v3.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_08_母平均の区間推定・母分散の区間推定(前半)v3.pdf) {supplementary}

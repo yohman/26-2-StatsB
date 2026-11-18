@@ -32,7 +32,7 @@ prepare_en: Review the difference between sample variance and unbiased sample va
 
 ## Materials
 
-- [Yoh's Week 6 lecture](materials/2026-yoh/week06/w6.pdf) {primary}
+- [Yoh's Week 6 lecture](materials/2026-yoh/shared/course-slides.html?week=6) {primary}
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_06_確率分布_連続確率分布_後半_v3.pdf) {supplementary}
 - [標準正規分布表 / Standard normal distribution table](materials/2026-yoh/week06/standard-normal-table.pdf) {resource}

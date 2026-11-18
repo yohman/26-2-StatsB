@@ -33,7 +33,7 @@ prepare_en: Review Week 12 regression and bring questions for final-exam prepara
 
 ## Materials
 
-- [Yoh's Week 13 lecture](materials/2026-yoh/week13/w13.pdf) {primary}
+- [Yoh's Week 13 lecture](materials/2026-yoh/shared/course-slides.html?week=13) {primary}
 
 - [Tsumura 2026 lecture slides: Part 2 (PowerPoint)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pptx) {supplementary}
 - [Tsumura 2026 lecture slides: Part 2 (PDF)](materials/2026-tsumura/26_13_回帰分析とその他の代表的な分析手法_後半.pdf) {supplementary}

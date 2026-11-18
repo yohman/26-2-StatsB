@@ -29,7 +29,7 @@ prepare_en: Be ready to distinguish when to use binomial and Poisson distributio
 
 ## Materials
 
-- [Yoh's Week 4 lecture](materials/2026-yoh/week04/w4.pdf) {primary}
+- [Yoh's Week 4 lecture](materials/2026-yoh/shared/course-slides.html?week=4) {primary}
 - [AIニュースの正確性 / AI news accuracy](materials/2026-yoh/week04/news-ai-news-errors.pdf) {news-example}
 - [AIへの怒り / Anger about AI](materials/2026-yoh/week04/news-genz-ai-anger.pdf) {news-example}
 - [クマの出現 / Bear sightings](materials/2026-yoh/week04/news-poisson-bears.pdf) {news-example}

@@ -162,6 +162,11 @@ function lectureDecks(materials, week) {
 }
 
 function slideThumbnail(deck, week) {
+  if (deck.preview?.startsWith('materials/2026-yoh/shared/course-slides.html?')) {
+    if (week.week === 8) return 'assets/slide-previews/yoh-w08.png?v=week8-story';
+    if (week.week === 14) return week.image || '';
+    return slideThumbnail({...deck, preview:`materials/2026-yoh/week${String(week.week).padStart(2,'0')}/w${week.week}.pdf`},week);
+  }
   if(deck.preview?.endsWith('/week09/index.html')) return 'materials/2026-yoh/week09/images/nyt-graduate-jobs.jpg';
   const news = deck.preview?.match(/\/week04\/(news-[a-z-]+)\.pdf$/);
   if (news) return `assets/slide-previews/week04-${news[1]}.png?v=20261020`;
@@ -198,7 +203,9 @@ function activityResource(item, week) {
 
 function slideCard(deck, week) {
   const image = slideThumbnail(deck, week);
-  const link = deck.preview ? (deck.preview.endsWith('/week09/index.html') ? `${deck.preview}?p` : viewerLink(deck.preview, deck.label, week.week, deck.source)) : '';
+  const link = deck.preview ? (extension(deck.preview) === 'HTML'
+    ? deck.preview + (new URLSearchParams(location.search).has('p') ? (deck.preview.includes('?') ? '&p' : '?p') : '')
+    : viewerLink(deck.preview, deck.label, week.week, deck.source)) : '';
   const preview = link ? `<a class="file-button slide-preview-button" href="${link}">${bilingual('Open slides', 'スライドを開く')}<span aria-hidden="true">↗</span></a>` : '';
   const titleParts = deck.label.split(' / ');
   const title = titleParts.length === 2 ? bilingual(escapeHtml(titleParts[1]), escapeHtml(titleParts[0])) : escapeHtml(deck.label);

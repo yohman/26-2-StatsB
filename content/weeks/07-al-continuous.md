@@ -35,7 +35,7 @@ prepare_en: Have the standard-normal and t-distribution tables ready for class.
 
 ## Materials
 
-- [Yoh's Week 7 lecture](materials/2026-yoh/week07/w7.pdf) {primary}
+- [Yoh's Week 7 lecture](materials/2026-yoh/shared/course-slides.html?week=7) {primary}
 
 - [Tsumura 2026 lecture slides — student edition (PDF)](materials/2026-tsumura/26_07_[AL]_確率分布_連続確率分布v3.pdf) {supplementary}
 - [AL用ワークシート](weeks/07-al-continuous-distributions/07_AL用ワークシート.xlsx) {worksheet}

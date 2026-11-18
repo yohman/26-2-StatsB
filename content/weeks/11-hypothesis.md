@@ -33,7 +33,7 @@ prepare_en: Review the different purposes of confidence intervals and hypothesis
 
 ## Materials
 
-- [Yoh's Week 11 lecture](materials/2026-yoh/week11/w11.pdf) {primary}
+- [Yoh's Week 11 lecture](materials/2026-yoh/shared/course-slides.html?week=11) {primary}
 
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_11_統計的仮説検定v3.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_11_統計的仮説検定v3.pdf) {supplementary}

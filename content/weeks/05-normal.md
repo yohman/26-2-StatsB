@@ -33,7 +33,7 @@ prepare_en: Review the difference between continuous and discrete variables.
 
 ## Materials
 
-- [Yoh's Week 5 lecture](materials/2026-yoh/week05/w5.pdf) {primary}
+- [Yoh's Week 5 lecture](materials/2026-yoh/shared/course-slides.html?week=5) {primary}
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v7.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_05_確率分布_連続確率分布_前半v7.pdf) {supplementary}
 - [標準正規分布表：上側確率 / Standard normal table: upper tail](materials/2026-yoh/week05/normal-upper-tail-table.html) {resource}

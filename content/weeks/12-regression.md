@@ -32,7 +32,7 @@ Excel でデータ分析ツールを使えるか確認してください。
 
 ## Materials
 
-- [Yoh's Week 12 lecture](materials/2026-yoh/week12/w12.pdf) {primary}
+- [Yoh's Week 12 lecture](materials/2026-yoh/shared/course-slides.html?week=12) {primary}
 
 - [Tsumura 2026 lecture slides: Part 1 (PowerPoint)](materials/2026-tsumura/26_12_回帰分析とその他の代表的な分析手法_前半v3.pptx) {supplementary}
 - [Tsumura 2026 lecture slides: Part 1 (PDF)](materials/2026-tsumura/26_12_回帰分析とその他の代表的な分析手法_前半v3.pdf) {supplementary}
