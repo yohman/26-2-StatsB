@@ -38,3 +38,5 @@ prepare_en: Review the meanings of parameter, statistic, and estimator.
 - [Tsumura 2026 lecture slides (PowerPoint)](materials/2026-tsumura/26_08_母平均の区間推定・母分散の区間推定(前半)v3.pptx) {supplementary}
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_08_母平均の区間推定・母分散の区間推定(前半)v3.pdf) {supplementary}
 - [AL用ワークシート](weeks/08-confidence-intervals-i/08_AL用ワークシート.xlsx) {worksheet}
+
+- [期末試験形式クイズ / Exam-style quiz](materials/2026-yoh/week08/quiz.html) {quiz}

@@ -319,3 +319,8 @@
 
 # Verified textbook references only; the textbook PDFs remain private.
 !/materials/2026-yoh/textbook-guide.html
+
+# Week 8 in-class practice quiz and explicitly shared worked answers.
+!/materials/2026-yoh/week08/quiz.html
+!/materials/2026-yoh/week08/quiz-answers.html
+!/materials/2026-yoh/week08/quiz.css
