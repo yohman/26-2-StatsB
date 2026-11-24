@@ -6,198 +6,220 @@
 <script src="../../../assets/preview-access.js"></script>
 <script defer src="../../../assets/future-stats-math.js"></script>
 <style>
-:root{color-scheme:light;background:#fffdf8;color:#203740;font:16px/1.45 system-ui,"Hiragino Sans",sans-serif;--orange:#a5431b;--teal:#16655f;--violet:#63528a;--muted:#55696d}
-*{box-sizing:border-box}[hidden]{display:none!important}body{margin:0}main{max-width:1040px;margin:auto;padding:clamp(10px,2vw,24px)}
-h1,h2,p,figure{margin:0}h1{font:700 clamp(24px,4vw,42px)/1.15 "Hiragino Mincho ProN","Yu Mincho",serif}
-h2{font-size:clamp(17px,2.3vw,25px);margin-bottom:10px}header p,footer,.caption{font-size:.82rem;color:var(--muted)}
-header p{margin-top:3px}footer{margin-top:12px}a{color:var(--teal)}button,input{font:inherit}
-.controls,.nav{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.controls{margin:13px 0}
-button{border:0;border-radius:5px;padding:5px 11px;color:#254543;background:#e6ede7;cursor:pointer}
-button[aria-pressed=true],#next{background:#9a401e;color:white}button:disabled{opacity:.45;cursor:default}
-button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
-#reset{margin-left:auto}.controls label{display:flex;align-items:center;gap:7px}input[type=range]{width:clamp(110px,28vw,240px);accent-color:var(--orange)}
-.nav{margin-top:13px;justify-content:center}.nav output{min-width:4em;text-align:center;color:var(--muted);font-size:.85rem}
-.step{text-align:center;padding:15px 8px 5px;min-height:270px}.step:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
-.eq{font:clamp(25px,5vw,55px)/1.3 "Cambria Math",Cambria,"Times New Roman",serif;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:.1em .22em;font-variant-numeric:tabular-nums}
-.eq.secondary{font-size:clamp(17px,3vw,32px);margin:0 0 9px;color:#41575c}.eq.result{color:var(--orange)}
-.eq:has(>.mapped){align-items:end}
-.eq sub,.eq sup{font-size:.58em}.term{display:inline-block;white-space:nowrap}.op{color:#55696d}
-.group{display:flex;flex-wrap:wrap;justify-content:center;align-items:end;gap:.6em 1.3em;margin:7px 0}
-.given{display:inline-grid;justify-items:center;min-width:60px}.given strong{font-size:clamp(18px,3.1vw,30px);line-height:1.12}
-.given small,.mapped small{font:600 clamp(10px,1.6vw,15px)/1.22 system-ui,sans-serif;color:var(--muted)}
-.mapped{display:inline-grid;justify-items:center;align-self:end;white-space:nowrap;gap:1px}
-.mapped i{font:500 .47em/1 system-ui;color:inherit}
-.mean{color:var(--orange)}.critical{color:var(--violet)}.spread{color:var(--teal)}
-.frac{display:inline-grid;justify-items:center;line-height:1.13;vertical-align:middle}.frac>span:first-child{padding:0 .17em .05em;border-bottom:.055em solid currentColor}.frac>span:last-child{padding-top:.05em}
-.scores{display:flex;justify-content:center;gap:.35em 1em;flex-wrap:wrap;color:var(--orange);font-weight:750;font-size:clamp(19px,3.4vw,35px)}
-table{margin:8px auto;width:min(100%,580px);border-collapse:collapse;font-size:.87rem;font-variant-numeric:tabular-nums}
-td,th{padding:2px 5px;text-align:right;border-bottom:1px solid #dce4df}th:first-child,td:first-child{text-align:left}tfoot{font-weight:750;color:var(--teal)}
-.caption{margin-top:8px}.chart{width:min(100%,810px);display:block;margin:5px auto 0}
-.chart .wing{transform-box:fill-box;transform-origin:center;animation:open .36s ease-out both}.chart .dot{animation:appear .2s ease both}
-@keyframes open{from{transform:scaleX(.02);opacity:.25}to{transform:scaleX(1);opacity:1}}@keyframes appear{from{opacity:0}to{opacity:1}}
-@media(prefers-reduced-motion:reduce){.chart *{animation:none!important}}
-@media(max-width:520px){main{padding:9px}.step{padding-inline:0}.eq{font-size:clamp(20px,6vw,30px)}.eq.secondary{font-size:clamp(16px,4vw,23px)}button{padding:5px 7px}.controls{gap:5px}#reset{margin-left:0}}
+:root{color-scheme:light;background:#fbfaf6;color:#22343b;--ink:#22343b;--muted:#54666d;--paper:#fff;--orange:#a84920;--wing:#c96530;--teal:#186a63;--violet:#624b8d;--rule:#e5e1d8;font:16px/1.45 system-ui,"Hiragino Sans",sans-serif}
+*{box-sizing:border-box}body{margin:0}main{max-width:1260px;margin:auto;padding:clamp(12px,2.2vw,30px)}
+h1,h2,p,figure{margin:0}h1{font-size:clamp(24px,4.4vw,46px);line-height:1.16;letter-spacing:-.032em}
+.english{font-size:.75rem;color:var(--muted);margin-top:.3rem}article,aside{min-width:0}
+button,input{font:inherit}a{color:var(--teal);text-underline-offset:.18em}button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin:.95rem 0 1rem}
+button{border:0;border-radius:6px;padding:.37rem .7rem;background:#ece9e0;color:var(--ink);font-size:.8rem;font-weight:650;cursor:pointer}
+button:hover{background:#e3ded2}button.primary,button[aria-pressed=true]{background:var(--ink);color:white}button.primary:hover,button[aria-pressed=true]:hover{background:#354b53}
+#reset{margin-left:auto;background:transparent;color:var(--muted)}.controls label{display:flex;align-items:center;gap:.4rem;font-size:.85rem}.controls output{font-weight:760;min-width:2.1ch}input[type=range]{width:clamp(8rem,20vw,15rem);accent-color:var(--wing)}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:clamp(12px,2.5vw,32px);align-items:start}
+.visual{background:var(--paper);padding:clamp(11px,1.65vw,21px);border-radius:12px;text-align:center}
+.sample{display:flex;align-items:baseline;flex-wrap:wrap;gap:.2rem .6rem;margin:0 0 .4rem}.sample-label,.label{font-size:.73rem;font-weight:700;color:var(--muted)}
+.score{font-size:clamp(15px,2.4vw,24px);font-weight:750;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.facts{display:flex;flex-wrap:wrap;gap:.22rem .8rem;font-size:.78rem;margin-bottom:.55rem}.facts b{font-weight:780;margin-left:.25em;white-space:nowrap}
+.mean{color:var(--orange)}.spread{color:var(--teal)}.critical{color:var(--violet)}
+.formula{padding:.48rem 0}.formula+.formula{border-top:1px solid var(--rule)}
+.math{display:flex;justify-content:center;align-items:center;min-height:3.05em;padding:.2em 0;font-size:clamp(16px,2.35vw,30px);overflow-x:auto}
+.math math{min-width:max-content;margin:auto}.formula.chi .math{font-size:clamp(14px,2.05vw,26px)}
+.margin,.note,footer,figcaption{color:var(--muted);font-size:.77rem}.margin{margin:.15rem 0 .2rem}.margin strong{color:var(--ink)}
+.result-label{font-size:.8rem;font-weight:680;color:var(--muted)}.result{display:block;font-size:clamp(23px,4.25vw,48px);font-weight:800;letter-spacing:-.045em;color:var(--orange);font-variant-numeric:tabular-nums;line-height:1.15;margin:.24rem 0 .4rem}.result small{font-size:.42em;letter-spacing:0}
+.chart{display:block;width:100%;height:auto;overflow:visible}.axis{stroke:#c2caca;stroke-width:1}.tick{fill:#556a70;font-size:13px}.wing{stroke:var(--wing);stroke-linecap:round;stroke-width:3.6;fill:none}.wing.faint{stroke:#adbbb8;stroke-width:2}.dot{fill:var(--wing)}.dot.faint{fill:#adbbb8}.reference{stroke:var(--teal);stroke-width:1.25;stroke-dasharray:4 4}.reference-label{fill:var(--teal);font-size:13px;font-weight:700}.plot-label{font-size:13px;fill:var(--ink);font-weight:650}.emphasis{font-weight:780;fill:var(--orange)}
+.chart .wing.active{transform-box:fill-box;transform-origin:center;animation:wings .24s ease-out both}@keyframes wings{from{opacity:.35;transform:scaleX(.82)}to{opacity:1;transform:scaleX(1)}}@media(prefers-reduced-motion:reduce){.chart .wing.active{animation:none}}
+.count{font-size:.79rem;margin-top:.55rem;color:var(--teal)}.count strong{font-size:1.09rem}.legend{margin:.3rem 0 0}
+details{margin:.25rem 0 0;font-size:.77rem}summary{cursor:pointer;color:var(--teal);width:max-content;max-width:100%;padding:.26em 0}details .math{font-size:clamp(14px,1.85vw,22px);justify-content:start}details .math math{margin:0}details .note{margin:.14rem 0}
+footer{margin-top:.7rem}footer p+p{margin-top:.22rem}
+body.embedded main{max-width:1120px}body.embedded h1{font-size:clamp(23px,3.1vw,39px)}
+@media(max-width:670px){.layout{grid-template-columns:1fr;gap:.65rem}.visual{grid-row:1}.math{font-size:clamp(16px,4.7vw,27px)}.formula.chi .math{font-size:clamp(14px,4.15vw,24px)}.controls{margin:.65rem 0}.result{font-size:clamp(24px,6vw,38px)}}
 </style>
 </head>
 <body><main>
-<header><h1 id="title"></h1><p id="subtitle"></p></header>
+<header><h1 id="title"></h1><p id="english" class="english"></p></header>
 <div class="controls" id="controls" aria-label="実験の条件"></div>
-<section id="step" class="step" tabindex="-1" aria-live="polite"></section>
-<div class="nav" aria-label="計算の手順"><button id="prev" type="button">← 前の手順</button><output id="progress"></output><button id="next" type="button">次の手順 →</button></div>
+<div class="layout">
+  <article aria-label="公式と計算">
+    <div id="inputs"></div>
+    <div id="rule"></div>
+    <div id="substitution"></div>
+    <details><summary id="detail-label">途中の計算</summary><div id="detail"></div></details>
+  </article>
+  <figure class="visual" aria-labelledby="figure-title">
+    <p class="result-label" id="figure-title"></p><output class="result" id="result" aria-live="polite"></output>
+    <div id="chart"></div><figcaption id="caption"></figcaption>
+  </figure>
+</div>
 <footer id="foot"></footer>
 </main>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
   'use strict';
   const M=window.FutureStats,$=id=>document.getElementById(id);
-  const mode=new URLSearchParams(location.search).get('mode')||'curry';
   const models={
-    curry:['Curryの5試合','Five games · 母平均の信頼区間'],
-    coverage:['100本のうち、何本が届く？','Repeated intervals · 1組の計算から、100組の結果へ'],
-    'mean-ci':['信頼係数を変える','Confidence level · 得点は同じ。t値だけを変える。'],
-    size:['標本数を変える','Sample size · 標本平均120分と母標準偏差10分は固定。'],
-    'variance-ci':['母分散の左右の翼','Population variance · 同じ偏差二乗和を、異なるχ²値で割る。']
+    curry:['Curryの5試合','Population mean · Student’s t'],
+    coverage:['100本のうち、何本が届く？','Long-run coverage'],
+    'mean-ci':['信頼係数で、幅はどう変わる？','Confidence level'],
+    size:['標本数で、幅はどう変わる？','Sample size · Known population variance'],
+    'variance-ci':['母分散の左右の翼','Population variance · Chi-square']
   };
-  const active=Object.hasOwn(models,mode)?mode:'curry';
-  const example=[23,29,31,32,35],mu=30, tTable='../week06/t-table.html?p',chiTable='../shared/chi-table.html?p',zTable='../week05/normal-upper-tail-table.html?p';
-  const batchMode=active==='curry'||active==='coverage';
-  let sample=example,n=25,level=95,index=0,one=null,first=0,hit=0,history=[],stages=[];
-  const f=(value,d=2)=>Number(value.toFixed(d)).toFixed(d);
-  const trim=(value,d=2)=>String(Number(value.toFixed(d)));
-  const token=(s,cls='')=>'<span class="term '+cls+'">'+s+'</span>';
-  const eq=(a,kind='')=>'<div class="eq '+kind+'">'+a.join('')+'</div>';
-  const frac=(a,b)=>'<span class="frac"><span>'+a+'</span><span>'+b+'</span></span>';
-  const given=(label,value,cls='')=>'<span class="given '+cls+'"><small>'+label+'</small><strong>'+value+'</strong></span>';
-  const mapped=(label,value,cls)=>'<span class="mapped '+cls+'"><small>'+label+'</small><i aria-hidden="true">↓</i><span>'+value+'</span></span>';
-  const givens=(...a)=>'<div class="group">'+a.join('')+'</div>';
-  const cap=s=>'<p class="caption">'+s+'</p>';
-  const scores=()=>'<div class="scores" aria-label="5試合の得点">'+sample.map(x=>'<span>'+trim(x)+'</span>').join('')+'</div>';
-  const stage=(title,html)=>({title,html});
-  const sym={x:'X̄',sum:'Σ(Xᵢ−X̄)²',s:'σ̂²',t:'t<sub>α/2</sub>(ν)'};
-  const calcGame=()=>mu+Math.sqrt(20)*M.normal();
-  const summary=()=>M.summary(sample);
-
-  function wingPlot(r,unit,{reference=null,extra=[],repeat=false,decimal=2}={}){
-    const all=[r,...extra],h=extra.length?(repeat?160:137):103;
-    const low=Math.min(...all.map(s=>s.lo),reference??Infinity),high=Math.max(...all.map(s=>s.hi),reference??-Infinity);
-    const span=Math.max(1,high-low),X=x=>56+(x-low+span*.07)/(span*1.14)*688;
-    const line=(s,y,primary=false)=>{
-      const a=X(s.lo),b=X(s.hi),c=X(s.mean),color=primary?'#b85427':s.miss?'#637982':'#bd744f',cap=primary?9:repeat?0:5;
-      return '<path class="'+(primary?'wing':'')+'" d="M'+a+' '+y+'H'+b+' M'+a+' '+(y-cap)+'v'+(cap*2)+' M'+b+' '+(y-cap)+'v'+(cap*2)+'" fill="none" stroke="'+color+'" stroke-width="'+(primary?4:repeat?1.2:2)+'" opacity="'+(primary?1:.65)+'"/><circle class="'+(primary?'dot':'')+'" cx="'+c+'" cy="'+y+'" r="'+(primary?7:repeat?1.1:3)+'" fill="'+color+'"/>';
-    };
-    // Keep exact labels outside the graph when edges are too close for three annotations.
-    const wide=X(r.hi)-X(r.lo)>160;
-    const labels=wide?'<g fill="#7f361b" text-anchor="middle" font-size="19" font-weight="700"><text x="'+X(r.lo)+'" y="22">'+f(r.lo,decimal)+'</text><text x="'+X(r.mean)+'" y="22">'+f(r.mean,decimal)+'</text><text x="'+X(r.hi)+'" y="22">'+f(r.hi,decimal)+'</text></g>':'';
-    return '<svg class="chart" viewBox="0 0 800 '+h+'" role="img" aria-label="推定値 '+f(r.mean)+unit+'、区間 '+f(r.lo)+' から '+f(r.hi)+unit+'">'+
-      (reference===null?'':'<path d="M'+X(reference)+' 29V'+(h-21)+'" stroke="#608184" stroke-dasharray="4 4"/><text x="'+X(reference)+'" y="'+(h-5)+'" text-anchor="middle" fill="#46656b" font-size="15">μ = '+reference+'</text>')+
-      extra.map((s,i)=>line(s,70+(i+.5)*(h-94)/extra.length)).join('')+line(r,45,true)+labels+'</svg>';
-  }
-  function deviation(s){
-    return '<table aria-label="得点、偏差、偏差二乗"><thead><tr><th scope="col">得点 Xᵢ</th><th scope="col">Xᵢ−X̄</th><th scope="col">(Xᵢ−X̄)²</th></tr></thead><tbody>'+sample.map(x=>'<tr><td>'+trim(x)+'</td><td>'+f(x-s.mean)+'</td><td>'+f((x-s.mean)**2)+'</td></tr>').join('')+'</tbody><tfoot><tr><th scope="row">合計</th><td>0</td><td>'+f(s.ss)+'</td></tr></tfoot></table>';
-  }
-  const range=(lo,hi,unit)=>eq([token('['+f(lo)+', '+f(hi)+'] '+unit)],'result');
-  const bounds=(center,margin)=>eq([token('[ '+f(center)+' − '+f(margin,4)+', '+f(center)+' + '+f(margin,4)+' ]')],'secondary');
-  const linked=(url,label)=>'<a href="'+url+'" target="_blank" rel="noopener">'+label+' ↗</a>';
-  function onePlot(){
-    const left=Math.min(15,Math.floor(one/5)*5),right=Math.max(45,Math.ceil(one/5)*5);
-    const x=56+688*(one-left)/(right-left);
-    return '<svg class="chart" viewBox="0 0 800 85" role="img" aria-label="1試合の得点を示す点。信頼区間なし。"><line x1="56" x2="744" y1="40" y2="40" stroke="#86979a"/><circle class="dot" cx="'+x+'" cy="40" r="8" fill="#b85427"/><g text-anchor="middle" font-size="18" fill="#506469"><text x="56" y="68">'+left+'</text><text x="744" y="68">'+right+'点</text></g></svg>';
-  }
-
-  function tSteps(){
-    const s=summary(),q=M.tq((100-level)/200,s.df),m=q*s.se,lo=s.mean-m,hi=s.mean+m,df=s.df;
-    const rec={mean:s.mean,lo,hi};
-    if(one!==null)return [
-      stage('1試合の得点',eq([mapped('観測値',f(one)+' 点','mean')])+cap('標本平均はこの1点。母分散は未知。')),
-      stage('自由度が 0',eq([token('ν = n − 1'),token('= 1 − 1'),token('= 0','spread')])+cap('偏差二乗和を n − 1 で割れません。1試合では t の信頼区間を作れません。')),
-      stage('点だけ、翼は付かない',eq([token(f(one)+' 点','mean')])+onePlot()+cap('この点は1試合の得点です。'))
-    ];
-    const dataStep=stage('得点を平均にする',eq([token('X̄ ='),mapped('5つの得点を足す',frac(sample.map(x=>trim(x)).join(' + '),s.n),'mean')],'secondary')+
-      eq([token('='),mapped('得点の合計 ÷ 試合数',frac(f(s.mean*s.n),s.n),'mean'),token('≈ '+f(s.mean),'mean')])+cap('標本平均（Sample mean）が区間の中心です。'));
-    const varianceStep=stage('ばらつきを計算する',deviation(s)+eq([token(sym.s+' ='),mapped('偏差二乗和 ÷ 自由度',frac(f(s.ss),s.n+' − 1'),'spread'),token('≈ '+f(s.s2),'spread')],'secondary')+cap('不偏分散（Unbiased sample variance）を使います。'));
-    const crit=stage('t値と標準誤差を求める',givens(given('自由度 ν = 5 − 1','4','critical'),given('右側確率 (1 − '+(level/100)+') / 2',f((100-level)/200,3),'critical'))+
-      eq([mapped('自由度と右側確率から', 't<sub>'+f((100-level)/200,3)+'</sub>('+df+') ≈ '+f(q,4),'critical')],'secondary')+
-      eq([token('SE = √(σ̂² / n) ='),mapped('不偏分散と標本数','√('+f(s.s2)+' / '+s.n+')','spread'),token('≈ '+f(s.se,4),'spread')],'secondary'));
-    const substitute=stage('片側の幅を掛ける',eq([token('X̄ ± '+sym.t+' × SE')],'secondary')+eq([mapped('標本平均',f(s.mean),'mean'),token('±','op'),mapped('t値',f(q,4),'critical'),token('×','op'),mapped('標準誤差',f(s.se,4),'spread')])+eq([token('≈ '+f(s.mean)+' ± '+f(m,4))],'secondary')+cap('中心から同じ幅を引くと下限、足すと上限。'));
-    const intervals=history.slice(-100);
-    const comparison=active==='mean-ci'?[90,95,99].filter(c=>c!==level).map(c=>{
-      const a=M.tq((100-c)/200,df)*s.se;
-      return {mean:s.mean,lo:s.mean-a,hi:s.mean+a};
-    }):[];
-    const final=stage(level+'%信頼区間',bounds(s.mean,m)+range(lo,hi,'点')+wingPlot(rec,'点',{
-      reference:batchMode?mu:null,extra:batchMode?intervals:comparison,repeat:batchMode
-    })+cap(batchMode?(first?'30点を含む：'+hit+' / '+first+' 組（'+f(100*hit/first,1)+'%）。図は直近'+intervals.length+'組（灰色：30点を含まない）。':'橙の点：標本平均。両端：下限・上限。破線：モデルの母平均。'):'橙：選んだ信頼係数の区間。細い線は残りの2つの信頼係数（90・95・99%）との比較。'));
-    const out=active==='mean-ci'?[stage('今回変えるのは、信頼係数だけ',givens(given('標本平均',f(s.mean)+' 点','mean'),given('不偏分散',f(s.s2)+' 点²','spread'),given('信頼係数',level+'%','critical'))+eq([token('α = 1 − '+(level/100)),token('= '+trim(1-level/100,2),'critical')])+cap('元の5試合は23、29、31、32、35。')) ,crit,substitute,final]:[dataStep,varianceStep,crit,substitute,final];
-    if(active==='coverage'&&first)out.push(stage('今回の割合と、長期の信頼係数',eq([token(frac(hit,first),'mean'),token('≈ '+f(100*hit/first,1)+'%','mean')])+cap('縦の破線をまたぐ区間を数えます。95%は、同じ方法を繰り返したときの長期的な割合です。')+wingPlot(rec,'点',{reference:mu,extra:intervals,repeat:true})));
-    return out;
-  }
-
-  function zSteps(){
-    const center=120,sigma=10,z=1.96,se=sigma/Math.sqrt(n),margin=z*se,lo=center-margin,hi=center+margin;
-    const comparison=n===25?100:25, delta=z*sigma/Math.sqrt(comparison);
-    return [
-      stage('標本数だけを変える',givens(given('標本平均',center+' 分','mean'),given('母標準偏差',sigma+' 分','spread'),given('標本数 n',n,'spread'))+cap('母標準偏差が既知なので、95%区間の境界は標準正規分布の 1.96。')),
-      stage('標本数を分母に入れる',eq([token('SE ='),token(frac('σₓ','√n'))],'secondary')+eq([token('='),mapped('母標準偏差 ÷ √標本数',frac(sigma,'√'+n),'spread'),token('≈ '+f(se,4),'spread')])+cap('√n が大きくなると、標本平均の標準誤差は小さくなります。')),
-      stage('中心と片側の幅',eq([token('X̄ ± 1.96 × SE')],'secondary')+eq([mapped('標本平均',center,'mean'),token('±','op'),mapped('Z境界',z,'critical'),token('×','op'),mapped('標準誤差',f(se,4),'spread')])+eq([token('≈ '+center+' ± '+f(margin,4))],'secondary')),
-      stage('母平均の95%信頼区間',bounds(center,margin)+range(lo,hi,'分')+wingPlot({mean:center,lo,hi},'分',{extra:[{mean:center,lo:center-delta,hi:center+delta}]})+cap('橙：n = '+n+'、区間の全幅 '+f(2*margin)+' 分。細線：n = '+comparison+'、全幅 '+f(2*delta)+' 分。'))
-    ];
-  }
-
-  function chiSteps(){
-    const s=summary(),a=M.chiq(.025,s.df),b=M.chiq(.975,s.df),lo=s.ss/a,hi=s.ss/b;
-    return [
-      stage('5試合のばらつき',scores()+givens(given('標本平均',f(s.mean)+' 点','mean'),given('自由度 ν = n − 1',s.df,'critical'))+cap('今回は平均ではなく、母分散（Population variance）の区間を求めます。')),
-      stage('偏差二乗和を上下限に使う',deviation(s)+eq([token(sym.sum+' ≈'),token(f(s.ss),'spread')])+cap('上下限の分子は同じ。橙の点になる不偏分散は '+f(s.ss)+' ÷ '+s.df+' ≈ '+f(s.s2)+' 点²。')),
-      stage('表から、2つの境界を読む',givens(given('自由度4 × 右側0.025',f(a,4),'critical'),given('自由度4 × 右側0.975',f(b,4),'critical'))+
-        eq([token('χ²<sub>0.025</sub>(4)'),token('と','op'),token('χ²<sub>0.975</sub>(4)')],'secondary')+cap('χ²分布は左右非対称。大きい値で割るほうが下限です。')),
-      stage('同じ分子を、別々の値で割る',eq([token('['),token(frac(sym.sum,'χ²<sub>0.025</sub>(ν)')),token(','),token(frac(sym.sum,'χ²<sub>0.975</sub>(ν)')),token(']')],'secondary')+
-        eq([token('['),mapped('下限：大きいχ²で割る',frac(f(s.ss),f(a,4)),'spread'),token(','),mapped('上限：小さいχ²で割る',frac(f(s.ss),f(b,4)),'critical'),token(']')])+range(lo,hi,'点²')),
-      stage('母分散の95%信頼区間',range(lo,hi,'点²')+wingPlot({mean:s.s2,lo,hi},'点²')+cap('橙の点：不偏分散 '+f(s.s2)+' 点²。区間は点の左右で同じ幅にはなりません。'))
-    ];
-  }
-
-  function draw(){
-    const p=stages[index];$('step').innerHTML='<h2>'+p.title+'</h2>'+p.html;
-    $('progress').textContent=(index+1)+' / '+stages.length;
-    $('prev').disabled=index===0;$('next').disabled=index>=stages.length-1;
-    $('next').textContent=index===stages.length-2?'図と結果を見る →':'次の手順 →';
-  }
-  function restart(){index=0;stages=active==='size'?zSteps():active==='variance-ci'?chiSteps():tSteps();draw();}
-  function samples(count){
-    one=null;
-    for(let i=0;i<count;i++){
-      sample=Array.from({length:5},calcGame);
-      const r=M.ci(sample);
-      const miss=r.lower>mu||r.upper<mu;
-      first++;if(!miss)hit++;
-      history.push({lo:r.lower,hi:r.upper,mean:r.mean,miss});
+  const params=new URLSearchParams(location.search),mode=params.get('mode');
+  if(params.has('embed'))document.body.classList.add('embedded');
+  const active=Object.hasOwn(models,mode)?mode:'curry',coverage=active==='coverage',confidence=active==='mean-ci',sizeMode=active==='size',chi=active==='variance-ci';
+  const example=[23,29,31,32,35],mu=30;
+  let sample=example,n=25,level=95,one=false,history=[],total=0,hits=0,run=0;
+  const fix=(x,d=2)=>x.toFixed(d),trim=(x,d=4)=>String(+x.toFixed(d)),rounded=(x,d=4)=>+x.toFixed(d);
+  const game=()=>rounded(mu+Math.sqrt(20)*M.normal(),1);
+  const math=s=>'<div class="math"><math display="block">'+s+'</math></div>';
+  const tag=(t,s)=>'<'+t+'>'+s+'</'+t+'>',i=s=>tag('mi',s),v=s=>tag('mn',s),o=s=>tag('mo',s),r=(...s)=>tag('mrow',s.join(''));
+  const sub=(a,b)=>tag('msub',a+b),sup=(a,b)=>tag('msup',a+b),frac=(a,b)=>tag('mfrac',a+b),root=s=>tag('msqrt',s),accent=(a,b)=>'<mover accent="true">'+a+o(b)+'</mover>';
+  const color=(s,c)=>'<mstyle class="'+c+'">'+s+'</mstyle>';
+  const par=s=>r(o('('),s,o(')')),br=(a,b)=>o('[')+a+o(',')+b+o(']');
+  const xbar=accent(i('x'),'¯'),xi=sub(i('x'),i('i')),sig=sup(sub(i('σ'),i('x')),v(2)),hat=accent(sig,'^'),nn=i('n'),df=r(nn,o('−'),v(1)),diff=sup(par(r(xi,o('−'),xbar)),v(2)),sum=r(o('∑'),diff);
+  const t=sub(i('t'),i('α'))+par(df),qchi=a=>sub(sup(i('χ'),v(2)),v(a))+par(df);
+  const meanRule=(m,q,s,N,{numeric=false}={})=>{
+    const center=color(m,'mean'),critical=color(q,'critical'),spread=color(root(frac(s,N)),'spread');
+    return br(r(center,o('−'),critical,numeric?o('×'):'',spread),r(center,o('+'),critical,numeric?o('×'):'',spread));
+  };
+  const chiRule=(ss,a,b)=>br(frac(color(ss,'spread'),color(r(a),'critical')),frac(color(ss,'spread'),color(r(b),'critical')));
+  const pair=(label,expression,tail='')=>'<div class="formula'+(chi?' chi':'')+'"><p class="label">'+label+'</p>'+math(expression)+tail+'</div>';
+  const fact=(label,value,c)=>'<span class="'+c+'">'+label+'<b>'+value+'</b></span>';
+  const calcMean=(s,c)=>{
+    // Use the same four-decimal percentile as the printed upper-tail table.
+    const a=(100-c)/200,q=rounded(M.tq(a,s.df));const w=q*s.se;
+    return {mean:s.mean,lo:s.mean-w,hi:s.mean+w,q,w,a,c};
+  };
+  function calculate(s){
+    if(sizeMode){
+      const m=120,q=1.96,variance=100,w=q*Math.sqrt(variance/n);
+      return {mean:m,lo:m-w,hi:m+w,q,w,c:95,a:.025};
     }
-    history=history.slice(-100);restart();
+    if(chi){
+      const a=rounded(M.chiq(.025,s.df)),b=rounded(M.chiq(.975,s.df));
+      return {mean:s.s2,lo:s.ss/a,hi:s.ss/b,a,b,c:95};
+    }
+    return calcMean(s,level);
   }
-  function button(id,label,value=''){return '<button type="button" data-'+id+'="'+value+'">'+label+'</button>';}
-  $('title').textContent=models[active][0];$('subtitle').textContent=models[active][1];document.title=models[active][0]+' · Week 9';
-  if(batchMode)$('controls').innerHTML=button('draw','5試合 × 1組',1)+button('draw','× 10組',10)+button('draw','× 100組',100)+(active==='curry'?button('one','1試合だけ'):'');
-  if(active==='mean-ci')$('controls').innerHTML=[90,95,99].map(v=>button('level',v+'%',v)).join('');
-  if(active==='size')$('controls').innerHTML='<label>標本数 <input aria-label="標本数" id="size" type="range" min="5" max="100" value="25"><output for="size" id="size-value">25</output></label>'+button('n','25台',25)+button('n','100台',100);
-  if(active==='variance-ci')$('controls').innerHTML=button('example','スライドの5試合')+button('random','5試合を抽出');
-  $('controls').insertAdjacentHTML('beforeend','<button type="button" id="reset">リセット</button>');
+  function scale(rows,min,max){
+    const all=rows.flatMap(a=>[a.lo,a.hi,a.mean]);
+    const lo=Math.min(min,...all),hi=Math.max(max,...all),start=40,end=460;
+    return {lo,hi,start,end,x:z=>start+(end-start)*(z-lo)/(hi-lo)};
+  }
+  function axis({lo,hi,x,start,end},y,unit,ticks=[]){
+    return '<path class="axis" d="M'+start+' '+y+'H'+end+'"/>'+ticks.filter(k=>lo<=k&&k<=hi).map(k=>'<path class="axis" d="M'+x(k)+' '+y+'v5"/><text class="tick" x="'+x(k)+'" y="'+(y+20)+'" text-anchor="middle">'+k+'</text>').join('')+'<text class="tick" x="488" y="'+(y+20)+'" text-anchor="end">'+unit+'</text>';
+  }
+  function wing(rec,y,x,{faint=false,thin=false,animate=false}={}){
+    const a=x(rec.lo),b=x(rec.hi),m=x(rec.mean),cap=thin?0:faint?5:8;
+    return '<path class="wing'+(faint?' faint':'')+(animate?' active':'')+'"'+(thin?' style="stroke-width:1.6"':'')+' d="M'+a+' '+y+'H'+b+' M'+a+' '+(y-cap)+'v'+(2*cap)+' M'+b+' '+(y-cap)+'v'+(2*cap)+'"/><circle class="dot'+(faint?' faint':'')+'" cx="'+m+'" cy="'+y+'" r="'+(thin?1.25:faint?3.5:6)+'"/>';
+  }
+  function graph(rec){
+    const unit=chi?'点²':sizeMode?'分':'点';
+    if(one){
+      const s=scale([rec],15,45);
+      return '<svg class="chart" viewBox="0 0 490 104" role="img" aria-label="1試合の得点。区間なし。"><circle class="dot" r="7" cy="40" cx="'+s.x(rec.mean)+'"/>'+axis(s,67,unit,[15,20,25,30,35,40,45])+'</svg>';
+    }
+    const compare=confidence?[90,95,99].map(c=>calcMean(M.summary(sample),c)):sizeMode?[rec,{mean:120,w:1.96,lo:118.04,hi:121.96}]:[];
+    if(sizeMode&&n===100)compare[1]={mean:120,w:3.92,lo:116.08,hi:123.92};
+    const many=coverage?history:active==='curry'&&history.length>1?history:[];
+    const showRuns=many.length>0;
+    const s=scale([rec,...compare,...many],chi?0:sizeMode?108:15,chi?Math.max(180,Math.ceil(rec.hi/50)*50):sizeMode?132:45),x=s.x;
+    const ticks=chi?[0,1,2,3,4].map(k=>k*(s.hi>200?Math.round(s.hi/5/25)*25:40)):sizeMode?[110,115,120,125,130]:[15,20,25,30,35,40,45];
+    const start=showRuns?83:compare.length?27:47,yAxis=showRuns?225:compare.length?start+compare.length*38:80;
+    let plot='';
+    if(showRuns||coverage){
+      plot=(coverage?'<path class="reference" d="M'+x(mu)+' 21V'+yAxis+'"/><text class="reference-label" x="'+x(mu)+'" y="14" text-anchor="middle">μₓ = 30</text>':'')+
+        wing(rec,40,x,{animate:run>0,faint:coverage&&history.at(-1)?.miss})+
+        (showRuns?'<text class="tick" x="5" y="70">直近'+many.length+'組</text>':'')+
+        many.map((a,j)=>wing(a,start+(j+.5)*132/many.length,x,{faint:a.miss,thin:many.length>15})).join('');
+    } else if(compare.length){
+      plot=compare.map((a,j)=>{
+        const pos=start+j*38,selected=confidence?a.c===level:j===0;
+        return '<text class="plot-label'+(selected?' emphasis':'')+'" x="3" y="'+(pos-10)+'">'+(confidence?a.c+'%':'n = '+(j===0?n:n===100?25:100))+'</text>'+wing(a,pos,x,{faint:!selected,animate:selected&&!sizeMode&&run>0});
+      }).join('');
+    } else {
+      plot=wing(rec,start,x,{animate:run>0});
+      const labels=[{at:x(rec.lo),value:rec.lo},{at:x(rec.mean),value:rec.mean},{at:x(rec.hi),value:rec.hi}];
+      if(labels[1].at-labels[0].at>53&&labels[2].at-labels[1].at>53)plot+=labels.map(a=>'<text class="plot-label emphasis" x="'+a.at+'" y="26" text-anchor="middle">'+fix(a.value)+'</text>').join('');
+      else plot+='<text class="plot-label emphasis" x="'+x(rec.mean)+'" y="26" text-anchor="middle">'+fix(rec.mean)+'</text>';
+    }
+    const alt=coverage?'破線は真の母平均30点。各横線は95%区間。':chi?'点は不偏分散。左右非対称の区間。':'橙の点は標本平均。両端は信頼区間の下限と上限。';
+    return '<svg class="chart" viewBox="0 0 490 '+(yAxis+28)+'" role="img" aria-label="'+alt+'">'+plot+axis(s,yAxis,unit,ticks)+'</svg>';
+  }
+  function details(s,rec){
+    if(sizeMode)return '<p class="note">教科書 p.125 の標準化を母平均 μₓ について整理すると、上の区間の式になります。</p>'+
+      math(r(i('Z'),o('='),frac(r(xbar,o('−'),sub(i('μ'),i('x'))),root(frac(sig,nn)))))+
+      '<p class="note">母標準偏差10分 → 母分散100分²。標本数だけを変えます。</p>'+
+      math(r(root(frac(sig,nn)),o('='),root(frac(v(100),v(n))),o('≈'),v(fix(10/Math.sqrt(n),4))));
+    if(one)return '<p class="note">1試合では標本不偏分散の分母が0になるため、tで幅を計算できません。</p>';
+    const xs=sample.map(x=>v(x)).reduce((a,b)=>a+o('+')+b);
+    const meanLine=math(r(xbar,o('='),frac(tag('munderover',o('∑')+r(i('i'),o('='),v(1))+nn)+xi,nn),o('='),frac(r(xs),v(s.n)),o('='),v(trim(s.mean,2))));
+    const terms=sample.map(x=>sup(par(r(v(x),o('−'),v(trim(s.mean,2)))),v(2))).reduce((a,b)=>a+o('+')+b);
+    const ssLine=math(r(sum,o('='),terms,o('='),v(trim(s.ss,6))));
+    const s2Line=math(r(hat,o('='),frac(v(1),df),tag('munderover',o('∑')+r(i('i'),o('='),v(1))+nn),diff))+
+      math(r(hat,o('='),frac(v(1),r(v(s.n),o('−'),v(1))),o('×'),v(trim(s.ss,6)),o('='),v(trim(s.s2,6))));
+    return (chi?ssLine:meanLine+ssLine)+s2Line;
+  }
+  function render(){
+    const s=sizeMode?null:M.summary(sample),rec=one?{mean:sample[0],lo:sample[0],hi:sample[0]}:calculate(s);
+    const unit=chi?'点²':sizeMode?'分':'点';
+    $('inputs').innerHTML=(sizeMode?'':'<div class="sample"><span class="sample-label">'+(one?'1試合':'5試合')+'の得点</span>'+sample.map(x=>'<span class="score">'+trim(x,1)+'</span>').join('')+'</div>')+
+      '<div class="facts">'+(sizeMode?fact('標本平均','120分','mean')+fact('母分散','100分²','spread')+fact('標本数',n,'spread'):
+      one?fact('標本数',1,'spread')+fact('自由度',0,'critical'):
+      (chi?fact('偏差二乗和',trim(s.ss)+'点²','spread'):fact('標本平均',trim(s.mean,2)+'点','mean')+fact('不偏分散',trim(s.s2)+'点²','spread'))+fact('自由度',s.df,'critical'))+'</div>';
+    $('rule').innerHTML=chi?pair('教科書の式 · p.136',chiRule(sum,qchi('0.025'),qchi('0.975'))):
+      pair(sizeMode?'母分散が既知の場合 · 教科書 pp.125・133 から':'教科書の式 · p.133',meanRule(xbar,sizeMode?sub(i('z'),i('α')):t,sizeMode?sig:hat,nn));
+    $('substitution').innerHTML=one?'<p class="note">自由度 0。点は出せますが、翼（信頼区間）は作れません。</p>':
+      chi?pair('今回の数値を代入',chiRule(v(trim(s.ss)),v(fix(rec.a,4)),v(fix(rec.b,4))),'<p class="margin">同じ分子。大きい χ² 値が<strong>下限</strong>の分母。</p>'):
+      pair('今回の数値を代入',meanRule(v(sizeMode?120:trim(s.mean,2)),v(fix(rec.q,sizeMode?2:4)),v(sizeMode?100:trim(s.s2,6)),v(sizeMode?n:s.n),{numeric:true}),
+        '<p class="margin">片側の幅 <strong>'+fix(rec.w,4)+unit+'</strong> ／ 上側確率 α = '+trim(rec.a,3)+'</p>');
+    $('detail').innerHTML=details(s,rec);
+    $('figure-title').textContent=one?'1試合の得点 · 区間なし':(chi?'母分散':'母平均')+'の'+rec.c+'%信頼区間'+(coverage||active==='curry'&&history.length>1?' · 最新の1組':'');
+    $('result').innerHTML=(one?trim(rec.mean,1):fix(rec.lo)+' – '+fix(rec.hi))+' <small>'+unit+'</small>';
+    $('chart').innerHTML=graph(rec);
+    $('caption').innerHTML=one?'点：この1試合の得点。':coverage?
+      (total?'<p class="count">30点を含む：<strong>'+hits+' / '+total+'組（'+fix(100*hits/total,1)+'%）</strong></p>':'<p>最初はスライドの1組。抽出ボタンで区間を増やす。</p>')+
+      '<p class="legend">橙：30点を含む ／ 灰：含まない ／ 破線：真の母平均'+(total>100?'（直近100組を表示）':'')+'</p>':
+      confidence?'3本とも同じ5試合。橙：選んだ信頼係数。':sizeMode?'橙：現在の標本数。全幅 '+fix(2*rec.w)+'分。':chi?'点：不偏分散 '+fix(rec.mean)+'点²。区間の真ん中ではない。':'点：標本平均 '+fix(rec.mean)+'点 ／ 翼の先：下限と上限'+(history.length>1?' ／ 下に直近'+history.length+'組':'');
+    document.querySelectorAll('[data-level]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.level===level)));
+    if($('size')){$('size').value=n;$('size-value').textContent=n;}
+  }
+  function draw(count){
+    one=false;level=95;
+    if(!coverage)history=[];
+    for(let j=0;j<count;j++){
+      sample=Array.from({length:5},game);
+      if(coverage||active==='curry'){
+        const rec=calcMean(M.summary(sample),95),miss=mu<rec.lo||mu>rec.hi;
+        history.push({...rec,miss:coverage&&miss});
+        if(coverage){total++;if(!miss)hits++;}
+      }
+    }
+    history=history.slice(-100);
+  }
+  const btn=(type,label,value='',cls='')=>'<button type="button" class="'+cls+'" data-'+type+'="'+value+'">'+label+'</button>';
+  const link=(href,label)=>'<a href="'+href+'" target="_blank" rel="noopener">'+label+' ↗</a>';
+  $('title').textContent=models[active][0];$('english').textContent=models[active][1];document.title=models[active][0]+' · Week 9';
+  $('controls').innerHTML=(confidence?[90,95,99].map(c=>btn('level',c+'%',c)).join('')+btn('sample','別の5試合'):
+    sizeMode?'<label for="size">標本数 <input id="size" type="range" min="5" max="100" value="25"><output id="size-value" for="size">25</output></label>'+btn('n','25台',25)+btn('n','100台',100):
+    btn('draw','5試合を抽出',1,'primary')+(chi?'':btn('draw','10組',10)+btn('draw','100組',100))+(active==='curry'?btn('one','1試合だけ'):''))+
+    '<button type="button" id="reset" title="スライドの例に戻す">↺ リセット</button>';
   $('controls').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
-    if(b.dataset.draw){samples(+b.dataset.draw);return;}
-    if('one' in b.dataset)one=calcGame();
-    if(b.dataset.level){level=+b.dataset.level;updateLevel();}
-    if(b.dataset.n){n=+b.dataset.n;$('size').value=n;$('size-value').textContent=n;}
-    if('example' in b.dataset)sample=example;
-    if('random' in b.dataset)sample=Array.from({length:5},calcGame);
-    if(b.id==='reset'){sample=example;one=null;first=hit=0;history=[];level=95;n=25;updateLevel();if($('size')){$('size').value=n;$('size-value').textContent=n;}}
-    restart();
+    if(b.dataset.draw)draw(+b.dataset.draw);
+    if('one' in b.dataset){one=true;sample=[game()];}
+    if('sample' in b.dataset)sample=Array.from({length:5},game);
+    if(b.dataset.level)level=+b.dataset.level;
+    if(b.dataset.n)n=+b.dataset.n;
+    if(b.id==='reset'){sample=example;one=false;level=95;n=25;history=[];hits=total=0;run=0;}
+    else run++;
+    render();
   });
-  function updateLevel(){document.querySelectorAll('[data-level]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.level)===level)));}
-  $('size')?.addEventListener('input',e=>{n=+e.target.value;$('size-value').textContent=n;restart();});
-  $('prev').onclick=()=>{if(index>0){index--;draw();}};
-  $('next').onclick=()=>{if(index<stages.length-1){index++;draw();}};
-  $('foot').innerHTML=(active==='size'?'教科書 p.134 脚注1 · '+linked(zTable,'標準正規分布表'):active==='variance-ci'?'教科書 p.135〜136 · '+linked(chiTable,'χ²分布表'):'教科書 p.133 · '+linked(tTable,'t分布表'))+'<br>'+ (active==='size'?'授業用の設定。標本平均と母標準偏差を固定して比較。':'授業用の架空の得点。独立な正規モデル（μ = 30、σ² = 20）。モデルの母数は区間計算に使いません。')+' 表示のみ丸めています。';
-  updateLevel();restart();
+  $('size')?.addEventListener('input',e=>{n=+e.target.value;render();});
+  $('foot').innerHTML='<p>'+(sizeMode?'教科書 pp.125・133、p.202 · '+link('../week05/normal-upper-tail-table.html?p','標準正規分布表'):
+   chi?'教科書 pp.135–136 · '+link('../shared/chi-table.html?p','χ²分布表'):'教科書 pp.132–135 · '+link('../week06/t-table.html?p','t分布表'))+'</p>'+
+   '<p>'+(sizeMode?'授業用の設定。標本平均・母分散は固定。':'授業用の架空の得点。独立な正規モデルで抽出した得点を小数1桁で記録。'+(coverage?' 母平均30点は照合用（区間計算には使わない）。':'')+' 分布表の境界値は小数4桁。')+'</p>';
+  render();
 });
 </script>
-</body></html>
+</body>
+</html>

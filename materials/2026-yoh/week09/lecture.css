@@ -74,3 +74,14 @@
 #stage.worked-slide .work-note { color:#526970;font-size:clamp(12px,1.75cqw,21px);margin:1.4cqw auto 0 }
 @media(max-width:520px){#stage.worked-slide .work-beat .math { font-size:clamp(15px,4.2cqw,23px) }.work-equation { font-size:clamp(17px,5.1cqw,30px) }.work-chart svg {max-height:33cqw}}
 @media print {.work-beat:not(.work-active){display:none}}
+
+#stage.worked-slide .work-beat .math { font-size:clamp(16px,3.75cqw,52px);max-width:100%;overflow-x:auto }
+.var-work { display:grid;grid-template-columns:minmax(0,36%) minmax(0,1fr);align-items:center;gap:clamp(8px,2cqw,30px) }
+#stage.worked-slide .var-work .math { font-size:clamp(15px,2.6cqw,36px) }
+.deviation-table { width:100%;font-variant-numeric:tabular-nums }
+.deviation-table :is(td,th) { padding:.44em .28em }
+.deviation-table tfoot { color:#16665f;font-weight:750 }
+.lab-jump { font-size:clamp(12px,1.5cqw,19px) }
+#stage.lab-slide .slide-body { padding:0;justify-content:flex-start;overflow:hidden;align-items:stretch }
+.lecture-lab { display:block;width:100%;height:100%;border:0;background:#fbfaf6 }
+@media(max-width:560px){.var-work{grid-template-columns:1fr}.deviation-table{width:min(100%,300px);margin:auto}}
