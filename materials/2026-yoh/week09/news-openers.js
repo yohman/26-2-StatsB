@@ -183,4 +183,107 @@
     slides[i].html += `<div class="news-story-exit">${jump('menu', 'ニュースを選ぶ')}${jump('lecture', '授業へ')}</div>`;
   });
   window.Week9Openers = slides;
+
+  // The class makes one decision, sees what the headlines measure, then revisits it.
+  const japanJobs = 'https://www.mext.go.jp/b_menu/toukei/chousa01/naitei/kekka/k_detail/1422624_00027.htm';
+  const usJobs = 'https://www.richmondfed.org/research/national_economy/macro_minute/2026/cap_gown_waiting_around_recent_college_grads_job-hunting_longer';
+  const jobsNews = 'https://gvwire.com/2026/06/07/a-job-market-leaving-young-graduates-behind-could-scar-them-for-years/';
+  let firstChoice = '';
+  const accept = '今の内定を受ける';
+  const wait = '第一志望の結果を待つ';
+  const section = '今夜までに、返事を';
+  const beat = (title, style, html, notes, extras = {}) =>
+    ({section, title, html, notes, theme:'light', className:'job-story '+style, ...extras});
+
+  function bindChoice(root, prefix, update) {
+    const output = root.querySelector('[data-job-choice-output]');
+    const buttons = Array.from(root.querySelectorAll('[data-job-vote]'));
+    buttons.forEach(button => {
+      button.onclick = () => {
+        const label = button.textContent;
+        buttons.forEach(item => item.setAttribute('aria-pressed',String(item === button)));
+        output.textContent = prefix + label;
+        update?.(label);
+      };
+    });
+  }
+
+  window.Week9Story = [
+    beat('内定メール。返事は今夜まで。','offer-photo',
+      `<img class="job-art" src="images/nyt-graduate-jobs.jpg" alt="就職先を探して迷路を進む卒業生">
+       <div class="offer-title"><p>卒業まで、あと少し。</p><h1>内定メール。<br>返事は、今夜まで。</h1></div>
+       <div class="job-photo-credit">${external(jobsNews,'Shonagh Rae / The New York Times · GV Wire掲載')}</div>`,
+      'Fictional setup. Let the image sit. Say: you have a real offer, but you are still waiting on the job you wanted. The deadline is tonight. Advance before showing any statistics.',
+      {key:'decision',theme:'space'}),
+
+    beat('返事をする？ 待つ？','offer-inbox',
+      `<div class="offer-mail"><p>受信トレイ <span>17:42</span></p><h2>採用内定のご連絡</h2><p>本日23:59までにご回答ください。</p></div>
+       <p class="job-line">第一志望の結果は、まだ来ていない。</p>
+       <div class="job-votes"><button type="button" data-job-vote aria-pressed="false">${accept}</button>
+       <button type="button" data-job-vote aria-pressed="false">${wait}</button></div>
+       <p class="job-vote-output" data-job-choice-output aria-live="polite"></p>
+       <p data-job-consequence hidden></p><small class="job-fiction">架空の場面</small>`,
+      'Ask for a show of hands for each choice. Record one class choice on screen and ask one student why. If a student suggests asking for an extension, acknowledge it and assume the employer says no for this scenario. Keep the offer, the deadline, and the preferred job fictional.',
+      {mount(root){
+        bindChoice(root,'最初の選択：',label => {
+          firstChoice = label;
+          const consequence = root.querySelector('[data-job-consequence]');
+          consequence.hidden = false;
+          consequence.textContent = label === accept ?
+            'もし明日、第一志望から連絡が来たら？' :
+            '今夜の内定を見送ったら、次の内定はいつ来る？';
+        });
+      }}),
+
+    beat('98.0％。誰を数えている？','offer-japan',
+      `<p class="job-side">友人：「日本の大学生、就職率98％だって」</p><div class="job-98">98.0<span>%</span></div>
+       <h2>その数字で、今夜の返事を決められる？</h2>
+       ${reveal(`<div class="job-fraction"><span>就職した人</span><strong>就職を希望した人</strong></div>
+         <p>2026年4月1日時点。第一志望に入れたかは、この数字からは分からない。</p>
+         ${external(japanJobs,'文部科学省・厚生労働省')}`)}`,
+      'Ask what the denominator is before revealing it. This is the April 1 employment rate among university graduates seeking jobs. Ask whether the survey tells you when this particular person will hear back from their preferred employer. Pause before the U.S. detour.'),
+
+    beat('アメリカでは、待つ時間を測った','offer-us',
+      `<h2>では、「どれだけ待つか」を<br>測った数字は？</h2>
+       ${reveal(`<div class="job-us-figure"><img src="images/us-graduate-duration.jpg" alt="米国の失業期間の推移。若い大卒者はオレンジ、全体は紫。">
+          <div><strong>22.7</strong><span>週間</span></div></div>
+          <p>米国で調査時に失業中だった22〜27歳の大卒者等。<br>失業が続いていた期間の平均（2026年9月、12か月移動平均）。</p>
+          ${external(usJobs,'Richmond Fed・図2')}`)}
+       ${reveal('<p class="job-line">あなたが日本で内定を待つ期間は、測っていない。</p>',2)}`,
+      'Use the line chart as the moment the number gets unsettling. Ask who was left out of the U.S. average. It measures already elapsed unemployment duration among people still unemployed at the survey point. It cannot predict how long a Japanese student will wait for an offer.'),
+
+    beat('待つなら、何か月持つ？','offer-budget',
+      `<h2>返事の前に、口座を見た。</h2><div class="job-ledger"><span>手元にあるお金<small>（架空の例）</small></span><strong>18万円</strong></div>
+       <div class="job-ledger"><label for="job-spend">1か月の生活費</label><output id="job-monthly">6万円</output></div>
+       <input id="job-spend" type="range" min="4" max="9" value="6" step="1">
+       <div class="job-runway" aria-hidden="true"><span data-job-runway></span></div>
+       <p class="job-budget-result" data-job-budget aria-live="polite"></p>
+       <div class="job-votes"><button type="button" data-job-vote aria-pressed="false">${accept}</button>
+       <button type="button" data-job-vote aria-pressed="false">${wait}</button></div>
+       <p class="job-vote-output" data-job-choice-output aria-live="polite"></p>`,
+      'Return to the student, whose fictional savings are ¥180,000. Move the slider from ¥60,000 to ¥90,000 and then to ¥40,000. Ask if the class would change its first choice and what additional information would matter. These amounts illustrate a budget, not typical student expenses.',
+      {mount(root){
+        const input = root.querySelector('#job-spend');
+        const update = () => {
+          const cost = Number(input.value);
+          const months = 18 / cost;
+          root.querySelector('#job-monthly').textContent = cost + '万円';
+          root.querySelector('[data-job-runway]').style.width = (months / 5 * 100) + '%';
+          root.querySelector('[data-job-budget]').textContent = '待てるのは約 ' + Number(months.toFixed(1)) + ' か月';
+        };
+        input.oninput = update;
+        update();
+        if (firstChoice) root.querySelector('[data-job-choice-output]').textContent = '最初の選択：' + firstChoice;
+        bindChoice(root,'もう一度選ぶ：');
+      }}),
+
+    beat('その「3か月」は、どれくらい確か？','offer-ending',
+      `<p>就職までの期間を、5人に聞いたとしたら。</p><h2>平均 <strong>3</strong> か月。</h2>
+       ${reveal(`<div class="job-samples"><div><span>A</span><b>2　3　3　3　4</b></div>
+         <div><span>B</span><b>1　2　3　4　5</b></div></div><p class="job-example">説明用の架空のデータ（か月）。どちらも平均は3。</p>
+         <p class="job-line">どちらの平均のほうが、精度が高そう？</p>`)}
+       ${reveal('<p class="job-line">平均に、どれくらいの幅をつける？</p>',2)}`,
+      'Both fictional samples have five observations, mean 3 months, and different spread. Ask the room which gives a more precise estimate under the same sampling assumptions. Ask what the width would tell us about the population mean. The interval answers the mean question, so it still leaves the student’s personal deadline open. Advance straight into the existing point-to-interval slide.',
+      {theme:'dark'})
+  ];
 })();

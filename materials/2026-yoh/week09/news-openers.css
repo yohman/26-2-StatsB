@@ -124,3 +124,64 @@
   #stage.news-slide .news-reveal,.news-bars,.news-range { width:100% }
   .news-bars { gap:10px }
 }
+
+/* A job offer unfolds as a scene, an inbox, a headline and a decision. */
+#stage.job-story .slide-body {
+  position:absolute;inset:0;padding:5cqw 8cqw;gap:1.5cqw;
+  align-items:stretch;text-align:left;
+}
+#stage.job-story .reveal:not(.shown) { display:none }
+#stage.job-story h2 { font-size:clamp(1.35rem,4.6cqw,4rem);line-height:1.35 }
+#stage.job-story p { font-size:clamp(.86rem,1.95cqw,1.45rem);line-height:1.55 }
+#stage.job-story a { font-size:clamp(.65rem,1.25cqw,.96rem) }
+#stage.offer-photo .slide-body { padding:0;isolation:isolate;overflow:hidden }
+.job-art { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 44%;z-index:-2 }
+.offer-photo .slide-body::before {
+  content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(15deg,#0c141fee,#0c141f00 71%);
+}
+.offer-title { position:absolute;left:6cqw;right:6cqw;bottom:6cqw;color:#fff9ef;text-shadow:0 2px 18px #07121b }
+#stage.offer-photo h1 { font-size:clamp(2.2rem,7.4cqw,6.8rem);letter-spacing:-.045em;line-height:1.18 }
+.job-photo-credit { position:absolute;right:2cqw;bottom:1.8cqw;color:#fff9ef;text-shadow:0 1px 5px #07121b }
+#stage.offer-inbox { background:#f2eee5;color:#2f2923 }
+.offer-mail { border-top:2px solid #332e25;border-bottom:1px solid #aa9d8d;padding:1.1cqw 0 2cqw }
+.offer-mail span { float:right;font-variant-numeric:tabular-nums;color:#63574b }
+#stage .offer-mail h2 { margin:.2em 0;font-family:Georgia,"Yu Mincho",serif;font-weight:650 }
+.offer-mail p { margin:0 }
+.job-votes { display:flex;flex-wrap:wrap;gap:.45rem 1rem }
+.job-votes button { border-radius:0;border-bottom:1px solid #9a4a33;background:transparent;color:#743321;padding:.28em .38em;font-size:clamp(.82rem,2cqw,1.25rem) }
+.job-votes button[aria-pressed=true] { background:#853b2a;color:#fff9ef }
+.job-vote-output { min-height:1.6em;color:#6c4c3b }
+#stage.offer-japan { background:#fff7df;color:#342d20 }
+.job-98 { color:#aa5029;font-size:clamp(5.1rem,17cqw,13rem);font-weight:790;line-height:.98;letter-spacing:-.08em }
+.job-98 span { font-size:.41em;letter-spacing:0;margin-left:.1em }
+#stage .job-fraction { display:inline-grid;justify-items:center;font-size:clamp(.93rem,2.25cqw,1.65rem);margin:.36em 0 }
+.job-fraction strong { border-top:1px solid;padding-top:.05em }
+#stage.offer-us { background:#e7f0ed;color:#203a38 }
+.job-us-figure { display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:3cqw;align-items:center }
+.job-us-figure img { width:100%;height:auto;max-height:23cqw;object-fit:contain;object-position:left center }
+.job-us-figure strong { display:block;font-size:clamp(2.2rem,7.4cqw,6rem);line-height:1;color:#954924 }
+.job-us-figure span { font-size:clamp(.85rem,2cqw,1.25rem) }
+#stage.offer-budget { background:#e8e6da;color:#282b22 }
+.job-ledger { display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-bottom:1px solid #8b8f7b;font-size:clamp(.88rem,2.4cqw,1.55rem) }
+.job-ledger :is(output,strong) { font-size:1.42em;font-weight:750;font-variant-numeric:tabular-nums }
+.job-ledger small { margin-left:.25em }
+#job-spend { width:min(68%,29rem);accent-color:#7c3d29 }
+.job-runway { height:clamp(5px,.8cqw,11px);background:#c8c9b9 }
+.job-runway span { display:block;height:100%;background:#623e2b;transition:width .2s }
+#stage .job-budget-result { font-size:clamp(1.12rem,3.5cqw,2.75rem);color:#6a3525;font-weight:750 }
+#stage.offer-ending { background:#172935;color:#fff3dc }
+#stage.offer-ending h2 { font-weight:450 }
+.offer-ending h2 strong { font-size:2.2em;color:#f9c989 }
+.job-samples { display:grid;gap:.35em;margin:.2em 0 .4em }
+.job-samples div { display:flex;gap:1em;align-items:baseline;font-size:clamp(1.05rem,3.25cqw,2.55rem);font-variant-numeric:tabular-nums }
+.job-samples span { font-size:.7em;width:1em;color:#f9c989 }
+#stage.job-story .job-example { color:#ebdcc5;font-size:clamp(.7rem,1.4cqw,1.1rem) }
+#stage.job-story .job-line { font-weight:650 }
+@media (max-width:670px) {
+  #stage.job-story { min-height:min(69dvh,540px,100%);aspect-ratio:auto }
+  #stage.job-story .slide-body { padding:6vw;gap:12px }
+  .offer-title { bottom:14cqw }
+  .job-us-figure { grid-template-columns:minmax(0,1fr) }
+  .job-us-figure img { max-height:46cqw }
+  .job-us-figure strong { display:inline;margin-right:.2em }
+}
