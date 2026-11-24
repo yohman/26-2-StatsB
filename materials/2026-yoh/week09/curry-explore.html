@@ -32,6 +32,13 @@ button:hover{background:#e3ded2}button.primary,button[aria-pressed=true]{backgro
 details{margin:.25rem 0 0;font-size:.77rem}summary{cursor:pointer;color:var(--teal);width:max-content;max-width:100%;padding:.26em 0}details .math{font-size:clamp(14px,1.85vw,22px);justify-content:start}details .math math{margin:0}details .note{margin:.14rem 0}
 footer{margin-top:.7rem}footer p+p{margin-top:.22rem}
 body.embedded main{max-width:1120px}body.embedded h1{font-size:clamp(23px,3.1vw,39px)}
+.history-layout .controls{position:sticky;top:0;z-index:1;background:#fbfaf6;padding:.35rem 0}
+.history-layout .visual{display:flex;flex-direction:column}
+.history-layout #chart{order:1}
+.history-layout figcaption{margin-bottom:.65rem}
+.history-row text{fill:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.history-row.latest text{fill:var(--ink);font-weight:700}
+.history-header{fill:var(--muted);font-size:12px;font-weight:650}
 @media(max-width:670px){.layout{grid-template-columns:1fr;gap:.65rem}.visual{grid-row:1}.math{font-size:clamp(16px,4.7vw,27px)}.formula.chi .math{font-size:clamp(14px,4.15vw,24px)}.controls{margin:.65rem 0}.result{font-size:clamp(24px,6vw,38px)}}
 </style>
 </head>
@@ -66,6 +73,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   const params=new URLSearchParams(location.search),mode=params.get('mode');
   if(params.has('embed'))document.body.classList.add('embedded');
   const active=Object.hasOwn(models,mode)?mode:'curry',coverage=active==='coverage',confidence=active==='mean-ci',sizeMode=active==='size',chi=active==='variance-ci';
+  if(coverage||active==='curry')document.body.classList.add('history-layout');
   const example=[23,29,31,32,35],mu=30;
   let sample=example,n=25,level=95,one=false,history=[],total=0,hits=0,run=0;
   const fix=(x,d=2)=>x.toFixed(d),trim=(x,d=4)=>String(+x.toFixed(d)),rounded=(x,d=4)=>+x.toFixed(d);
@@ -100,9 +108,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
     return calcMean(s,level);
   }
-  function scale(rows,min,max){
+  function scale(rows,min,max,{start=40,end=460}={}){
     const all=rows.flatMap(a=>[a.lo,a.hi,a.mean]);
-    const lo=Math.min(min,...all),hi=Math.max(max,...all),start=40,end=460;
+    const lo=Math.min(min,...all),hi=Math.max(max,...all);
     return {lo,hi,start,end,x:z=>start+(end-start)*(z-lo)/(hi-lo)};
   }
   function axis({lo,hi,x,start,end},y,unit,ticks=[]){
@@ -122,15 +130,24 @@ document.addEventListener('DOMContentLoaded',()=>{
     if(sizeMode&&n===100)compare[1]={mean:120,w:3.92,lo:116.08,hi:123.92};
     const many=coverage?history:active==='curry'&&history.length>1?history:[];
     const showRuns=many.length>0;
-    const s=scale([rec,...compare,...many],chi?0:sizeMode?108:15,chi?Math.max(180,Math.ceil(rec.hi/50)*50):sizeMode?132:45),x=s.x;
+    const showHistory=showRuns||coverage;
+    const s=scale([rec,...compare,...many],chi?0:sizeMode?108:15,chi?Math.max(180,Math.ceil(rec.hi/50)*50):sizeMode?132:45,showHistory?{start:43,end:427}:undefined),x=s.x;
     const ticks=chi?[0,1,2,3,4].map(k=>k*(s.hi>200?Math.round(s.hi/5/25)*25:40)):sizeMode?[110,115,120,125,130]:[15,20,25,30,35,40,45];
-    const start=showRuns?83:compare.length?27:47,yAxis=showRuns?225:compare.length?start+compare.length*38:80;
+    const rowGap=22,firstRow=105,initialSlots=10;
+    const start=compare.length?27:47,yAxis=showHistory?firstRow+Math.max(initialSlots,many.length)*rowGap:compare.length?start+compare.length*38:80;
     let plot='';
-    if(showRuns||coverage){
+    if(showHistory){
+      const firstNumber=coverage?total-many.length+1:1;
       plot=(coverage?'<path class="reference" d="M'+x(mu)+' 21V'+yAxis+'"/><text class="reference-label" x="'+x(mu)+'" y="14" text-anchor="middle">μₓ = 30</text>':'')+
         wing(rec,40,x,{animate:run>0,faint:coverage&&history.at(-1)?.miss})+
-        (showRuns?'<text class="tick" x="5" y="70">直近'+many.length+'組</text>':'')+
-        many.map((a,j)=>wing(a,start+(j+.5)*132/many.length,x,{faint:a.miss,thin:many.length>15})).join('');
+        '<text class="history-header" x="5" y="80">標本</text><text class="history-header" x="485" y="80" text-anchor="end">標本平均</text>'+
+        (showRuns?'':'<text class="history-header" x="245" y="112" text-anchor="middle">抽出すると、ここに区間が追加されます。</text>')+
+        many.map((a,j)=>{
+          const y=firstRow+j*rowGap,number=firstNumber+j,latest=j===many.length-1;
+          return '<g class="history-row'+(latest?' latest':'')+'" data-sample="'+number+'"><title>標本 '+number+'：'+fix(a.lo)+' – '+fix(a.hi)+'点、標本平均 '+fix(a.mean)+'点</title>'+
+            '<text x="5" y="'+(y+4)+'">#'+number+'</text>'+wing(a,y,x,{faint:a.miss})+
+            '<text x="485" y="'+(y+4)+'" text-anchor="end">'+fix(a.mean)+'</text></g>';
+        }).join('');
     } else if(compare.length){
       plot=compare.map((a,j)=>{
         const pos=start+j*38,selected=confidence?a.c===level:j===0;
@@ -159,6 +176,17 @@ document.addEventListener('DOMContentLoaded',()=>{
       math(r(hat,o('='),frac(v(1),r(v(s.n),o('−'),v(1))),o('×'),v(trim(s.ss,6)),o('='),v(trim(s.s2,6))));
     return (chi?ssLine:meanLine+ssLine)+s2Line;
   }
+  function fitFormulas(){
+    for(const formula of document.querySelectorAll('.formula .math > math')){
+      formula.style.removeProperty('font-size');
+      const available=formula.parentElement.clientWidth;
+      const natural=formula.getBoundingClientRect().width;
+      if(available>0&&natural>available){
+        const size=parseFloat(getComputedStyle(formula).fontSize);
+        formula.style.fontSize=(size*(available-2)/natural)+'px';
+      }
+    }
+  }
   function render(){
     const s=sizeMode?null:M.summary(sample),rec=one?{mean:sample[0],lo:sample[0],hi:sample[0]}:calculate(s);
     const unit=chi?'点²':sizeMode?'分':'点';
@@ -182,6 +210,7 @@ document.addEventListener('DOMContentLoaded',()=>{
       confidence?'3本とも同じ5試合。橙：選んだ信頼係数。':sizeMode?'橙：現在の標本数。全幅 '+fix(2*rec.w)+'分。':chi?'点：不偏分散 '+fix(rec.mean)+'点²。区間の真ん中ではない。':'点：標本平均 '+fix(rec.mean)+'点 ／ 翼の先：下限と上限'+(history.length>1?' ／ 下に直近'+history.length+'組':'');
     document.querySelectorAll('[data-level]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.level===level)));
     if($('size')){$('size').value=n;$('size-value').textContent=n;}
+    fitFormulas();
   }
   function draw(count){
     one=false;level=95;
@@ -218,6 +247,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('foot').innerHTML='<p>'+(sizeMode?'教科書 pp.125・133、p.202 · '+link('../week05/normal-upper-tail-table.html?p','標準正規分布表'):
    chi?'教科書 pp.135–136 · '+link('../shared/chi-table.html?p','χ²分布表'):'教科書 pp.132–135 · '+link('../week06/t-table.html?p','t分布表'))+'</p>'+
    '<p>'+(sizeMode?'授業用の設定。標本平均・母分散は固定。':'授業用の架空の得点。独立な正規モデルで抽出した得点を小数1桁で記録。'+(coverage?' 母平均30点は照合用（区間計算には使わない）。':'')+' 分布表の境界値は小数4桁。')+'</p>';
+  window.addEventListener('resize',fitFormulas);
   render();
 });
 </script>

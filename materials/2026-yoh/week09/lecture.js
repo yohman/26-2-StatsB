@@ -19,7 +19,7 @@ const zformula=meanRule(over,zCrit,known,'n');
 const vformula=chiRule(ssRule,chiUpper,chiLower);
 const varianceFormula=String.raw`${hat}=\frac{1}{n-1}\sum_{i=1}^{n}(x_i-\bar x)^2`;
 const averageFormula=String.raw`\bar x=\frac{1}{n}\sum_{i=1}^{n}x_i`;
-const labUrl=mode=>'curry-explore.html?p&mode='+mode+'&v=interval-workbench';
+const labUrl=mode=>'curry-explore.html?p&mode='+mode+'&v=interval-fit';
 function add(section,title,html,notes,opts={}){slides.push({section,title,html,notes,...opts});}
 function term(ja,en){return `<h1>${ja}</h1><p class="english">${en}</p>`;}
 const article='https://gvwire.com/2026/06/07/a-job-market-leaving-young-graduates-behind-could-scar-them-for-years/';
@@ -117,7 +117,7 @@ function worked(title,beats,{legend=false}={}){
   s.theme='cream';s.className='worked-slide'+(legend?' formula-follow':'');s.init=undefined;s.mount=undefined;
   s.html=beats.map(([header,content,formulaLegend],i)=>`<section class="work-beat${i?' reveal':''}" data-work="${i}"${i?` data-step="${i}"`:''}>${formulaLegend||''}<div class="work-details"><h2>${header}</h2>${content}</div></section>`).join('');
 }
-const wChart=(lo,hi,center,unit,min,max)=>`<div class="work-chart">${intervalGraphic(lo,hi,center,unit,min,max)}</div>`;
+const wChart=(lo,hi,center,unit,min,max,matchBounds=false)=>`<div class="work-chart${matchBounds?' endpoint-chart':''}">${intervalGraphic(lo,hi,center,unit,min,max,matchBounds)}</div>`;
 // Formula terms occupy fixed grid tracks. The same tracks are reused in both
 // rows, and neither the current content nor its font weight can move them.
 const mi=s=>`<mi>${s}</mi>`,mn=s=>`<mn>${s}</mn>`,mo=s=>`<mo>${s}</mo>`;
@@ -130,9 +130,11 @@ const mdof=mo('(')+mi('n')+mo('−')+mn(1)+mo(')');
 const mathToken=v=>`<math>${mrow(v)}</math>`;
 const focusTerm=(v,role,focus,side)=>`<span class="legend-term legend-${role}${focus.has(role)||focus.has(side)?' is-focus':''}" data-role="${role}"${side?` data-side="${side}"`:''}>${mathToken(v)}</span>`;
 const bracketMark=side=>`<span class="legend-bracket ${side}" aria-hidden="true"></span>`;
-const sign=(s,active=false)=>`<span class="legend-sign${active?' is-focus':''}">${s}</span>`;
-function formulaLegend(kind,rule,work){
-  return `<div class="formula-legend legend-${kind}"><div class="legend-row" data-row="symbolic"><span class="legend-label">公式</span><div class="legend-expression">${rule}</div></div><div class="legend-row" data-row="working"><span class="legend-label">代入</span><div class="legend-expression">${work}</div></div></div>`;
+const sign=(s,active=false,side)=>`<span class="legend-sign${active?' is-focus':''}"${side?` data-side="${side}"`:''}>${s}</span>`;
+function formulaLegend(kind,rule,work,bounds){
+  const answer=(side,label,value,unit)=>`<div data-side="${side}"><span class="endpoint-arrow" aria-hidden="true">↓</span><span class="endpoint-value"><small>${label}</small> ${value}<small>${unit}</small></span></div>`;
+  const results=bounds?`<div class="legend-row endpoint-answers"><span class="legend-label">結果</span><div class="endpoint-map">${answer('lower','下限',bounds.lo,bounds.unit)}${answer('upper','上限',bounds.hi,bounds.unit)}</div></div>`:'';
+  return `<div class="formula-legend legend-${kind}${bounds?' shows-endpoints':''}"><div class="legend-row" data-row="symbolic"><span class="legend-label">公式</span><div class="legend-expression">${rule}</div></div><div class="legend-row" data-row="working"><span class="legend-label">代入</span><div class="legend-expression">${work}</div></div>${results}</div>`;
 }
 function meanExpression(isT,{center,q,variance,n,se,alpha,df}={},active=[]){
   const focus=new Set(active);
@@ -141,12 +143,12 @@ function meanExpression(isT,{center,q,variance,n,se,alpha,df}={},active=[]){
   const numerator=variance==null?(isT?mhat:msigma):mn(variance);
   const markedNumerator=`<mrow class="legend-spread${focus.has('variance')?' is-focus':''}" data-role="variance">${numerator}</mrow>`;
   const error=se==null?mroot(mfrac(markedNumerator,n==null?mi('n'):mn(n))):mn(se);
-  const half=(s,side)=>focusTerm(avg,'mean',focus,side)+sign(s,focus.has(side))+focusTerm(boundary,'critical',focus,side)+
-    sign(q==null?'&nbsp;':'×',focus.has(side)||focus.has('critical')&&focus.has('spread'))+focusTerm(error,'spread',focus,side);
+  const half=(s,side)=>focusTerm(avg,'mean',focus,side)+sign(s,focus.has(side),side)+focusTerm(boundary,'critical',focus,side)+
+    sign(q==null?'&nbsp;':'×',focus.has(side)||focus.has('critical')&&focus.has('spread'),side)+focusTerm(error,'spread',focus,side);
   return bracketMark('left')+half('−','lower')+sign(',')+half('+','upper')+bracketMark('right');
 }
-function meanLegend(isT,values={},active=[]){
-  return formulaLegend('mean-pair',meanExpression(isT,{},active),meanExpression(isT,values,active));
+function meanLegend(isT,values={},active=[],bounds){
+  return formulaLegend('mean-pair',meanExpression(isT,{},active),meanExpression(isT,values,active),bounds);
 }
 function intervalPreview(annotate=false){
   const callout=(role,ja,en,step)=>`<div class="formula-callout legend-${role}${step?' reveal':' shown'}"${step?` data-step="${step}"`:''}><span class="formula-leader" aria-hidden="true"></span><span>${ja}<small>${en}</small></span></div>`;
@@ -168,7 +170,7 @@ function chiLegend(values={},active=[]){
   return formulaLegend('chi-pair',render({}),render(values));
 }
 const usingLegend={legend:true};
-function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=false}){
+function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=false,mapEndpoints=false}){
   const varianceName=t?'不偏分散':'母分散（既知）';
   const q=critical,filled={center,q,variance,n},computed={...filled,se};
   return [
@@ -180,8 +182,8 @@ function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=fal
       wNote(t?`上側確率 0.025、自由度 ${n} − 1 = ${n-1}。表の t 値は ${q}。`:`上側確率 0.025。表の Z の値は ${q}。`),meanLegend(t,filled,['critical'])],
     ['片側の幅',math(q+'\\times'+se+'='+margin)+wNote('境界値 × 標準誤差'),meanLegend(t,computed,['critical','spread'])],
     ['下限と上限',wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'),wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean')),meanLegend(t,computed,['lower','upper'])],
-    ['母平均の95%信頼区間',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+
-      wChart(+lo,+hi,center,unit,...domain),meanLegend(t,computed)]
+    ['母平均の95%信頼区間',(mapEndpoints?'':`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`)+
+      wChart(+lo,+hi,center,unit,...domain,mapEndpoints),meanLegend(t,computed,[],mapEndpoints?{lo,hi,unit}:undefined)]
   ];
 }
 function varianceBeats({ss,n,a,b,lo,hi,center,unit,max}){
@@ -195,7 +197,7 @@ function varianceBeats({ss,n,a,b,lo,hi,center,unit,max}){
       wNote(`橙の点：不偏分散 ${ss} ÷ ${df} = ${center}${unit}。`),chiLegend(filled)]
   ];
 }
-const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],t:true};
+const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],t:true,mapEndpoints:true};
 worked('30 ± いくつ？',meanBeats(curry).slice(4,5),usingLegend);
 worked('下限、そして上限',meanBeats(curry).slice(5),usingLegend);
 worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],t:true}),usingLegend);
@@ -258,7 +260,7 @@ const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<d
   variance.notes='Start with only the variance numerator in teal. The table shows each score minus 30 and its square. Their sum is 80 points squared. Divide by four to get 20 points squared and fill only the numerator. Then focus the entire radical: divide by five and take the square root to get two points.';
   worked(tails.title,[[
     '③ 指定された95%と t分布',
-    `<p class="work-note">問題の指定は95%。片側に残る確率は ${im('(1-0.95)/2=0.025')}。</p><div class="work-chart t-lookup-density">${density('t')}</div><div class="tail-labels"><span>2.5%</span><b>中央95%</b><span>2.5%</span></div>${wNote(`母分散が未知なので t分布。自由度は ${im('5-1=4')}。`)}`,
+    `<p class="work-note">問題の指定は95%。片側に残る確率は ${im('(1-0.95)/2=0.025')}。</p><div class="work-chart t-lookup-density">${density('t',4,{annotateTails:true})}</div>${wNote(`母分散が未知なので t分布。自由度は ${im('5-1=4')}。`)}`,
     meanLegend(true,tailReady,['critical'])
   ]],usingLegend);
   tails.title='③ t分布：上側確率と自由度';
@@ -338,8 +340,34 @@ function annotate(el){const walk=document.createTreeWalker(el,NodeFilter.SHOW_TE
 const stage=document.querySelector('#stage');let index=0,step=0,cleanup=()=>{},pendingGuard=false;
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function svg(content){return `<svg viewBox="0 0 1000 300" role="img">${content}</svg>`;}
-function intervalGraphic(lo,hi,m,unit,min,max){const x=v=>90+(v-min)/(max-min)*820;return svg(`<title>${lo.toFixed(2)}から${hi.toFixed(2)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="3"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(2)}</text>`).join('')}<circle cx="${x(m)}" cy="115" r="10" fill="#d0642d"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);}
-function density(kind,df=4){const chi=kind==='chi',a=chi?0:-6,b=chi?18:6,pdf=chi?x=>M.chiPdf(x,df):x=>M.tPdf(x,df),max=chi?.21:.4,lo=chi?M.chiq(.975,df):-M.tq(.025,df),hi=chi?M.chiq(.025,df):M.tq(.025,df),x=v=>55+(v-a)/(b-a)*890,y=v=>245-pdf(v)/max*200;let points=[],area=[];for(let j=0;j<=400;j++){const v=a+(b-a)*j/400;points.push(`${x(v)},${y(v)}`);if(v>=lo&&v<=hi)area.push(`${x(v)},${y(v)}`);}return svg(`<title>${chi?'カイ二乗':'t'}分布、自由度${df}、中央95%</title><polygon points="${x(lo)},245 ${area.join(' ')} ${x(hi)},245" fill="#70b8ad" opacity=".65"/><polyline points="${points.join(' ')}" fill="none" stroke="#214b56" stroke-width="4"/><line x1="55" x2="945" y1="245" y2="245" stroke="#70878a"/>${[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="${y(v)}" y2="248" stroke="#bd542e" stroke-dasharray="5 5"/><text x="${x(v)}" y="285" text-anchor="middle">${v.toFixed(4)}</text>`).join('')}`);}
+function intervalGraphic(lo,hi,m,unit,min,max,matchBounds=false){
+  const x=v=>90+(v-min)/(max-min)*820;
+  const endpoints=[lo,hi].map((v,i)=>`<g${matchBounds?` data-side="${i?'upper':'lower'}"`:''}><line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="${matchBounds?6:3}"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(2)}</text></g>`).join('');
+  return svg(`<title>${lo.toFixed(2)}から${hi.toFixed(2)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${endpoints}<circle cx="${x(m)}" cy="115" r="10" fill="#d0642d"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);
+}
+function density(kind,df=4,{annotateTails=false}={}){
+  const chi=kind==='chi',a=chi?0:-6,b=chi?18:6,base=245;
+  const pdf=chi?x=>M.chiPdf(x,df):x=>M.tPdf(x,df);
+  const lo=chi?M.chiq(.975,df):-M.tq(.025,df),hi=chi?M.chiq(.025,df):M.tq(.025,df);
+  const x=v=>55+(v-a)/(b-a)*890,y=v=>base-pdf(v)/(chi?.21:.4)*200;
+  const trace=(start,end,n)=>Array.from({length:n+1},(_,j)=>{
+    const v=start+(end-start)*j/n;
+    return `${x(v)},${y(v)}`;
+  }).join(' ');
+  const area=(start,end,fill,opacity,attrs='')=>`<polygon ${attrs} points="${x(start)},${base} ${trace(start,end,100)} ${x(end)},${base}" fill="${fill}" opacity="${opacity}"/>`;
+  const tailColor='#994321';
+  const tail=(side,cut)=>{
+    // Put the tip in the shaded area, beyond the cutoff and below the curve.
+    const direction=side==='left'?-1:1,target=cut+direction*.3;
+    const tipX=x(target),tipY=(base+y(target))/2,labelX=tipX+direction*65;
+    const shading=side==='left'?area(a,cut,'#d5845e','.78','data-tail-area="left"'):area(cut,b,'#d5845e','.78','data-tail-area="right"');
+    return {shading,callout:`<g data-tail-label="${side}" fill="${tailColor}"><path d="M ${labelX} 175 L ${tipX} ${tipY}" fill="none" stroke="${tailColor}" stroke-width="2.8" marker-end="url(#curry-tail-arrow)"/><text x="${labelX}" y="165" text-anchor="middle" font-size="32" font-weight="700">2.5%</text></g>`};
+  };
+  const tails=annotateTails?[tail('left',lo),tail('right',hi)]:[];
+  const markers=annotateTails?`<defs><marker id="curry-tail-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 10 5 L 0 10 Z" fill="${tailColor}"/></marker></defs>`:'';
+  const thresholds=[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="${y(v)}" y2="248" stroke="#bd542e" stroke-dasharray="5 5"/>${annotateTails?'':`<text x="${x(v)}" y="285" text-anchor="middle">${v.toFixed(4)}</text>`}`).join('');
+  return svg(`<title>${chi?'カイ二乗':'t'}分布、自由度${df}、中央95%${annotateTails?'、左右の裾は各2.5%':''}</title>${markers}${area(lo,hi,'#70b8ad','.65')}${tails.map(t=>t.shading).join('')}<polyline points="${trace(a,b,400)}" fill="none" stroke="#214b56" stroke-width="4"/><line x1="55" x2="945" y1="${base}" y2="${base}" stroke="#70878a"/>${thresholds}${tails.map(t=>t.callout).join('')}${annotateTails?`<text x="500" y="170" text-anchor="middle" fill="#234653" font-size="33" font-weight="700">中央95%</text>`:''}`);
+}
 const inits={tails:()=>{document.querySelector('#t-tail-chart').innerHTML=density('t');},chiTails:()=>{document.querySelector('#chi-tail-chart').innerHTML=density('chi');},parts:()=>{const desc=['中心：標本平均。今回の5試合では30点。','t値：信頼係数と自由度で決まる。95%・自由度4 → 2.7764。','標準誤差：平均の推定のばらつき。√(20/5) = 2点。'];stage.querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>{stage.querySelectorAll('[data-part]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.querySelector('#part-description').textContent=desc[+b.dataset.part];});},curryInterval:()=>{document.querySelector('#curry-interval').innerHTML=intervalGraphic(24.4472,35.5528,30,'点',20,40);},robotAnswer:()=>{document.querySelector('#robot-answer').innerHTML=intervalGraphic(155.388,164.612,160,'cm',152,168);},knownAnswer:()=>{document.querySelector('#known-answer').innerHTML=intervalGraphic(116.08,123.92,120,'分',113,127);},varianceAnswer:()=>{document.querySelector('#variance-interval').innerHTML=intervalGraphic(80/11.1433,80/.4844,20,'点²',0,180);stage.querySelectorAll('[data-denom]').forEach(b=>b.onclick=()=>{document.querySelector(b.dataset.denom==='large'?'#variance-low':'#variance-high').hidden=false;if(!document.querySelector('#variance-low').hidden&&!document.querySelector('#variance-high').hidden)document.querySelector('#variance-interval').classList.remove('concealed');});},deliveryAnswer:()=>{document.querySelector('#delivery-answer').innerHTML=intervalGraphic(30/12.8325,30/.8312,6,'分²',0,40);},confidence:()=>{const range=document.querySelector('#confidence'),draw=()=>{const c=[.9,.95,.99][+range.value],q=M.tq((1-c)/2,4),w=q*2;document.querySelector('#confidence-result').textContent=`${Math.round(c*100)}%：${(30-w).toFixed(2)}〜${(30+w).toFixed(2)}点`;document.querySelector('#confidence-chart').innerHTML=intervalGraphic(30-w,30+w,30,'点',18,42);};range.oninput=draw;draw();},size:()=>{const range=document.querySelector('#size'),draw=()=>{const n=+range.value,w=1.96*10/Math.sqrt(n);document.querySelector('#size-result').textContent=`n = ${n} · 幅 ${(2*w).toFixed(2)}分`;document.querySelector('#size-chart').innerHTML=intervalGraphic(120-w,120+w,120,'分',110,130);};range.oninput=draw;draw();},coverage:()=>{let rows=[],timer=null;const run=document.querySelector('#coverage-run'),reset=document.querySelector('#coverage-reset');const draw=()=>{const min=Math.min(18,...rows.map(r=>r.lower)),max=Math.max(42,...rows.map(r=>r.upper)),x=v=>55+(v-min)/(max-min)*890;document.querySelector('#coverage-chart').innerHTML=`<svg viewBox="0 0 1000 360" role="img" aria-label="繰り返し抽出した100本の信頼区間"><line x1="${x(30)}" x2="${x(30)}" y1="20" y2="335" stroke="#687f84" stroke-dasharray="5 4"/><text x="${x(30)+8}" y="18">μ = 30</text>${rows.map((r,i)=>`<line x1="${x(r.lower)}" x2="${x(r.upper)}" y1="${28+i*3}" y2="${28+i*3}" stroke="${r.lower<=30&&r.upper>=30?'#16786f':'#d67435'}" stroke-width="2"/>`).join('')}<text x="55" y="357">${min.toFixed(1)}</text><text x="945" y="357" text-anchor="end">${max.toFixed(1)} 点</text></svg>`;const hits=rows.filter(r=>r.lower<=30&&r.upper>=30).length;document.querySelector('#coverage-count').textContent=`30を含む ${hits} / ${rows.length}`;};run.onclick=()=>{if(timer)return;rows=[];run.disabled=true;timer=setInterval(()=>{rows.push(M.ci(Array.from({length:5},()=>30+Math.sqrt(20)*M.normal())));draw();if(rows.length===100){clearInterval(timer);timer=null;run.disabled=false;}},38);};reset.onclick=()=>{clearInterval(timer);timer=null;rows=[];run.disabled=false;draw();};draw();return()=>clearInterval(timer);}};
 function maxStep(){return Math.max(0,...[...stage.querySelectorAll('[data-step]')].map(x=>+x.dataset.step));}
 function updateStep(){stage.querySelectorAll('[data-work]').forEach(e=>e.classList.toggle('work-active',+e.dataset.work===step));stage.querySelectorAll('[data-step]').forEach(e=>e.classList.toggle('shown',+e.dataset.step<=step));document.querySelector('#reveal').hidden=step>=maxStep();document.querySelector('#steps').textContent=maxStep()?`${step} / ${maxStep()}`:'';document.querySelector('#reveal').textContent='表示 ＋';pendingGuard=false;}

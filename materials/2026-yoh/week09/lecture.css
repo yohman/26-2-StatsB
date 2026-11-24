@@ -105,6 +105,22 @@
 .legend-spread { --term-color:#16665f }
 .legend-expression .is-focus { color:var(--term-color,#213d48);font-weight:750;-webkit-text-stroke:.022em currentColor }
 .legend-expression math .is-focus { font-weight:750 }
+[data-side="lower"] { --endpoint-color:#16665f }
+[data-side="upper"] { --endpoint-color:#a7451e }
+.shows-endpoints [data-row="working"] [data-side],
+.endpoint-map [data-side] { color:var(--endpoint-color);font-weight:750 }
+.endpoint-map {
+  width:24.6em;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.endpoint-arrow { display:block;font-size:clamp(13px,2.15cqw,31px);line-height:1.15 }
+.endpoint-value { font-size:clamp(16px,3.2cqw,44px);line-height:1.15 }
+.endpoint-value small { font-size:.5em }
+.formula-follow .work-details .endpoint-chart svg { font-size:32px;font-family:Arial,sans-serif;fill:#234653 }
+.endpoint-chart [data-side] text { fill:var(--endpoint-color);font-weight:700 }
+.endpoint-chart [data-side] line { stroke:var(--endpoint-color) }
 #stage.formula-preview .slide-body { display:grid;place-items:center;padding:0 }
 .interval-diagram {
   --inactive:#213d48;
@@ -180,7 +196,7 @@
 .square-sum-label { color:#16665f;font-size:clamp(10px,1.85cqw,25px);font-weight:700;line-height:1.25 }
 .square-sum-label span { display:block;color:#526970;font-size:.65em;font-weight:500 }
 .formula-follow .work-details :is(a,.secondary,.tail-labels) { font-size:clamp(9px,1.4cqw,19px) }
-.t-lookup-density svg text { visibility:hidden }
+.t-lookup-density svg { font-family:Arial,"Hiragino Kaku Gothic ProN",sans-serif }
 @media(max-width:560px){
   .formula-legend { grid-template-rows:repeat(2,max(29px,6.2cqw));font-size:clamp(9px,2.45cqw,16px) }
   .legend-row { grid-template-columns:max(24px,6.25cqw) minmax(0,1fr) }
