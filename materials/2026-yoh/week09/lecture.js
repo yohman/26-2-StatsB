@@ -57,7 +57,7 @@ add('母平均：Z','ロボットの電池：計算と答え','', 'Insert the ob
 add('母平均：Z','標本数で、幅を動かす',`<h2>同じ平均、同じ母標準偏差。</h2><div id="size-chart" class="chart"></div><div class="compact-controls"><label>n <input id="size" type="range" min="5" max="100" value="25" step="1"></label><output id="size-result"></output></div>${math(String.raw`120\pm1.96\frac{10}{\sqrt n}`)}`, 'Use the sample-size slider with population standard deviation10 fixed. Explain the square-root relationship with one concrete comparison: quadrupling n halves the margin. Holding sample mean120 fixed isolates the effect of sample size.',{book:'134 脚注1',init:'size'});
 add('母分散：χ²','母分散の区間推定',term('母分散の区間推定','Confidence interval for population variance'), 'Change the target from the population mean to the population variance. How much do individual observations vary, rather than where is their average?',{theme:'gold',book:'135〜136'});
 add('母分散：χ²','母分散の95%信頼区間の公式','', 'Show the full formula before giving any data. Reveal the common numerator first, then the two denominators. For a 95% interval, the chi-square table uses upper-tail areas 0.025 and 0.975. The large cutoff goes below the lower bound because it yields the smaller quotient.',{theme:'cream',book:'136',className:'formula-preview chi-preview',key:'variance-ci-formula'});
-add('母分散：χ²','χ²分布：両側の面積と分母','', 'For an independent sample from a normal population, the sum of squared deviations divided by the population variance follows a chi-square distribution with n minus 1 degrees of freedom. Unlike Z or t, this curve starts at zero and has a long right tail. Reveal the central 95% and two tails of 2.5% each. The table always counts area to the right: the right cutoff leaves 2.5%, and the left cutoff leaves 97.5%. Track the right cutoff to the left-hand fraction: dividing by the larger value gives the lower variance bound. The left cutoff gives the upper bound. The numbers shown illustrate df 4 only. Next, read the café problem and use its own degrees of freedom.',{theme:'cream',book:'135〜136',className:'chi-bridge',key:'variance-ci-tails'});
+add('母分散：χ²','χ²分布：両側の面積と分母','', 'For an independent normal sample, the sum of squared deviations divided by population variance follows chi-square with n minus 1 degrees of freedom. Reveal the central 95% and the two 2.5% tails. The linked table uses area to the right. On the example row for 4 degrees of freedom, the 0.025 column gives 11.1433, the right cutoff. The left cutoff has 1 minus 0.025 = 0.975 to its right, so the 0.975 column gives 0.4844. Dividing by the larger cutoff gives the lower variance bound. Next, use the café problem’s own degrees of freedom.',{theme:'cream',book:'135〜136',className:'chi-bridge',key:'variance-ci-tails'});
 add('母分散：χ²','カフェのドリンク：例題','', 'Read the entire question before solving. The campus café measures seven independent pours at the same setting. Assume a normal population. We are estimating the variance of the pour volumes, in squared milliliters, at the explicitly stated 95% confidence level.',{book:'135〜136',className:'practice-question pour-question',key:'variance-ci-problem'});
 add('母分散：χ²','① 分子：7杯の偏差二乗和','', 'Start with the seven measurements. Total 1750 divided by 7 gives the mean 250 mL. Subtract 250 from each value, square the deviations, and add them to get 36 mL². That sum, rather than the unbiased point estimate, goes in both numerators.',{book:'132・136',key:'variance-ci-numerator'});
 add('母分散：χ²','②・③ 分母から上下限へ','', 'Seven measurements give six degrees of freedom. On the chi-square curve the central 95% leaves 2.5% in each tail. Read upper-tail probabilities 0.025 then 0.975 from the df 6 row. Divide 36 by the large cutoff for the lower endpoint and by the small cutoff for the upper endpoint. The dot is the unbiased variance estimate 36/6 = 6 mL², not the interval midpoint.',{book:'135〜136',key:'variance-ci-answer'});
@@ -182,10 +182,20 @@ function chiPreview(){
   const callout=(part,role,ja,en,step)=>`<div class="formula-callout chi-label-${part} legend-${role} reveal" data-step="${step}"><span class="formula-leader" aria-hidden="true"></span><span>${ja}<small>${en}</small></span></div>`;
   return `<h2>母分散の95%信頼区間</h2><div class="legend-expression interval-diagram chi-interval-diagram">${chiExpression()}${callout('numerator','spread','① 共通の分子：偏差二乗和','Sum of squared deviations',1)}${callout('lower','critical','② 下限の分母：大きいχ²値','Larger chi-square critical value',2)}${callout('upper','critical','③ 上限の分母：小さいχ²値','Smaller chi-square critical value',3)}</div>`;
 }
+const chiBridgeCutoffs=[{side:'upper',tail:.975,step:3},{side:'lower',tail:.025,step:2}];
+function chiBridgeLookup(df){
+  const columns=chiBridgeCutoffs.map(({side,tail})=>`<th scope="col" data-side="${side}">${tail}</th>`).join('');
+  const rows=[df-1,df,df+1].map(d=>`<tr${d===df?' class="lookup-df"':''}><th scope="row">${d}</th>${chiBridgeCutoffs.map(({side,tail,step})=>{
+    const value=M.chiq(tail,d).toFixed(4);
+    return d===df?`<td data-side="${side}"><span class="reveal" data-step="${step}">${value}</span></td>`:`<td>${value}</td>`;
+  }).join('')}</tr>`).join('');
+  return `<div class="chi-bridge-lookup reveal" data-step="2"><div class="chi-lookup-caption">${table('chi')}<span>上側確率の列</span></div><table aria-label="カイ二乗分布表（上側確率）の抜粋"><thead><tr><th scope="col">自由度</th>${columns}</tr></thead><tbody>${rows}</tbody></table></div>`;
+}
 function chiBridge(){
+  const df=4;
   const ratio='<span class="chi-ratio" role="math" aria-label="偏差二乗和を母分散で割った値"><span>偏差二乗和</span><span>母分散</span></span>';
   const namedBound=(side,label,qualifier,step)=>`<div class="chi-bound reveal" data-side="${side}" data-step="${step}">${label}：${qualifier}値で割る</div>`;
-  return `<h2>母分散の区間には χ² 分布</h2><p class="english">Chi-square distribution</p><p class="chi-reason">独立な正規標本では、${ratio} が自由度 ${mathToken(mi('n')+mo('−')+mn(1))} の χ² 分布に従う。</p>${chiBridgeChart(4)}<div class="legend-expression chi-bridge-formula">${chiExpression()}${namedBound('lower','下限','大きい',2)}${namedBound('upper','上限','小さい',3)}</div>`;
+  return `<h2>母分散の区間には χ² 分布</h2><p class="english">Chi-square distribution</p><p class="chi-reason">独立な正規標本では、${ratio} が自由度 ${mathToken(mi('n')+mo('−')+mn(1))} の χ² 分布に従う。</p><div class="chi-bridge-plot">${chiBridgeChart(df)}${chiBridgeLookup(df)}</div><div class="legend-expression chi-bridge-formula">${chiExpression()} ${namedBound('lower','下限','大きい',2)}${namedBound('upper','上限','小さい',3)}</div>`;
 }
 const usingLegend={legend:true};
 function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,target,t=false}){
@@ -403,10 +413,9 @@ function chiBridgeChart(df){
   }).join(' ');
   const area=(start,stop,attrs='')=>`<polygon ${attrs} points="${x(start)},${base} ${trace(start,stop)} ${x(stop)},${base}"/>`;
   // A cutoff on the right of the curve belongs to the lower variance endpoint.
-  const cutoffs=[
-    {side:'lower',cut:largeCut,tail:'0.025',step:2,labelX:754,tailX:795,tailY:145,inside:largeCut+.8},
-    {side:'upper',cut:smallCut,tail:'0.975',step:3,labelX:170,tailX:62,tailY:114,inside:smallCut*.68}
-  ];
+  const cutoffs=chiBridgeCutoffs.map(c=>({...c,...(c.side==='lower'
+    ?{cut:largeCut,labelX:754,tailX:755,tailY:154,inside:largeCut+.8}
+    :{cut:smallCut,labelX:170,tailX:62,tailY:114,inside:smallCut*.68})}));
   const leader=(side,path)=>`<path d="${path}" fill="none" stroke="var(--endpoint-color)" stroke-width="2.1" marker-end="url(#chi-bridge-arrow-${side})"/>`;
   const markers=cutoffs.map(({side})=>`<marker data-side="${side}" id="chi-bridge-arrow-${side}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--endpoint-color)"/></marker>`).join('');
   const tails=cutoffs.map(({side,tailX,tailY,inside})=>{
@@ -415,12 +424,13 @@ function chiBridgeChart(df){
   }).join('');
   const labels=cutoffs.map(({side,cut,step,labelX,tail})=>{
     const px=x(cut),py=y(cut);
+    const rightArea=side==='upper'?`1 − 0.025 = ${tail}`:`${tail}`;
     return `<g data-side="${side}" class="reveal" data-step="${step}">
       <line x1="${px}" x2="${px}" y1="${py}" y2="${base}" stroke="var(--endpoint-color)" stroke-width="2.5" stroke-dasharray="4 3"/>
       <circle cx="${px}" cy="${base}" r="4" fill="var(--endpoint-color)"/>
       ${leader(side,`M ${labelX} 245 L ${px} ${base+5}`)}
       <text x="${labelX}" y="270" text-anchor="middle" class="chi-cut-label">χ² = ${cut.toFixed(4)}</text>
-      <text x="${labelX}" y="293" text-anchor="middle" class="chi-tail-label">上側確率 ${tail}</text>
+      <text x="${labelX}" y="293" text-anchor="middle" class="chi-tail-label">右側 ${rightArea}</text>
     </g>`;
   }).join('');
   return `<svg class="chi-bridge-chart" viewBox="0 0 1000 300" role="img" aria-label="自由度4のカイ二乗分布。右に長い裾を持つ。">
@@ -434,8 +444,7 @@ function chiBridgeChart(df){
     <line x1="59" x2="943" y1="${base}" y2="${base}" stroke="#819397" stroke-width="1.4"/>
     <text x="65" y="237" text-anchor="middle" class="chi-shape-note">0</text>
     <text x="936" y="237" text-anchor="end" class="chi-shape-note">χ²</text>
-    <text x="951" y="51" text-anchor="end" class="chi-shape-note">自由度 ${df} の例</text>
-    <text x="951" y="82" text-anchor="end" class="chi-shape-note">Z・t と違い、右の裾が長い</text>
+    <g class="chi-shape-intro"><text x="951" y="51" text-anchor="end" class="chi-shape-note">自由度 ${df} の例</text><text x="951" y="77" text-anchor="end" class="chi-shape-note">Z・t と違い、右の裾が長い</text></g>
     ${labels}
   </svg>`;
 }

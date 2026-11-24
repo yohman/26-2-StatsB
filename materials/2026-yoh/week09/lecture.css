@@ -200,17 +200,32 @@
 .legend-chi-pair .endpoint-map { width:15.3em }
 .chi-bridge .slide-body { gap:.15cqw;padding:2.4cqw 4cqw 2.8cqw }
 .chi-bridge h2 { font-size:3.5cqw;line-height:1.25 }
-.chi-bridge .english { font-size:1.55cqw }
-.chi-reason { display:flex;align-items:center;justify-content:center;gap:.45cqw;font-size:1.9cqw;margin-top:.75cqw }
+.chi-bridge .english { font-size:1.32cqw }
+.chi-reason { display:flex;align-items:center;justify-content:center;gap:.45cqw;font-size:1.55cqw;margin-top:.75cqw }
 .chi-reason math { font-size:inherit }
 .chi-ratio { display:inline-grid;flex:none;font-size:.83em;line-height:1.35;white-space:nowrap;margin-inline:.3cqw }
 .chi-ratio > span:first-child { border-bottom:1px solid currentColor;padding:0 .2em .08em }
-.chi-bridge-chart { display:block;width:min(100%,89cqw);height:auto;margin-top:.25cqw;fill:#213d48 }
+.chi-bridge-plot { position:relative;width:min(100%,89cqw);margin-top:.25cqw }
+.chi-bridge-chart { display:block;width:100%;height:auto;fill:#213d48 }
 .chi-bridge-chart .chi-tail-fill { fill:var(--endpoint-color);opacity:.47 }
 .chi-tail-pct,.chi-cut-label { fill:var(--endpoint-color);font-size:28px;font-weight:750 }
-.chi-tail-label { fill:var(--endpoint-color);font-size:21px }
+.chi-tail-label { fill:var(--endpoint-color);font-size:18px }
 .chi-center-label { font-size:31px;font-weight:750 }
-.chi-shape-note { fill:#526970;font-size:24px }
+.chi-shape-note { fill:#526970;font-size:19px }
+.chi-bridge-plot:has(.chi-bridge-lookup.shown) .chi-shape-intro { visibility:hidden }
+.chi-bridge-lookup { position:absolute;top:2%;right:5%;width:33%;color:#526970 }
+.chi-lookup-caption { display:flex;align-items:baseline;justify-content:space-between;gap:.5cqw;font-size:1.23cqw;line-height:1.4 }
+.chi-lookup-caption a:not(.photo-link) { color:#213d48;font-size:1.48cqw;font-weight:700;text-underline-offset:.22em }
+.chi-bridge-lookup table { table-layout:fixed;margin-top:.25cqw }
+.chi-bridge-lookup :is(td,th) { font-size:1.39cqw;line-height:1.2;padding:.17cqw .5cqw;border-color:#acafa387 }
+.chi-bridge-lookup .lookup-df th { font-weight:750;background:#e3d7bb;color:#213d48 }
+.chi-bridge-lookup td:has(.shown),
+.chi-bridge-lookup:has(td[data-side="lower"] .shown) thead [data-side="lower"],
+.chi-bridge-lookup:has(td[data-side="upper"] .shown) thead [data-side="upper"] {
+  color:var(--endpoint-color);
+  background:color-mix(in srgb,var(--endpoint-color) 13%,transparent);
+  font-weight:750;
+}
 .chi-bridge-formula {
   --inactive:#677475;
   grid-template-columns:.45em 7.15em 1em 7.15em .45em;
@@ -219,7 +234,7 @@
   height:auto;
 }
 .chi-bridge-formula .legend-bracket { height:2.2em }
-.chi-bound { grid-row:2;font:700 1.85cqw/1.35 Arial,"Hiragino Sans",sans-serif;color:var(--endpoint-color) }
+.chi-bound { grid-row:2;font:700 1.55cqw/1.35 Arial,"Hiragino Sans",sans-serif;color:var(--endpoint-color) }
 .chi-bound[data-side="lower"] { grid-column:2 }
 .chi-bound[data-side="upper"] { grid-column:4 }
 .chi-bridge-formula:has(.chi-bound[data-side="lower"].shown) [data-chi-part="lower"],
