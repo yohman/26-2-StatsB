@@ -46,9 +46,13 @@ add('95%の意味','100本の区間を作る',`<h2>真の母平均は固定。�
 add('95%の意味','確実さを上げると、幅は？',`<h2>同じ標本。変えるのは、信頼係数。</h2><p class="english">Confidence level</p><div id="confidence-chart" class="chart"></div><div class="compact-controls"><label>信頼係数 <input id="confidence" type="range" min="0" max="2" step="1" value="1"></label><output id="confidence-result"></output></div>${small('5試合：平均30点、不偏分散20点²。90%・95%・99%を比較。')}`, 'Move the confidence slider from 90% to 99%. More coverage requires a wider interval when the sample is unchanged. This is not improved precision. Let students predict direction before moving the slider.',{book:'133',init:'confidence'});
 add('チャレンジ1','ロボットの平均身長',`<p class="challenge-time">5分 · 自分で解く</p><h2>この工場のロボットは、平均何cm？</h2><div class="givens"><div><small>標本数</small><b>9体</b></div><div><small>標本平均</small><b>160cm</b></div><div><small>不偏分散</small><b>36cm²</b></div></div><ol><li>自由度と、表で使うt値を求める。</li><li>母平均の95%信頼区間を求める。</li></ol>${small('独立な正規標本。母分散は未知。') }<details><summary>参考公式</summary>${math(formula)}</details>${table('t')}`, 'Give students five minutes, individually. They have the unbiased variance already, so no raw-data table is required. They must choose df 8, right-tail 0.025, then calculate both endpoints. Leave the reference formula collapsed unless needed.',{book:'133・203',challenge:true});
 add('チャレンジ1','答え：155.39〜164.61cm',`<h2>母平均の95%信頼区間</h2>${math(String.raw`160\pm2.3060\sqrt{36/9}`)}${rev(math(String.raw`160\pm4.612`))}${rev('<div class="result">155.39〜164.61 cm</div>',2)}<div id="robot-answer" class="chart reveal" data-step="2"></div>`, 'Show the symbolic reference on the question if requested. Here substitute n9, mean160, variance36, df8. Reveal standard error2 and margin4.612, then the result. The chart is a range for the population mean height, not all robot heights.',{book:'133',init:'robotAnswer'});
-add('母平均：Z','Zか、tか？',`<h2>知っているのは、母分散？</h2><table class="choice"><thead><tr><th>条件</th><th>使う分布</th><th>ばらつき</th></tr></thead><tbody><tr><td>母分散が未知</td><td class="orange">t</td><td>標本から推定した不偏分散</td></tr><tr><td>母分散が既知</td><td class="teal">Z</td><td>与えられた母分散</td></tr></tbody></table>${small('どちらも「母平均」の区間を求めている。')}`, 'The target remains population mean. The deciding information is whether population variance is known. A large sample alone is not a reason to pretend an unknown variance is known; use the stated course model.',{book:'133・134 脚注1'});
-add('母平均：Z','母分散が既知なら',math(zformula), 'This is the known-population-variance 95% interval in textbook page134 footnote1. The standard deviation here is the population value, not an estimate from the current sample. The normal critical value is1.96.',{theme:'dark',book:'134 脚注1',className:'formula-slide'});
-add('母平均：Z','ロボットの電池',`<h2>母標準偏差10分は、既知。</h2><div class="givens"><div><small>標本数</small><b>25台</b></div><div><small>標本平均</small><b>120分</b></div></div>${math(String.raw`120\pm1.96\sqrt{100/25}`)}${rev('<div class="result">116.08〜123.92 分</div>')}<div id="known-answer" class="chart reveal" data-step="1"></div>`, 'The given population standard deviation10 means population variance100. Standard error is2, margin3.92. This parallels the t calculation, but the known variance allows the Z critical value. The normal model is assumed.',{book:'134 脚注1',init:'knownAnswer'});
+add('母平均：Z','母分散が既知なら、Z',`<div class="z-section-lead"><h1><span>母分散が既知なら</span><strong>Z</strong></h1><p>標準正規分布 <span class="english">Standard normal distribution</span></p><small>標本不偏分散が与えられていても、母分散が未知なら <em>t</em>。</small></div>`, 'We are still estimating a population mean. With unknown population variance, the earlier interval used t and an estimated variance. Knowing the sample SD is not the same as knowing the population SD. If the population variance is known (equivalently, the population SD is known), use Z.',{theme:'dark',className:'z-section-hero',book:'124〜125・133',key:'known-variance-z'});
+add('母平均：Z','ロボット電池の持続時間：問題',`<h2>ロボットの電池は平均何分もつ？</h2><p class="battery-prompt">同じ工場で作ったロボットを無作為に選び、満充電から電池切れまでの時間を同じ条件で測った。</p>
+  <div class="givens battery-givens"><div><small>標本数 ${im('n')}</small><b>25<small>台</small></b></div><div><small>標本平均 ${im('\\bar x')}</small><b>120<small>分</small></b></div><div><small>既知の母標準偏差 ${im('\\sigma_x')}</small><b>10<small>分</small></b></div></div>
+  <p class="battery-question">電池の持続時間の母平均の<strong>95%信頼区間</strong>を求めよ。</p><span class="english">95% confidence interval for the population mean</span>${small('独立な正規標本と仮定する。')}`,
+  'Read the problem before showing the formula. 120 minutes is the mean of the 25 sampled robots, not the population mean. The population standard deviation of 10 minutes is given, and the problem asks for a 95% interval.',{theme:'cream',className:'battery-problem',book:'124〜125・133',key:'battery-problem'});
+add('母平均：Z','Zの区間推定の公式','', 'Show the symbolic interval before revealing the three leaders. The standard error uses the known population variance, with no hat on sigma squared. The critical value is from the standard normal distribution.',{theme:'cream',className:'formula-preview',book:'124〜125・133',key:'z-interval-formula'});
+add('母平均：Z','ロボットの電池：計算と答え','', 'Insert the observed mean, then the known variance and sample size. Locate the right-tail probability 0.02500 in the Z table. The row and column give 1.96, so the margin is 3.92 minutes.',{book:'124〜125・133',key:'battery-solution'});
 add('母平均：Z','標本数で、幅を動かす',`<h2>同じ平均、同じ母標準偏差。</h2><div id="size-chart" class="chart"></div><div class="compact-controls"><label>n <input id="size" type="range" min="5" max="100" value="25" step="1"></label><output id="size-result"></output></div>${math(String.raw`120\pm1.96\frac{10}{\sqrt n}`)}`, 'Use the sample-size slider with population standard deviation10 fixed. Explain the square-root relationship with one concrete comparison: quadrupling n halves the margin. Holding sample mean120 fixed isolates the effect of sample size.',{book:'134 脚注1',init:'size'});
 add('母分散：χ²','母分散の区間推定',term('母分散の区間推定','Confidence interval for population variance'), 'Now change the target: not the mean score, but the underlying variance of scores. A point estimate of20 does not mean we know the population variance exactly.',{theme:'gold',book:'135〜136'});
 add('母分散：χ²','20点²も、推定値。',`<div class="scores mini">${[23,29,31,32,35].map(x=>`<b>${x}</b>`).join('')}</div><div class="hero">20<span>点²</span></div><p>不偏分散による、母分散の点推定。</p>${rev('<h2>散らばりに、下限と上限を。</h2>')}`, 'Return to exactly the same five simulated Curry scores. The mean was30 and the sum of squared deviations80. Dividing80 by4 estimated variance as20. Now construct a confidence interval for that population variance.',{theme:'cream',book:'135〜136'});
@@ -148,13 +152,14 @@ function meanExpression(isT,{center,q,variance,n,se,alpha,df}={},active=[]){
 function meanLegend(isT,values={},active=[],bounds){
   return formulaLegend('mean-pair',meanExpression(isT,{},active),meanExpression(isT,values,active),bounds);
 }
-function intervalPreview(annotate=false){
+function intervalPreview({annotate=false,isT=true,startBare=false}={}){
   const callout=(role,ja,en,step)=>`<div class="formula-callout legend-${role}${step?' reveal':' shown'}"${step?` data-step="${step}"`:''}><span class="formula-leader" aria-hidden="true"></span><span>${ja}<small>${en}</small></span></div>`;
+  const offset=startBare?1:0,cutoff=isT?'t':'Z';
   const callouts=annotate?
-    callout('mean','① 標本平均','Sample mean',0)+
-    callout('spread','② <ruby>標<rt>ひょう</rt></ruby><ruby>準<rt>じゅん</rt></ruby><ruby>誤<rt>ご</rt></ruby><ruby>差<rt>さ</rt></ruby>','Standard error',1)+
-    callout('critical','③ tの境界値','t critical value',2):'';
-  return `<div class="legend-expression interval-diagram">${meanExpression(true)}${callouts}</div>`;
+    callout('mean','① 標本平均','Sample mean',offset)+
+    callout('spread','② <ruby>標<rt>ひょう</rt></ruby><ruby>準<rt>じゅん</rt></ruby><ruby>誤<rt>ご</rt></ruby><ruby>差<rt>さ</rt></ruby>','Standard error',1+offset)+
+    callout('critical',`③ ${cutoff}の境界値`,`${cutoff} critical value`,2+offset):'';
+  return `<div class="legend-expression interval-diagram${isT?'':' z-interval-diagram'}">${meanExpression(isT)}${callouts}</div>`;
 }
 function chiLegend(values={},active=[]){
   const focus=new Set(active);
@@ -199,7 +204,21 @@ const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',
 worked('30 ± いくつ？',meanBeats(curry).slice(4,5),usingLegend);
 worked('下限、そして上限',meanBeats(curry).slice(5),usingLegend);
 worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],target:'この工場で作るロボットの平均身長',t:true}),usingLegend);
-worked('ロボットの電池',meanBeats({center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127],target:'ロボットの電池の平均持続時間'}),usingLegend);
+{
+  const battery={center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127],target:'ロボットの電池の平均持続時間',mapEndpoints:true};
+  const {center,variance,n,critical:q}=battery,filled={center,variance,n};
+  const zExcerpt=selected=>`<table class="lookup battery-z-table" aria-label="標準正規分布表の抜粋：上側確率"><thead><tr><th scope="col">z</th>${[.05,.06,.07].map(d=>`<th scope="col" class="${selected&&d===.06?'active':''}">${d.toFixed(2)}</th>`).join('')}</tr></thead><tbody>${[1.8,1.9,2.0].map(r=>`<tr><th scope="row" class="${selected&&r===1.9?'active':''}">${r.toFixed(1)}</th>${[.05,.06,.07].map(d=>`<td class="${selected&&r===1.9&&d===.06?'target':''}">${(1-M.normalCdf(r+d)).toFixed(5)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+  const lookupNote=wNote(`標準正規分布表（上側確率）で ${im('(1-0.95)/2=0.02500')} を探す。`);
+  const zTable=link('../week05/normal-upper-tail-table.html?p','標準正規分布表（上側確率）');
+  const steps=meanBeats(battery);
+  worked('ロボットの電池：計算と答え',[
+    steps[1],
+    ['② 既知の母分散を使う',math(String.raw`\sigma_x^2=10^2=100\qquad \sqrt{\frac{100}{25}}=2`)+wNote('母標準偏差10分を二乗して、母分散100分²を得る。'),meanLegend(false,filled,['spread'])],
+    ['③ Z表で上側確率0.02500を探す',lookupNote+zExcerpt(false)+zTable,meanLegend(false,{...filled,alpha:'0.025'},['critical'])],
+    ['③ Zの境界値は1.96',wNote(`確率0.02500のセルは、行 ${im('1.9')} と列 ${im('0.06')}。したがって ${im('z=1.9+0.06=1.96')}。`)+zExcerpt(true)+zTable,meanLegend(false,{...filled,q},['critical'])],
+    ...steps.slice(4)
+  ],usingLegend);
+}
 worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critical:'1.96',se:'2',margin:'3.92',lo:'38.08',hi:'45.92',unit:'分',domain:[35,49],target:'学生全体の平均通学時間'}),usingLegend);
 worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180,target:'Curryの1試合あたりの得点の母分散'}).slice(2),usingLegend);
 worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40,target:'配送時間の母分散'}),usingLegend);
@@ -247,7 +266,7 @@ const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<d
   slides.splice(slides.indexOf(sample)+1,0,preview,map,whole);
   // Legacy page links to the old t hero now land on the t calculation.
   legacyLecture[legacyLecture.indexOf(tHero)]=tails;
-  Object.assign(map,{theme:'cream',className:'formula-preview',init:undefined,key:'t-ci-parts',html:intervalPreview(true)});
+  Object.assign(map,{theme:'cream',className:'formula-preview',init:undefined,key:'t-ci-parts',html:intervalPreview({annotate:true})});
   map.notes='Point to the sample mean as the center. Reveal the standard error next and the t critical value last. The same three pieces appear in both endpoints. No values have been substituted yet.';
   worked(whole.title,[
     ['① 標本平均',math(averageFormula),meanLegend(true,{},['mean'])],
@@ -291,9 +310,8 @@ const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<d
   const chiTails=byTitle('カイ二乗は、左右非対称');
   worked(chiTails.title,[['② χ²分布：2つの境界値',`<div class="work-chart">${density('chi')}</div>${table('chi')}${wNote('自由度4。上側確率0.025と0.975の境界値を読む。')}`,chiLegend({ss:80},['critical'])]],usingLegend);
   Object.assign(byTitle('20点²も、推定値。'),{book:'132・136',notes:'Focus the two identical numerators. Insert the five scores and mean 30. Reuse the sum of 80. The dot is 20, not the midpoint of this asymmetric interval.'});
-  Object.assign(byTitle('母分散が既知なら'),{book:'124〜125・133',notes:'The textbook prints the Z standardization on p.125. Rearranging it for the population mean gives this bracketed interval. Use the p.124 upper-tail area for the 95% boundary. The variance here is known, not estimated from the sample.'});
-  worked('母分散が既知なら',[['母分散が既知の場合',wNote('標準正規分布の境界値を使う。'),meanLegend(false,{},['mean','spread','critical'])]],usingLegend);
-  for(const name of ['ロボットの電池','標本数で、幅を動かす','通学時間の母平均','答え：38.08〜45.92分'])byTitle(name).book='124〜125・133';
+  byTitle('Zの区間推定の公式').html=intervalPreview({annotate:true,isT:false,startBare:true});
+  for(const name of ['標本数で、幅を動かす','通学時間の母平均','答え：38.08〜45.92分'])byTitle(name).book='124〜125・133';
   const conv=byTitle('S²が与えられたら？');
   conv.html=`<h2>標本分散と標本不偏分散</h2>${math(String.raw`S_x^2=\frac{1}{n}\sum (x_i-\bar x)^2\qquad ${hat}=\frac{n}{n-1}S_x^2`)}${rev(math(String.raw`\sum(x_i-\bar x)^2=nS_x^2=5\times16=80`))}${rev(math(String.raw`${hat}=\frac{n}{n-1}S_x^2=\frac{5}{5-1}\times16=20`),2)}`;
   conv.book='134 脚注1';conv.notes='Show both definitions before inserting numbers. With n=5 and divisor-n variance 16, the sum of squared deviations is 5×16 = 80 for chi-square; the unbiased variance for the t interval is 5/(5−1)×16 = 20.';

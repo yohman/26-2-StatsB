@@ -219,6 +219,22 @@
 .food-truck-calculation [data-stat="variance"] tfoot td:last-child{color:#16665f;background:#dcece6}
 .food-truck-calculation .deviation-table tbody th { color:#526970 }
 .food-truck-lookup { width:min(54cqw,100%) }
+.z-section-lead h1 { margin:0;line-height:1.1 }
+.z-section-lead h1 span { display:block;font-size:clamp(19px,4.5cqw,64px) }
+.z-section-lead h1 strong { display:block;color:#8ee5cd;font-size:clamp(70px,16cqw,220px);line-height:1.05 }
+.z-section-lead p { margin:0;font-size:clamp(14px,2.8cqw,37px);font-weight:650 }
+.z-section-lead .english { display:block;color:#bad9d5;font-size:.64em;font-weight:500 }
+.z-section-lead > small { display:block;margin-top:2cqw;color:#dadbd6;font-size:clamp(10px,1.75cqw,22px) }
+.battery-problem .battery-prompt { max-width:75cqw;font-size:clamp(11px,2.05cqw,27px);line-height:1.55;margin:0 }
+.battery-problem .battery-question { font-size:clamp(12px,2.35cqw,30px);margin:.75cqw 0 0 }
+.battery-question strong { color:#a7451e }
+.battery-givens b { font-size:clamp(25px,6cqw,75px);line-height:1.15 }
+.battery-givens b small { display:inline;font-size:.37em;margin-left:.15em }
+.battery-givens div:last-child b { color:#16665f }
+.battery-problem .english { font-size:clamp(9px,1.4cqw,19px) }
+.z-interval-diagram { grid-template-columns:.45em 2em .95em 2.8em .75em 3.3em .9em 2em .95em 2.8em .75em 3.3em .45em }
+.battery-z-table { width:min(54cqw,100%) }
+.battery-z-table .target { background:#644e87 }
 @media(max-width:560px){
   .formula-legend { grid-template-rows:repeat(2,max(29px,6.2cqw));font-size:clamp(9px,2.45cqw,16px) }
   .legend-row { grid-template-columns:max(24px,6.25cqw) minmax(0,1fr) }
