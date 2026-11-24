@@ -134,17 +134,25 @@ const sign=(s,active=false)=>`<span class="legend-sign${active?' is-focus':''}">
 function formulaLegend(kind,rule,work){
   return `<div class="formula-legend legend-${kind}"><div class="legend-row" data-row="symbolic"><span class="legend-label">公式</span><div class="legend-expression">${rule}</div></div><div class="legend-row" data-row="working"><span class="legend-label">代入</span><div class="legend-expression">${work}</div></div></div>`;
 }
-function meanLegend(isT,values={},active=[]){
+function meanExpression(isT,{center,q,variance,n,se,alpha,df}={},active=[]){
   const focus=new Set(active);
-  const render=({center,q,variance,n,se,alpha,df})=>{
-    const avg=center==null?mbar:mn(center);
-    const boundary=q==null?msub(mi(isT?'t':'z'),alpha==null?mi('α'):mn(alpha))+(isT?(df==null?mdof:mo('(')+mn(df)+mo(')')):''):mn(q);
-    const error=se==null?mroot(mfrac(variance==null?(isT?mhat:msigma):mn(variance),n==null?mi('n'):mn(n))):mn(se);
-    const half=(s,side)=>focusTerm(avg,'mean',focus,side)+sign(s,focus.has(side))+focusTerm(boundary,'critical',focus,side)+
-      sign(q==null?'&nbsp;':'×',focus.has(side)||focus.has('critical')&&focus.has('spread'))+focusTerm(error,'spread',focus,side);
-    return bracketMark('left')+half('−','lower')+sign(',')+half('+','upper')+bracketMark('right');
-  };
-  return formulaLegend('mean-pair',render({}),render(values));
+  const avg=center==null?mbar:mn(center);
+  const boundary=q==null?msub(mi(isT?'t':'z'),alpha==null?mi('α'):mn(alpha))+(isT?(df==null?mdof:mo('(')+mn(df)+mo(')')):''):mn(q);
+  const error=se==null?mroot(mfrac(variance==null?(isT?mhat:msigma):mn(variance),n==null?mi('n'):mn(n))):mn(se);
+  const half=(s,side)=>focusTerm(avg,'mean',focus,side)+sign(s,focus.has(side))+focusTerm(boundary,'critical',focus,side)+
+    sign(q==null?'&nbsp;':'×',focus.has(side)||focus.has('critical')&&focus.has('spread'))+focusTerm(error,'spread',focus,side);
+  return bracketMark('left')+half('−','lower')+sign(',')+half('+','upper')+bracketMark('right');
+}
+function meanLegend(isT,values={},active=[]){
+  return formulaLegend('mean-pair',meanExpression(isT,{},active),meanExpression(isT,values,active));
+}
+function intervalPreview(annotate=false){
+  const callout=(role,ja,en,step)=>`<div class="formula-callout legend-${role}${step?' reveal':' shown'}"${step?` data-step="${step}"`:''}><span class="formula-leader" aria-hidden="true"></span><span>${ja}<small>${en}</small></span></div>`;
+  const callouts=annotate?
+    callout('mean','① 標本平均','Sample mean',0)+
+    callout('spread','② <ruby>標<rt>ひょう</rt></ruby><ruby>準<rt>じゅん</rt></ruby><ruby>誤<rt>ご</rt></ruby><ruby>差<rt>さ</rt></ruby>','Standard error',1)+
+    callout('critical','③ tの境界値','t critical value',2):'';
+  return `<div class="legend-expression interval-diagram">${meanExpression(true)}${callouts}</div>`;
 }
 function chiLegend(values={},active=[]){
   const focus=new Set(active);
@@ -218,18 +226,15 @@ const varianceTable=`<table class="deviation-table"><thead><tr><th>得点</th><t
   const centered={center:30},spreadDone={...centered,variance:20,n:5};
   const tailReady={...spreadDone,alpha:'0.025',df:4};
   sample.html=`<h2>Curryの5試合から、母平均を推定。</h2><div class="scores">${scores.map(x=>`<div><span>🏀</span><b>${x}</b></div>`).join('')}</div>${small('架空の得点・独立な正規標本と仮定。')}`;
-  sample.notes='Show the five scores. Ask what we want to estimate: the underlying population mean, not just the average of these five scores. The next slide shows all three pieces before we calculate any of them.';
+  sample.notes='Show the five scores. Ask what we want to estimate: the underlying population mean, not just the average of these five scores. Show the whole formula next.';
   for(const s of [whole,map,tHero])slides.splice(slides.indexOf(s),1);
-  slides.splice(slides.indexOf(sample)+1,0,map,whole);
+  const preview={section:map.section,title:'母平均の95%信頼区間の公式',key:'t-ci-formula',theme:'cream',className:'formula-preview',book:'133',html:intervalPreview(),
+    notes:'Show the complete interval without annotations. The left expression is the lower limit, and the right expression is the upper limit. Advance to see how the three shared pieces fit into both ends.'};
+  slides.splice(slides.indexOf(sample)+1,0,preview,map,whole);
   // Legacy page links to the old t hero now land on the t calculation.
   legacyLecture[legacyLecture.indexOf(tHero)]=tails;
-  map.key='t-ci-formula';
-  worked(map.title,[[
-    '母平均の95%信頼区間',
-    `<div class="legend-roadmap"><span class="legend-mean">① 標本平均<small>Sample mean</small></span><span class="legend-spread">② 標準誤差<small>Standard error</small></span><span class="legend-critical">③ t分布の境界値<small>t critical value</small></span></div>`,
-    meanLegend(true,{},['mean','spread','critical'])
-  ]],usingLegend);
-  map.notes='Preview the full interval and the calculation order. The center comes first, the standard error second, and the table value last. At this point nothing has been substituted.';
+  Object.assign(map,{theme:'cream',className:'formula-preview',init:undefined,key:'t-ci-parts',html:intervalPreview(true)});
+  map.notes='Point to the sample mean as the center. Reveal the standard error next and the t critical value last. The same three pieces appear in both endpoints. No values have been substituted yet.';
   worked(whole.title,[
     ['① 標本平均',math(averageFormula),meanLegend(true,{},['mean'])],
     ['① 5試合の得点を代入',math(averageNumeric),meanLegend(true,centered,['mean'])]
