@@ -95,6 +95,67 @@ for(const s of slides) {
   else if(s.section==='チャレンジ2') s.section=legacyLecture.includes(s)?'チャレンジ4':'チャレンジ1';
 }
 
+// Match the guided Explore sequence: inputs → rule → substitution → arithmetic → graph.
+const wSlot=(label,value,cls='')=>`<span class="work-slot ${cls}"><small>${label}</small><i aria-hidden="true">↓</i><span>${value}</span></span>`;
+const wMap=(...items)=>`<div class="work-map">${items.map(([label,value,color])=>`<span class="work-slot ${color}"><small>${label}</small><strong>${value}</strong></span>`).join('')}</div>`;
+const wEq=(...items)=>`<div class="work-equation">${items.map(i=>i.startsWith('<')?i:`<span>${i}</span>`).join('')}</div>`;
+const wFrac=(a,b)=>`<span class="work-frac"><span>${a}</span><span>${b}</span></span>`;
+const wNote=text=>`<p class="work-note">${text}</p>`;
+function worked(title,beats){
+  const s=slides.find(s=>s.title===title);
+  if(!s) throw new Error('Missing worked slide: '+title);
+  s.theme='cream';s.className='worked-slide';s.init=undefined;s.mount=undefined;
+  s.html=beats.map(([header,content],i)=>`<section class="work-beat${i?' reveal':''}" data-work="${i}"${i?` data-step="${i}"`:''}><h2>${header}</h2>${content}</section>`).join('');
+}
+const wChart=(lo,hi,center,unit,min,max)=>`<div class="work-chart">${intervalGraphic(lo,hi,center,unit,min,max)}</div>`;
+function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=false}){
+  const varianceName=t?'不偏分散':'母分散（既知）',criticalName=t?'t分布表':'Zの境界';
+  return [
+    ['中心と、片側の幅',wMap(['標本平均',center+' '+unit,'mean'],[varianceName,variance+' '+unit+'²','spread'],['標本数',n,'spread'])+
+      math(t?String.raw`\bar X\ \pm\ t_{0.025}(n-1)\sqrt{\widehat{\sigma_x^2}/n}`:String.raw`\bar X\ \pm\ 1.96\sqrt{\sigma_x^2/n}`)+
+      wNote(t?'母分散は未知。標本から求めた不偏分散と t を使う。':'母分散は既知。標準正規分布の境界 1.96 を使う。')],
+    ['値を入れる場所',wEq(wSlot('標本平均',String(center),'mean'),'±',wSlot(criticalName,critical,'critical'),'×',
+      wSlot(varianceName+' ÷ 標本数','√('+variance+' / '+n+')','spread'))+
+      wNote(t?`自由度：${n} − 1 = ${n-1} ／ 右側確率：0.025`:'母分散 ÷ 標本数の平方根が標準誤差。')],
+    ['中心に、足す・引く',wEq(wSlot('中心',String(center),'mean'),'±',wSlot(criticalName,critical,'critical'),'×',wSlot('標準誤差',se,'spread'))+
+      wEq(center+' ± '+margin)],
+    ['下限を引く。上限を足す。',wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'))+
+      wEq(wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean'))+wNote('同じ片側の幅を、標本平均から引く・足す。')],
+    ['母平均の95%信頼区間',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+
+      wChart(+lo,+hi,center,unit,...domain)+wNote('橙の点：標本平均 ／ 翼の先：母平均の95%信頼区間の両端')]
+  ];
+}
+function varianceBeats({ss,n,a,b,lo,hi,center,unit,max}){
+  const df=n-1;
+  return [
+    ['母分散の区間',wMap(['偏差二乗和',ss+' '+unit,'spread'],['標本数',n,'critical'])+math(vformula)],
+    ['自由度と、右側確率',wEq(wSlot('自由度',n+' − 1 = '+df,'critical'))+
+      wMap(['右側0.025・大きい境界',a,'critical'],['右側0.975・小さい境界',b,'critical'])+table('chi')],
+    ['分子は同じ。分母を入れ替える',wEq('[',wFrac(wSlot('偏差二乗和',ss,'spread'),wSlot('大きい χ²',a,'critical')),',',
+      wFrac(wSlot('偏差二乗和',ss,'spread'),wSlot('小さい χ²',b,'critical')),']')+wNote('大きい値で割ると下限、小さい値で割ると上限。')],
+    ['下限と上限',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+wChart(+lo,+hi,center,unit,0,max)+
+      wNote(`橙の点：不偏分散 ${ss} ÷ ${df} = ${center}${unit}。翼は左右で同じ長さではない。`)]
+  ];
+}
+const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],t:true};
+worked('30 ± いくつ？',meanBeats(curry).slice(0,3));
+worked('下限、そして上限',meanBeats(curry).slice(3));
+worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],t:true}));
+worked('ロボットの電池',meanBeats({center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127]}));
+worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critical:'1.96',se:'2',margin:'3.92',lo:'38.08',hi:'45.92',unit:'分',domain:[35,49]}));
+worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180}));
+worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40}));
+{
+  const s=slides.find(s=>s.title==='今回の90%と、長期の95%');
+  const draw=s.mount;
+  worked(s.title,[
+    ['母平均を含む割合',wMap(['母平均を含む区間','9本','mean'],['区間の合計','10本','spread'])+wEq(wFrac('母平均を含む本数','区間の合計'))],
+    ['今回の割合を出す',wEq(wFrac(wSlot('母平均を含む本数','9','mean'),wSlot('区間の合計','10','spread')),'＝ 0.9','＝ 90%')],
+    ['今回の90%、長期の95%',`<div id="capture-answer" class="work-chart"></div>`+wNote('9本が縦線をまたぐ。95%は、同じ方法を繰り返したときの長期的な割合。')]
+  ]);
+  s.mount=draw;
+}
+
 const story = window.Week9Story || [];
 const archivedOpeners = [...story, ...(window.Week9Openers || [])];
 const candidates = window.Week9Candidates || [];
@@ -133,11 +194,11 @@ function annotate(el){const walk=document.createTreeWalker(el,NodeFilter.SHOW_TE
 const stage=document.querySelector('#stage');let index=0,step=0,cleanup=()=>{},pendingGuard=false;
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function svg(content){return `<svg viewBox="0 0 1000 300" role="img">${content}</svg>`;}
-function intervalGraphic(lo,hi,m,unit,min,max){const x=v=>90+(v-min)/(max-min)*820;return svg(`<title>${lo.toFixed(2)}から${hi.toFixed(2)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="3"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(2)}</text>`).join('')}<circle cx="${x(m)}" cy="115" r="10" fill="#16786f"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);}
+function intervalGraphic(lo,hi,m,unit,min,max){const x=v=>90+(v-min)/(max-min)*820;return svg(`<title>${lo.toFixed(2)}から${hi.toFixed(2)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="3"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(2)}</text>`).join('')}<circle cx="${x(m)}" cy="115" r="10" fill="#d0642d"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);}
 function density(kind,df=4){const chi=kind==='chi',a=chi?0:-6,b=chi?18:6,pdf=chi?x=>M.chiPdf(x,df):x=>M.tPdf(x,df),max=chi?.21:.4,lo=chi?M.chiq(.975,df):-M.tq(.025,df),hi=chi?M.chiq(.025,df):M.tq(.025,df),x=v=>55+(v-a)/(b-a)*890,y=v=>245-pdf(v)/max*200;let points=[],area=[];for(let j=0;j<=400;j++){const v=a+(b-a)*j/400;points.push(`${x(v)},${y(v)}`);if(v>=lo&&v<=hi)area.push(`${x(v)},${y(v)}`);}return svg(`<title>${chi?'カイ二乗':'t'}分布、自由度${df}、中央95%</title><polygon points="${x(lo)},245 ${area.join(' ')} ${x(hi)},245" fill="#70b8ad" opacity=".65"/><polyline points="${points.join(' ')}" fill="none" stroke="#214b56" stroke-width="4"/><line x1="55" x2="945" y1="245" y2="245" stroke="#70878a"/>${[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="${y(v)}" y2="248" stroke="#bd542e" stroke-dasharray="5 5"/><text x="${x(v)}" y="285" text-anchor="middle">${v.toFixed(4)}</text>`).join('')}`);}
 const inits={tails:()=>{document.querySelector('#t-tail-chart').innerHTML=density('t');},chiTails:()=>{document.querySelector('#chi-tail-chart').innerHTML=density('chi');},parts:()=>{const desc=['中心：標本平均。今回の5試合では30点。','t値：信頼係数と自由度で決まる。95%・自由度4 → 2.7764。','標準誤差：平均の推定のばらつき。√(20/5) = 2点。'];stage.querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>{stage.querySelectorAll('[data-part]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.querySelector('#part-description').textContent=desc[+b.dataset.part];});},curryInterval:()=>{document.querySelector('#curry-interval').innerHTML=intervalGraphic(24.4472,35.5528,30,'点',20,40);},robotAnswer:()=>{document.querySelector('#robot-answer').innerHTML=intervalGraphic(155.388,164.612,160,'cm',152,168);},knownAnswer:()=>{document.querySelector('#known-answer').innerHTML=intervalGraphic(116.08,123.92,120,'分',113,127);},varianceAnswer:()=>{document.querySelector('#variance-interval').innerHTML=intervalGraphic(80/11.1433,80/.4844,20,'点²',0,180);stage.querySelectorAll('[data-denom]').forEach(b=>b.onclick=()=>{document.querySelector(b.dataset.denom==='large'?'#variance-low':'#variance-high').hidden=false;if(!document.querySelector('#variance-low').hidden&&!document.querySelector('#variance-high').hidden)document.querySelector('#variance-interval').classList.remove('concealed');});},deliveryAnswer:()=>{document.querySelector('#delivery-answer').innerHTML=intervalGraphic(30/12.8325,30/.8312,6,'分²',0,40);},confidence:()=>{const range=document.querySelector('#confidence'),draw=()=>{const c=[.9,.95,.99][+range.value],q=M.tq((1-c)/2,4),w=q*2;document.querySelector('#confidence-result').textContent=`${Math.round(c*100)}%：${(30-w).toFixed(2)}〜${(30+w).toFixed(2)}点`;document.querySelector('#confidence-chart').innerHTML=intervalGraphic(30-w,30+w,30,'点',18,42);};range.oninput=draw;draw();},size:()=>{const range=document.querySelector('#size'),draw=()=>{const n=+range.value,w=1.96*10/Math.sqrt(n);document.querySelector('#size-result').textContent=`n = ${n} · 幅 ${(2*w).toFixed(2)}分`;document.querySelector('#size-chart').innerHTML=intervalGraphic(120-w,120+w,120,'分',110,130);};range.oninput=draw;draw();},coverage:()=>{let rows=[],timer=null;const run=document.querySelector('#coverage-run'),reset=document.querySelector('#coverage-reset');const draw=()=>{const min=Math.min(18,...rows.map(r=>r.lower)),max=Math.max(42,...rows.map(r=>r.upper)),x=v=>55+(v-min)/(max-min)*890;document.querySelector('#coverage-chart').innerHTML=`<svg viewBox="0 0 1000 360" role="img" aria-label="繰り返し抽出した100本の信頼区間"><line x1="${x(30)}" x2="${x(30)}" y1="20" y2="335" stroke="#687f84" stroke-dasharray="5 4"/><text x="${x(30)+8}" y="18">μ = 30</text>${rows.map((r,i)=>`<line x1="${x(r.lower)}" x2="${x(r.upper)}" y1="${28+i*3}" y2="${28+i*3}" stroke="${r.lower<=30&&r.upper>=30?'#16786f':'#d67435'}" stroke-width="2"/>`).join('')}<text x="55" y="357">${min.toFixed(1)}</text><text x="945" y="357" text-anchor="end">${max.toFixed(1)} 点</text></svg>`;const hits=rows.filter(r=>r.lower<=30&&r.upper>=30).length;document.querySelector('#coverage-count').textContent=`30を含む ${hits} / ${rows.length}`;};run.onclick=()=>{if(timer)return;rows=[];run.disabled=true;timer=setInterval(()=>{rows.push(M.ci(Array.from({length:5},()=>30+Math.sqrt(20)*M.normal())));draw();if(rows.length===100){clearInterval(timer);timer=null;run.disabled=false;}},38);};reset.onclick=()=>{clearInterval(timer);timer=null;rows=[];run.disabled=false;draw();};draw();return()=>clearInterval(timer);}};
 function maxStep(){return Math.max(0,...[...stage.querySelectorAll('[data-step]')].map(x=>+x.dataset.step));}
-function updateStep(){stage.querySelectorAll('[data-step]').forEach(e=>e.classList.toggle('shown',+e.dataset.step<=step));document.querySelector('#reveal').hidden=step>=maxStep();document.querySelector('#steps').textContent=maxStep()?`${step} / ${maxStep()}`:'';document.querySelector('#reveal').textContent='表示 ＋';pendingGuard=false;}
+function updateStep(){stage.querySelectorAll('[data-work]').forEach(e=>e.classList.toggle('work-active',+e.dataset.work===step));stage.querySelectorAll('[data-step]').forEach(e=>e.classList.toggle('shown',+e.dataset.step<=step));document.querySelector('#reveal').hidden=step>=maxStep();document.querySelector('#steps').textContent=maxStep()?`${step} / ${maxStep()}`:'';document.querySelector('#reveal').textContent='表示 ＋';pendingGuard=false;}
 function render(){cleanup();cleanup=()=>{};if(window.MathJax?.typesetClear)window.MathJax.typesetClear([stage]);const s=slides[index];stage.className=`${s.theme||'light'} ${s.className||''}`;stage.innerHTML=`<div class="slide-body" tabindex="0" aria-label="スライド内容">${s.html}</div>${s.book?`<span class="book">教科書 p.${s.book}</span>`:''}${s.source?`<span class="source">${s.source}</span>`:''}`;annotate(stage);step=0;updateStep();document.querySelector('#page').value=index+1;document.querySelector('#total').textContent=slides.length;document.querySelector('#first').disabled=document.querySelector('#prev').disabled=index===0;document.querySelector('#last').disabled=index===slides.length-1;document.querySelector('#next').disabled=index===slides.length-1;document.querySelector('#notes').textContent=s.notes;document.querySelector('#status').textContent=`${index+1} / ${slides.length} ${s.title}`;const url=new URL(location.href);if(archiveMode)url.searchParams.set('openers','archive');url.searchParams.delete('page');url.searchParams.delete('story');url.searchParams.delete('slide');url.searchParams.set('scene',index+1);history.replaceState(null,'',url);document.title=`${index+1} · ${s.title} · Week 9`;cleanup=(s.mount ? s.mount(stage) : inits[s.init]?.())||(()=>{});if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([stage]).catch(()=>{});}
 function go(n){index=Math.max(0,Math.min(slides.length-1,n));render();}
 function next(){if(step<maxStep()){step++;updateStep();return;}if(slides[index].challenge&&!pendingGuard){pendingGuard=true;const b=document.querySelector('#reveal');b.hidden=false;b.textContent='答えへ進む →';return;}go(archiveMode && ((story.length && index===story.length-1) || (openingCount && index===openingCount-1)) ? destinations.get('lecture') : index+1);}
