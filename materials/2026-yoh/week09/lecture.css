@@ -82,17 +82,49 @@
 .deviation-table :is(td,th) { padding:.44em .28em }
 .deviation-table tfoot { color:#16665f;font-weight:750 }
 .lab-jump { font-size:clamp(12px,1.5cqw,19px) }
-.paired-math { display:grid;gap:.8cqw }
-.paired-math > div { min-width:0 }
-.paired-math > div + div { padding-top:.65cqw }
-.paired-math > div > span,.work-anchor > span { display:block;color:#566a71;font-size:clamp(11px,1.35cqw,17px);font-weight:650 }
-#stage.worked-slide .paired-math .math { font-size:clamp(15px,2.7cqw,39px);margin:.25cqw 0 }
-#stage.worked-slide :is(.paired-math,.work-anchor) mjx-container[display=true] { margin:.18em 0!important }
-#stage.worked-slide .work-anchor .math { font-size:clamp(15px,2.45cqw,32px);margin:.15cqw 0 }
-.anchored-work { margin-top:.8cqw }
-.anchored-work .lookup { margin:.75cqw auto }
-.anchored-work :is(.lookup,.deviation-table) :is(td,th) { padding:.32em .3em }
 .var-work .deviation-table { font-size:clamp(12px,1.65cqw,20px) }
 #stage.lab-slide .slide-body { padding:0;justify-content:flex-start;overflow:hidden;align-items:stretch }
 .lecture-lab { display:block;width:100%;height:100%;border:0;background:#fbfaf6 }
 @media(max-width:560px){.var-work{grid-template-columns:1fr}.deviation-table{width:min(100%,300px);margin:auto}}
+
+/* Keep the two equations at the same coordinates even when the material below changes. */
+#stage.formula-follow .slide-body { justify-content:flex-start;padding:2.05cqw 4.4cqw 3cqw }
+.formula-legend { --inactive:#81786a;display:grid;grid-template-rows:repeat(2,7.65cqw);width:100%;font-size:clamp(10px,3.03cqw,44px);line-height:1 }
+.legend-row { display:grid;grid-template-columns:6.25cqw minmax(0,1fr);align-items:center }
+.legend-label { align-self:center;color:#526970;font-size:clamp(9px,1.32cqw,18px);font-weight:650;text-align:left }
+.legend-expression { display:grid;grid-template-columns:.45em 2em .95em 4.4em .75em 3.3em .9em 2em .95em 4.4em .75em 3.3em .45em;height:100%;width:max-content;margin:auto;align-items:center;justify-items:center;color:var(--inactive);font-family:"Cambria Math","STIX Two Math","Times New Roman",serif }
+.legend-chi-pair .legend-expression { grid-template-columns:.45em 7.15em 1em 7.15em .45em }
+.legend-expression math { font-size:inherit;color:inherit }
+.legend-term { display:grid;place-items:center;width:100% }
+.legend-bracket { justify-self:stretch;height:1.85em;border:solid currentColor;border-width:.045em .05em }
+.legend-chi-pair .legend-bracket { height:2.15em }
+.legend-bracket.left { border-right:0 }
+.legend-bracket.right { border-left:0 }
+.legend-mean { --term-color:#a7451e }
+.legend-critical { --term-color:#644e87 }
+.legend-spread { --term-color:#16665f }
+.legend-expression .is-focus { color:var(--term-color,#213d48);font-weight:750;-webkit-text-stroke:.022em currentColor }
+.legend-expression math .is-focus { font-weight:750 }
+.legend-roadmap { display:flex;flex-wrap:wrap;justify-content:center;gap:1.1cqw 4cqw;font-weight:700;margin:1.25cqw 0 }
+.legend-roadmap span { color:var(--term-color) }
+.legend-roadmap small { display:block;color:#526970;font-size:.61em;font-weight:500 }
+#stage.formula-follow .work-details { margin:2cqw auto 0 }
+#stage.formula-follow .work-details h2 { font-size:clamp(13px,2.65cqw,36px);margin:0 0 .45cqw }
+#stage.formula-follow .work-details .math { font-size:clamp(12px,2.5cqw,36px);margin:.25cqw 0 }
+#stage.formula-follow .work-details mjx-container[display=true] { margin:.15em 0!important }
+#stage.formula-follow .work-details .work-note { font-size:clamp(10px,1.7cqw,23px);margin:.45cqw auto }
+.formula-follow .work-details .work-value { font-size:clamp(22px,4cqw,57px);line-height:1.2 }
+.formula-follow .work-details .work-chart { width:min(85%,65cqw);margin:.35cqw auto }
+.formula-follow .work-details .work-chart svg { max-height:17cqw }
+.formula-follow .work-details .var-work { width:min(90%,73cqw);margin:auto }
+.formula-follow .work-details :is(.deviation-table,.lookup) { margin:.18cqw auto;font-size:clamp(9px,1.55cqw,20px) }
+.formula-follow .work-details :is(.deviation-table,.lookup) :is(td,th) { padding:.12em .42em }
+.formula-follow .deviation-table :is(td,th) { font-size:.84em;line-height:1.2 }
+.formula-follow .work-details :is(a,.secondary,.tail-labels) { font-size:clamp(9px,1.4cqw,19px) }
+.t-lookup-density svg text { visibility:hidden }
+@media(max-width:560px){
+  .formula-legend { grid-template-rows:repeat(2,max(37px,7.65cqw));font-size:clamp(9px,3.03cqw,18px) }
+  .legend-row { grid-template-columns:max(24px,6.25cqw) minmax(0,1fr) }
+  .legend-roadmap { font-size:clamp(10px,2.4cqw,14px) }
+  .formula-follow .work-details .var-work { grid-template-columns:minmax(0,45%) minmax(0,1fr);width:96% }
+}

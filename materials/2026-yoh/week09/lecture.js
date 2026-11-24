@@ -9,8 +9,6 @@ const link=(url,text)=>`<a href="${url}" target="_blank" rel="noopener">${text} 
 const table=type=>link(type==='t'?'../week06/t-table.html?p':'../shared/chi-table.html?p',type==='t'?'t分布表':'χ²分布表');
 const rev=(s,n=1)=>`<div class="reveal" data-step="${n}">${s}</div>`;
 const over=String.raw`\bar x`,hat=String.raw`\widehat{\sigma_x^2}`,known=String.raw`\sigma_x^2`,ssRule=String.raw`\sum(x_i-\bar x)^2`;
-const palette={mean:'#a7451e',critical:'#644e87',spread:'#16665f'};
-const tint=(s,key)=>String.raw`{\color{${palette[key]}}{${s}}}`;
 const radical=(a,b)=>String.raw`\sqrt{\frac{${a}}{${b}}}`;
 const bracket=(a,b)=>String.raw`\left[${a},\;${b}\right]`;
 const meanRule=(x,q,s,n,numeric=false)=>bracket(x+'-'+q+(numeric?String.raw`\times`:'')+radical(s,n),x+'+'+q+(numeric?String.raw`\times`:'')+radical(s,n));
@@ -113,67 +111,88 @@ const wMap=(...items)=>`<div class="work-map">${items.map(([label,value,color])=
 const wEq=(...items)=>`<div class="work-equation">${items.map(i=>i.startsWith('<')?i:`<span>${i}</span>`).join('')}</div>`;
 const wFrac=(a,b)=>`<span class="work-frac"><span>${a}</span><span>${b}</span></span>`;
 const wNote=text=>`<p class="work-note">${text}</p>`;
-function worked(title,beats){
+function worked(title,beats,{legend=false}={}){
   const s=slides.find(s=>s.title===title);
   if(!s) throw new Error('Missing worked slide: '+title);
-  s.theme='cream';s.className='worked-slide';s.init=undefined;s.mount=undefined;
-  s.html=beats.map(([header,content],i)=>`<section class="work-beat${i?' reveal':''}" data-work="${i}"${i?` data-step="${i}"`:''}><h2>${header}</h2>${content}</section>`).join('');
+  s.theme='cream';s.className='worked-slide'+(legend?' formula-follow':'');s.init=undefined;s.mount=undefined;
+  s.html=beats.map(([header,content,formulaLegend],i)=>`<section class="work-beat${i?' reveal':''}" data-work="${i}"${i?` data-step="${i}"`:''}>${formulaLegend||''}<div class="work-details"><h2>${header}</h2>${content}</div></section>`).join('');
 }
 const wChart=(lo,hi,center,unit,min,max)=>`<div class="work-chart">${intervalGraphic(lo,hi,center,unit,min,max)}</div>`;
-const emphasizedMean=(isT,part)=>{
-  const shade=(s,role)=>part==='all'||part===role?tint(s,role):s;
-  const x=shade(over,'mean'),q=shade(isT?tCrit:zCrit,'critical'),se=shade(radical(isT?hat:known,'n'),'spread');
-  return bracket(x+'-'+q+se,x+'+'+q+se);
-};
-const fillMean=(isT,{center,q,variance,n}={})=>{
-  const x=tint(center??over,'mean'),cutoff=tint(q??(isT?tCrit:zCrit),'critical');
-  const se=tint(radical(variance??(isT?hat:known),n??'n'),'spread');
-  const times=q===undefined?'':'\\times';
-  return bracket(x+'-'+cutoff+times+se,x+'+'+cutoff+times+se);
-};
-const paired=(rule,values)=>`<div class="paired-math"><div><span>公式</span>${math(rule)}</div><div><span>代入</span>${math(values)}</div></div>`;
-const anchored=(rule,work)=>`<div class="work-anchor"><span>公式</span>${math(rule)}</div><div class="anchored-work">${work}</div>`;
-const coloredChi=(ss,a,b)=>chiRule(tint(ss,'spread'),tint(a,'critical'),tint(b,'critical'));
+// Formula terms occupy fixed grid tracks. The same tracks are reused in both
+// rows, and neither the current content nor its font weight can move them.
+const mi=s=>`<mi>${s}</mi>`,mn=s=>`<mn>${s}</mn>`,mo=s=>`<mo>${s}</mo>`;
+const mover=(a,b)=>`<mover accent="true">${a}${mo(b)}</mover>`;
+const msub=(a,b)=>`<msub>${a}${b}</msub>`,msup=(a,b)=>`<msup>${a}${b}</msup>`;
+const mrow=s=>`<mrow>${s}</mrow>`,mfrac=(a,b)=>`<mfrac>${a}${b}</mfrac>`;
+const mroot=a=>`<msqrt>${a}</msqrt>`;
+const mbar=mover(mi('x'),'¯'),msigma=msup(msub(mi('σ'),mi('x')),mn(2)),mhat=mover(msigma,'^');
+const mdof=mo('(')+mi('n')+mo('−')+mn(1)+mo(')');
+const mathToken=v=>`<math>${mrow(v)}</math>`;
+const focusTerm=(v,role,focus,side)=>`<span class="legend-term legend-${role}${focus.has(role)||focus.has(side)?' is-focus':''}" data-role="${role}"${side?` data-side="${side}"`:''}>${mathToken(v)}</span>`;
+const bracketMark=side=>`<span class="legend-bracket ${side}" aria-hidden="true"></span>`;
+const sign=(s,active=false)=>`<span class="legend-sign${active?' is-focus':''}">${s}</span>`;
+function formulaLegend(kind,rule,work){
+  return `<div class="formula-legend legend-${kind}"><div class="legend-row" data-row="symbolic"><span class="legend-label">公式</span><div class="legend-expression">${rule}</div></div><div class="legend-row" data-row="working"><span class="legend-label">代入</span><div class="legend-expression">${work}</div></div></div>`;
+}
+function meanLegend(isT,values={},active=[]){
+  const focus=new Set(active);
+  const render=({center,q,variance,n,se,alpha,df})=>{
+    const avg=center==null?mbar:mn(center);
+    const boundary=q==null?msub(mi(isT?'t':'z'),alpha==null?mi('α'):mn(alpha))+(isT?(df==null?mdof:mo('(')+mn(df)+mo(')')):''):mn(q);
+    const error=se==null?mroot(mfrac(variance==null?(isT?mhat:msigma):mn(variance),n==null?mi('n'):mn(n))):mn(se);
+    const half=(s,side)=>focusTerm(avg,'mean',focus,side)+sign(s,focus.has(side))+focusTerm(boundary,'critical',focus,side)+
+      sign(q==null?'&nbsp;':'×',focus.has(side)||focus.has('critical')&&focus.has('spread'))+focusTerm(error,'spread',focus,side);
+    return bracketMark('left')+half('−','lower')+sign(',')+half('+','upper')+bracketMark('right');
+  };
+  return formulaLegend('mean-pair',render({}),render(values));
+}
+function chiLegend(values={},active=[]){
+  const focus=new Set(active);
+  const summed=mo('∑')+msup(mrow(mo('(')+msub(mi('x'),mi('i'))+mo('−')+mbar+mo(')')),mn(2));
+  const cutoff=tail=>msub(msup(mi('χ'),mn(2)),mn(tail))+mdof;
+  const part=(v,role,side)=>`<mrow class="legend-${role}${focus.has(role)||focus.has(side)?' is-focus':''}">${v}</mrow>`;
+  const render=({ss,a,b})=>{
+    const half=(value,tail,side)=>mathToken(mfrac(part(ss==null?summed:mn(ss),'spread',side),part(value==null?cutoff(tail):mn(value),'critical',side)));
+    return bracketMark('left')+half(a,'0.025','lower')+sign(',')+half(b,'0.975','upper')+bracketMark('right');
+  };
+  return formulaLegend('chi-pair',render({}),render(values));
+}
+const usingLegend={legend:true};
 function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=false}){
   const varianceName=t?'不偏分散':'母分散（既知）';
-  const rule=emphasizedMean(t,'all'),q=critical;
+  const q=critical,filled={center,q,variance,n},computed={...filled,se};
   return [
-    ['母平均の信頼区間',math(rule)+wNote(t?'母分散が未知 → t分布':'母分散が既知 → 標準正規分布')],
-    ['① 中心：標本平均',paired(rule,fillMean(t,{center}))+wNote('オレンジ：両方の x̄ に '+center+' '+unit+' が入る。')],
-    ['② 境界：分布表で探す',paired(rule,fillMean(t,{center,q}))+
-      wNote(t?`紫：右側確率0.025、自由度 ${n} − 1 = ${n-1}。t値は ${q}。`:`紫：右側確率0.025。Zの境界は ${q}。`)],
-    ['③ 標準誤差：分散と標本数',paired(rule,fillMean(t,{center,q,variance,n}))+
-      wNote('青緑：'+varianceName+' '+variance+' ÷ 標本数 '+n+' の平方根は '+se+' '+unit+'。')],
-    ['片側の幅を求める',anchored(rule,math(bracket(center+'-'+q+'\\times'+se,center+'+'+q+'\\times'+se)))+
-      wNote('片側の幅：'+q+' × '+se+' = '+margin+' '+unit)],
-    ['下限を引く。上限を足す。',anchored(rule,wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'))+
-      wEq(wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean')))],
+    ['母平均の信頼区間',wNote(t?'母分散が未知のため、t分布を使う。':'母分散が既知のため、標準正規分布を使う。'),meanLegend(t,{},['mean','spread','critical'])],
+    ['① 中心：標本平均',wNote('両方の x̄ に '+center+' '+unit+' が入る。'),meanLegend(t,{center},['mean'])],
+    ['② 標準誤差：分散と標本数',math(radical(variance,n)+'='+se)+
+      wNote(varianceName+'を標本数で割り、平方根を取る。'),meanLegend(t,{center,variance,n},['spread'])],
+    ['③ 境界：分布表の値',
+      wNote(t?`上側確率 0.025、自由度 ${n} − 1 = ${n-1}。表の t 値は ${q}。`:`上側確率 0.025。表の Z の値は ${q}。`),meanLegend(t,filled,['critical'])],
+    ['片側の幅',math(q+'\\times'+se+'='+margin)+wNote('境界値 × 標準誤差'),meanLegend(t,computed,['critical','spread'])],
+    ['下限と上限',wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'),wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean')),meanLegend(t,computed,['lower','upper'])],
     ['母平均の95%信頼区間',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+
-      wChart(+lo,+hi,center,unit,...domain)+wNote('橙の点：標本平均 ／ 翼の先：母平均の95%信頼区間の両端')]
+      wChart(+lo,+hi,center,unit,...domain),meanLegend(t,computed)]
   ];
 }
 function varianceBeats({ss,n,a,b,lo,hi,center,unit,max}){
-  const df=n-1,rule=coloredChi(ssRule,chiUpper,chiLower);
+  const df=n-1,filled={ss,a,b};
   return [
-    ['母分散の区間',math(rule)],
-    ['① 分子：左右で同じ偏差二乗和',paired(rule,coloredChi(ss,chiUpper,chiLower))+
-      wNote('青緑：両方の分子に '+ss+' '+unit+' が入る。')],
-    ['② 分母：2つのχ²値を読む',paired(rule,coloredChi(ss,a,b))+
-      wNote(`紫：自由度 ${df}。右側0.025なら ${a}、右側0.975なら ${b}。`)+table('chi')],
-    ['同じ分子を、異なる分母で割る',anchored(rule,math(chiRule(ss,a,b)+'\\approx'+bracket(lo,hi)))+
-      wNote('大きい値で割ると下限、小さい値で割ると上限。')],
+    ['母分散の区間','',chiLegend({},['spread','critical'])],
+    ['① 分子：偏差二乗和',wNote('両方の分子に '+ss+' '+unit+' が入る。'),chiLegend({ss},['spread'])],
+    ['② 分母：2つのχ²値',wNote(`自由度 ${df}。上側確率 0.025 なら ${a}、0.975 なら ${b}。`)+table('chi'),chiLegend(filled,['critical'])],
+    ['下限と上限',math(chiRule(ss,a,b)+'\\approx'+bracket(lo,hi))+wNote('大きい値で割ると下限、小さい値で割ると上限。'),chiLegend(filled,['lower','upper'])],
     ['下限と上限',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+wChart(+lo,+hi,center,unit,0,max)+
-      wNote(`橙の点：不偏分散 ${ss} ÷ ${df} = ${center}${unit}。翼は左右で同じ長さではない。`)]
+      wNote(`橙の点：不偏分散 ${ss} ÷ ${df} = ${center}${unit}。`),chiLegend(filled)]
   ];
 }
 const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],t:true};
-worked('30 ± いくつ？',meanBeats(curry).slice(3,5));
-worked('下限、そして上限',meanBeats(curry).slice(5));
-worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],t:true}));
-worked('ロボットの電池',meanBeats({center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127]}));
-worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critical:'1.96',se:'2',margin:'3.92',lo:'38.08',hi:'45.92',unit:'分',domain:[35,49]}));
-worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180}));
-worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40}));
+worked('30 ± いくつ？',meanBeats(curry).slice(4,5),usingLegend);
+worked('下限、そして上限',meanBeats(curry).slice(5),usingLegend);
+worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],t:true}),usingLegend);
+worked('ロボットの電池',meanBeats({center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127]}),usingLegend);
+worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critical:'1.96',se:'2',margin:'3.92',lo:'38.08',hi:'45.92',unit:'分',domain:[35,49]}),usingLegend);
+worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180}).slice(2),usingLegend);
+worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40}),usingLegend);
 {
   const s=slides.find(s=>s.title==='今回の90%と、長期の95%');
   const draw=s.mount;
@@ -185,7 +204,7 @@ worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.83
   s.mount=draw;
 }
 
-// Establish the whole interval before doing arithmetic on the five scores.
+// Keep the same two rows from the map of the formula through the finished interval.
 const byTitle=title=>slides.find(s=>s.title===title);
 const scores=[23,29,31,32,35];
 const averageNumeric=String.raw`\bar x=\frac{1}{5}(23+29+31+32+35)=\frac{150}{5}=30`;
@@ -193,47 +212,67 @@ const varianceNumeric=String.raw`${hat}=\frac{1}{5-1}\left[(23-30)^2+(29-30)^2+(
 const varianceTable=`<table class="deviation-table"><thead><tr><th>得点</th><th>偏差 ${im('x_i-\\bar x')}</th><th>偏差二乗 ${im('(x_i-\\bar x)^2')}</th></tr></thead><tbody>${scores.map(x=>`<tr><td>${x}</td><td>${x-30}</td><td>${(x-30)**2}</td></tr>`).join('')}</tbody><tfoot><tr><th>合計</th><td>0</td><td>80</td></tr></tfoot></table>`;
 {
   const sample=byTitle('Curryの5試合'),whole=byTitle('母平均の95%信頼区間'),map=byTitle('公式の3つの部品');
-  sample.html=`<h2>Curryの5試合から、母平均を推定。</h2><div class="scores">${scores.map(x=>`<div><span>🏀</span><b>${x}</b></div>`).join('')}</div>${small('架空の得点・独立な正規標本と仮定。')}`;
-  sample.notes='Let the five scores hang on screen. Ask what we want to estimate: the underlying population mean, not the average of these five scores alone. Do not calculate it yet. Show the whole interval first.';
-  whole.key='t-ci-formula';whole.notes='Show the bracketed formula as printed on p.133, with lowercase x-bar and t sub alpha. The first expression is the lower endpoint and the second is the upper endpoint. Don’t explain every symbol yet; next we will locate and calculate each part for Curry.';
-  whole.theme='cream';whole.html=math(emphasizedMean(true,'all'));
-  for(const s of [whole,map])slides.splice(slides.indexOf(s),1);
-  slides.splice(slides.indexOf(sample)+1,0,whole,map);
-  worked(map.title,[
-    ['① 中心：標本平均',math(emphasizedMean(true,'mean'))+math(averageFormula)],
-    ['5試合の得点を、そのまま代入',anchored(emphasizedMean(true,'mean'),math(averageNumeric))+wNote('左右の式で使う中心は、同じ30点。')],
-    ['① 両方の x̄ を30に置き換える',paired(emphasizedMean(true,'all'),fillMean(true,{center:30}))],
-    ['② 境界：t分布表',math(emphasizedMean(true,'critical'))+wNote('95%と標本数から、t値を決める。')],
-    ['③ 標準誤差：まず不偏分散を求める',math(emphasizedMean(true,'spread'))+wNote('平方根の中に、標本から求める不偏分散がある。')]
-  ]);
-  map.notes='Break apart the same formula. Show the sample-mean rule, then reveal the five scores in place. Point to t as a lookup and the radical as the standard error. We’ll calculate the estimated variance and look up t before returning to the bracketed formula.';
-  worked('まず、不偏分散',[
-    ['標本不偏分散',math(varianceFormula)+wNote('標本平均からの偏差を二乗し、足して、n − 1で割る。')],
-    ['得点・標本平均・標本数を代入',anchored(varianceFormula,math(varianceNumeric))+wNote('各得点から標本平均30を引く。試合数は5。')],
-    ['偏差二乗を足して、80',`<div class="var-work">${varianceTable}<div>${anchored(varianceFormula,math(String.raw`49+1+1+4+25=80`))}</div></div>`],
-    ['標本不偏分散は20点²',anchored(varianceFormula,math(String.raw`${hat}=\frac{1}{5-1}\times80=\frac{80}{4}=20`))+wNote('この20は、区間の式にある平方根の中に入る。')]
-  ]);
-  const tLookup=byTitle('表で探す場所');
+  const variance=byTitle('まず、不偏分散'),tHero=byTitle('母分散が未知 → t');
+  const tails=byTitle('中央95%、両端2.5%'),tLookup=byTitle('表で探す場所');
   const lookupBody=tLookup.html.replace(/^<h2>.*?<\/h2>/,'');
+  const centered={center:30},spreadDone={...centered,variance:20,n:5};
+  const tailReady={...spreadDone,alpha:'0.025',df:4};
+  sample.html=`<h2>Curryの5試合から、母平均を推定。</h2><div class="scores">${scores.map(x=>`<div><span>🏀</span><b>${x}</b></div>`).join('')}</div>${small('架空の得点・独立な正規標本と仮定。')}`;
+  sample.notes='Show the five scores. Ask what we want to estimate: the underlying population mean, not just the average of these five scores. The next slide shows all three pieces before we calculate any of them.';
+  for(const s of [whole,map,tHero])slides.splice(slides.indexOf(s),1);
+  slides.splice(slides.indexOf(sample)+1,0,map,whole);
+  // Legacy page links to the old t hero now land on the t calculation.
+  legacyLecture[legacyLecture.indexOf(tHero)]=tails;
+  map.key='t-ci-formula';
+  worked(map.title,[[
+    '母平均の95%信頼区間',
+    `<div class="legend-roadmap"><span class="legend-mean">① 標本平均<small>Sample mean</small></span><span class="legend-spread">② 標準誤差<small>Standard error</small></span><span class="legend-critical">③ t分布の境界値<small>t critical value</small></span></div>`,
+    meanLegend(true,{},['mean','spread','critical'])
+  ]],usingLegend);
+  map.notes='Preview the full interval and the calculation order. The center comes first, the standard error second, and the table value last. At this point nothing has been substituted.';
+  worked(whole.title,[
+    ['① 標本平均',math(averageFormula),meanLegend(true,{},['mean'])],
+    ['① 5試合の得点を代入',math(averageNumeric),meanLegend(true,centered,['mean'])]
+  ],usingLegend);
+  whole.title='① 標本平均：Curryの5試合';
+  whole.notes='Point to x-bar in both formulas. On reveal, substitute the five scores in the mean calculation, then trace 30 to the two orange slots. The remaining terms are dim but stay in place.';
+  worked(variance.title,[
+    ['② 標準誤差に使う標本不偏分散',math(varianceFormula)+wNote('標本平均からの偏差を二乗し、足して、n − 1で割る。'),meanLegend(true,centered,['spread'])],
+    ['② 5試合の得点と平均との差',math(varianceNumeric),meanLegend(true,{...centered,n:5},['spread'])],
+    ['② 偏差二乗の合計',`<div class="var-work">${varianceTable}${math(String.raw`49+1+1+4+25=80`)}</div>`,meanLegend(true,{...centered,n:5},['spread'])],
+    ['② 標準誤差は2点',math(String.raw`${hat}=\frac{80}{5-1}=20,\qquad\sqrt{\frac{20}{5}}=2`),meanLegend(true,spreadDone,['spread'])]
+  ],usingLegend);
+  variance.title='② 標準誤差：Curryの5試合';
+  variance.book='132〜134';
+  variance.notes='Point to the teal radical. Keep 30 in the dimmed center. Calculate the five squared deviations, divide their sum by four, then insert 20 and 5 into the radical to get a standard error of 2 points.';
+  worked(tails.title,[[
+    '③ t分布の上側確率',
+    `<p class="work-note">母分散が未知で、標本不偏分散を使うので t分布。自由度は ${im('5-1=4')}。</p><div class="work-chart t-lookup-density">${density('t')}</div><div class="tail-labels"><span>2.5%</span><b>中央95%</b><span>2.5%</span></div>`,
+    meanLegend(true,tailReady,['critical'])
+  ]],usingLegend);
+  tails.title='③ t分布：上側確率と自由度';
+  tails.notes='This is the last blank in the same interval, not a new section. With unknown population variance we used the sample variance, so use the t distribution with four degrees of freedom. The upper tail is 0.025. The next slide reads the value from the table.';
   worked(tLookup.title,[
-    ['自由度4 × 右側0.025',anchored(emphasizedMean(true,'critical'),lookupBody)],
-    ['② t の場所に、2.7764を入れる',paired(emphasizedMean(true,'all'),fillMean(true,{center:30,q:'2.7764'}))]
-  ]);
-  tLookup.notes+=' Once you read the table, reveal the original interval and the working interval with 30 and 2.7764 already in place.';
-  Object.assign(byTitle('まず、不偏分散'),{book:'132・134',notes:'Show the p.132 definition alone. Next, replace n with 5, each x_i with a score and x-bar with 30. The vertical table verifies each square before the sum of 80 is divided by 4. Point back to the radical of the interval formula.'});
+    ['③ 自由度4、上側確率0.025',lookupBody,meanLegend(true,tailReady,['critical'])],
+    ['③ tの境界値は2.7764',wNote('自由度4の行と、上側確率0.025の列が交わるセルの値。'),meanLegend(true,{...spreadDone,q:curry.critical},['critical'])]
+  ],usingLegend);
+  tLookup.title='③ tの境界値：表で探す';
+  tLookup.notes='Trace the row and column in the upper-tail table. Reveal 2.7764 in the two purple slots. The center and standard-error values stay where they were.';
 }
 {
   const whole=byTitle('母分散の95%信頼区間'),intro=byTitle('母分散の区間推定');
-  whole.theme='cream';whole.html=math(coloredChi(ssRule,chiUpper,chiLower));
   slides.splice(slides.indexOf(whole),1);slides.splice(slides.indexOf(intro)+1,0,whole);
+  worked(whole.title,[['母分散の95%信頼区間','',chiLegend({},['spread','critical'])]],usingLegend);
   worked('20点²も、推定値。',[
-    ['① 分子：同じ偏差二乗和を使う',math(chiRule(tint(ssRule,'spread'),chiUpper,chiLower))],
-    ['5試合の得点を代入',anchored(coloredChi(ssRule,chiUpper,chiLower),math(String.raw`${ssRule}=(23-30)^2+(29-30)^2+(31-30)^2+(32-30)^2+(35-30)^2=80`))+wNote('母平均の推定で求めた偏差二乗和を、両方の分子に戻す。')],
-    ['点と翼は、別の計算',anchored(coloredChi(ssRule,chiUpper,chiLower),math(String.raw`${hat}=\frac{1}{n-1}${ssRule}=\frac{80}{5-1}=20`))+wNote('橙の点は不偏分散20点²、両端の分子は偏差二乗和80点²。')]
-  ]);
+    ['① 分子：同じ偏差二乗和',math(ssRule),chiLegend({},['spread'])],
+    ['① 5試合から求めた偏差二乗和',math(String.raw`(23-30)^2+(29-30)^2+(31-30)^2+(32-30)^2+(35-30)^2=80`),chiLegend({ss:80},['spread'])],
+    ['点推定は標本不偏分散',math(String.raw`${hat}=\frac{80}{5-1}=20`)+wNote('区間の分子は80点²。点推定は20点²。'),chiLegend({ss:80},['spread'])]
+  ],usingLegend);
+  const chiTails=byTitle('カイ二乗は、左右非対称');
+  worked(chiTails.title,[['② χ²分布：2つの境界値',`<div class="work-chart">${density('chi')}</div>${table('chi')}${wNote('自由度4。上側確率0.025と0.975の境界値を読む。')}`,chiLegend({ss:80},['critical'])]],usingLegend);
   Object.assign(byTitle('20点²も、推定値。'),{book:'132・136',notes:'Focus the two identical numerators. Insert the five scores and mean 30. Reuse the sum of 80. The dot is 20, not the midpoint of this asymmetric interval.'});
   Object.assign(byTitle('母分散が既知なら'),{book:'124〜125・133',notes:'The textbook prints the Z standardization on p.125. Rearranging it for the population mean gives this bracketed interval. Use the p.124 upper-tail area for the 95% boundary. The variance here is known, not estimated from the sample.'});
-  Object.assign(byTitle('母分散が既知なら'),{theme:'cream',html:math(emphasizedMean(false,'all'))});
+  worked('母分散が既知なら',[['母分散が既知の場合',wNote('標準正規分布の境界値を使う。'),meanLegend(false,{},['mean','spread','critical'])]],usingLegend);
   for(const name of ['ロボットの電池','標本数で、幅を動かす','通学時間の母平均','答え：38.08〜45.92分'])byTitle(name).book='124〜125・133';
   const conv=byTitle('S²が与えられたら？');
   conv.html=`<h2>標本分散と標本不偏分散</h2>${math(String.raw`S_x^2=\frac{1}{n}\sum (x_i-\bar x)^2\qquad ${hat}=\frac{n}{n-1}S_x^2`)}${rev(math(String.raw`\sum(x_i-\bar x)^2=nS_x^2=5\times16=80`))}${rev(math(String.raw`${hat}=\frac{n}{n-1}S_x^2=\frac{5}{5-1}\times16=20`),2)}`;
