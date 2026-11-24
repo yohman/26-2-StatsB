@@ -197,6 +197,15 @@
 .square-sum-label span { display:block;color:#526970;font-size:.65em;font-weight:500 }
 .formula-follow .work-details :is(a,.secondary,.tail-labels) { font-size:clamp(9px,1.4cqw,19px) }
 .t-lookup-density svg { font-family:Arial,"Hiragino Kaku Gothic ProN",sans-serif }
+#stage.practice-question .slide-body { gap:.7cqw;padding:3cqw 6cqw }
+.practice-question h2 { font-size:clamp(15px,3.5cqw,49px);margin:0 }
+.practice-question .practice-prompt { font-size:clamp(11px,1.95cqw,25px);margin:0 }
+.practice-values { display:flex;align-items:baseline;gap:2.05cqw;color:#213d48;line-height:1.25;font-size:clamp(21px,5.2cqw,72px);font-variant-numeric:tabular-nums }
+.practice-values small { font-size:.42em }
+.practice-question .practice-parts { text-align:left;margin:.5cqw 0;padding-inline-start:1.5em;font-size:clamp(11px,2.02cqw,28px);line-height:1.55 }
+.practice-parts strong { color:#a7451e }
+.practice-question .secondary { font-size:clamp(9px,1.4cqw,19px);margin:0 }
+.practice-reference { display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:0 1.6cqw;color:#526970;font-size:clamp(9px,1.26cqw,17px) }
 @media(max-width:560px){
   .formula-legend { grid-template-rows:repeat(2,max(29px,6.2cqw));font-size:clamp(9px,2.45cqw,16px) }
   .legend-row { grid-template-columns:max(24px,6.25cqw) minmax(0,1fr) }

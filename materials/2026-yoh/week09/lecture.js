@@ -77,16 +77,14 @@ insertAfter('下限、そして上限',()=>{
     ${link(labUrl('curry'),'Curryの5試合をシミュレーション')}`, 'Open the lab at its starting example. The chart, textbook formula and substitution are already visible. Draw five new scores and trace how the average, estimated variance and endpoints change together. A single game produces a dot, but cannot provide a t interval.',{book:'133',key:'curry-lab'});
 });
 insertAfter('100本の区間を作る',()=>{
-  add('チャレンジ2','10本中9本',`<p class="challenge-time">2分 · 自分で解く</p><h2>10本のうち、9本が母平均を含んだ。</h2>
-    <ol><li>今回の割合を求める。</li><li>95%の方法が間違っていると言える？ 理由も書く。</li></ol>`,
-    'Use the Curry exploration to motivate this question. Give two minutes. Ask students separately for the observed proportion and the long-run meaning of the confidence level.',{challenge:true,book:'133'});
-  add('チャレンジ2','今回の90%と、長期の95%',`<h2>今回の10本：9 ÷ 10 = <strong>90%</strong></h2>
-    <div id="capture-answer" class="chart"></div>${rev('<h3>95%は、同じ方法を繰り返したときの長期的な割合。</h3>')}`,
-    'Nine intervals in this illustrative run cross the fixed population mean; one does not. A short run need not match 95%. This tells us about the procedure, not where individual scores fall.',{book:'133',mount(root){
-      const intervals=[[25,33],[26,34],[24,32],[29,39],[27,34],[26,31],[28,35],[25,36],[31,38],[24,35]];
-      const x=v=>180+(v-23)*40;
-      root.querySelector('#capture-answer').innerHTML=svg(`<title>10本のうち9本が母平均30を含む。</title><line x1="${x(30)}" x2="${x(30)}" y1="36" y2="278" stroke="#537879" stroke-width="2" stroke-dasharray="6 5"/><text x="${x(30)}" y="26" text-anchor="middle">μ = 30</text>${intervals.map(([lo,hi],i)=>`<path d="M${x(lo)} ${50+i*24}H${x(hi)}" stroke="${lo>30?'#61767c':'#c66934'}" stroke-width="6"/>`).join('')}`);
-    }});
+  add('チャレンジ2','学園祭のキッチンカー：平均待ち時間',`<p class="challenge-time">6分 · 自分で解く</p><h2>学園祭のキッチンカー：平均待ち時間</h2>
+    <p class="practice-prompt">昼の営業中、無作為に選んだ6件について、注文から受け取りまでの時間を記録した。</p>
+    <div class="practice-values" aria-label="6件の待ち時間、単位は分"><b>14</b><b>11</b><b>18</b><b>15</b><b>12</b><b>14</b><small>分</small></div>
+    <ol class="practice-parts"><li>標本平均と標本不偏分散を求めよ。</li><li>自由度と上側確率を求め、t分布表から境界値を読め。</li><li>昼の待ち時間の母平均の<strong>90%信頼区間</strong>を求めよ。両端は小数第3位まで。</li></ol>
+    ${small('独立な正規標本と仮定する。母分散は未知。')}<div class="practice-reference"><span>90% confidence interval for the population mean</span>${table('t')}</div>`,
+    'Give students six minutes. This is a mock exam problem, with six raw observations and 90% rather than 95%. They need to compute the sample mean and unbiased variance, then locate the t critical value and both endpoints.',{challenge:true,theme:'cream',className:'practice-question',book:'132〜134・203',key:'food-truck-practice'});
+  add('チャレンジ2','答え：キッチンカーの90%信頼区間','',
+    'The deviations from 14 are 0, −3, 4, 1, −2 and 0. Their squares sum to 30. The unbiased sample variance is 6, the standard error is 1, and the 90% critical value with five degrees of freedom is 2.0150. The interval 11.985 to 16.015 minutes estimates the population mean, not the wait for an individual order.',{book:'132〜134・203',key:'food-truck-answer'});
 });
 insertAfter('標本数で、幅を動かす',()=>{
   add('チャレンジ3','通学時間の母平均',`<p class="challenge-time">4分 · 自分で解く</p><h2>通学時間の母平均は、何分くらい？</h2>
@@ -107,9 +105,7 @@ for(const s of slides) {
 // Keep the textbook layout through the example. Highlight a part, find its value,
 // then replace that term in the same two-ended expression.
 const wSlot=(label,value,cls='')=>`<span class="work-slot ${cls}"><small>${label}</small><i aria-hidden="true">↓</i><span>${value}</span></span>`;
-const wMap=(...items)=>`<div class="work-map">${items.map(([label,value,color])=>`<span class="work-slot ${color}"><small>${label}</small><strong>${value}</strong></span>`).join('')}</div>`;
 const wEq=(...items)=>`<div class="work-equation">${items.map(i=>i.startsWith('<')?i:`<span>${i}</span>`).join('')}</div>`;
-const wFrac=(a,b)=>`<span class="work-frac"><span>${a}</span><span>${b}</span></span>`;
 const wNote=text=>`<p class="work-note">${text}</p>`;
 function worked(title,beats,{legend=false}={}){
   const s=slides.find(s=>s.title===title);
@@ -117,7 +113,7 @@ function worked(title,beats,{legend=false}={}){
   s.theme='cream';s.className='worked-slide'+(legend?' formula-follow':'');s.init=undefined;s.mount=undefined;
   s.html=beats.map(([header,content,formulaLegend],i)=>`<section class="work-beat${i?' reveal':''}" data-work="${i}"${i?` data-step="${i}"`:''}>${formulaLegend||''}<div class="work-details"><h2>${header}</h2>${content}</div></section>`).join('');
 }
-const wChart=(lo,hi,center,unit,min,max,matchBounds=false)=>`<div class="work-chart${matchBounds?' endpoint-chart':''}">${intervalGraphic(lo,hi,center,unit,min,max,matchBounds)}</div>`;
+const wChart=(lo,hi,center,unit,min,max,matchBounds=false,digits=2)=>`<div class="work-chart${matchBounds?' endpoint-chart':''}">${intervalGraphic(lo,hi,center,unit,min,max,matchBounds,digits)}</div>`;
 // Formula terms occupy fixed grid tracks. The same tracks are reused in both
 // rows, and neither the current content nor its font weight can move them.
 const mi=s=>`<mi>${s}</mi>`,mn=s=>`<mn>${s}</mn>`,mo=s=>`<mo>${s}</mo>`;
@@ -206,14 +202,16 @@ worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critic
 worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180}).slice(2),usingLegend);
 worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40}),usingLegend);
 {
-  const s=slides.find(s=>s.title==='今回の90%と、長期の95%');
-  const draw=s.mount;
-  worked(s.title,[
-    ['母平均を含む割合',wMap(['母平均を含む区間','9本','mean'],['区間の合計','10本','spread'])+wEq(wFrac('母平均を含む本数','区間の合計'))],
-    ['今回の割合を出す',wEq(wFrac(wSlot('母平均を含む本数','9','mean'),wSlot('区間の合計','10','spread')),'＝ 0.9','＝ 90%')],
-    ['今回の90%、長期の95%',`<div id="capture-answer" class="work-chart"></div>`+wNote('9本が縦線をまたぐ。95%は、同じ方法を繰り返したときの長期的な割合。')]
-  ]);
-  s.mount=draw;
+  const center=14,variance=6,n=6,se=1,q=M.tq(.05,n-1).toFixed(4),unit='分';
+  const lo=(center-Number(q)).toFixed(3),hi=(center+Number(q)).toFixed(3);
+  const done={center,variance,n,se,q};
+  worked('答え：キッチンカーの90%信頼区間',[
+    ['① 標本平均は14分',math(String.raw`\bar x=\frac{14+11+18+15+12+14}{6}=\frac{84}{6}=14`),meanLegend(true,{center},['mean'])],
+    ['① 標本不偏分散は6分²',math(String.raw`${hat}=\frac{0+9+16+1+4+0}{6-1}=\frac{30}{5}=6`)+wNote('分子の30は、各待ち時間と14分との差を二乗して足した値。'),meanLegend(true,{center,variance},['variance'])],
+    ['標準誤差は1分',math(String.raw`\sqrt{\frac{6}{6}}=1`),meanLegend(true,{center,variance,n},['spread'])],
+    ['② 90%信頼区間の t の境界値',math(String.raw`t_{(1-0.90)/2}(6-1)=t_{0.05}(5)\approx${q}`)+table('t'),meanLegend(true,done,['critical'])],
+    ['③ 母平均の90%信頼区間',wChart(+lo,+hi,center,unit,10,18,true,3),meanLegend(true,done,[],{lo,hi,unit})]
+  ],usingLegend);
 }
 
 // Keep the same two rows from the map of the formula through the finished interval.
@@ -340,10 +338,10 @@ function annotate(el){const walk=document.createTreeWalker(el,NodeFilter.SHOW_TE
 const stage=document.querySelector('#stage');let index=0,step=0,cleanup=()=>{},pendingGuard=false;
 const esc=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function svg(content){return `<svg viewBox="0 0 1000 300" role="img">${content}</svg>`;}
-function intervalGraphic(lo,hi,m,unit,min,max,matchBounds=false){
+function intervalGraphic(lo,hi,m,unit,min,max,matchBounds=false,digits=2){
   const x=v=>90+(v-min)/(max-min)*820;
-  const endpoints=[lo,hi].map((v,i)=>`<g${matchBounds?` data-side="${i?'upper':'lower'}"`:''}><line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="${matchBounds?6:3}"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(2)}</text></g>`).join('');
-  return svg(`<title>${lo.toFixed(2)}から${hi.toFixed(2)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${endpoints}<circle cx="${x(m)}" cy="115" r="10" fill="#d0642d"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);
+  const endpoints=[lo,hi].map((v,i)=>`<g${matchBounds?` data-side="${i?'upper':'lower'}"`:''}><line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="${matchBounds?6:3}"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(digits)}</text></g>`).join('');
+  return svg(`<title>${lo.toFixed(digits)}から${hi.toFixed(digits)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${endpoints}<circle cx="${x(m)}" cy="115" r="10" fill="#d0642d"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);
 }
 function density(kind,df=4,{annotateTails=false}={}){
   const chi=kind==='chi',a=chi?0:-6,b=chi?18:6,base=245;
