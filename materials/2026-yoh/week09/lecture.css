@@ -235,6 +235,15 @@
 .z-interval-diagram { grid-template-columns:.45em 2em .95em 2.8em .75em 3.3em .9em 2em .95em 2.8em .75em 3.3em .45em }
 .battery-z-table { width:min(54cqw,100%) }
 .battery-z-table .target { background:#644e87 }
+#stage.variance-compare .slide-body { gap:1.6cqw;padding:2.8cqw 4.5cqw }
+.variance-compare h2 { font-size:clamp(16px,3.65cqw,48px);margin:0 }
+.variance-cases { width:min(100%,81cqw);display:grid;gap:2cqw }
+.variance-case header { display:flex;align-items:center;gap:1cqw;text-align:left;font-size:clamp(10px,1.8cqw,25px);line-height:1.2 }
+.variance-case header strong { color:#644e87;font-size:clamp(18px,3.7cqw,48px);min-width:1em;text-align:center }
+.variance-case header small { display:block;color:#526970;font-size:.67em }
+.variance-case header .variance-mark { margin-inline-start:auto;color:#16665f;font-size:.87em;white-space:nowrap }
+.variance-mark math { font-size:1.7em;vertical-align:middle }
+.variance-case .legend-expression { --inactive:#8c8170;height:auto;font-size:clamp(10px,2.82cqw,38px);margin:.6cqw auto 0 }
 @media(max-width:560px){
   .formula-legend { grid-template-rows:repeat(2,max(29px,6.2cqw));font-size:clamp(9px,2.45cqw,16px) }
   .legend-row { grid-template-columns:max(24px,6.25cqw) minmax(0,1fr) }

@@ -51,6 +51,7 @@ add('母平均：Z','ロボット電池の持続時間：問題',`<h2>ロボッ�
   <div class="givens battery-givens"><div><small>標本数 ${im('n')}</small><b>25<small>台</small></b></div><div><small>標本平均 ${im('\\bar x')}</small><b>120<small>分</small></b></div><div><small>既知の母標準偏差 ${im('\\sigma_x')}</small><b>10<small>分</small></b></div></div>
   <p class="battery-question">電池の持続時間の母平均の<strong>95%信頼区間</strong>を求めよ。</p><span class="english">95% confidence interval for the population mean</span>${small('独立な正規標本と仮定する。')}`,
   'Read the problem before showing the formula. 120 minutes is the mean of the 25 sampled robots, not the population mean. The population standard deviation of 10 minutes is given, and the problem asks for a 95% interval.',{theme:'cream',className:'battery-problem',book:'124〜125・133',key:'battery-problem'});
+add('母平均：Z','tとZの公式：分散のハット','', 'Compare the two formulas. The center and sample size stay the same. A hat marks a population variance estimated from the sample, so the critical value comes from t. If the population variance is known, it has no hat and the critical value comes from Z. A given sample standard deviation still belongs to the t case.',{theme:'cream',className:'variance-compare',book:'124〜125・133',key:'t-or-z-formulas'});
 add('母平均：Z','Zの区間推定の公式','', 'Show the symbolic interval before revealing the three leaders. The standard error uses the known population variance, with no hat on sigma squared. The critical value is from the standard normal distribution.',{theme:'cream',className:'formula-preview',book:'124〜125・133',key:'z-interval-formula'});
 add('母平均：Z','ロボットの電池：計算と答え','', 'Insert the observed mean, then the known variance and sample size. Locate the right-tail probability 0.02500 in the Z table. The row and column give 1.96, so the margin is 3.92 minutes.',{book:'124〜125・133',key:'battery-solution'});
 add('母平均：Z','標本数で、幅を動かす',`<h2>同じ平均、同じ母標準偏差。</h2><div id="size-chart" class="chart"></div><div class="compact-controls"><label>n <input id="size" type="range" min="5" max="100" value="25" step="1"></label><output id="size-result"></output></div>${math(String.raw`120\pm1.96\frac{10}{\sqrt n}`)}`, 'Use the sample-size slider with population standard deviation10 fixed. Explain the square-root relationship with one concrete comparison: quadrupling n halves the margin. Holding sample mean120 fixed isolates the effect of sample size.',{book:'134 脚注1',init:'size'});
@@ -151,6 +152,10 @@ function meanExpression(isT,{center,q,variance,n,se,alpha,df}={},active=[]){
 }
 function meanLegend(isT,values={},active=[],bounds){
   return formulaLegend('mean-pair',meanExpression(isT,{},active),meanExpression(isT,values,active),bounds);
+}
+function compareMeanFormulas(){
+  const row=(isT,label,english,varianceLabel)=>`<div class="variance-case"><header><strong>${isT?'t':'Z'}</strong><span>${label}<small>${english}</small></span><span class="variance-mark">${mathToken(isT?mhat:msigma)} ${varianceLabel}</span></header><div class="legend-expression">${meanExpression(isT,{},['variance','critical'])}</div></div>`;
+  return `<h2>t と Z：分散のハット</h2><div class="variance-cases">${row(true,'母分散が未知','Unknown population variance','ハットあり：標本から推定')}${row(false,'母分散が既知','Known population variance','ハットなし：既知の母分散')}</div>`;
 }
 function intervalPreview({annotate=false,isT=true,startBare=false}={}){
   const callout=(role,ja,en,step)=>`<div class="formula-callout legend-${role}${step?' reveal':' shown'}"${step?` data-step="${step}"`:''}><span class="formula-leader" aria-hidden="true"></span><span>${ja}<small>${en}</small></span></div>`;
@@ -310,6 +315,7 @@ const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<d
   const chiTails=byTitle('カイ二乗は、左右非対称');
   worked(chiTails.title,[['② χ²分布：2つの境界値',`<div class="work-chart">${density('chi')}</div>${table('chi')}${wNote('自由度4。上側確率0.025と0.975の境界値を読む。')}`,chiLegend({ss:80},['critical'])]],usingLegend);
   Object.assign(byTitle('20点²も、推定値。'),{book:'132・136',notes:'Focus the two identical numerators. Insert the five scores and mean 30. Reuse the sum of 80. The dot is 20, not the midpoint of this asymmetric interval.'});
+  byTitle('tとZの公式：分散のハット').html=compareMeanFormulas();
   byTitle('Zの区間推定の公式').html=intervalPreview({annotate:true,isT:false,startBare:true});
   for(const name of ['標本数で、幅を動かす','通学時間の母平均','答え：38.08〜45.92分'])byTitle(name).book='124〜125・133';
   const conv=byTitle('S²が与えられたら？');
