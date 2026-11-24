@@ -220,9 +220,9 @@
 #stage.candidate-cover .slide-body { padding:0;isolation:isolate;overflow:hidden;align-items:flex-start }
 .candidate-photo { position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2 }
 .candidate-cover .slide-body::before { content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(0deg,#111921ed 0%,#11192189 38%,transparent 72%) }
-.candidate-photo-copy { margin:auto 5cqw 4cqw;text-align:left;color:#fff }
-.candidate-photo-copy a { color:#fff;font-size:clamp(.65rem,1.45cqw,1.05rem) }
+  background:linear-gradient(0deg,#111921f5 0%,#111921a1 35%,transparent 76%) }
+.candidate-photo-copy { margin:auto 6cqw 4.5cqw;text-align:left;color:#fffaf3 }
+.candidate-photo-copy a { font-size:clamp(.65rem,1.18cqw,.94rem) }
 .candidate-duo { display:grid;grid-template-columns:1fr 1fr;width:min(100%,62rem);gap:4cqw;align-items:start }
 .candidate-number { text-align:center }
 .candidate-number b { display:block;color:#146960;font-size:clamp(2rem,9cqw,7.3rem);line-height:1.14;font-variant-numeric:tabular-nums;white-space:nowrap }
@@ -253,4 +253,32 @@
   #stage.candidate-scene .slide-body { gap:8px }
   .candidate-source-figure { width:min(100%,84cqw);max-height:41cqw }
   .candidate-scores { grid-template-columns:repeat(2,1fr);gap:9px }
+}
+
+/* Book-like story headings. Quiet subtitles and sources, without separator rules. */
+#stage .slide-body { touch-action:pan-y pinch-zoom }
+#stage:is(.candidate-scene,.news-slide,.job-story) :is(h1,h2) {
+  font-family:"Hiragino Mincho ProN","Yu Mincho","Noto Serif CJK JP",
+    "Noto Serif JP","IPA Mincho",Georgia,serif;
+  font-weight:700;letter-spacing:-.02em;text-wrap:balance;
+}
+#stage.candidate-cover .candidate-photo-copy h1 {
+  font-size:clamp(1.9rem,7.2cqw,6.2rem);line-height:1.12;margin:0;
+}
+#stage.candidate-scene .candidate-subtitle {
+  font-size:clamp(.75rem,2.07cqw,1.53rem);line-height:1.48;margin:.4em 0 0;
+  font-weight:400;text-wrap:pretty;color:var(--story-subtitle,#53616a);
+}
+#stage:is(.space,.dark,.candidate-map-scene) { --story-subtitle:#d2d9d9;--story-source:#c8d0d2 }
+#stage.candidate-cover .candidate-photo-copy a { display:inline-block;margin-top:.78em }
+#stage:is(.candidate-scene,.news-slide,.job-story) a {
+  text-decoration:none;color:var(--story-source,#53616a);
+}
+#stage:is(.candidate-scene,.news-slide,.job-story) a:hover { color:inherit }
+#stage:is(.candidate-scene,.news-slide,.job-story) a:focus-visible {
+  outline:2px solid currentColor;outline-offset:4px;
+}
+#stage.job-story :is(.offer-mail,.job-ledger,.job-votes button) { border-block:0 }
+@media (max-width:670px) {
+  #stage.candidate-cover .candidate-photo-copy h1 { font-size:clamp(1.35rem,6.9cqw,3.05rem) }
 }

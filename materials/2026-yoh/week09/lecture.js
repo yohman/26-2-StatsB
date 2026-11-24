@@ -99,6 +99,51 @@ function updateStep(){stage.querySelectorAll('[data-step]').forEach(e=>e.classLi
 function render(){cleanup();cleanup=()=>{};if(window.MathJax?.typesetClear)window.MathJax.typesetClear([stage]);const s=slides[index];stage.className=`${s.theme||'light'} ${s.className||''}`;stage.innerHTML=`<div class="slide-body" tabindex="0" aria-label="スライド内容">${s.html}</div>${s.book?`<span class="book">教科書 p.${s.book}</span>`:''}${s.source?`<span class="source">${s.source}</span>`:''}`;annotate(stage);step=0;updateStep();document.querySelector('#page').value=index+1;document.querySelector('#total').textContent=slides.length;document.querySelector('#first').disabled=document.querySelector('#prev').disabled=index===0;document.querySelector('#last').disabled=index===slides.length-1;document.querySelector('#next').disabled=index===slides.length-1;document.querySelector('#notes').textContent=s.notes;document.querySelector('#status').textContent=`${index+1} / ${slides.length} ${s.title}`;const url=new URL(location.href);if(archiveMode)url.searchParams.set('openers','archive');url.searchParams.delete('page');url.searchParams.delete('story');url.searchParams.delete('slide');url.searchParams.set('scene',index+1);history.replaceState(null,'',url);document.title=`${index+1} · ${s.title} · Week 9`;cleanup=(s.mount ? s.mount(stage) : inits[s.init]?.())||(()=>{});if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([stage]).catch(()=>{});}
 function go(n){index=Math.max(0,Math.min(slides.length-1,n));render();}
 function next(){if(step<maxStep()){step++;updateStep();return;}if(slides[index].challenge&&!pendingGuard){pendingGuard=true;const b=document.querySelector('#reveal');b.hidden=false;b.textContent='答えへ進む →';return;}go(archiveMode && ((story.length && index===story.length-1) || (openingCount && index===openingCount-1)) ? destinations.get('lecture') : index+1);}
+
+// A swipe follows the same reveal and challenge rules as the navigation buttons.
+function canSwipe(target) {
+  if (toc.open || !(target instanceof Element) ||
+      target.closest('a,button,input,select,textarea,summary,video,audio,iframe,[contenteditable],[role="slider"]')) return false;
+  for (let el=target; el && el!==stage; el=el.parentElement) {
+    if (el.scrollWidth>el.clientWidth+2 && /auto|scroll/.test(getComputedStyle(el).overflowX)) return false;
+  }
+  return true;
+}
+function swipe(direction) {
+  const button=document.querySelector(direction>0 ? '#next' : '#prev');
+  if (!button.disabled) button.click();
+}
+let finger=null;
+stage.addEventListener('touchstart',e=>{
+  finger=null;
+  if (e.touches.length!==1 || !canSwipe(e.target)) return;
+  const t=e.touches[0];
+  finger={id:t.identifier,x:t.clientX,y:t.clientY,at:e.timeStamp,index,step};
+},{passive:true});
+stage.addEventListener('touchcancel',()=>{finger=null;},{passive:true});
+stage.addEventListener('touchend',e=>{
+  const start=finger;finger=null;
+  if (!start || e.touches.length || start.index!==index || start.step!==step || e.timeStamp-start.at>850 || toc.open) return;
+  const t=Array.from(e.changedTouches).find(t=>t.identifier===start.id);
+  if (!t) return;
+  const dx=t.clientX-start.x,dy=t.clientY-start.y;
+  if (Math.abs(dx)>=48 && Math.abs(dx)>1.55*Math.abs(dy)) swipe(-Math.sign(dx));
+},{passive:true});
+
+// Count one horizontal trackpad burst as one step, including its momentum tail.
+let wheelAt=-Infinity,wheelTravel=0,wheelDone=false;
+stage.addEventListener('wheel',e=>{
+  if (e.ctrlKey || e.metaKey || e.shiftKey || !canSwipe(e.target) ||
+      Math.abs(e.deltaX)<=1.5*Math.abs(e.deltaY)) return;
+  if (e.timeStamp-wheelAt>240) {wheelTravel=0;wheelDone=false;}
+  wheelAt=e.timeStamp;
+  if (e.cancelable) e.preventDefault();
+  if (wheelDone) return;
+  const dx=e.deltaX*(e.deltaMode===1 ? 16 : e.deltaMode===2 ? stage.clientWidth : 1);
+  wheelTravel=Math.sign(dx)===Math.sign(wheelTravel) ? wheelTravel+dx : dx;
+  if (Math.abs(wheelTravel)>=64) {wheelDone=true;swipe(Math.sign(wheelTravel));}
+},{passive:false});
+
 stage.addEventListener('click', e => {
   const anchor = e.target.closest('[data-opening-jump]');
   if (!anchor || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;

@@ -317,9 +317,9 @@
   const candidates = [];
   const scene = (section, title, html, notes, opts = {}) =>
     candidates.push({section,title,html,notes,theme:'light',className:'candidate-scene',...opts});
-  const photo = (image, alt, title, credit, href) =>
+  const photo = (image, alt, title, subtitle, credit, href) =>
     `<img class="candidate-photo" src="${image}" alt="${alt}">
-      <div class="candidate-photo-copy"><h1>${title}</h1>${external(href,credit)}</div>`;
+      <div class="candidate-photo-copy"><h1>${title}</h1><p class="candidate-subtitle">${subtitle}</p>${external(href,credit)}</div>`;
   const coverOptions = key => ({key,theme:'space',className:'candidate-scene candidate-cover'});
   const desc = html => `<p class="candidate-caption">${html}</p>`;
   const number = (value, label, cls = '') => `<div class="candidate-number ${cls}"><b>${value}</b><span>${label}</span></div>`;
@@ -329,7 +329,7 @@
   {
     const s = '① MLB｜最後の一球';
     scene(s,'最後の一球',photo('https://img.mlbstatic.com/mlb-images/image/upload/t_2x1/t_w1536/mlb/vaih50ydsx7pajiun1uj.jpg',
-      'フィリーズ対ブレーブスのポストシーズン試合','最後の一球','MLB公式・記事と映像',refs.baseball),
+      'フィリーズ対ブレーブスのポストシーズン試合','最後の一球','延長10回。判定はボール。捕手がチャレンジした。','MLB公式・記事と映像',refs.baseball),
       `Start with the replay. Pause after the umpire calls ball, before the automated review. Philadelphia leads by one in the tenth; Atlanta has two on and two out. Ask ball or strike, then play the result. It was the first game-ending postseason ABS challenge. MLB: ${refs.baseball}. Video also in Gameday: ${refs.replay}.`,coverOptions('baseball'));
     scene(s,'54%の分母',`<h2>判定が覆った割合</h2>${number('54%','2026年 MLBレギュラーシーズン')}
       <p>審判の判定は、半分以上が間違い？</p>
@@ -343,7 +343,7 @@
   }
   {
     const s = '② Pokémon Sleep｜千葉の睡眠';
-    scene(s,'千葉の睡眠は全国何位？',`<h2>千葉の睡眠は、全国何位？</h2>
+    scene(s,'千葉の睡眠は全国何位？',`<header class="candidate-heading"><h2>千葉の睡眠は、全国何位？</h2><p class="candidate-subtitle">ポケモンスリープが作った、47都道府県の地図。</p></header>
       <img class="candidate-map" src="https://www.pokemonsleep.net/suimin-grandprix/assets/img/img_map-dist.webp" alt="ポケモンスリープによる47都道府県の総合睡眠スコアの地図">
       ${credit(external(refs.sleep,'Pokémon Sleep・全国睡眠県グランプリ 2026'))}`,
       `Let students find Chiba on the official map and guess a rank before advancing. The colors reflect a composite score from the project, not average hours. Source and map: ${refs.sleep}.`,{key:'sleep',theme:'teal',className:'candidate-scene candidate-map-scene'});
@@ -358,9 +358,9 @@
   }
   {
     const s = '③ PISA｜順位に幅はある？';
-    scene(s,'日本の557点は何位？',`<h2>この4つを、点数順に並べると？</h2>
+    scene(s,'日本の557点は何位？',`<header class="candidate-heading"><h2>この4つを、点数順に並べると？</h2><p class="candidate-subtitle">PISA 2025：コンピュータを使った問題解決</p></header>
       <div class="candidate-scores"><div>日本<b>557</b></div><div>シンガポール<b>563</b></div><div>チャイニーズ・タイペイ<b>551</b></div><div>中国・4地域<b>560</b></div></div>
-      ${desc('PISA 2025・コンピュータを使った問題解決の平均点推定値')}
+      ${desc('平均点の推定値')}
       ${credit(external(refs.pisa,'OECD・表 I.2.4'))}`,
       `Give the room a few seconds to order these four selected education systems, not the whole world. The China comparison is Beijing, Shanghai, Jiangsu and Zhejiang only. Then ask if the point-estimate ordering is the same as a clear difference between populations. Source: ${refs.pisa}.`,{key:'pisa',theme:'cream'});
     scene(s,'点数順と、差が言えること',`<h2>日本の557点。<br>他の3つと差があると言える？</h2>
@@ -378,7 +378,7 @@
   {
     const s = '④ 音楽｜プレイリストの中身';
     scene(s,'プレイリストにAIの曲はある？',photo('https://newsroom-deezer.com/wp-content/uploads/2026/11/new-20241206-Deezer-ImageBank-FINAL-DEE00581-4.jpg',
-      'Deezerが2026年AI音楽調査の発表に使った写真','このプレイリストに、<br>AIが作った曲はある？','Deezer / Ipsos・2026年11月',refs.music),
+      'Deezerが2026年AI音楽調査の発表に使った写真','このプレイリストに、<br>AIが作った曲はある？','リスナーの回答と、配信サービスの記録を見比べる。','Deezer / Ipsos・2026年11月',refs.music),
       `Ask the room how they would know whether a fully AI-generated song had landed in a playlist. Do not claim that the image shows a particular playlist or that we tested anyone in the room. News coverage: ${refs.musicNews}. Photo/source: ${refs.music}.`,coverOptions('music'));
     scene(s,'74%は「入っていないと思う」',`<h2>プレイリストにAI曲は？</h2>
       ${number('74%','「完全AI生成の曲は入っていないと思う」')}
@@ -396,7 +396,7 @@
   {
     const s = '⑤ NBA｜観客がいないホーム';
     scene(s,'観客がいないホーム',photo('https://images-dh-production-baselayer.dailyhive.com/uploads/2020/07/EdeUMgsX0AAeYXg-e1595439142670.jpg?format=auto',
-      '2020年NBAバブルの会場','観客がいなくても、<br>ホームは有利？','2020年のバブル会場・NBA / Daily Hive',refs.bubble),
+      '2020年NBAバブルの会場','観客がいなくても、<br>ホームは有利？','2020年。各チームが同じ施設で試合をした。','バブル会場・NBA / Daily Hive',refs.bubble),
       `Start with the NBA bubble arena, not the numbers. Teams lived and played at a common site. Ask what home advantage could mean with no crowd and no ordinary away travel. Image: ${refs.bubble}. Analysis: ${refs.nba}.`,coverOptions('nba'));
     scene(s,'172試合と1,080試合',`<h2>「ホーム」が違う、2つのシーズン</h2>
       ${duo(number('172試合','バブル：観客なし・移動なし'),number('1,080試合','翌季：観客はほぼ不在・移動あり','warm-ink'))}
@@ -420,7 +420,7 @@
   {
     const s = '⑥ アニメ｜16億人の定義';
     scene(s,'アニメに関心を持つ人、世界で何人？',photo('https://www.japantimes.co.jp/japantimes/uploads/images/2026/10/09/567665.jpg?v=3.1',
-      '上海の鬼滅の刃プレミアに並ぶ映画ポスター','アニメに関心を持つ人、<br>世界で何人？','The Japan Times・写真と記事',refs.anime),
+      '上海の鬼滅の刃プレミアに並ぶ映画ポスター','アニメに関心を持つ人、<br>世界で何人？','上海の『鬼滅の刃』プレミアから。','The Japan Times・写真と記事',refs.anime),
       `Start with the Shanghai premiere image and ask who would count as an anime audience member. The photo illustrates worldwide interest; China is excluded from the projection on the next slide. Photo/source: ${refs.anime}.`,coverOptions('anime'));
     scene(s,'16億人は何を数えた？',`<h2>16億人は、どんな人？</h2>
       ${number('約16億人','Crunchyrollの推定')}
@@ -439,7 +439,7 @@
   {
     const s = '⑦ ガザ｜記録と推定';
     scene(s,'記録に載らなかった人を、どう数える？',
-      `<h1>記録に載らなかった人を、<br>どう数える？</h1>${desc('ガザ地区・2023年10月7日〜2025年1月5日')}${credit(external(refs.war,'PRIO・研究報告'))}`,
+      `<header class="candidate-heading"><h1>記録に載らなかった人を、<br>どう数える？</h1><p class="candidate-subtitle">ガザ地区・2023年10月7日〜2025年1月5日</p></header>${credit(external(refs.war,'PRIO・研究報告'))}`,
       `Treat this as a short documentary opener. No guessing game and no graphic images. Ask how researchers can estimate a population total when recording systems have been disrupted. Use only the specified period and violent deaths for the comparison. Source: ${refs.war}.`,{key:'gaza',theme:'space'});
     scene(s,'記録では49,090人',`<h2>保健省が記録した暴力による死亡者</h2>
       ${number('49,090人','ガザ地区・同じ調査対象期間')}
