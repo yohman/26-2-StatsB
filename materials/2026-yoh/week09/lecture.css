@@ -281,9 +281,9 @@
 .pour-question .practice-values { margin:2.2cqw 0;font-size:clamp(14px,4.4cqw,60px) }
 .pour-task { font-size:clamp(12px,2.8cqw,37px) }
 .pour-task strong { color:#a7451e }
-.formula-follow .work-details .pour-deviations { width:min(100%,75cqw);margin:1.7cqw auto }
-.formula-follow .pour-deviations :is(th,td) { font-size:clamp(8px,1.78cqw,23px);padding:.4cqw .6cqw;white-space:nowrap }
-.pour-deviations tr:last-child td { color:#16665f;font-weight:700 }
+.formula-follow .work-details .pour-calculation { grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);width:min(100%,82cqw) }
+.formula-follow .pour-calculation :is(th,td) { font-size:clamp(9px,1.68cqw,22px);line-height:1.2;padding:.36cqw .44cqw;white-space:nowrap }
+.pour-calculation .deviation-table tfoot td:last-child { color:#16665f;background:#dcece6 }
 .formula-follow .work-details .pour-lookup { width:min(100%,49cqw);margin:1.6cqw auto }
 .formula-follow .pour-lookup :is(th,td) { font-size:clamp(8px,1.85cqw,25px) }
 .practice-question .practice-parts { text-align:left;margin:.5cqw 0;padding-inline-start:1.5em;font-size:clamp(11px,2.02cqw,28px);line-height:1.55 }
@@ -332,5 +332,6 @@
   .formula-follow .work-details .var-work { grid-template-columns:minmax(0,45%) minmax(0,1fr);width:96% }
   .formula-follow .work-details .curry-deviations { grid-template-columns:minmax(0,56%) minmax(0,1fr);width:100% }
   .formula-follow .work-details .food-truck-calculation { grid-template-columns:minmax(0,57%) minmax(0,1fr);width:100% }
+  .formula-follow .work-details .pour-calculation { grid-template-columns:minmax(0,1fr);width:min(100%,82cqw) }
   .curry-question { width:min(100%,84cqw);font-size:clamp(11px,2.25cqw,15px) }
 }

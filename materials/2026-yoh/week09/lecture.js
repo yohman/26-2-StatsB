@@ -328,15 +328,18 @@ const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<d
   const deviations=pours.map(x=>x-mean),ss=deviations.reduce((sum,d)=>sum+d*d,0),variance=ss/df;
   const a=M.chiq(.025,df).toFixed(4),b=M.chiq(.975,df).toFixed(4),filled={ss,a,b},unit='mL²';
   const lo=(ss/Number(a)).toFixed(2),hi=(ss/Number(b)).toFixed(2);
-  const row=(label,values)=>`<tr><th scope="row">${label}</th>${values.map(v=>`<td>${v}</td>`).join('')}</tr>`;
-  const deviationsTable=`<table class="deviation-table pour-deviations" aria-label="注いだ量と偏差の二乗"><thead><tr><th scope="col">回</th>${pours.map((_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${row('量（mL）',pours)}${row('偏差（量 − '+mean+'）',deviations)}${row('偏差の二乗',deviations.map(d=>d*d))}</tbody></table>`;
+  const deviationsTable=`<table class="deviation-table" data-stat="variance" aria-label="注いだ量と偏差の二乗"><thead><tr><th scope="col">回</th><th scope="col">量（mL）</th><th scope="col">偏差</th><th scope="col">偏差の二乗</th></tr></thead><tbody>${pours.map((x,i)=>{
+    const d=deviations[i];
+    return `<tr><th scope="row">${i+1}</th><td>${x}</td><td>${x} − ${mean} = ${String(d).replace('-','−')}</td><td>${d*d}</td></tr>`;
+  }).join('')}</tbody><tfoot><tr><th scope="row">合計</th><td>${total}</td><td>0</td><td>${ss}</td></tr></tfoot></table>`;
+  const deviationsWork=`<div class="var-work pour-calculation">${deviationsTable}<div>${math(String.raw`\begin{gathered}${ssRule}\\ =${deviations.map(d=>d*d).join('+')}\\ =${ss}\;\mathrm{mL}^2\end{gathered}`)}</div></div>`;
   const lookup=(side)=>`<table class="lookup pour-lookup" aria-label="カイ二乗分布表の抜粋（上側確率）"><thead><tr><th scope="col">自由度 ＼ 上側確率</th><th scope="col" class="${side==='lower'?'active':''}">0.025</th><th scope="col" class="${side==='upper'?'active':''}">0.975</th></tr></thead><tbody><tr><th scope="row" class="active">${df}</th><td class="${side==='lower'?'target':''}">${a}</td><td class="${side==='upper'?'target':''}">${b}</td></tr></tbody></table>`;
   byTitle('母分散の95%信頼区間の公式').html=chiPreview();
   byTitle('χ²分布：両側の面積と分母').html=chiBridge();
   byTitle('カフェのドリンク：例題').html=`<h2>カフェのドリンクは、毎回どれくらいばらつく？</h2><p class="practice-prompt">学内カフェで、同じ設定のドリンクマシンから7杯分を計量した。</p><div class="practice-values">${pours.map(x=>`<b>${x}</b>`).join('')}<small>mL</small></div><p class="pour-task">1杯の量の<strong>母分散の95%信頼区間</strong>を求めよ。</p>${small('授業用のデータ。各回の量は独立で、同じ正規分布に従うと仮定する。')}`;
   worked('① 分子：7杯の偏差二乗和',[
     ['7杯の標本平均',math(String.raw`\bar x=\frac{${pours.join('+')}}{${n}}=\frac{${total}}{${n}}=${mean}\;\mathrm{mL}`),chiLegend({},['spread'])],
-    ['① 各回の偏差を二乗して足す',deviationsTable+math(String.raw`${ssRule}=${deviations.map(d=>d*d).join('+')}=${ss}\;\mathrm{mL}^2`),chiLegend({ss},['spread'])]
+    ['① 各回の偏差を二乗して足す',deviationsWork,chiLegend({ss},['spread'])]
   ],usingLegend);
   worked('②・③ 分母から上下限へ',[
     ['7杯のデータ：自由度は6',math('n-1='+n+'-1='+df)+wNote('χ²分布表の自由度6の行で、上側確率0.025と0.975の列を読む。'),chiLegend({ss},['critical'])],
