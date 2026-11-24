@@ -235,33 +235,41 @@
         });
       }}),
 
-    beat('98.0％。誰を数えている？','offer-japan',
-      `<p class="job-side">友人：「日本の大学生、就職率98％だって」</p><div class="job-98">98.0<span>%</span></div>
-       <h2>その数字で、今夜の返事を決められる？</h2>
+    beat('米国の若い大卒者、失業は何週間？','offer-us',
+      `<h2>米国の若い大卒者。<br>失業期間はどう変わった？</h2>
+       <div class="job-us-layout"><figure class="job-us-chart"><img src="images/us-graduate-duration.jpg" alt="米国の平均失業期間の推移。オレンジは22〜27歳の大卒者等、紫は全体。">
+         <figcaption>オレンジ：22〜27歳の大卒者等 ／ 紫：全体</figcaption></figure>
+       <div class="job-us-notes">${reveal(`<div class="job-us-comparison">
+         <div><small>1994〜2018年の平均</small><b>15.1</b></div>
+         <div><small>2026年9月時点</small><b>22.7</b><span>週間</span></div></div>
+         <p>若い大卒者の失業期間は約7.6週長くなった。直近値は12か月移動平均。</p>`)}
+       ${reveal(`<p><strong>でも、同じ時点の全体は24.8週間。</strong><br>若い大卒者は全体より短い。過去の若い大卒者と比べると長い。</p>`,2)}
+       ${reveal(`<p class="job-line">調査時点で、まだ失業中の人に「これまで何週間？」と聞いた。</p>
+         <p>では、日本でも同じ期間を測っている？</p>
+         ${external(usJobs,'Richmond Fed・図2')}`,3)}</div></div>`,
+      'Start with the orange line. Ask students what changed compared with the earlier period, then reveal 15.1 and 22.7. Point to the purple line and ask whether recent grads were waiting longer than the national average at the same time. Reveal 24.8. Both readings are true because the comparison group changes. Finally ask who was surveyed. The CPS records elapsed duration for people still unemployed at the interview, not the eventual length of a completed spell, and it does not predict a particular offer. Ask what the analogous Japanese statistic would need to measure.'),
+
+    beat('日本では、仕事が決まるまで何週間？','offer-japan',
+      `<h2>日本でも、<br>待つ時間は分かる？</h2>
+       ${reveal(`<p class="job-side">日本の大学卒業者の就職率</p><div class="job-98">98.0<span>%</span></div>
+         <p>この数字の分母は？</p>`)}
        ${reveal(`<div class="job-fraction"><span>就職した人</span><strong>就職を希望した人</strong></div>
-         <p>2026年4月1日時点。第一志望に入れたかは、この数字からは分からない。</p>
-         ${external(japanJobs,'文部科学省・厚生労働省')}`)}`,
-      'Ask what the denominator is before revealing it. This is the April 1 employment rate among university graduates seeking jobs. Ask whether the survey tells you when this particular person will hear back from their preferred employer. Pause before the U.S. detour.'),
+         <p>2026年4月1日時点。この調査結果は、就職までの週数を示していない。</p>
+         ${external(japanJobs,'文部科学省・厚生労働省')}`,2)}
+       ${reveal('<p class="job-line">今夜の返事までに知りたいこと。<br>次の内定までの時間と、自分が待てる時間。</p>',3)}`,
+      'Ask the room to name the measure they would need in Japan. Reveal 98% as a plausible headline they might find. Have someone read out the numerator, the denominator, and the date. Write two questions on the board: how long might the search take, and how long can this student keep looking after graduation? The headlines cannot answer the first for this student. The next slide calculates the second using the information the student actually has.'),
 
-    beat('アメリカでは、待つ時間を測った','offer-us',
-      `<h2>では、「どれだけ待つか」を<br>測った数字は？</h2>
-       ${reveal(`<div class="job-us-figure"><img src="images/us-graduate-duration.jpg" alt="米国の失業期間の推移。若い大卒者はオレンジ、全体は紫。">
-          <div><strong>22.7</strong><span>週間</span></div></div>
-          <p>米国で調査時に失業中だった22〜27歳の大卒者等。<br>失業が続いていた期間の平均（2026年9月、12か月移動平均）。</p>
-          ${external(usJobs,'Richmond Fed・図2')}`)}
-       ${reveal('<p class="job-line">あなたが日本で内定を待つ期間は、測っていない。</p>',2)}`,
-      'Use the line chart as the moment the number gets unsettling. Ask who was left out of the U.S. average. It measures already elapsed unemployment duration among people still unemployed at the survey point. It cannot predict how long a Japanese student will wait for an offer.'),
-
-    beat('待つなら、何か月持つ？','offer-budget',
-      `<h2>返事の前に、口座を見た。</h2><div class="job-ledger"><span>手元にあるお金<small>（架空の例）</small></span><strong>18万円</strong></div>
+    beat('就活を続けるなら、何か月待てる？','offer-budget',
+      `<h2>卒業後、収入なしで<br>何か月待てる？</h2><div class="job-ledger"><span>手元にあるお金<small>（架空の例）</small></span><strong>18万円</strong></div>
        <div class="job-ledger"><label for="job-spend">1か月の生活費</label><output id="job-monthly">6万円</output></div>
        <input id="job-spend" type="range" min="4" max="9" value="6" step="1">
        <div class="job-runway" aria-hidden="true"><span data-job-runway></span></div>
        <p class="job-budget-result" data-job-budget aria-live="polite"></p>
        <div class="job-votes"><button type="button" data-job-vote aria-pressed="false">${accept}</button>
        <button type="button" data-job-vote aria-pressed="false">${wait}</button></div>
-       <p class="job-vote-output" data-job-choice-output aria-live="polite"></p>`,
-      'Return to the student, whose fictional savings are ¥180,000. Move the slider from ¥60,000 to ¥90,000 and then to ¥40,000. Ask if the class would change its first choice and what additional information would matter. These amounts illustrate a budget, not typical student expenses.',
+       <p class="job-vote-output" data-job-choice-output aria-live="polite"></p>
+       ${reveal('<p class="job-line">では、同じ状況の卒業生に、就職までの期間を聞けたら？</p>')}`,
+      'Apply the second question from the last slide. If the student keeps looking after graduation with no income, savings and monthly expenses give a personal deadline. Move the slider and revisit the choice. Ask what information would help estimate the first question. Use the final reveal to pose a small survey of local peers in the same situation. The budget is fictional and gives a constraint, not a forecast.',
       {mount(root){
         const input = root.querySelector('#job-spend');
         const update = () => {
@@ -278,11 +286,11 @@
       }}),
 
     beat('その「3か月」は、どれくらい確か？','offer-ending',
-      `<p>就職までの期間を、5人に聞いたとしたら。</p><h2>平均 <strong>3</strong> か月。</h2>
+      `<p>同じような状況の卒業生5人に、就職までの期間を聞いた。</p><h2>平均 <strong>3</strong> か月。</h2>
        ${reveal(`<div class="job-samples"><div><span>A</span><b>2　3　3　3　4</b></div>
          <div><span>B</span><b>1　2　3　4　5</b></div></div><p class="job-example">説明用の架空のデータ（か月）。どちらも平均は3。</p>
          <p class="job-line">どちらの平均のほうが、精度が高そう？</p>`)}
-       ${reveal('<p class="job-line">平均に、どれくらいの幅をつける？</p>',2)}`,
+       ${reveal('<p class="job-line">この5人から推定する母平均に、どれくらいの幅をつける？</p>',2)}`,
       'Both fictional samples have five observations, mean 3 months, and different spread. Ask the room which gives a more precise estimate under the same sampling assumptions. Ask what the width would tell us about the population mean. The interval answers the mean question, so it still leaves the student’s personal deadline open. Advance straight into the existing point-to-interval slide.',
       {theme:'dark'})
   ];
