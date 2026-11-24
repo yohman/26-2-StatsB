@@ -57,6 +57,7 @@ add('母平均：Z','ロボットの電池：計算と答え','', 'Insert the ob
 add('母平均：Z','標本数で、幅を動かす',`<h2>同じ平均、同じ母標準偏差。</h2><div id="size-chart" class="chart"></div><div class="compact-controls"><label>n <input id="size" type="range" min="5" max="100" value="25" step="1"></label><output id="size-result"></output></div>${math(String.raw`120\pm1.96\frac{10}{\sqrt n}`)}`, 'Use the sample-size slider with population standard deviation10 fixed. Explain the square-root relationship with one concrete comparison: quadrupling n halves the margin. Holding sample mean120 fixed isolates the effect of sample size.',{book:'134 脚注1',init:'size'});
 add('母分散：χ²','母分散の区間推定',term('母分散の区間推定','Confidence interval for population variance'), 'Change the target from the population mean to the population variance. How much do individual observations vary, rather than where is their average?',{theme:'gold',book:'135〜136'});
 add('母分散：χ²','母分散の95%信頼区間の公式','', 'Show the full formula before giving any data. Reveal the common numerator first, then the two denominators. For a 95% interval, the chi-square table uses upper-tail areas 0.025 and 0.975. The large cutoff goes below the lower bound because it yields the smaller quotient.',{theme:'cream',book:'136',className:'formula-preview chi-preview',key:'variance-ci-formula'});
+add('母分散：χ²','χ²分布：両側の面積と分母','', 'For an independent sample from a normal population, the sum of squared deviations divided by the population variance follows a chi-square distribution with n minus 1 degrees of freedom. Unlike Z or t, this curve starts at zero and has a long right tail. Reveal the central 95% and two tails of 2.5% each. The table always counts area to the right: the right cutoff leaves 2.5%, and the left cutoff leaves 97.5%. Track the right cutoff to the left-hand fraction: dividing by the larger value gives the lower variance bound. The left cutoff gives the upper bound. The numbers shown illustrate df 4 only. Next, read the café problem and use its own degrees of freedom.',{theme:'cream',book:'135〜136',className:'chi-bridge',key:'variance-ci-tails'});
 add('母分散：χ²','カフェのドリンク：例題','', 'Read the entire question before solving. The campus café measures seven independent pours at the same setting. Assume a normal population. We are estimating the variance of the pour volumes, in squared milliliters, at the explicitly stated 95% confidence level.',{book:'135〜136',className:'practice-question pour-question',key:'variance-ci-problem'});
 add('母分散：χ²','① 分子：7杯の偏差二乗和','', 'Start with the seven measurements. Total 1750 divided by 7 gives the mean 250 mL. Subtract 250 from each value, square the deviations, and add them to get 36 mL². That sum, rather than the unbiased point estimate, goes in both numerators.',{book:'132・136',key:'variance-ci-numerator'});
 add('母分散：χ²','②・③ 分母から上下限へ','', 'Seven measurements give six degrees of freedom. On the chi-square curve the central 95% leaves 2.5% in each tail. Read upper-tail probabilities 0.025 then 0.975 from the df 6 row. Divide 36 by the large cutoff for the lower endpoint and by the small cutoff for the upper endpoint. The dot is the unbiased variance estimate 36/6 = 6 mL², not the interval midpoint.',{book:'135〜136',key:'variance-ci-answer'});
@@ -113,7 +114,7 @@ for(const s of slides) {
 const wSlot=(label,value,cls='')=>`<span class="work-slot ${cls}"><small>${label}</small><i aria-hidden="true">↓</i><span>${value}</span></span>`;
 const wEq=(...items)=>`<div class="work-equation">${items.map(i=>i.startsWith('<')?i:`<span>${i}</span>`).join('')}</div>`;
 const wNote=text=>`<p class="work-note">${text}</p>`;
-const intervalConclusion=(level,target,lo,hi,unit)=>`<p class="work-conclusion">信頼水準${level}%で、${target}は<strong>${lo}〜${hi}${unit}</strong>と推定される。</p>`;
+const intervalConclusion=(level,target,lo,hi,unit)=>`<p class="work-conclusion">信頼水準<strong>${level}%</strong>で、${target}は<strong class="conclusion-range"><span data-side="lower">${lo}</span>〜<span data-side="upper">${hi}</span>${unit}</strong>と推定できる。</p>`;
 function worked(title,beats,{legend=false}={}){
   const s=slides.find(s=>s.title===title);
   if(!s) throw new Error('Missing worked slide: '+title);
@@ -135,7 +136,7 @@ const focusTerm=(v,role,focus,side)=>`<span class="legend-term legend-${role}${f
 const bracketMark=side=>`<span class="legend-bracket ${side}" aria-hidden="true"></span>`;
 const sign=(s,active=false,side)=>`<span class="legend-sign${active?' is-focus':''}"${side?` data-side="${side}"`:''}>${s}</span>`;
 function formulaLegend(kind,rule,work,bounds){
-  const answer=(side,label,value,unit)=>`<div data-side="${side}"><span class="endpoint-arrow" aria-hidden="true">↓</span><span class="endpoint-value"><small>${label}</small> ${value}<small>${unit}</small></span></div>`;
+  const answer=(side,label,value,unit)=>`<div data-side="${side}"><span class="endpoint-arrow" aria-hidden="true"></span><span class="endpoint-value"><small>${label}</small> ${value}<small>${unit}</small></span></div>`;
   const results=bounds?`<div class="legend-row endpoint-answers"><span class="legend-label">結果</span><div class="endpoint-map">${answer('lower','下限',bounds.lo,bounds.unit)}${answer('upper','上限',bounds.hi,bounds.unit)}</div></div>`:'';
   return `<div class="formula-legend legend-${kind}${bounds?' shows-endpoints':''}"><div class="legend-row" data-row="symbolic"><span class="legend-label">公式</span><div class="legend-expression">${rule}</div></div><div class="legend-row" data-row="working"><span class="legend-label">代入</span><div class="legend-expression">${work}</div></div>${results}</div>`;
 }
@@ -181,8 +182,13 @@ function chiPreview(){
   const callout=(part,role,ja,en,step)=>`<div class="formula-callout chi-label-${part} legend-${role} reveal" data-step="${step}"><span class="formula-leader" aria-hidden="true"></span><span>${ja}<small>${en}</small></span></div>`;
   return `<h2>母分散の95%信頼区間</h2><div class="legend-expression interval-diagram chi-interval-diagram">${chiExpression()}${callout('numerator','spread','① 共通の分子：偏差二乗和','Sum of squared deviations',1)}${callout('lower','critical','② 下限の分母：大きいχ²値','Larger chi-square critical value',2)}${callout('upper','critical','③ 上限の分母：小さいχ²値','Smaller chi-square critical value',3)}</div>`;
 }
+function chiBridge(){
+  const ratio='<span class="chi-ratio" role="math" aria-label="偏差二乗和を母分散で割った値"><span>偏差二乗和</span><span>母分散</span></span>';
+  const namedBound=(side,label,qualifier,step)=>`<div class="chi-bound reveal" data-side="${side}" data-step="${step}">${label}：${qualifier}値で割る</div>`;
+  return `<h2>母分散の区間には χ² 分布</h2><p class="english">Chi-square distribution</p><p class="chi-reason">独立な正規標本では、${ratio} が自由度 ${mathToken(mi('n')+mo('−')+mn(1))} の χ² 分布に従う。</p>${chiBridgeChart(4)}<div class="legend-expression chi-bridge-formula">${chiExpression()}${namedBound('lower','下限','大きい',2)}${namedBound('upper','上限','小さい',3)}</div>`;
+}
 const usingLegend={legend:true};
-function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,target,t=false,mapEndpoints=false}){
+function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,target,t=false}){
   const varianceName=t?'不偏分散':'母分散（既知）';
   const q=critical,filled={center,q,variance,n},computed={...filled,se};
   return [
@@ -193,9 +199,9 @@ function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,targe
     ['③ 境界：分布表の値',
       wNote(t?`上側確率 0.025、自由度 ${n} − 1 = ${n-1}。表の t 値は ${q}。`:`上側確率 0.025。表の Z の値は ${q}。`),meanLegend(t,filled,['critical'])],
     ['片側の幅',math(q+'\\times'+se+'='+margin)+wNote('境界値 × 標準誤差'),meanLegend(t,computed,['critical','spread'])],
-    ['下限と上限',wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'),wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean')),meanLegend(t,computed,['lower','upper'])],
-    ['母平均の95%信頼区間',(mapEndpoints?'':`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`)+
-      wChart(+lo,+hi,center,unit,...domain,mapEndpoints)+intervalConclusion(95,target,lo,hi,unit),meanLegend(t,computed,[],mapEndpoints?{lo,hi,unit}:undefined)]
+    ['下限と上限',wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'endpoint-low'),wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'endpoint-high')),meanLegend(t,computed,['lower','upper'])],
+    ['母平均の95%信頼区間',wChart(+lo,+hi,center,unit,...domain,true)+
+      intervalConclusion(95,target,lo,hi,unit),meanLegend(t,computed,[],{lo,hi,unit})]
   ];
 }
 function varianceBeats({ss,n,a,b,lo,hi,center,unit,max,target}){
@@ -205,16 +211,16 @@ function varianceBeats({ss,n,a,b,lo,hi,center,unit,max,target}){
     ['① 分子：偏差二乗和',wNote('両方の分子に '+ss+' '+unit+' が入る。'),chiLegend({ss},['spread'])],
     ['② 分母：2つのχ²値',wNote(`自由度 ${df}。上側確率 0.025 なら ${a}、0.975 なら ${b}。`)+table('chi'),chiLegend(filled,['critical'])],
     ['下限と上限',math(chiRule(ss,a,b)+'\\approx'+bracket(lo,hi))+wNote('大きい値で割ると下限、小さい値で割ると上限。'),chiLegend(filled,['lower','upper'])],
-    ['下限と上限',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+wChart(+lo,+hi,center,unit,0,max)+
-      intervalConclusion(95,target,lo,hi,unit),chiLegend(filled)]
+    ['母分散の95%信頼区間',wChart(+lo,+hi,center,unit,0,max,true)+
+      intervalConclusion(95,target,lo,hi,unit),chiLegend(filled,[],{lo,hi,unit})]
   ];
 }
-const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],target:'Curryの1試合あたりの平均得点',t:true,mapEndpoints:true};
+const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],target:'Curryの1試合あたりの平均得点',t:true};
 worked('30 ± いくつ？',meanBeats(curry).slice(4,5),usingLegend);
 worked('下限、そして上限',meanBeats(curry).slice(5),usingLegend);
 worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],target:'この工場で作るロボットの平均身長',t:true}),usingLegend);
 {
-  const battery={center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127],target:'ロボットの電池の平均持続時間',mapEndpoints:true};
+  const battery={center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127],target:'ロボットの電池の平均持続時間'};
   const {center,variance,n,critical:q}=battery,filled={center,variance,n};
   const zExcerpt=selected=>`<table class="lookup battery-z-table" aria-label="標準正規分布表の抜粋：上側確率"><thead><tr><th scope="col">z</th>${[.05,.06,.07].map(d=>`<th scope="col" class="${selected&&d===.06?'active':''}">${d.toFixed(2)}</th>`).join('')}</tr></thead><tbody>${[1.8,1.9,2.0].map(r=>`<tr><th scope="row" class="${selected&&r===1.9?'active':''}">${r.toFixed(1)}</th>${[.05,.06,.07].map(d=>`<td class="${selected&&r===1.9&&d===.06?'target':''}">${(1-M.normalCdf(r+d)).toFixed(5)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
   const lookupNote=wNote(`標準正規分布表（上側確率）で ${im('(1-0.95)/2=0.02500')} を探す。`);
@@ -316,13 +322,14 @@ const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<d
   const deviationsTable=`<table class="deviation-table pour-deviations" aria-label="注いだ量と偏差の二乗"><thead><tr><th scope="col">回</th>${pours.map((_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${row('量（mL）',pours)}${row('偏差（量 − '+mean+'）',deviations)}${row('偏差の二乗',deviations.map(d=>d*d))}</tbody></table>`;
   const lookup=(side)=>`<table class="lookup pour-lookup" aria-label="カイ二乗分布表の抜粋（上側確率）"><thead><tr><th scope="col">自由度 ＼ 上側確率</th><th scope="col" class="${side==='lower'?'active':''}">0.025</th><th scope="col" class="${side==='upper'?'active':''}">0.975</th></tr></thead><tbody><tr><th scope="row" class="active">${df}</th><td class="${side==='lower'?'target':''}">${a}</td><td class="${side==='upper'?'target':''}">${b}</td></tr></tbody></table>`;
   byTitle('母分散の95%信頼区間の公式').html=chiPreview();
+  byTitle('χ²分布：両側の面積と分母').html=chiBridge();
   byTitle('カフェのドリンク：例題').html=`<h2>カフェのドリンクは、毎回どれくらいばらつく？</h2><p class="practice-prompt">学内カフェで、同じ設定のドリンクマシンから7杯分を計量した。</p><div class="practice-values">${pours.map(x=>`<b>${x}</b>`).join('')}<small>mL</small></div><p class="pour-task">1杯の量の<strong>母分散の95%信頼区間</strong>を求めよ。</p>${small('授業用のデータ。各回の量は独立で、同じ正規分布に従うと仮定する。')}`;
   worked('① 分子：7杯の偏差二乗和',[
     ['7杯の標本平均',math(String.raw`\bar x=\frac{${pours.join('+')}}{${n}}=\frac{${total}}{${n}}=${mean}\;\mathrm{mL}`),chiLegend({},['spread'])],
     ['① 各回の偏差を二乗して足す',deviationsTable+math(String.raw`${ssRule}=${deviations.map(d=>d*d).join('+')}=${ss}\;\mathrm{mL}^2`),chiLegend({ss},['spread'])]
   ],usingLegend);
   worked('②・③ 分母から上下限へ',[
-    ['χ²分布は左右非対称',wNote(`自由度 ${im(n+'-1='+df)}。中央95%の外側には、左右に2.5%ずつ。`)+`<div class="work-chart pour-chi-density">${density('chi',df,{labelCutoffs:false})}</div>`,chiLegend({ss},['critical'])],
+    ['7杯のデータ：自由度は6',math('n-1='+n+'-1='+df)+wNote('χ²分布表の自由度6の行で、上側確率0.025と0.975の列を読む。'),chiLegend({ss},['critical'])],
     ['② 下限の分母：上側確率 0.025',lookup('lower')+wNote('右に2.5%を残す、大きい境界値。')+table('chi'),chiLegend({ss,a},['lower-critical'])],
     ['③ 上限の分母：上側確率 0.975',lookup('upper')+wNote('右に97.5%を残す、小さい境界値。')+table('chi'),chiLegend(filled,['upper-critical'])],
     ['下限と上限',math(chiRule(ss,a,b)+'\\approx'+bracket(lo,hi))+wNote('大きい値で割ると下限、小さい値で割ると上限。'),chiLegend(filled,['lower','upper'])],
@@ -387,7 +394,52 @@ function intervalGraphic(lo,hi,m,unit,min,max,matchBounds=false,digits=2){
   const endpoints=[lo,hi].map((v,i)=>`<g${matchBounds?` data-side="${i?'upper':'lower'}"`:''}><line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="${matchBounds?6:3}"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(digits)}</text></g>`).join('');
   return svg(`<title>${lo.toFixed(digits)}から${hi.toFixed(digits)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${endpoints}<circle cx="${x(m)}" cy="115" r="10" fill="#d0642d"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);
 }
-function density(kind,df=4,{annotateTails=false,labelCutoffs=true}={}){
+function chiBridgeChart(df){
+  const smallCut=M.chiq(.975,df),largeCut=M.chiq(.025,df),end=16,base=213;
+  const x=v=>68+864*v/end,y=v=>base-890*M.chiPdf(v,df);
+  const trace=(start,stop)=>Array.from({length:121},(_,i)=>{
+    const v=start+(stop-start)*i/120;
+    return `${x(v).toFixed(2)},${y(v).toFixed(2)}`;
+  }).join(' ');
+  const area=(start,stop,attrs='')=>`<polygon ${attrs} points="${x(start)},${base} ${trace(start,stop)} ${x(stop)},${base}"/>`;
+  // A cutoff on the right of the curve belongs to the lower variance endpoint.
+  const cutoffs=[
+    {side:'lower',cut:largeCut,tail:'0.025',step:2,labelX:754,tailX:795,tailY:145,inside:largeCut+.8},
+    {side:'upper',cut:smallCut,tail:'0.975',step:3,labelX:170,tailX:62,tailY:114,inside:smallCut*.68}
+  ];
+  const leader=(side,path)=>`<path d="${path}" fill="none" stroke="var(--endpoint-color)" stroke-width="2.1" marker-end="url(#chi-bridge-arrow-${side})"/>`;
+  const markers=cutoffs.map(({side})=>`<marker data-side="${side}" id="chi-bridge-arrow-${side}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 10 5 L 0 10 Z" fill="var(--endpoint-color)"/></marker>`).join('');
+  const tails=cutoffs.map(({side,tailX,tailY,inside})=>{
+    const tip=base-(base-y(inside))*.52;
+    return `<g data-side="${side}"><text x="${tailX}" y="${tailY}" text-anchor="middle" class="chi-tail-pct">2.5%</text>${leader(side,`M ${tailX} ${tailY+11} L ${x(inside)} ${tip}`)}</g>`;
+  }).join('');
+  const labels=cutoffs.map(({side,cut,step,labelX,tail})=>{
+    const px=x(cut),py=y(cut);
+    return `<g data-side="${side}" class="reveal" data-step="${step}">
+      <line x1="${px}" x2="${px}" y1="${py}" y2="${base}" stroke="var(--endpoint-color)" stroke-width="2.5" stroke-dasharray="4 3"/>
+      <circle cx="${px}" cy="${base}" r="4" fill="var(--endpoint-color)"/>
+      ${leader(side,`M ${labelX} 245 L ${px} ${base+5}`)}
+      <text x="${labelX}" y="270" text-anchor="middle" class="chi-cut-label">χ² = ${cut.toFixed(4)}</text>
+      <text x="${labelX}" y="293" text-anchor="middle" class="chi-tail-label">上側確率 ${tail}</text>
+    </g>`;
+  }).join('');
+  return `<svg class="chi-bridge-chart" viewBox="0 0 1000 300" role="img" aria-label="自由度4のカイ二乗分布。右に長い裾を持つ。">
+    <defs>${markers}</defs>
+    <g class="reveal" data-step="1">${area(smallCut,largeCut,'fill="#adc9ca"')}
+      ${area(0,smallCut,'data-side="upper" class="chi-tail-fill"')}
+      ${area(largeCut,end,'data-side="lower" class="chi-tail-fill"')}
+      <text x="327" y="194" text-anchor="middle" class="chi-center-label">中央 95%</text>${tails}
+    </g>
+    <polyline points="${trace(0,end)}" fill="none" stroke="#214b56" stroke-width="3.6"/>
+    <line x1="59" x2="943" y1="${base}" y2="${base}" stroke="#819397" stroke-width="1.4"/>
+    <text x="65" y="237" text-anchor="middle" class="chi-shape-note">0</text>
+    <text x="936" y="237" text-anchor="end" class="chi-shape-note">χ²</text>
+    <text x="951" y="51" text-anchor="end" class="chi-shape-note">自由度 ${df} の例</text>
+    <text x="951" y="82" text-anchor="end" class="chi-shape-note">Z・t と違い、右の裾が長い</text>
+    ${labels}
+  </svg>`;
+}
+function density(kind,df=4,{annotateTails=false}={}){
   const chi=kind==='chi',a=chi?0:-6,b=chi?18:6,base=245;
   const pdf=chi?x=>M.chiPdf(x,df):x=>M.tPdf(x,df);
   const lo=chi?M.chiq(.975,df):-M.tq(.025,df),hi=chi?M.chiq(.025,df):M.tq(.025,df);
@@ -407,7 +459,7 @@ function density(kind,df=4,{annotateTails=false,labelCutoffs=true}={}){
   };
   const tails=annotateTails?[tail('left',lo),tail('right',hi)]:[];
   const markers=annotateTails?`<defs><marker id="curry-tail-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 10 5 L 0 10 Z" fill="${tailColor}"/></marker></defs>`:'';
-  const thresholds=[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="${y(v)}" y2="248" stroke="#bd542e" stroke-dasharray="5 5"/>${annotateTails||!labelCutoffs?'':`<text x="${x(v)}" y="285" text-anchor="middle">${v.toFixed(4)}</text>`}`).join('');
+  const thresholds=[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="${y(v)}" y2="248" stroke="#bd542e" stroke-dasharray="5 5"/>${annotateTails?'':`<text x="${x(v)}" y="285" text-anchor="middle">${v.toFixed(4)}</text>`}`).join('');
   return svg(`<title>${chi?'カイ二乗':'t'}分布、自由度${df}、中央95%${annotateTails?'、左右の裾は各2.5%':''}</title>${markers}${area(lo,hi,'#70b8ad','.65')}${tails.map(t=>t.shading).join('')}<polyline points="${trace(a,b,400)}" fill="none" stroke="#214b56" stroke-width="4"/><line x1="55" x2="945" y1="${base}" y2="${base}" stroke="#70878a"/>${thresholds}${tails.map(t=>t.callout).join('')}${annotateTails?`<text x="500" y="170" text-anchor="middle" fill="#234653" font-size="33" font-weight="700">中央95%</text>`:''}`);
 }
 const inits={tails:()=>{document.querySelector('#t-tail-chart').innerHTML=density('t');},chiTails:()=>{document.querySelector('#chi-tail-chart').innerHTML=density('chi');},parts:()=>{const desc=['中心：標本平均。今回の5試合では30点。','t値：信頼係数と自由度で決まる。95%・自由度4 → 2.7764。','標準誤差：平均の推定のばらつき。√(20/5) = 2点。'];stage.querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>{stage.querySelectorAll('[data-part]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.querySelector('#part-description').textContent=desc[+b.dataset.part];});},curryInterval:()=>{document.querySelector('#curry-interval').innerHTML=intervalGraphic(24.4472,35.5528,30,'点',20,40);},robotAnswer:()=>{document.querySelector('#robot-answer').innerHTML=intervalGraphic(155.388,164.612,160,'cm',152,168);},knownAnswer:()=>{document.querySelector('#known-answer').innerHTML=intervalGraphic(116.08,123.92,120,'分',113,127);},varianceAnswer:()=>{document.querySelector('#variance-interval').innerHTML=intervalGraphic(80/11.1433,80/.4844,20,'点²',0,180);stage.querySelectorAll('[data-denom]').forEach(b=>b.onclick=()=>{document.querySelector(b.dataset.denom==='large'?'#variance-low':'#variance-high').hidden=false;if(!document.querySelector('#variance-low').hidden&&!document.querySelector('#variance-high').hidden)document.querySelector('#variance-interval').classList.remove('concealed');});},deliveryAnswer:()=>{document.querySelector('#delivery-answer').innerHTML=intervalGraphic(30/12.8325,30/.8312,6,'分²',0,40);},confidence:()=>{const range=document.querySelector('#confidence'),draw=()=>{const c=[.9,.95,.99][+range.value],q=M.tq((1-c)/2,4),w=q*2;document.querySelector('#confidence-result').textContent=`${Math.round(c*100)}%：${(30-w).toFixed(2)}〜${(30+w).toFixed(2)}点`;document.querySelector('#confidence-chart').innerHTML=intervalGraphic(30-w,30+w,30,'点',18,42);};range.oninput=draw;draw();},size:()=>{const range=document.querySelector('#size'),draw=()=>{const n=+range.value,w=1.96*10/Math.sqrt(n);document.querySelector('#size-result').textContent=`n = ${n} · 幅 ${(2*w).toFixed(2)}分`;document.querySelector('#size-chart').innerHTML=intervalGraphic(120-w,120+w,120,'分',110,130);};range.oninput=draw;draw();},coverage:()=>{let rows=[],timer=null;const run=document.querySelector('#coverage-run'),reset=document.querySelector('#coverage-reset');const draw=()=>{const min=Math.min(18,...rows.map(r=>r.lower)),max=Math.max(42,...rows.map(r=>r.upper)),x=v=>55+(v-min)/(max-min)*890;document.querySelector('#coverage-chart').innerHTML=`<svg viewBox="0 0 1000 360" role="img" aria-label="繰り返し抽出した100本の信頼区間"><line x1="${x(30)}" x2="${x(30)}" y1="20" y2="335" stroke="#687f84" stroke-dasharray="5 4"/><text x="${x(30)+8}" y="18">μ = 30</text>${rows.map((r,i)=>`<line x1="${x(r.lower)}" x2="${x(r.upper)}" y1="${28+i*3}" y2="${28+i*3}" stroke="${r.lower<=30&&r.upper>=30?'#16786f':'#d67435'}" stroke-width="2"/>`).join('')}<text x="55" y="357">${min.toFixed(1)}</text><text x="945" y="357" text-anchor="end">${max.toFixed(1)} 点</text></svg>`;const hits=rows.filter(r=>r.lower<=30&&r.upper>=30).length;document.querySelector('#coverage-count').textContent=`30を含む ${hits} / ${rows.length}`;};run.onclick=()=>{if(timer)return;rows=[];run.disabled=true;timer=setInterval(()=>{rows.push(M.ci(Array.from({length:5},()=>30+Math.sqrt(20)*M.normal())));draw();if(rows.length===100){clearInterval(timer);timer=null;run.disabled=false;}},38);};reset.onclick=()=>{clearInterval(timer);timer=null;rows=[];run.disabled=false;draw();};draw();return()=>clearInterval(timer);}};

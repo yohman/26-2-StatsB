@@ -107,15 +107,19 @@
 .legend-expression math .is-focus { font-weight:750 }
 [data-side="lower"] { --endpoint-color:#16665f }
 [data-side="upper"] { --endpoint-color:#a7451e }
-.shows-endpoints [data-row="working"] [data-side],
-.endpoint-map [data-side] { color:var(--endpoint-color);font-weight:750 }
+.shows-endpoints .legend-expression [data-side],
+.endpoint-map [data-side],.conclusion-range [data-side] { color:var(--endpoint-color);font-weight:750 }
+.shows-endpoints [data-row="symbolic"] .legend-expression [data-side] { opacity:.82 }
+.work-slot.endpoint-low { color:#16665f }
+.work-slot.endpoint-high { color:#a7451e }
 .endpoint-map {
   width:24.6em;
   margin:auto;
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
 }
-.endpoint-arrow { display:block;font-size:clamp(13px,2.15cqw,31px);line-height:1.15 }
+.endpoint-arrow { display:block;position:relative;margin:.21cqw auto .65cqw;width:max(1px,.15cqw);height:2.1cqw;background:currentColor }
+.endpoint-arrow::after { content:"";position:absolute;bottom:0;left:50%;width:.6cqw;height:.6cqw;border:solid currentColor;border-width:0 max(1px,.15cqw) max(1px,.15cqw) 0;transform:translateX(-50%) rotate(45deg) }
 .endpoint-value { font-size:clamp(16px,3.2cqw,44px);line-height:1.15 }
 .endpoint-value small { font-size:.5em }
 .formula-follow .work-details .endpoint-chart svg { font-size:32px;font-family:Arial,sans-serif;fill:#234653 }
@@ -194,6 +198,36 @@
   -webkit-text-stroke:.022em currentColor;
 }
 .legend-chi-pair .endpoint-map { width:15.3em }
+.chi-bridge .slide-body { gap:.15cqw;padding:2.4cqw 4cqw 2.8cqw }
+.chi-bridge h2 { font-size:3.5cqw;line-height:1.25 }
+.chi-bridge .english { font-size:1.55cqw }
+.chi-reason { display:flex;align-items:center;justify-content:center;gap:.45cqw;font-size:1.9cqw;margin-top:.75cqw }
+.chi-reason math { font-size:inherit }
+.chi-ratio { display:inline-grid;flex:none;font-size:.83em;line-height:1.35;white-space:nowrap;margin-inline:.3cqw }
+.chi-ratio > span:first-child { border-bottom:1px solid currentColor;padding:0 .2em .08em }
+.chi-bridge-chart { display:block;width:min(100%,89cqw);height:auto;margin-top:.25cqw;fill:#213d48 }
+.chi-bridge-chart .chi-tail-fill { fill:var(--endpoint-color);opacity:.47 }
+.chi-tail-pct,.chi-cut-label { fill:var(--endpoint-color);font-size:28px;font-weight:750 }
+.chi-tail-label { fill:var(--endpoint-color);font-size:21px }
+.chi-center-label { font-size:31px;font-weight:750 }
+.chi-shape-note { fill:#526970;font-size:24px }
+.chi-bridge-formula {
+  --inactive:#677475;
+  grid-template-columns:.45em 7.15em 1em 7.15em .45em;
+  grid-template-rows:7.3cqw 3cqw;
+  font-size:3.15cqw;
+  height:auto;
+}
+.chi-bridge-formula .legend-bracket { height:2.2em }
+.chi-bound { grid-row:2;font:700 1.85cqw/1.35 Arial,"Hiragino Sans",sans-serif;color:var(--endpoint-color) }
+.chi-bound[data-side="lower"] { grid-column:2 }
+.chi-bound[data-side="upper"] { grid-column:4 }
+.chi-bridge-formula:has(.chi-bound[data-side="lower"].shown) [data-chi-part="lower"],
+.chi-bridge-formula:has(.chi-bound[data-side="upper"].shown) [data-chi-part="upper"] {
+  color:var(--endpoint-color);
+  font-weight:750;
+  -webkit-text-stroke:.022em currentColor;
+}
 @media(max-width:440px){
   .chi-interval-diagram .formula-callout { font-size:clamp(7px,2.1cqw,10px) }
 }
