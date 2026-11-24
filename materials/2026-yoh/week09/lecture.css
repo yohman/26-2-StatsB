@@ -168,10 +168,23 @@
 .formula-follow .work-details :is(.deviation-table,.lookup) { margin:.18cqw auto;font-size:clamp(9px,1.55cqw,20px) }
 .formula-follow .work-details :is(.deviation-table,.lookup) :is(td,th) { padding:.12em .42em }
 .formula-follow .deviation-table :is(td,th) { font-size:.84em;line-height:1.2 }
+.curry-question { width:min(100%,72cqw);line-height:1.5 }
+.curry-question strong { color:#a7451e }
+.curry-question .english { display:block;margin:.4cqw 0 0 }
+.formula-follow .work-details .curry-deviations {
+  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);width:min(96%,77cqw);
+}
+.formula-follow .work-details .curry-deviations .deviation-table { font-size:clamp(11px,1.95cqw,24px) }
+.formula-follow .work-details .curry-deviations .deviation-table :is(td,th) { font-size:.9em;padding:.22em .35em }
+.curry-deviations .deviation-table tbody td:last-child { color:#16665f;font-weight:680 }
+.square-sum-label { color:#16665f;font-size:clamp(10px,1.85cqw,25px);font-weight:700;line-height:1.25 }
+.square-sum-label span { display:block;color:#526970;font-size:.65em;font-weight:500 }
 .formula-follow .work-details :is(a,.secondary,.tail-labels) { font-size:clamp(9px,1.4cqw,19px) }
 .t-lookup-density svg text { visibility:hidden }
 @media(max-width:560px){
   .formula-legend { grid-template-rows:repeat(2,max(29px,6.2cqw));font-size:clamp(9px,2.45cqw,16px) }
   .legend-row { grid-template-columns:max(24px,6.25cqw) minmax(0,1fr) }
   .formula-follow .work-details .var-work { grid-template-columns:minmax(0,45%) minmax(0,1fr);width:96% }
+  .formula-follow .work-details .curry-deviations { grid-template-columns:minmax(0,56%) minmax(0,1fr);width:100% }
+  .curry-question { width:min(100%,84cqw);font-size:clamp(11px,2.25cqw,15px) }
 }

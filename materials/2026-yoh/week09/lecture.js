@@ -138,7 +138,9 @@ function meanExpression(isT,{center,q,variance,n,se,alpha,df}={},active=[]){
   const focus=new Set(active);
   const avg=center==null?mbar:mn(center);
   const boundary=q==null?msub(mi(isT?'t':'z'),alpha==null?mi('α'):mn(alpha))+(isT?(df==null?mdof:mo('(')+mn(df)+mo(')')):''):mn(q);
-  const error=se==null?mroot(mfrac(variance==null?(isT?mhat:msigma):mn(variance),n==null?mi('n'):mn(n))):mn(se);
+  const numerator=variance==null?(isT?mhat:msigma):mn(variance);
+  const markedNumerator=`<mrow class="legend-spread${focus.has('variance')?' is-focus':''}" data-role="variance">${numerator}</mrow>`;
+  const error=se==null?mroot(mfrac(markedNumerator,n==null?mi('n'):mn(n))):mn(se);
   const half=(s,side)=>focusTerm(avg,'mean',focus,side)+sign(s,focus.has(side))+focusTerm(boundary,'critical',focus,side)+
     sign(q==null?'&nbsp;':'×',focus.has(side)||focus.has('critical')&&focus.has('spread'))+focusTerm(error,'spread',focus,side);
   return bracketMark('left')+half('−','lower')+sign(',')+half('+','upper')+bracketMark('right');
@@ -215,18 +217,21 @@ worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.83
 // Keep the same two rows from the map of the formula through the finished interval.
 const byTitle=title=>slides.find(s=>s.title===title);
 const scores=[23,29,31,32,35];
-const averageNumeric=String.raw`\bar x=\frac{1}{5}(23+29+31+32+35)=\frac{150}{5}=30`;
-const varianceNumeric=String.raw`${hat}=\frac{1}{5-1}\left[(23-30)^2+(29-30)^2+(31-30)^2+(32-30)^2+(35-30)^2\right]`;
-const varianceTable=`<table class="deviation-table"><thead><tr><th>得点</th><th>偏差 ${im('x_i-\\bar x')}</th><th>偏差二乗 ${im('(x_i-\\bar x)^2')}</th></tr></thead><tbody>${scores.map(x=>`<tr><td>${x}</td><td>${x-30}</td><td>${(x-30)**2}</td></tr>`).join('')}</tbody><tfoot><tr><th>合計</th><td>0</td><td>80</td></tr></tfoot></table>`;
+const averageNumeric=String.raw`\bar x=\frac{23+29+31+32+35}{5}=\frac{150}{5}=30`;
+const varianceTable=`<table class="deviation-table" aria-label="得点と偏差二乗"><thead><tr><th scope="col">得点</th><th scope="col">偏差（得点 − 30）</th><th scope="col">偏差の二乗</th></tr></thead><tbody>${scores.map(x=>{
+  const d=x-curry.center;
+  return `<tr><td>${x}</td><td>${x} − ${curry.center} = ${String(d).replace('-','−')}</td><td>${d**2}</td></tr>`;
+}).join('')}</tbody><tfoot><tr><th scope="row" colspan="2">偏差二乗和</th><td>80</td></tr></tfoot></table>`;
+const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<div><div class="square-sum-label">偏差二乗和<span>Sum of squared deviations</span></div>${math('49+1+1+4+25=80')}</div></div>`;
 {
   const sample=byTitle('Curryの5試合'),whole=byTitle('母平均の95%信頼区間'),map=byTitle('公式の3つの部品');
   const variance=byTitle('まず、不偏分散'),tHero=byTitle('母分散が未知 → t');
   const tails=byTitle('中央95%、両端2.5%'),tLookup=byTitle('表で探す場所');
   const lookupBody=tLookup.html.replace(/^<h2>.*?<\/h2>/,'');
   const centered={center:30},spreadDone={...centered,variance:20,n:5};
-  const tailReady={...spreadDone,alpha:'0.025',df:4};
-  sample.html=`<h2>Curryの5試合から、母平均を推定。</h2><div class="scores">${scores.map(x=>`<div><span>🏀</span><b>${x}</b></div>`).join('')}</div>${small('架空の得点・独立な正規標本と仮定。')}`;
-  sample.notes='Show the five scores. Ask what we want to estimate: the underlying population mean, not just the average of these five scores. Show the whole formula next.';
+  const tailReady={...spreadDone,se:curry.se,alpha:'0.025',df:4};
+  sample.html=`<h2>Curryの1試合あたりの得点</h2><div class="scores">${scores.map(x=>`<div><span>🏀</span><b>${x}</b></div>`).join('')}</div><div class="curry-question"><p>この5試合を標本として、1試合あたりの得点の母平均の<strong>95%信頼区間</strong>を求めなさい。</p><span class="english">95% confidence interval for the population mean</span></div>${small('得点は架空。独立な正規標本と仮定し、母分散は未知とする。')}`;
+  sample.notes='Read the entire problem: use the five simulated scores to find a 95% confidence interval for Curry’s population mean points per game. The problem specifies 95%. We assume an independent normal sample and unknown population variance.';
   for(const s of [whole,map,tHero])slides.splice(slides.indexOf(s),1);
   const preview={section:map.section,title:'母平均の95%信頼区間の公式',key:'t-ci-formula',theme:'cream',className:'formula-preview',book:'133',html:intervalPreview(),
     notes:'Show the complete interval without annotations. The left expression is the lower limit, and the right expression is the upper limit. Advance to see how the three shared pieces fit into both ends.'};
@@ -237,29 +242,30 @@ const varianceTable=`<table class="deviation-table"><thead><tr><th>得点</th><t
   map.notes='Point to the sample mean as the center. Reveal the standard error next and the t critical value last. The same three pieces appear in both endpoints. No values have been substituted yet.';
   worked(whole.title,[
     ['① 標本平均',math(averageFormula),meanLegend(true,{},['mean'])],
-    ['① 5試合の得点を代入',math(averageNumeric),meanLegend(true,centered,['mean'])]
+    ['① 5試合の得点を代入',math(averageNumeric)+wNote('次は、各試合の得点とこの30点との差を求める。'),meanLegend(true,centered,['mean'])]
   ],usingLegend);
   whole.title='① 標本平均：Curryの5試合';
   whole.notes='Point to x-bar in both formulas. On reveal, substitute the five scores in the mean calculation, then trace 30 to the two orange slots. The remaining terms are dim but stay in place.';
   worked(variance.title,[
-    ['② 標準誤差に使う標本不偏分散',math(varianceFormula)+wNote('標本平均からの偏差を二乗し、足して、n − 1で割る。'),meanLegend(true,centered,['spread'])],
-    ['② 5試合の得点と平均との差',math(varianceNumeric),meanLegend(true,{...centered,n:5},['spread'])],
-    ['② 偏差二乗の合計',`<div class="var-work">${varianceTable}${math(String.raw`49+1+1+4+25=80`)}</div>`,meanLegend(true,{...centered,n:5},['spread'])],
-    ['② 標準誤差は2点',math(String.raw`${hat}=\frac{80}{5-1}=20,\qquad\sqrt{\frac{20}{5}}=2`),meanLegend(true,spreadDone,['spread'])]
+    ['② 標本不偏分散',`<span class="english">Unbiased sample variance</span>${math(varianceFormula)}${wNote('各得点から標本平均30点を引き、その差を二乗する。')}`,meanLegend(true,centered,['variance'])],
+    ['5試合の偏差二乗を足す',squareTotal(),meanLegend(true,centered,['variance'])],
+    ['標本不偏分散は20点²',math(String.raw`${hat}=\frac{80}{5-1}=20`)+wNote('分子の80点²は、5試合の偏差二乗の合計。'),meanLegend(true,{...centered,variance:20},['variance'])],
+    ['標準誤差は2点',`<span class="english">Standard error</span>${math(String.raw`\sqrt{\frac{20}{5}}=2`)}${wNote('標本不偏分散20点²を試合数5で割り、平方根をとる。')}`,meanLegend(true,spreadDone,['spread'])]
   ],usingLegend);
   variance.title='② 標準誤差：Curryの5試合';
+  variance.key='curry-variance';
   variance.book='132〜134';
-  variance.notes='Point to the teal radical. Keep 30 in the dimmed center. Calculate the five squared deviations, divide their sum by four, then insert 20 and 5 into the radical to get a standard error of 2 points.';
+  variance.notes='Start with only the variance numerator in teal. The table shows each score minus 30 and its square. Their sum is 80 points squared. Divide by four to get 20 points squared and fill only the numerator. Then focus the entire radical: divide by five and take the square root to get two points.';
   worked(tails.title,[[
-    '③ t分布の上側確率',
-    `<p class="work-note">母分散が未知で、標本不偏分散を使うので t分布。自由度は ${im('5-1=4')}。</p><div class="work-chart t-lookup-density">${density('t')}</div><div class="tail-labels"><span>2.5%</span><b>中央95%</b><span>2.5%</span></div>`,
+    '③ 指定された95%と t分布',
+    `<p class="work-note">問題の指定は95%。片側に残る確率は ${im('(1-0.95)/2=0.025')}。</p><div class="work-chart t-lookup-density">${density('t')}</div><div class="tail-labels"><span>2.5%</span><b>中央95%</b><span>2.5%</span></div>${wNote(`母分散が未知なので t分布。自由度は ${im('5-1=4')}。`)}`,
     meanLegend(true,tailReady,['critical'])
   ]],usingLegend);
   tails.title='③ t分布：上側確率と自由度';
-  tails.notes='This is the last blank in the same interval, not a new section. With unknown population variance we used the sample variance, so use the t distribution with four degrees of freedom. The upper tail is 0.025. The next slide reads the value from the table.';
+  tails.notes='Return to the 95% the question asked for. Five percent is outside the central area, so each tail has 2.5%. The standard error is already two points. Unknown population variance leads to t with four degrees of freedom. Use the 0.025 column next.';
   worked(tLookup.title,[
     ['③ 自由度4、上側確率0.025',lookupBody,meanLegend(true,tailReady,['critical'])],
-    ['③ tの境界値は2.7764',wNote('自由度4の行と、上側確率0.025の列が交わるセルの値。'),meanLegend(true,{...spreadDone,q:curry.critical},['critical'])]
+    ['③ tの境界値は2.7764',wNote('自由度4の行と、上側確率0.025の列が交わるセルの値。'),meanLegend(true,{...spreadDone,se:curry.se,q:curry.critical},['critical'])]
   ],usingLegend);
   tLookup.title='③ tの境界値：表で探す';
   tLookup.notes='Trace the row and column in the upper-tail table. Reveal 2.7764 in the two purple slots. The center and standard-error values stay where they were.';
@@ -270,7 +276,7 @@ const varianceTable=`<table class="deviation-table"><thead><tr><th>得点</th><t
   worked(whole.title,[['母分散の95%信頼区間','',chiLegend({},['spread','critical'])]],usingLegend);
   worked('20点²も、推定値。',[
     ['① 分子：同じ偏差二乗和',math(ssRule),chiLegend({},['spread'])],
-    ['① 5試合から求めた偏差二乗和',math(String.raw`(23-30)^2+(29-30)^2+(31-30)^2+(32-30)^2+(35-30)^2=80`),chiLegend({ss:80},['spread'])],
+    ['① 5試合から求めた偏差二乗和',squareTotal(),chiLegend({ss:80},['spread'])],
     ['点推定は標本不偏分散',math(String.raw`${hat}=\frac{80}{5-1}=20`)+wNote('区間の分子は80点²。点推定は20点²。'),chiLegend({ss:80},['spread'])]
   ],usingLegend);
   const chiTails=byTitle('カイ二乗は、左右非対称');
