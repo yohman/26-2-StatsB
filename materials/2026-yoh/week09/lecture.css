@@ -82,6 +82,17 @@
 .deviation-table :is(td,th) { padding:.44em .28em }
 .deviation-table tfoot { color:#16665f;font-weight:750 }
 .lab-jump { font-size:clamp(12px,1.5cqw,19px) }
+.paired-math { display:grid;gap:.8cqw }
+.paired-math > div { min-width:0 }
+.paired-math > div + div { padding-top:.65cqw }
+.paired-math > div > span,.work-anchor > span { display:block;color:#566a71;font-size:clamp(11px,1.35cqw,17px);font-weight:650 }
+#stage.worked-slide .paired-math .math { font-size:clamp(15px,2.7cqw,39px);margin:.25cqw 0 }
+#stage.worked-slide :is(.paired-math,.work-anchor) mjx-container[display=true] { margin:.18em 0!important }
+#stage.worked-slide .work-anchor .math { font-size:clamp(15px,2.45cqw,32px);margin:.15cqw 0 }
+.anchored-work { margin-top:.8cqw }
+.anchored-work .lookup { margin:.75cqw auto }
+.anchored-work :is(.lookup,.deviation-table) :is(td,th) { padding:.32em .3em }
+.var-work .deviation-table { font-size:clamp(12px,1.65cqw,20px) }
 #stage.lab-slide .slide-body { padding:0;justify-content:flex-start;overflow:hidden;align-items:stretch }
 .lecture-lab { display:block;width:100%;height:100%;border:0;background:#fbfaf6 }
 @media(max-width:560px){.var-work{grid-template-columns:1fr}.deviation-table{width:min(100%,300px);margin:auto}}

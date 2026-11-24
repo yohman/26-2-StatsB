@@ -121,43 +121,46 @@ function worked(title,beats){
 }
 const wChart=(lo,hi,center,unit,min,max)=>`<div class="work-chart">${intervalGraphic(lo,hi,center,unit,min,max)}</div>`;
 const emphasizedMean=(isT,part)=>{
-  const shade=(s,role)=>part===role?tint(s,role):s;
+  const shade=(s,role)=>part==='all'||part===role?tint(s,role):s;
   const x=shade(over,'mean'),q=shade(isT?tCrit:zCrit,'critical'),se=shade(radical(isT?hat:known,'n'),'spread');
   return bracket(x+'-'+q+se,x+'+'+q+se);
 };
-const substituteMean=(x,q,s,n)=>{
-  const center=tint(x,'mean'),critical=tint(q,'critical'),se=tint(radical(s,n),'spread');
-  return bracket(center+'-'+critical+'\\times'+se,center+'+'+critical+'\\times'+se);
+const fillMean=(isT,{center,q,variance,n}={})=>{
+  const x=tint(center??over,'mean'),cutoff=tint(q??(isT?tCrit:zCrit),'critical');
+  const se=tint(radical(variance??(isT?hat:known),n??'n'),'spread');
+  const times=q===undefined?'':'\\times';
+  return bracket(x+'-'+cutoff+times+se,x+'+'+cutoff+times+se);
 };
+const paired=(rule,values)=>`<div class="paired-math"><div><span>公式</span>${math(rule)}</div><div><span>代入</span>${math(values)}</div></div>`;
+const anchored=(rule,work)=>`<div class="work-anchor"><span>公式</span>${math(rule)}</div><div class="anchored-work">${work}</div>`;
+const coloredChi=(ss,a,b)=>chiRule(tint(ss,'spread'),tint(a,'critical'),tint(b,'critical'));
 function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=false}){
   const varianceName=t?'不偏分散':'母分散（既知）';
+  const rule=emphasizedMean(t,'all'),q=critical;
   return [
-    ['母平均の信頼区間',math(t?formula:zformula)+wNote(t?'母分散が未知 → t分布':'母分散が既知 → 標準正規分布')],
-    ['① 中心：標本平均',math(emphasizedMean(t,'mean'))+
-      wMap(['両端の式に入る標本平均',center+' '+unit,'mean'])],
-    ['② 境界：分布表で探す',math(emphasizedMean(t,'critical'))+
-      math(t?`t_{0.025}(${n}-1)=t_{0.025}(${n-1})\\approx${critical}`:`z_{0.025}=${critical}`)+
-      wNote(t?'右側確率0.025（中央95%）と自由度から読む。':'右側確率0.025（中央95%）で読む。')],
-    ['③ 標準誤差：分散と標本数',math(emphasizedMean(t,'spread'))+
-      math(radical(t?hat:known,'n')+'='+radical(variance,n)+'='+se)+wNote(varianceName+'を標本数で割り、平方根を取る。')],
-    ['同じ式に、3つの値を戻す',math(substituteMean(center,critical,variance,n))+
-      wMap(['標本平均',center,'mean'],[t?'tの境界':'Zの境界',critical,'critical'],[varianceName+' ／ 標本数',variance+' ／ '+n,'spread'])],
-    ['下限を引く。上限を足す。',wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'))+
-      wEq(wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean'))+wNote('片側の幅：'+critical+' × '+se+' = '+margin+' '+unit)],
+    ['母平均の信頼区間',math(rule)+wNote(t?'母分散が未知 → t分布':'母分散が既知 → 標準正規分布')],
+    ['① 中心：標本平均',paired(rule,fillMean(t,{center}))+wNote('オレンジ：両方の x̄ に '+center+' '+unit+' が入る。')],
+    ['② 境界：分布表で探す',paired(rule,fillMean(t,{center,q}))+
+      wNote(t?`紫：右側確率0.025、自由度 ${n} − 1 = ${n-1}。t値は ${q}。`:`紫：右側確率0.025。Zの境界は ${q}。`)],
+    ['③ 標準誤差：分散と標本数',paired(rule,fillMean(t,{center,q,variance,n}))+
+      wNote('青緑：'+varianceName+' '+variance+' ÷ 標本数 '+n+' の平方根は '+se+' '+unit+'。')],
+    ['片側の幅を求める',anchored(rule,math(bracket(center+'-'+q+'\\times'+se,center+'+'+q+'\\times'+se)))+
+      wNote('片側の幅：'+q+' × '+se+' = '+margin+' '+unit)],
+    ['下限を引く。上限を足す。',anchored(rule,wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'))+
+      wEq(wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean')))],
     ['母平均の95%信頼区間',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+
       wChart(+lo,+hi,center,unit,...domain)+wNote('橙の点：標本平均 ／ 翼の先：母平均の95%信頼区間の両端')]
   ];
 }
 function varianceBeats({ss,n,a,b,lo,hi,center,unit,max}){
-  const df=n-1;
+  const df=n-1,rule=coloredChi(ssRule,chiUpper,chiLower);
   return [
-    ['母分散の区間',math(vformula)],
-    ['① 分子：左右で同じ偏差二乗和',math(chiRule(tint(ssRule,'spread'),chiUpper,chiLower))+
-      wMap(['両方の分子に入る偏差二乗和',ss+' '+unit,'spread'])],
-    ['② 分母：2つのχ²値を読む',math(chiRule(ssRule,tint(chiUpper,'critical'),tint(chiLower,'critical')))+
-      wEq(wSlot('自由度',n+' − 1 = '+df,'critical'))+
-      wMap(['右側0.025・大きい境界',a,'critical'],['右側0.975・小さい境界',b,'critical'])+table('chi')],
-    ['同じ式に、数値を戻す',math(chiRule(tint(ss,'spread'),tint(a,'critical'),tint(b,'critical')))+
+    ['母分散の区間',math(rule)],
+    ['① 分子：左右で同じ偏差二乗和',paired(rule,coloredChi(ss,chiUpper,chiLower))+
+      wNote('青緑：両方の分子に '+ss+' '+unit+' が入る。')],
+    ['② 分母：2つのχ²値を読む',paired(rule,coloredChi(ss,a,b))+
+      wNote(`紫：自由度 ${df}。右側0.025なら ${a}、右側0.975なら ${b}。`)+table('chi')],
+    ['同じ分子を、異なる分母で割る',anchored(rule,math(chiRule(ss,a,b)+'\\approx'+bracket(lo,hi)))+
       wNote('大きい値で割ると下限、小さい値で割ると上限。')],
     ['下限と上限',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+wChart(+lo,+hi,center,unit,0,max)+
       wNote(`橙の点：不偏分散 ${ss} ÷ ${df} = ${center}${unit}。翼は左右で同じ長さではない。`)]
@@ -193,33 +196,44 @@ const varianceTable=`<table class="deviation-table"><thead><tr><th>得点</th><t
   sample.html=`<h2>Curryの5試合から、母平均を推定。</h2><div class="scores">${scores.map(x=>`<div><span>🏀</span><b>${x}</b></div>`).join('')}</div>${small('架空の得点・独立な正規標本と仮定。')}`;
   sample.notes='Let the five scores hang on screen. Ask what we want to estimate: the underlying population mean, not the average of these five scores alone. Do not calculate it yet. Show the whole interval first.';
   whole.key='t-ci-formula';whole.notes='Show the bracketed formula as printed on p.133, with lowercase x-bar and t sub alpha. The first expression is the lower endpoint and the second is the upper endpoint. Don’t explain every symbol yet; next we will locate and calculate each part for Curry.';
+  whole.theme='cream';whole.html=math(emphasizedMean(true,'all'));
   for(const s of [whole,map])slides.splice(slides.indexOf(s),1);
   slides.splice(slides.indexOf(sample)+1,0,whole,map);
   worked(map.title,[
     ['① 中心：標本平均',math(emphasizedMean(true,'mean'))+math(averageFormula)],
-    ['5試合の得点を、そのまま代入',math(averageNumeric)+wNote('左右の式で使う中心は、同じ30点。')],
+    ['5試合の得点を、そのまま代入',anchored(emphasizedMean(true,'mean'),math(averageNumeric))+wNote('左右の式で使う中心は、同じ30点。')],
+    ['① 両方の x̄ を30に置き換える',paired(emphasizedMean(true,'all'),fillMean(true,{center:30}))],
     ['② 境界：t分布表',math(emphasizedMean(true,'critical'))+wNote('95%と標本数から、t値を決める。')],
     ['③ 標準誤差：まず不偏分散を求める',math(emphasizedMean(true,'spread'))+wNote('平方根の中に、標本から求める不偏分散がある。')]
   ]);
   map.notes='Break apart the same formula. Show the sample-mean rule, then reveal the five scores in place. Point to t as a lookup and the radical as the standard error. We’ll calculate the estimated variance and look up t before returning to the bracketed formula.';
   worked('まず、不偏分散',[
     ['標本不偏分散',math(varianceFormula)+wNote('標本平均からの偏差を二乗し、足して、n − 1で割る。')],
-    ['得点・標本平均・標本数を代入',math(varianceNumeric)+wNote('各得点から標本平均30を引く。試合数は5。')],
-    ['偏差二乗を足して、80',`<div class="var-work">${varianceTable}${math(String.raw`${hat}=\frac{1}{5-1}(49+1+1+4+25)`)}</div>`],
-    ['標本不偏分散は20点²',math(String.raw`${hat}=\frac{80}{5-1}=\frac{80}{4}=20`)+wNote('この20は、区間の式にある平方根の中に入る。')]
+    ['得点・標本平均・標本数を代入',anchored(varianceFormula,math(varianceNumeric))+wNote('各得点から標本平均30を引く。試合数は5。')],
+    ['偏差二乗を足して、80',`<div class="var-work">${varianceTable}<div>${anchored(varianceFormula,math(String.raw`49+1+1+4+25=80`))}</div></div>`],
+    ['標本不偏分散は20点²',anchored(varianceFormula,math(String.raw`${hat}=\frac{1}{5-1}\times80=\frac{80}{4}=20`))+wNote('この20は、区間の式にある平方根の中に入る。')]
   ]);
+  const tLookup=byTitle('表で探す場所');
+  const lookupBody=tLookup.html.replace(/^<h2>.*?<\/h2>/,'');
+  worked(tLookup.title,[
+    ['自由度4 × 右側0.025',anchored(emphasizedMean(true,'critical'),lookupBody)],
+    ['② t の場所に、2.7764を入れる',paired(emphasizedMean(true,'all'),fillMean(true,{center:30,q:'2.7764'}))]
+  ]);
+  tLookup.notes+=' Once you read the table, reveal the original interval and the working interval with 30 and 2.7764 already in place.';
   Object.assign(byTitle('まず、不偏分散'),{book:'132・134',notes:'Show the p.132 definition alone. Next, replace n with 5, each x_i with a score and x-bar with 30. The vertical table verifies each square before the sum of 80 is divided by 4. Point back to the radical of the interval formula.'});
 }
 {
   const whole=byTitle('母分散の95%信頼区間'),intro=byTitle('母分散の区間推定');
+  whole.theme='cream';whole.html=math(coloredChi(ssRule,chiUpper,chiLower));
   slides.splice(slides.indexOf(whole),1);slides.splice(slides.indexOf(intro)+1,0,whole);
   worked('20点²も、推定値。',[
     ['① 分子：同じ偏差二乗和を使う',math(chiRule(tint(ssRule,'spread'),chiUpper,chiLower))],
-    ['5試合の得点を代入',math(String.raw`${ssRule}=(23-30)^2+(29-30)^2+(31-30)^2+(32-30)^2+(35-30)^2=80`)+wNote('母平均の推定で求めた偏差二乗和を、両方の分子に戻す。')],
-    ['点と翼は、別の計算',math(String.raw`${hat}=\frac{1}{n-1}${ssRule}=\frac{80}{5-1}=20`)+wNote('橙の点は不偏分散20点²、両端の分子は偏差二乗和80点²。')]
+    ['5試合の得点を代入',anchored(coloredChi(ssRule,chiUpper,chiLower),math(String.raw`${ssRule}=(23-30)^2+(29-30)^2+(31-30)^2+(32-30)^2+(35-30)^2=80`))+wNote('母平均の推定で求めた偏差二乗和を、両方の分子に戻す。')],
+    ['点と翼は、別の計算',anchored(coloredChi(ssRule,chiUpper,chiLower),math(String.raw`${hat}=\frac{1}{n-1}${ssRule}=\frac{80}{5-1}=20`))+wNote('橙の点は不偏分散20点²、両端の分子は偏差二乗和80点²。')]
   ]);
   Object.assign(byTitle('20点²も、推定値。'),{book:'132・136',notes:'Focus the two identical numerators. Insert the five scores and mean 30. Reuse the sum of 80. The dot is 20, not the midpoint of this asymmetric interval.'});
   Object.assign(byTitle('母分散が既知なら'),{book:'124〜125・133',notes:'The textbook prints the Z standardization on p.125. Rearranging it for the population mean gives this bracketed interval. Use the p.124 upper-tail area for the 95% boundary. The variance here is known, not estimated from the sample.'});
+  Object.assign(byTitle('母分散が既知なら'),{theme:'cream',html:math(emphasizedMean(false,'all'))});
   for(const name of ['ロボットの電池','標本数で、幅を動かす','通学時間の母平均','答え：38.08〜45.92分'])byTitle(name).book='124〜125・133';
   const conv=byTitle('S²が与えられたら？');
   conv.html=`<h2>標本分散と標本不偏分散</h2>${math(String.raw`S_x^2=\frac{1}{n}\sum (x_i-\bar x)^2\qquad ${hat}=\frac{n}{n-1}S_x^2`)}${rev(math(String.raw`\sum(x_i-\bar x)^2=nS_x^2=5\times16=80`))}${rev(math(String.raw`${hat}=\frac{n}{n-1}S_x^2=\frac{5}{5-1}\times16=20`),2)}`;
