@@ -50,9 +50,50 @@ add('母分散：χ²','S²が与えられたら？',`<h2>「nで割った分散
 add('チャレンジ2','配送時間のばらつき',`<p class="challenge-time">5分 · 自分で解く</p><h2>配送時間は、どれくらい散らばる？</h2><div class="givens"><div><small>標本数</small><b>6回</b></div><div><small>偏差二乗和</small><b>30分²</b></div></div><ol><li>自由度と、2つのχ²値を求める。</li><li>母分散の95%信頼区間を求める。単位も書く。</li></ol>${small('独立な正規標本と仮定。') }<details><summary>参考公式</summary>${math(vformula)}</details>${table('chi')}`, 'Give five minutes. The sum of squared deviations is supplied to isolate the two-table-bound calculation. Students must use df5 and upper-tail0.025 and0.975. Check that they report variance units, minutes squared.',{book:'136',challenge:true});
 add('チャレンジ2','答え：2.34〜36.09分²',`${math(String.raw`\left[\frac{30}{12.8325},\ \frac{30}{0.8312}\right]`)}${rev('<div class="result">2.34〜36.09 分²</div>')}<div id="delivery-answer" class="chart reveal" data-step="1"></div>${small('自由度5。不偏分散の点推定は30 ÷ 5 = 6分²。')}`, 'Trace the two critical values in the linked table. Divide the same numerator30 by the larger and smaller values. Mark the variance estimate6 on the asymmetric interval. With rounded table values the upper endpoint rounds to36.09.',{book:'136',init:'deliveryAnswer'});
 add('まとめ・クイズ・AL','何を、区間で推定する？',`<h2>求めるもの → 条件 → 分布</h2><table class="choice"><thead><tr><th>求めるもの</th><th>条件</th><th>分布</th><th>単位の例</th></tr></thead><tbody><tr><td>母平均</td><td>母分散が未知</td><td>t</td><td>点・分・cm</td></tr><tr><td>母平均</td><td>母分散が既知</td><td>Z</td><td>点・分・cm</td></tr><tr><td>母分散</td><td>正規母集団</td><td>χ²</td><td>点²・分²・cm²</td></tr></tbody></table>`, 'Use this as the last decision check before the quiz. Ask what the target parameter is before asking which table. All sample examples assume independent observations, and exact small-sample t and chi-square intervals assume normal populations.',{book:'133〜136'});
-add('まとめ・クイズ・AL','20分、試験と同じように。',`<h1>期末試験形式<br>3問 · 20分</h1><div class="quiz-links">${link('quiz.html?p','問題を開く')}${link('quiz-answers.html?p','答え合わせ')}</div>${small('計算過程を示す。上下限と単位を、忘れずに。')}`, 'Open the HTML quiz in a new tab and give20 minutes. It contains a raw-variance-to-t interval problem, a variance interval from five scores, and a known-variance Z interval with sample-size comparison. References are collapsed by default. The answer page uses the simple word stats as a reveal step.',{theme:'dark'});
+add('まとめ・クイズ・AL','20分、試験と同じように。',`<h1>期末試験形式<br>3問 · 20分</h1><div class="quiz-links">${link('quiz.html?p','問題を開く')}${link('quiz-answers.html?p','答え合わせ')}</div>${small('計算過程を示す。上下限と単位を、忘れずに。')}`, 'Open the HTML quiz in a new tab and give20 minutes. It combines prior work on unbiased variance, standardization and normal-table lookup with all three interval methods: t, Z and chi-square. References are collapsed by default. Unlock the worked answers after the quiz.',{theme:'dark'});
 add('まとめ・クイズ・AL','AL：ここからは、自分で。',`<h1>母平均の<br>信頼区間を作る。</h1><div class="al-steps"><span>① 条件を読む</span><span>② 分散の定義を確認</span><span>③ 表を選ぶ</span><span>④ 下限・上限と単位</span></div>${link('../../../assets/worksheet-previews/w09/index.html?p','ワークシートを見る')}`, 'Students now apply the workflow independently to the assigned AL worksheet. Do not reveal or populate homework answers. Remind them to check whether the given sample variance uses n or n−1, show their working and write both bounds with units.',{book:'133〜136'});
 add('まとめ・クイズ・AL','点だけでなく、幅を見る。',`<div class="tie-scene"><img src="images/tie.png" alt="左右の境界を思い出すTIEファイター"><h1>推定値に、幅を。</h1><p>下限 ── 点推定 ── 上限</p></div>`, 'Return to the image. The memory students should leave with: identify the target, choose the appropriate distribution, and report an interval rather than treating a sample estimate as exact.',{theme:'space'});
+
+// Keep preview links to the original lecture valid as new practice slides are inserted.
+const legacyLecture = slides.slice();
+const insertAfter=(title,build)=>{
+  const at=slides.findIndex(s=>s.title===title);
+  const start=slides.length;
+  build();
+  const extra=slides.splice(start);
+  slides.splice(at+1,0,...extra);
+};
+insertAfter('下限、そして上限',()=>{
+  add('母平均：t','Curryの5試合を引き直す',`<h2>次の5試合でも<br>同じ区間になる？</h2><p class="english">Repeated t intervals</p>
+    ${link('curry-explore.html?p','Curryの5試合をシミュレーション')}`, 'Start with the worked example. Point to the orange mean and its wings. Generate one five-game sample and compare the new center and bounds. Use the single-game dot to ask why there are no wings: with unknown variance, one observation leaves zero degrees of freedom.',{book:'133',key:'curry-lab'});
+});
+insertAfter('100本の区間を作る',()=>{
+  add('チャレンジ2','10本中9本',`<p class="challenge-time">2分 · 自分で解く</p><h2>10本のうち、9本が母平均を含んだ。</h2>
+    <ol><li>今回の割合を求める。</li><li>95%の方法が間違っていると言える？ 理由も書く。</li></ol>`,
+    'Use the Curry exploration to motivate this question. Give two minutes. Ask students separately for the observed proportion and the long-run meaning of the confidence level.',{challenge:true,book:'133'});
+  add('チャレンジ2','今回の90%と、長期の95%',`<h2>今回の10本：9 ÷ 10 = <strong>90%</strong></h2>
+    <div id="capture-answer" class="chart"></div>${rev('<h3>95%は、同じ方法を繰り返したときの長期的な割合。</h3>')}`,
+    'Nine intervals in this illustrative run cross the fixed population mean; one does not. A short run need not match 95%. This tells us about the procedure, not where individual scores fall.',{book:'133',mount(root){
+      const intervals=[[25,33],[26,34],[24,32],[29,39],[27,34],[26,31],[28,35],[25,36],[31,38],[24,35]];
+      const x=v=>180+(v-23)*40;
+      root.querySelector('#capture-answer').innerHTML=svg(`<title>10本のうち9本が母平均30を含む。</title><line x1="${x(30)}" x2="${x(30)}" y1="36" y2="278" stroke="#537879" stroke-width="2" stroke-dasharray="6 5"/><text x="${x(30)}" y="26" text-anchor="middle">μ = 30</text>${intervals.map(([lo,hi],i)=>`<path d="M${x(lo)} ${50+i*24}H${x(hi)}" stroke="${lo>30?'#61767c':'#c66934'}" stroke-width="6"/>`).join('')}`);
+    }});
+});
+insertAfter('標本数で、幅を動かす',()=>{
+  add('チャレンジ3','通学時間の母平均',`<p class="challenge-time">4分 · 自分で解く</p><h2>通学時間の母平均は、何分くらい？</h2>
+    <div class="givens"><div><small>標本数 / n</small><b>36人</b></div><div><small>標本平均 / Sample mean</small><b>42分</b></div><div><small>母標準偏差 / Population SD</small><b>12分</b></div></div>
+    <ol><li>Zとtのどちらを使うか。理由も書く。</li><li>母平均の95%信頼区間を求める。</li></ol>${small('授業用のモデル。独立な正規標本、母標準偏差は既知。')}<details><summary>参考公式 / Formula</summary>${math(zformula)}</details>`,
+    'Use after the sample-size slider. Let students decide whether 12 is a population standard deviation or a sample statistic. The numbers are for a classroom model, not measured commute times.',{challenge:true,book:'134 脚注1'});
+  add('チャレンジ3','答え：38.08〜45.92分',`<h2>母標準偏差が既知 → Z</h2>${math(String.raw`42\pm1.96\frac{12}{\sqrt{36}}=42\pm3.92`)}
+    ${rev('<b class="result">38.08〜45.92分</b><div id="commute-answer" class="chart"></div>')}`,
+    'The standard error is 12 divided by 6, which is 2 minutes. Multiply by 1.96 and add/subtract 3.92 from 42. These bounds estimate the population mean, not a range for one student’s commute.',{book:'134 脚注1',mount(root){
+      root.querySelector('#commute-answer').innerHTML=intervalGraphic(38.08,45.92,42,'分',35,49);
+    }});
+});
+for(const s of slides) {
+  if(s.section==='チャレンジ1') s.section='チャレンジ2';
+  else if(s.section==='チャレンジ2') s.section=legacyLecture.includes(s)?'チャレンジ4':'チャレンジ1';
+}
 
 const story = window.Week9Story || [];
 const archivedOpeners = [...story, ...(window.Week9Openers || [])];
@@ -66,7 +107,7 @@ const openers = archiveMode ? archivedOpeners : candidates;
 if (!archiveMode) slides.splice(0,originalOpeningCount);
 const openingCount = openers.length;
 slides.unshift(...openers);
-const destinations = new Map(openers.flatMap((slide, i) => slide.key ? [[slide.key,i]] : []));
+const destinations = new Map(slides.flatMap((slide, i) => slide.key ? [[slide.key,i]] : []));
 if (archiveMode) destinations.set('jobs',openingCount);
 const lectureStart = openingCount + (archiveMode ? originalOpeningCount : 0);
 destinations.set('lecture',lectureStart);
@@ -80,7 +121,8 @@ function locationIndex() {
   // Existing exploration links use the original lecture numbering.
   if (params.has('page')) {
     const baseIndex = (+params.get('page') || 1) - 1;
-    return archiveMode ? openingCount + baseIndex : lectureStart + Math.max(0,baseIndex-originalOpeningCount);
+    const target=slides.indexOf(legacyLecture[baseIndex]);
+    return target<0 ? lectureStart : target;
   }
   return 0;
 }

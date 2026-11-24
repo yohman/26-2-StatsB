@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>Curryの5試合 · Week 9</title>
+<script src="../../../assets/preview-access.js"></script>
+<script defer src="../../../assets/future-stats-math.js"></script>
+<style>
+:root{color-scheme:light;background:#fffdf8;color:#223b43;font:15px/1.38 system-ui,"Hiragino Sans",sans-serif;--orange:#b45425;--quiet:#506469}
+*{box-sizing:border-box}body{margin:0}main{max-width:1050px;margin:auto;padding:12px clamp(12px,2.5vw,28px)}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:6px 18px;flex-wrap:wrap}
+h1{font-family:"Hiragino Mincho ProN","Yu Mincho",serif;font-size:clamp(24px,4vw,39px);margin:0;line-height:1.14}
+p{margin:0}.caption,.credit,.legend{color:var(--quiet);font-size:.83rem}a{color:#17655e;text-underline-offset:.17em}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:9px 0}
+button{font:inherit;border:0;border-radius:6px;padding:5px 10px;cursor:pointer;background:#e7efea;color:#24433e}
+.draw{background:#8e3d20;color:white}.draw:hover{background:#6f2e17}.compare{margin-left:auto}
+button:focus-visible,a:focus-visible{outline:2px solid #236b66;outline-offset:2px}
+.result{display:grid;grid-template-columns:repeat(3,1fr);text-align:center;gap:6px}
+.result span,.label{font-size:.78rem;color:var(--quiet)}.result b{display:block;font-size:clamp(20px,3.5vw,31px);color:var(--orange);font-variant-numeric:tabular-nums}
+.plot{width:100%;display:block;overflow:visible}.legend{display:flex;justify-content:space-between;gap:4px 16px;flex-wrap:wrap}
+.math-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;align-items:start;margin-top:9px}
+table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:right;font-variant-numeric:tabular-nums}
+caption{text-align:left;font-weight:700;padding-bottom:3px}th,td{padding:2px 5px;font-size:.87rem}th{background:#eef2ea;font-weight:600}
+td:first-child,th:first-child{text-align:left}tbody tr:nth-child(even){background:#f6f5ee}tfoot{font-weight:750}
+.steps{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 9px;align-items:baseline}
+.steps dt{font-size:.78rem;color:var(--quiet)}.steps dd{margin:0;font-family:Cambria,"Times New Roman",serif;font-size:clamp(15px,2vw,19px);font-variant-numeric:tabular-nums}
+.credit{margin-top:8px}rt{font-size:.59em}.english{font-size:.72em;color:var(--quiet);font-weight:400}
+@media(max-width:600px){.math-grid{grid-template-columns:1fr;gap:8px}.compare{margin-left:0}.controls button{padding:5px 7px}.steps dd{font-size:16px}}
+</style>
+</head>
+<body>
+<main>
+  <header><h1>Curryの5試合</h1><p class="caption">授業用の架空の得点。独立な正規モデル：μ = 30、σ = √20。</p></header>
+  <div class="controls" aria-label="標本を抽出">
+    <button class="draw" type="button" data-count="1">5試合 × 1組</button>
+    <button class="draw" type="button" data-count="10">× 10組</button>
+    <button class="draw" type="button" data-count="100">× 100組</button>
+    <button class="compare" type="button" id="one">1試合だけ</button>
+    <button type="button" id="reset">リセット</button>
+  </div>
+  <div class="result" aria-label="母平均の95%信頼区間">
+    <div><span><ruby>下<rt>か</rt></ruby><ruby>限<rt>げん</rt></ruby> / Lower</span><b id="lower"></b></div>
+    <div><span><ruby>標<rt>ひょう</rt></ruby><ruby>本<rt>ほん</rt></ruby><ruby>平<rt>へい</rt></ruby><ruby>均<rt>きん</rt></ruby> / Sample mean</span><b id="mean"></b></div>
+    <div><span><ruby>上<rt>じょう</rt></ruby><ruby>限<rt>げん</rt></ruby> / Upper</span><b id="upper"></b></div>
+  </div>
+  <svg class="plot" id="plot" role="img"></svg>
+  <div class="legend"><span id="coverage" role="status"></span><span>破線：モデルの母平均 30点 ／ 翼：95%信頼区間（履歴の灰色は30点を含まない）</span></div>
+  <p id="single" class="caption" role="status" hidden></p>
+  <div class="math-grid">
+    <table>
+      <caption id="sample-name">スライドの5試合 <span class="english">Worked example</span></caption>
+      <thead><tr><th scope="col">試合</th><th scope="col">得点 Xᵢ</th><th scope="col">偏差 Xᵢ−X̄</th><th scope="col">偏差²</th></tr></thead>
+      <tbody id="sample"></tbody><tfoot id="sums"></tfoot>
+    </table>
+    <dl class="steps" aria-label="公式と代入">
+      <dt>標本平均</dt><dd id="calc-mean"></dd>
+      <dt><ruby>不<rt>ふ</rt></ruby><ruby>偏<rt>へん</rt></ruby><ruby>分<rt>ぶん</rt></ruby><ruby>散<rt>さん</rt></ruby></dt><dd id="calc-var"></dd>
+      <dt><ruby>自<rt>じ</rt></ruby><ruby>由<rt>ゆう</rt></ruby><ruby>度<rt>ど</rt></ruby>と t</dt><dd id="calc-t"></dd>
+      <dt>標準誤差</dt><dd id="calc-se"></dd>
+      <dt>片側の幅</dt><dd id="calc-margin"></dd>
+      <dt>95%信頼区間</dt><dd id="calc-ci"></dd>
+    </dl>
+  </div>
+  <p class="credit">μとσはデータ生成用。区間の計算には使いません。表示のみ丸めています。教科書 p.133・t表 p.203。<a href="../week06/t-table.html?p" target="_blank" rel="noopener">t分布表 ↗</a></p>
+</main>
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const M=window.FutureStats,$=id=>document.getElementById(id),truth=30,n=5,t=M.tq(.025,4);
+  const example=[23,29,31,32,35], f=(v,d=2)=>Number(v.toFixed(d)).toFixed(d), concise=v=>Number(v.toFixed(2)).toString();
+  const history=[];
+  let sample=example,one=null,drawn=0,hits=0;
+  function stats(values){
+    const s=M.summary(values),margin=t*s.se;
+    return {...s,margin,lo:s.mean-margin,hi:s.mean+margin};
+  }
+  const drawGame=()=>truth+Math.sqrt(20)*M.normal();
+  function chart(s){
+    const rows=history.slice(-100), p=$('plot'), w=Math.max(280,Math.round(p.clientWidth||760));
+    const axis=rows.length?149:85, h=axis+21, pad=25, plotW=w-2*pad, rowStart=one===null?52:78;
+    const lo=Math.floor(Math.min(18,one??truth,s.lo,...rows.map(r=>r.lo))/5)*5;
+    const hi=Math.ceil(Math.max(42,one??truth,s.hi,...rows.map(r=>r.hi))/5)*5;
+    const X=x=>pad+(x-lo)/(hi-lo)*plotW;
+    const whiskers=(r,y,cap,stroke,width,opacity,dot)=>`<g fill="${stroke}" stroke="${stroke}" opacity="${opacity}"><path d="M${X(r.lo)} ${y}H${X(r.hi)} M${X(r.lo)} ${y-cap}v${cap*2} M${X(r.hi)} ${y-cap}v${cap*2}" fill="none" stroke-width="${width}"/><circle cx="${X(r.mean)}" cy="${y}" r="${dot}" stroke="none"/></g>`;
+    const ticks=[];for(let v=lo;v<=hi;v+=hi-lo>40?10:5)ticks.push(`<text x="${X(v)}" y="${axis+15}" text-anchor="middle">${v}</text>`);
+    p.setAttribute('viewBox',`0 0 ${w} ${h}`);
+    p.setAttribute('aria-label',`最新の標本平均 ${f(s.mean)} 点、95%信頼区間 ${f(s.lo)} から ${f(s.hi)} 点。縦線は母平均30点。`);
+    p.innerHTML=`<path d="M${X(truth)} 4V${axis} M${pad} ${axis}H${w-pad}" stroke="#82959a" stroke-dasharray="3 3" fill="none"/>
+      ${rows.map((r,i)=>whiskers(r,rowStart+(i+.5)*(140-rowStart)/rows.length,0,r.lo<=truth&&truth<=r.hi?'#b45425':'#61767c',rows.length>45?1:1.5,.52,rows.length>45?1:1.9)).join('')}
+      ${whiskers(s,29,9,'#c45e29',3.5,1,7)}
+      ${one===null?'':`<circle cx="${X(one)}" cy="51" r="5" fill="#c45e29"/><text x="${X(one)}" y="61" text-anchor="middle" dominant-baseline="hanging" font-size="10" fill="#8e3d20">1試合</text>`}
+      <g font-size="11" fill="#506469">${ticks.join('')}<text x="${w-3}" y="${axis+15}" text-anchor="end">点</text></g>`;
+  }
+  function show(){
+    const s=stats(sample),sum=sample.reduce((a,b)=>a+b,0);
+    ['lower','mean','upper'].forEach((key,i)=>$(key).textContent=f([s.lo,s.mean,s.hi][i])+' 点');
+    $('sample-name').textContent=drawn?`第 ${drawn} 組（5試合）`:'スライドの5試合';
+    $('sample').innerHTML=sample.map((x,i)=>`<tr><td>${i+1}</td><td>${concise(x)}</td><td>${f(x-s.mean)}</td><td>${f((x-s.mean)**2)}</td></tr>`).join('');
+    $('sums').innerHTML=`<tr><td>合計</td><td>${f(sum)}</td><td>0</td><td>${f(s.ss)}</td></tr>`;
+    $('calc-mean').textContent=`X̄ = ΣXᵢ / n = ${f(sum)} / 5 = ${f(s.mean)}`;
+    $('calc-var').textContent=`σ̂² = Σ(Xᵢ − X̄)² / (n − 1) ≈ ${f(s.ss)} / 4 ≈ ${f(s.s2)}`;
+    $('calc-t').textContent='ν = n − 1 = 4、t₀.₀₂₅(4) ≈ '+f(t,4);
+    $('calc-se').textContent=`SE = √(σ̂²/n) ≈ √(${f(s.s2)}/5) ≈ ${f(s.se,4)}`;
+    $('calc-margin').textContent=`m = t × SE ≈ ${f(t,4)} × ${f(s.se,4)} ≈ ${f(s.margin,4)}`;
+    $('calc-ci').textContent=`X̄ ± m ≈ ${f(s.mean)} ± ${f(s.margin,4)} → [${f(s.lo)}, ${f(s.hi)}] 点`;
+    $('coverage').textContent=drawn?`30点を含む：${hits} / ${drawn} 組（${f(100*hits/drawn,1)}%）・図は直近 ${history.length} 組`:'上の図はスライドの例。抽出した区間を下に重ねます。';
+    $('single').hidden=one===null;
+    $('single').textContent=one===null?'':`1試合の得点は ${f(one)} 点。自由度 n − 1 = 0 のため、母分散を標本から推定できず、tの区間は作れません。`;
+    chart(s);
+  }
+  document.querySelectorAll('[data-count]').forEach(b=>b.onclick=()=>{
+    for(let i=0;i<Number(b.dataset.count);i++){
+      sample=Array.from({length:n},drawGame);
+      const row=stats(sample);
+      drawn++;hits+=row.lo<=truth&&truth<=row.hi?1:0;history.push(row);
+    }
+    if(history.length>100)history.splice(0,history.length-100);
+    show();
+  });
+  $('one').onclick=()=>{one=drawGame();show();};
+  $('reset').onclick=()=>{one=null;sample=example;history.length=drawn=hits=0;show();};
+  new ResizeObserver(()=>chart(stats(sample))).observe($('plot'));
+  show();
+});
+</script>
+</body></html>
