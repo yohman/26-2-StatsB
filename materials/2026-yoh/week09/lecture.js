@@ -55,12 +55,12 @@ add('母平均：Z','tとZの公式：分散のハット','', 'Compare the two f
 add('母平均：Z','Zの区間推定の公式','', 'Show the symbolic interval before revealing the three leaders. The standard error uses the known population variance, with no hat on sigma squared. The critical value is from the standard normal distribution.',{theme:'cream',className:'formula-preview',book:'124〜125・133',key:'z-interval-formula'});
 add('母平均：Z','ロボットの電池：計算と答え','', 'Insert the observed mean, then the known variance and sample size. Locate the right-tail probability 0.02500 in the Z table. The row and column give 1.96, so the margin is 3.92 minutes.',{book:'124〜125・133',key:'battery-solution'});
 add('母平均：Z','標本数で、幅を動かす',`<h2>同じ平均、同じ母標準偏差。</h2><div id="size-chart" class="chart"></div><div class="compact-controls"><label>n <input id="size" type="range" min="5" max="100" value="25" step="1"></label><output id="size-result"></output></div>${math(String.raw`120\pm1.96\frac{10}{\sqrt n}`)}`, 'Use the sample-size slider with population standard deviation10 fixed. Explain the square-root relationship with one concrete comparison: quadrupling n halves the margin. Holding sample mean120 fixed isolates the effect of sample size.',{book:'134 脚注1',init:'size'});
-add('母分散：χ²','母分散の区間推定',term('母分散の区間推定','Confidence interval for population variance'), 'Now change the target: not the mean score, but the underlying variance of scores. A point estimate of20 does not mean we know the population variance exactly.',{theme:'gold',book:'135〜136'});
-add('母分散：χ²','20点²も、推定値。',`<div class="scores mini">${[23,29,31,32,35].map(x=>`<b>${x}</b>`).join('')}</div><div class="hero">20<span>点²</span></div><p>不偏分散による、母分散の点推定。</p>${rev('<h2>散らばりに、下限と上限を。</h2>')}`, 'Return to exactly the same five simulated Curry scores. The mean was30 and the sum of squared deviations80. Dividing80 by4 estimated variance as20. Now construct a confidence interval for that population variance.',{theme:'cream',book:'135〜136'});
-add('母分散：χ²','カイ二乗は、左右非対称',`<h2>同じ中央95%。左右の境界は違う。</h2><p class="english">Chi-square distribution · ν = 4</p><div id="chi-tail-chart" class="chart"></div><div class="tail-labels"><span>2.5%</span><b>95%</b><span>2.5%</span></div>${rev('<p>右側0.975 → <b>0.4844</b> ／ 右側0.025 → <b>11.1433</b></p>')}${table('chi')}`, 'For a normal population, the sum of squared deviations divided by the population variance follows chi-square with df4. We use two different positive critical values. The table is upper-tail: the smaller boundary leaves97.5% to its right, and the larger leaves2.5%. Do not use a symmetric plus/minus formula.',{book:'135〜136',init:'chiTails'});
-add('母分散：χ²','母分散の95%信頼区間',math(vformula), 'This is the textbook variance-interval formula on page136. Keep the sum of squared deviations in both numerators. The larger denominator belongs to the lower endpoint. Normality is required for this chi-square interval.',{theme:'dark',book:'136',className:'formula-slide'});
-add('母分散：χ²','大きい数で割ると、小さくなる',`<h2>偏差二乗和は、どちらも80。</h2><div class="bounds"><div><p>下限</p><button class="denominator" data-denom="large">${math(String.raw`\frac{80}{11.1433}`)}</button><b id="variance-low" hidden>7.18 点²</b></div><div><p>上限</p><button class="denominator" data-denom="small">${math(String.raw`\frac{80}{0.4844}`)}</button><b id="variance-high" hidden>165.15 点²</b></div></div>${small('式をクリックして、計算結果を確認。')}<div id="variance-interval" class="chart concealed"></div>`, 'Ask students which denominator gives the smaller result. Click each expression to reveal its endpoint. The interval is very wide and asymmetric because this is a tiny sample. Units are points squared. The dot20 is the unbiased point estimate, not the midpoint of this interval.',{book:'136',init:'varianceAnswer'});
-add('母分散：χ²','S²が与えられたら？',`<h2>「nで割った分散」と、混同しない。</h2>${math(String.raw`S^2=\frac{1}{n}\sum(X_i-\bar X)^2`)}${rev(math(String.raw`\sum(X_i-\bar X)^2=nS^2=5\times16=80`))}${rev(math(String.raw`\widehat{\sigma_x^2}=\frac{nS^2}{n-1}=\frac{80}{4}=20`),2)}`, 'This is the conversion students need when a question or worksheet gives sample variance with divisor n. Rebuild the sum of squares first. For mean t intervals use the unbiased variance20; for variance intervals use the sum of squares80. These are our practice numbers, not homework cell answers.',{book:'134 脚注2・136'});
+add('母分散：χ²','母分散の区間推定',term('母分散の区間推定','Confidence interval for population variance'), 'Change the target from the population mean to the population variance. How much do individual observations vary, rather than where is their average?',{theme:'gold',book:'135〜136'});
+add('母分散：χ²','母分散の95%信頼区間の公式','', 'Show the full formula before giving any data. Reveal the common numerator first, then the two denominators. For a 95% interval, the chi-square table uses upper-tail areas 0.025 and 0.975. The large cutoff goes below the lower bound because it yields the smaller quotient.',{theme:'cream',book:'136',className:'formula-preview chi-preview',key:'variance-ci-formula'});
+add('母分散：χ²','カフェのドリンク：例題','', 'Read the entire question before solving. The campus café measures seven independent pours at the same setting. Assume a normal population. We are estimating the variance of the pour volumes, in squared milliliters, at the explicitly stated 95% confidence level.',{book:'135〜136',className:'practice-question pour-question',key:'variance-ci-problem'});
+add('母分散：χ²','① 分子：7杯の偏差二乗和','', 'Start with the seven measurements. Total 1750 divided by 7 gives the mean 250 mL. Subtract 250 from each value, square the deviations, and add them to get 36 mL². That sum, rather than the unbiased point estimate, goes in both numerators.',{book:'132・136',key:'variance-ci-numerator'});
+add('母分散：χ²','②・③ 分母から上下限へ','', 'Seven measurements give six degrees of freedom. On the chi-square curve the central 95% leaves 2.5% in each tail. Read upper-tail probabilities 0.025 then 0.975 from the df 6 row. Divide 36 by the large cutoff for the lower endpoint and by the small cutoff for the upper endpoint. The dot is the unbiased variance estimate 36/6 = 6 mL², not the interval midpoint.',{book:'135〜136',key:'variance-ci-answer'});
+add('母分散：χ²','S²が与えられたら？','', 'Show how to recover the numerator if the raw measurements are replaced by a supplied variance with divisor n. For the seven pours, S² would be 36/7; multiplying by seven recovers 36. The unbiased variance uses divisor n−1 and equals 6.',{book:'134 脚注1・136'});
 add('チャレンジ2','配送時間のばらつき',`<p class="challenge-time">5分 · 自分で解く</p><h2>配送時間は、どれくらい散らばる？</h2><div class="givens"><div><small>標本数</small><b>6回</b></div><div><small>偏差二乗和</small><b>30分²</b></div></div><ol><li>自由度と、2つのχ²値を求める。</li><li>母分散の95%信頼区間を求める。単位も書く。</li></ol>${small('独立な正規標本と仮定。') }<details><summary>参考公式</summary>${math(vformula)}</details>${table('chi')}`, 'Give five minutes. The sum of squared deviations is supplied to isolate the two-table-bound calculation. Students must use df5 and upper-tail0.025 and0.975. Check that they report variance units, minutes squared.',{book:'136',challenge:true});
 add('チャレンジ2','答え：2.34〜36.09分²',`${math(String.raw`\left[\frac{30}{12.8325},\ \frac{30}{0.8312}\right]`)}${rev('<div class="result">2.34〜36.09 分²</div>')}<div id="delivery-answer" class="chart reveal" data-step="1"></div>${small('自由度5。不偏分散の点推定は30 ÷ 5 = 6分²。')}`, 'Trace the two critical values in the linked table. Divide the same numerator30 by the larger and smaller values. Mark the variance estimate6 on the asymmetric interval. With rounded table values the upper endpoint rounds to36.09.',{book:'136',init:'deliveryAnswer'});
 add('まとめ・クイズ・AL','何を、区間で推定する？',`<h2>求めるもの → 条件 → 分布</h2><table class="choice"><thead><tr><th>求めるもの</th><th>条件</th><th>分布</th><th>単位の例</th></tr></thead><tbody><tr><td>母平均</td><td>母分散が未知</td><td>t</td><td>点・分・cm</td></tr><tr><td>母平均</td><td>母分散が既知</td><td>Z</td><td>点・分・cm</td></tr><tr><td>母分散</td><td>正規母集団</td><td>χ²</td><td>点²・分²・cm²</td></tr></tbody></table>`, 'Use this as the last decision check before the quiz. Ask what the target parameter is before asking which table. All sample examples assume independent observations, and exact small-sample t and chi-square intervals assume normal populations.',{book:'133〜136'});
@@ -166,16 +166,20 @@ function intervalPreview({annotate=false,isT=true,startBare=false}={}){
     callout('critical',`③ ${cutoff}の境界値`,`${cutoff} critical value`,2+offset):'';
   return `<div class="legend-expression interval-diagram${isT?'':' z-interval-diagram'}">${meanExpression(isT)}${callouts}</div>`;
 }
-function chiLegend(values={},active=[]){
+function chiExpression({ss,a,b}={},active=[]){
   const focus=new Set(active);
   const summed=mo('∑')+msup(mrow(mo('(')+msub(mi('x'),mi('i'))+mo('−')+mbar+mo(')')),mn(2));
   const cutoff=tail=>msub(msup(mi('χ'),mn(2)),mn(tail))+mdof;
-  const part=(v,role,side)=>`<mrow class="legend-${role}${focus.has(role)||focus.has(side)?' is-focus':''}">${v}</mrow>`;
-  const render=({ss,a,b})=>{
-    const half=(value,tail,side)=>mathToken(mfrac(part(ss==null?summed:mn(ss),'spread',side),part(value==null?cutoff(tail):mn(value),'critical',side)));
-    return bracketMark('left')+half(a,'0.025','lower')+sign(',')+half(b,'0.975','upper')+bracketMark('right');
-  };
-  return formulaLegend('chi-pair',render({}),render(values));
+  const part=(v,role,side)=>`<mrow data-chi-part="${role==='spread'?'numerator':side}" class="legend-${role}${focus.has(role)||focus.has(side)||focus.has(side+'-'+role)?' is-focus':''}">${v}</mrow>`;
+  const half=(value,tail,side)=>`<span data-side="${side}">${mathToken(mfrac(part(ss==null?summed:mn(ss),'spread',side),part(value==null?cutoff(tail):mn(value),'critical',side)))}</span>`;
+  return bracketMark('left')+half(a,'0.025','lower')+sign(',')+half(b,'0.975','upper')+bracketMark('right');
+}
+function chiLegend(values={},active=[],bounds){
+  return formulaLegend('chi-pair',chiExpression({},active),chiExpression(values,active),bounds);
+}
+function chiPreview(){
+  const callout=(part,role,ja,en,step)=>`<div class="formula-callout chi-label-${part} legend-${role} reveal" data-step="${step}"><span class="formula-leader" aria-hidden="true"></span><span>${ja}<small>${en}</small></span></div>`;
+  return `<h2>母分散の95%信頼区間</h2><div class="legend-expression interval-diagram chi-interval-diagram">${chiExpression()}${callout('numerator','spread','① 共通の分子：偏差二乗和','Sum of squared deviations',1)}${callout('lower','critical','② 下限の分母：大きいχ²値','Larger chi-square critical value',2)}${callout('upper','critical','③ 上限の分母：小さいχ²値','Smaller chi-square critical value',3)}</div>`;
 }
 const usingLegend={legend:true};
 function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,target,t=false,mapEndpoints=false}){
@@ -225,7 +229,6 @@ worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critic
   ],usingLegend);
 }
 worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critical:'1.96',se:'2',margin:'3.92',lo:'38.08',hi:'45.92',unit:'分',domain:[35,49],target:'学生全体の平均通学時間'}),usingLegend);
-worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180,target:'Curryの1試合あたりの得点の母分散'}).slice(2),usingLegend);
 worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40,target:'配送時間の母分散'}),usingLegend);
 {
   const n=foodTruckWaits.length,total=foodTruckWaits.reduce((a,x)=>a+x,0),center=total/n,df=n-1;
@@ -304,23 +307,32 @@ const squareTotal=()=>`<div class="var-work curry-deviations">${varianceTable}<d
   tLookup.notes='Trace the row and column in the upper-tail table. Reveal 2.7764 in the two purple slots. The center and standard-error values stay where they were.';
 }
 {
-  const whole=byTitle('母分散の95%信頼区間'),intro=byTitle('母分散の区間推定');
-  slides.splice(slides.indexOf(whole),1);slides.splice(slides.indexOf(intro)+1,0,whole);
-  worked(whole.title,[['母分散の95%信頼区間','',chiLegend({},['spread','critical'])]],usingLegend);
-  worked('20点²も、推定値。',[
-    ['① 分子：同じ偏差二乗和',math(ssRule),chiLegend({},['spread'])],
-    ['① 5試合から求めた偏差二乗和',squareTotal(),chiLegend({ss:80},['spread'])],
-    ['点推定は標本不偏分散',math(String.raw`${hat}=\frac{80}{5-1}=20`)+wNote('区間の分子は80点²。点推定は20点²。'),chiLegend({ss:80},['spread'])]
+  const pours=[251,248,250,253,247,253,248];
+  const n=pours.length,df=n-1,total=pours.reduce((sum,x)=>sum+x,0),mean=total/n;
+  const deviations=pours.map(x=>x-mean),ss=deviations.reduce((sum,d)=>sum+d*d,0),variance=ss/df;
+  const a=M.chiq(.025,df).toFixed(4),b=M.chiq(.975,df).toFixed(4),filled={ss,a,b},unit='mL²';
+  const lo=(ss/Number(a)).toFixed(2),hi=(ss/Number(b)).toFixed(2);
+  const row=(label,values)=>`<tr><th scope="row">${label}</th>${values.map(v=>`<td>${v}</td>`).join('')}</tr>`;
+  const deviationsTable=`<table class="deviation-table pour-deviations" aria-label="注いだ量と偏差の二乗"><thead><tr><th scope="col">回</th>${pours.map((_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${row('量（mL）',pours)}${row('偏差（量 − '+mean+'）',deviations)}${row('偏差の二乗',deviations.map(d=>d*d))}</tbody></table>`;
+  const lookup=(side)=>`<table class="lookup pour-lookup" aria-label="カイ二乗分布表の抜粋（上側確率）"><thead><tr><th scope="col">自由度 ＼ 上側確率</th><th scope="col" class="${side==='lower'?'active':''}">0.025</th><th scope="col" class="${side==='upper'?'active':''}">0.975</th></tr></thead><tbody><tr><th scope="row" class="active">${df}</th><td class="${side==='lower'?'target':''}">${a}</td><td class="${side==='upper'?'target':''}">${b}</td></tr></tbody></table>`;
+  byTitle('母分散の95%信頼区間の公式').html=chiPreview();
+  byTitle('カフェのドリンク：例題').html=`<h2>カフェのドリンクは、毎回どれくらいばらつく？</h2><p class="practice-prompt">学内カフェで、同じ設定のドリンクマシンから7杯分を計量した。</p><div class="practice-values">${pours.map(x=>`<b>${x}</b>`).join('')}<small>mL</small></div><p class="pour-task">1杯の量の<strong>母分散の95%信頼区間</strong>を求めよ。</p>${small('授業用のデータ。各回の量は独立で、同じ正規分布に従うと仮定する。')}`;
+  worked('① 分子：7杯の偏差二乗和',[
+    ['7杯の標本平均',math(String.raw`\bar x=\frac{${pours.join('+')}}{${n}}=\frac{${total}}{${n}}=${mean}\;\mathrm{mL}`),chiLegend({},['spread'])],
+    ['① 各回の偏差を二乗して足す',deviationsTable+math(String.raw`${ssRule}=${deviations.map(d=>d*d).join('+')}=${ss}\;\mathrm{mL}^2`),chiLegend({ss},['spread'])]
   ],usingLegend);
-  const chiTails=byTitle('カイ二乗は、左右非対称');
-  worked(chiTails.title,[['② χ²分布：2つの境界値',`<div class="work-chart">${density('chi')}</div>${table('chi')}${wNote('自由度4。上側確率0.025と0.975の境界値を読む。')}`,chiLegend({ss:80},['critical'])]],usingLegend);
-  Object.assign(byTitle('20点²も、推定値。'),{book:'132・136',notes:'Focus the two identical numerators. Insert the five scores and mean 30. Reuse the sum of 80. The dot is 20, not the midpoint of this asymmetric interval.'});
+  worked('②・③ 分母から上下限へ',[
+    ['χ²分布は左右非対称',wNote(`自由度 ${im(n+'-1='+df)}。中央95%の外側には、左右に2.5%ずつ。`)+`<div class="work-chart pour-chi-density">${density('chi',df,{labelCutoffs:false})}</div>`,chiLegend({ss},['critical'])],
+    ['② 下限の分母：上側確率 0.025',lookup('lower')+wNote('右に2.5%を残す、大きい境界値。')+table('chi'),chiLegend({ss,a},['lower-critical'])],
+    ['③ 上限の分母：上側確率 0.975',lookup('upper')+wNote('右に97.5%を残す、小さい境界値。')+table('chi'),chiLegend(filled,['upper-critical'])],
+    ['下限と上限',math(chiRule(ss,a,b)+'\\approx'+bracket(lo,hi))+wNote('大きい値で割ると下限、小さい値で割ると上限。'),chiLegend(filled,['lower','upper'])],
+    ['母分散の95%信頼区間',wChart(+lo,+hi,variance,unit,0,35,true)+intervalConclusion(95,'1杯の量の母分散',lo,hi,unit)+`<div class="lab-jump">${link(labUrl('variance-ci'),'母分散の区間をシミュレーション')}</div>`,chiLegend(filled,[],{lo,hi,unit})]
+  ],usingLegend);
   byTitle('tとZの公式：分散のハット').html=compareMeanFormulas();
   byTitle('Zの区間推定の公式').html=intervalPreview({annotate:true,isT:false,startBare:true});
   for(const name of ['標本数で、幅を動かす','通学時間の母平均','答え：38.08〜45.92分'])byTitle(name).book='124〜125・133';
   const conv=byTitle('S²が与えられたら？');
-  conv.html=`<h2>標本分散と標本不偏分散</h2>${math(String.raw`S_x^2=\frac{1}{n}\sum (x_i-\bar x)^2\qquad ${hat}=\frac{n}{n-1}S_x^2`)}${rev(math(String.raw`\sum(x_i-\bar x)^2=nS_x^2=5\times16=80`))}${rev(math(String.raw`${hat}=\frac{n}{n-1}S_x^2=\frac{5}{5-1}\times16=20`),2)}`;
-  conv.book='134 脚注1';conv.notes='Show both definitions before inserting numbers. With n=5 and divisor-n variance 16, the sum of squared deviations is 5×16 = 80 for chi-square; the unbiased variance for the t interval is 5/(5−1)×16 = 20.';
+  conv.html=`<h2>標本分散と標本不偏分散</h2>${math(String.raw`S_x^2=\frac{1}{n}\sum (x_i-\bar x)^2\qquad ${hat}=\frac{n}{n-1}S_x^2`)}${rev(math(String.raw`${ssRule}=nS_x^2=${n}\times\frac{${ss}}{${n}}=${ss}`))}${rev(math(String.raw`${hat}=\frac{n}{n-1}S_x^2=\frac{${n}}{${n}-1}\times\frac{${ss}}{${n}}=${variance}`),2)}`;
 }
 // Use the same live controls and formula layout in the deck and in Explore.
 for(const [title,mode,notes] of [
@@ -331,7 +343,6 @@ for(const [title,mode,notes] of [
   const s=byTitle(title);s.className='lab-slide';s.init=undefined;s.notes=notes;s.book=undefined;
   s.html=`<iframe class="lecture-lab" title="${title}" src="${labUrl(mode)}&embed=1"></iframe>`;
 }
-byTitle('大きい数で割ると、小さくなる').html+=`<div class="lab-jump">${link(labUrl('variance-ci'),'別の5試合で、母分散の区間を試す')}</div>`;
 
 const story = window.Week9Story || [];
 const archivedOpeners = [...story, ...(window.Week9Openers || [])];
@@ -376,7 +387,7 @@ function intervalGraphic(lo,hi,m,unit,min,max,matchBounds=false,digits=2){
   const endpoints=[lo,hi].map((v,i)=>`<g${matchBounds?` data-side="${i?'upper':'lower'}"`:''}><line x1="${x(v)}" x2="${x(v)}" y1="90" y2="145" stroke="#de7e36" stroke-width="${matchBounds?6:3}"/><text x="${x(v)}" y="215" text-anchor="middle">${v.toFixed(digits)}</text></g>`).join('');
   return svg(`<title>${lo.toFixed(digits)}から${hi.toFixed(digits)}${unit}の区間。点推定${m}。</title><line x1="60" x2="940" y1="175" y2="175" stroke="#8c9da0"/><line x1="${x(lo)}" x2="${x(hi)}" y1="115" y2="115" stroke="#de7e36" stroke-width="12" stroke-linecap="round"/>${endpoints}<circle cx="${x(m)}" cy="115" r="10" fill="#d0642d"/><text x="${x(m)}" y="67" text-anchor="middle" fill="#16786f">点推定 ${m}</text><text x="920" y="265" text-anchor="end">${unit}</text>`);
 }
-function density(kind,df=4,{annotateTails=false}={}){
+function density(kind,df=4,{annotateTails=false,labelCutoffs=true}={}){
   const chi=kind==='chi',a=chi?0:-6,b=chi?18:6,base=245;
   const pdf=chi?x=>M.chiPdf(x,df):x=>M.tPdf(x,df);
   const lo=chi?M.chiq(.975,df):-M.tq(.025,df),hi=chi?M.chiq(.025,df):M.tq(.025,df);
@@ -396,7 +407,7 @@ function density(kind,df=4,{annotateTails=false}={}){
   };
   const tails=annotateTails?[tail('left',lo),tail('right',hi)]:[];
   const markers=annotateTails?`<defs><marker id="curry-tail-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto"><path d="M 0 0 L 10 5 L 0 10 Z" fill="${tailColor}"/></marker></defs>`:'';
-  const thresholds=[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="${y(v)}" y2="248" stroke="#bd542e" stroke-dasharray="5 5"/>${annotateTails?'':`<text x="${x(v)}" y="285" text-anchor="middle">${v.toFixed(4)}</text>`}`).join('');
+  const thresholds=[lo,hi].map(v=>`<line x1="${x(v)}" x2="${x(v)}" y1="${y(v)}" y2="248" stroke="#bd542e" stroke-dasharray="5 5"/>${annotateTails||!labelCutoffs?'':`<text x="${x(v)}" y="285" text-anchor="middle">${v.toFixed(4)}</text>`}`).join('');
   return svg(`<title>${chi?'カイ二乗':'t'}分布、自由度${df}、中央95%${annotateTails?'、左右の裾は各2.5%':''}</title>${markers}${area(lo,hi,'#70b8ad','.65')}${tails.map(t=>t.shading).join('')}<polyline points="${trace(a,b,400)}" fill="none" stroke="#214b56" stroke-width="4"/><line x1="55" x2="945" y1="${base}" y2="${base}" stroke="#70878a"/>${thresholds}${tails.map(t=>t.callout).join('')}${annotateTails?`<text x="500" y="170" text-anchor="middle" fill="#234653" font-size="33" font-weight="700">中央95%</text>`:''}`);
 }
 const inits={tails:()=>{document.querySelector('#t-tail-chart').innerHTML=density('t');},chiTails:()=>{document.querySelector('#chi-tail-chart').innerHTML=density('chi');},parts:()=>{const desc=['中心：標本平均。今回の5試合では30点。','t値：信頼係数と自由度で決まる。95%・自由度4 → 2.7764。','標準誤差：平均の推定のばらつき。√(20/5) = 2点。'];stage.querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>{stage.querySelectorAll('[data-part]').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.querySelector('#part-description').textContent=desc[+b.dataset.part];});},curryInterval:()=>{document.querySelector('#curry-interval').innerHTML=intervalGraphic(24.4472,35.5528,30,'点',20,40);},robotAnswer:()=>{document.querySelector('#robot-answer').innerHTML=intervalGraphic(155.388,164.612,160,'cm',152,168);},knownAnswer:()=>{document.querySelector('#known-answer').innerHTML=intervalGraphic(116.08,123.92,120,'分',113,127);},varianceAnswer:()=>{document.querySelector('#variance-interval').innerHTML=intervalGraphic(80/11.1433,80/.4844,20,'点²',0,180);stage.querySelectorAll('[data-denom]').forEach(b=>b.onclick=()=>{document.querySelector(b.dataset.denom==='large'?'#variance-low':'#variance-high').hidden=false;if(!document.querySelector('#variance-low').hidden&&!document.querySelector('#variance-high').hidden)document.querySelector('#variance-interval').classList.remove('concealed');});},deliveryAnswer:()=>{document.querySelector('#delivery-answer').innerHTML=intervalGraphic(30/12.8325,30/.8312,6,'分²',0,40);},confidence:()=>{const range=document.querySelector('#confidence'),draw=()=>{const c=[.9,.95,.99][+range.value],q=M.tq((1-c)/2,4),w=q*2;document.querySelector('#confidence-result').textContent=`${Math.round(c*100)}%：${(30-w).toFixed(2)}〜${(30+w).toFixed(2)}点`;document.querySelector('#confidence-chart').innerHTML=intervalGraphic(30-w,30+w,30,'点',18,42);};range.oninput=draw;draw();},size:()=>{const range=document.querySelector('#size'),draw=()=>{const n=+range.value,w=1.96*10/Math.sqrt(n);document.querySelector('#size-result').textContent=`n = ${n} · 幅 ${(2*w).toFixed(2)}分`;document.querySelector('#size-chart').innerHTML=intervalGraphic(120-w,120+w,120,'分',110,130);};range.oninput=draw;draw();},coverage:()=>{let rows=[],timer=null;const run=document.querySelector('#coverage-run'),reset=document.querySelector('#coverage-reset');const draw=()=>{const min=Math.min(18,...rows.map(r=>r.lower)),max=Math.max(42,...rows.map(r=>r.upper)),x=v=>55+(v-min)/(max-min)*890;document.querySelector('#coverage-chart').innerHTML=`<svg viewBox="0 0 1000 360" role="img" aria-label="繰り返し抽出した100本の信頼区間"><line x1="${x(30)}" x2="${x(30)}" y1="20" y2="335" stroke="#687f84" stroke-dasharray="5 4"/><text x="${x(30)+8}" y="18">μ = 30</text>${rows.map((r,i)=>`<line x1="${x(r.lower)}" x2="${x(r.upper)}" y1="${28+i*3}" y2="${28+i*3}" stroke="${r.lower<=30&&r.upper>=30?'#16786f':'#d67435'}" stroke-width="2"/>`).join('')}<text x="55" y="357">${min.toFixed(1)}</text><text x="945" y="357" text-anchor="end">${max.toFixed(1)} 点</text></svg>`;const hits=rows.filter(r=>r.lower<=30&&r.upper>=30).length;document.querySelector('#coverage-count').textContent=`30を含む ${hits} / ${rows.length}`;};run.onclick=()=>{if(timer)return;rows=[];run.disabled=true;timer=setInterval(()=>{rows.push(M.ci(Array.from({length:5},()=>30+Math.sqrt(20)*M.normal())));draw();if(rows.length===100){clearInterval(timer);timer=null;run.disabled=false;}},38);};reset.onclick=()=>{clearInterval(timer);timer=null;rows=[];run.disabled=false;draw();};draw();return()=>clearInterval(timer);}};

@@ -172,6 +172,31 @@
   font-weight:750;
   -webkit-text-stroke:.022em currentColor;
 }
+.chi-preview h2 { position:absolute;top:6cqw;left:0;width:100%;font-size:3.2cqw }
+.chi-interval-diagram {
+  grid-template-columns:.45em 7.15em 1em 7.15em .45em;
+  grid-template-rows:9.5cqw 11.5cqw 9.5cqw;
+  font-size:clamp(10px,4.35cqw,64px);
+}
+.chi-interval-diagram .legend-bracket { height:2.6em }
+.chi-interval-diagram .chi-label-numerator { grid-column:2;grid-row:1 }
+.chi-interval-diagram .chi-label-lower { grid-column:2;grid-row:3 }
+.chi-interval-diagram .chi-label-upper { grid-column:4;grid-row:3 }
+.chi-interval-diagram .chi-label-numerator .formula-leader { margin-bottom:-.62cqw }
+.chi-interval-diagram .formula-callout.legend-critical { align-self:start }
+.chi-interval-diagram .formula-callout.legend-critical .formula-leader { order:0;margin:-.32cqw 0 .45cqw }
+.chi-interval-diagram .formula-callout.legend-critical .formula-leader::after { top:0;bottom:auto;transform:translateX(-50%) rotate(225deg) }
+.chi-interval-diagram:has(.chi-label-numerator.shown) [data-chi-part="numerator"],
+.chi-interval-diagram:has(.chi-label-lower.shown) [data-chi-part="lower"],
+.chi-interval-diagram:has(.chi-label-upper.shown) [data-chi-part="upper"] {
+  color:var(--term-color);
+  font-weight:750;
+  -webkit-text-stroke:.022em currentColor;
+}
+.legend-chi-pair .endpoint-map { width:15.3em }
+@media(max-width:440px){
+  .chi-interval-diagram .formula-callout { font-size:clamp(7px,2.1cqw,10px) }
+}
 #stage.formula-follow .work-details { margin:2cqw auto 0 }
 #stage.formula-follow .work-details h2 { font-size:clamp(13px,2.65cqw,36px);margin:0 0 .45cqw }
 #stage.formula-follow .work-details .math { font-size:clamp(12px,2.5cqw,36px);margin:.25cqw 0 }
@@ -204,6 +229,14 @@
 .practice-question .practice-prompt { font-size:clamp(11px,1.95cqw,25px);margin:0 }
 .practice-values { display:flex;align-items:baseline;gap:2.05cqw;color:#213d48;line-height:1.25;font-size:clamp(21px,5.2cqw,72px);font-variant-numeric:tabular-nums }
 .practice-values small { font-size:.42em }
+.pour-question .practice-values { margin:2.2cqw 0;font-size:clamp(14px,4.4cqw,60px) }
+.pour-task { font-size:clamp(12px,2.8cqw,37px) }
+.pour-task strong { color:#a7451e }
+.formula-follow .work-details .pour-deviations { width:min(100%,75cqw);margin:1.7cqw auto }
+.formula-follow .pour-deviations :is(th,td) { font-size:clamp(8px,1.78cqw,23px);padding:.4cqw .6cqw;white-space:nowrap }
+.pour-deviations tr:last-child td { color:#16665f;font-weight:700 }
+.formula-follow .work-details .pour-lookup { width:min(100%,49cqw);margin:1.6cqw auto }
+.formula-follow .pour-lookup :is(th,td) { font-size:clamp(8px,1.85cqw,25px) }
 .practice-question .practice-parts { text-align:left;margin:.5cqw 0;padding-inline-start:1.5em;font-size:clamp(11px,2.02cqw,28px);line-height:1.55 }
 .practice-parts strong { color:#a7451e }
 .practice-question .secondary { font-size:clamp(9px,1.4cqw,19px);margin:0 }
