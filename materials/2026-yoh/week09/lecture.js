@@ -65,6 +65,7 @@ add('まとめ・クイズ・AL','点だけでなく、幅を見る。',`<div cl
 
 // Keep preview links to the original lecture valid as new practice slides are inserted.
 const legacyLecture = slides.slice();
+const foodTruckWaits=[14,11,18,15,12,14];
 const insertAfter=(title,build)=>{
   const at=slides.findIndex(s=>s.title===title);
   const start=slides.length;
@@ -79,9 +80,9 @@ insertAfter('下限、そして上限',()=>{
 insertAfter('100本の区間を作る',()=>{
   add('チャレンジ2','学園祭のキッチンカー：平均待ち時間',`<p class="challenge-time">6分 · 自分で解く</p><h2>学園祭のキッチンカー：平均待ち時間</h2>
     <p class="practice-prompt">昼の営業中、無作為に選んだ6件について、注文から受け取りまでの時間を記録した。</p>
-    <div class="practice-values" aria-label="6件の待ち時間、単位は分"><b>14</b><b>11</b><b>18</b><b>15</b><b>12</b><b>14</b><small>分</small></div>
+    <div class="practice-values" aria-label="6件の待ち時間、単位は分">${foodTruckWaits.map(wait=>`<b>${wait}</b>`).join('')}<small>分</small></div>
     <ol class="practice-parts"><li>標本平均と標本不偏分散を求めよ。</li><li>自由度と上側確率を求め、t分布表から境界値を読め。</li><li>昼の待ち時間の母平均の<strong>90%信頼区間</strong>を求めよ。両端は小数第3位まで。</li></ol>
-    ${small('独立な正規標本と仮定する。母分散は未知。')}<div class="practice-reference"><span>90% confidence interval for the population mean</span>${table('t')}</div>`,
+    ${small('独立な正規標本と仮定する。母分散は未知。')}<div class="practice-formula"><div class="practice-reference"><span>参考公式 / Confidence interval for the population mean</span>${table('t')}</div>${math(formula)}</div>`,
     'Give students six minutes. This is a mock exam problem, with six raw observations and 90% rather than 95%. They need to compute the sample mean and unbiased variance, then locate the t critical value and both endpoints.',{challenge:true,theme:'cream',className:'practice-question',book:'132〜134・203',key:'food-truck-practice'});
   add('チャレンジ2','答え：キッチンカーの90%信頼区間','',
     'The deviations from 14 are 0, −3, 4, 1, −2 and 0. Their squares sum to 30. The unbiased sample variance is 6, the standard error is 1, and the 90% critical value with five degrees of freedom is 2.0150. The interval 11.985 to 16.015 minutes estimates the population mean, not the wait for an individual order.',{book:'132〜134・203',key:'food-truck-answer'});
@@ -107,6 +108,7 @@ for(const s of slides) {
 const wSlot=(label,value,cls='')=>`<span class="work-slot ${cls}"><small>${label}</small><i aria-hidden="true">↓</i><span>${value}</span></span>`;
 const wEq=(...items)=>`<div class="work-equation">${items.map(i=>i.startsWith('<')?i:`<span>${i}</span>`).join('')}</div>`;
 const wNote=text=>`<p class="work-note">${text}</p>`;
+const intervalConclusion=(level,target,lo,hi,unit)=>`<p class="work-conclusion">信頼水準${level}%で、${target}は<strong>${lo}〜${hi}${unit}</strong>と推定される。</p>`;
 function worked(title,beats,{legend=false}={}){
   const s=slides.find(s=>s.title===title);
   if(!s) throw new Error('Missing worked slide: '+title);
@@ -166,7 +168,7 @@ function chiLegend(values={},active=[]){
   return formulaLegend('chi-pair',render({}),render(values));
 }
 const usingLegend={legend:true};
-function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=false,mapEndpoints=false}){
+function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,target,t=false,mapEndpoints=false}){
   const varianceName=t?'不偏分散':'母分散（既知）';
   const q=critical,filled={center,q,variance,n},computed={...filled,se};
   return [
@@ -179,10 +181,10 @@ function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,t=fal
     ['片側の幅',math(q+'\\times'+se+'='+margin)+wNote('境界値 × 標準誤差'),meanLegend(t,computed,['critical','spread'])],
     ['下限と上限',wEq(wSlot('下限',center+' − '+margin+' ≈ '+lo,'mean'),wSlot('上限',center+' ＋ '+margin+' ≈ '+hi,'mean')),meanLegend(t,computed,['lower','upper'])],
     ['母平均の95%信頼区間',(mapEndpoints?'':`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`)+
-      wChart(+lo,+hi,center,unit,...domain,mapEndpoints),meanLegend(t,computed,[],mapEndpoints?{lo,hi,unit}:undefined)]
+      wChart(+lo,+hi,center,unit,...domain,mapEndpoints)+intervalConclusion(95,target,lo,hi,unit),meanLegend(t,computed,[],mapEndpoints?{lo,hi,unit}:undefined)]
   ];
 }
-function varianceBeats({ss,n,a,b,lo,hi,center,unit,max}){
+function varianceBeats({ss,n,a,b,lo,hi,center,unit,max,target}){
   const df=n-1,filled={ss,a,b};
   return [
     ['母分散の区間','',chiLegend({},['spread','critical'])],
@@ -190,27 +192,34 @@ function varianceBeats({ss,n,a,b,lo,hi,center,unit,max}){
     ['② 分母：2つのχ²値',wNote(`自由度 ${df}。上側確率 0.025 なら ${a}、0.975 なら ${b}。`)+table('chi'),chiLegend(filled,['critical'])],
     ['下限と上限',math(chiRule(ss,a,b)+'\\approx'+bracket(lo,hi))+wNote('大きい値で割ると下限、小さい値で割ると上限。'),chiLegend(filled,['lower','upper'])],
     ['下限と上限',`<div class="work-value">${lo} ～ ${hi} ${unit}</div>`+wChart(+lo,+hi,center,unit,0,max)+
-      wNote(`橙の点：不偏分散 ${ss} ÷ ${df} = ${center}${unit}。`),chiLegend(filled)]
+      intervalConclusion(95,target,lo,hi,unit),chiLegend(filled)]
   ];
 }
-const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],t:true,mapEndpoints:true};
+const curry={center:30,variance:20,n:5,critical:'2.7764',se:'2',margin:'5.5528',lo:'24.45',hi:'35.55',unit:'点',domain:[20,40],target:'Curryの1試合あたりの平均得点',t:true,mapEndpoints:true};
 worked('30 ± いくつ？',meanBeats(curry).slice(4,5),usingLegend);
 worked('下限、そして上限',meanBeats(curry).slice(5),usingLegend);
-worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],t:true}),usingLegend);
-worked('ロボットの電池',meanBeats({center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127]}),usingLegend);
-worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critical:'1.96',se:'2',margin:'3.92',lo:'38.08',hi:'45.92',unit:'分',domain:[35,49]}),usingLegend);
-worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180}).slice(2),usingLegend);
-worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40}),usingLegend);
+worked('答え：155.39〜164.61cm',meanBeats({center:160,variance:36,n:9,critical:'2.3060',se:'2',margin:'4.612',lo:'155.39',hi:'164.61',unit:'cm',domain:[152,168],target:'この工場で作るロボットの平均身長',t:true}),usingLegend);
+worked('ロボットの電池',meanBeats({center:120,variance:100,n:25,critical:'1.96',se:'2',margin:'3.92',lo:'116.08',hi:'123.92',unit:'分',domain:[113,127],target:'ロボットの電池の平均持続時間'}),usingLegend);
+worked('答え：38.08〜45.92分',meanBeats({center:42,variance:144,n:36,critical:'1.96',se:'2',margin:'3.92',lo:'38.08',hi:'45.92',unit:'分',domain:[35,49],target:'学生全体の平均通学時間'}),usingLegend);
+worked('大きい数で割ると、小さくなる',varianceBeats({ss:80,n:5,a:'11.1433',b:'0.4844',lo:'7.18',hi:'165.15',center:20,unit:'点²',max:180,target:'Curryの1試合あたりの得点の母分散'}).slice(2),usingLegend);
+worked('答え：2.34〜36.09分²',varianceBeats({ss:30,n:6,a:'12.8325',b:'0.8312',lo:'2.34',hi:'36.09',center:6,unit:'分²',max:40,target:'配送時間の母分散'}),usingLegend);
 {
-  const center=14,variance=6,n=6,se=1,q=M.tq(.05,n-1).toFixed(4),unit='分';
-  const lo=(center-Number(q)).toFixed(3),hi=(center+Number(q)).toFixed(3);
+  const n=foodTruckWaits.length,total=foodTruckWaits.reduce((a,x)=>a+x,0),center=total/n,df=n-1;
+  const rows=foodTruckWaits.map(x=>({x,d:x-center,sq:(x-center)**2}));
+  const squaredSum=rows.reduce((a,{sq})=>a+sq,0),variance=squaredSum/df,se=Math.sqrt(variance/n);
+  const alpha=.05,q=M.tq(alpha,df).toFixed(4),unit='分',margin=Number(q)*se;
+  const lo=(center-margin).toFixed(3),hi=(center+margin).toFixed(3);
   const done={center,variance,n,se,q};
+  const calcTable=showDeviation=>`<table class="deviation-table" data-stat="${showDeviation?'variance':'mean'}" aria-label="待ち時間の計算表"><thead><tr><th scope="col">注文</th><th scope="col">待ち時間 ${im('x_i')}</th><th scope="col">偏差 ${im('x_i-\\bar x')}</th><th scope="col">偏差の二乗</th></tr></thead><tbody>${rows.map(({x,d,sq},k)=>`<tr><th scope="row">${k+1}</th><td>${x}</td><td>${showDeviation?`${x} − ${center} = ${String(d).replace('-','−')}`:''}</td><td>${showDeviation?sq:''}</td></tr>`).join('')}</tbody><tfoot><tr><th scope="row">合計</th><td>${total}</td><td>${showDeviation?0:''}</td><td>${showDeviation?squaredSum:''}</td></tr></tfoot></table>`;
+  const withCalcTable=(showDeviation,body)=>`<div class="var-work food-truck-calculation">${calcTable(showDeviation)}<div>${body}</div></div>`;
+  const tailColumns=[.10,alpha,.025];
+  const lookup=`<table class="lookup food-truck-lookup" aria-label="t分布表の抜粋：上側確率"><thead><tr><th scope="col">ν ＼ α</th>${tailColumns.map(a=>`<th scope="col" class="${a===alpha?'active':''}">${a===.10?'0.10':a}</th>`).join('')}</tr></thead><tbody>${[df-1,df,df+1].map(d=>`<tr><th scope="row" class="${d===df?'active':''}">${d}</th>${tailColumns.map(a=>`<td class="${d===df&&a===alpha?'target':''}">${M.tq(a,d).toFixed(4)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
   worked('答え：キッチンカーの90%信頼区間',[
-    ['① 標本平均は14分',math(String.raw`\bar x=\frac{14+11+18+15+12+14}{6}=\frac{84}{6}=14`),meanLegend(true,{center},['mean'])],
-    ['① 標本不偏分散は6分²',math(String.raw`${hat}=\frac{0+9+16+1+4+0}{6-1}=\frac{30}{5}=6`)+wNote('分子の30は、各待ち時間と14分との差を二乗して足した値。'),meanLegend(true,{center,variance},['variance'])],
+    ['① 標本平均は14分',withCalcTable(false,wNote('「待ち時間」列の合計を件数で割る。')+math(String.raw`\bar x=\frac{${total}}{${n}}=${center}`)),meanLegend(true,{center},['mean'])],
+    ['① 標本不偏分散は6分²',withCalcTable(true,wNote('「偏差の二乗」列の合計を、件数 − 1 で割る。')+math(String.raw`${hat}=\frac{${squaredSum}}{${n}-1}=\frac{${squaredSum}}{${df}}=${variance}`)),meanLegend(true,{center,variance},['variance'])],
     ['標準誤差は1分',math(String.raw`\sqrt{\frac{6}{6}}=1`),meanLegend(true,{center,variance,n},['spread'])],
-    ['② 90%信頼区間の t の境界値',math(String.raw`t_{(1-0.90)/2}(6-1)=t_{0.05}(5)\approx${q}`)+table('t'),meanLegend(true,done,['critical'])],
-    ['③ 母平均の90%信頼区間',wChart(+lo,+hi,center,unit,10,18,true,3),meanLegend(true,done,[],{lo,hi,unit})]
+    ['② 90%信頼区間の t の境界値',wNote(`上側確率 ${im('(1-0.90)/2=0.05')}、自由度 ${im('6-1=5')}。`)+lookup+table('t'),meanLegend(true,done,['critical'])],
+    ['③ 母平均の90%信頼区間',wChart(+lo,+hi,center,unit,10,18,true,3)+intervalConclusion(90,'キッチンカーの昼の平均待ち時間',lo,hi,unit),meanLegend(true,done,[],{lo,hi,unit})]
   ],usingLegend);
 }
 

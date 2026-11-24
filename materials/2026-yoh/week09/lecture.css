@@ -177,6 +177,8 @@
 #stage.formula-follow .work-details .math { font-size:clamp(12px,2.5cqw,36px);margin:.25cqw 0 }
 #stage.formula-follow .work-details mjx-container[display=true] { margin:.15em 0!important }
 #stage.formula-follow .work-details .work-note { font-size:clamp(10px,1.7cqw,23px);margin:.45cqw auto }
+.work-conclusion { max-width:83cqw;margin:.35cqw auto 0;color:#213d48;font-size:clamp(11px,1.9cqw,26px);line-height:1.55 }
+.work-conclusion strong { white-space:nowrap }
 .formula-follow .work-details .work-value { font-size:clamp(22px,4cqw,57px);line-height:1.2 }
 .formula-follow .work-details .work-chart { width:min(85%,65cqw);margin:.35cqw auto }
 .formula-follow .work-details .work-chart svg { max-height:17cqw }
@@ -197,7 +199,7 @@
 .square-sum-label span { display:block;color:#526970;font-size:.65em;font-weight:500 }
 .formula-follow .work-details :is(a,.secondary,.tail-labels) { font-size:clamp(9px,1.4cqw,19px) }
 .t-lookup-density svg { font-family:Arial,"Hiragino Kaku Gothic ProN",sans-serif }
-#stage.practice-question .slide-body { gap:.7cqw;padding:3cqw 6cqw }
+#stage.practice-question .slide-body { gap:.53cqw;padding:2.2cqw 6cqw }
 .practice-question h2 { font-size:clamp(15px,3.5cqw,49px);margin:0 }
 .practice-question .practice-prompt { font-size:clamp(11px,1.95cqw,25px);margin:0 }
 .practice-values { display:flex;align-items:baseline;gap:2.05cqw;color:#213d48;line-height:1.25;font-size:clamp(21px,5.2cqw,72px);font-variant-numeric:tabular-nums }
@@ -205,11 +207,23 @@
 .practice-question .practice-parts { text-align:left;margin:.5cqw 0;padding-inline-start:1.5em;font-size:clamp(11px,2.02cqw,28px);line-height:1.55 }
 .practice-parts strong { color:#a7451e }
 .practice-question .secondary { font-size:clamp(9px,1.4cqw,19px);margin:0 }
+.practice-formula { width:100%;color:#213d48;line-height:1.1 }
+.practice-formula .math { font-size:clamp(11px,2.35cqw,32px);line-height:1 }
+.practice-formula .math mjx-container[display="true"] { margin:.08em 0!important }
 .practice-reference { display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:0 1.6cqw;color:#526970;font-size:clamp(9px,1.26cqw,17px) }
+.formula-follow .work-details .food-truck-calculation { grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);width:min(96%,80cqw) }
+.formula-follow .work-details .food-truck-calculation table { font-size:clamp(10px,1.65cqw,21px);width:100% }
+.food-truck-calculation :is(td,th) { white-space:nowrap }
+.food-truck-calculation .deviation-table tfoot{color:#526970}
+.food-truck-calculation [data-stat="mean"] tfoot td:nth-child(2),
+.food-truck-calculation [data-stat="variance"] tfoot td:last-child{color:#16665f;background:#dcece6}
+.food-truck-calculation .deviation-table tbody th { color:#526970 }
+.food-truck-lookup { width:min(54cqw,100%) }
 @media(max-width:560px){
   .formula-legend { grid-template-rows:repeat(2,max(29px,6.2cqw));font-size:clamp(9px,2.45cqw,16px) }
   .legend-row { grid-template-columns:max(24px,6.25cqw) minmax(0,1fr) }
   .formula-follow .work-details .var-work { grid-template-columns:minmax(0,45%) minmax(0,1fr);width:96% }
   .formula-follow .work-details .curry-deviations { grid-template-columns:minmax(0,56%) minmax(0,1fr);width:100% }
+  .formula-follow .work-details .food-truck-calculation { grid-template-columns:minmax(0,57%) minmax(0,1fr);width:100% }
   .curry-question { width:min(100%,84cqw);font-size:clamp(11px,2.25cqw,15px) }
 }
