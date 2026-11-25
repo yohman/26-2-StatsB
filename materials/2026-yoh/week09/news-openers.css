@@ -11,7 +11,7 @@
 }
 #stage.news-slide .reveal:not(.shown) { display:none }
 #stage.news-slide .news-reveal { width:min(100%,72cqw) }
-#stage.news-slide .news-caption { font-size:clamp(.72rem,1.55cqw,1.15rem);line-height:1.55;margin:.55em 0 }
+#stage.news-slide .news-caption { color:var(--support-ink);font-size:clamp(.68rem,1.36cqw,1.04rem);line-height:1.55;margin:.55em 0 }
 #stage.news-slide .news-links,
 #stage.news-slide .news-controls,
 #stage.news-slide .news-picker-links,
@@ -87,7 +87,8 @@
 .news-picker-links a:last-child { font-weight:700;color:#f2c995 }
 .news-bars { width:min(100%,65cqw);margin:1.4cqw auto;display:grid;gap:1.45cqw }
 .news-bar-row { min-width:0;text-align:left }
-.news-bar-label { display:flex;align-items:baseline;justify-content:space-between;gap:.5em;font-size:clamp(.76rem,1.85cqw,1.25rem) }
+.news-bar-label { display:flex;align-items:baseline;justify-content:space-between;gap:.5em;font-size:clamp(.72rem,1.55cqw,1.12rem) }
+.news-bar-label > span { color:var(--support-ink) }
 .news-bar-label b { font-size:clamp(1.06rem,2.8cqw,2.25rem);font-variant-numeric:tabular-nums;text-align:right }
 .news-track { background:#e3eae7;height:clamp(.45rem,1.6cqw,1.15rem);position:relative;margin-top:.35em }
 .news-bar { background:#277466;height:100%;transition:width .22s ease;transform-origin:left;animation:news-in .26s ease both }
@@ -167,7 +168,7 @@
 .job-us-notes:not(:has(.shown)) { display:none }
 .job-us-layout:has(.shown) { display:grid;grid-template-columns:1.12fr 1fr;gap:3cqw;align-items:center }
 .job-us-layout:has(.shown) .job-us-chart img { width:100%;object-position:left center }
-.job-us-chart figcaption { font-size:clamp(.68rem,1.25cqw,.96rem);margin-top:.25em }
+.job-us-chart figcaption { color:var(--support-ink);font-size:clamp(.65rem,1.12cqw,.88rem);margin-top:.25em }
 .job-us-comparison { display:flex;gap:4cqw;align-items:flex-end }
 .job-us-comparison small { display:block;font-size:clamp(.7rem,1.3cqw,1rem) }
 .job-us-comparison b { font-size:clamp(1.6rem,4.6cqw,3.6rem);line-height:1 }
@@ -228,11 +229,11 @@
 .candidate-number b { display:block;color:#146960;font-size:clamp(2rem,9cqw,7.3rem);line-height:1.14;font-variant-numeric:tabular-nums;white-space:nowrap }
 .candidate-number.warm-ink b { color:#9e4e28 }
 .dark .candidate-number b,.space .candidate-number b { color:#f0ae74 }
-.candidate-number span { display:block;font-size:clamp(.74rem,2cqw,1.42rem);line-height:1.3 }
+.candidate-number span { display:block;color:var(--support-ink);font-size:clamp(.7rem,1.68cqw,1.26rem);line-height:1.3 }
 .candidate-duo .candidate-number b { font-size:clamp(1.55rem,6.5cqw,5rem) }
 .candidate-credit { display:flex;justify-content:center;flex-wrap:wrap;gap:.35em 1.4em;
   font-size:clamp(.67rem,1.3cqw,1rem);line-height:1.4 }
-#stage.candidate-scene .candidate-caption { max-width:85ch;font-size:clamp(.69rem,1.55cqw,1.18rem);margin:0 }
+#stage.candidate-scene .candidate-caption { max-width:85ch;color:var(--support-ink);font-size:clamp(.67rem,1.35cqw,1rem);margin:0 }
 .candidate-map { display:block;max-width:100%;max-height:36cqw;object-fit:contain }
 .candidate-source-figure { position:relative;display:block;overflow:hidden;width:min(100%,71cqw);
   aspect-ratio:2.08;max-height:34cqw;background:#fff }
@@ -266,10 +267,10 @@
   font-size:clamp(1.9rem,7.2cqw,6.2rem);line-height:1.12;margin:0;
 }
 #stage.candidate-scene .candidate-subtitle {
-  font-size:clamp(.75rem,2.07cqw,1.53rem);line-height:1.48;margin:.4em 0 0;
-  font-weight:400;text-wrap:pretty;color:var(--story-subtitle,#53616a);
+  font-size:clamp(.72rem,1.67cqw,1.3rem);line-height:1.48;margin:.4em 0 0;
+  font-weight:400;text-wrap:pretty;color:var(--story-subtitle,var(--support-ink));
 }
-#stage:is(.space,.dark,.candidate-map-scene) { --story-subtitle:#d2d9d9;--story-source:#c8d0d2 }
+#stage:is(.space,.dark,.candidate-map-scene,.candidate-cover) { --story-subtitle:#bac7ca;--story-source:#c8d0d2 }
 #stage.candidate-cover .candidate-photo-copy a { display:inline-block;margin-top:.78em }
 #stage:is(.candidate-scene,.news-slide,.job-story) a {
   text-decoration:none;color:var(--story-source,#53616a);

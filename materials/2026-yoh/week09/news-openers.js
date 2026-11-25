@@ -295,7 +295,7 @@
       {theme:'dark'})
   ];
 
-  // The front of the deck is a sequential review reel. Each candidate has a stable link.
+  // Story groups keep their own deep links, independent of the week they open.
   const refs = {
     baseball:'https://www.mlb.com/news/j-t-realmuto-initiates-first-game-ending-abs-challenge-in-postseason-history',
     replay:'https://www.mlb.com/gameday/phillies-vs-braves/2026/09/30/849841',
@@ -339,7 +339,7 @@
       ${bars([{label:'実際にチャレンジした判定のうち、覆した割合',value:81},{label:'覆せた判定のうち、実際にチャレンジした割合',value:27,color:'warm'}],100,'%')}
       ${reveal(`<p>選んだ判定の結果から、全判定の正確さは分からない。</p>${desc('J.T. Realmuto・2026年レギュラーシーズン')}`)}
       ${credit(external(refs.savant,'MLB Statcast'))}`,
-      `Point to each denominator as you read it. The 27% is a challenge rate among overturn opportunities, not an umpire error rate. The Week 9 bridge: first define the population or a precise interval can describe the wrong set. Source: ${refs.savant}.`);
+      `Point to each denominator as you read it. The 27% is a challenge rate among overturn opportunities, not an umpire error rate. Define the population before choosing a method: a precise interval can otherwise describe the wrong set. Source: ${refs.savant}.`);
   }
   {
     const s = '② Pokémon Sleep｜千葉の睡眠';
@@ -461,5 +461,8 @@
       ${credit(external(refs.lancet,'推定値と信頼区間'))}`,
       `Reveal the 95% interval after showing both points. It is about uncertainty in a survey-based estimate of the total, not about the uncertainty of the recorded count or every possible source of error. The study uses a survey method different from our textbook interval for a mean. Source: ${refs.lancet}.`,{theme:'cream'});
   }
-  window.Week9Candidates = candidates;
+  const groups = new Map(candidates.filter(s=>s.key).map(s=>[s.key,candidates.filter(beat=>beat.section===s.section)]));
+  const reel = keys => keys.flatMap((key,i)=>groups.get(key).map(beat=>({...beat,section:beat.section.replace(/^\S+ /,`${'①②③④'[i]} `)})));
+  window.Week9Candidates = reel(['pisa','nba','gaza']);
+  window.Week10Candidates = reel(['baseball','sleep','music','anime']);
 })();

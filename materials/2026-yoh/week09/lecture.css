@@ -31,6 +31,8 @@
 @media print{.navigation{display:none}}
 
 /* The slide scrolls independently of the presenter controls. */
+#stage { --support-ink:#5e6e73 }
+#stage:is(.dark,.space,.teal) { --support-ink:#b6c6c9 }
 #stage .slide-body {
   overflow:auto;
   overscroll-behavior:contain;
@@ -38,6 +40,9 @@
   align-items:safe center;
 }
 #stage .slide-body > :not(.photo-link):not(.full-photo) { flex-shrink:0 }
+#stage .slide-body :is(.english,.secondary) { color:var(--support-ink);opacity:1 }
+#stage .slide-body .english { font-size:clamp(9px,1.28cqw,17px) }
+#stage .slide-body .secondary { font-size:clamp(9px,1.28cqw,17px) }
 #stage .slide-body:focus-visible { outline:2px solid #d68542;outline-offset:-2px }
 #stage > :is(.book,.source) { pointer-events:none }
 @media (max-width:360px) {
@@ -71,7 +76,8 @@
 .work-value { font-weight:750;font-size:clamp(26px,6cqw,73px);font-variant-numeric:tabular-nums }
 .work-chart { margin:1cqw auto 0;width:min(92%,72cqw) }
 .work-chart svg { width:100%;height:auto;max-height:23cqw;display:block;margin:auto }
-#stage.worked-slide .work-note { color:#526970;font-size:clamp(12px,1.75cqw,21px);margin:1.4cqw auto 0 }
+#stage.worked-slide .work-note { color:var(--support-ink);font-size:clamp(10px,1.46cqw,20px);margin:1.25cqw auto 0 }
+#stage.worked-slide .work-note :is(math,mjx-container) { color:#213d48 }
 @media(max-width:520px){#stage.worked-slide .work-beat .math { font-size:clamp(15px,4.2cqw,23px) }.work-equation { font-size:clamp(17px,5.1cqw,30px) }.work-chart svg {max-height:33cqw}}
 @media print {.work-beat:not(.work-active){display:none}}
 
@@ -142,9 +148,10 @@
   align-self:end;
   width:max-content;
   color:var(--term-color);
-  font:700 clamp(10px,2.1cqw,31px)/1.2 Arial,"Hiragino Sans",sans-serif;
+  font:650 clamp(9px,1.82cqw,27px)/1.2 Arial,"Hiragino Sans",sans-serif;
 }
-.formula-callout small { display:block;color:#526970;font-size:.66em;font-weight:550;line-height:1.15 }
+.formula-callout > span:not(.formula-leader) { color:color-mix(in srgb,var(--term-color) 72%,var(--support-ink)) }
+.formula-callout small { display:block;color:var(--support-ink);font-size:.66em;font-weight:500;line-height:1.15 }
 .formula-callout.legend-mean { grid-column:2;grid-row:3;align-self:start }
 .formula-callout.legend-spread { grid-column:12;grid-row:1 }
 .formula-callout.legend-critical { grid-column:4;grid-row:1 }
@@ -201,8 +208,8 @@
 .chi-bridge .slide-body { gap:.15cqw;padding:2.4cqw 4cqw 2.8cqw }
 .chi-bridge h2 { font-size:3.5cqw;line-height:1.25 }
 .chi-bridge .english { font-size:1.32cqw }
-.chi-reason { display:flex;align-items:center;justify-content:center;gap:.45cqw;font-size:1.55cqw;margin-top:.75cqw }
-.chi-reason math { font-size:inherit }
+.chi-reason { display:flex;align-items:center;justify-content:center;gap:.45cqw;color:var(--support-ink);font-size:1.44cqw;margin-top:.75cqw }
+.chi-reason :is(math,.chi-ratio) { color:#213d48;font-size:inherit }
 .chi-ratio { display:inline-grid;flex:none;font-size:.83em;line-height:1.35;white-space:nowrap;margin-inline:.3cqw }
 .chi-ratio > span:first-child { border-bottom:1px solid currentColor;padding:0 .2em .08em }
 .chi-bridge-plot { position:relative;width:min(100%,89cqw);margin-top:.25cqw }
@@ -248,11 +255,12 @@
 }
 #stage.formula-follow .work-details { margin:2cqw auto 0 }
 #stage.formula-follow .work-details h2 { font-size:clamp(13px,2.65cqw,36px);margin:0 0 .45cqw }
+#stage.formula-follow .work-details:has(>.math,>.work-chart) h2 { font-size:clamp(12px,2.35cqw,32px) }
 #stage.formula-follow .work-details .math { font-size:clamp(12px,2.5cqw,36px);margin:.25cqw 0 }
 #stage.formula-follow .work-details mjx-container[display=true] { margin:.15em 0!important }
-#stage.formula-follow .work-details .work-note { font-size:clamp(10px,1.7cqw,23px);margin:.45cqw auto }
-.work-conclusion { max-width:83cqw;margin:.35cqw auto 0;color:#213d48;font-size:clamp(11px,1.9cqw,26px);line-height:1.55 }
-.work-conclusion strong { white-space:nowrap }
+#stage.formula-follow .work-details .work-note { margin:.45cqw auto }
+.work-conclusion { max-width:83cqw;margin:.35cqw auto 0;color:var(--support-ink);font-size:clamp(10px,1.6cqw,22px);line-height:1.55 }
+.work-conclusion strong { color:#213d48;font-size:1.14em;white-space:nowrap }
 .formula-follow .work-details .work-value { font-size:clamp(22px,4cqw,57px);line-height:1.2 }
 .formula-follow .work-details .work-chart { width:min(85%,65cqw);margin:.35cqw auto }
 .formula-follow .work-details .work-chart svg { max-height:17cqw }
@@ -292,21 +300,21 @@
 .al-homework .al-submission b { color:#16665f;font-size:4.65cqw;line-height:1.3 }
 .al-homework a:not(.photo-link) { font-size:2.1cqw;font-weight:650 }
 .interval-recap .slide-body { gap:.35cqw;padding:3cqw 5cqw }
-.interval-recap h2 { font-size:3.6cqw;line-height:1.35 }
-.interval-recap .english { font-size:1.48cqw }
-.recap-condition { margin-top:1cqw;color:#526970;font-size:1.85cqw }
+.interval-recap h2 { font-size:3.25cqw;line-height:1.35 }
+.recap-condition { margin-top:1cqw;color:var(--support-ink);font-size:1.56cqw }
 .recap-condition strong { color:#213d48 }
 .recap-rule { --inactive:#213d48;height:auto;font-size:3.48cqw;margin:2cqw auto }
 .recap-rule-chi { grid-template-columns:.45em 7.15em 1em 7.15em .45em;font-size:4.24cqw }
 .recap-rule .legend-bracket { height:2.45em }
 .recap-rule-chi [data-chi-part="lower"].is-focus,
 .recap-rule-chi [data-chi-part="upper"].is-focus { color:var(--endpoint-color) }
-.recap-guide { width:100%;color:#526970;font-size:1.72cqw;line-height:1.55 }
+.recap-guide { width:100%;color:var(--support-ink);font-size:1.48cqw;line-height:1.55 }
 .recap-guide > p { margin:.4cqw auto }
 .recap-guide :is(a,strong) { color:#213d48;font-weight:700 }
+.recap-guide a:not(.photo-link) { font-size:inherit }
+.recap-guide :is(.math,math) { color:#213d48 }
 .recap-guide .math { font-size:2.53cqw;line-height:1.25 }
 .recap-guide .math mjx-container[display=true] { margin:.18em 0!important }
-.recap-guide .secondary { font-size:1.34cqw }
 .recap-bounds { display:flex;justify-content:center;gap:4.5cqw;margin:.9cqw auto 0 }
 .recap-bounds span { color:var(--endpoint-color);font-weight:700 }
 .practice-question .practice-parts { text-align:left;margin:.5cqw 0;padding-inline-start:1.5em;font-size:clamp(11px,2.02cqw,28px);line-height:1.55 }
@@ -345,9 +353,9 @@
 .variance-cases { width:min(100%,81cqw);display:grid;gap:2cqw }
 .variance-case header { display:flex;align-items:center;gap:1cqw;text-align:left;font-size:clamp(10px,1.8cqw,25px);line-height:1.2 }
 .variance-case header strong { color:#644e87;font-size:clamp(18px,3.7cqw,48px);min-width:1em;text-align:center }
-.variance-case header small { display:block;color:#526970;font-size:.67em }
-.variance-case header .variance-mark { margin-inline-start:auto;color:#16665f;font-size:.87em;white-space:nowrap }
-.variance-mark math { font-size:1.7em;vertical-align:middle }
+.variance-case header small { display:block;color:var(--support-ink);font-size:.63em }
+.variance-case header .variance-mark { margin-inline-start:auto;color:var(--support-ink);font-size:.78em;white-space:nowrap }
+.variance-mark math { color:#16665f;font-size:1.9em;vertical-align:middle }
 .variance-case .legend-expression { --inactive:#8c8170;height:auto;font-size:clamp(10px,2.82cqw,38px);margin:.6cqw auto 0 }
 @media(max-width:560px){
   .formula-legend { grid-template-rows:repeat(2,max(29px,6.2cqw));font-size:clamp(9px,2.45cqw,16px) }
