@@ -26,13 +26,6 @@ const labUrl=mode=>'curry-explore.html?p&mode='+mode+'&v=luka-games';
 function add(section,title,html,notes,opts={}){slides.push({section,title,html,notes,...opts});}
 function term(ja,en){return `<h1>${ja}</h1><p class="english">${en}</p>`;}
 const tieIcon=()=>'<img class="tie-icon" src="images/tie.png" alt="" aria-hidden="true">';
-const article='https://gvwire.com/2026/06/07/a-job-market-leaving-young-graduates-behind-could-scar-them-for-years/';
-const fed='https://www.richmondfed.org/research/national_economy/macro_minute/2026/cap_gown_waiting_around_recent_college_grads_job-hunting_longer';
-const japan='https://www.mext.go.jp/b_menu/toukei/chousa01/naitei/kekka/k_detail/1422624_00027.htm';
-add('世界から日本へ','卒業したら、仕事はある？',`<a class="photo-link" href="${article}" target="_blank" rel="noopener"><img class="full-photo" src="images/nyt-graduate-jobs.jpg" alt="卒業生が迷路の中で仕事を探すイラスト"><div class="photo-caption"><h1>卒業したら、<br>仕事はある？</h1><p>The New York Times · 2026.6.7 ↗</p></div><span class="photo-credit">Shonagh Rae / The New York Times · GV Wire掲載</span></a>`, 'Start with the illustration. Ask: “When you graduate, what number would help you judge the job market?” Open the NYT story syndicated by GV Wire. It reports a difficult U.S. market; it does not establish that AI caused the problem.');
-add('世界から日本へ','アメリカでは、長い就職活動',`<div class="chart-story"><img src="images/us-graduate-duration.jpg" alt="米国の失業期間の平均の推移。若い大卒者はオレンジ、全体は紫。"><div><p>失業中の若い大卒者</p><div class="hero orange">22.7<span>週間</span></div><p>平均失業期間</p>${small('22〜27歳・学士以上<br>2026年9月／12か月移動平均')}${link(fed,'Richmond Fed · 2026.11.10')}</div></div>`, 'The orange line is unemployed bachelor’s-degree holders aged 22–27. Their average ongoing unemployment duration is 22.7 weeks, using a 12-month moving average. This is not a prediction that every graduate will take 22.7 weeks to find work. Let students trace the orange line.',{source:'Federal Reserve Bank of Richmond · CPS / IPUMS'});
-add('世界から日本へ','では、日本は？',`<div class="chart-story"><img src="images/japan-jobs-chart.png" alt="文部科学省：大学の就職内定率・就職率の推移、2026年4月98.0%"><div><div class="hero teal">98.0<span>%</span></div><p>大学の就職率</p>${rev(small('分母は<strong>就職希望者</strong>。<br>卒業生全員ではない。'))}${small('2026年3月卒／4月1日時点')}${link(japan,'文部科学省・厚生労働省')}</div></div>`, 'Bring the story home. Japan’s figure is 98.0% of university graduates who wanted employment, not 98.0% of all graduates. The university sample is 4,770 students at 62 universities; 6,250 is the broader tertiary sample. Reveal the denominator before making any comparison.',{source:'2026年5月22日公表 · 大学62校・4,770人の抽出調査'});
-add('世界から日本へ','1つの数字。その先は？',`<div class="two-numbers"><div><b class="orange">22.7<small>週間</small></b><p>米国：平均失業期間</p></div><div><b class="teal">98.0<small>%</small></b><p>日本：就職希望者の就職率</p></div></div>${small('対象者も、測っているものも違う。直接の優劣比較はできない。')}${rev('<h2>推定した数字は、<br>どれくらい不確か？</h2>')}`, 'These are different measures and different reference populations. We cannot subtract them or rank the countries from these two numbers. Neither chart supplies the confidence interval we will calculate today. The bridge is the question: a survey gives a number, but how precise is an estimate?',{theme:'dark'});
 add('点から区間へ','点から、幅へ',`<div class="point-to-range"><div><p>先週：点推定<br><span class="english">Point estimation</span></p><div class="range-label"><svg role="img" aria-label="点推定：オレンジの点ひとつ" viewBox="0 0 96 36" width="5em" height="2.6em" style="display:block;margin-inline:auto"><circle cx="48" cy="18" r="5" fill="#d47b39"/></svg></div></div><b aria-hidden="true">→</b><div class="range-with-tie">${tieIcon()}<p>今週：区間推定<br><span class="english">Interval estimation</span></p><div class="range-label" style="display:flex;align-items:center;justify-content:center;gap:.3em">下限 <svg role="img" aria-label="点推定と上下の限界を示す区間" viewBox="0 0 96 36" width="5em" height="2.6em"><path d="M4 18H92 M4 12V24 M92 12V24" fill="none" stroke="#d47b39" stroke-width="2" stroke-linecap="round"/><circle cx="48" cy="18" r="5" fill="#d47b39"/></svg> 上限</div></div></div>`, 'Last week we used a sample to estimate an unknown population mean with one number: the orange dot. This week we keep the dot and add two endpoints. The orange ticks mark the lower and upper bounds; the interval communicates sampling uncertainty.',{book:'133',key:'point-to-interval'});
 add('点から区間へ','両側に、境界がある',`<div class="tie-scene"><img src="images/tie.png" alt="左右に翼のあるTIEファイター"><div class="tie-label left reveal" data-step="1">下限<span>Lower bound</span></div><div class="tie-label right reveal" data-step="1">上限<span>Upper bound</span></div><p class="reveal" data-step="2">真ん中の推定値に、左右の幅をつける。</p></div>`, 'Use the two wings as a visual memory aid for two bounds. This is a mnemonic, not a graph or an equation. Point at the left and right wings, reveal their labels, then connect that picture to a number line.',{theme:'space',key:'tie-fighter'});
 add('母平均：t','母分散が未知なら、t',`<div class="z-section-lead"><h1><span>母分散が未知なら</span><strong>t</strong></h1><p>母平均の信頼区間 <span class="english">Student’s t interval for the population mean</span></p><small>独立な正規標本を使い、母分散は標本不偏分散で推定する。</small></div>`, 'We are estimating a population mean. If the population variance is unknown, estimate it with the unbiased variance from the sample and use t with n minus 1 degrees of freedom. The textbook interval assumes independent normal observations. Next, ask how this applies to Luka’s five actual game scores.',{theme:'dark',className:'z-section-slide',book:'125・133',key:'t-section'});
@@ -74,7 +67,8 @@ add('まとめ・クイズ・AL','AL（課題）：来週までにUNIPAへ提出
 add('まとめ・クイズ・AL','点だけでなく、幅を見る。',`<div class="tie-scene"><img src="images/tie.png" alt="左右の境界を思い出すTIEファイター"><h1>推定値に、幅を。</h1><p>下限 ── 点推定 ── 上限</p></div>`, 'Return to the image. The memory students should leave with: identify the target, choose the appropriate distribution, and report an interval rather than treating a sample estimate as exact.',{theme:'space'});
 
 // Keep preview links to the original lecture valid as new practice slides are inserted.
-const legacyLecture = slides.slice();
+const retiredOpeningCount = 4;
+const legacyLecture = [...Array(retiredOpeningCount), ...slides];
 const introRange=slides.findIndex(s=>s.key==='point-to-interval');
 [slides[introRange],slides[introRange+1]]=[slides[introRange+1],slides[introRange]];
 // Leave the submission instructions visible on the final slide.
@@ -423,48 +417,37 @@ for(const [title,mode,notes] of [
   s.html=`<iframe class="lecture-lab" title="${title}" src="${labUrl(mode)}&embed=1"></iframe>`;
 }
 
-const story = window.Week9Story || [];
-const archivedOpeners = [...story, ...(window.Week9Openers || [])];
-const candidates = window.Week9Candidates || [];
 const nextWeekCandidates = window.Week10Candidates || [];
-const originalOpeningCount = 4;
 const params = new URL(location.href).searchParams;
-const openerMode = params.get('openers'), storyKey = params.get('story');
-const week10Mode = nextWeekCandidates.length > 0 && (openerMode === 'week10' ||
-  (openerMode !== 'archive' && nextWeekCandidates.some(s=>s.key && s.key===storyKey)));
-const archiveMode = !week10Mode && (openerMode === 'archive' || params.has('slide') ||
-  storyKey === 'jobs' || archivedOpeners.some(s => s.key && s.key === storyKey) ||
-  !candidates.length);
-const openers = week10Mode ? nextWeekCandidates : archiveMode ? archivedOpeners : candidates;
+const week10Mode = nextWeekCandidates.length > 0 && (params.get('openers') === 'week10' ||
+  nextWeekCandidates.some(s=>s.key && s.key===params.get('story')));
 if (week10Mode) {
-  slides.length=0;
+  slides.splice(0,slides.length,...nextWeekCandidates);
   const back=document.querySelector('.topbar>a');
   back.href='../../../agenda.html?p#week-10';
   back.setAttribute('aria-label','Week 10に戻る');
   document.querySelector('.topbar>span').textContent='W10 · ニュース候補';
   document.querySelector('#toc h2').textContent='Week 10 · ニュース候補';
-} else if (!archiveMode) slides.splice(0,originalOpeningCount);
-const openingCount = openers.length;
-slides.unshift(...openers);
+}
 const destinations = new Map(slides.flatMap((slide, i) => slide.key ? [[slide.key,i]] : []));
-if (archiveMode) destinations.set('jobs',openingCount);
-const lectureStart = openingCount + (archiveMode ? originalOpeningCount : 0);
 if (!week10Mode) {
-  destinations.set('lecture',lectureStart);
+  destinations.set('lecture',0);
   destinations.set('recap-overview',slides.findIndex(s=>s.title==='何を、区間で推定する？'));
 }
 
 function locationIndex() {
   const params = new URL(location.href).searchParams;
   if (destinations.has(params.get('story'))) return destinations.get(params.get('story'));
+  if (params.get('openers') === 'archive' && !week10Mode) return 0;
   if (params.has('scene')) return (+params.get('scene') || 1) - 1;
-  // Preserve the URLs generated by the previous news-picker version.
-  if (params.has('slide')) return story.length + (+params.get('slide') || 1) - 1;
-  // Existing exploration links use the original lecture numbering.
+  // Translate links from the former story picker into the lecture-only numbering.
+  if (!week10Mode && params.has('slide')) {
+    return Math.max(0,(+params.get('slide') || 1) - 1 - (window.Week9Openers || []).length - retiredOpeningCount);
+  }
   if (params.has('page')) {
     const baseIndex = (+params.get('page') || 1) - 1;
     const target=slides.indexOf(legacyLecture[baseIndex]);
-    return target<0 ? (week10Mode?0:lectureStart) : target;
+    return Math.max(0,target);
   }
   return 0;
 }
@@ -603,9 +586,9 @@ function bindChallengeClock(root,minutes){
   draw();
   return stop;
 }
-function render(){cleanup();cleanup=()=>{};if(window.MathJax?.typesetClear)window.MathJax.typesetClear([stage]);const s=slides[index];stage.className=`${s.theme||'light'} ${s.className||''}${s.challenge?' challenge-slide':''}`;stage.innerHTML=`<div class="slide-body" tabindex="0" aria-label="スライド内容">${s.html}</div>${s.challenge?challengeClock(s.minutes,challengeNumbers.get(s)):''}${s.book?`<span class="book">教科書 p.${s.book}</span>`:''}${s.source?`<span class="source">${s.source}</span>`:''}`;annotate(stage);step=0;updateStep();document.querySelector('#page').value=index+1;document.querySelector('#total').textContent=slides.length;document.querySelector('#first').disabled=document.querySelector('#prev').disabled=index===0;document.querySelector('#last').disabled=index===slides.length-1;document.querySelector('#next').disabled=index===slides.length-1&&step>=maxStep();document.querySelector('#notes').textContent=s.notes;document.querySelector('#status').textContent=`${index+1} / ${slides.length} ${s.title}`;const url=new URL(location.href);if(week10Mode)url.searchParams.set('openers','week10');else if(archiveMode)url.searchParams.set('openers','archive');url.searchParams.delete('page');url.searchParams.delete('story');url.searchParams.delete('slide');url.searchParams.set('scene',index+1);history.replaceState(null,'',url);document.title=`${index+1} · ${s.title} · ${week10Mode?'Week 10 opening stories':'Week 9'}`;const dispose=(s.mount ? s.mount(stage) : inits[s.init]?.())||(()=>{});const stopClock=s.challenge?bindChallengeClock(stage,s.minutes):()=>{};cleanup=()=>{stopClock();dispose();};if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([stage]).catch(()=>{});}
+function render(){cleanup();cleanup=()=>{};if(window.MathJax?.typesetClear)window.MathJax.typesetClear([stage]);const s=slides[index];stage.className=`${s.theme||'light'} ${s.className||''}${s.challenge?' challenge-slide':''}`;stage.innerHTML=`<div class="slide-body" tabindex="0" aria-label="スライド内容">${s.html}</div>${s.challenge?challengeClock(s.minutes,challengeNumbers.get(s)):''}${s.book?`<span class="book">教科書 p.${s.book}</span>`:''}${s.source?`<span class="source">${s.source}</span>`:''}`;annotate(stage);step=0;updateStep();document.querySelector('#page').value=index+1;document.querySelector('#total').textContent=slides.length;document.querySelector('#first').disabled=document.querySelector('#prev').disabled=index===0;document.querySelector('#last').disabled=index===slides.length-1;document.querySelector('#next').disabled=index===slides.length-1&&step>=maxStep();document.querySelector('#notes').textContent=s.notes;document.querySelector('#status').textContent=`${index+1} / ${slides.length} ${s.title}`;const url=new URL(location.href);if(week10Mode)url.searchParams.set('openers','week10');else url.searchParams.delete('openers');url.searchParams.delete('page');url.searchParams.delete('story');url.searchParams.delete('slide');url.searchParams.set('scene',index+1);history.replaceState(null,'',url);document.title=`${index+1} · ${s.title} · ${week10Mode?'Week 10 opening stories':'Week 9'}`;const dispose=(s.mount ? s.mount(stage) : inits[s.init]?.())||(()=>{});const stopClock=s.challenge?bindChallengeClock(stage,s.minutes):()=>{};cleanup=()=>{stopClock();dispose();};if(window.MathJax?.typesetPromise)window.MathJax.typesetPromise([stage]).catch(()=>{});}
 function go(n){index=Math.max(0,Math.min(slides.length-1,n));render();}
-function next(){if(step<maxStep()){step++;updateStep();return;}go(archiveMode && ((story.length && index===story.length-1) || (openingCount && index===openingCount-1)) ? destinations.get('lecture') : index+1);}
+function next(){if(step<maxStep()){step++;updateStep();return;}go(index+1);}
 
 // A swipe follows the same reveal and challenge rules as the navigation buttons.
 function canSwipe(target) {

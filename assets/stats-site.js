@@ -167,7 +167,7 @@ function slideThumbnail(deck, week) {
     if (week.week === 14) return week.image || '';
     return slideThumbnail({...deck, preview:`materials/2026-yoh/week${String(week.week).padStart(2,'0')}/w${week.week}.pdf`},week);
   }
-  if(deck.preview?.endsWith('/week09/index.html')) return 'materials/2026-yoh/week09/images/nyt-graduate-jobs.jpg';
+  if(deck.preview?.endsWith('/week09/index.html')) return 'materials/2026-yoh/week09/images/tie.png';
   const news = deck.preview?.match(/\/week04\/(news-[a-z-]+)\.pdf$/);
   if (news) return `assets/slide-previews/week04-${news[1]}.png?v=20261020`;
   if (deck.preview?.endsWith('/week03/practice-quiz.pdf')) return 'assets/slide-previews/week03-practice-quiz.png?v=20261014';
