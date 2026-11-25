@@ -224,6 +224,16 @@
   background:linear-gradient(0deg,#111921f5 0%,#111921a1 35%,transparent 76%) }
 .candidate-photo-copy { margin:auto 6cqw 4.5cqw;text-align:left;color:#fffaf3 }
 .candidate-photo-copy a { font-size:clamp(.65rem,1.18cqw,.94rem) }
+.soccer-photo { object-position:center 42% }
+.soccer-photo-credit { position:absolute;bottom:1.1cqw;right:1.65cqw;font-size:1.05cqw;color:#edf1f0;text-shadow:0 1px 3px #07121b }
+#stage.candidate-scene .soccer-scoreline { align-items:start;margin-top:2cqw }
+#stage.candidate-scene .soccer-scoreline > div .candidate-caption { min-height:2.85em;margin:.25em auto }
+#stage.candidate-scene .soccer-article {
+  display:inline-flex;flex-direction:column;align-items:center;gap:.32em;padding:.65em 1.45em;
+  background:#e6ede8;color:#213d48;text-align:center;
+}
+.soccer-article small,.soccer-article span { font-size:.76em;color:var(--support-ink) }
+.soccer-article strong { font-size:clamp(1rem,2.9cqw,2.35rem);line-height:1.35 }
 .candidate-duo { display:grid;grid-template-columns:1fr 1fr;width:min(100%,62rem);gap:4cqw;align-items:start }
 .candidate-number { text-align:center }
 .candidate-number b { display:block;color:#146960;font-size:clamp(2rem,9cqw,7.3rem);line-height:1.14;font-variant-numeric:tabular-nums;white-space:nowrap }

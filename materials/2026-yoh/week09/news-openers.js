@@ -302,6 +302,9 @@
     baseballAP:'https://apnews.com/article/e016f3fcca021d7f8b09258f54fcb253',
     savant:'https://baseballsavant.mlb.com/changelog/2026-10-08-abs-leaderboard-update-frv',
     sleep:'https://www.pokemonsleep.net/suimin-grandprix/',
+    soccer:'https://www.jfa.jp/news/00037032/',
+    soccerPhoto:'https://www.jfa.jp/img/cache/6af92cad-9d98-4d86-ac37-1bc1d3093d95.jpg',
+    soccerWorldCup:'https://www.jfa.jp/samuraiblue/worldcup_2026/final/match_page/m76.html',
     pisa:'https://www.oecd.org/en/publications/pisa-2025-results-volume-i_73451bc5-en/full-report/student-performance-in-pisa-2025_23e075c2.html',
     japan:'https://www.oecd.org/en/publications/pisa-2025-results-volume-i-country-notes_2d4ff9ea-en/japan_cf203dac-en.html',
     pisaArt:'https://www.oecd.org/adobe/dynamicmedia/deliver/dm-aid--04632851-d4ce-4e02-a514-691802dcb47f/image7.png?preferwebp=true&quality=80',
@@ -326,6 +329,20 @@
   const duo = (...items) => `<div class="candidate-duo">${items.join('')}</div>`;
   const credit = (...items) => `<div class="candidate-credit">${items.join('')}</div>`;
 
+  {
+    const s='日本対ブラジル｜試合終了間際';
+    scene(s,'試合終了間際、日本対ブラジル',`<img class="candidate-photo soccer-photo" src="${refs.soccerPhoto}" alt="シンガポールで行われた日本対ブラジルの試合">
+      <div class="candidate-photo-copy"><h1>また同点。<br>相手はブラジル。</h1><p class="candidate-subtitle">ワールドカップで逆転負けした日本。シンガポールの再戦も、終盤で同点に。</p></div><span class="soccer-photo-credit">写真：JFA</span>`,
+      `Open with the match photo, not the scoreboard. Tell the class that in November, Japan had led Brazil in Singapore but had just been caught. At the World Cup in June, Japan also led and the game turned late. Leave both final scores for the next slide. Photo and match report: ${refs.soccer}.`,coverOptions('soccer'));
+    scene(s,'二つの試合、逆の結末',`<h2>先に得点したのは、どちらも日本</h2>
+      <div class="candidate-duo soccer-scoreline"><div><h3>ワールドカップ</h3>${desc('終盤にブラジルが逆転。')}${reveal(number('1–2','日本 — ブラジル','warm-ink'),1)}</div>
+      <div class="reveal" data-step="2"><h3>シンガポールで再戦</h3>${desc('追いつかれた後、坂元達裕がこぼれ球を押し込む。')}${number('3–2','日本 — ブラジル')}</div></div>`,
+      `Reveal June first: Japan scored first but Brazil won 2–1 with a stoppage-time winner. Pause before revealing Singapore. Brazil erased Japan’s two-goal lead, then substitute Tatsuhiro Sakamoto scored in stoppage time. Japan won 3–2. June score: ${refs.soccerWorldCup}. November score and account: ${refs.soccer}.`,{theme:'cream'});
+    scene(s,'もう一度対戦したら？',`<h2>ブラジルとまた対戦したら、<br>日本はどれくらい勝てる？</h2>${desc('堂安律は、繰り返し対戦しても勝てるチームを目指すと話した。')}
+      ${reveal(`<a class="soccer-article" href="${refs.soccer}" target="_blank" rel="noopener"><small>日本サッカー協会 ／ 試合レポート</small><strong>坂元達裕が終了間際に決勝点</strong><span>試合の経過と選手のコメントを読む ↗</span></a>`)}
+      ${reveal(desc('勝敗は記録できる。次の試合にも通じる強さは、少ない試合からは断定できない。'),2)}`,
+      `Open and show the JFA article. Read or paraphrase Doan’s comments about trying to win more often over repeated meetings. Both scorelines are facts. The future chance of winning under defined conditions is a different question; two deliberately chosen matches in different settings do not estimate it reliably. Do not fit a textbook t interval to these results. Now pivot to the NBA example and ask how analysts show uncertainty when they have many comparable games. Source: ${refs.soccer}.`);
+  }
   {
     const s = '① MLB｜最後の一球';
     scene(s,'最後の一球',photo('https://img.mlbstatic.com/mlb-images/image/upload/t_2x1/t_w1536/mlb/vaih50ydsx7pajiun1uj.jpg',
@@ -463,6 +480,6 @@
   }
   const groups = new Map(candidates.filter(s=>s.key).map(s=>[s.key,candidates.filter(beat=>beat.section===s.section)]));
   const reel = keys => keys.flatMap((key,i)=>groups.get(key).map(beat=>({...beat,section:beat.section.replace(/^\S+ /,`${'①②③④'[i]} `)})));
-  window.Week9Candidates = reel(['pisa','nba','gaza']);
+  window.Week9Candidates = reel(['soccer','nba','gaza']);
   window.Week10Candidates = reel(['baseball','sleep','music','anime']);
 })();
