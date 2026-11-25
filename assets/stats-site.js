@@ -192,13 +192,16 @@ function fileButton(item, label = bilingual('Download material', '資料をダ�
 
 function activityResource(item, week) {
   const type = extension(item.href);
+  const lookupTable = /(?:^|\/)(?:normal-upper-tail-table|standard-normal-table|t-table|chi-table|poisson-table)\.(?:html|pdf)$/i.test(item.href);
+  const target = lookupTable ? ' target="_blank" rel="noopener"' : '';
+  const tabLabel = lookupTable ? ' · Opens in new tab / 新しいタブで開く' : '';
   const worksheet = type === 'XLSX' && /^weeks\/\d{2}-.+\/\d{2}_AL/.test(item.href);
   const previewFile = worksheet ? `assets/worksheet-previews/w${String(week.week).padStart(2, '0')}/index.html` : type === 'PDF' ? item.href : '';
   const preview = previewFile ? viewerLink(previewFile, item.label, week.week, worksheet ? item.href : '') : encodeHref(item.href);
   const name = worksheet ? item.href.split('/').pop() : item.label;
   const translated = name.split(' / ');
   const displayName = translated.length === 2 ? bilingual(escapeHtml(translated[1]), escapeHtml(translated[0])) : escapeHtml(name);
-  return `<div class="activity-resource"><strong class="activity-resource-name" title="${escapeHtml(name)}">${displayName}</strong><span class="activity-resource-type">${escapeHtml(type)}</span><div class="activity-resource-actions"><a class="activity-resource-preview" href="${preview}" aria-label="${escapeHtml(name)} · Preview / プレビュー">${previewFile ? bilingual('Preview', 'プレビュー') : bilingual('Open', '開く')}</a><a class="activity-resource-download" href="${encodeHref(item.href)}" download aria-label="${escapeHtml(name)} · Download / ダウンロード">${bilingual('Download', 'ダウンロード')}</a></div></div>`;
+  return `<div class="activity-resource"><strong class="activity-resource-name" title="${escapeHtml(name)}">${displayName}</strong><span class="activity-resource-type">${escapeHtml(type)}</span><div class="activity-resource-actions"><a class="activity-resource-preview" href="${preview}"${target} aria-label="${escapeHtml(name)} · Preview / プレビュー${tabLabel}">${previewFile ? bilingual('Preview', 'プレビュー') : bilingual('Open', '開く')}</a><a class="activity-resource-download" href="${encodeHref(item.href)}" download aria-label="${escapeHtml(name)} · Download / ダウンロード">${bilingual('Download', 'ダウンロード')}</a></div></div>`;
 }
 
 function slideCard(deck, week) {

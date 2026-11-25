@@ -41,3 +41,6 @@ prepare_en: Review why we use unbiased sample variance before class.
 - [Tsumura 2026 lecture slides (PDF)](materials/2026-tsumura/26_09_母平均の区間推定・母分散の区間推定(後半)v4.pdf) {supplementary}
 - [AL用ワークシート](weeks/09-confidence-intervals-ii/09_AL用ワークシート.xlsx) {worksheet}
 - [統計表](weeks/09-confidence-intervals-ii/09_統計表.xlsx) {resource}
+- [標準正規分布表 / Standard normal table](materials/2026-yoh/week05/normal-upper-tail-table.html) {resource}
+- [t分布表 / Student’s t table](materials/2026-yoh/week06/t-table.html) {resource}
+- [カイ二乗分布表 / Chi-square table](materials/2026-yoh/shared/chi-table.html) {resource}
