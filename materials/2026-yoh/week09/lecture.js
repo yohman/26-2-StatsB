@@ -200,6 +200,37 @@ function chiBridge(){
   const namedBound=(side,label,qualifier,step)=>`<div class="chi-bound reveal" data-side="${side}" data-step="${step}">${label}：${qualifier}値で割る</div>`;
   return `<h2>母分散の区間には χ² 分布</h2><p class="english">Chi-square distribution</p><p class="chi-reason">独立な正規標本では、${ratio} が自由度 ${mathToken(mi('n')+mo('−')+mn(1))} の χ² 分布に従う。</p><div class="chi-bridge-plot">${chiBridgeChart(df)}${chiBridgeLookup(df)}</div><div class="legend-expression chi-bridge-formula">${chiExpression()} ${namedBound('lower','下限','大きい',2)}${namedBound('upper','上限','小さい',3)}</div>`;
 }
+insertAfter('何を、区間で推定する？',()=>{
+  const recap=({method,target,english,condition,rule,guide,book,notes,chi=false})=>{
+    const title=`${method}：${target}の95%信頼区間`;
+    add('まとめ・クイズ・AL',title,`<h2>${title}</h2><p class="english">${english}</p><p class="recap-condition">${condition}</p><div class="legend-expression recap-rule${chi?' recap-rule-chi':''}">${rule}</div><div class="recap-guide">${guide}</div>`,notes,{className:'interval-recap',book,key:`recap-${chi?'chi':method.toLowerCase()}`});
+  };
+  const df=mathToken(mi('n')+mo('−')+mn(1));
+  recap({
+    method:'t',target:'母平均',english:'Population mean · Unknown variance',
+    condition:'母分散が<strong>未知</strong>。標本不偏分散を使う。',
+    rule:meanExpression(true,{alpha:'0.025'},['critical','variance']),
+    guide:`<p>${table('t')}：自由度 ${df}、上側確率 <strong>0.025</strong></p><p>不偏分散 / Unbiased variance</p>${math(String.raw`${hat}=\frac{${ssRule}}{n-1}=\frac{n}{n-1}S_x^2`)}${small('ここで、'+mathToken(msup(msub(mi('S'),mi('x')),mn(2)))+' は n で割る標本分散。')}`,
+    book:'133・134 脚注2',
+    notes:'Ask which distribution we need when the population variance is unknown. Point to the hat: estimate the variance from the sample. If raw data are given, divide the squared-deviation sum by n minus 1; if the divisor-n sample variance is supplied, multiply by n over n minus 1. For 95%, read the 0.025 column of the t table at n minus 1 degrees of freedom.'
+  });
+  recap({
+    method:'Z',target:'母平均',english:'Population mean · Known variance',
+    condition:'母分散が<strong>既知</strong>。わかっている母分散をそのまま使う。',
+    rule:meanExpression(false,{alpha:'0.025'},['critical','variance']),
+    guide:`<p>${link('../week05/normal-upper-tail-table.html?p','標準正規分布表')}：上側確率 <strong>0.025</strong>、${mathToken(msub(mi('z'),mn('0.025'))+mo('=')+mn('1.96'))}</p><p>標準誤差 / Standard error</p>${math(radical(known,'n')+String.raw`=\frac{\sigma_x}{\sqrt{n}}`)}`,
+    book:'124〜125・133',
+    notes:'Compare to the previous slide: the center and n stay the same, the variance has no hat, and the cutoff changes to Z. For a 95% interval the right-tail area is 0.025 and the standard normal cutoff is 1.96. If the known population standard deviation is given, divide it directly by the square root of n.'
+  });
+  recap({
+    method:'χ²',target:'母分散',english:'Population variance · Chi-square',
+    condition:'正規母集団からの独立標本。母分散を、元の単位の<strong>二乗</strong>で表す。',
+    rule:chiExpression({},['spread','lower-critical','upper-critical']),
+    guide:`<p>${table('chi')}：自由度 ${df}、上側確率 <strong>0.025</strong> と <strong>0.975</strong></p><div class="recap-bounds"><span data-side="lower">下限：大きい χ² 値で割る</span><span data-side="upper">上限：小さい χ² 値で割る</span></div>`,
+    book:'135〜136',chi:true,
+    notes:'Ask what now goes in the numerator: the sum of squared deviations, not the unbiased variance by itself. Read both chi-square values on the same degrees-of-freedom row. Because the cutoffs are denominators, the larger critical value gives the lower limit and the smaller value gives the upper limit. Check that the reported units are squared.'
+  });
+});
 const usingLegend={legend:true};
 function meanBeats({center,variance,n,critical,se,margin,lo,hi,unit,domain,target,t=false}){
   const varianceName=t?'不偏分散':'母分散（既知）';

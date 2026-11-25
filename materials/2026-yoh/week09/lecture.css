@@ -291,6 +291,24 @@
 .al-homework .al-submission small { font-size:1.65cqw }
 .al-homework .al-submission b { color:#16665f;font-size:4.65cqw;line-height:1.3 }
 .al-homework a:not(.photo-link) { font-size:2.1cqw;font-weight:650 }
+.interval-recap .slide-body { gap:.35cqw;padding:3cqw 5cqw }
+.interval-recap h2 { font-size:3.6cqw;line-height:1.35 }
+.interval-recap .english { font-size:1.48cqw }
+.recap-condition { margin-top:1cqw;color:#526970;font-size:1.85cqw }
+.recap-condition strong { color:#213d48 }
+.recap-rule { --inactive:#213d48;height:auto;font-size:3.48cqw;margin:2cqw auto }
+.recap-rule-chi { grid-template-columns:.45em 7.15em 1em 7.15em .45em;font-size:4.24cqw }
+.recap-rule .legend-bracket { height:2.45em }
+.recap-rule-chi [data-chi-part="lower"].is-focus,
+.recap-rule-chi [data-chi-part="upper"].is-focus { color:var(--endpoint-color) }
+.recap-guide { width:100%;color:#526970;font-size:1.72cqw;line-height:1.55 }
+.recap-guide > p { margin:.4cqw auto }
+.recap-guide :is(a,strong) { color:#213d48;font-weight:700 }
+.recap-guide .math { font-size:2.53cqw;line-height:1.25 }
+.recap-guide .math mjx-container[display=true] { margin:.18em 0!important }
+.recap-guide .secondary { font-size:1.34cqw }
+.recap-bounds { display:flex;justify-content:center;gap:4.5cqw;margin:.9cqw auto 0 }
+.recap-bounds span { color:var(--endpoint-color);font-weight:700 }
 .practice-question .practice-parts { text-align:left;margin:.5cqw 0;padding-inline-start:1.5em;font-size:clamp(11px,2.02cqw,28px);line-height:1.55 }
 .practice-parts strong { color:#a7451e }
 .practice-question .secondary { font-size:clamp(9px,1.4cqw,19px);margin:0 }
