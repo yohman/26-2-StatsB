@@ -397,6 +397,9 @@
 .food-truck-calculation [data-stat="variance"] tfoot td:last-child{color:#16665f;background:#dcece6}
 .food-truck-calculation .deviation-table tbody th { color:#526970 }
 .food-truck-lookup { width:min(54cqw,100%) }
+.formula-follow .work-details .food-truck-tail-reference { grid-template-columns:minmax(0,57%) minmax(0,1fr);width:min(98%,81cqw) }
+.formula-follow .work-details .food-truck-tail-reference .work-chart { width:100%;margin:0 }
+.formula-follow .work-details .food-truck-tail-reference .lookup { width:100%;font-variant-numeric:tabular-nums;line-height:1.3 }
 .z-section-lead h1 { margin:0;line-height:1.1 }
 .z-section-lead h1 span { display:block;font-size:clamp(19px,4.5cqw,64px) }
 .z-section-lead h1 strong { display:block;color:#8ee5cd;font-size:clamp(70px,16cqw,220px);line-height:1.05 }

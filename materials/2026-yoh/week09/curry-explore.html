@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   'use strict';
   const M=window.FutureStats,$=id=>document.getElementById(id);
   const models={
-    curry:['Curryの5試合','Population mean · Student’s t'],
+    curry:['Lukaの5試合','Population mean · Student’s t'],
     coverage:['100本のうち、何本が届く？','Long-run coverage'],
     'mean-ci':['信頼係数で、幅はどう変わる？','Confidence level'],
     size:['標本数で、幅はどう変わる？','Sample size · Known population variance'],
@@ -74,10 +74,11 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(params.has('embed'))document.body.classList.add('embedded');
   const active=Object.hasOwn(models,mode)?mode:'curry',coverage=active==='coverage',confidence=active==='mean-ci',sizeMode=active==='size',chi=active==='variance-ci';
   if(coverage||active==='curry')document.body.classList.add('history-layout');
-  const example=[23,29,31,32,35],mu=30;
+  const isNBA=active==='curry'||confidence,example=isNBA?[43,36,29,25,28]:[23,29,31,32,35],mu=30;
+  const start=M.summary(example);
   let sample=example,n=25,level=95,one=false,history=[],total=0,hits=0,run=0;
   const fix=(x,d=2)=>x.toFixed(d),trim=(x,d=4)=>String(+x.toFixed(d)),rounded=(x,d=4)=>+x.toFixed(d);
-  const game=()=>rounded(mu+Math.sqrt(20)*M.normal(),1);
+  const game=()=>isNBA?Math.max(0,Math.round(start.mean+start.sd*M.normal())):rounded(mu+Math.sqrt(20)*M.normal(),1);
   const math=s=>'<div class="math"><math display="block">'+s+'</math></div>';
   const tag=(t,s)=>'<'+t+'>'+s+'</'+t+'>',i=s=>tag('mi',s),v=s=>tag('mn',s),o=s=>tag('mo',s),r=(...s)=>tag('mrow',s.join(''));
   const sub=(a,b)=>tag('msub',a+b),sup=(a,b)=>tag('msup',a+b),frac=(a,b)=>tag('mfrac',a+b),root=s=>tag('msqrt',s),accent=(a,b)=>'<mover accent="true">'+a+o(b)+'</mover>';
@@ -190,7 +191,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   function render(){
     const s=sizeMode?null:M.summary(sample),rec=one?{mean:sample[0],lo:sample[0],hi:sample[0]}:calculate(s);
     const unit=chi?'点²':sizeMode?'分':'点';
-    $('inputs').innerHTML=(sizeMode?'':'<div class="sample"><span class="sample-label">'+(one?'1試合':'5試合')+'の得点</span>'+sample.map(x=>'<span class="score">'+trim(x,1)+'</span>').join('')+'</div>')+
+    $('inputs').innerHTML=(sizeMode?'':'<div class="sample"><span class="sample-label">'+(one?'1試合':'5試合')+'の得点'+(isNBA?(sample===example?'（NBA実績）':'（シミュレーション）'):'（授業用）')+'</span>'+sample.map(x=>'<span class="score">'+trim(x,1)+'</span>').join('')+'</div>')+
       '<div class="facts">'+(sizeMode?fact('標本平均','120分','mean')+fact('母分散','100分²','spread')+fact('標本数',n,'spread'):
       one?fact('標本数',1,'spread')+fact('自由度',0,'critical'):
       (chi?fact('偏差二乗和',trim(s.ss)+'点²','spread'):fact('標本平均',trim(s.mean,2)+'点','mean')+fact('不偏分散',trim(s.s2)+'点²','spread'))+fact('自由度',s.df,'critical'))+'</div>';
@@ -205,7 +206,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     $('result').innerHTML=(one?trim(rec.mean,1):fix(rec.lo)+' – '+fix(rec.hi))+' <small>'+unit+'</small>';
     $('chart').innerHTML=graph(rec);
     $('caption').innerHTML=one?'点：この1試合の得点。':coverage?
-      (total?'<p class="count">30点を含む：<strong>'+hits+' / '+total+'組（'+fix(100*hits/total,1)+'%）</strong></p>':'<p>最初はスライドの1組。抽出ボタンで区間を増やす。</p>')+
+      (total?'<p class="count">30点を含む：<strong>'+hits+' / '+total+'組（'+fix(100*hits/total,1)+'%）</strong></p>':'<p>最初は授業用の1組。抽出ボタンで区間を増やす。</p>')+
       '<p class="legend">橙：30点を含む ／ 灰：含まない ／ 破線：真の母平均'+(total>100?'（直近100組を表示）':'')+'</p>':
       confidence?'3本とも同じ5試合。橙：選んだ信頼係数。':sizeMode?'橙：現在の標本数。全幅 '+fix(2*rec.w)+'分。':chi?'点：不偏分散 '+fix(rec.mean)+'点²。区間の真ん中ではない。':'点：標本平均 '+fix(rec.mean)+'点 ／ 翼の先：下限と上限'+(history.length>1?' ／ 下に直近'+history.length+'組':'');
     document.querySelectorAll('[data-level]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.level===level)));
@@ -228,9 +229,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   const btn=(type,label,value='',cls='')=>'<button type="button" class="'+cls+'" data-'+type+'="'+value+'">'+label+'</button>';
   const link=(href,label)=>'<a href="'+href+'" target="_blank" rel="noopener">'+label+' ↗</a>';
   $('title').textContent=models[active][0];$('english').textContent=models[active][1];document.title=models[active][0]+' · Week 9';
-  $('controls').innerHTML=(confidence?[90,95,99].map(c=>btn('level',c+'%',c)).join('')+btn('sample','別の5試合'):
+  $('controls').innerHTML=(confidence?[90,95,99].map(c=>btn('level',c+'%',c)).join('')+btn('sample','模擬5試合'):
     sizeMode?'<label for="size">標本数 <input id="size" type="range" min="5" max="100" value="25"><output id="size-value" for="size">25</output></label>'+btn('n','25台',25)+btn('n','100台',100):
-    btn('draw','5試合を抽出',1,'primary')+(chi?'':btn('draw','10組',10)+btn('draw','100組',100))+(active==='curry'?btn('one','1試合だけ'):''))+
+    btn('draw',active==='curry'?'模擬5試合':'5試合を抽出',1,'primary')+(chi?'':btn('draw','10組',10)+btn('draw','100組',100))+(active==='curry'?btn('one','1試合だけ'):''))+
     '<button type="button" id="reset" title="スライドの例に戻す">↺ リセット</button>';
   $('controls').addEventListener('click',e=>{
     const b=e.target.closest('button');if(!b)return;
@@ -246,7 +247,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('size')?.addEventListener('input',e=>{n=+e.target.value;render();});
   $('foot').innerHTML='<p>'+(sizeMode?'教科書 pp.125・133、p.202 · '+link('../week05/normal-upper-tail-table.html?p','標準正規分布表'):
    chi?'教科書 pp.135–136 · '+link('../shared/chi-table.html?p','χ²分布表'):'教科書 pp.132–135 · '+link('../week06/t-table.html?p','t分布表'))+'</p>'+
-   '<p>'+(sizeMode?'授業用の設定。標本平均・母分散は固定。':'授業用の架空の得点。独立な正規モデルで抽出した得点を小数1桁で記録。'+(coverage?' 母平均30点は照合用（区間計算には使わない）。':'')+' 分布表の境界値は小数4桁。')+'</p>';
+   '<p>'+(sizeMode?'授業用の設定。標本平均・母分散は固定。':isNBA?'初期値：2026年11月15〜23日の実績。 '+link('https://www.nba.com/stats/player/1629029','NBA公式スタッツ')+'。追加分は、初期標本の平均・標準偏差を使った模擬得点。実際の試合ではありません。':'授業用の架空の得点。独立な正規モデルで抽出した得点を小数1桁で記録。'+(coverage?' 母平均30点は照合用（区間計算には使わない）。':'')+' 分布表の境界値は小数4桁。')+'</p>';
   window.addEventListener('resize',fitFormulas);
   render();
 });
