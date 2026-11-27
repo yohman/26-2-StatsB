@@ -15,6 +15,7 @@ prepare_en: Practise identifying which of the population variance, sample size, 
 
 ## In class
 
+- REITAKU RUN：クラスで得点を集め、無作為に選んだ5人の得点から母平均の95%信頼区間を求める (Draw five class scores and build a 95% confidence interval for the mean)
 - 標本不偏分散、母平均の95%信頼区間、母分散の95%信頼区間を確認する (unbiased sample variance and 95% confidence intervals)
 - テスト得点、ネジの長さ、バッテリー寿命、トマト重量の事例で区間推定を行う (interval estimation using scores, screw lengths, battery life, and tomato weight)
 
@@ -34,5 +35,5 @@ prepare_en: Practise identifying which of the population variance, sample size, 
 - [ニュース候補（4本） / Optional opening stories](materials/2026-yoh/week09/index.html?openers=week10) {news-example}
 
 - [Tsumura 2026 lecture slides — student edition (PDF)](materials/2026-tsumura/26_10_[AL]_母平均の区間推定・母分散の区間推定v2.pdf) {supplementary}
-- [AL用ワークシート](weeks/10-al-confidence-intervals/10_AL用ワークシート.xlsx) {worksheet}
 - [REITAKU RUN](https://statsb-live-stopwatch.ykawano421126.chatgpt.site/runner) {live-runner}
+- [AL用ワークシート](weeks/10-al-confidence-intervals/10_AL用ワークシート.xlsx) {worksheet}

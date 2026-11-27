@@ -82,5 +82,19 @@ window.completeLecture = (week, review) => {
     }
     return {title, items};
   });
+  if (week === 10) {
+    const game = 'https://statsb-live-stopwatch.ykawano421126.chatgpt.site/runner';
+    sections.unshift({
+      title:'授業のはじめ：REITAKU RUN',
+      items:[{
+        title:'REITAKU RUN', anchor:'reitaku-run',
+        html:'<h2>REITAKU RUN</h2><p class="lesson-story">5人の得点から、クラスの平均はどこまで分かる？</p>' +
+          '<p class="secondary"><ruby>信<rt>しん</rt></ruby><ruby>頼<rt>らい</rt></ruby><ruby>区<rt>く</rt></ruby><ruby>間<rt>かん</rt></ruby> <span class="english">Confidence interval</span></p>' +
+          '<p class="secondary">本番は1人1回。先生が共有するリンクから参加。</p>' +
+          '<div class="lesson-controls"><a href="'+game+'?view=teacher" target="_blank" rel="noopener">クラスを開始</a><a href="'+game+'" target="_blank" rel="noopener">練習</a></div>',
+        notes:'Open the teacher board and share its student link. Give everyone one official run with a nickname. After the last submission, close entries and draw five. Pause on the five scores for students to work. Step through the 95% t interval, then compare with the actual mean of all submitted scores. Return to the next slide: the interval estimated the center. The tuna example now asks what that center fails to tell us about spread.'
+      }]
+    });
+  }
   return {...review, sections, challenges:plan.challenges || []};
 };
